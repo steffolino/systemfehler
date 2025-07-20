@@ -1,0 +1,18 @@
+[
+  {
+    "id": "wohngeld-leipzig",
+    "title": "Wohngeld in Leipzig",
+    "summary_de": "Finanzielle Unterstützung bei Mietkosten.",
+    "summary_en": "Financial support for housing costs.",
+    "source": "https://www.leipzig.de/wohngeld",
+    "related_links": [],
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "housing"
+    ],
+    "createdAt": "2025-07-16T00:00:00Z",
+    "updatedAt": "2025-07-16T00:00:00Z"
+  }
+]

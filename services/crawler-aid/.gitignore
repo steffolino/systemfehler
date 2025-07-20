@@ -1,0 +1,7 @@
+# services/crawler-aid/ and crawler-benefits/
+__pycache__/
+*.py[cod]
+*.log
+.venv/
+.env
+.cache/

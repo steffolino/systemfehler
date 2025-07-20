@@ -1,0 +1,20 @@
+[
+  {
+    "id": "wohnungslos-hilfe-leipzig",
+    "title": "Hilfe für Wohnungslose",
+    "summary_de": "Anlaufstellen und Notunterkünfte in Leipzig.",
+    "summary_en": "Emergency housing services in Leipzig.",
+    "region": "Leipzig",
+    "source": "https://www.leipzig.de/wohnungslosigkeit",
+    "related_links": [],
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "emergency",
+      "housing"
+    ],
+    "createdAt": "2025-07-16T00:00:00Z",
+    "updatedAt": "2025-07-16T00:00:00Z"
+  }
+]

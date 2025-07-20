@@ -1,0 +1,9 @@
+{
+  "dashboard": {
+    "title": "Dashboard",
+    "welcomeMessage": "Welcome to your dashboard. Here you can manage your data and settings.",
+    "getStarted": "Get Started",
+    "learnMore": "Learn More",
+    "language": "Language"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "master": {
+    "de": "Das Recht auf Teilhabe ist nicht verhandelbar.",
+    "en": "The right to participation is non-negotiable."
+  },
+  "variants": {
+    "housing": {
+      "de": "Das Recht auf Unterkunft ist nicht verhandelbar.",
+      "en": "The right to housing is non-negotiable."
+    },
+    "energy": {
+      "de": "Das Recht auf Wärme ist nicht verhandelbar.",
+      "en": "The right to warmth is non-negotiable."
+    },
+    "food": {
+      "de": "Das Recht auf Essen ist nicht verhandelbar.",
+      "en": "The right to food is non-negotiable."
+    },
+    "information": {
+      "de": "Das Recht auf Orientierung ist nicht verhandelbar.",
+      "en": "The right to orientation is non-negotiable."
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "dashboard": {
+    "title": "Übersicht",
+    "welcomeMessage": "Willkommen in deinem Dashboard. Hier kannst du deine Daten und Einstellungen verwalten.",
+    "getStarted": "Loslegen",
+    "learnMore": "Mehr erfahren",
+    "language": "Sprache"
+  }
+}

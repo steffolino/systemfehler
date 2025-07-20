@@ -1,0 +1,24 @@
+[
+  {
+    "id": "heizkosten-check",
+    "name": "Heizkosten-Check",
+    "source": "DIE LINKE",
+    "url": "https://www.heizkostencheck.die-linke.de",
+    "tags": ["Energie", "Wohnen"],
+    "description": {
+      "de": "Berechne, ob deine Heizkostennachzahlung angemessen ist.",
+      "en": "Check if your heating back payment is reasonable."
+    }
+  },
+  {
+    "id": "wohngeld-rechner",
+    "name": "Wohngeld-Rechner",
+    "source": "wohngeld.org",
+    "url": "https://www.wohngeld.org/rechner.html",
+    "tags": ["Wohnen", "Geld"],
+    "description": {
+      "de": "Finde heraus, ob du Wohngeld beantragen kannst.",
+      "en": "Check whether you are eligible for housing benefits."
+    }
+  }
+]

@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Logs & system files
+*.log
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.vscode/
+.idea/
+
+# Top-level env
+.env
+.env.local
+.env.*.local
+
+# SQLite (if any data/contents.sqlite is committed temporarily)
+data/**/*.sqlite

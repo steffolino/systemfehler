@@ -1,0 +1,19 @@
+[
+  {
+    "id": "heizkosten-check",
+    "title": "Heizkosten-Check",
+    "summary_de": "Tool zur Prüfung überhöhter Heizkosten.",
+    "summary_en": "Tool to check excessive heating costs.",
+    "source": "https://www.die-linke.de/heizkostencheck",
+    "category": "calculator",
+    "related_links": [],
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "energy"
+    ],
+    "createdAt": "2025-07-16T00:00:00Z",
+    "updatedAt": "2025-07-16T00:00:00Z"
+  }
+]
