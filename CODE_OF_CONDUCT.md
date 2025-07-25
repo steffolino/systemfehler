@@ -15,6 +15,6 @@ We as contributors and maintainers pledge to make participation in our project a
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at [your.email@example.com].
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team
 
 Thank you for helping to create a welcoming community!
