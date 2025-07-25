@@ -1,75 +1,32 @@
-# Nuxt Minimal Starter
+# systemfehler frontend
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This is the Nuxt 3 frontend for the systemfehler platform.
 
-## Setup
-
-Make sure to install dependencies:
+## Getting started
 
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
+cd apps/fe
 yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
 yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+## Project structure
 
-Build the application for production:
+- `pages/` – app routes
+- `components/global/` – reusable components
+- `layouts/` – layout definitions
+- `i18n/locales/` – translations (DE/EN)
+- `assets/css/main.css` – custom Tailwind/DaisyUI setup
+- `.data/content/` – preloaded SQLite database (optional dev features)
 
-```bash
-# npm
-npm run build
+## Stack
 
-# pnpm
-pnpm build
+- [Nuxt 3](https://nuxt.com)
+- [Tailwind CSS](https://tailwindcss.com)
+- [DaisyUI](https://daisyui.com)
+- [Vue I18n](https://vue-i18n.intlify.dev/)
+- [@nuxt/content](https://content.nuxtjs.org)
 
-# yarn
-yarn build
+## License
 
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+AGPLv3 – see [../../LICENSE](../../LICENSE)
