@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>systemfehler – MVP Roadmap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      color: #222;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #2b6cb0;
+    }
+    code {
+      background: #eee;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+    .mindmap {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    li {
+      margin: 0.3rem 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚀 systemfehler MVP Roadmap</h1>
+  <p>This page outlines the minimum viable product goals and current epic breakdown for the <strong>systemfehler</strong> platform.</p>
+
+  <h2>🎯 MVP Goals</h2>
+  <ul>
+    <li>Collect structured tools and help offers</li>
+    <li>Serve them in an accessible frontend</li>
+    <li>Allow editorial improvements and plain-language contributions</li>
+    <li>Support future enrichment with LLMs or open data</li>
+  </ul>
+
+  <div class="mindmap">
+    <img src="systemfehler_mvp_mindmap.png" alt="Mindmap of MVP features" style="max-width: 100%;">
+  </div>
+
+  <h2>🧩 Epics & Subtasks</h2>
+
+  <h3>1. Modular Crawler</h3>
+  <ul>
+    <li>Scaffold base logic</li>
+    <li>Add one working crawler</li>
+    <li>Output valid <code>entries.json</code></li>
+    <li>Track <code>urls.json</code> sources</li>
+  </ul>
+
+  <h3>2. JSON Schema + Validation</h3>
+  <ul>
+    <li>Define schema</li>
+    <li>Write validator (CLI)</li>
+    <li>Check existing entries</li>
+  </ul>
+
+  <h3>3. Editorial Dashboard</h3>
+  <ul>
+    <li>Status: draft/approved/flagged</li>
+    <li>Moderation view in frontend</li>
+    <li>Approve / delete / edit entries</li>
+  </ul>
+
+  <h3>4. Plain Language</h3>
+  <ul>
+    <li>Field for simplified description</li>
+    <li>Toggle to compare full/simplified</li>
+    <li>Flag missing simplifications</li>
+  </ul>
+
+  <h3>5. LLM Enrichment (Optional)</h3>
+  <ul>
+    <li>Add fields for <code>ai_summary</code>, <code>ai_tags</code></li>
+    <li>Run enrichments via script or API</li>
+  </ul>
+
+  <p>Join us on GitHub to contribute, translate, or suggest features.</p>
+</body>
+</html>
