@@ -1,0 +1,57 @@
+[
+    {
+        "domain": "https://www.arbeitsagentur.de",
+        "allow_paths": [
+            "/buergergeld",
+            "/familie-und-kinder",
+            "/jobcenter"
+        ],
+        "exclude_paths": [
+            "/vor-ort",
+            "/int",
+            "/unternehmen",
+            "/presse"
+        ],
+        "sitemap_overrides": [
+            "https://www.arbeitsagentur.de/sitemap-portal.xml"
+        ],
+        "max_urls": 40
+    },
+    {
+        "domain": "https://www.kinderzuschlag.de",
+        "allow_paths": [
+            "/kiz"
+        ],
+        "exclude_paths": [],
+        "sitemap_overrides": [
+            "https://www.kinderzuschlag.de/sitemap.xml"
+        ],
+        "max_urls": 20
+    },
+    {
+        "domain": "https://www.familienkasse.de",
+        "allow_paths": [
+            "/familienleistungen",
+            "/kinderzuschlag",
+            "/kindergeld"
+        ],
+        "exclude_paths": [
+            "/presse"
+        ],
+        "sitemap_overrides": [
+            "https://www.familienkasse.de/sitemap.xml"
+        ],
+        "max_urls": 30
+    },
+    {
+        "domain": "https://www.wohngeld.org",
+        "allow_paths": [
+            "/"
+        ],
+        "exclude_paths": [],
+        "sitemap_overrides": [
+            "https://www.wohngeld.org/sitemap.xml"
+        ],
+        "max_urls": 30
+    }
+]

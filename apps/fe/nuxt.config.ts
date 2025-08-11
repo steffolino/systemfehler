@@ -2,7 +2,12 @@
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
+  compatibilityDate: '2025-08-01',
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.VITE_API_BASE
+    }
+  },
   devtools: { enabled: true },
   modules: ['@nuxt/content', '@nuxt/eslint', '@nuxt/ui', '@nuxtjs/i18n', '@nuxtjs/color-mode'],
   css: ['../assets/css/main.css'],
