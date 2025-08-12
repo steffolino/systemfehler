@@ -6,7 +6,7 @@ const colorMode = useColorMode()
 // Map logical color modes to DaisyUI themes
 const themeMap = {
   light: 'lofi',
-  dark: 'abyss',
+  dark: 'dark',
 }
 
 const isDark = ref(false)

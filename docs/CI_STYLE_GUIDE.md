@@ -6,7 +6,7 @@
 
 ## 🎨 Color System
 
-| Role         | Light Mode (lofi) | Dark Mode (abyss) |
+| Role         | Light Mode (lofi) | Dark Mode (dark) |
 |--------------|-------------------|--------------------|
 | Primary      | `#C06030` (Terracotta) | `#C06030` (same) |
 | Accent       | `#ff1d25` (Altrosa) | `#ff1d25` (Altrosa) |

@@ -1,0 +1,10 @@
+{
+    "domain": "https://www.wohngeld.org",
+    "allow_paths": [
+        "/"
+    ],
+    "sitemap_overrides": [
+        "https://www.wohngeld.org/sitemap.xml"
+    ],
+    "max_urls": 30
+}

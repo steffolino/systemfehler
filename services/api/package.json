@@ -1,14 +1,14 @@
 {
   "name": "api-tools",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "description": "",
+  "license": "ISC",
+  "scripts": {
+    "dev": "npx nodemon --ext js,json --watch . index.js",
+    "start": "node index.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0"
