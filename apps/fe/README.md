@@ -25,7 +25,6 @@ yarn dev
 - [Tailwind CSS](https://tailwindcss.com)
 - [DaisyUI](https://daisyui.com)
 - [Vue I18n](https://vue-i18n.intlify.dev/)
-- [@nuxt/content](https://content.nuxtjs.org)
 
 ## License
 

@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "daisyui": "^5.0.50",
     "prisma": "^6.12.0"
   },
   "dependencies": {

@@ -21,3 +21,5 @@ Thumbs.db
 
 # SQLite (if any data/contents.sqlite is committed temporarily)
 data/**/*.sqlite
+node_modules
+

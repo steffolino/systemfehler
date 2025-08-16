@@ -1,9 +1,35 @@
 {
+  "brand": "Systemfehler",
+  "heroTitle": "Find help faster",
+  "heroSubtitle": "Benefits, tools and offers — all in one place.",
+  "topics": "Topics",
+  "officialSource": "Official source",
+  "viewMore": "See more on this topic",
+  "details": "Details",
+  "openSource": "Open source",
+  "topics": {
+    "family_benefits": "Family benefits",
+    "housing_benefits": "Housing",
+    "work": "Work",
+    "health": "Health"
+  },
+  "menu": "Menu",
   "dashboard": {
     "title": "Dashboard",
     "welcomeMessage": "Welcome to your dashboard. Here you can manage your data and settings.",
     "getStarted": "Get Started",
     "learnMore": "Learn More"
+  },
+  "entry": {
+    "loading": "Loading …",
+    "error": "Error loading.",
+    "openSource": "Open source",
+    "links": "Links"
+  },
+  "relation": {
+    "official_info": "Official info",
+    "linked_from_page": "Linked from page",
+    "other": "Additional info"
   },
   "language": "Language",
   "loading": "Loading…",

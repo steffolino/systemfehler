@@ -3,6 +3,10 @@ import fs from 'fs'
 import path from 'path'
 import cors from 'cors'
 import { fileURLToPath } from 'url'
+import pkg from 'pg'
+
+const { Pool } = pkg
+const pool = new Pool({ connectionString: process.env.DATABASE_URL || 'postgresql://postgres:postgres@db:5432/systemfehler' })
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -34,6 +38,17 @@ app.get('/api/benefits', (_req, res) => {
   if (!fs.existsSync(p)) return res.json([])
   res.json(readJSON(p))
 })
+
+app.post('/admin/refresh-search', async (req,res) => {
+  try {
+    await pool.query('REFRESH MATERIALIZED VIEW CONCURRENTLY entries_mv;')
+    res.json({ ok: true })
+  } catch (e) {
+    console.error(e)
+    res.status(500).json({ ok:false, error: String(e) })
+  }
+})
+
 
 // optional convenience: /api/benefits/:id
 app.get('/api/benefits/:id', (req, res) => {

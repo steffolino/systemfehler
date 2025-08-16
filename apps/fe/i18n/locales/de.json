@@ -1,9 +1,35 @@
 {
+  "brand": "Systemfehler",
+  "heroTitle": "Finde Hilfe schneller",
+  "heroSubtitle": "Leistungen, Tools und Angebote – alles an einem Ort.",
+  "menu": "Menü",
+  "topics": "Themen",
+  "officialSource": "Offizielle Quelle",
+  "viewMore": "Mehr zu diesem Thema",
+  "details": "Details",
+  "openSource": "Zur Quelle",
+  "topics": {
+    "family_benefits": "Familienleistungen",
+    "housing_benefits": "Wohnen",
+    "work": "Arbeit",
+    "health": "Gesundheit"
+  },
   "dashboard": {
     "title": "Übersicht",
     "welcomeMessage": "Willkommen in deinem Dashboard. Hier kannst du deine Daten und Einstellungen verwalten.",
     "getStarted": "Loslegen",
     "learnMore": "Mehr erfahren"
+  },
+  "entry": {
+    "loading": "Lade …",
+    "error": "Fehler beim Laden.",
+    "openSource": "Zur Quelle",
+    "links": "Links"
+  },
+  "relation": {
+    "official_info": "Offizielle Info",
+    "linked_from_page": "Verlinkt von Seite",
+    "other": "Weitere Info"
   },
   "language": "Sprache",
   "loading": "Laden…",

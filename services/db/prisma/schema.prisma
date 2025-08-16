@@ -3,69 +3,73 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"   // ← WICHTIG: SQLite → PostgreSQL ändern
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model Benefit {
-  id             String         @id
-  title_de       String
-  title_en       String
-  summary_de     String
-  summary_en     String
-  topic          String[]
-  language       String[]
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
-  relatedLinks   RelatedLink[]
+  id           String        @id
+  title_de     String
+  title_en     String
+  summary_de   String
+  summary_en   String
+  topic        String[]
+  language     String[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  relatedLinks RelatedLink[]
 }
 
 model Tool {
-  id             String         @id
-  title_de       String
-  title_en       String
-  summary_de     String
-  summary_en     String
-  url            String
-  category       String?
-  language       String[]
-  topic          String[]
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
-  relatedLinks   RelatedLink[]
+  id           String        @id
+  title_de     String
+  title_en     String
+  summary_de   String
+  summary_en   String
+  url          String
+  category     String?
+  language     String[]
+  topic        String[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  relatedLinks RelatedLink[]
 }
 
 model AidOffer {
-  id             String         @id
-  title_de       String
-  title_en       String
-  summary_de     String
-  summary_en     String
-  organization   String?
-  contact        String?
-  region         String?
-  language       String[]
-  topic          String[]
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
-  relatedLinks   RelatedLink[]
+  id           String        @id
+  title_de     String
+  title_en     String
+  summary_de   String
+  summary_en   String
+  organization String?
+  contact      String?
+  region       String?
+  language     String[]
+  topic        String[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  relatedLinks RelatedLink[]
 }
 
 model RelatedLink {
-  id             String         @id @default(uuid())
-  url            String
-  title          String?
-  relation       String?        // e.g. "linked_from_page", "official_info"
-  proposedAsEntry Boolean       @default(false)
-  status         String         @default("pending") // "pending" | "confirmed" | "ignored"
+  id              String    @id @default(uuid())
+  url             String
+  title           String?
+  relation        String?
+  proposedAsEntry Boolean   @default(false)
+  status          String    @default("pending")
+  benefitId       String?
+  toolId          String?
+  aidOfferId      String?
+  aidOffer        AidOffer? @relation(fields: [aidOfferId], references: [id])
+  benefit         Benefit?  @relation(fields: [benefitId], references: [id])
+  tool            Tool?     @relation(fields: [toolId], references: [id])
+}
 
-  // Relations to all parent types (optional FK)
-  benefitId      String?        
-  benefit        Benefit?       @relation(fields: [benefitId], references: [id])
+model entry_popularity {
+  kind       String
+  id         String
+  popularity Float  @default(0) @db.Real
 
-  toolId         String?
-  tool           Tool?          @relation(fields: [toolId], references: [id])
-
-  aidOfferId     String?
-  aidOffer       AidOffer?      @relation(fields: [aidOfferId], references: [id])
+  @@id([kind, id])
 }

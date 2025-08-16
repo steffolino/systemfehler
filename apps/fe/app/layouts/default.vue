@@ -1,18 +1,10 @@
 <template>
   <div class="flex flex-col min-h-screen bg-base-100 text-base-content">
     <!-- Navbar -->
-    <div class="navbar sticky top-0 z-50 bg-base-100/75 backdrop-blur border-b border-base-200">
-      <div class="flex-1 px-4">
-        <span class="text-lg font-bold">Systemfehler</span>
-      </div>
-      <div class="flex-none gap-2 px-2">
-        <LanguageSwitch />
-        <ThemeSwitch class="ml-2"/>
-      </div>
-    </div>
+      <NavMenu/>
 
     <!-- Main content -->
-    <main class="flex-1 px-4 py-6">
+    <main class="flex-1 px-4 py-4">
       <div class="max-w-7xl mx-auto">
         <slot />
       </div>
