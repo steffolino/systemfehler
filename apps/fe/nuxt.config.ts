@@ -4,7 +4,9 @@ import { dirname, resolve as resolvePath } from 'node:path'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineNuxtConfig({
-  compatibilityDate: '2025-08-01',
+  nitro: {
+    preset: 'cloudflare-pages'
+  },
   app: {
     head: {
       title: 'systemfehler',
@@ -24,7 +26,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBase: process.env.VITE_API_BASE,
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'https://systemfehler.inequality.workers.dev',
       searchBase: process.env.NUXT_PUBLIC_SEARCH_BASE || 'http://localhost:8000'
     }
   },

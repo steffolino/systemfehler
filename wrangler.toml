@@ -7,6 +7,7 @@ compatibility_flags = ["nodejs_compat"]
 
 [site]
 bucket = "./apps/fe/.output/public"
+pages_build_output_dir = "./apps/fe/.output/public"
 
 [[d1_databases]]
 binding = "DB"
