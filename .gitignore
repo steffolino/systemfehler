@@ -91,3 +91,6 @@ services/api/.cache/
 *.swp
 *.swo
 
+# Mac system files
+Icon?
+

@@ -1,8 +1,4 @@
 // apps/fe/nuxt.config.ts
-import { fileURLToPath } from 'node:url'
-import { dirname, resolve as resolvePath } from 'node:path'
-const __dirname = dirname(fileURLToPath(import.meta.url))
-
 export default defineNuxtConfig({
   nitro: {
     preset: 'cloudflare-pages'
@@ -20,9 +16,7 @@ export default defineNuxtConfig({
         { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
         { rel: "manifest", href: "/site.webmanifest" }
       ]
-    },
-    // Use the custom error page for 404/500
-    error: '~/pages/error.vue'
+    }
   },
   runtimeConfig: {
     public: {
@@ -32,7 +26,7 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: true },
   modules: ['@nuxt/eslint', '@nuxt/ui', '@nuxtjs/i18n', '@nuxtjs/color-mode', '@nuxt/icon'],
-  css: [resolvePath(__dirname, 'assets/css/main.css')], // absolute path
+  css: [__dirname + '/assets/css/main.css'], // absolute path
   postcss: {
     plugins: {
       '@tailwindcss/postcss': {},
@@ -50,5 +44,22 @@ export default defineNuxtConfig({
     strategy: 'prefix_except_default',
   },
   colorMode: { classSuffix: '' },
-  vite: { plugins: [] }
+  vite: {
+    plugins: [],
+    resolve: {
+      alias: {
+        'node:buffer': false as unknown as string,
+        'node:events': false as unknown as string,
+        'node:process': false as unknown as string,
+        'node:stream': false as unknown as string,
+        'node:util': false as unknown as string,
+        'node:crypto': false as unknown as string,
+        'node:path': false as unknown as string,
+        'node:url': false as unknown as string,
+        'node:fs': false as unknown as string,
+        'node:http': false as unknown as string,
+        'node:https': false as unknown as string
+      }
+    }
+  }
 })
