@@ -21,5 +21,73 @@ Thumbs.db
 
 # SQLite (if any data/contents.sqlite is committed temporarily)
 data/**/*.sqlite
-node_modules
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Nuxt build output
+.nuxt/
+.output/
+.cache/
+dist/
+build/
+
+# Vite
+.vite/
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+
+# Wrangler/D1 local database state (never commit local DBs)
+.wrangler/
+.wrangler/state/
+.wrangler/state/v3/
+.wrangler/state/v3/d1/
+.wrangler/state/v3/d1/*.sqlite
+.wrangler/local-d1/
+*.sqlite
+
+# API data output (if not needed in repo)
+services/api/data/benefits.json
+
+# Build artifacts for frontend (if not needed in repo)
+apps/fe/.output/
+apps/fe/.nuxt/
+apps/fe/.cache/
+apps/fe/node_modules/
+
+# Build artifacts for crawler
+services/crawler-benefits/.venv/
+services/crawler-benefits/__pycache__/
+services/crawler-benefits/*.pyc
+
+# Build artifacts for API
+services/api/node_modules/
+services/api/.output/
+services/api/.nuxt/
+services/api/.cache/
+
+# Misc
+*.swp
+*.swo
 

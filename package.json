@@ -10,8 +10,25 @@
     "tailwindcss": "^3.4.17"
   },
   "scripts": {
+    "install:all": "npm install && npm --prefix services/api install && npm --prefix services/crawler-benefits install && npm --prefix apps/fe install",
+    "build:frontend": "npm --prefix apps/fe run build",
+    "start:api": "npm --prefix services/api run dev",
+    "start:frontend": "npm --prefix apps/fe run dev",
+    "start:crawler": "cd services/crawler-benefits && py main.py",
+    "import:benefits": "set D1_API_URL=https://systemfehler.inequality.workers.dev/admin/upsert-benefit && cd services/crawler-benefits && py import_benefits_to_d1.py",
+    "deploy:db": "npx wrangler d1 execute systemfehler-db --file=./schema.sql",
+    "deploy:crawler": "npm run start:crawler && npm run import:benefits",
     "dev:api": "npm --prefix services/api run dev",
     "dev:frontend": "npm --prefix apps/fe run dev",
-    "dev": "concurrently -n API,WEB -c green,cyan \"npm:dev:api\" \"npm:dev:frontend\""
+    "dev": "concurrently -n API,WEB -c green,cyan \"npm run dev:api\" \"npm run dev:frontend\"",
+    "deploy:frontend": "wrangler pages publish apps/fe/.output/public --project-name=systemfehler",
+    "deploy:api": "cd services/api && wrangler deploy",
+    "deploy": "npm run build:frontend && npm run deploy:frontend"
+  },
+  "resolutions": {
+    "babel-eslint": "^11.0.0-beta.0"
+  },
+  "overrides": {
+    "eslint-config-moxy/babel-eslint": "^11.0.0-beta.0"
   }
 }

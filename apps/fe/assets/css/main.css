@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* load daisyUI + built-ins you want */
+/* load daisyUI + built-ins */
 @plugin "daisyui" { themes: lofi, abyss; logs: false; }
 
 /* extend built-in "lofi" for your light theme */
@@ -38,6 +38,11 @@
   --border: 1px;
   --depth: 0;
   --noise: 0;
+
+  /* new hero/space tokens */
+  --hero-from: #ffb53e;  /* orange-yellow */
+  --hero-mid:  #ff7a2f;  /* orange */
+  --hero-to:   #2d2379;  /* darker blue-purple top-right */
 }
 
 /* extend built-in "abyss" for your dark theme */
@@ -46,6 +51,7 @@
   base: abyss;
   prefersdark: true;
   color-scheme: dark;
+
   --color-base-100: oklch(22% 0.019 237.69);
   --color-base-200: oklch(20% 0.019 237.69);
   --color-base-300: oklch(18% 0.019 237.69);
@@ -74,6 +80,11 @@
   --border: 1px;
   --depth: 0;
   --noise: 0;
+
+  /* new hero/space tokens */
+  --hero-from: #ffb53e;
+  --hero-mid:  #ff7a2f;
+  --hero-to:   #1a154d; /* even darker indigo-purple */
 }
 
 @plugin "daisyui" {

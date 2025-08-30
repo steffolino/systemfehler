@@ -5,6 +5,23 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-08-01',
+  app: {
+    head: {
+      title: 'systemfehler',
+      meta: [
+        { name: 'description', content: 'systemfehler - Das Recht auf Teilhabe ist nicht verhandelbar. systemfehler is a digital infrastructure project countering the collapse of the German welfare system with modular, accessible, and open-source solidarity tools. It supports those left behind by bureaucracy, stigma, and digital exclusion.' }
+      ],
+      link: [
+        { rel: "icon", type: "image/png", sizes: "96x96", href: "/favicon-96x96.png" },
+        { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+        { rel: "shortcut icon", href: "/favicon.ico" },
+        { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+        { rel: "manifest", href: "/site.webmanifest" }
+      ]
+    },
+    // Use the custom error page for 404/500
+    error: '~/pages/error.vue'
+  },
   runtimeConfig: {
     public: {
       apiBase: process.env.VITE_API_BASE,
