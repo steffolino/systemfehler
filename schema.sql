@@ -61,18 +61,3 @@ CREATE TABLE IF NOT EXISTS entry_popularity (
   popularity REAL DEFAULT 0,
   PRIMARY KEY (kind, id)
 );
-
-CREATE TABLE IF NOT EXISTS benefits (
-  id TEXT PRIMARY KEY,
-  url TEXT,
-  title TEXT,
-  meta_description TEXT,
-  h1 TEXT,
-  excerpt TEXT,
-  content TEXT,
-  topic TEXT, -- store as JSON string representing an array of topics
-  source TEXT,
-  language TEXT, -- store as JSON string representing an array
-  status TEXT,
-  last_crawled_at TEXT
-);

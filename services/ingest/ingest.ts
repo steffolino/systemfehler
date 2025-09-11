@@ -8,12 +8,10 @@ import dotenv from 'dotenv'
 import pg from 'pg'
 import { PrismaClient } from '@prisma/client'
 // services/ingest/ingest.ts
-import type { Benefit, Tool, AidOffer, RelatedLink } from '@prisma/client'
+// Removed invalid type imports from @prisma/client
 
 // example: a function shaped by DB types
-function formatBenefit(b: Benefit) {
-  return { id: b.id, title: b.title_de, topics: b.topic }
-}
+// Removed formatBenefit function referencing missing Benefit type
 
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env') })
