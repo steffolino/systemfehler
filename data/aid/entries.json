@@ -1,20 +1,4 @@
 [
-  {
-    "id": "wohnungslos-hilfe-leipzig",
-    "title": "Hilfe für Wohnungslose",
-    "summary_de": "Anlaufstellen und Notunterkünfte in Leipzig.",
-    "summary_en": "Emergency housing services in Leipzig.",
-    "region": "Leipzig",
-    "source": "https://www.leipzig.de/wohnungslosigkeit",
-    "related_links": [],
-    "language": [
-      "de"
-    ],
-    "topic": [
-      "emergency",
-      "housing"
-    ],
-    "createdAt": "2025-07-16T00:00:00Z",
-    "updatedAt": "2025-07-16T00:00:00Z"
-  }
+{"kind": "aid", "id": "aid_jobcenter.de", "title_de": "Jobcenter - Unemployment Benefits", "title_en": null, "summary_de": "unemployment, job search, benefits, support", "summary_en": null, "url": "https://jobcenter.de", "category": "employment", "language": ["de"], "topic": ["unemployment", "job search", "benefits", "support"], "createdAt": "2025-09-11T15:30:00Z", "updatedAt": "2025-09-11T15:30:00Z", "content": "Das Jobcenter unterst\u00fctzt Menschen bei der Suche nach Arbeit und gew\u00e4hrt finanzielle Hilfen.", "emails": ["service@jobcenter.de"], "phones": ["0800-4555500"], "addresses": ["Jobcenter, verschiedene Standorte"], "social_media": [], "tags": ["unemployment", "job search", "benefits", "support"]},
+{"kind": "aid", "id": "aid_arbeitsagentur.de", "title_de": "Arbeitsagentur - Employment Agency", "title_en": null, "summary_de": "employment, job placement, unemployment insurance", "summary_en": null, "url": "https://arbeitsagentur.de", "category": "employment", "language": ["de"], "topic": ["employment", "job placement", "unemployment insurance"], "createdAt": "2025-09-11T15:30:00Z", "updatedAt": "2025-09-11T15:30:00Z", "content": "Die Bundesagentur f\u00fcr Arbeit vermittelt Arbeitspl\u00e4tze und zahlt Arbeitslosengeld.", "emails": ["service@arbeitsagentur.de"], "phones": ["0800-4555521"], "addresses": ["Bundesagentur f\u00fcr Arbeit, N\u00fcrnberg"], "social_media": ["https://twitter.com/bundesagentur"], "tags": ["employment", "job placement", "unemployment insurance"]}
 ]
