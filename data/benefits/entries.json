@@ -1,18 +1,5 @@
 [
-  {
-    "id": "wohngeld-leipzig",
-    "title": "Wohngeld in Leipzig",
-    "summary_de": "Finanzielle Unterstützung bei Mietkosten.",
-    "summary_en": "Financial support for housing costs.",
-    "source": "https://www.leipzig.de/wohngeld",
-    "related_links": [],
-    "language": [
-      "de"
-    ],
-    "topic": [
-      "housing"
-    ],
-    "createdAt": "2025-07-16T00:00:00Z",
-    "updatedAt": "2025-07-16T00:00:00Z"
-  }
+{"kind": "benefit", "id": "benefit_tafel.de", "title_de": "Tafel Deutschland - Food Aid", "title_en": null, "summary_de": "food aid, tafel, charity, volunteer", "summary_en": null, "url": "https://tafel.de", "category": "welfare", "language": ["de"], "topic": ["food aid", "tafel", "charity", "volunteer"], "createdAt": "2025-09-11T15:30:00Z", "updatedAt": "2025-09-11T15:30:00Z", "content": "Die Tafeln retten Lebensmittel und helfen Menschen. Bundesweit sammeln \u00fcber 60.000 Ehrenamtliche Lebensmittelspenden.", "emails": ["info@tafel.de"], "phones": ["030-12345678"], "addresses": ["Tafel Deutschland e.V., Berlin"], "social_media": ["https://facebook.com/tafel.de"], "tags": ["food aid", "tafel", "charity", "volunteer"]},
+{"kind": "benefit", "id": "benefit_caritas.de", "title_de": "Caritas - Social Services", "title_en": null, "summary_de": "social services, caritas, welfare, support", "summary_en": null, "url": "https://caritas.de", "category": "welfare", "language": ["de"], "topic": ["social services", "caritas", "welfare", "support"], "createdAt": "2025-09-11T15:30:00Z", "updatedAt": "2025-09-11T15:30:00Z", "content": "Der Deutsche Caritasverband ist Spitzenverband der freien Wohlfahrtspflege und einer der gr\u00f6\u00dften Sozialverb\u00e4nde weltweit.", "emails": ["info@caritas.de"], "phones": ["0761-200-0"], "addresses": ["Deutscher Caritasverband e.V., Freiburg"], "social_media": ["https://facebook.com/caritas", "https://twitter.com/caritas_web"], "tags": ["social services", "caritas", "welfare", "support"]},
+{"kind": "benefit", "id": "benefit_diakonie.de", "title_de": "Diakonie - Church Social Service", "title_en": null, "summary_de": "diakonie, church, social service, evangelical", "summary_en": null, "url": "https://diakonie.de", "category": "welfare", "language": ["de"], "topic": ["diakonie", "church", "social service", "evangelical"], "createdAt": "2025-09-11T15:30:00Z", "updatedAt": "2025-09-11T15:30:00Z", "content": "Die Diakonie ist der soziale Dienst der evangelischen Kirchen und hilft Menschen in Not.", "emails": ["diakonie@diakonie.de"], "phones": ["030-65211-0"], "addresses": ["Diakonie Deutschland, Berlin"], "social_media": ["https://facebook.com/diakonie.deutschland"], "tags": ["diakonie", "church", "social service", "evangelical"]}
 ]
