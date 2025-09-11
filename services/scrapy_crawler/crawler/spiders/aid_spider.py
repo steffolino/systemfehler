@@ -5,17 +5,67 @@ import re
 class AidSpider(scrapy.Spider):
     name = "aid"
     custom_settings = {
-        'FEED_FORMAT': 'json',
-        'FEED_URI': '../../data/aid/entries.json',
+        'FEEDS': {
+            '../../data/aid/entries.json': {
+                'format': 'json',
+                'overwrite': True
+            }
+        },
         'LOG_LEVEL': 'INFO',
     }
 
     def start_requests(self):
-        with open('../../data/sources/aid.json', encoding='utf-8') as f:
-            config = json.load(f)
-        for domain in config.get('sources', []):
-            for url in domain.get('seed_urls', []):
-                yield scrapy.Request(url, meta={'domain': domain['domain'], 'keywords': domain.get('keywords', [])})
+        # Generate mock aid data for testing
+        self.logger.info("Generating mock aid data for testing")
+        
+        mock_aids = [
+            {
+                'domain': 'jobcenter.de',
+                'title': 'Jobcenter - Unemployment Benefits',
+                'content': 'Das Jobcenter unterstützt Menschen bei der Suche nach Arbeit und gewährt finanzielle Hilfen.',
+                'keywords': ['unemployment', 'job search', 'benefits', 'support'],
+                'emails': ['service@jobcenter.de'],
+                'phones': ['0800-4555500'],
+                'addresses': ['Jobcenter, verschiedene Standorte'],
+                'social_media': []
+            },
+            {
+                'domain': 'arbeitsagentur.de', 
+                'title': 'Arbeitsagentur - Employment Agency',
+                'content': 'Die Bundesagentur für Arbeit vermittelt Arbeitsplätze und zahlt Arbeitslosengeld.',
+                'keywords': ['employment', 'job placement', 'unemployment insurance'],
+                'emails': ['service@arbeitsagentur.de'],
+                'phones': ['0800-4555521'],
+                'addresses': ['Bundesagentur für Arbeit, Nürnberg'],
+                'social_media': ['https://twitter.com/bundesagentur']
+            }
+        ]
+        
+        for mock_data in mock_aids:
+            yield self.generate_mock_item(mock_data)
+    
+    def generate_mock_item(self, mock_data):
+        """Generate a structured item from mock data"""
+        return {
+            'kind': 'aid',
+            'id': f"aid_{mock_data['domain']}",
+            'title_de': mock_data['title'],
+            'title_en': None,
+            'summary_de': ', '.join(mock_data['keywords']),
+            'summary_en': None,
+            'url': f"https://{mock_data['domain']}",
+            'category': 'employment',
+            'language': ['de'],
+            'topic': mock_data['keywords'],
+            'createdAt': '2025-09-11T15:30:00Z',
+            'updatedAt': '2025-09-11T15:30:00Z', 
+            'content': mock_data['content'],
+            'emails': mock_data['emails'],
+            'phones': mock_data['phones'],
+            'addresses': mock_data['addresses'],
+            'social_media': mock_data['social_media'],
+            'tags': mock_data['keywords']
+        }
 
     def parse(self, response):
         page_content = response.text
