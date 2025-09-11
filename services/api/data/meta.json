@@ -1,0 +1,862 @@
+[
+  {
+    "id": "tafel.de",
+    "organization_id": null,
+    "kind_code": "aid_org",
+    "title_de": "Tafel",
+    "title_en": null,
+    "url": "https://www.tafel.de/",
+    "summary_de": "Tafel, Lebensmittelhilfe",
+    "summary_en": null,
+    "topic": [
+      "Tafel",
+      "Lebensmittelhilfe"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "caritas.de",
+    "organization_id": null,
+    "kind_code": "aid_org",
+    "title_de": "Caritas",
+    "title_en": null,
+    "url": "https://www.caritas.de/",
+    "summary_de": "Caritas, Sozialberatung",
+    "summary_en": null,
+    "topic": [
+      "Caritas",
+      "Sozialberatung"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "diakonie.de",
+    "organization_id": null,
+    "kind_code": "aid_org",
+    "title_de": "Diakonie",
+    "title_en": null,
+    "url": "https://www.diakonie.de/",
+    "summary_de": "Diakonie, Beratung",
+    "summary_en": null,
+    "topic": [
+      "Diakonie",
+      "Beratung"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "der-paritaetische.de",
+    "organization_id": null,
+    "kind_code": "umbrella",
+    "title_de": "Der-paritaetische",
+    "title_en": null,
+    "url": "https://www.der-paritaetische.de/",
+    "summary_de": "Paritätischer, Armut",
+    "summary_en": null,
+    "topic": [
+      "Paritätischer",
+      "Armut"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "freundstattfremd.de",
+    "organization_id": null,
+    "kind_code": "local_initiative",
+    "title_de": "Freundstattfremd",
+    "title_en": null,
+    "url": "https://freundstattfremd.de/",
+    "summary_de": "Geflüchtete, Bamberg, Hilfe",
+    "summary_en": null,
+    "topic": [
+      "Geflüchtete",
+      "Bamberg",
+      "Hilfe"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "patenschaftsnetzwerk.de",
+    "organization_id": null,
+    "kind_code": "aid_org",
+    "title_de": "Patenschaftsnetzwerk",
+    "title_en": null,
+    "url": "https://www.patenschaftsnetzwerk.de/",
+    "summary_de": "Ortskräfte, Afghanistan, Patenschaft",
+    "summary_en": null,
+    "topic": [
+      "Ortskräfte",
+      "Afghanistan",
+      "Patenschaft"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "vdk.de",
+    "organization_id": null,
+    "kind_code": "advocacy_group",
+    "title_de": "Vdk",
+    "title_en": null,
+    "url": "https://www.vdk.de/deutschland/",
+    "summary_de": "VdK, Sozialrecht",
+    "summary_en": null,
+    "topic": [
+      "VdK",
+      "Sozialrecht"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "sovd.de",
+    "organization_id": null,
+    "kind_code": "advocacy_group",
+    "title_de": "Sovd",
+    "title_en": null,
+    "url": "https://www.sovd.de/",
+    "summary_de": "SoVD, Sozialrecht",
+    "summary_en": null,
+    "topic": [
+      "SoVD",
+      "Sozialrecht"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "sanktionsfrei.de",
+    "organization_id": null,
+    "kind_code": "advocacy_group",
+    "title_de": "Sanktionsfrei",
+    "title_en": null,
+    "url": "https://sanktionsfrei.de/",
+    "summary_de": "Bürgergeld, Hartz IV, Jobcenter",
+    "summary_en": null,
+    "topic": [
+      "Bürgergeld",
+      "Hartz IV",
+      "Jobcenter"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "arbeitslosenselbsthilfe.org",
+    "organization_id": null,
+    "kind_code": "advocacy_group",
+    "title_de": "Arbeitslosenselbsthilfe",
+    "title_en": null,
+    "url": "https://www.arbeitslosenselbsthilfe.org/",
+    "summary_de": "Arbeitslosigkeit, ALG II, Bürgergeld",
+    "summary_en": null,
+    "topic": [
+      "Arbeitslosigkeit",
+      "ALG II",
+      "Bürgergeld"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "proasyl.de",
+    "organization_id": null,
+    "kind_code": "advocacy_group",
+    "title_de": "Proasyl",
+    "title_en": null,
+    "url": "https://www.proasyl.de/",
+    "summary_de": "Asyl, Flucht, Migration",
+    "summary_en": null,
+    "topic": [
+      "Asyl",
+      "Flucht",
+      "Migration"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "rlc-deutschland.de",
+    "organization_id": null,
+    "kind_code": "advocacy_group",
+    "title_de": "Rlc-deutschland",
+    "title_en": null,
+    "url": "https://rlc-deutschland.de/",
+    "summary_de": "Rechtsberatung, Flüchtlinge",
+    "summary_en": null,
+    "topic": [
+      "Rechtsberatung",
+      "Flüchtlinge"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "antidiskriminierungsstelle.de",
+    "organization_id": null,
+    "kind_code": "advocacy_group",
+    "title_de": "Antidiskriminierungsstelle",
+    "title_en": null,
+    "url": "https://www.antidiskriminierungsstelle.de/",
+    "summary_de": "Diskriminierung, Rechtsanspruch",
+    "summary_en": null,
+    "topic": [
+      "Diskriminierung",
+      "Rechtsanspruch"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "verbraucherzentrale.de",
+    "organization_id": null,
+    "kind_code": "ngo",
+    "title_de": "Verbraucherzentrale",
+    "title_en": null,
+    "url": "https://www.verbraucherzentrale.de/",
+    "summary_de": "Verbraucherschutz, Energie, Tarife",
+    "summary_en": null,
+    "topic": [
+      "Verbraucherschutz",
+      "Energie",
+      "Tarife"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "mieterbund.de",
+    "organization_id": null,
+    "kind_code": "ngo",
+    "title_de": "Mieterbund",
+    "title_en": null,
+    "url": "https://www.mieterbund.de/",
+    "summary_de": "Mieterrechte, Mietrecht",
+    "summary_en": null,
+    "topic": [
+      "Mieterrechte",
+      "Mietrecht"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "oxfam.de",
+    "organization_id": null,
+    "kind_code": "ngo",
+    "title_de": "Oxfam",
+    "title_en": null,
+    "url": "https://www.oxfam.de/",
+    "summary_de": "Oxfam, Ungleichheit, Armut",
+    "summary_en": null,
+    "topic": [
+      "Oxfam",
+      "Ungleichheit",
+      "Armut"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "bpb.de",
+    "organization_id": null,
+    "kind_code": "govt",
+    "title_de": "Bpb",
+    "title_en": null,
+    "url": "https://www.bpb.de/themen/ungleichheit/",
+    "summary_de": "bpb, Ungleichheit, Dossiers",
+    "summary_en": null,
+    "topic": [
+      "bpb",
+      "Ungleichheit",
+      "Dossiers"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "inequalitymonitor.de",
+    "organization_id": null,
+    "kind_code": "research_org",
+    "title_de": "Inequalitymonitor",
+    "title_en": null,
+    "url": "https://www.inequalitymonitor.de/",
+    "summary_de": "Ungleichheit, Daten, Analysen",
+    "summary_en": null,
+    "topic": [
+      "Ungleichheit",
+      "Daten",
+      "Analysen"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "armuts-und-reichtumsbericht.de",
+    "organization_id": null,
+    "kind_code": "govt",
+    "title_de": "Armuts-und-reichtumsbericht",
+    "title_en": null,
+    "url": "https://www.armuts-und-reichtumsbericht.de/",
+    "summary_de": "Armutsbericht, Reichtum, Regierung",
+    "summary_en": null,
+    "topic": [
+      "Armutsbericht",
+      "Reichtum",
+      "Regierung"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "grundeinkommen.de",
+    "organization_id": null,
+    "kind_code": "ngo",
+    "title_de": "Grundeinkommen",
+    "title_en": null,
+    "url": "https://www.grundeinkommen.de/",
+    "summary_de": "BGE, Grundeinkommen, Kampagne",
+    "summary_en": null,
+    "topic": [
+      "BGE",
+      "Grundeinkommen",
+      "Kampagne"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "armut.de",
+    "organization_id": null,
+    "kind_code": "ngo",
+    "title_de": "Armut",
+    "title_en": null,
+    "url": "https://www.armut.de/",
+    "summary_de": "Armut, Aufklärung",
+    "summary_en": null,
+    "topic": [
+      "Armut",
+      "Aufklärung"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "ungleichheit.info",
+    "organization_id": null,
+    "kind_code": "research_org",
+    "title_de": "Ungleichheit",
+    "title_en": null,
+    "url": "https://ungleichheit.info/",
+    "summary_de": "Ungleichheit, Faktenportal",
+    "summary_en": null,
+    "topic": [
+      "Ungleichheit",
+      "Faktenportal"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "sozialberatung.de",
+    "organization_id": null,
+    "kind_code": "ngo",
+    "title_de": "Sozialberatung",
+    "title_en": null,
+    "url": "https://www.sozialberatung.de/",
+    "summary_de": "Sozialberatung, Beratungsstellen",
+    "summary_en": null,
+    "topic": [
+      "Sozialberatung",
+      "Beratungsstellen"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "schuldnerberatung.de",
+    "organization_id": null,
+    "kind_code": "ngo",
+    "title_de": "Schuldnerberatung",
+    "title_en": null,
+    "url": "https://www.schuldnerberatung.de/",
+    "summary_de": "Schulden, Beratung",
+    "summary_en": null,
+    "topic": [
+      "Schulden",
+      "Beratung"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "buergergeld.org",
+    "organization_id": null,
+    "kind_code": "ngo",
+    "title_de": "Buergergeld",
+    "title_en": null,
+    "url": "https://www.buergergeld.org/",
+    "summary_de": "Bürgergeld, Rechner",
+    "summary_en": null,
+    "topic": [
+      "Bürgergeld",
+      "Rechner"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "vdk.de",
+    "organization_id": null,
+    "kind_code": "advocacy_group",
+    "title_de": "Vdk",
+    "title_en": null,
+    "url": "https://www.vdk.de/deutschland/",
+    "summary_de": "Sozialrecht",
+    "summary_en": null,
+    "topic": [
+      "Sozialrecht"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "sovd.de",
+    "organization_id": null,
+    "kind_code": "advocacy_group",
+    "title_de": "Sovd",
+    "title_en": null,
+    "url": "https://www.sovd.de/",
+    "summary_de": "Rechtsvertretung",
+    "summary_en": null,
+    "topic": [
+      "Rechtsvertretung"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "sanktionsfrei.de",
+    "organization_id": null,
+    "kind_code": "advocacy_group",
+    "title_de": "Sanktionsfrei",
+    "title_en": null,
+    "url": "https://sanktionsfrei.de/",
+    "summary_de": "Jobcenter, Sanktionen",
+    "summary_en": null,
+    "topic": [
+      "Jobcenter",
+      "Sanktionen"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "arbeitslosenselbsthilfe.org",
+    "organization_id": null,
+    "kind_code": "advocacy_group",
+    "title_de": "Arbeitslosenselbsthilfe",
+    "title_en": null,
+    "url": "https://www.arbeitslosenselbsthilfe.org/",
+    "summary_de": "ALG II, Bürgergeld",
+    "summary_en": null,
+    "topic": [
+      "ALG II",
+      "Bürgergeld"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "proasyl.de",
+    "organization_id": null,
+    "kind_code": "advocacy_group",
+    "title_de": "Proasyl",
+    "title_en": null,
+    "url": "https://www.proasyl.de/",
+    "summary_de": "Asyl, Flüchtlinge",
+    "summary_en": null,
+    "topic": [
+      "Asyl",
+      "Flüchtlinge"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "rlc-deutschland.de",
+    "organization_id": null,
+    "kind_code": "advocacy_group",
+    "title_de": "Rlc-deutschland",
+    "title_en": null,
+    "url": "https://rlc-deutschland.de/",
+    "summary_de": "Rechtsberatung, Studierende",
+    "summary_en": null,
+    "topic": [
+      "Rechtsberatung",
+      "Studierende"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "antidiskriminierungsstelle.de",
+    "organization_id": null,
+    "kind_code": "advocacy_group",
+    "title_de": "Antidiskriminierungsstelle",
+    "title_en": null,
+    "url": "https://www.antidiskriminierungsstelle.de/",
+    "summary_de": "Diskriminierung",
+    "summary_en": null,
+    "topic": [
+      "Diskriminierung"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "dgb.de",
+    "organization_id": null,
+    "kind_code": "advocacy_group",
+    "title_de": "Dgb",
+    "title_en": null,
+    "url": "https://www.dgb.de/",
+    "summary_de": "Gewerkschaft, Soziale Gerechtigkeit",
+    "summary_en": null,
+    "topic": [
+      "Gewerkschaft",
+      "Soziale Gerechtigkeit"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "bpb.de",
+    "organization_id": null,
+    "kind_code": "govt",
+    "title_de": "Bpb",
+    "title_en": null,
+    "url": "https://www.bpb.de/themen/",
+    "summary_de": "Bildung, Politik",
+    "summary_en": null,
+    "topic": [
+      "Bildung",
+      "Politik"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "armuts-und-reichtumsbericht.de",
+    "organization_id": null,
+    "kind_code": "govt",
+    "title_de": "Armuts-und-reichtumsbericht",
+    "title_en": null,
+    "url": "https://www.armuts-und-reichtumsbericht.de/",
+    "summary_de": "Armut, Reichtum",
+    "summary_en": null,
+    "topic": [
+      "Armut",
+      "Reichtum"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "destatis.de",
+    "organization_id": null,
+    "kind_code": "govt",
+    "title_de": "Destatis",
+    "title_en": null,
+    "url": "https://www.destatis.de/",
+    "summary_de": "Statistik, Amtlich",
+    "summary_en": null,
+    "topic": [
+      "Statistik",
+      "Amtlich"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "bmas.de",
+    "organization_id": null,
+    "kind_code": "govt",
+    "title_de": "Bmas",
+    "title_en": null,
+    "url": "https://www.bmas.de/",
+    "summary_de": "BMAS, Sozialpolitik",
+    "summary_en": null,
+    "topic": [
+      "BMAS",
+      "Sozialpolitik"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "jobcenter.digital",
+    "organization_id": null,
+    "kind_code": "govt",
+    "title_de": "Jobcenter",
+    "title_en": null,
+    "url": "https://jobcenter.digital/",
+    "summary_de": "Jobcenter, Online-Portal",
+    "summary_en": null,
+    "topic": [
+      "Jobcenter",
+      "Online-Portal"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "inequalitymonitor.de",
+    "organization_id": null,
+    "kind_code": "research_org",
+    "title_de": "Inequalitymonitor",
+    "title_en": null,
+    "url": "https://www.inequalitymonitor.de/",
+    "summary_de": "Ungleichheit, Daten",
+    "summary_en": null,
+    "topic": [
+      "Ungleichheit",
+      "Daten"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "ungleichheit.info",
+    "organization_id": null,
+    "kind_code": "research_org",
+    "title_de": "Ungleichheit",
+    "title_en": null,
+    "url": "https://ungleichheit.info/",
+    "summary_de": "Faktenportal, Sozialpolitik",
+    "summary_en": null,
+    "topic": [
+      "Faktenportal",
+      "Sozialpolitik"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "wzb.eu",
+    "organization_id": null,
+    "kind_code": "research_org",
+    "title_de": "Wzb",
+    "title_en": null,
+    "url": "https://www.wzb.eu/",
+    "summary_de": "Sozialforschung",
+    "summary_en": null,
+    "topic": [
+      "Sozialforschung"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "diw.de",
+    "organization_id": null,
+    "kind_code": "research_org",
+    "title_de": "Diw",
+    "title_en": null,
+    "url": "https://www.diw.de/",
+    "summary_de": "Ungleichheitsforschung",
+    "summary_en": null,
+    "topic": [
+      "Ungleichheitsforschung"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "boeckler.de",
+    "organization_id": null,
+    "kind_code": "research_org",
+    "title_de": "Boeckler",
+    "title_en": null,
+    "url": "https://www.boeckler.de/",
+    "summary_de": "Arbeitsmarkt, Studien",
+    "summary_en": null,
+    "topic": [
+      "Arbeitsmarkt",
+      "Studien"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "grundeinkommen.de",
+    "organization_id": null,
+    "kind_code": "ngo",
+    "title_de": "Grundeinkommen",
+    "title_en": null,
+    "url": "https://www.grundeinkommen.de/",
+    "summary_de": "Grundeinkommen",
+    "summary_en": null,
+    "topic": [
+      "Grundeinkommen"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  },
+  {
+    "id": "armut.de",
+    "organization_id": null,
+    "kind_code": "ngo",
+    "title_de": "Armut",
+    "title_en": null,
+    "url": "https://www.armut.de/",
+    "summary_de": "Aufklärung, Armut",
+    "summary_en": null,
+    "topic": [
+      "Aufklärung",
+      "Armut"
+    ],
+    "language": [
+      "de"
+    ],
+    "createdAt": "2025-09-02T21:46:34.425209Z",
+    "updatedAt": "2025-09-02T21:46:34.425209Z"
+  }
+]

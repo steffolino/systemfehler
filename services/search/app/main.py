@@ -52,6 +52,9 @@ def search(
     limit: int = 20,
     offset: int = 0
 ):
+    import logging
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger("search-endpoint")
     q_stripped = (q or "").strip()
     qx = expand_query(q_stripped)
     params: Dict[str, Any] = {"q": q_stripped, "qx": qx, "limit": limit, "offset": offset, "pfx": f"{q_stripped}%"}
@@ -83,12 +86,19 @@ def search(
     LIMIT %(limit)s OFFSET %(offset)s
     """
 
-    with psycopg.connect(DB_URL, row_factory=dict_row) as conn:
-        # For very short queries, relax trigram similarity
-        if len(q_stripped) <= 4:
-            conn.execute("SELECT set_limit(0.2);")  # default is ~0.3
-        rows = conn.execute(sql, params).fetchall()
-    return {"hits": rows}
+    logger.info(f"/search called with params: {params}")
+    logger.info(f"SQL: {sql}")
+    try:
+        with psycopg.connect(DB_URL, row_factory=dict_row) as conn:
+            # For very short queries, relax trigram similarity
+            if len(q_stripped) <= 4:
+                conn.execute("SELECT set_limit(0.2);")  # default is ~0.3
+            rows = conn.execute(sql, params).fetchall()
+        logger.info(f"Returned {len(rows)} rows")
+        return {"hits": rows}
+    except Exception as e:
+        logger.error(f"Error in /search: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/suggest")
 def suggest(prefix: str, topic: Optional[str] = None, limit: int = 8):

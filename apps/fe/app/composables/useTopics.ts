@@ -2,14 +2,14 @@ import { useI18n } from '#imports'
 
 export type TopicItem = { topic: string; total: number; benefit: number; tool: number; aid: number }
 
-const SEARCH_BASE = (import.meta as any).env?.VITE_SEARCH_BASE || 'http://localhost:8000'
-
+// Fetch topics from /api/topics (benefits/topics)
 export async function fetchTopics(limit = 20) {
-  const url = new URL('/topics', SEARCH_BASE)
-  url.searchParams.set('limit', String(limit))
-  const res = await fetch(url.toString())
-  if (!res.ok) throw new Error(`Topics failed: ${res.status}`)
-  return (await res.json()) as { topics: TopicItem[] }
+  const config = useRuntimeConfig();
+  const searchBase = config.public.searchBase;
+  const url = `${searchBase}/topics?limit=${limit}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error('Failed to fetch topics');
+  return await res.json();
 }
 
 export function topicLabel(slug: string) {
@@ -18,3 +18,13 @@ export function topicLabel(slug: string) {
   const label = t(key)
   return label === key ? slug.replace(/_/g, ' ') : label
 }
+
+export const useTopics = async (params = {}) => {
+  const config = useRuntimeConfig();
+  const searchBase = config.public.searchBase;
+  const query = new URLSearchParams(params).toString();
+  const url = `${searchBase}/topics${query ? `?${query}` : ''}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error('Failed to fetch topics');
+  return await res.json();
+};

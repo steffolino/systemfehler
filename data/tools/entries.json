@@ -1,19 +1,82 @@
-e[
+[
   {
-    "id": "heizkosten-check",
-    "title": "Heizkosten-Check",
-    "summary_de": "Tool zur Prüfung überhöhter Heizkosten.",
-    "summary_en": "Tool to check excessive heating costs.",
-    "source": "https://www.die-linke.de/heizkostencheck",
-    "category": "calculator",
-    "related_links": [],
+    "id": "buergergeld-org",
+    "title_de": "Bürgergeld.org",
+    "title_en": "Citizen’s Income Portal",
+    "url": "https://www.buergergeld.org/",
+    "summary_de": "Unabhängiges Infoportal zum Bürgergeld mit Anspruchsrechner und Anleitungen.",
+    "summary_en": "Independent info portal for Citizen’s Income with eligibility calculator and guides.",
+    "category": "benefits",
+    "topic": [
+      "Bürgergeld",
+      "Sozialleistungen"
+    ],
     "language": [
       "de"
-    ],
+    ]
+  },
+  {
+    "id": "sozialberatung-de",
+    "title_de": "Sozialberatung.de",
+    "title_en": "Social Counseling Directory",
+    "url": "https://www.sozialberatung.de/",
+    "summary_de": "Verzeichnis von Beratungsstellen bundesweit, einfach nach PLZ/Ort durchsuchbar.",
+    "summary_en": "Directory of social counseling centers across Germany, searchable by postcode.",
+    "category": "counseling",
     "topic": [
-      "energy"
+      "Sozialberatung",
+      "Anlaufstellen"
     ],
-    "createdAt": "2025-07-16T00:00:00Z",
-    "updatedAt": "2025-07-16T00:00:00Z"
+    "language": [
+      "de"
+    ]
+  },
+  {
+    "id": "schuldnerberatung-de",
+    "title_de": "Schuldnerberatung.de",
+    "title_en": "Debt Advice Directory",
+    "url": "https://www.schuldnerberatung.de/",
+    "summary_de": "Finder für kostenfreie Schuldnerberatungen in Deutschland.",
+    "summary_en": "Finder for free debt counseling services in Germany.",
+    "category": "debt",
+    "topic": [
+      "Schulden",
+      "Insolvenz"
+    ],
+    "language": [
+      "de"
+    ]
+  },
+  {
+    "id": "verbraucherzentrale",
+    "title_de": "Verbraucherzentrale",
+    "title_en": "Consumer Advice Center",
+    "url": "https://www.verbraucherzentrale.de/",
+    "summary_de": "Beratungsportal mit Tools zu Energieschulden, Verträgen und Sozialtarifen.",
+    "summary_en": "Consumer portal with tools for energy debt, contracts and social tariffs.",
+    "category": "consumer",
+    "topic": [
+      "Verbraucherschutz",
+      "Energie"
+    ],
+    "language": [
+      "de"
+    ]
+  },
+  {
+    "id": "mieterbund",
+    "title_de": "Deutscher Mieterbund",
+    "title_en": "German Tenants’ Association",
+    "url": "https://www.mieterbund.de/",
+    "summary_de": "Beratungsfinder und Musterbriefe zu Mietrecht, Kündigung, Nebenkosten.",
+    "summary_en": "Finder and template letters for tenancy law, termination, ancillary costs.",
+    "category": "housing",
+    "topic": [
+      "Mietrecht",
+      "Wohnen"
+    ],
+    "language": [
+      "de"
+    ]
   }
 ]

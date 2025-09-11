@@ -1,14 +1,17 @@
 # wrangler.toml — Cloudflare Pages (Functions) config
 
-name = "systemfehler"                 # ← required for Pages
+name = "systemfehler"
+main = "services/api/worker.js"
 compatibility_date = "2024-09-23"
+account_id = "5f9005a65d4848073ca40a794d0d30f4"
+workers_dev = true
 compatibility_flags = ["nodejs_compat"]  # enables node:buffer etc on Pages Functions
 
-# Tell Pages where your static build output is
-pages_build_output_dir = "./apps/fe/.output/public"
 
 # D1 binding (works on Pages Functions)
 [[d1_databases]]
 binding = "DB"
 database_id = "318e633f-b1da-4fb3-9ce7-a0bc2ccf3160"
 database_name = "systemfehler-db"
+# local_path = "./.wrangler/local-d1/systemfehler-db.sqlite3"
+

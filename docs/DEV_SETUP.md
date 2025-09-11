@@ -240,3 +240,22 @@ You must use a real database in the database_id configuration. You can find your
 - **CORS issues:** Ensure your Cloudflare Worker is configured to allow requests from your frontend's origin.
 
 - **Environment variable issues:** Double-check that all required environment variables are set in the Cloudflare dashboard and are correctly referenced in your code.
+
+# Deployment
+
+## Frontend (Cloudflare Pages)
+Build and deploy the frontend using the Pages config:
+```bash
+wrangler --config wrangler.pages.toml pages deploy ./apps/fe/.output/public --project-name=systemfehler
+```
+
+## API (Cloudflare Worker)
+Deploy the API using the Worker config:
+```bash
+wrangler --config wrangler.worker.toml deploy
+```
+
+## Notes
+- Use `wrangler.pages.toml` for frontend-only deployments.
+- Use `wrangler.worker.toml` for API/Worker deployments.
+- Switch configs as needed for each deployment type.

@@ -1,0 +1,10 @@
+{
+    "domains": [
+        "meta.org",
+        "infosite.com"
+    ],
+    "seed_urls": [
+        "https://meta.org/info",
+        "https://infosite.com/meta"
+    ]
+}

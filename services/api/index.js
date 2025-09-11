@@ -1,165 +1,79 @@
-// Cloudflare Workers API handler using D1 (Cloudflare's SQLite-compatible DB).
+// services/api/index.js
 
-export default {
-  async fetch(request, env, ctx) {
-    const url = new URL(request.url)
-    const { pathname } = url
+import path from "path";
+import { fileURLToPath } from 'url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+import express from "express";
+import cors from "cors";
+import { entityRouter } from "./routes/entityRouter.js";
+import { searchRouter } from "./routes/search.js";
+import { metaEntitiesRouter } from "./routes/metaEntities.js";
 
-    // Add this for debugging
-    console.log("Request path:", pathname, "Method:", request.method);
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-    // /api/benefits
-    if (pathname === '/api/benefits' && request.method === 'GET') {
-      const { results } = await env.DB.prepare("SELECT * FROM benefits").all()
-      return new Response(JSON.stringify(results), {
-        headers: { 'Content-Type': 'application/json' }
-      })
-    }
 
-    const benefitMatch = pathname.match(/^\/api\/benefits\/(\w+)$/)
-    if (benefitMatch && request.method === 'GET') {
-      const id = benefitMatch[1]
-      const { results } = await env.DB.prepare("SELECT * FROM benefits WHERE id = ?").bind(id).all()
-      if (results.length === 0) {
-        return new Response(JSON.stringify({ error: 'not found' }), {
-          status: 404,
-          headers: { 'Content-Type': 'application/json' }
-        })
-      }
-      return new Response(JSON.stringify(results[0]), {
-        headers: { 'Content-Type': 'application/json' }
-      })
-    }
-
-    // /api/tools
-    if (pathname === '/api/tools' && request.method === 'GET') {
-      const { results } = await env.DB.prepare("SELECT * FROM tools").all()
-      return new Response(JSON.stringify(results), {
-        headers: { 'Content-Type': 'application/json' }
-      })
-    }
-
-    // /api/slogans
-    if (pathname === '/api/slogans' && request.method === 'GET') {
-      const { results } = await env.DB.prepare("SELECT * FROM slogans").all()
-      return new Response(JSON.stringify(results), {
-        headers: { 'Content-Type': 'application/json' }
-      })
-    }
-
-    // /admin/refresh-search (not supported in Workers)
-    if (pathname === '/admin/refresh-search' && request.method === 'POST') {
-      return new Response(JSON.stringify({ ok: false, error: 'Not implemented on Workers' }), {
-        status: 501,
-        headers: { 'Content-Type': 'application/json' }
-      })
-    }
-
-    // Upsert benefit (admin)
-    if (
-      pathname === '/admin/upsert-benefit' ||
-      pathname === '/api/admin/upsert-benefit' ||
-      pathname === '/services/api/admin/upsert-benefit'
-    ) {
-      if (request.method !== 'POST') {
-        return new Response(JSON.stringify({ error: "Method Not Allowed" }), { status: 405 })
-      }
-      let benefit
-      try {
-        benefit = await request.json()
-      } catch (e) {
-        return new Response(JSON.stringify({ ok: false, error: "Invalid JSON" }), { status: 400 })
-      }
-      // Validate required fields
-      const required = ["id", "url", "title", "meta_description", "h1", "excerpt", "content", "source", "language", "status", "last_crawled_at"]
-      for (const key of required) {
-        if (!(key in benefit)) {
-          return new Response(JSON.stringify({ ok: false, error: `Missing field: ${key}` }), { status: 400 })
-        }
-      }
-      // Store language as JSON string if it's an array
-      const language = Array.isArray(benefit.language) ? JSON.stringify(benefit.language) : benefit.language
-      const topic = Array.isArray(benefit.topic) || benefit.topic === null
-        ? JSON.stringify(benefit.topic)
-        : JSON.stringify([benefit.topic])
-      // Upsert (insert or replace)
-      await env.DB.prepare(`
-        INSERT INTO benefits (
-          id, url, title, meta_description, h1, excerpt, content, topic, source, language, status, last_crawled_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ON CONFLICT(id) DO UPDATE SET
-          url=excluded.url,
-          title=excluded.title,
-          meta_description=excluded.meta_description,
-          h1=excluded.h1,
-          excerpt=excluded.excerpt,
-          content=excluded.content,
-          topic=excluded.topic,
-          source=excluded.source,
-          language=excluded.language,
-          status=excluded.status,
-          last_crawled_at=excluded.last_crawled_at
-      `)
-      .bind(
-        benefit.id, benefit.url, benefit.title, benefit.meta_description, benefit.h1, benefit.excerpt,
-        benefit.content, topic, benefit.source, language, benefit.status, benefit.last_crawled_at
-      ).run()
-      return new Response(JSON.stringify({ ok: true }), { headers: { "Content-Type": "application/json" } })
-    }
-
-    // Optional: Bulk import all (POST /admin/import-all with JSON array)
-    if (pathname === '/admin/import-all' && request.method === 'POST') {
-      let benefits
-      try {
-        benefits = await request.json()
-      } catch (e) {
-        return new Response(JSON.stringify({ ok: false, error: "Invalid JSON" }), { status: 400 })
-      }
-      let count = 0
-      for (const benefit of benefits) {
-        const required = ["id", "url", "title", "meta_description", "h1", "excerpt", "content", "source", "language", "status", "last_crawled_at"]
-        if (!required.every(k => k in benefit)) continue
-        const language = Array.isArray(benefit.language) ? JSON.stringify(benefit.language) : benefit.language
-        const topic = Array.isArray(benefit.topic) || benefit.topic === null
-          ? JSON.stringify(benefit.topic)
-          : JSON.stringify([benefit.topic])
-        await env.DB.prepare(`
-          INSERT INTO benefits (
-            id, url, title, meta_description, h1, excerpt, content, topic, source, language, status, last_crawled_at
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-          ON CONFLICT(id) DO UPDATE SET
-            url=excluded.url,
-            title=excluded.title,
-            meta_description=excluded.meta_description,
-            h1=excluded.h1,
-            excerpt=excluded.excerpt,
-            content=excluded.content,
-            topic=excluded.topic,
-            source=excluded.source,
-            language=excluded.language,
-            status=excluded.status,
-            last_crawled_at=excluded.last_crawled_at
-        `)
-        .bind(
-          benefit.id, benefit.url, benefit.title, benefit.meta_description, benefit.h1, benefit.excerpt,
-          benefit.content, topic, benefit.source, language, benefit.status, benefit.last_crawled_at
-        ).run()
-        count++
-      }
-      return new Response(JSON.stringify({ ok: true, count }), { headers: { "Content-Type": "application/json" } })
-    }
-
-    // Health check endpoint
-    if (pathname === '/health' && request.method === 'GET') {
-      return new Response(JSON.stringify({ ok: true }), {
-        headers: { 'Content-Type': 'application/json' }
-      })
-    }
-
-    // 404 fallback
-    return new Response(JSON.stringify({ error: 'Not found' }), {
-      status: 404,
-      headers: { 'Content-Type': 'application/json' }
-    })
+(async () => {
+  // Use require for sqlite3 to ensure the driver is defined
+  let sqlite3;
+  try {
+    sqlite3 = (await import('sqlite3')).default;
+  } catch (e) {
+    sqlite3 = require('sqlite3');
   }
-}// (No Buffer check needed here)
+  const { open } = await import('sqlite');
+  const db = await open({
+    filename: path.resolve(__dirname, '../../.generated/local.sqlite'),
+    driver: sqlite3.Database,
+  });
+
+  app.use("/api/organizations", entityRouter("organization", db));
+  app.use("/api/benefits", entityRouter("benefit", db));
+  app.use("/api/contacts", entityRouter("contact", db));
+  app.use("/api/services", entityRouter("service", db));
+  app.use("/api/items", entityRouter("knowledge_item", db));
+  app.use("/api/search", searchRouter(db));
+  app.use("/api/meta/entities", metaEntitiesRouter(db));
+  // Lookup tables
+  app.use("/api/org-kind", entityRouter("org_kind", db));
+  app.use("/api/service-kind", entityRouter("service_kind", db));
+  app.use("/api/item-kind", entityRouter("item_kind", db));
+  app.use("/api/topic", entityRouter("topic", db));
+  app.use("/api/language", entityRouter("language", db));
+  app.use("/api/target-group", entityRouter("target_group", db));
+  // Junctions
+  app.use("/api/organization-topic", entityRouter("organization_topic", db));
+  app.use("/api/organization-language", entityRouter("organization_language", db));
+  app.use("/api/organization-target-group", entityRouter("organization_target_group", db));
+  app.use("/api/service-topic", entityRouter("service_topic", db));
+  app.use("/api/service-language", entityRouter("service_language", db));
+  app.use("/api/service-target-group", entityRouter("service_target_group", db));
+  app.use("/api/item-topic", entityRouter("item_topic", db));
+  app.use("/api/item-language", entityRouter("item_language", db));
+  app.use("/api/item-target-group", entityRouter("item_target_group", db));
+  app.use("/api/popularity", entityRouter("popularity", db));
+  app.use("/api/related-link", entityRouter("related_link", db));
+
+  // Add this route before app.listen
+  app.get("/api/search/topics", async (req, res) => {
+    try {
+      const limit = parseInt(req.query.limit) || 20;
+      // Get all topics with counts per entity type using junction tables
+      const sql = `SELECT t.code, t.label,
+        (SELECT COUNT(*) FROM benefit WHERE benefit.topic LIKE '%' || t.code || '%') as benefit_count,
+  (SELECT COUNT(*) FROM service_topic WHERE service_topic.topic_id = t.rowid) as service_count,
+  (SELECT COUNT(*) FROM organization_topic WHERE organization_topic.topic_id = t.rowid) as organization_count,
+        (SELECT COUNT(*) FROM contact WHERE contact.tags LIKE '%' || t.code || '%') as contact_count
+        FROM topic t ORDER BY t.label ASC LIMIT ?`;
+      const rows = await db.all(sql, [limit]);
+      res.json(rows);
+    } catch (err) {
+      res.status(500).json({ error: "Failed to fetch topics", details: err.message });
+    }
+  });
+
+  app.listen(3001, () => {
+    console.log("API listening on http://localhost:3001");
+  });
+})();

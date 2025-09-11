@@ -1,0 +1,10 @@
+{
+    "domains": [
+        "benefits.org",
+        "helpme.com"
+    ],
+    "seed_urls": [
+        "https://benefits.org/angebote",
+        "https://helpme.com/benefits"
+    ]
+}

@@ -1,34 +1,62 @@
 {
+  "name": "systemfehler-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/fe",
+    "services/api",
+    "services/crawler*"
+  ],
   "devDependencies": {
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/tailwindcss": "^6.14.0",
     "@tailwindcss/postcss": "^4.1.12",
     "autoprefixer": "^10.4.21",
+    "better-sqlite3": "^12.2.0",
+    "chokidar-cli": "^3.0.0",
     "concurrently": "^9.2.0",
     "daisyui": "^5.0.50",
+    "kysely": "^0.27.2",
+    "kysely-codegen": "^0.2.0",
     "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.17"
+    "sqlite3": "^5.1.6",
+    "tailwindcss": "^3.4.17",
+    "zx": "^8.8.1"
   },
   "scripts": {
-    "install:all": "npm install && npm --prefix services/api install && npm --prefix services/crawler-benefits install && npm --prefix apps/fe install",
-    "build:frontend": "npm --prefix apps/fe run build",
-    "start:api": "npm --prefix services/api run dev",
-    "start:frontend": "npm --prefix apps/fe run dev",
-    "start:crawler": "cd services/crawler-benefits && py main.py",
-    "import:benefits": "set D1_API_URL=https://systemfehler.inequality.workers.dev/admin/upsert-benefit && cd services/crawler-benefits && py import_benefits_to_d1.py",
-    "deploy:db": "npx wrangler d1 execute systemfehler-db --file=./schema.sql",
-    "deploy:crawler": "npm run start:crawler && npm run import:benefits",
-    "dev:api": "npm --prefix services/api run dev",
-    "dev:frontend": "npm --prefix apps/fe run dev",
+    "install:all": "npm install",
+    "build:frontend": "npm --workspace apps/fe run build",
+    "start:api": "npm --workspace services/api run dev",
+    "start:frontend": "npm --workspace apps/fe run dev",
+    "dev:api": "npm --workspace services/api run dev",
+    "dev:frontend": "npm --workspace apps/fe run dev",
     "dev": "concurrently -n API,WEB -c green,cyan \"npm run dev:api\" \"npm run dev:frontend\"",
-    "deploy:frontend": "wrangler pages publish apps/fe/.output/public --project-name=systemfehler",
-    "deploy:api": "cd services/api && wrangler deploy",
-    "deploy": "npm run build:frontend && npm run deploy:frontend"
+    "crawl:benefits": "python services/crawler-benefits/main.py",
+    "crawl:contacts": "python services/crawler/contacts_generic.py",
+    "crawl:canonical": "python services/crawler/import_canonical_seed.py",
+    "crawl:aid": "python services/crawler-aid/main.py",
+    "crawl:tools": "python services/crawler-tools/main.py",
+    "crawl:meta": "python services/crawler-meta/main.py",
+    "crawl:all": "npm run crawl:contacts && npm run crawl:benefits && npm run crawl:canonical && npm run crawl:aid && npm run crawl:tools && npm run crawl:meta",
+    "db:build-local": "zx scripts/build-local-db.mjs",
+    "db:import-json": "node scripts/db-import-json.js",
+    "db:codegen-sqlite": "node scripts/codegen-sqlite.js",
+    "db:codegen": "kysely-codegen --dialect sqlite --out-file src/types/db.d.ts --url file:./.generated/local.sqlite",
+    "db:codegen:ci": "pnpm db:build-local && pnpm db:codegen && git diff --exit-code -- src/types/db.d.ts",
+    "db:watch": "chokidar 'migrations/**/*.sql' -c 'pnpm db:build-local && pnpm db:codegen'",
+    "seed:benefits": "node services/api/scripts/seed-benefits.js",
+    "seed:aid": "node services/api/scripts/seed-aid.js",
+    "seed:tools": "node services/api/scripts/seed-tools.js",
+    "seed:contacts": "node services/api/scripts/seed-contacts.js",
+    "seed:all": "npm run seed:contacts && npm run seed:benefits && npm run seed:aid && npm run seed:tools",
+    "deploy:api": "wrangler deploy --config services/api/wrangler.toml",
+    "dev:api:worker": "wrangler dev --config services/api/wrangler.toml",
+    "d1:apply": "wrangler d1 execute systemfehler-db --file services/api/db/schema.sql --config services/api/wrangler.toml"
   },
   "resolutions": {
     "babel-eslint": "^11.0.0-beta.0"
   },
-  "overrides": {
-    "eslint-config-moxy/babel-eslint": "^11.0.0-beta.0"
-  }
+  "dependencies": {
+    "pinia": "^3.0.3"
+  },
+  "packageManager": "pnpm@9.15.9+sha512.68046141893c66fad01c079231128e9afb89ef87e2691d69e4d40eee228988295fd4682181bae55b58418c3a253bde65a505ec7c5f9403ece5cc3cd37dcf2531"
 }

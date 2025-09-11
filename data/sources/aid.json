@@ -1,0 +1,312 @@
+{
+    "sources": [
+        {
+            "domain": "aidnow.net",
+            "seed_urls": [
+                "https://aidnow.net/aid"
+            ],
+            "kind_code": "aid_org",
+            "keywords": [
+                "AidNow",
+                "Support"
+            ]
+        },
+        {
+            "domain": "support.org",
+            "seed_urls": [
+                "https://support.org/aid"
+            ],
+            "kind_code": "aid_org",
+            "keywords": [
+                "Support",
+                "Help"
+            ]
+        },
+        {
+            "domain": "tafel.de",
+            "seed_urls": [
+                "https://www.tafel.de/"
+            ],
+            "kind_code": "aid_org",
+            "keywords": [
+                "Tafel",
+                "Lebensmittelhilfe"
+            ]
+        },
+        {
+            "domain": "caritas.de",
+            "seed_urls": [
+                "https://www.caritas.de/"
+            ],
+            "kind_code": "aid_org",
+            "keywords": [
+                "Caritas",
+                "Sozialberatung"
+            ]
+        },
+        {
+            "domain": "diakonie.de",
+            "seed_urls": [
+                "https://www.diakonie.de/"
+            ],
+            "kind_code": "aid_org",
+            "keywords": [
+                "Diakonie",
+                "Beratung"
+            ]
+        },
+        {
+            "domain": "der-paritaetische.de",
+            "seed_urls": [
+                "https://www.der-paritaetische.de/"
+            ],
+            "kind_code": "umbrella",
+            "keywords": [
+                "Paritätischer",
+                "Armut"
+            ]
+        },
+        {
+            "domain": "freundstattfremd.de",
+            "seed_urls": [
+                "https://freundstattfremd.de/"
+            ],
+            "kind_code": "local_initiative",
+            "keywords": [
+                "Geflüchtete",
+                "Bamberg",
+                "Hilfe"
+            ]
+        },
+        {
+            "domain": "patenschaftsnetzwerk.de",
+            "seed_urls": [
+                "https://www.patenschaftsnetzwerk.de/"
+            ],
+            "kind_code": "aid_org",
+            "keywords": [
+                "Ortskräfte",
+                "Afghanistan",
+                "Patenschaft"
+            ]
+        },
+        {
+            "domain": "vdk.de",
+            "seed_urls": [
+                "https://www.vdk.de/deutschland/"
+            ],
+            "kind_code": "advocacy_group",
+            "keywords": [
+                "VdK",
+                "Sozialrecht"
+            ]
+        },
+        {
+            "domain": "sovd.de",
+            "seed_urls": [
+                "https://www.sovd.de/"
+            ],
+            "kind_code": "advocacy_group",
+            "keywords": [
+                "SoVD",
+                "Sozialrecht"
+            ]
+        },
+        {
+            "domain": "sanktionsfrei.de",
+            "seed_urls": [
+                "https://sanktionsfrei.de/"
+            ],
+            "kind_code": "advocacy_group",
+            "keywords": [
+                "Bürgergeld",
+                "Hartz IV",
+                "Jobcenter"
+            ]
+        },
+        {
+            "domain": "arbeitslosenselbsthilfe.org",
+            "seed_urls": [
+                "https://www.arbeitslosenselbsthilfe.org/"
+            ],
+            "kind_code": "advocacy_group",
+            "keywords": [
+                "Arbeitslosigkeit",
+                "ALG II",
+                "Bürgergeld"
+            ]
+        },
+        {
+            "domain": "proasyl.de",
+            "seed_urls": [
+                "https://www.proasyl.de/"
+            ],
+            "kind_code": "advocacy_group",
+            "keywords": [
+                "Asyl",
+                "Flucht",
+                "Migration"
+            ]
+        },
+        {
+            "domain": "rlc-deutschland.de",
+            "seed_urls": [
+                "https://rlc-deutschland.de/"
+            ],
+            "kind_code": "advocacy_group",
+            "keywords": [
+                "Rechtsberatung",
+                "Flüchtlinge"
+            ]
+        },
+        {
+            "domain": "antidiskriminierungsstelle.de",
+            "seed_urls": [
+                "https://www.antidiskriminierungsstelle.de/"
+            ],
+            "kind_code": "advocacy_group",
+            "keywords": [
+                "Diskriminierung",
+                "Rechtsanspruch"
+            ]
+        },
+        {
+            "domain": "verbraucherzentrale.de",
+            "seed_urls": [
+                "https://www.verbraucherzentrale.de/"
+            ],
+            "kind_code": "ngo",
+            "keywords": [
+                "Verbraucherschutz",
+                "Energie",
+                "Tarife"
+            ]
+        },
+        {
+            "domain": "mieterbund.de",
+            "seed_urls": [
+                "https://www.mieterbund.de/"
+            ],
+            "kind_code": "ngo",
+            "keywords": [
+                "Mieterrechte",
+                "Mietrecht"
+            ]
+        },
+        {
+            "domain": "oxfam.de",
+            "seed_urls": [
+                "https://www.oxfam.de/"
+            ],
+            "kind_code": "ngo",
+            "keywords": [
+                "Oxfam",
+                "Ungleichheit",
+                "Armut"
+            ]
+        },
+        {
+            "domain": "bpb.de",
+            "seed_urls": [
+                "https://www.bpb.de/themen/ungleichheit/"
+            ],
+            "kind_code": "govt",
+            "keywords": [
+                "bpb",
+                "Ungleichheit",
+                "Dossiers"
+            ]
+        },
+        {
+            "domain": "armuts-und-reichtumsbericht.de",
+            "seed_urls": [
+                "https://www.armuts-und-reichtumsbericht.de/"
+            ],
+            "kind_code": "govt",
+            "keywords": [
+                "Armutsbericht",
+                "Reichtum",
+                "Regierung"
+            ]
+        },
+        {
+            "domain": "inequalitymonitor.de",
+            "seed_urls": [
+                "https://www.inequalitymonitor.de/"
+            ],
+            "kind_code": "research_org",
+            "keywords": [
+                "Ungleichheit",
+                "Daten",
+                "Analysen"
+            ]
+        },
+        {
+            "domain": "ungleichheit.info",
+            "seed_urls": [
+                "https://ungleichheit.info/"
+            ],
+            "kind_code": "research_org",
+            "keywords": [
+                "Ungleichheit",
+                "Faktenportal"
+            ]
+        },
+        {
+            "domain": "grundeinkommen.de",
+            "seed_urls": [
+                "https://www.grundeinkommen.de/"
+            ],
+            "kind_code": "ngo",
+            "keywords": [
+                "BGE",
+                "Grundeinkommen",
+                "Kampagne"
+            ]
+        },
+        {
+            "domain": "armut.de",
+            "seed_urls": [
+                "https://www.armut.de/"
+            ],
+            "kind_code": "ngo",
+            "keywords": [
+                "Armut",
+                "Aufklärung"
+            ]
+        },
+        {
+            "domain": "sozialberatung.de",
+            "seed_urls": [
+                "https://www.sozialberatung.de/"
+            ],
+            "kind_code": "ngo",
+            "keywords": [
+                "Sozialberatung",
+                "Beratungsstellen"
+            ]
+        },
+        {
+            "domain": "schuldnerberatung.de",
+            "seed_urls": [
+                "https://www.schuldnerberatung.de/"
+            ],
+            "kind_code": "ngo",
+            "keywords": [
+                "Schulden",
+                "Beratung"
+            ]
+        },
+        {
+            "domain": "buergergeld.org",
+            "seed_urls": [
+                "https://www.buergergeld.org/"
+            ],
+            "kind_code": "ngo",
+            "keywords": [
+                "Bürgergeld",
+                "Rechner"
+            ]
+        }
+    ]
+}

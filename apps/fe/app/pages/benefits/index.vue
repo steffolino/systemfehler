@@ -196,9 +196,9 @@ function statusBadgeClass(st: string) {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="row in rows" :key="row.__i" class="hover">
+            <tr v-for="row in rows" :key="row.id" class="hover">
               <td class="align-top">
-                <NuxtLink :to="`/benefits/${row.__i}`" class="link link-primary">
+                <NuxtLink :to="`/benefits/${row.id}`" class="link link-primary">
                   {{ row.title || row.h1 || row.url }}
                 </NuxtLink>
                 <div v-if="row.meta_description" class="text-sm text-base-content/70 line-clamp-2 mt-1">
@@ -216,7 +216,7 @@ function statusBadgeClass(st: string) {
               </td>
               <td class="align-top text-right">
                 <div class="flex gap-2 justify-end">
-                  <NuxtLink :to="`/benefits/${row.__i}`" class="btn btn-sm btn-primary">
+                  <NuxtLink :to="`/benefits/${row.id}`" class="btn btn-sm btn-primary">
                     {{ $t('open') }}
                   </NuxtLink>
                   <a :href="row.url" target="_blank" class="btn btn-sm btn-ghost" rel="noopener">

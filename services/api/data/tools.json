@@ -1,0 +1,605 @@
+[
+  {
+    "id": "tafel.de",
+    "title_de": "Tafel",
+    "title_en": null,
+    "summary_de": "Tafel, Lebensmittelhilfe",
+    "summary_en": null,
+    "url": "https://www.tafel.de/",
+    "category": "aid_org",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Tafel",
+      "Lebensmittelhilfe"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "caritas.de",
+    "title_de": "Caritas",
+    "title_en": null,
+    "summary_de": "Caritas, Sozialberatung",
+    "summary_en": null,
+    "url": "https://www.caritas.de/",
+    "category": "aid_org",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Caritas",
+      "Sozialberatung"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "diakonie.de",
+    "title_de": "Diakonie",
+    "title_en": null,
+    "summary_de": "Diakonie, Beratung",
+    "summary_en": null,
+    "url": "https://www.diakonie.de/",
+    "category": "aid_org",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Diakonie",
+      "Beratung"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "der-paritaetische.de",
+    "title_de": "Der-paritaetische",
+    "title_en": null,
+    "summary_de": "Paritätischer, Armut",
+    "summary_en": null,
+    "url": "https://www.der-paritaetische.de/",
+    "category": "umbrella",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Paritätischer",
+      "Armut"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "freundstattfremd.de",
+    "title_de": "Freundstattfremd",
+    "title_en": null,
+    "summary_de": "Geflüchtete, Bamberg, Hilfe",
+    "summary_en": null,
+    "url": "https://freundstattfremd.de/",
+    "category": "local_initiative",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Geflüchtete",
+      "Bamberg",
+      "Hilfe"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "patenschaftsnetzwerk.de",
+    "title_de": "Patenschaftsnetzwerk",
+    "title_en": null,
+    "summary_de": "Ortskräfte, Afghanistan, Patenschaft",
+    "summary_en": null,
+    "url": "https://www.patenschaftsnetzwerk.de/",
+    "category": "aid_org",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Ortskräfte",
+      "Afghanistan",
+      "Patenschaft"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "vdk.de",
+    "title_de": "Vdk",
+    "title_en": null,
+    "summary_de": "VdK, Sozialrecht",
+    "summary_en": null,
+    "url": "https://www.vdk.de/deutschland/",
+    "category": "advocacy_group",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "VdK",
+      "Sozialrecht"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "sovd.de",
+    "title_de": "Sovd",
+    "title_en": null,
+    "summary_de": "SoVD, Sozialrecht",
+    "summary_en": null,
+    "url": "https://www.sovd.de/",
+    "category": "advocacy_group",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "SoVD",
+      "Sozialrecht"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "sanktionsfrei.de",
+    "title_de": "Sanktionsfrei",
+    "title_en": null,
+    "summary_de": "Bürgergeld, Hartz IV, Jobcenter",
+    "summary_en": null,
+    "url": "https://sanktionsfrei.de/",
+    "category": "advocacy_group",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Bürgergeld",
+      "Hartz IV",
+      "Jobcenter"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "arbeitslosenselbsthilfe.org",
+    "title_de": "Arbeitslosenselbsthilfe",
+    "title_en": null,
+    "summary_de": "Arbeitslosigkeit, ALG II, Bürgergeld",
+    "summary_en": null,
+    "url": "https://www.arbeitslosenselbsthilfe.org/",
+    "category": "advocacy_group",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Arbeitslosigkeit",
+      "ALG II",
+      "Bürgergeld"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "proasyl.de",
+    "title_de": "Proasyl",
+    "title_en": null,
+    "summary_de": "Asyl, Flucht, Migration",
+    "summary_en": null,
+    "url": "https://www.proasyl.de/",
+    "category": "advocacy_group",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Asyl",
+      "Flucht",
+      "Migration"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "rlc-deutschland.de",
+    "title_de": "Rlc-deutschland",
+    "title_en": null,
+    "summary_de": "Rechtsberatung, Flüchtlinge",
+    "summary_en": null,
+    "url": "https://rlc-deutschland.de/",
+    "category": "advocacy_group",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Rechtsberatung",
+      "Flüchtlinge"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "antidiskriminierungsstelle.de",
+    "title_de": "Antidiskriminierungsstelle",
+    "title_en": null,
+    "summary_de": "Diskriminierung, Rechtsanspruch",
+    "summary_en": null,
+    "url": "https://www.antidiskriminierungsstelle.de/",
+    "category": "advocacy_group",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Diskriminierung",
+      "Rechtsanspruch"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "verbraucherzentrale.de",
+    "title_de": "Verbraucherzentrale",
+    "title_en": null,
+    "summary_de": "Verbraucherschutz, Energie, Tarife",
+    "summary_en": null,
+    "url": "https://www.verbraucherzentrale.de/",
+    "category": "ngo",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Verbraucherschutz",
+      "Energie",
+      "Tarife"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "mieterbund.de",
+    "title_de": "Mieterbund",
+    "title_en": null,
+    "summary_de": "Mieterrechte, Mietrecht",
+    "summary_en": null,
+    "url": "https://www.mieterbund.de/",
+    "category": "ngo",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Mieterrechte",
+      "Mietrecht"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "oxfam.de",
+    "title_de": "Oxfam",
+    "title_en": null,
+    "summary_de": "Oxfam, Ungleichheit, Armut",
+    "summary_en": null,
+    "url": "https://www.oxfam.de/",
+    "category": "ngo",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Oxfam",
+      "Ungleichheit",
+      "Armut"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "bpb.de",
+    "title_de": "Bpb",
+    "title_en": null,
+    "summary_de": "bpb, Ungleichheit, Dossiers",
+    "summary_en": null,
+    "url": "https://www.bpb.de/themen/ungleichheit/",
+    "category": "govt",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "bpb",
+      "Ungleichheit",
+      "Dossiers"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "inequalitymonitor.de",
+    "title_de": "Inequalitymonitor",
+    "title_en": null,
+    "summary_de": "Ungleichheit, Daten, Analysen",
+    "summary_en": null,
+    "url": "https://www.inequalitymonitor.de/",
+    "category": "research_org",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Ungleichheit",
+      "Daten",
+      "Analysen"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "armuts-und-reichtumsbericht.de",
+    "title_de": "Armuts-und-reichtumsbericht",
+    "title_en": null,
+    "summary_de": "Armutsbericht, Reichtum, Regierung",
+    "summary_en": null,
+    "url": "https://www.armuts-und-reichtumsbericht.de/",
+    "category": "govt",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Armutsbericht",
+      "Reichtum",
+      "Regierung"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "grundeinkommen.de",
+    "title_de": "Grundeinkommen",
+    "title_en": null,
+    "summary_de": "BGE, Grundeinkommen, Kampagne",
+    "summary_en": null,
+    "url": "https://www.grundeinkommen.de/",
+    "category": "ngo",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "BGE",
+      "Grundeinkommen",
+      "Kampagne"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "armut.de",
+    "title_de": "Armut",
+    "title_en": null,
+    "summary_de": "Armut, Aufklärung",
+    "summary_en": null,
+    "url": "https://www.armut.de/",
+    "category": "ngo",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Armut",
+      "Aufklärung"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "ungleichheit.info",
+    "title_de": "Ungleichheit",
+    "title_en": null,
+    "summary_de": "Ungleichheit, Faktenportal",
+    "summary_en": null,
+    "url": "https://ungleichheit.info/",
+    "category": "research_org",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Ungleichheit",
+      "Faktenportal"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "sozialberatung.de",
+    "title_de": "Sozialberatung",
+    "title_en": null,
+    "summary_de": "Sozialberatung, Beratungsstellen",
+    "summary_en": null,
+    "url": "https://www.sozialberatung.de/",
+    "category": "ngo",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Sozialberatung",
+      "Beratungsstellen"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "schuldnerberatung.de",
+    "title_de": "Schuldnerberatung",
+    "title_en": null,
+    "summary_de": "Schulden, Beratung",
+    "summary_en": null,
+    "url": "https://www.schuldnerberatung.de/",
+    "category": "ngo",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Schulden",
+      "Beratung"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "buergergeld.org",
+    "title_de": "Buergergeld",
+    "title_en": null,
+    "summary_de": "Bürgergeld, Rechner",
+    "summary_en": null,
+    "url": "https://www.buergergeld.org/",
+    "category": "ngo",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Bürgergeld",
+      "Rechner"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "verbraucherzentrale.de",
+    "title_de": "Verbraucherzentrale",
+    "title_en": null,
+    "summary_de": "Verbraucherschutz, Energie",
+    "summary_en": null,
+    "url": "https://www.verbraucherzentrale.de/",
+    "category": "ngo",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Verbraucherschutz",
+      "Energie"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "mieterbund.de",
+    "title_de": "Mieterbund",
+    "title_en": null,
+    "summary_de": "Mietrecht",
+    "summary_en": null,
+    "url": "https://www.mieterbund.de/",
+    "category": "ngo",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Mietrecht"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "oxfam.de",
+    "title_de": "Oxfam",
+    "title_en": null,
+    "summary_de": "Ungleichheit, NGO",
+    "summary_en": null,
+    "url": "https://www.oxfam.de/",
+    "category": "ngo",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Ungleichheit",
+      "NGO"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "transparency.de",
+    "title_de": "Transparency",
+    "title_en": null,
+    "summary_de": "Korruption, Ungleichheit",
+    "summary_en": null,
+    "url": "https://www.transparency.de/",
+    "category": "ngo",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Korruption",
+      "Ungleichheit"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "sozialberatung.de",
+    "title_de": "Sozialberatung",
+    "title_en": null,
+    "summary_de": "Sozialberatung",
+    "summary_en": null,
+    "url": "https://www.sozialberatung.de/",
+    "category": "ngo",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Sozialberatung"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "schuldnerberatung.de",
+    "title_de": "Schuldnerberatung",
+    "title_en": null,
+    "summary_de": "Schulden, Beratung",
+    "summary_en": null,
+    "url": "https://www.schuldnerberatung.de/",
+    "category": "ngo",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Schulden",
+      "Beratung"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "buergergeld.org",
+    "title_de": "Buergergeld",
+    "title_en": null,
+    "summary_de": "Bürgergeld, Rechner",
+    "summary_en": null,
+    "url": "https://www.buergergeld.org/",
+    "category": "ngo",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "Bürgergeld",
+      "Rechner"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  },
+  {
+    "id": "hartziv.org",
+    "title_de": "Hartziv",
+    "title_en": null,
+    "summary_de": "ALG II, Infos",
+    "summary_en": null,
+    "url": "https://www.hartziv.org/",
+    "category": "ngo",
+    "language": [
+      "de"
+    ],
+    "topic": [
+      "ALG II",
+      "Infos"
+    ],
+    "createdAt": "2025-09-02T21:46:33.798856Z",
+    "updatedAt": "2025-09-02T21:46:33.798856Z"
+  }
+]

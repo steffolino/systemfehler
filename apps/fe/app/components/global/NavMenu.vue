@@ -2,9 +2,21 @@
 import { ref, onMounted } from 'vue'
 import { fetchTopics, topicLabel  } from '@/composables/useTopics'
 import type {TopicItem} from '@/composables/useTopics';
+import { useSearchFilterStore } from '@/stores/searchFilter';
 const items = ref<TopicItem[]>([])
 const open = ref(false)
-onMounted(async () => { items.value = (await fetchTopics(12)).topics })
+const filterStore = useSearchFilterStore()
+onMounted(async () => {
+  const result = await fetchTopics(12)
+  // Akzeptiere Array von Strings oder Array von Objekten
+  if (Array.isArray(result)) {
+    items.value = result.map(t => typeof t === 'string' ? { topic: t, total: undefined } : t)
+  } else if (Array.isArray(result.topics)) {
+    items.value = result.topics.map(t => typeof t === 'string' ? { topic: t, total: undefined } : t)
+  } else {
+    items.value = []
+  }
+})
 </script>
 
 <template>
@@ -16,20 +28,30 @@ onMounted(async () => { items.value = (await fetchTopics(12)).topics })
 
       <div class="flex items-center gap-4">
         <div class="hidden md:flex items-center gap-4">
-          <NuxtLink v-for="t in items" :key="t.topic" class="link link-hover" :to="`/topic/${t.topic}`">
+          <button
+            v-for="t in items"
+            :key="t.topic"
+            class="link link-hover flex items-center"
+            :class="{ 'font-bold text-primary': filterStore.topic === t.topic }"
+            @click="filterStore.setTopic(t.topic)"
+          >
             {{ topicLabel(t.topic) }}
-            <span class="badge badge-ghost ml-1">{{ t.total }}</span>
-          </NuxtLink>
+            <span v-if="t.total !== undefined" class="badge badge-ghost ml-1">{{ t.total }}</span>
+          </button>
         </div>
 
         <div class="md:hidden dropdown dropdown-end" :class="{ 'dropdown-open': open }">
           <label tabindex="0" class="btn btn-ghost" @click="open = !open">{{ $t('menu') }}</label>
           <ul tabindex="0" class="menu dropdown-content bg-base-100 rounded-box z-[1] w-64 p-2 shadow">
             <li v-for="t in items" :key="t.topic">
-              <NuxtLink :to="`/topic/${t.topic}`" @click="open=false">
+              <button
+                class="w-full flex items-center"
+                :class="{ 'font-bold text-primary': filterStore.topic === t.topic }"
+                @click="filterStore.setTopic(t.topic); open=false"
+              >
                 {{ topicLabel(t.topic) }}
-                <span class="badge badge-ghost ml-1">{{ t.total }}</span>
-              </NuxtLink>
+                <span v-if="t.total !== undefined" class="badge badge-ghost ml-1">{{ t.total }}</span>
+              </button>
             </li>
           </ul>
         </div>

@@ -5,14 +5,16 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 const apiBase = import.meta.env.VITE_API_BASE || 'http://localhost:3001'
 
-const id = computed(() => Number.parseInt(String(route.params.id), 10))
+const id = computed(() => String(route.params.id))
 
 const { data, pending, error } = await useAsyncData(
   'benefitDetail',
   async () => {
-    const all = await $fetch<any[]>(`${apiBase}/api/benefits`)
-    if (Number.isNaN(id.value) || id.value < 0 || id.value >= all.length) return null
-    return all[id.value]
+    try {
+      return await $fetch(`${apiBase}/api/benefits/${id.value}`)
+    } catch (e) {
+      return null
+    }
   },
   { watch: [id] }
 )

@@ -1,0 +1,63 @@
+{
+  "https://www.dkjs.de/kontakt/": {
+    "error": "HTTPSConnectionPool(host='www.dkjs.de', port=443): Max retries exceeded with url: /kontakt/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)')))",
+    "status_code": null
+  },
+  "https://www.diakonie.de/kontakt": {
+    "status_code": 200
+  },
+  "https://www.malteser.de/kontakt.html": {
+    "status_code": 200
+  },
+  "https://www.caritas.de/kontakt": {
+    "status_code": 200
+  },
+  "https://www.profamilia.de/kontakt": {
+    "status_code": 404
+  },
+  "https://www.tafel.de/kontakt/": {
+    "status_code": 200
+  },
+  "https://www.johanniter.de/juh/kontakt/": {
+    "status_code": 404
+  },
+  "https://www.samariterstiftung.de/kontakt/": {
+    "status_code": 200
+  },
+  "https://www.leipzig-stiftung.de/kontakt/": {
+    "error": "HTTPSConnectionPool(host='www.leipzig-stiftung.de', port=443): Max retries exceeded with url: /kontakt/ (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x000001F8C5CAB990>: Failed to resolve 'www.leipzig-stiftung.de' ([Errno 11001] getaddrinfo failed)\"))",
+    "status_code": null
+  },
+  "https://www.wohlfahrtszentrum-leipzig.de/kontakt/": {
+    "error": "HTTPSConnectionPool(host='www.wohlfahrtszentrum-leipzig.de', port=443): Max retries exceeded with url: /kontakt/ (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x000001F8C5CADC10>: Failed to resolve 'www.wohlfahrtszentrum-leipzig.de' ([Errno 11001] getaddrinfo failed)\"))",
+    "status_code": null
+  },
+  "https://www.diakonie-leipzig.de/kontakt": {
+    "status_code": 200
+  },
+  "https://www.caritas-leipzig.de/kontakt": {
+    "status_code": 404
+  },
+  "https://www.awo-leipzig.de/kontakt/": {
+    "error": "HTTPSConnectionPool(host='www.awo-leipzig.de', port=443): Max retries exceeded with url: /kontakt/ (Caused by SSLError(SSLError(1, '[SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:1006)')))",
+    "status_code": null
+  },
+  "https://www.leipzig.de/kontakt": {
+    "status_code": 200
+  },
+  "https://www.drk-leipzig.de/kontakt.html": {
+    "status_code": 200
+  },
+  "https://www.johanniter.de/mitteldeutschland/leipzig/kontakt/": {
+    "status_code": 404
+  },
+  "https://www.malteser-leipzig.de/kontakt.html": {
+    "status_code": 404
+  },
+  "https://www.volkssolidaritaet-leipzig.de/kontakt/": {
+    "status_code": 200
+  },
+  "https://www.awo.org/kontakt": {
+    "status_code": 200
+  }
+}

@@ -1,0 +1,329 @@
+{
+    "organization": [
+        {
+            "id": "tafel",
+            "name": "Tafel Deutschland",
+            "domain": "tafel.de",
+            "url": "https://www.tafel.de/",
+            "kind_code": "aid_org",
+            "region": "DE",
+            "description_de": "Lebensmittelhilfe durch lokale Tafeln"
+        },
+        {
+            "id": "caritas",
+            "name": "Caritas",
+            "domain": "caritas.de",
+            "url": "https://www.caritas.de/",
+            "kind_code": "aid_org",
+            "region": "DE",
+            "description_de": "Sozialberatung, Wohnungslosenhilfe, Familienhilfe"
+        },
+        {
+            "id": "diakonie",
+            "name": "Diakonie Deutschland",
+            "domain": "diakonie.de",
+            "url": "https://www.diakonie.de/",
+            "kind_code": "aid_org",
+            "region": "DE",
+            "description_de": "Sozial- und Migrationsberatung"
+        },
+        {
+            "id": "paritaet",
+            "name": "Der Paritätische",
+            "domain": "der-paritaetische.de",
+            "url": "https://www.der-paritaetische.de/",
+            "kind_code": "umbrella",
+            "region": "DE",
+            "description_de": "Dachverband soziale Träger; Armut & Teilhabe"
+        },
+        {
+            "id": "freundstattfremd",
+            "name": "Freund statt fremd e.V.",
+            "domain": "freundstattfremd.de",
+            "url": "https://freundstattfremd.de/",
+            "kind_code": "local_initiative",
+            "region": "Bamberg, DE",
+            "description_de": "Begleitung im Behördendschungel"
+        },
+        {
+            "id": "patenschaftsnetzwerk",
+            "name": "Patenschaftsnetzwerk Ortskräfte e.V.",
+            "domain": "patenschaftsnetzwerk.de",
+            "url": "https://www.patenschaftsnetzwerk.de/",
+            "kind_code": "aid_org",
+            "region": "DE",
+            "description_de": "Begleitung afghanischer Ortskräfte"
+        },
+        {
+            "id": "vdk",
+            "name": "VdK Deutschland",
+            "domain": "vdk.de",
+            "url": "https://www.vdk.de/deutschland/",
+            "kind_code": "advocacy_group",
+            "region": "DE",
+            "description_de": "Sozialrechtliche Vertretung"
+        },
+        {
+            "id": "sovd",
+            "name": "SoVD",
+            "domain": "sovd.de",
+            "url": "https://www.sovd.de/",
+            "kind_code": "advocacy_group",
+            "region": "DE",
+            "description_de": "Sozialverband mit Beratungsnetz"
+        },
+        {
+            "id": "sanktionsfrei",
+            "name": "Sanktionsfrei",
+            "domain": "sanktionsfrei.de",
+            "url": "https://sanktionsfrei.de/",
+            "kind_code": "advocacy_group",
+            "region": "DE",
+            "description_de": "Begleitung bei Jobcenter-Konflikten"
+        },
+        {
+            "id": "arbeitslosenselbsthilfe",
+            "name": "Arbeitslosenselbsthilfe.org",
+            "domain": "arbeitslosenselbsthilfe.org",
+            "url": "https://www.arbeitslosenselbsthilfe.org/",
+            "kind_code": "advocacy_group",
+            "region": "DE",
+            "description_de": "Rechtstipps Bürgergeld/ALG II"
+        },
+        {
+            "id": "proasyl",
+            "name": "PRO ASYL",
+            "domain": "proasyl.de",
+            "url": "https://www.proasyl.de/",
+            "kind_code": "advocacy_group",
+            "region": "DE",
+            "description_de": "Asylrecht & Kampagnen"
+        },
+        {
+            "id": "rlc",
+            "name": "Refugee Law Clinics Deutschland",
+            "domain": "rlc-deutschland.de",
+            "url": "https://rlc-deutschland.de/",
+            "kind_code": "advocacy_group",
+            "region": "DE",
+            "description_de": "Ehrenamtliche Rechtsberatung"
+        },
+        {
+            "id": "adsb",
+            "name": "Antidiskriminierungsstelle des Bundes",
+            "domain": "antidiskriminierungsstelle.de",
+            "url": "https://www.antidiskriminierungsstelle.de/",
+            "kind_code": "advocacy_group",
+            "region": "DE",
+            "description_de": "Beratung bei Diskriminierung"
+        },
+        {
+            "id": "verbraucherzentrale",
+            "name": "Verbraucherzentrale",
+            "domain": "verbraucherzentrale.de",
+            "url": "https://www.verbraucherzentrale.de/",
+            "kind_code": "ngo",
+            "region": "DE",
+            "description_de": "Energie, Verträge, Tarife"
+        },
+        {
+            "id": "mieterbund",
+            "name": "Deutscher Mieterbund",
+            "domain": "mieterbund.de",
+            "url": "https://www.mieterbund.de/",
+            "kind_code": "ngo",
+            "region": "DE",
+            "description_de": "Interessenvertretung für Mieter:innen"
+        },
+        {
+            "id": "oxfam",
+            "name": "Oxfam Deutschland",
+            "domain": "oxfam.de",
+            "url": "https://www.oxfam.de/",
+            "kind_code": "ngo",
+            "region": "DE",
+            "description_de": "NGO gegen Armut, Ungleichheit"
+        },
+        {
+            "id": "bpb",
+            "name": "Bundeszentrale für politische Bildung (bpb)",
+            "domain": "bpb.de",
+            "url": "https://www.bpb.de/",
+            "kind_code": "govt",
+            "region": "DE",
+            "description_de": "Politische Bildung & Dossiers"
+        },
+        {
+            "id": "inequalitymonitor",
+            "name": "Inequality Monitor",
+            "domain": "inequalitymonitor.de",
+            "url": "https://www.inequalitymonitor.de/",
+            "kind_code": "research_org",
+            "region": "DE",
+            "description_de": "Daten & Analysen zu Ungleichheit"
+        },
+        {
+            "id": "armutsbericht",
+            "name": "Armuts- und Reichtumsbericht (Bund)",
+            "domain": "armuts-und-reichtumsbericht.de",
+            "url": "https://www.armuts-und-reichtumsbericht.de/",
+            "kind_code": "govt",
+            "region": "DE",
+            "description_de": "Regierungsbericht zu Armut & Reichtum"
+        },
+        {
+            "id": "grundeinkommen",
+            "name": "Netzwerk Grundeinkommen",
+            "domain": "grundeinkommen.de",
+            "url": "https://www.grundeinkommen.de/",
+            "kind_code": "ngo",
+            "region": "DE",
+            "description_de": "Infos & Kampagnen zum BGE"
+        },
+        {
+            "id": "armutde",
+            "name": "Armut.de",
+            "domain": "armut.de",
+            "url": "https://www.armut.de/",
+            "kind_code": "ngo",
+            "region": "DE",
+            "description_de": "Aufklärung gegen Armut"
+        },
+        {
+            "id": "ungleichheitinfo",
+            "name": "Ungleichheit.info",
+            "domain": "ungleichheit.info",
+            "url": "https://ungleichheit.info/",
+            "kind_code": "research_org",
+            "region": "DE",
+            "description_de": "Faktenportal zu Ungleichheit in Deutschland"
+        },
+        {
+            "id": "sozialberatungde",
+            "name": "Sozialberatung.de",
+            "domain": "sozialberatung.de",
+            "url": "https://www.sozialberatung.de/",
+            "kind_code": "ngo",
+            "region": "DE",
+            "description_de": "Beratungsstellen-Verzeichnis"
+        },
+        {
+            "id": "schuldnerberatungde",
+            "name": "Schuldnerberatung.de",
+            "domain": "schuldnerberatung.de",
+            "url": "https://www.schuldnerberatung.de/",
+            "kind_code": "ngo",
+            "region": "DE",
+            "description_de": "Schuldnerberatungs-Finder"
+        },
+        {
+            "id": "buergergeldorg",
+            "name": "Buergergeld.org",
+            "domain": "buergergeld.org",
+            "url": "https://www.buergergeld.org/",
+            "kind_code": "ngo",
+            "region": "DE",
+            "description_de": "Bürgergeld-Infos & Rechner"
+        }
+    ],
+    "service": [
+        {
+            "id": "svc-buergergeld-org",
+            "organization_id": "buergergeldorg",
+            "kind_code": "calculator",
+            "title_de": "Buergergeld.org Rechner",
+            "url": "https://www.buergergeld.org/",
+            "description_de": "Anspruchsrechner & Anleitungen"
+        },
+        {
+            "id": "svc-sozialberatung-de",
+            "organization_id": "sozialberatungde",
+            "kind_code": "directory",
+            "title_de": "Sozialberatung.de Verzeichnis",
+            "url": "https://www.sozialberatung.de/",
+            "description_de": "Beratungsstellen-Finder"
+        },
+        {
+            "id": "svc-schuldnerberatung-de",
+            "organization_id": "schuldnerberatungde",
+            "kind_code": "directory",
+            "title_de": "Schuldnerberatung.de Verzeichnis",
+            "url": "https://www.schuldnerberatung.de/",
+            "description_de": "Schuldnerberatungs-Finder"
+        },
+        {
+            "id": "svc-verbraucherzentrale-portal",
+            "organization_id": "verbraucherzentrale",
+            "kind_code": "portal",
+            "title_de": "Verbraucherzentrale Portal",
+            "url": "https://www.verbraucherzentrale.de/",
+            "description_de": "Tools zu Energie, Verträgen & Tarifen"
+        },
+        {
+            "id": "svc-mieterbund-vorlagen",
+            "organization_id": "mieterbund",
+            "kind_code": "legal_template",
+            "title_de": "Mieterbund Musterbriefe",
+            "url": "https://www.mieterbund.de/",
+            "description_de": "Musterbriefe & Beratungsfinder"
+        }
+    ],
+    "knowledge_item": [
+        {
+            "id": "itm-ungleichheit-info",
+            "organization_id": "ungleichheitinfo",
+            "kind_code": "facts_portal",
+            "title_de": "Ungleichheit.info – Faktenportal",
+            "url": "https://ungleichheit.info/",
+            "summary_de": "Fakten und Daten zu Ungleichheit in Deutschland"
+        },
+        {
+            "id": "itm-oxfam-ungleichheit",
+            "organization_id": "oxfam",
+            "kind_code": "ngo_report",
+            "title_de": "Oxfam – Ungleichheit",
+            "url": "https://www.oxfam.de/ungleichheit",
+            "summary_de": "Kampagnen und Berichte zu Armut und Ungleichheit"
+        },
+        {
+            "id": "itm-bpb-ungleichheit",
+            "organization_id": "bpb",
+            "kind_code": "education_portal",
+            "title_de": "bpb Dossiers: Ungleichheit",
+            "url": "https://www.bpb.de/themen/ungleichheit/",
+            "summary_de": "Hintergrundtexte und Dossiers zu Ungleichheit"
+        },
+        {
+            "id": "itm-inequality-monitor",
+            "organization_id": "inequalitymonitor",
+            "kind_code": "research_portal",
+            "title_de": "Inequality Monitor – Datenportal",
+            "url": "https://www.inequalitymonitor.de/",
+            "summary_de": "Wissenschaftsportal mit Daten und Analysen zur Ungleichheit"
+        },
+        {
+            "id": "itm-armutsbericht",
+            "organization_id": "armutsbericht",
+            "kind_code": "gov_report",
+            "title_de": "Armuts- und Reichtumsbericht (Bund)",
+            "url": "https://www.armuts-und-reichtumsbericht.de/",
+            "summary_de": "Offizieller Bericht der Bundesregierung zu Armut & Reichtum"
+        },
+        {
+            "id": "itm-grundeinkommen-portal",
+            "organization_id": "grundeinkommen",
+            "kind_code": "ngo_report",
+            "title_de": "Netzwerk Grundeinkommen – Portal",
+            "url": "https://www.grundeinkommen.de/",
+            "summary_de": "Informationen & Kampagnen zum BGE"
+        },
+        {
+            "id": "itm-armut-de-portal",
+            "organization_id": "armutde",
+            "kind_code": "education_portal",
+            "title_de": "Armut.de – Portal",
+            "url": "https://www.armut.de/",
+            "summary_de": "Aufklärung und Projekte gegen Armut"
+        }
+    ]
+}

@@ -94,3 +94,4 @@ services/api/.cache/
 # Mac system files
 Icon?
 
+node_modules/**

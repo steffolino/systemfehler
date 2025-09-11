@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS Benefit (
   id TEXT PRIMARY KEY,
+  url TEXT,
   title_de TEXT NOT NULL,
   title_en TEXT NOT NULL,
   summary_de TEXT NOT NULL,
@@ -7,7 +8,7 @@ CREATE TABLE IF NOT EXISTS Benefit (
   topic TEXT,         -- store as comma-separated or JSON string
   language TEXT,      -- store as comma-separated or JSON string
   createdAt TEXT NOT NULL DEFAULT (datetime('now')),
-  updatedAt TEXT NOT NULL DEFAULT (datetime('now'))
+  updatedAt TEXT NOT NULL DEFAULT (datetime(s'now'))
 );
 
 CREATE TABLE IF NOT EXISTS Tool (

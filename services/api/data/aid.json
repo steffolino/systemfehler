@@ -1,0 +1,227 @@
+[
+  {
+    "id": "tafel.de",
+    "name": "Tafel",
+    "kind_code": "aid_org",
+    "domain": "tafel.de",
+    "url": "https://www.tafel.de/",
+    "description_de": "Tafel, Lebensmittelhilfe",
+    "description_en": null
+  },
+  {
+    "id": "caritas.de",
+    "name": "Caritas",
+    "kind_code": "aid_org",
+    "domain": "caritas.de",
+    "url": "https://www.caritas.de/",
+    "description_de": "Caritas, Sozialberatung",
+    "description_en": null
+  },
+  {
+    "id": "diakonie.de",
+    "name": "Diakonie",
+    "kind_code": "aid_org",
+    "domain": "diakonie.de",
+    "url": "https://www.diakonie.de/",
+    "description_de": "Diakonie, Beratung",
+    "description_en": null
+  },
+  {
+    "id": "der-paritaetische.de",
+    "name": "Der-paritaetische",
+    "kind_code": "umbrella",
+    "domain": "der-paritaetische.de",
+    "url": "https://www.der-paritaetische.de/",
+    "description_de": "Paritätischer, Armut",
+    "description_en": null
+  },
+  {
+    "id": "freundstattfremd.de",
+    "name": "Freundstattfremd",
+    "kind_code": "local_initiative",
+    "domain": "freundstattfremd.de",
+    "url": "https://freundstattfremd.de/",
+    "description_de": "Geflüchtete, Bamberg, Hilfe",
+    "description_en": null
+  },
+  {
+    "id": "patenschaftsnetzwerk.de",
+    "name": "Patenschaftsnetzwerk",
+    "kind_code": "aid_org",
+    "domain": "patenschaftsnetzwerk.de",
+    "url": "https://www.patenschaftsnetzwerk.de/",
+    "description_de": "Ortskräfte, Afghanistan, Patenschaft",
+    "description_en": null
+  },
+  {
+    "id": "vdk.de",
+    "name": "Vdk",
+    "kind_code": "advocacy_group",
+    "domain": "vdk.de",
+    "url": "https://www.vdk.de/deutschland/",
+    "description_de": "VdK, Sozialrecht",
+    "description_en": null
+  },
+  {
+    "id": "sovd.de",
+    "name": "Sovd",
+    "kind_code": "advocacy_group",
+    "domain": "sovd.de",
+    "url": "https://www.sovd.de/",
+    "description_de": "SoVD, Sozialrecht",
+    "description_en": null
+  },
+  {
+    "id": "sanktionsfrei.de",
+    "name": "Sanktionsfrei",
+    "kind_code": "advocacy_group",
+    "domain": "sanktionsfrei.de",
+    "url": "https://sanktionsfrei.de/",
+    "description_de": "Bürgergeld, Hartz IV, Jobcenter",
+    "description_en": null
+  },
+  {
+    "id": "arbeitslosenselbsthilfe.org",
+    "name": "Arbeitslosenselbsthilfe",
+    "kind_code": "advocacy_group",
+    "domain": "arbeitslosenselbsthilfe.org",
+    "url": "https://www.arbeitslosenselbsthilfe.org/",
+    "description_de": "Arbeitslosigkeit, ALG II, Bürgergeld",
+    "description_en": null
+  },
+  {
+    "id": "proasyl.de",
+    "name": "Proasyl",
+    "kind_code": "advocacy_group",
+    "domain": "proasyl.de",
+    "url": "https://www.proasyl.de/",
+    "description_de": "Asyl, Flucht, Migration",
+    "description_en": null
+  },
+  {
+    "id": "rlc-deutschland.de",
+    "name": "Rlc-deutschland",
+    "kind_code": "advocacy_group",
+    "domain": "rlc-deutschland.de",
+    "url": "https://rlc-deutschland.de/",
+    "description_de": "Rechtsberatung, Flüchtlinge",
+    "description_en": null
+  },
+  {
+    "id": "antidiskriminierungsstelle.de",
+    "name": "Antidiskriminierungsstelle",
+    "kind_code": "advocacy_group",
+    "domain": "antidiskriminierungsstelle.de",
+    "url": "https://www.antidiskriminierungsstelle.de/",
+    "description_de": "Diskriminierung, Rechtsanspruch",
+    "description_en": null
+  },
+  {
+    "id": "verbraucherzentrale.de",
+    "name": "Verbraucherzentrale",
+    "kind_code": "ngo",
+    "domain": "verbraucherzentrale.de",
+    "url": "https://www.verbraucherzentrale.de/",
+    "description_de": "Verbraucherschutz, Energie, Tarife",
+    "description_en": null
+  },
+  {
+    "id": "mieterbund.de",
+    "name": "Mieterbund",
+    "kind_code": "ngo",
+    "domain": "mieterbund.de",
+    "url": "https://www.mieterbund.de/",
+    "description_de": "Mieterrechte, Mietrecht",
+    "description_en": null
+  },
+  {
+    "id": "oxfam.de",
+    "name": "Oxfam",
+    "kind_code": "ngo",
+    "domain": "oxfam.de",
+    "url": "https://www.oxfam.de/",
+    "description_de": "Oxfam, Ungleichheit, Armut",
+    "description_en": null
+  },
+  {
+    "id": "bpb.de",
+    "name": "Bpb",
+    "kind_code": "govt",
+    "domain": "bpb.de",
+    "url": "https://www.bpb.de/themen/ungleichheit/",
+    "description_de": "bpb, Ungleichheit, Dossiers",
+    "description_en": null
+  },
+  {
+    "id": "armuts-und-reichtumsbericht.de",
+    "name": "Armuts-und-reichtumsbericht",
+    "kind_code": "govt",
+    "domain": "armuts-und-reichtumsbericht.de",
+    "url": "https://www.armuts-und-reichtumsbericht.de/",
+    "description_de": "Armutsbericht, Reichtum, Regierung",
+    "description_en": null
+  },
+  {
+    "id": "inequalitymonitor.de",
+    "name": "Inequalitymonitor",
+    "kind_code": "research_org",
+    "domain": "inequalitymonitor.de",
+    "url": "https://www.inequalitymonitor.de/",
+    "description_de": "Ungleichheit, Daten, Analysen",
+    "description_en": null
+  },
+  {
+    "id": "ungleichheit.info",
+    "name": "Ungleichheit",
+    "kind_code": "research_org",
+    "domain": "ungleichheit.info",
+    "url": "https://ungleichheit.info/",
+    "description_de": "Ungleichheit, Faktenportal",
+    "description_en": null
+  },
+  {
+    "id": "grundeinkommen.de",
+    "name": "Grundeinkommen",
+    "kind_code": "ngo",
+    "domain": "grundeinkommen.de",
+    "url": "https://www.grundeinkommen.de/",
+    "description_de": "BGE, Grundeinkommen, Kampagne",
+    "description_en": null
+  },
+  {
+    "id": "armut.de",
+    "name": "Armut",
+    "kind_code": "ngo",
+    "domain": "armut.de",
+    "url": "https://www.armut.de/",
+    "description_de": "Armut, Aufklärung",
+    "description_en": null
+  },
+  {
+    "id": "sozialberatung.de",
+    "name": "Sozialberatung",
+    "kind_code": "ngo",
+    "domain": "sozialberatung.de",
+    "url": "https://www.sozialberatung.de/",
+    "description_de": "Sozialberatung, Beratungsstellen",
+    "description_en": null
+  },
+  {
+    "id": "schuldnerberatung.de",
+    "name": "Schuldnerberatung",
+    "kind_code": "ngo",
+    "domain": "schuldnerberatung.de",
+    "url": "https://www.schuldnerberatung.de/",
+    "description_de": "Schulden, Beratung",
+    "description_en": null
+  },
+  {
+    "id": "buergergeld.org",
+    "name": "Buergergeld",
+    "kind_code": "ngo",
+    "domain": "buergergeld.org",
+    "url": "https://www.buergergeld.org/",
+    "description_de": "Bürgergeld, Rechner",
+    "description_en": null
+  }
+]

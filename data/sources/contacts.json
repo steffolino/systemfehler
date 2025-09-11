@@ -1,0 +1,301 @@
+{
+    "defaults": {
+        "max_pages_per_domain": 150,
+        "request_delay_ms": 800,
+        "follow_external": false,
+        "contact_keywords": [
+            "kontakt",
+            "beratung",
+            "hilfe",
+            "unterstützung",
+            "sozial",
+            "impressum",
+            "team",
+            "standorte",
+            "anlaufstelle"
+        ],
+        "deny_patterns": [
+            "\\.(pdf|jpg|jpeg|png|gif|svg|zip|rar|7z|docx|pptx|xlsx)$",
+            "calendar",
+            "veranstaltungen",
+            "jobs",
+            "karriere"
+        ]
+    },
+    "domains": [
+        {
+            "domain": "www.caritas.de",
+            "seed_urls": [
+                "https://www.caritas.de/kontakt"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Beratung",
+                "Hilfe"
+            ]
+        },
+        {
+            "domain": "www.diakonie.de",
+            "seed_urls": [
+                "https://www.diakonie.de/kontakt"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Beratung",
+                "Hilfe"
+            ]
+        },
+        {
+            "domain": "www.awo.org",
+            "seed_urls": [
+                "https://www.awo.org/kontakt"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Beratung",
+                "Unterstützung"
+            ]
+        },
+        {
+            "domain": "www.dkjs.de",
+            "seed_urls": [
+                "https://www.dkjs.de/kontakt/"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Programme",
+                "Beratung"
+            ]
+        },
+        {
+            "domain": "www.tafel.de",
+            "seed_urls": [
+                "https://www.tafel.de"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Hilfe",
+                "Lebensmittel"
+            ]
+        },
+        {
+            "domain": "www.profamilia.de",
+            "seed_urls": [
+                "https://www.profamilia.de"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Beratung",
+                "Sexualität"
+            ]
+        },
+        {
+            "domain": "www.johanniter.de",
+            "seed_urls": [
+                "https://www.johanniter.de"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Hilfe",
+                "Pflege",
+                "Beratung"
+            ]
+        },
+        {
+            "domain": "www.malteser.de",
+            "seed_urls": [
+                "https://www.malteser.de"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Hilfe",
+                "Ehrenamt"
+            ]
+        },
+        {
+            "domain": "www.samariterstiftung.de",
+            "seed_urls": [
+                "https://www.samariterstiftung.de"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Beratung",
+                "Pflege"
+            ]
+        },
+        {
+            "domain": "www.diakonie-leipzig.de",
+            "seed_urls": [
+                "https://www.diakonie-leipzig.de"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Hilfe",
+                "Beratung"
+            ]
+        },
+        {
+            "domain": "www.leipzig.de",
+            "seed_urls": [
+                "https://www.leipzig.de"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Bürgeramt",
+                "Hilfe",
+                "Beratung"
+            ]
+        },
+        {
+            "domain": "www.caritas-leipzig.de",
+            "seed_urls": [
+                "https://www.caritas-leipzig.de"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Beratung",
+                "Hilfe",
+                "Sozialdienste"
+            ]
+        },
+        {
+            "domain": "www.awo-leipzig.de",
+            "seed_urls": [
+                "https://www.awo-leipzig.de/kontakt/"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Beratung",
+                "Familienhilfe",
+                "Jugendhilfe"
+            ]
+        },
+        {
+            "domain": "www.volkssolidaritaet-leipzig.de",
+            "seed_urls": [
+                "https://www.volkssolidaritaet-leipzig.de/kontakt/"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Beratung",
+                "Pflege",
+                "Seniorenhilfe"
+            ]
+        },
+        {
+            "domain": "www.drk-leipzig.de",
+            "seed_urls": [
+                "https://www.drk-leipzig.de/kontakt.html"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Hilfe",
+                "Sanitätsdienst",
+                "Beratung"
+            ]
+        },
+        {
+            "domain": "www.leipzig-stiftung.de",
+            "seed_urls": [
+                "https://www.leipzig-stiftung.de/kontakt/"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Förderung",
+                "Unterstützung"
+            ]
+        },
+        {
+            "domain": "www.wohlfahrtszentrum-leipzig.de",
+            "seed_urls": [
+                "https://www.wohlfahrtszentrum-leipzig.de/kontakt/"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Beratung",
+                "Wohnungslosigkeit",
+                "Sozialhilfe"
+            ]
+        },
+        {
+            "domain": "www.johanniter.de/mitteldeutschland/leipzig",
+            "seed_urls": [
+                "https://www.johanniter.de/mitteldeutschland/leipzig/kontakt/"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Hilfe",
+                "Pflege",
+                "Rettungsdienst"
+            ]
+        },
+        {
+            "domain": "www.malteser-leipzig.de",
+            "seed_urls": [
+                "https://www.malteser-leipzig.de/kontakt.html"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kontakt",
+                "Hilfe",
+                "Pflege",
+                "Beratung"
+            ]
+        },
+        {
+            "domain": "example.com",
+            "seed_urls": [
+                "https://example.com/contact"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": []
+        },
+        {
+            "domain": "anotherdomain.com",
+            "seed_urls": [
+                "https://anotherdomain.com/impressum"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": []
+        }
+    ]
+}
