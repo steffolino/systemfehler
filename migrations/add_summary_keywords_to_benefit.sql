@@ -1,0 +1,2 @@
+ALTER TABLE benefit ADD COLUMN summary TEXT;
+ALTER TABLE benefit ADD COLUMN keywords TEXT;

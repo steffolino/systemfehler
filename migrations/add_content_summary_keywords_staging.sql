@@ -1,0 +1,9 @@
+ALTER TABLE Organization_Staging ADD COLUMN content TEXT;
+ALTER TABLE Organization_Staging ADD COLUMN summary TEXT;
+ALTER TABLE Organization_Staging ADD COLUMN keywords TEXT;
+ALTER TABLE Contact_Staging ADD COLUMN content TEXT;
+ALTER TABLE Contact_Staging ADD COLUMN summary TEXT;
+ALTER TABLE Contact_Staging ADD COLUMN keywords TEXT;
+ALTER TABLE AidOffer_Staging ADD COLUMN content TEXT;
+ALTER TABLE AidOffer_Staging ADD COLUMN summary TEXT;
+ALTER TABLE AidOffer_Staging ADD COLUMN keywords TEXT;

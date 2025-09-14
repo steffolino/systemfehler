@@ -1,0 +1,4 @@
+packages:
+  - apps/fe
+  - services/api
+  - services/crawler*

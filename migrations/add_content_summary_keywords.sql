@@ -1,0 +1,15 @@
+ALTER TABLE Organization ADD COLUMN content TEXT;
+ALTER TABLE Organization ADD COLUMN summary TEXT;
+ALTER TABLE Organization ADD COLUMN keywords TEXT;
+ALTER TABLE contact ADD COLUMN content TEXT;
+ALTER TABLE contact ADD COLUMN summary TEXT;
+ALTER TABLE contact ADD COLUMN keywords TEXT;
+ALTER TABLE aid_offer ADD COLUMN content TEXT;
+ALTER TABLE aid_offer ADD COLUMN summary TEXT;
+ALTER TABLE aid_offer ADD COLUMN keywords TEXT;
+ALTER TABLE service ADD COLUMN content TEXT;
+ALTER TABLE service ADD COLUMN summary TEXT;
+ALTER TABLE service ADD COLUMN keywords TEXT;
+ALTER TABLE knowledge_item ADD COLUMN content TEXT;
+ALTER TABLE knowledge_item ADD COLUMN summary TEXT;
+ALTER TABLE knowledge_item ADD COLUMN keywords TEXT;

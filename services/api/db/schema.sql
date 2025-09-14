@@ -1,3 +1,46 @@
+CREATE TABLE AidOffer_Staging (
+  id TEXT PRIMARY KEY,
+  url TEXT NOT NULL,
+  title_de TEXT,
+  title_en TEXT,
+  summary_de TEXT,
+  summary_en TEXT,
+  topic TEXT,         -- JSON array
+  language TEXT,      -- JSON array
+  updatedAt TEXT NOT NULL,
+  content TEXT,
+  summary TEXT,
+  keywords TEXT
+);
+
+CREATE TABLE aid_offer (
+  id TEXT PRIMARY KEY,
+  url TEXT NOT NULL,
+  title_de TEXT,
+  title_en TEXT,
+  summary_de TEXT,
+  summary_en TEXT,
+  topic TEXT,
+  language TEXT,
+  updatedAt TEXT NOT NULL,
+  content TEXT,
+  summary TEXT,
+  keywords TEXT
+);
+CREATE TABLE Benefit_Staging (
+  id TEXT PRIMARY KEY,
+  url TEXT NOT NULL,
+  title_de TEXT,
+  title_en TEXT,
+  summary_de TEXT,
+  summary_en TEXT,
+  topic TEXT,         -- JSON array
+  language TEXT,      -- JSON array
+  updatedAt TEXT NOT NULL,
+  content TEXT,
+  summary TEXT,
+  keywords TEXT
+);
 CREATE TABLE IF NOT EXISTS benefit (
   id TEXT PRIMARY KEY,
   url TEXT,
@@ -6,6 +49,8 @@ CREATE TABLE IF NOT EXISTS benefit (
   h1 TEXT,
   excerpt TEXT,
   content TEXT,
+  summary TEXT,
+  keywords TEXT,
   topic TEXT, -- store as JSON string representing an array of topics
   source TEXT,
   language TEXT, -- store as JSON string representing an array
@@ -44,7 +89,10 @@ CREATE TABLE IF NOT EXISTS organization (
   domain TEXT NOT NULL UNIQUE,
   url TEXT NOT NULL,
   description_de TEXT,
-  description_en TEXT
+  description_en TEXT,
+  content TEXT,
+  summary TEXT,
+  keywords TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_organization_kind ON organization(kind_code);
 
@@ -56,7 +104,10 @@ CREATE TABLE IF NOT EXISTS service (
   title_en TEXT,
   url TEXT NOT NULL,
   summary_de TEXT,
-  summary_en TEXT
+  summary_en TEXT,
+  content TEXT,
+  summary TEXT,
+  keywords TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_service_kind ON service(kind_code);
 CREATE INDEX IF NOT EXISTS idx_service_org ON service(organization_id);
@@ -69,7 +120,10 @@ CREATE TABLE IF NOT EXISTS knowledge_item (
   title_en TEXT,
   url TEXT NOT NULL,
   summary_de TEXT,
-  summary_en TEXT
+  summary_en TEXT,
+  content TEXT,
+  summary TEXT,
+  keywords TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_item_kind ON knowledge_item(kind_code);
 CREATE INDEX IF NOT EXISTS idx_item_org ON knowledge_item(organization_id);
@@ -87,6 +141,9 @@ CREATE TABLE IF NOT EXISTS contact (
   domain TEXT,
   last_seen TEXT,
   tags TEXT,
+  content TEXT,
+  summary TEXT,
+  keywords TEXT,
   createdAt TEXT NOT NULL DEFAULT (datetime('now')),
   updatedAt TEXT NOT NULL DEFAULT (datetime('now'))
 );
