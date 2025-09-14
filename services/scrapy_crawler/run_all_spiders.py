@@ -12,11 +12,11 @@ with open(MASTER_DOMAINS_PATH, "r", encoding="utf-8") as f:
 
 # List of spiders to run
 spiders = [
-    "aid_spider",
-    "benefits_spider",
-    "contacts_spider",
-    "meta_spider",
-    "tools_spider"
+    "aid",
+    "benefits",
+    "contacts",
+    "meta",
+    "tools"
 ]
 
 process = CrawlerProcess(get_project_settings())

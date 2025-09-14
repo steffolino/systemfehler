@@ -1,0 +1,29 @@
+{
+    "category": "association",
+    "sources": [
+        {
+            "domain": "paritaet.org",
+            "seed_urls": [
+                "https://www.paritaet.org/themen/soziales"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Verein",
+                "Sozialverband"
+            ]
+        },
+        {
+            "domain": "awo.org",
+            "seed_urls": [
+                "https://www.awo.org/"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Wohlfahrt",
+                "Beratung"
+            ]
+        }
+    ]
+}

@@ -1,1 +1,2 @@
+## DEPRECATED: Do not use for deployment. Active Worker config is services/api/wrangler.toml
 pages_build_output_dir = "./apps/fe/.output/public"

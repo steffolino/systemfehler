@@ -1,0 +1,30 @@
+{
+    "category": "legal_aid",
+    "sources": [
+        {
+            "domain": "dgbrechtsschutz.de",
+            "seed_urls": [
+                "https://www.dgbrechtsschutz.de/"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Rechtsberatung",
+                "Arbeitsrecht",
+                "Sozialrecht"
+            ]
+        },
+        {
+            "domain": "anwaltsauskunft.de",
+            "seed_urls": [
+                "https://anwaltsauskunft.de/familie-soziales"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Rechtsanwalt",
+                "Sozialleistungen"
+            ]
+        }
+    ]
+}

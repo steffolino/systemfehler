@@ -1,3 +1,4 @@
+## DEPRECATED: Do not use for deployment. Active Worker config is services/api/wrangler.toml
 name = "systemfehler"
 main = "services/api/index.js"
 compatibility_date = "2024-09-23"

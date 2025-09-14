@@ -1,0 +1,42 @@
+{
+    "category": "tool",
+    "sources": [
+        {
+            "domain": "arbeitsagentur.de",
+            "seed_urls": [
+                "https://www.arbeitsagentur.de/buergergeld-rechner"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Rechner",
+                "Bürgergeld",
+                "Anspruch"
+            ]
+        },
+        {
+            "domain": "familienportal.de",
+            "seed_urls": [
+                "https://familienportal.de/familienportal/rechner-und-plaene/kinderzuschlag-berechnen"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kinderzuschlag",
+                "Rechner"
+            ]
+        },
+        {
+            "domain": "wohngeldrechner.nrw.de",
+            "seed_urls": [
+                "https://www.wohngeldrechner.nrw.de/"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Wohngeld",
+                "Rechner"
+            ]
+        }
+    ]
+}

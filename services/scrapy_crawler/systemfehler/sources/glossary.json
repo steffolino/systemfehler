@@ -1,0 +1,18 @@
+{
+    "category": "glossary",
+    "sources": [
+        {
+            "domain": "arbeitsagentur.de",
+            "seed_urls": [
+                "https://www.arbeitsagentur.de/lexikon"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Glossar",
+                "Begriffe",
+                "Sozialleistungen"
+            ]
+        }
+    ]
+}

@@ -30,12 +30,19 @@ Der deutsche Sozialstaat ist fragmentiert, feindlich und oft unzugänglich. Info
 
 ## 🧱 Architecture Overview
 
-This monorepo includes all core modules:
 
-- `apps/frontend/` – accessible user interface (Nuxt 3, i18n, TailwindCSS, SQLite)
-- `services/crawler/` – Python-based modular crawler framework per domain (e.g. benefits, tools)
-- `services/api-tools/` – JSON API providing structured access to enriched data
-- `data/` – machine-readable, LLM-friendly content in JSON (e.g. tools, benefits, slogans)
+## 🗄️ Archived: Postgres/Prisma
+The previous Postgres/Prisma setup is now archived:
+- Prisma/Postgres code and migrations are in `archive/services_db_prisma/`
+- Docker Compose for Postgres is in `archive/docker-compose.postgres.yml`
+- Do not use these for active development. The active database is **SQLite/D1** (see `services/api/db/schema.sql`).
+
+## 🧱 Architecture Overview
+This monorepo includes all core modules:
+- `apps/fe/` – accessible user interface (Nuxt 3, i18n, TailwindCSS, SQLite)
+- `services/scrapy_crawler/` – Python Scrapy-based modular crawler framework per domain (e.g. benefits, tools)
+- `services/api/` – Express/Cloudflare Worker API providing structured access to enriched data
+- `data/` – machine-readable, LLM-friendly content in JSON (legacy, not used for new entries)
 - `docs/` – project documentation (structure, DDD, editorial flows)
 
 See also: [`docs/structure.md`](./docs/structure.md), [`docs/domains.md`](./docs/domains.md), [`docs/conventions.md`](./docs/conventions.md)

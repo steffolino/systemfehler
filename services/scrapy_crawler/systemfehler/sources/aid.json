@@ -1,0 +1,30 @@
+{
+    "category": "legal_aid",
+    "sources": [
+        {
+            "domain": "caritas.de",
+            "seed_urls": [
+                "https://www.caritas.de/hilfeundberatung/onlineberatung"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Beratung",
+                "Hilfe",
+                "Unterstützung"
+            ]
+        },
+        {
+            "domain": "diakonie.de",
+            "seed_urls": [
+                "https://www.diakonie.de/hilfe-und-beratung"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Sozialberatung",
+                "Unterstützung"
+            ]
+        }
+    ]
+}

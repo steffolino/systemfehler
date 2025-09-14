@@ -3,8 +3,6 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "ingest:file": "node ingest.js --file ../crawler/output.ndjson",
-        "ingest:dir": "node ingest.js --dir ../crawler/out",
         "ingest:refresh": "node ingest.js --refresh-only"
     },
     "dependencies": {

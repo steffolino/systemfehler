@@ -35,17 +35,14 @@ DEFAULT_REQUEST_HEADERS = {
 #    'crawler.middlewares.CrawlerSpiderMiddleware': 543,
 #}
 
-# Enable or disable downloader middlewares
-# See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'crawler.middlewares.CrawlerDownloaderMiddleware': 543,
+DOWNLOAD_TIMEOUT = 10  # Lowered timeout for all requests
 #}
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'crawler.pipelines.CrawlerPipeline': 300,
-#}
+ITEM_PIPELINES = {
+  'crawler.pipelines.NormalizeAndStore': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

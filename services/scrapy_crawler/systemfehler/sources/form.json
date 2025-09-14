@@ -1,0 +1,32 @@
+{
+    "category": "form",
+    "sources": [
+        {
+            "domain": "arbeitsagentur.de",
+            "seed_urls": [
+                "https://www.arbeitsagentur.de/arbeitslosengeld/formulare"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Formulare",
+                "Anträge",
+                "ALG",
+                "Bürgergeld"
+            ]
+        },
+        {
+            "domain": "arbeitsagentur.de",
+            "seed_urls": [
+                "https://www.arbeitsagentur.de/buergergeld/antrag-stellen"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Bürgergeld",
+                "Antrag",
+                "Unterlagen"
+            ]
+        }
+    ]
+}

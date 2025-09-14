@@ -1,0 +1,46 @@
+{
+    "category": "service",
+    "sources": [
+        {
+            "domain": "arbeitsagentur.de",
+            "seed_urls": [
+                "https://www.arbeitsagentur.de/"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Bürgergeld",
+                "Arbeitslosengeld",
+                "Aufstockung",
+                "Anspruch",
+                "Leistungen"
+            ]
+        },
+        {
+            "domain": "bmfsfj.de",
+            "seed_urls": [
+                "https://www.bmfsfj.de/"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Kinderzuschlag",
+                "Familienleistungen",
+                "Unterstützung"
+            ]
+        },
+        {
+            "domain": "wohngeld.de",
+            "seed_urls": [
+                "https://www.wohngeld.de/"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Wohngeld",
+                "Mietzuschuss",
+                "Lastenzuschuss"
+            ]
+        }
+    ]
+}

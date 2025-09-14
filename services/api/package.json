@@ -8,10 +8,6 @@
   "scripts": {
     "dev": "nodemon --ext js,json --watch . index.js",
     "start": "node index.js",
-    "seed:contacts": "node scripts/seed-contacts.js",
-    "seed:benefits": "node scripts/seed-benefits.js",
-    "seed:aid": "node scripts/seed-aid.js",
-    "seed:tools": "node scripts/seed-tools.js",
     "dev:worker": "wrangler dev --config ./wrangler.toml",
     "deploy:worker": "wrangler deploy --config ./wrangler.toml",
     "d1:apply": "wrangler d1 execute systemfehler-db --file ./db/schema.sql --config ./wrangler.toml"

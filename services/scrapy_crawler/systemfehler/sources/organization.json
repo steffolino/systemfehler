@@ -1,0 +1,57 @@
+{
+    "category": "organization",
+    "sources": [
+        {
+            "domain": "leipzig.de",
+            "seed_urls": [
+                "https://www.leipzig.de/soziales-und-gesundheit/soziale-unterstuetzung"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Sozialamt",
+                "Beratung",
+                "Kontakt",
+                "Leipzig"
+            ]
+        },
+        {
+            "domain": "jobcenter-ge.de",
+            "seed_urls": [
+                "https://www.jobcenter-ge.de/"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Jobcenter",
+                "Kontakt",
+                "Ansprechpartner"
+            ]
+        },
+        {
+            "domain": "caritas.de",
+            "seed_urls": [
+                "https://www.caritas.de/hilfeundberatung/onlineberatung"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Beratung",
+                "Hilfe",
+                "Unterstützung"
+            ]
+        },
+        {
+            "domain": "diakonie.de",
+            "seed_urls": [
+                "https://www.diakonie.de/hilfe-und-beratung"
+            ],
+            "allow": [],
+            "deny": [],
+            "keywords": [
+                "Sozialberatung",
+                "Unterstützung"
+            ]
+        }
+    ]
+}

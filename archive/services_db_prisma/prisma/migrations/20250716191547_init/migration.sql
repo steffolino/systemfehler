@@ -1,0 +1,2 @@
+-- Archived: Prisma/Postgres migration SQL (deprecated)
+-- Do not use for active development. Active DB is SQLite/D1.

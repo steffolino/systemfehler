@@ -1,3 +1,169 @@
+-- DB-First: Systemfehler POC Schema (2025)
+-- Only use this file as the source of truth for all tables and fields
+
+-- 2.1 Staging Table
+CREATE TABLE IF NOT EXISTS staging_entry (
+  id TEXT PRIMARY KEY,
+  category TEXT CHECK (category IN ('organization','service','tool','form','glossary','legal_aid','association')),
+  source_url TEXT,
+  source_domain TEXT,
+  title TEXT,
+  summary TEXT,
+  language TEXT,
+  topic TEXT,
+  content TEXT,
+  keywords TEXT,
+  payload TEXT,
+  first_seen TEXT,
+  last_seen TEXT,
+  checksum TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_staging_category ON staging_entry(category);
+CREATE INDEX IF NOT EXISTS idx_staging_domain ON staging_entry(source_domain);
+
+-- 2.2 Canonical Tables
+CREATE TABLE IF NOT EXISTS organization (
+  id TEXT PRIMARY KEY,
+  url TEXT,
+  title_de TEXT,
+  title_simple_de TEXT,
+  title_en TEXT,
+  summary_de TEXT,
+  summary_simple_de TEXT,
+  summary_en TEXT,
+  topic TEXT,
+  language TEXT,
+  content TEXT,
+  keywords TEXT,
+  status TEXT CHECK (status IN ('unverified','auto_processed','verified')),
+  last_checked TEXT,
+  updatedAt TEXT,
+  org_name TEXT,
+  email TEXT,
+  phone TEXT,
+  address TEXT
+);
+CREATE TABLE IF NOT EXISTS service (
+  id TEXT PRIMARY KEY,
+  url TEXT,
+  title_de TEXT,
+  title_simple_de TEXT,
+  title_en TEXT,
+  summary_de TEXT,
+  summary_simple_de TEXT,
+  summary_en TEXT,
+  topic TEXT,
+  language TEXT,
+  content TEXT,
+  keywords TEXT,
+  status TEXT CHECK (status IN ('unverified','auto_processed','verified')),
+  last_checked TEXT,
+  updatedAt TEXT
+);
+CREATE TABLE IF NOT EXISTS tool (
+  id TEXT PRIMARY KEY,
+  url TEXT,
+  title_de TEXT,
+  title_simple_de TEXT,
+  title_en TEXT,
+  summary_de TEXT,
+  summary_simple_de TEXT,
+  summary_en TEXT,
+  topic TEXT,
+  language TEXT,
+  content TEXT,
+  keywords TEXT,
+  status TEXT CHECK (status IN ('unverified','auto_processed','verified')),
+  last_checked TEXT,
+  updatedAt TEXT
+);
+CREATE TABLE IF NOT EXISTS form (
+  id TEXT PRIMARY KEY,
+  url TEXT,
+  title_de TEXT,
+  title_simple_de TEXT,
+  title_en TEXT,
+  summary_de TEXT,
+  summary_simple_de TEXT,
+  summary_en TEXT,
+  topic TEXT,
+  language TEXT,
+  content TEXT,
+  keywords TEXT,
+  status TEXT CHECK (status IN ('unverified','auto_processed','verified')),
+  last_checked TEXT,
+  updatedAt TEXT
+);
+CREATE TABLE IF NOT EXISTS glossary (
+  id TEXT PRIMARY KEY,
+  url TEXT,
+  title_de TEXT,
+  title_simple_de TEXT,
+  title_en TEXT,
+  summary_de TEXT,
+  summary_simple_de TEXT,
+  summary_en TEXT,
+  topic TEXT,
+  language TEXT,
+  content TEXT,
+  keywords TEXT,
+  status TEXT CHECK (status IN ('unverified','auto_processed','verified')),
+  last_checked TEXT,
+  updatedAt TEXT
+);
+CREATE TABLE IF NOT EXISTS legal_aid (
+  id TEXT PRIMARY KEY,
+  url TEXT,
+  title_de TEXT,
+  title_simple_de TEXT,
+  title_en TEXT,
+  summary_de TEXT,
+  summary_simple_de TEXT,
+  summary_en TEXT,
+  topic TEXT,
+  language TEXT,
+  content TEXT,
+  keywords TEXT,
+  status TEXT CHECK (status IN ('unverified','auto_processed','verified')),
+  last_checked TEXT,
+  updatedAt TEXT
+);
+CREATE TABLE IF NOT EXISTS association (
+  id TEXT PRIMARY KEY,
+  url TEXT,
+  title_de TEXT,
+  title_simple_de TEXT,
+  title_en TEXT,
+  summary_de TEXT,
+  summary_simple_de TEXT,
+  summary_en TEXT,
+  topic TEXT,
+  language TEXT,
+  content TEXT,
+  keywords TEXT,
+  status TEXT CHECK (status IN ('unverified','auto_processed','verified')),
+  last_checked TEXT,
+  updatedAt TEXT
+);
+
+-- 2.3 Search View
+CREATE VIEW IF NOT EXISTS search_entry AS
+SELECT id, category, title_de, title_simple_de, title_en, status, last_checked, url, topic, keywords
+FROM (
+  SELECT id, 'organization' AS category, title_de, title_simple_de, title_en, status, last_checked, url, topic, keywords FROM organization
+  UNION ALL
+  SELECT id, 'service' AS category, title_de, title_simple_de, title_en, status, last_checked, url, topic, keywords FROM service
+  UNION ALL
+  SELECT id, 'tool' AS category, title_de, title_simple_de, title_en, status, last_checked, url, topic, keywords FROM tool
+  UNION ALL
+  SELECT id, 'form' AS category, title_de, title_simple_de, title_en, status, last_checked, url, topic, keywords FROM form
+  UNION ALL
+  SELECT id, 'glossary' AS category, title_de, title_simple_de, title_en, status, last_checked, url, topic, keywords FROM glossary
+  UNION ALL
+  SELECT id, 'legal_aid' AS category, title_de, title_simple_de, title_en, status, last_checked, url, topic, keywords FROM legal_aid
+  UNION ALL
+  SELECT id, 'association' AS category, title_de, title_simple_de, title_en, status, last_checked, url, topic, keywords FROM association
+);
 CREATE TABLE AidOffer_Staging (
   id TEXT PRIMARY KEY,
   url TEXT NOT NULL,
