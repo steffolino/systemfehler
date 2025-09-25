@@ -1,0 +1,7 @@
+id: https://systemfehler.dev/schema/overlay/de
+name: systemfehler_de_overlay
+imports:
+  - systemfehler.yaml
+annotations:
+  classes.StagingEntry.label@de: "Staging-Eintrag"
+  slots.category.label@de: "Kategorie"

@@ -1,9 +1,21 @@
 export type Organization = {
   id: string;
-  name: string;
-  kind_id?: number;
-  popularity_id?: number;
+  url?: string;
+  title_de?: string;
+  title_simple_de?: string;
+  title_en?: string;
+  summary_de?: string;
+  summary_simple_de?: string;
+  summary_en?: string;
+  topic?: string;
+  language?: string;
+  content?: string;
+  keywords?: string;
+  status?: 'unverified' | 'auto_processed' | 'verified';
+  last_checked?: string;
   updatedAt?: string;
-  domain?: string;
-  tags?: string[];
+  org_name?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
 };

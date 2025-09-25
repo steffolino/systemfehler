@@ -1,6 +1,9 @@
 {
   // https://nuxt.com/docs/guide/concepts/typescript
   "files": [],
+  "compilerOptions": {
+    "types": ["./types/systemfehler.schema"]
+  },
   "references": [
     {
       "path": "./.nuxt/tsconfig.app.json"

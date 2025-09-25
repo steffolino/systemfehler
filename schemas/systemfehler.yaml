@@ -1,0 +1,241 @@
+id: https://systemfehler.dev/schema
+name: systemfehler
+imports:
+  - linkml:types
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+
+enums:
+  CategoryEnum:
+    permissible_values:
+      - organization
+      - service
+      - tool
+      - form
+      - glossary
+      - legal_aid
+      - association
+  StatusEnum:
+    permissible_values:
+      - unverified
+      - auto_processed
+      - verified
+  LanguageCode:
+    permissible_values:
+      - de
+      - de_simple
+      - en
+  ProminenceEnum:
+    permissible_values:
+      - title
+      - h1
+      - h2
+      - body
+      - link
+
+slots:
+  id:
+    identifier: true
+    range: string
+  url:
+    range: string
+  domain:
+    range: string
+  title:
+    range: string
+  summary:
+    range: string
+  content:
+    range: string
+  lang:
+    range: LanguageCode
+  status:
+    range: StatusEnum
+  last_checked:
+    range: datetime
+  updated_at:
+    range: datetime
+  category:
+    range: CategoryEnum
+  keywords:
+    range: string
+    multivalued: true
+  payload:
+    range: string
+  first_seen:
+    range: datetime
+  last_seen:
+    range: datetime
+  checksum:
+    range: string
+  page_id:
+    range: string
+  topic_slug:
+    range: string
+  prominence:
+    range: ProminenceEnum
+  score:
+    range: float
+  type:
+    range: CategoryEnum
+  primary_page_id:
+    range: string
+  org_name:
+    range: string
+  email:
+    range: string
+  phone:
+    range: string
+  address:
+    range: string
+  eligibility:
+    range: string
+  benefit_amount:
+    range: string
+  application_steps:
+    range: string
+  required_documents:
+    range: string
+  tool_kind:
+    range: string
+  target_outcome:
+    range: string
+  file_url:
+    range: string
+  file_type:
+    range: string
+  online_application_url:
+    range: string
+  definition:
+    range: string
+  practice_area:
+    range: string
+  scope:
+    range: string
+  owner_kind:
+    range: string
+  owner_id:
+    range: string
+  variant:
+    range: string
+  text:
+    range: string
+  is_machine_generated:
+    range: string
+  quality:
+    range: string
+  reviewed_by:
+    range: string
+  reviewed_at:
+    range: datetime
+
+classes:
+  Reviewable:
+    mixin: true
+    slots:
+      - status
+      - last_checked
+  Timestamps:
+    mixin: true
+    slots:
+      - updated_at
+  Localized:
+    mixin: true
+    slots:
+      - lang
+  SourceDomain: {}
+  CrawlRun: {}
+  Page: {}
+  PageText: {}
+  StagingEntry:
+    slots:
+      - id
+      - category
+      - url
+      - domain
+      - title
+      - summary
+      - content
+      - lang
+      - topic_slug
+      - keywords
+      - payload
+      - first_seen
+      - last_seen
+      - checksum
+      - page_id
+  Topic: {}
+  TopicSynonym: {}
+  Hit: {}
+  Entity:
+    abstract: true
+    mixins:
+      - Reviewable
+      - Timestamps
+      - Localized
+    slots:
+      - id
+      - url
+      - title
+      - summary
+      - lang
+      - keywords
+      - type
+      - primary_page_id
+  Organization:
+    is_a: Entity
+    slots:
+      - org_name
+      - email
+      - phone
+      - address
+  Service:
+    is_a: Entity
+    slots:
+      - eligibility
+      - benefit_amount
+      - application_steps
+      - required_documents
+  Tool:
+    is_a: Entity
+    slots:
+      - tool_kind
+      - target_outcome
+  Form:
+    is_a: Entity
+    slots:
+      - file_url
+      - file_type
+      - online_application_url
+  Glossary:
+    is_a: Entity
+    slots:
+      - definition
+  LegalAid:
+    is_a: Entity
+    slots:
+      - practice_area
+  Association:
+    is_a: Entity
+    slots:
+      - scope
+  TextVariant:
+    slots:
+      - owner_kind
+      - owner_id
+      - lang
+      - variant
+      - text
+      - is_machine_generated
+      - quality
+      - reviewed_by
+      - reviewed_at
+  EntityTopic: {}
+  Tag: {}
+  EntityTag: {}
+  Region: {}
+  EntityRegion: {}
+  RelatedLink: {}
+  Review: {}
+  AuditLog: {}

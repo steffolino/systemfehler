@@ -1,25 +1,7 @@
 -- DB-First: Systemfehler POC Schema (2025)
 -- Only use this file as the source of truth for all tables and fields
 
--- 2.1 Staging Table
-CREATE TABLE IF NOT EXISTS staging_entry (
-  id TEXT PRIMARY KEY,
-  category TEXT CHECK (category IN ('organization','service','tool','form','glossary','legal_aid','association')),
-  source_url TEXT,
-  source_domain TEXT,
-  title TEXT,
-  summary TEXT,
-  language TEXT,
-  topic TEXT,
-  content TEXT,
-  keywords TEXT,
-  payload TEXT,
-  first_seen TEXT,
-  last_seen TEXT,
-  checksum TEXT
-);
-CREATE INDEX IF NOT EXISTS idx_staging_category ON staging_entry(category);
-CREATE INDEX IF NOT EXISTS idx_staging_domain ON staging_entry(source_domain);
+
 
 -- 2.2 Canonical Tables
 CREATE TABLE IF NOT EXISTS organization (
@@ -111,6 +93,48 @@ CREATE TABLE IF NOT EXISTS glossary (
   last_checked TEXT,
   updatedAt TEXT
 );
+  -- ================================
+  -- STAGING & CRAWL BOOKKEEPING
+  -- ================================
+
+  -- Crawl bookkeeping
+  CREATE TABLE IF NOT EXISTS crawl_run (
+    id TEXT PRIMARY KEY,            -- UUID or hash
+    spider TEXT NOT NULL,
+    started_at TEXT NOT NULL,       -- ISO-8601 UTC
+    finished_at TEXT,               -- ISO-8601 UTC
+    status TEXT NOT NULL            -- running|succeeded|failed
+  );
+
+  -- Optional raw capture (no HTML in prod if you prefer)
+  CREATE TABLE IF NOT EXISTS raw_page (
+    url TEXT PRIMARY KEY,
+    fetched_at TEXT NOT NULL,
+    status_code INTEGER,
+    content_type TEXT,
+    body BLOB
+  );
+
+  -- STAGING ENTRY: single ingress for all crawlers
+  CREATE TABLE IF NOT EXISTS staging_entry (
+    id TEXT PRIMARY KEY,            -- sha256(source_domain|'|'|source_url)
+    category TEXT NOT NULL,         -- organization|service|tool|form|glossary|legal_aid|association
+    source_url TEXT NOT NULL,
+    source_domain TEXT NOT NULL,
+    title TEXT,
+    summary TEXT,
+    language TEXT,                  -- e.g., 'de'
+    topic TEXT,
+    content TEXT,                   -- text only
+    keywords TEXT,                  -- comma-separated
+    payload JSON,                   -- raw structured fields (LLM-friendly)
+    first_seen TEXT NOT NULL,       -- ISO-8601 UTC
+    last_seen TEXT NOT NULL,        -- ISO-8601 UTC
+    checksum TEXT NOT NULL          -- sha256(payload normalized)
+  );
+
+  CREATE INDEX IF NOT EXISTS idx_staging_category ON staging_entry(category);
+  CREATE INDEX IF NOT EXISTS idx_staging_domain   ON staging_entry(source_domain);
 CREATE TABLE IF NOT EXISTS legal_aid (
   id TEXT PRIMARY KEY,
   url TEXT,
@@ -248,19 +272,6 @@ FOR EACH ROW BEGIN
 END;
 
 -- Fach-Tabellen (1:1-Vererbung von entity)
-CREATE TABLE IF NOT EXISTS organization (
-  id TEXT PRIMARY KEY REFERENCES entity(id) ON DELETE CASCADE,
-  name TEXT NOT NULL,
-  kind_code TEXT NOT NULL REFERENCES org_kind(code),
-  domain TEXT NOT NULL UNIQUE,
-  url TEXT NOT NULL,
-  description_de TEXT,
-  description_en TEXT,
-  content TEXT,
-  summary TEXT,
-  keywords TEXT
-);
-CREATE INDEX IF NOT EXISTS idx_organization_kind ON organization(kind_code);
 
 CREATE TABLE IF NOT EXISTS service (
   id TEXT PRIMARY KEY REFERENCES entity(id) ON DELETE CASCADE,

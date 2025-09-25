@@ -1,0 +1,337 @@
+[
+    {
+        "domain": "arbeitsagentur.de",
+        "trust_level": "official",
+        "seeds": [
+            "https://www.arbeitsagentur.de/buergergeld/",
+            "https://www.arbeitsagentur.de/arbeitslosengeld/formulare",
+            "https://www.arbeitsagentur.de/buergergeld/antrag-stellen",
+            "https://www.arbeitsagentur.de/buergergeld-rechner",
+            "https://www.arbeitsagentur.de/lexikon"
+        ],
+        "allow_paths": [
+            "/buergergeld",
+            "/arbeitslosengeld",
+            "/lexikon"
+        ],
+        "deny_paths": [
+            "/jobsuche",
+            "/suche"
+        ],
+        "category_rules": [
+            {
+                "category": "service",
+                "path_regex": "(buergergeld|arbeitslosengeld)"
+            },
+            {
+                "category": "form",
+                "path_regex": "(formulare|antrag-stellen)"
+            },
+            {
+                "category": "tool",
+                "path_regex": "rechner"
+            },
+            {
+                "category": "glossary",
+                "path_regex": "lexikon"
+            }
+        ],
+        "file_ext_as_form": [
+            ".pdf",
+            ".doc",
+            ".docx",
+            ".odt"
+        ]
+    },
+    {
+        "domain": "familienportal.de",
+        "trust_level": "official",
+        "seeds": [
+            "https://familienportal.de/familienportal/leistungen/elterngeld",
+            "https://familienportal.de/familienportal/leistungen/kindergeld",
+            "https://familienportal.de/familienportal/rechner-und-plaene/kinderzuschlag-berechnen"
+        ],
+        "allow_paths": [
+            "/familienportal/leistungen",
+            "/familienportal/rechner-und-plaene"
+        ],
+        "deny_paths": [],
+        "category_rules": [
+            {
+                "category": "service",
+                "path_regex": "/leistungen/"
+            },
+            {
+                "category": "tool",
+                "path_regex": "/rechner-und-plaene/"
+            },
+            {
+                "category": "form",
+                "path_regex": "(antrag|formular)"
+            }
+        ]
+    },
+    {
+        "domain": "bmfsfj.de",
+        "trust_level": "official",
+        "seeds": [
+            "https://www.bmfsfj.de/"
+        ],
+        "allow_paths": [
+            "/elterngeld",
+            "/familienleistungen"
+        ],
+        "deny_paths": [],
+        "category_rules": [
+            {
+                "category": "service",
+                "path_regex": "(elterngeld|familienleistungen)"
+            }
+        ]
+    },
+    {
+        "domain": "bmas.de",
+        "trust_level": "official",
+        "seeds": [
+            "https://www.bmas.de/DE/Europa-und-die-Welt/Soziales-in-Deutschland/Buergergeld/_Buergergeld.html"
+        ],
+        "allow_paths": [
+            "/DE/Europa-und-die-Welt/Soziales-in-Deutschland",
+            "/DE/Service"
+        ],
+        "deny_paths": [],
+        "category_rules": [
+            {
+                "category": "service",
+                "path_regex": "Buergergeld"
+            },
+            {
+                "category": "glossary",
+                "path_regex": "/Service/Glossar"
+            }
+        ]
+    },
+    {
+        "domain": "bmwsb.bund.de",
+        "trust_level": "official",
+        "seeds": [
+            "https://www.bmwsb.bund.de/"
+        ],
+        "allow_paths": [
+            "/Themen/Wohnen",
+            "/Service"
+        ],
+        "deny_paths": [],
+        "category_rules": [
+            {
+                "category": "service",
+                "path_regex": "(Wohngeld|Wohnen)"
+            },
+            {
+                "category": "form",
+                "path_regex": "(Formular|Antrag|Download)"
+            }
+        ]
+    },
+    {
+        "domain": "wohngeldrechner.nrw.de",
+        "trust_level": "official",
+        "seeds": [
+            "https://www.wohngeldrechner.nrw.de/"
+        ],
+        "allow_paths": [
+            "/"
+        ],
+        "deny_paths": [],
+        "category_rules": [
+            {
+                "category": "tool",
+                "path_regex": "/"
+            }
+        ]
+    },
+    {
+        "domain": "bmbf.de",
+        "trust_level": "official",
+        "seeds": [
+            "https://www.bmbf.de/bmbf/de/studium/BAfoeG/bafoeg_node.html"
+        ],
+        "allow_paths": [
+            "/bmbf/de/studium/BAfoeG"
+        ],
+        "deny_paths": [],
+        "category_rules": [
+            {
+                "category": "service",
+                "path_regex": "BAfoeG"
+            },
+            {
+                "category": "form",
+                "path_regex": "(Formular|Antrag)"
+            }
+        ]
+    },
+    {
+        "domain": "bafoeg-digital.de",
+        "trust_level": "official",
+        "seeds": [
+            "https://www.bafoeg-digital.de/"
+        ],
+        "allow_paths": [
+            "/"
+        ],
+        "deny_paths": [],
+        "category_rules": [
+            {
+                "category": "tool",
+                "path_regex": "/"
+            },
+            {
+                "category": "form",
+                "path_regex": "(antrag|formular)"
+            }
+        ]
+    },
+    {
+        "domain": "jobcenter.digital",
+        "trust_level": "official",
+        "seeds": [
+            "https://www.jobcenter.digital/"
+        ],
+        "allow_paths": [
+            "/"
+        ],
+        "deny_paths": [],
+        "category_rules": [
+            {
+                "category": "tool",
+                "path_regex": "/"
+            },
+            {
+                "category": "form",
+                "path_regex": "(antrag|unterlagen)"
+            }
+        ]
+    },
+    {
+        "domain": "sachsen.de",
+        "trust_level": "official",
+        "seeds": [
+            "https://www.sachsen.de/soziales.htm"
+        ],
+        "allow_paths": [
+            "/soziales",
+            "/verwaltung/buerger"
+        ],
+        "deny_paths": [],
+        "category_rules": [
+            {
+                "category": "service",
+                "path_regex": "(Wohngeld|Sozialhilfe|Bildung-und-Teilhabe)"
+            },
+            {
+                "category": "form",
+                "path_regex": "(Formular|Antrag|Download)"
+            },
+            {
+                "category": "organization",
+                "path_regex": "(Kontakt|Zustaendigkeit|Amt)"
+            }
+        ],
+        "region": "DE-SN"
+    },
+    {
+        "domain": "leipzig.de",
+        "trust_level": "official",
+        "seeds": [
+            "https://www.leipzig.de/soziales-und-gesundheit/soziale-unterstuetzung",
+            "https://www.leipzig.de/leben-in-leipzig/soziales/leistungen-und-hilfen"
+        ],
+        "allow_paths": [
+            "/soziales-und-gesundheit",
+            "/leben-in-leipzig/soziales"
+        ],
+        "deny_paths": [],
+        "category_rules": [
+            {
+                "category": "organization",
+                "path_regex": "(amt|stelle|kontakt|beratung)"
+            },
+            {
+                "category": "service",
+                "path_regex": "(leistungen|hilfen)"
+            },
+            {
+                "category": "form",
+                "path_regex": "(formular|download|antrag)"
+            }
+        ],
+        "region": "DE-SN-14713"
+    },
+    {
+        "domain": "caritas.de",
+        "trust_level": "ngo",
+        "seeds": [
+            "https://www.caritas.de/hilfeundberatung/onlineberatung"
+        ],
+        "allow_paths": [
+            "/hilfeundberatung",
+            "/ratgeber"
+        ],
+        "deny_paths": [],
+        "category_rules": [
+            {
+                "category": "organization",
+                "path_regex": "beratung"
+            },
+            {
+                "category": "service",
+                "path_regex": "ratgeber"
+            }
+        ]
+    },
+    {
+        "domain": "diakonie.de",
+        "trust_level": "ngo",
+        "seeds": [
+            "https://www.diakonie.de/hilfe-und-beratung"
+        ],
+        "allow_paths": [
+            "/hilfe-und-beratung",
+            "/ratgeber"
+        ],
+        "deny_paths": [],
+        "category_rules": [
+            {
+                "category": "organization",
+                "path_regex": "beratung"
+            },
+            {
+                "category": "service",
+                "path_regex": "ratgeber"
+            }
+        ]
+    },
+    {
+        "domain": "verbraucherzentrale.de",
+        "trust_level": "ngo",
+        "seeds": [
+            "https://www.verbraucherzentrale.de/"
+        ],
+        "allow_paths": [
+            "/wissen",
+            "/beratung"
+        ],
+        "deny_paths": [],
+        "category_rules": [
+            {
+                "category": "service",
+                "path_regex": "/wissen/"
+            },
+            {
+                "category": "organization",
+                "path_regex": "/beratung/"
+            }
+        ]
+    }
+]

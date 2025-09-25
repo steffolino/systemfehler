@@ -1,0 +1,238 @@
+[
+    {
+        "slug": "kindergeld",
+        "title_de": "Kindergeld",
+        "title_en": "Child benefit",
+        "synonyms": {
+            "de": [
+                "kindergeld"
+            ],
+            "de_simple": [
+                "geld für kinder"
+            ],
+            "en": [
+                "child benefit"
+            ]
+        },
+        "categories": [
+            "service",
+            "form",
+            "organization"
+        ],
+        "extraction_goals": [
+            "eligibility",
+            "benefit_amount",
+            "application_steps",
+            "required_documents",
+            "forms",
+            "contact_points"
+        ]
+    },
+    {
+        "slug": "kinderzuschlag",
+        "title_de": "Kinderzuschlag",
+        "title_en": "Child supplement",
+        "synonyms": {
+            "de": [
+                "kinderzuschlag",
+                "kiz"
+            ],
+            "de_simple": [
+                "zusätzliches geld für kinder"
+            ],
+            "en": [
+                "child supplement"
+            ]
+        },
+        "categories": [
+            "service",
+            "tool",
+            "form"
+        ],
+        "extraction_goals": [
+            "eligibility",
+            "benefit_amount",
+            "application_steps",
+            "required_documents",
+            "calculator",
+            "forms"
+        ]
+    },
+    {
+        "slug": "wohngeld",
+        "title_de": "Wohngeld",
+        "title_en": "Housing benefit",
+        "synonyms": {
+            "de": [
+                "wohngeld",
+                "mietzuschuss",
+                "lastenzuschuss"
+            ],
+            "de_simple": [
+                "hilfe für miete"
+            ],
+            "en": [
+                "housing benefit"
+            ]
+        },
+        "categories": [
+            "service",
+            "tool",
+            "form"
+        ],
+        "extraction_goals": [
+            "eligibility",
+            "benefit_amount",
+            "application_steps",
+            "required_documents",
+            "calculator",
+            "forms"
+        ]
+    },
+    {
+        "slug": "buergergeld",
+        "title_de": "Bürgergeld",
+        "title_en": "Basic income support",
+        "synonyms": {
+            "de": [
+                "bürgergeld"
+            ],
+            "de_simple": [
+                "geld vom jobcenter"
+            ],
+            "en": [
+                "basic income support"
+            ]
+        },
+        "categories": [
+            "service",
+            "form",
+            "organization",
+            "glossary"
+        ],
+        "extraction_goals": [
+            "eligibility",
+            "benefit_amount",
+            "application_steps",
+            "required_documents",
+            "deadlines",
+            "forms",
+            "contact_points"
+        ]
+    },
+    {
+        "slug": "bildung-und-teilhabe",
+        "title_de": "Bildung und Teilhabe",
+        "title_en": "Education and participation",
+        "synonyms": {
+            "de": [
+                "bildung und teilhabe",
+                "but"
+            ],
+            "de_simple": [
+                "geld für schule und freizeit"
+            ],
+            "en": [
+                "education benefits"
+            ]
+        },
+        "categories": [
+            "service",
+            "form"
+        ],
+        "extraction_goals": [
+            "benefit_components",
+            "eligibility",
+            "required_documents",
+            "application_steps",
+            "forms"
+        ]
+    },
+    {
+        "slug": "elterngeld",
+        "title_de": "Elterngeld",
+        "title_en": "Parental allowance",
+        "synonyms": {
+            "de": [
+                "elterngeld",
+                "elterngeldplus"
+            ],
+            "de_simple": [
+                "geld für eltern nach geburt"
+            ],
+            "en": [
+                "parental allowance"
+            ]
+        },
+        "categories": [
+            "service",
+            "form",
+            "tool"
+        ],
+        "extraction_goals": [
+            "eligibility",
+            "benefit_amount",
+            "application_steps",
+            "required_documents",
+            "forms",
+            "calculator"
+        ]
+    },
+    {
+        "slug": "mutterschaftsgeld",
+        "title_de": "Mutterschaftsgeld",
+        "title_en": "Maternity benefit",
+        "synonyms": {
+            "de": [
+                "mutterschaftsgeld"
+            ],
+            "de_simple": [
+                "geld vor und nach geburt"
+            ],
+            "en": [
+                "maternity benefit"
+            ]
+        },
+        "categories": [
+            "service",
+            "form"
+        ],
+        "extraction_goals": [
+            "eligibility",
+            "benefit_amount",
+            "application_steps",
+            "required_documents",
+            "forms"
+        ]
+    },
+    {
+        "slug": "grundsicherung-im-alter",
+        "title_de": "Grundsicherung im Alter",
+        "title_en": "Basic security in old age",
+        "synonyms": {
+            "de": [
+                "grundsicherung im alter",
+                "aufstockung rente"
+            ],
+            "de_simple": [
+                "hilfe wenn rente nicht reicht"
+            ],
+            "en": [
+                "basic security old age"
+            ]
+        },
+        "categories": [
+            "service",
+            "form",
+            "organization"
+        ],
+        "extraction_goals": [
+            "eligibility",
+            "benefit_amount",
+            "required_documents",
+            "application_steps",
+            "forms",
+            "contact_points"
+        ]
+    }
+]

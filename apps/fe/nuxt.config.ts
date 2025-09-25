@@ -25,11 +25,11 @@ export default defineNuxtConfig({
       apiBase:
         process.env.NODE_ENV === "production"
           ? "https://systemfehler.inequality.workers.dev"
-          : "http://localhost:3001",
+          : "http://localhost:8787",
       searchBase:
         process.env.NODE_ENV === "production"
           ? "https://systemfehler.inequality.workers.dev/api/search"
-          : "http://localhost:3001/api/search"
+          : "http://localhost:8787/api/search"
     }
   },
   devtools: { enabled: true },

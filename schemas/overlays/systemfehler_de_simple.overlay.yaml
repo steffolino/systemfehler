@@ -1,0 +1,5 @@
+imports:
+  - systemfehler.yaml
+annotations:
+  classes.StagingEntry.label@de_simple: "Staging-Eintrag (Einfach)"
+  slots.category.label@de_simple: "Kategorie (Einfach)"

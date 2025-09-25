@@ -1,5 +1,15 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+let localDb;
+import path from 'path';
+import { fileURLToPath } from 'url';
+if (process.env.NODE_ENV !== "production") {
+  // Use better-sqlite3 for local dev
+  const { default: Database } = await import('better-sqlite3');
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  const dbPath = path.resolve(__dirname, '../data/systemfehler.db');
+  localDb = new Database(dbPath);
+}
 
 // Hilfsfunktionen für D1
 async function queryAll(db, sql, params = []) {
@@ -57,8 +67,43 @@ async function listTopicsD1(db, limit = 12) {
 }
 
 // Worker-App
+
 const app = new Hono();
 app.use("/*", cors());
+// Inject local DB for all requests in dev
+if (process.env.NODE_ENV !== "production") {
+  app.use("/*", async (c, next) => {
+    c.env = c.env || {};
+    c.env.DB = localDb;
+    await next();
+  });
+}
+
+// Simple /api/search endpoint for local dev
+app.get("/api/search", async (c) => {
+  const q = c.req.query("q") || "";
+  const limit = Number(c.req.query("limit") || 10);
+  const likeQ = "%" + q + "%";
+  // Search in Benefit, Tool, and AidOffer tables
+  const benefitRows = await queryAll(
+    c.env.DB,
+    `SELECT *, 'benefit' as entity FROM Benefit WHERE titleDe LIKE ? OR summaryDe LIKE ? LIMIT ?`,
+    [likeQ, likeQ, limit]
+  );
+  const toolRows = await queryAll(
+    c.env.DB,
+    `SELECT *, 'tool' as entity FROM Tool WHERE titleDe LIKE ? OR summaryDe LIKE ? LIMIT ?`,
+    [likeQ, likeQ, limit]
+  );
+  const aidRows = await queryAll(
+    c.env.DB,
+    `SELECT *, 'aid' as entity FROM AidOffer WHERE titleDe LIKE ? OR summaryDe LIKE ? LIMIT ?`,
+    [likeQ, likeQ, limit]
+  );
+  // Combine and limit total results
+  const all = [...benefitRows, ...toolRows, ...aidRows].slice(0, limit);
+  return c.json(all);
+});
 
 // Health check
 app.get("/api/health", (c) => c.json({ ok: true }));
@@ -111,4 +156,13 @@ app.delete("/api/benefits/:id", async (c) => {
   return c.json({ success: true });
 });
 
+
 export default app;
+
+// Start local server if not in production (for local dev)
+if (process.env.NODE_ENV !== "production") {
+  import('@hono/node-server').then(({ serve }) => {
+    serve({ fetch: app.fetch, port: 8787 });
+    console.log("API listening on http://localhost:8787");
+  });
+}

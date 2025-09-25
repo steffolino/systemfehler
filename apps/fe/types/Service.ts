@@ -1,11 +1,17 @@
 export type Service = {
   id: string;
-  organization_id: string;
-  kind_id?: number;
-  title?: string;
-  summary?: string;
-  language?: string[];
-  topic?: string[];
-  status?: string;
+  url?: string;
+  title_de?: string;
+  title_simple_de?: string;
+  title_en?: string;
+  summary_de?: string;
+  summary_simple_de?: string;
+  summary_en?: string;
+  topic?: string;
+  language?: string;
+  content?: string;
+  keywords?: string;
+  status?: 'unverified' | 'auto_processed' | 'verified';
+  last_checked?: string;
   updatedAt?: string;
 };

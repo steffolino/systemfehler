@@ -34,10 +34,60 @@ CREATE TABLE IF NOT EXISTS AidOffer_Staging (
   updatedAt TEXT NOT NULL
 );
 
--- Canonical tables
 CREATE TABLE IF NOT EXISTS organization (
   id TEXT PRIMARY KEY,
   name TEXT NOT NULL,
+
+-- Additional Staging Tables for ETL
+CREATE TABLE IF NOT EXISTS Tool_Staging (
+  id TEXT PRIMARY KEY,
+  url TEXT NOT NULL,
+  title TEXT,
+  summary TEXT,
+  topic TEXT,
+  language TEXT,
+  updatedAt TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Form_Staging (
+  id TEXT PRIMARY KEY,
+  url TEXT NOT NULL,
+  title TEXT,
+  summary TEXT,
+  topic TEXT,
+  language TEXT,
+  updatedAt TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Glossary_Staging (
+  id TEXT PRIMARY KEY,
+  url TEXT NOT NULL,
+  title TEXT,
+  summary TEXT,
+  topic TEXT,
+  language TEXT,
+  updatedAt TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS LegalAid_Staging (
+  id TEXT PRIMARY KEY,
+  url TEXT NOT NULL,
+  title TEXT,
+  summary TEXT,
+  topic TEXT,
+  language TEXT,
+  updatedAt TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Association_Staging (
+  id TEXT PRIMARY KEY,
+  url TEXT NOT NULL,
+  title TEXT,
+  summary TEXT,
+  topic TEXT,
+  language TEXT,
+  updatedAt TEXT NOT NULL
+);
   domain TEXT NOT NULL,
   url TEXT NOT NULL,
   description_de TEXT,

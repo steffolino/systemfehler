@@ -1,0 +1,635 @@
+{
+    "$defs": {
+        "Association": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "keywords": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "lang": {
+                    "$ref": "#/$defs/LanguageCode"
+                },
+                "last_checked": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "primary_page_id": {
+                    "type": "string"
+                },
+                "scope": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/$defs/StatusEnum"
+                },
+                "summary": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/$defs/CategoryEnum"
+                },
+                "updated_at": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Association",
+            "type": "object"
+        },
+        "AuditLog": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "AuditLog",
+            "type": "object"
+        },
+        "CategoryEnum": {
+            "description": "",
+            "enum": [
+                "organization",
+                "service",
+                "tool",
+                "form",
+                "glossary",
+                "legal_aid",
+                "association"
+            ],
+            "title": "CategoryEnum",
+            "type": "string"
+        },
+        "CrawlRun": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "CrawlRun",
+            "type": "object"
+        },
+        "EntityRegion": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "EntityRegion",
+            "type": "object"
+        },
+        "EntityTag": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "EntityTag",
+            "type": "object"
+        },
+        "EntityTopic": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "EntityTopic",
+            "type": "object"
+        },
+        "Form": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "file_type": {
+                    "type": "string"
+                },
+                "file_url": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "keywords": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "lang": {
+                    "$ref": "#/$defs/LanguageCode"
+                },
+                "last_checked": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "online_application_url": {
+                    "type": "string"
+                },
+                "primary_page_id": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/$defs/StatusEnum"
+                },
+                "summary": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/$defs/CategoryEnum"
+                },
+                "updated_at": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Form",
+            "type": "object"
+        },
+        "Glossary": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "definition": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "keywords": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "lang": {
+                    "$ref": "#/$defs/LanguageCode"
+                },
+                "last_checked": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "primary_page_id": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/$defs/StatusEnum"
+                },
+                "summary": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/$defs/CategoryEnum"
+                },
+                "updated_at": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Glossary",
+            "type": "object"
+        },
+        "Hit": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "Hit",
+            "type": "object"
+        },
+        "LanguageCode": {
+            "description": "",
+            "enum": [
+                "de",
+                "de_simple",
+                "en"
+            ],
+            "title": "LanguageCode",
+            "type": "string"
+        },
+        "LegalAid": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "keywords": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "lang": {
+                    "$ref": "#/$defs/LanguageCode"
+                },
+                "last_checked": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "practice_area": {
+                    "type": "string"
+                },
+                "primary_page_id": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/$defs/StatusEnum"
+                },
+                "summary": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/$defs/CategoryEnum"
+                },
+                "updated_at": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "LegalAid",
+            "type": "object"
+        },
+        "Organization": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "keywords": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "lang": {
+                    "$ref": "#/$defs/LanguageCode"
+                },
+                "last_checked": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "org_name": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "primary_page_id": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/$defs/StatusEnum"
+                },
+                "summary": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/$defs/CategoryEnum"
+                },
+                "updated_at": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Organization",
+            "type": "object"
+        },
+        "Page": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "Page",
+            "type": "object"
+        },
+        "PageText": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "PageText",
+            "type": "object"
+        },
+        "ProminenceEnum": {
+            "description": "",
+            "enum": [
+                "title",
+                "h1",
+                "h2",
+                "body",
+                "link"
+            ],
+            "title": "ProminenceEnum",
+            "type": "string"
+        },
+        "Region": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "Region",
+            "type": "object"
+        },
+        "RelatedLink": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "RelatedLink",
+            "type": "object"
+        },
+        "Review": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "Review",
+            "type": "object"
+        },
+        "Service": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "application_steps": {
+                    "type": "string"
+                },
+                "benefit_amount": {
+                    "type": "string"
+                },
+                "eligibility": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "keywords": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "lang": {
+                    "$ref": "#/$defs/LanguageCode"
+                },
+                "last_checked": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "primary_page_id": {
+                    "type": "string"
+                },
+                "required_documents": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/$defs/StatusEnum"
+                },
+                "summary": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/$defs/CategoryEnum"
+                },
+                "updated_at": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Service",
+            "type": "object"
+        },
+        "SourceDomain": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "SourceDomain",
+            "type": "object"
+        },
+        "StagingEntry": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "category": {
+                    "$ref": "#/$defs/CategoryEnum"
+                },
+                "checksum": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "domain": {
+                    "type": "string"
+                },
+                "first_seen": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "keywords": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "lang": {
+                    "$ref": "#/$defs/LanguageCode"
+                },
+                "last_seen": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "page_id": {
+                    "type": "string"
+                },
+                "payload": {
+                    "type": "string"
+                },
+                "summary": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "topic_slug": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StagingEntry",
+            "type": "object"
+        },
+        "StatusEnum": {
+            "description": "",
+            "enum": [
+                "unverified",
+                "auto_processed",
+                "verified"
+            ],
+            "title": "StatusEnum",
+            "type": "string"
+        },
+        "Tag": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "Tag",
+            "type": "object"
+        },
+        "TextVariant": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "is_machine_generated": {
+                    "type": "string"
+                },
+                "lang": {
+                    "$ref": "#/$defs/LanguageCode"
+                },
+                "owner_id": {
+                    "type": "string"
+                },
+                "owner_kind": {
+                    "type": "string"
+                },
+                "quality": {
+                    "type": "string"
+                },
+                "reviewed_at": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "reviewed_by": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "variant": {
+                    "type": "string"
+                }
+            },
+            "title": "TextVariant",
+            "type": "object"
+        },
+        "Tool": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "keywords": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "lang": {
+                    "$ref": "#/$defs/LanguageCode"
+                },
+                "last_checked": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "primary_page_id": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/$defs/StatusEnum"
+                },
+                "summary": {
+                    "type": "string"
+                },
+                "target_outcome": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "tool_kind": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/$defs/CategoryEnum"
+                },
+                "updated_at": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Tool",
+            "type": "object"
+        },
+        "Topic": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "Topic",
+            "type": "object"
+        },
+        "TopicSynonym": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "TopicSynonym",
+            "type": "object"
+        }
+    },
+    "$id": "https://systemfehler.dev/schema",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": true,
+    "metamodel_version": "1.7.0",
+    "title": "systemfehler",
+    "type": "object",
+    "version": null
+}

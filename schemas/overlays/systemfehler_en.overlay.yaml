@@ -1,0 +1,5 @@
+imports:
+  - systemfehler.yaml
+annotations:
+  classes.StagingEntry.label@en: "Staging Entry"
+  slots.category.label@en: "Category"

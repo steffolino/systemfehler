@@ -3,7 +3,7 @@
   "private": true,
   "workspaces": [
     "apps/fe",
-    "services/api",
+    "api",
     "services/crawler*"
   ],
   "devDependencies": {
@@ -15,38 +15,50 @@
     "chokidar-cli": "^3.0.0",
     "concurrently": "^9.2.0",
     "daisyui": "^5.0.50",
+    "json-schema-to-typescript": "^11.0.0",
     "kysely": "^0.27.2",
     "kysely-codegen": "^0.2.0",
     "postcss": "^8.5.6",
     "sqlite3": "^5.1.6",
     "tailwindcss": "^3.4.17",
+    "typescript": "^5.0.0",
     "zx": "^8.8.1"
   },
   "scripts": {
     "install:all": "npm install",
     "build:frontend": "npm --workspace apps/fe run build",
-    "start:api": "npm --workspace services/api run dev",
+    "start:api": "npm --workspace api run dev",
     "start:frontend": "npm --workspace apps/fe run dev",
-    "dev:api": "npm --workspace services/api run dev",
-    "db:apply:sqlite": "sqlite3 data/systemfehler.db < services/api/db/schema.sql",
+    "dev:api": "npm --workspace api run dev",
+    "dev:frontend": "npm --workspace apps/fe run dev",
+    "dev:api:local": "node api/worker.js",
+    "dev:all": "concurrently -k -n FRONTEND,API -c blue,green \"pnpm dev:frontend\" \"pnpm dev:api:local\"",
+    "db:apply:sqlite": "sqlite3 data/systemfehler.db < api/db/schema.sql",
     "crawl:all": "python services/scrapy_crawler/main.py",
-    "etl": "python services/api/scripts/etl.py",
     "db:codegen": "kysely-codegen --dialect sqlite --out-file src/types/db.d.ts --url file:./.generated/local.sqlite",
     "db:codegen:ci": "pnpm db:build-local && pnpm db:codegen && git diff --exit-code -- src/types/db.d.ts",
     "db:watch": "chokidar 'migrations/**/*.sql' -c 'pnpm db:build-local && pnpm db:codegen'",
-    "seed:benefits": "node services/api/scripts/seed-benefits.js",
-    "seed:aid": "node services/api/scripts/seed-aid.js",
-    "seed:tools": "node services/api/scripts/seed-tools.js",
-    "seed:contacts": "node services/api/scripts/seed-contacts.js",
+    "seed:benefits": "node api/scripts/seed-benefits.js",
+    "seed:aid": "node api/scripts/seed-aid.js",
+    "seed:tools": "node api/scripts/seed-tools.js",
+    "seed:contacts": "node api/scripts/seed-contacts.js",
     "seed:all": "npm run seed:contacts && npm run seed:benefits && npm run seed:aid && npm run seed:tools",
-    "deploy:api": "wrangler deploy --config services/api/wrangler.toml",
-    "dev:api:worker": "wrangler dev --config services/api/wrangler.toml",
-    "d1:apply": "wrangler d1 execute systemfehler-db --file services/api/db/schema.sql --config services/api/wrangler.toml"
+    "deploy:api": "wrangler deploy --config api/wrangler.toml",
+    "d1:apply": "wrangler d1 execute systemfehler-db --file api/db/schema.sql --config api/wrangler.toml",
+    "schema:venv": "python -m venv .venv && .venv\\Scripts\\pip.exe install linkml==1.7.3",
+    "schema:json": ".venv\\Scripts\\gen-json-schema.exe schemas/systemfehler.yaml > generated/json-schema/systemfehler.schema.json",
+    "schema:sql": ".venv\\Scripts\\gen-sqltables.exe schemas/systemfehler.yaml > generated/sql/schema.sql",
+    "schema:python": ".venv\\Scripts\\gen-python.exe schemas/systemfehler.yaml -o generated/python",
+    "schema:docs": ".venv\\Scripts\\gen-doc.exe schemas/systemfehler.yaml -d generated/docs",
+    "schema:all": "pnpm schema:json && pnpm schema:sql && pnpm schema:python && pnpm schema:docs",
+    "schema:ts": "json2ts -i generated/json-schema/systemfehler.schema.json -o generated/json-schema/systemfehler.schema.d.ts"
   },
   "resolutions": {
     "babel-eslint": "^11.0.0-beta.0"
   },
   "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "pinia": "^3.0.3"
   },
   "packageManager": "pnpm@9.15.9+sha512.68046141893c66fad01c079231128e9afb89ef87e2691d69e4d40eee228988295fd4682181bae55b58418c3a253bde65a505ec7c5f9403ece5cc3cd37dcf2531"
