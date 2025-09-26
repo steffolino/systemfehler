@@ -1,0 +1,21 @@
+import scrapy
+
+class StagingEntryItem(scrapy.Item):
+    id = scrapy.Field()
+    category = scrapy.Field()
+    url = scrapy.Field()
+    source_url = scrapy.Field()
+    source_domain = scrapy.Field()
+    fetched_at = scrapy.Field()
+    lang = scrapy.Field()
+    language = scrapy.Field()
+    title = scrapy.Field()
+    summary = scrapy.Field()
+    content = scrapy.Field()
+    topic = scrapy.Field()
+    keywords = scrapy.Field()
+    raw_json = scrapy.Field()
+    payload = scrapy.Field()
+    first_seen = scrapy.Field()
+    last_seen = scrapy.Field()
+    checksum = scrapy.Field()

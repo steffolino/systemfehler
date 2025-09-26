@@ -71,22 +71,43 @@ app.get("/api/search/topics", async (c) => {
   }
 });
 
-// SEARCH ENDPOINT
+// SEARCH ENDPOINT (multi-entity)
+const ALL_ENTITIES = [
+  "aid_offer",
+  "staging_entry",
+  "search_doc",
+  "crawl_log",
+  "crawl_source",
+  "translation_cache",
+  "user_feedback"
+];
+
 app.get("/api/search", async (c) => {
   const url = new URL(c.req.url);
   const q = url.searchParams.get("q") || "";
   const entity = url.searchParams.get("entity");
   const limit = Number(url.searchParams.get("limit") || "20");
-  const allowedEntities = ["benefit"];
+  const allowedEntities = entity ? [entity] : ALL_ENTITIES;
   let results = [];
   try {
-    for (const ent of (entity ? [entity] : allowedEntities)) {
-  const sql = `SELECT * FROM benefit LIMIT 10`;
-  const rows = await queryAll(c.env.DB, sql);
+    for (const ent of allowedEntities) {
+      // Simple search: if q vorhanden, suche in title/summary/content, sonst alle
+      let sql = `SELECT *, '${ent}' as kind FROM ${ent}`;
+      let params = [];
+      if (q && ["aid_offer","staging_entry","search_doc"].includes(ent)) {
+        sql += ` WHERE (
+          (title LIKE ? OR summary LIKE ? OR content LIKE ?)
+          OR (title_de LIKE ? OR summary_de LIKE ? OR content_de LIKE ?)
+          OR (title_en LIKE ? OR summary_en LIKE ? OR content_en LIKE ?)
+        )`;
+        for (let i = 0; i < 9; ++i) params.push(`%${q}%`);
+      }
+      sql += ` LIMIT ${limit}`;
+      const rows = await queryAll(c.env.DB, sql, params);
       if (Array.isArray(rows)) {
         rows.forEach((row) => {
           results.push({
-            entity: ent,
+            kind: ent,
             ...row
           });
         });
@@ -99,54 +120,56 @@ app.get("/api/search", async (c) => {
   }
 });
 
-// Benefits CRUD
-app.get("/api/benefits", async (c) => {
-  try {
-    const rows = await queryAll(c.env.DB, "SELECT * FROM benefit");
-    console.log("[benefits] rows:", rows);
-    return c.json(rows);
-  } catch (err) {
-    console.error("[benefits] error:", err);
-    return c.json({ error: "Internal Server Error", details: String(err?.message) }, 500);
-  }
-});
 
-app.get("/api/benefits/:id", async (c) => {
-  const { id } = c.req.param();
-  const rows = await queryAll(c.env.DB, "SELECT * FROM benefit WHERE id = ?", [id]);
-  if (!rows.length) return c.json({ error: "Not found" }, 404);
-  return c.json(rows[0]);
-});
-
-app.post("/api/benefits", async (c) => {
-  const body = await c.req.json();
-  const keys = Object.keys(body);
-  const values = Object.values(body);
-  if (!keys.length) return c.json({ error: "No data" }, 400);
-  const placeholders = keys.map(() => "?").join(", ");
-  await run(
-    c.env.DB,
-  `INSERT INTO benefit (${keys.join(", ")}) VALUES (${placeholders})`,
-    values
-  );
-  return c.json({ success: true });
-});
-
-app.put("/api/benefits/:id", async (c) => {
-  const { id } = c.req.param();
-  const body = await c.req.json();
-  const keys = Object.keys(body);
-  const values = Object.values(body);
-  if (!keys.length) return c.json({ error: "No fields provided" }, 400);
-  const assignments = keys.map((k) => `${k} = ?`).join(", ");
-  await run(c.env.DB, `UPDATE benefit SET ${assignments} WHERE id = ?`, [...values, id]);
-  return c.json({ success: true });
-});
-
-app.delete("/api/benefits/:id", async (c) => {
-  const { id } = c.req.param();
-  await run(c.env.DB, "DELETE FROM benefit WHERE id = ?", [id]);
-  return c.json({ success: true });
-});
+// Generic CRUD for all entities
+for (const ent of ALL_ENTITIES) {
+  // List all
+  app.get(`/api/${ent}`, async (c) => {
+    try {
+      const rows = await queryAll(c.env.DB, `SELECT * FROM ${ent}`);
+      return c.json(rows);
+    } catch (err) {
+      return c.json({ error: "Internal Server Error", details: String(err?.message) }, 500);
+    }
+  });
+  // Get by id
+  app.get(`/api/${ent}/:id`, async (c) => {
+    const { id } = c.req.param();
+    const rows = await queryAll(c.env.DB, `SELECT * FROM ${ent} WHERE id = ?`, [id]);
+    if (!rows.length) return c.json({ error: "Not found" }, 404);
+    return c.json(rows[0]);
+  });
+  // Create
+  app.post(`/api/${ent}`, async (c) => {
+    const body = await c.req.json();
+    const keys = Object.keys(body);
+    const values = Object.values(body);
+    if (!keys.length) return c.json({ error: "No data" }, 400);
+    const placeholders = keys.map(() => "?").join(", ");
+    await run(
+      c.env.DB,
+      `INSERT INTO ${ent} (${keys.join(", ")}) VALUES (${placeholders})`,
+      values
+    );
+    return c.json({ success: true });
+  });
+  // Update
+  app.put(`/api/${ent}/:id`, async (c) => {
+    const { id } = c.req.param();
+    const body = await c.req.json();
+    const keys = Object.keys(body);
+    const values = Object.values(body);
+    if (!keys.length) return c.json({ error: "No fields provided" }, 400);
+    const assignments = keys.map((k) => `${k} = ?`).join(", ");
+    await run(c.env.DB, `UPDATE ${ent} SET ${assignments} WHERE id = ?`, [...values, id]);
+    return c.json({ success: true });
+  });
+  // Delete
+  app.delete(`/api/${ent}/:id`, async (c) => {
+    const { id } = c.req.param();
+    await run(c.env.DB, `DELETE FROM ${ent} WHERE id = ?`, [id]);
+    return c.json({ success: true });
+  });
+}
 
 export default app;

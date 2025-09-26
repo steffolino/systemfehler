@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { searchEntries } from '~/composables/useSearch'
+import { useSearch } from '~/composables/useSearch'
 import HeroBurst from '~/components/global/HeroBurst.vue'
 import { useSearchFilterStore } from '@/stores/searchFilter'
 
@@ -14,8 +14,9 @@ const topic = computed(() => filterStore.topic)
 async function runSearch() {
   loading.value = true
   try {
-    const result = await searchEntries({ q: q.value, topic: topic.value, limit: 10 })
-    hits.value = result && Array.isArray(result.results) ? result.results : []
+    const { results } = useSearch({ q: q.value, topic: topic.value, limit: 10 })
+    // results ist ein Ref, aber useSearch ruft search() sofort auf, daher kann direkt übernommen werden
+    hits.value = results.value
   } finally {
     loading.value = false
   }

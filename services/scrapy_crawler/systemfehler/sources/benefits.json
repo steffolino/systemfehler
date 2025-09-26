@@ -1,0 +1,203 @@
+[
+    {
+        "domain": "arbeitsagentur.de",
+        "seed_urls": [
+            "https://www.arbeitsagentur.de/buergergeld",
+            "https://www.arbeitsagentur.de/familie-und-kinder"
+        ],
+        "lang": "de",
+        "category": "benefit",
+        "keywords": [
+            "Bürgergeld",
+            "Arbeitslosengeld",
+            "ALG I",
+            "ALG II",
+            "Grundsicherung",
+            "Kindergeld",
+            "Kinderzuschlag",
+            "Sozialleistungen",
+            "Förderung",
+            "Unterstützung"
+        ]
+    },
+    {
+        "domain": "bmfsfj.de",
+        "seed_urls": [
+            "https://www.bmfsfj.de/bmfsfj/themen/leistungen-und-gesetze"
+        ],
+        "lang": "de",
+        "category": "benefit",
+        "keywords": [
+            "Familienleistungen",
+            "Elterngeld",
+            "Elternzeit",
+            "Unterstützung",
+            "Zuschüsse",
+            "Pflegeleistungen",
+            "Mutterschaftsgeld",
+            "Betreuungsgeld",
+            "Sozialhilfe",
+            "Förderprogramme"
+        ]
+    },
+    {
+        "domain": "drv.de",
+        "seed_urls": [
+            "https://www.drv.de/DE/Home/home_node.html"
+        ],
+        "lang": "de",
+        "category": "benefit",
+        "keywords": [
+            "Rente",
+            "Rentenversicherung",
+            "Erwerbsminderungsrente",
+            "Altersrente",
+            "Reha",
+            "Zuschüsse",
+            "Hinterbliebenenrente",
+            "Rentenantrag",
+            "Beitragszeiten",
+            "Soziale Sicherheit"
+        ]
+    },
+    {
+        "domain": "kinderzuschlag.de",
+        "seed_urls": [
+            "https://www.kinderzuschlag.de/de"
+        ],
+        "lang": "de",
+        "category": "benefit",
+        "keywords": [
+            "Kinderzuschlag",
+            "Familienleistungen",
+            "Aufstockung",
+            "Finanzhilfe",
+            "Kindergeld-Ergänzung",
+            "Sozialleistungen",
+            "Bedarfsgemeinschaft",
+            "Unterstützung",
+            "Kinderarmut",
+            "Förderung"
+        ]
+    },
+    {
+        "domain": "wohngeld.de",
+        "seed_urls": [
+            "https://www.wohngeld.de/"
+        ],
+        "lang": "de",
+        "category": "benefit",
+        "keywords": [
+            "Wohngeld",
+            "Mietzuschuss",
+            "Lastenzuschuss",
+            "Wohnkostenhilfe",
+            "Miete",
+            "Sozialleistungen",
+            "Wohnförderung",
+            "Haushaltseinkommen",
+            "Antrag Wohngeld",
+            "Wohnkostenentlastung"
+        ]
+    },
+    {
+        "domain": "kindergeld.org",
+        "seed_urls": [
+            "https://www.kindergeld.org/"
+        ],
+        "lang": "de",
+        "category": "benefit",
+        "keywords": [
+            "Kindergeld",
+            "Kinderbonus",
+            "Kinderfreibetrag",
+            "Familienleistungen",
+            "Elterngeld",
+            "Unterstützung",
+            "Familienförderung",
+            "Kinderzuschlag",
+            "Sozialleistungen",
+            "Kinderhilfe"
+        ]
+    },
+    {
+        "domain": "bmas.de",
+        "seed_urls": [
+            "https://www.bmas.de/DE/Soziales/soziale-Entgeltersatzleistungen/inhalt.html"
+        ],
+        "lang": "de",
+        "category": "benefit",
+        "keywords": [
+            "Sozialleistungen",
+            "Grundsicherung",
+            "Bürgergeld",
+            "Sozialhilfe",
+            "Arbeitsförderung",
+            "Kurzarbeitergeld",
+            "Krankengeld",
+            "Übergangsgeld",
+            "Behindertenhilfe",
+            "Entgeltersatzleistungen"
+        ]
+    },
+    {
+        "domain": "l-bank.de",
+        "seed_urls": [
+            "https://www.l-bank.de/de/privatpersonen/Familienfoerderung.html"
+        ],
+        "lang": "de",
+        "category": "benefit",
+        "keywords": [
+            "Landesleistungen",
+            "Familienförderung",
+            "Zuschüsse",
+            "Förderprogramme",
+            "Wohnbauförderung",
+            "Elternförderung",
+            "Finanzielle Unterstützung",
+            "Kinderförderung",
+            "Sozialleistungen",
+            "Förderdarlehen"
+        ]
+    },
+    {
+        "domain": "stmas.bayern.de",
+        "seed_urls": [
+            "https://www.stmas.bayern.de/familie/leistungen/index.php"
+        ],
+        "lang": "de",
+        "category": "benefit",
+        "keywords": [
+            "Familiengeld",
+            "Landesleistungen",
+            "Unterstützung",
+            "Betreuungsgeld",
+            "Kinderzuschuss",
+            "Sozialleistungen",
+            "Zuschüsse",
+            "Hilfen",
+            "Förderung",
+            "Finanzielle Hilfe"
+        ]
+    },
+    {
+        "domain": "familienkasse.de",
+        "seed_urls": [
+            "https://www.familienkasse.de/"
+        ],
+        "lang": "de",
+        "category": "benefit",
+        "keywords": [
+            "Kindergeld",
+            "Kinderzuschlag",
+            "Familienleistungen",
+            "Unterstützung",
+            "Kinderbonus",
+            "Familienförderung",
+            "Zuschüsse",
+            "Sozialleistungen",
+            "Kinderhilfe",
+            "Finanzielle Unterstützung"
+        ]
+    }
+]
