@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "systemfehler",
+			"path": "../../systemfehler"
+		},
+		{
+			"name": "docs",
+			"path": "../../docs"
+		},
+		{
+			"name": ".github",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}

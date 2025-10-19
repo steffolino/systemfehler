@@ -1,0 +1,22 @@
+name: Docs checks
+on:
+  pull_request:
+    paths: ["docs/**", "PROJECT_PLAN.md", ".github/**"]
+  push:
+    branches: ["main"]
+    paths: ["docs/**", "PROJECT_PLAN.md", ".github/**"]
+jobs:
+  markdownlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: avto-dev/markdown-lint@v1
+        with:
+          config: ""
+  linkcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --exclude-mail --max-concurrency 4 "docs/**/*.md" "PROJECT_PLAN.md"
