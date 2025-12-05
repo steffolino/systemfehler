@@ -1,0 +1,38 @@
+{
+  "name": "systemfehler",
+  "version": "0.1.0",
+  "description": "Modular, extensible, preservation-oriented data platform for social services in Germany",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "validate": "node scripts/validate_entries.js",
+    "score": "node scripts/calculate_quality_scores.js",
+    "diff": "node scripts/generate_diff.js",
+    "report:temporal": "node scripts/export_temporal_view.js",
+    "report:languages": "node scripts/report_language_coverage.js",
+    "crawl:benefits": "node services/benefits/crawler/index.js",
+    "crawl:aid": "node services/aid/crawler/index.js",
+    "crawl:tools": "node services/tools/crawler/index.js",
+    "crawl:organizations": "node services/organizations/crawler/index.js",
+    "crawl:contacts": "node services/contacts/crawler/index.js",
+    "dashboard": "echo 'Open moderation/dashboard/index.html in a browser'"
+  },
+  "keywords": [
+    "social-services",
+    "germany",
+    "benefits",
+    "open-data",
+    "preservation",
+    "accessibility"
+  ],
+  "author": "",
+  "license": "SEE LICENSE FILE",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "_todo": [
+    "TODO: Add dependencies as needed (e.g., ajv for JSON schema validation)",
+    "TODO: Add test framework configuration",
+    "TODO: Add linting configuration"
+  ]
+}

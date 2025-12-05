@@ -1,0 +1,10 @@
+{
+  "domain": "tools",
+  "version": "0.1.0",
+  "sources": [],
+  "_todo": [
+    "TODO: Add extraction rules for tools and calculator pages",
+    "TODO: Define field mappings to tools.schema.json"
+  ],
+  "extractionRules": {}
+}

@@ -1,0 +1,12 @@
+{
+  "version": "0.1.0",
+  "description": "Source reliability tracking and monitoring data",
+  "reliabilityScores": {},
+  "lastUpdated": null,
+  "_todo": [
+    "TODO: Implement reliability scoring algorithm per CRAWL-05 (Issue #29)",
+    "TODO: Add automated monitoring for source availability",
+    "TODO: Generate alerts for degraded sources",
+    "TODO: Track success rates, timeouts, and structural changes"
+  ]
+}

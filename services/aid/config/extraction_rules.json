@@ -1,0 +1,10 @@
+{
+  "domain": "aid",
+  "version": "0.1.0",
+  "sources": [],
+  "_todo": [
+    "TODO: Add extraction rules for aid program pages",
+    "TODO: Define field mappings to aid.schema.json"
+  ],
+  "extractionRules": {}
+}

@@ -1,0 +1,65 @@
+{
+  "version": "0.1.0",
+  "description": "Topic taxonomy for classifying social services entries",
+  "topics": [
+    {
+      "id": "financial_support",
+      "label": {
+        "de": "Finanzielle Unterstützung",
+        "en": "Financial Support",
+        "easy_de": "Geld-Hilfe"
+      },
+      "children": []
+    },
+    {
+      "id": "housing",
+      "label": {
+        "de": "Wohnen",
+        "en": "Housing",
+        "easy_de": "Wohnung"
+      },
+      "children": []
+    },
+    {
+      "id": "healthcare",
+      "label": {
+        "de": "Gesundheit",
+        "en": "Healthcare",
+        "easy_de": "Gesundheit"
+      },
+      "children": []
+    },
+    {
+      "id": "employment",
+      "label": {
+        "de": "Arbeit",
+        "en": "Employment",
+        "easy_de": "Arbeit"
+      },
+      "children": []
+    },
+    {
+      "id": "family",
+      "label": {
+        "de": "Familie",
+        "en": "Family",
+        "easy_de": "Familie"
+      },
+      "children": []
+    },
+    {
+      "id": "education",
+      "label": {
+        "de": "Bildung",
+        "en": "Education",
+        "easy_de": "Lernen und Schule"
+      },
+      "children": []
+    }
+  ],
+  "_todo": [
+    "TODO: Expand topic hierarchy based on domain analysis",
+    "TODO: Add topic validation in DATA-05 (Issue #28)",
+    "TODO: Ensure taxonomy alignment with quality scoring per QUALITY-01 (Issue #21)"
+  ]
+}

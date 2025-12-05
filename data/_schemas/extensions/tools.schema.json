@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://systemfehler.github.io/schemas/extensions/tools.schema.json",
+  "title": "Systemfehler Tools Extension Schema",
+  "description": "Extension schema for tool and calculator attributes. Extends core schema.",
+  "version": "0.1.0",
+  "type": "object",
+  "allOf": [
+    { "$ref": "../core.schema.json" }
+  ],
+  "properties": {
+    "toolType": {
+      "type": "string",
+      "description": "Type of tool (calculator, form, checklist, etc.)"
+    },
+    "relatedBenefits": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "References to related benefit entries"
+    },
+    "accessibility": {
+      "type": "object",
+      "properties": {
+        "languages": { "type": "array", "items": { "type": "string" } },
+        "screenReaderCompatible": { "type": "boolean" }
+      }
+    }
+  },
+  "_todo": [
+    "TODO: Define tool classification taxonomy per DATA-02 (Issue #8)",
+    "TODO: Add accessibility metadata validation"
+  ]
+}

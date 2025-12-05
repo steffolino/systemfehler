@@ -1,0 +1,4 @@
+{"_comment": "Systemfehler Audit Log - JSON Lines format"}
+{"_schema": "Each line is a JSON object representing one moderation action"}
+{"_fields": {"timestamp": "ISO datetime", "action": "approve|reject|defer|flag", "entryId": "Entry ID", "queueId": "Queue entry ID", "moderator": "Moderator ID", "reason": "Optional reason", "diff": "Optional diff summary"}}
+{"_todo": ["TODO: Implement audit logging per MOD-01 (Issue #18)", "TODO: Add dashboard audit log viewer per MOD-03 (Issue #20)"]}

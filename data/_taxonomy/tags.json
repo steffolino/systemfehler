@@ -1,0 +1,15 @@
+{
+  "version": "0.1.0",
+  "description": "Tags taxonomy for additional classification of entries",
+  "tags": [
+    { "id": "urgent", "label": { "de": "Dringend", "en": "Urgent" } },
+    { "id": "time_limited", "label": { "de": "Zeitlich begrenzt", "en": "Time-limited" } },
+    { "id": "means_tested", "label": { "de": "Einkommensabhängig", "en": "Means-tested" } },
+    { "id": "application_required", "label": { "de": "Antrag erforderlich", "en": "Application required" } },
+    { "id": "automatic", "label": { "de": "Automatisch", "en": "Automatic" } }
+  ],
+  "_todo": [
+    "TODO: Expand tags based on crawler output analysis",
+    "TODO: Add tag validation in schema validation pipeline"
+  ]
+}

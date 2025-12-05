@@ -1,0 +1,10 @@
+{
+  "domain": "organizations",
+  "version": "0.1.0",
+  "sources": [],
+  "_todo": [
+    "TODO: Add extraction rules for organization pages",
+    "TODO: Define field mappings to organizations.schema.json"
+  ],
+  "extractionRules": {}
+}

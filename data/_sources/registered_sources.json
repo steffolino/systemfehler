@@ -1,0 +1,31 @@
+{
+  "version": "0.1.0",
+  "description": "Registry of known data sources for crawling",
+  "sources": [
+    {
+      "id": "arbeitsagentur",
+      "name": "Bundesagentur für Arbeit",
+      "baseUrl": "https://www.arbeitsagentur.de",
+      "domains": ["benefits", "tools"],
+      "languages": ["de", "en"],
+      "priority": "high",
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "bmfsfj",
+      "name": "Bundesministerium für Familie, Senioren, Frauen und Jugend",
+      "baseUrl": "https://www.bmfsfj.de",
+      "domains": ["benefits", "aid"],
+      "languages": ["de"],
+      "priority": "high",
+      "license": "unknown",
+      "status": "active"
+    }
+  ],
+  "_todo": [
+    "TODO: Add more government and NGO sources",
+    "TODO: Verify license status for each source",
+    "TODO: Implement source registration workflow per CRAWL-05 (Issue #29)"
+  ]
+}

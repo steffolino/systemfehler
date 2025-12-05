@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://systemfehler.github.io/schemas/extensions/contacts.schema.json",
+  "title": "Systemfehler Contacts Extension Schema",
+  "description": "Extension schema for contact and advisor attributes. Extends core schema.",
+  "version": "0.1.0",
+  "type": "object",
+  "allOf": [
+    { "$ref": "../core.schema.json" }
+  ],
+  "properties": {
+    "contactType": {
+      "type": "string",
+      "description": "Type of contact (helpline, advisor, office, etc.)"
+    },
+    "specialization": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Areas of specialization"
+    },
+    "availability": {
+      "type": "object",
+      "properties": {
+        "hours": { "type": "string" },
+        "languages": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "linkedOrganization": {
+      "type": "string",
+      "description": "Reference to parent organization"
+    }
+  },
+  "_todo": [
+    "TODO: Define contact type taxonomy per DATA-02 (Issue #8)",
+    "TODO: Add language availability validation"
+  ]
+}
