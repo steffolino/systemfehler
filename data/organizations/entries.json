@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0",
+  "domain": "organizations",
+  "entries": [],
+  "_todo": [
+    "TODO: Populate with crawled and moderated organization entries",
+    "TODO: Validate against organizations.schema.json per DATA-05 (Issue #28)"
+  ]
+}

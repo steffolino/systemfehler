@@ -1,0 +1,10 @@
+{
+  "version": "0.1.0",
+  "domain": "benefits",
+  "urls": [],
+  "_todo": [
+    "TODO: Add seed URLs for benefit crawling per CRAWL-02 (Issue #5)",
+    "TODO: Implement URL canonicalization per CRAWL-06 (Issue #30)",
+    "TODO: URLs should be discovered via link expansion per CRAWL-03 (Issue #6)"
+  ]
+}

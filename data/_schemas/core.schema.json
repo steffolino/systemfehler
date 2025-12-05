@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://systemfehler.github.io/schemas/core.schema.json",
+  "title": "Systemfehler Core Schema",
+  "description": "Core schema for unified social-services entries. All domain entries inherit from this schema.",
+  "version": "0.1.0",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Persistent unique identifier"
+    },
+    "title": {
+      "$ref": "#/definitions/multilingualText",
+      "description": "Display title in multiple languages"
+    },
+    "summary": {
+      "$ref": "#/definitions/multilingualText",
+      "description": "Short description in multiple languages"
+    },
+    "content": {
+      "$ref": "#/definitions/multilingualText",
+      "description": "Main extracted text content"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Primary source URL"
+    },
+    "topics": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Normalized taxonomy topic terms"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Additional classification tags"
+    },
+    "targetGroups": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Target audience groups"
+    },
+    "validFrom": {
+      "type": "string",
+      "format": "date",
+      "description": "Start date of validity (ISO 8601)"
+    },
+    "validUntil": {
+      "type": "string",
+      "format": "date",
+      "description": "End date of validity (ISO 8601)"
+    },
+    "deadline": {
+      "type": "string",
+      "format": "date",
+      "description": "Application or action deadline (ISO 8601)"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "discontinued", "archived", "under_revision"],
+      "description": "Current lifecycle status"
+    },
+    "firstSeen": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when entry was first crawled"
+    },
+    "lastSeen": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when entry was last seen in source"
+    },
+    "sourceUnavailable": {
+      "type": "boolean",
+      "description": "True if source is no longer accessible"
+    },
+    "provenance": {
+      "$ref": "#/definitions/provenance",
+      "description": "Data origin and tracking metadata"
+    },
+    "qualityScores": {
+      "$ref": "#/definitions/qualityScores",
+      "description": "Computed quality and AI searchability scores"
+    }
+  },
+  "required": ["id", "title", "url", "status", "provenance"],
+  "definitions": {
+    "multilingualText": {
+      "type": "object",
+      "properties": {
+        "de": { "type": "string", "description": "German text" },
+        "en": { "type": "string", "description": "English text" },
+        "easy_de": { "type": "string", "description": "Easy German (Leichte Sprache)" }
+      },
+      "additionalProperties": { "type": "string" }
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "source": { "type": "string", "description": "Source domain or organization" },
+        "crawlId": { "type": "string", "description": "Identifier of the crawl run" },
+        "checksum": { "type": "string", "description": "Content checksum for change detection" },
+        "crawledAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["source", "crawledAt"]
+    },
+    "qualityScores": {
+      "type": "object",
+      "properties": {
+        "iqs": { "type": "number", "minimum": 0, "maximum": 100, "description": "Information Quality Score" },
+        "ais": { "type": "number", "minimum": 0, "maximum": 100, "description": "AI Searchability Score" },
+        "computedAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "_todo": [
+    "TODO: Finalize field definitions per DATA-01 (Issue #7)",
+    "TODO: Add deadline and validity field validation per TIME-01 (Issue #24)",
+    "TODO: Add multilingual structure validation per LANG-01",
+    "TODO: Implement CI validation enforcement per DATA-05 (Issue #28)"
+  ]
+}

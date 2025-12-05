@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0",
+  "domain": "contacts",
+  "entries": [],
+  "_todo": [
+    "TODO: Populate with crawled and moderated contact entries",
+    "TODO: Validate against contacts.schema.json per DATA-05 (Issue #28)"
+  ]
+}

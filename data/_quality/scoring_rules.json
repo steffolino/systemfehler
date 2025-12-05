@@ -1,0 +1,52 @@
+{
+  "version": "0.1.0",
+  "description": "Scoring rules for Information Quality Score (IQS) and AI Searchability Score (AIS)",
+  "iqs": {
+    "description": "Information Quality Score - measures completeness, freshness, provenance, and field coverage",
+    "components": {
+      "completeness": {
+        "weight": 0.3,
+        "description": "Percentage of required and recommended fields populated"
+      },
+      "freshness": {
+        "weight": 0.25,
+        "description": "Recency of last update and source verification"
+      },
+      "provenance": {
+        "weight": 0.2,
+        "description": "Quality and reliability of source attribution"
+      },
+      "coverage": {
+        "weight": 0.25,
+        "description": "Presence of key information (eligibility, deadlines, amounts)"
+      }
+    }
+  },
+  "ais": {
+    "description": "AI Searchability Score - measures suitability for LLM retrieval and reasoning",
+    "components": {
+      "structure": {
+        "weight": 0.3,
+        "description": "Well-defined fields and explicit metadata"
+      },
+      "clarity": {
+        "weight": 0.25,
+        "description": "Clear, unambiguous language in descriptions"
+      },
+      "languageCoverage": {
+        "weight": 0.25,
+        "description": "Availability in multiple languages including Easy German"
+      },
+      "metadataRichness": {
+        "weight": 0.2,
+        "description": "Presence of topics, tags, and target groups"
+      }
+    }
+  },
+  "_todo": [
+    "TODO: Define scoring formula per QUALITY-01 (Issue #21)",
+    "TODO: Implement scoring calculator per QUALITY-02 (Issue #22)",
+    "TODO: Calibrate weights based on real data analysis",
+    "TODO: Add score visualization to moderation dashboard per QUALITY-03 (Issue #23)"
+  ]
+}

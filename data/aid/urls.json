@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0",
+  "domain": "aid",
+  "urls": [],
+  "_todo": [
+    "TODO: Add seed URLs for aid program crawling",
+    "TODO: Implement URL canonicalization per CRAWL-06 (Issue #30)"
+  ]
+}

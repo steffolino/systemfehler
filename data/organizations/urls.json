@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0",
+  "domain": "organizations",
+  "urls": [],
+  "_todo": [
+    "TODO: Add seed URLs for organization directories",
+    "TODO: Implement URL canonicalization per CRAWL-06 (Issue #30)"
+  ]
+}

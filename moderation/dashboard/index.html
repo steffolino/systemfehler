@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Systemfehler - Moderation Dashboard</title>
+  <style>
+    /* TODO: Add proper styling per MOD-03 (Issue #20) */
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    header {
+      background: #1a1a2e;
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .queue-container {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .queue-item {
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 15px;
+      margin-bottom: 10px;
+    }
+    .todo-notice {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 4px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🔍 Systemfehler Moderation Dashboard</h1>
+    <p>Review and approve data changes before publication</p>
+  </header>
+
+  <div class="todo-notice">
+    <strong>⚠️ TODO: Implement dashboard features per MOD-03 (Issue #20)</strong>
+    <ul>
+      <li>Load and display review_queue.json</li>
+      <li>Show diffs in readable layout per MOD-02 (Issue #19)</li>
+      <li>Display metadata and provenance for each item</li>
+      <li>Implement approve, reject, and skip actions</li>
+      <li>Display quality scores per QUALITY-03 (Issue #23)</li>
+      <li>Add audit log integration</li>
+    </ul>
+  </div>
+
+  <main class="queue-container">
+    <h2>📋 Review Queue</h2>
+    <p id="queue-status">Loading queue...</p>
+    
+    <div id="queue-items">
+      <!-- Queue items will be loaded here -->
+    </div>
+  </main>
+
+  <script>
+    /**
+     * TODO: Implement the following per MOD-03 (Issue #20):
+     * 
+     * 1. Queue Loading
+     *    - Fetch review_queue.json
+     *    - Parse and display queue items
+     *    - Sort by priority and creation date
+     * 
+     * 2. Diff Display
+     *    - Render field-level diffs
+     *    - Highlight additions, removals, changes
+     *    - Support nested and multilingual fields
+     * 
+     * 3. Review Actions
+     *    - Approve: Move entry to final data
+     *    - Reject: Remove from queue with reason
+     *    - Defer: Keep in queue for later review
+     *    - Flag: Mark for additional attention
+     * 
+     * 4. Audit Logging
+     *    - Record all actions in audit_log.jsonl
+     *    - Include moderator, timestamp, reason
+     * 
+     * 5. Quality Display
+     *    - Show IQS and AIS scores
+     *    - Color-code low-quality entries
+     *    - Add tooltips explaining score components
+     */
+
+    async function loadQueue() {
+      try {
+        // For now, display placeholder message
+        document.getElementById('queue-status').textContent = 
+          'Queue functionality not yet implemented. See MOD-03 (Issue #20).';
+        document.getElementById('queue-items').innerHTML = `
+          <div class="queue-item">
+            <p><em>No items in queue. Crawler output will appear here after implementation.</em></p>
+          </div>
+        `;
+      } catch (error) {
+        document.getElementById('queue-status').textContent = 
+          'Error loading queue: ' + error.message;
+      }
+    }
+
+    // Initialize dashboard when DOM is ready
+    document.addEventListener('DOMContentLoaded', loadQueue);
+  </script>
+</body>
+</html>

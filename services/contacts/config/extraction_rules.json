@@ -1,0 +1,10 @@
+{
+  "domain": "contacts",
+  "version": "0.1.0",
+  "sources": [],
+  "_todo": [
+    "TODO: Add extraction rules for contact and helpline pages",
+    "TODO: Define field mappings to contacts.schema.json"
+  ],
+  "extractionRules": {}
+}
