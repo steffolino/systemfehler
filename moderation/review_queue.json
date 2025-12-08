@@ -1,0 +1,38 @@
+{
+  "version": "0.1.0",
+  "description": "Moderation queue for reviewing proposed entry changes",
+  "queue": [],
+  "_schema": {
+    "description": "Schema for moderation queue entries per MOD-01 (Issue #18)",
+    "entry": {
+      "id": "Unique queue entry identifier",
+      "entryId": "Target entry ID (if updating existing)",
+      "domain": "Target domain (benefits, aid, tools, etc.)",
+      "action": "create | update | delete",
+      "status": "pending | approved | rejected | deferred",
+      "proposedData": "New entry data conforming to domain schema",
+      "currentData": "Existing entry data (if update)",
+      "diff": "Structured diff showing changes per MOD-02 (Issue #19)",
+      "provenance": {
+        "crawlId": "ID of the crawl run",
+        "source": "Source URL or domain",
+        "crawledAt": "ISO timestamp of crawl",
+        "crawler": "Crawler identifier"
+      },
+      "metadata": {
+        "priority": "high | medium | low",
+        "flags": "Array of warning flags",
+        "qualityScores": "Pre-computed quality scores"
+      },
+      "createdAt": "ISO timestamp",
+      "reviewedAt": "ISO timestamp (when reviewed)",
+      "reviewedBy": "Moderator identifier"
+    }
+  },
+  "_todo": [
+    "TODO: Define complete moderation queue schema per MOD-01 (Issue #18)",
+    "TODO: Implement diff generation per MOD-02 (Issue #19)",
+    "TODO: Add quality score integration per QUALITY-03 (Issue #23)",
+    "TODO: Connect to dashboard UI per MOD-03 (Issue #20)"
+  ]
+}

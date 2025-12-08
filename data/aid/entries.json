@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0",
+  "domain": "aid",
+  "entries": [],
+  "_todo": [
+    "TODO: Populate with crawled and moderated aid entries",
+    "TODO: Validate against aid.schema.json per DATA-05 (Issue #28)"
+  ]
+}

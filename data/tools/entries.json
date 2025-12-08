@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0",
+  "domain": "tools",
+  "entries": [],
+  "_todo": [
+    "TODO: Populate with crawled and moderated tool entries",
+    "TODO: Validate against tools.schema.json per DATA-05 (Issue #28)"
+  ]
+}

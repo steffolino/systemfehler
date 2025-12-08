@@ -1,0 +1,23 @@
+{
+  "domain": "benefits",
+  "version": "0.1.0",
+  "sources": [],
+  "_todo": [
+    "TODO: Add extraction rules per source per CRAWL-07 (Issue #31)",
+    "TODO: Define CSS selectors and XPath for benefit pages",
+    "TODO: Include field mappings to benefits.schema.json"
+  ],
+  "extractionRules": {
+    "_example": {
+      "domain": "example.gov.de",
+      "titleSelector": "h1.title",
+      "contentSelector": ".main-content",
+      "amountSelector": ".benefit-amount",
+      "deadlineSelector": ".deadline-info",
+      "languagePatterns": {
+        "de": "/de/",
+        "en": "/en/"
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "version": "0.1.0",
+  "description": "Target groups taxonomy for audience classification",
+  "targetGroups": [
+    {
+      "id": "unemployed",
+      "label": { "de": "Arbeitslose", "en": "Unemployed", "easy_de": "Menschen ohne Arbeit" }
+    },
+    {
+      "id": "families",
+      "label": { "de": "Familien", "en": "Families", "easy_de": "Familien" }
+    },
+    {
+      "id": "single_parents",
+      "label": { "de": "Alleinerziehende", "en": "Single parents", "easy_de": "Allein-Erziehende" }
+    },
+    {
+      "id": "seniors",
+      "label": { "de": "Senioren", "en": "Seniors", "easy_de": "Ältere Menschen" }
+    },
+    {
+      "id": "students",
+      "label": { "de": "Studierende", "en": "Students", "easy_de": "Studenten" }
+    },
+    {
+      "id": "refugees",
+      "label": { "de": "Geflüchtete", "en": "Refugees", "easy_de": "Geflüchtete" }
+    },
+    {
+      "id": "disabled",
+      "label": { "de": "Menschen mit Behinderung", "en": "People with disabilities", "easy_de": "Menschen mit Behinderung" }
+    }
+  ],
+  "_todo": [
+    "TODO: Expand target groups based on benefit eligibility analysis",
+    "TODO: Add intersection support for multiple target groups"
+  ]
+}
