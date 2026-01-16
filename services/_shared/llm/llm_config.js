@@ -21,8 +21,6 @@
  */
 
 import { config } from 'dotenv';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
 
 // Load environment variables from .env file
 // LEARNING NOTE: dotenv reads your .env file and adds variables to process.env

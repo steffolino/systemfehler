@@ -66,7 +66,6 @@ import {
 } from './token_utils.js';
 import fs from 'fs/promises';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
 // ============================================================================
 // CUSTOM ERROR CLASSES
@@ -1202,6 +1201,10 @@ export class LLMClient {
             if (delta?.content) {
               const content = delta.content;
               fullContent += content;
+              
+              // NOTE: Token counting in streams is approximate
+              // We increment per chunk, but chunks don't always equal 1 token
+              // Accurate count is calculated at the end using tiktoken
               outputTokens++; // Approximate - we'll get exact count at end
 
               // Yield chunk to caller

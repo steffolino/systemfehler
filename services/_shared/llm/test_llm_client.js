@@ -86,7 +86,7 @@ async function testStatusReporting() {
     console.log(`   OpenAI configured: ${status.configured.openai}`);
     console.log(`   Mock mode: ${status.configured.mockMode}`);
     console.log(`   Default model: ${status.models.default}`);
-    console.log(`   Rate limit - Available: ${status.rateLimit.minuteTokensAvailable} requests/min`);
+    console.log(`   Rate limit - Available: ${status.rateLimit.minuteTokensAvailable} tokens`);
     console.log(`   Rate limit - Concurrent: ${status.rateLimit.currentConcurrent}/${status.rateLimit.maxConcurrent}`);
     console.log(`   Daily cost: ${status.costs.daily}`);
     console.log(`   Monthly cost: ${status.costs.monthly}`);

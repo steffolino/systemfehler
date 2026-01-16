@@ -381,6 +381,8 @@ export function getRemainingTokens(usedTokens, modelName = llmConfig.models.defa
   // Context window sizes for different models
   // LEARNING NOTE: These limits change as OpenAI releases new models
   // Always check official documentation for current limits
+  // Last updated: January 2024
+  // Reference: https://platform.openai.com/docs/models
   const contextWindows = {
     'gpt-4o': 128000,
     'gpt-4o-mini': 128000,
