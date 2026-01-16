@@ -19,7 +19,7 @@ console.log('🧪 Testing LLM Client Module\n');
 
 async function testMockMode() {
   console.log('1️⃣  Testing Mock Mode');
-  console.log('=' .repeat(50));
+  console.log('='.repeat(50));
   
   try {
     // Create client in mock mode
@@ -49,7 +49,7 @@ async function testMockMode() {
 
 async function testErrorHandling() {
   console.log('2️⃣  Testing Error Classes');
-  console.log('=' .repeat(50));
+  console.log('='.repeat(50));
   
   // Test custom error types
   try {
@@ -77,7 +77,7 @@ async function testErrorHandling() {
 
 async function testStatusReporting() {
   console.log('3️⃣  Testing Status Reporting');
-  console.log('=' .repeat(50));
+  console.log('='.repeat(50));
   
   try {
     const status = await getStatus();
@@ -99,7 +99,7 @@ async function testStatusReporting() {
 
 async function testConvenienceFunctions() {
   console.log('4️⃣  Testing Convenience Functions');
-  console.log('=' .repeat(50));
+  console.log('='.repeat(50));
   
   try {
     const messages = [
@@ -122,7 +122,7 @@ async function testConvenienceFunctions() {
 
 async function testMultipleCalls() {
   console.log('5️⃣  Testing Rate Limiting with Multiple Calls');
-  console.log('=' .repeat(50));
+  console.log('='.repeat(50));
   
   try {
     const client = new LLMClient();
@@ -158,7 +158,7 @@ async function runTests() {
     await testConvenienceFunctions();
     await testMultipleCalls();
     
-    console.log('=' .repeat(50));
+    console.log('='.repeat(50));
     console.log('✅ All tests completed!');
     console.log('\n💡 Tips:');
     console.log('   - Set USE_MOCK_LLM=false to test with real API');

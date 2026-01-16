@@ -69,7 +69,7 @@ Tokens are the basic units LLMs process. Understanding tokens is crucial for:
 - **Speed**: More tokens = slower responses
 
 ```javascript
-import { countTokens, countMessageTokens } from './llm_client.js';
+import { countTokens, countMessageTokens } from './token_utils.js';
 
 const text = "Hello, world!";
 console.log(countTokens(text)); // 4 tokens
