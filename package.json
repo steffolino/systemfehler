@@ -15,7 +15,13 @@
     "crawl:tools": "node services/tools/crawler/index.js",
     "crawl:organizations": "node services/organizations/crawler/index.js",
     "crawl:contacts": "node services/contacts/crawler/index.js",
-    "dashboard": "echo 'Open moderation/dashboard/index.html in a browser'"
+    "dashboard": "echo 'Open moderation/dashboard/index.html in a browser'",
+    "llm:setup": "node scripts/setup_llm.js",
+    "llm:embeddings": "node scripts/generate_embeddings.js",
+    "llm:qa": "node scripts/interactive_qa.js",
+    "llm:translate": "node scripts/generate_easy_german.js",
+    "llm:experiment": "node scripts/llm_experiments.js",
+    "llm:costs": "node scripts/report_llm_costs.js"
   },
   "keywords": [
     "social-services",
@@ -29,6 +35,14 @@
   "license": "SEE LICENSE FILE",
   "engines": {
     "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "openai": "^4.67.3",
+    "tiktoken": "^1.0.18",
+    "mathjs": "^14.0.1",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
   },
   "_todo": [
     "TODO: Add dependencies as needed (e.g., ajv for JSON schema validation)",
