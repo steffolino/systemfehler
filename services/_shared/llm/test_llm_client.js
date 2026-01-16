@@ -14,6 +14,7 @@ import {
   AuthenticationError
 } from './llm_client.js';
 import { formatCost } from './token_utils.js';
+import { llmConfig } from './llm_config.js';
 
 console.log('🧪 Testing LLM Client Module\n');
 
@@ -163,7 +164,7 @@ async function runTests() {
     console.log('\n💡 Tips:');
     console.log('   - Set USE_MOCK_LLM=false to test with real API');
     console.log('   - Set OPENAI_API_KEY in .env to use OpenAI');
-    console.log('   - Check data/_quality/llm_costs.jsonl for cost tracking');
+    console.log(`   - Check ${llmConfig.costs.trackingFile} for cost tracking`);
     
   } catch (error) {
     console.error('❌ Test suite failed:', error);

@@ -1202,10 +1202,11 @@ export class LLMClient {
               const content = delta.content;
               fullContent += content;
               
-              // NOTE: Token counting in streams is approximate
-              // We increment per chunk, but chunks don't always equal 1 token
-              // Accurate count is calculated at the end using tiktoken
-              outputTokens++; // Approximate - we'll get exact count at end
+              // NOTE: Token counting during streaming is intentionally approximate
+              // REASON: Calling tiktoken on every chunk would slow down streaming
+              // SOLUTION: We provide accurate count in the final completion chunk
+              // Each chunk doesn't necessarily equal 1 token - this is just for progress
+              outputTokens++; // Approximate - accurate count provided at end
 
               // Yield chunk to caller
               yield {

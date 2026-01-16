@@ -380,9 +380,9 @@ export function truncateToTokenLimit(
 export function getRemainingTokens(usedTokens, modelName = llmConfig.models.default) {
   // Context window sizes for different models
   // LEARNING NOTE: These limits change as OpenAI releases new models
-  // Always check official documentation for current limits
-  // Last updated: January 2024
-  // Reference: https://platform.openai.com/docs/models
+  // Last updated: January 16, 2024
+  // IMPORTANT: Verify current limits at: https://platform.openai.com/docs/models
+  // Update this table when OpenAI announces changes
   const contextWindows = {
     'gpt-4o': 128000,
     'gpt-4o-mini': 128000,
