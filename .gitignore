@@ -9,3 +9,5 @@ dist/
 data/snapshots/
 *.sqlite
 *.db
+# LLM runtime data
+data/_quality/llm_costs.jsonl

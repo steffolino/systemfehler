@@ -39,10 +39,10 @@
   "dependencies": {
     "openai": "^4.67.3",
     "tiktoken": "^1.0.18",
-    "mathjs": "^14.0.1"
+    "mathjs": "^14.0.1",
+    "dotenv": "^16.4.7"
   },
   "devDependencies": {
-    "anthropic": "^0.32.1"
   },
   "_todo": [
     "TODO: Add dependencies as needed (e.g., ajv for JSON schema validation)",
