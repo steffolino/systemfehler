@@ -1,0 +1,6 @@
+beautifulsoup4==4.12.3
+requests==2.31.0
+lxml==5.1.0
+python-dotenv==1.0.1
+jsonschema==4.21.1
+psycopg2-binary==2.9.9
