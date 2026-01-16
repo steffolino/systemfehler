@@ -11,3 +11,19 @@ data/snapshots/
 *.db
 # LLM runtime data
 data/_quality/llm_costs.jsonl
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+.venv
+*.egg-info/
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+# Database
+postgres_data/
