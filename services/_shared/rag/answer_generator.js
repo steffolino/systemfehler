@@ -219,7 +219,7 @@
  * @see context_builder.js for context formatting
  */
 
-import { generateCompletion } from '../llm/llm_client.js';
+import { createChatCompletion } from '../llm/llm_client.js';
 import { SYSTEM_PROMPTS } from '../llm/prompts.js';
 import { countTokens } from '../llm/token_utils.js';
 
@@ -312,17 +312,19 @@ export async function generateAnswer(question, context, options = {}) {
 
     // Step 2: Generate completion
     const startTime = Date.now();
-    const response = await generateCompletion({
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userPrompt },
-      ],
+    const result = await createChatCompletion([
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: userPrompt },
+    ], {
       temperature,
       max_tokens: maxTokens,
       model,
       response_format: structured ? { type: 'json_object' } : undefined,
     });
     const duration = Date.now() - startTime;
+    
+    // Extract response content
+    const response = result.content;
 
     // Step 3: Parse response
     let parsedResponse;
@@ -830,11 +832,10 @@ Base your answer ONLY on the provided context.`;
   const userPrompt = `Context:\n\n${context}\n\n---\n\nQuestion: ${question}\n\n---\n\nProvide your answer in JSON format matching this schema:\n${schemaDescription}`;
 
   try {
-    const response = await generateCompletion({
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userPrompt },
-      ],
+    const result = await createChatCompletion([
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: userPrompt },
+    ], {
       temperature: options.temperature || 0.1, // Low temperature for structured output
       max_tokens: options.maxTokens || 1000,
       model: options.model || 'gpt-4o-mini',
@@ -842,7 +843,7 @@ Base your answer ONLY on the provided context.`;
     });
 
     // Parse and validate against schema
-    const parsed = JSON.parse(response);
+    const parsed = JSON.parse(result.content);
     
     // Basic validation that required fields exist
     if (schema.required) {

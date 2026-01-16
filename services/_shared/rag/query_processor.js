@@ -135,7 +135,7 @@
  * @see ../llm/llm_client.js for LLM-based processing
  */
 
-import { generateCompletion } from '../llm/llm_client.js';
+import { createChatCompletion } from '../llm/llm_client.js';
 
 /**
  * Intent types we can classify
@@ -462,16 +462,15 @@ Query: "${query}"
 Respond with only the category name, nothing else.`;
 
   try {
-    const response = await generateCompletion({
-      messages: [
-        { role: 'user', content: prompt }
-      ],
+    const response = await createChatCompletion([
+      { role: 'user', content: prompt }
+    ], {
       temperature: 0, // Deterministic for classification
       max_tokens: 20, // Just need one word
     });
 
     // Extract intent from response
-    const intent = response.trim().toLowerCase();
+    const intent = response.content.trim().toLowerCase();
 
     // Validate it's a known intent
     if (Object.values(INTENT_TYPES).includes(intent)) {
