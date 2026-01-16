@@ -90,38 +90,144 @@ For details, see `docs/architecture.md`.
 
 ### Prerequisites
 
-* Git and GitHub account.
-* Node.js (LTS) and npm or pnpm.
-* Recommended: VS Code and GitHub CLI (`gh`).
+* **Node.js** 18+ and npm
+* **Python** 3.11+
+* **PostgreSQL** 16+
+* **Docker** (optional, for running PostgreSQL)
+* Git and GitHub account
+* Recommended: VS Code and GitHub CLI (`gh`)
 
 ### Installation
+
+1. **Clone the repository:**
 
 ```bash
 git clone git@github.com:steffolino/systemfehler.git
 cd systemfehler
+```
+
+2. **Install Node.js dependencies:**
+
+```bash
 npm install
 ```
 
-### Basic Commands
-
-The exact scripts may differ depending on implementation, but a typical workflow could be:
+3. **Install Python dependencies:**
 
 ```bash
-# Validate entries against schemas and taxonomies
-npm run validate
-
-# Run a domain-specific crawler (example: benefits)
-npm run crawl:benefits
-
-# Recalculate quality scores
-npm run score
-
-# Generate temporal and language reports
-npm run report:temporal
-npm run report:languages
+pip install -r crawlers/requirements.txt
 ```
 
-Refer to `package.json` once implemented for the authoritative list of scripts.
+4. **Set up environment variables:**
+
+```bash
+cp .env.example .env
+# Edit .env and add your configuration
+```
+
+5. **Start PostgreSQL database:**
+
+```bash
+# Using Docker Compose
+docker-compose up -d postgres
+
+# Or manually install and configure PostgreSQL 16
+```
+
+6. **Run database migrations:**
+
+```bash
+npm run db:migrate
+```
+
+7. **Install frontend dependencies:**
+
+```bash
+cd frontend
+npm install
+cd ..
+```
+
+### Quick Start
+
+**Run the benefits crawler:**
+
+```bash
+npm run crawl:benefits
+```
+
+**Import crawled data to database:**
+
+```bash
+npm run db:seed
+```
+
+**Start the API server:**
+
+```bash
+npm run api
+```
+
+**Start the frontend (in a new terminal):**
+
+```bash
+npm run dev
+```
+
+**Or start both together:**
+
+```bash
+npm run dev:all
+```
+
+Open http://localhost:5173 in your browser to view the admin panel.
+
+### Available Commands
+
+```bash
+# Crawlers
+npm run crawl:benefits          # Crawl Arbeitsagentur benefits data
+npm run crawl:all               # Run all available crawlers
+
+# Database
+npm run db:migrate              # Run database migrations
+npm run db:seed                 # Import crawled data to database
+
+# API and Frontend
+npm run api                     # Start Express API server (port 3001)
+npm run dev                     # Start Vite frontend dev server (port 5173)
+npm run dev:all                 # Start both API and frontend concurrently
+
+# Validation and Quality
+npm run validate                # Validate entries against schemas
+npm run score                   # Calculate quality scores (legacy)
+
+# Reports (legacy)
+npm run report:temporal         # Generate temporal view report
+npm run report:languages        # Report language coverage
+
+# LLM Features (legacy)
+npm run llm:setup               # Set up LLM client
+npm run llm:embeddings          # Generate embeddings
+npm run llm:qa                  # Interactive Q&A
+npm run llm:translate           # Generate Easy German translations
+npm run llm:costs               # Report LLM costs
+```
+
+### Python CLI
+
+The crawler CLI provides direct access to Python crawler functionality:
+
+```bash
+# Run crawler
+python crawlers/cli.py crawl benefits --source arbeitsagentur
+
+# Validate data
+python crawlers/cli.py validate --domain benefits
+
+# Import to database
+python crawlers/cli.py import --domain benefits --to-db
+```
 
 ---
 
