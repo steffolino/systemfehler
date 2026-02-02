@@ -9,6 +9,9 @@ dist/
 data/snapshots/
 *.sqlite
 *.db
+# exclude generated crawler exports
+data/**/candidates.json
+moderation/review_queue.json
 # LLM runtime data
 data/_quality/llm_costs.jsonl
 # Python
