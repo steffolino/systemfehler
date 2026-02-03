@@ -1,3 +1,57 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Moderation Queue</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 20px }
+      .item { border: 1px solid #ddd; padding: 12px; margin-bottom: 10px }
+      .meta { color: #666; font-size: 0.9em }
+      button { margin-right: 8px }
+    </style>
+  </head>
+  <body>
+    <h1>Moderation Queue</h1>
+    <div id="queue">Loading...</div>
+
+    <script>
+      async function loadQueue(){
+        const r = await fetch('/api/queue');
+        const q = await r.json();
+        const container = document.getElementById('queue');
+        if(!q || q.length===0){ container.innerHTML = '<p>No items.</p>'; return }
+        container.innerHTML = '';
+        q.forEach((it, idx)=>{
+          const el = document.createElement('div'); el.className='item';
+          el.innerHTML = `<div class="meta">${it.domain} — ${it.entry_id} — ${it.status}</div>
+            <h3>Source: <a href="${it.source}" target="_blank">${it.source}</a></h3>
+            <p><b>Original:</b> ${it.original_text}</p>
+            <p><b>Translation (de-LEICHT):</b> ${it.translation_text}</p>`;
+          const accept = document.createElement('button'); accept.textContent='Accept';
+          accept.onclick = async ()=>{ await review(it, 'accept'); showToast('Accepted'); };
+          const reject = document.createElement('button'); reject.textContent='Reject';
+          reject.onclick = async ()=>{ await review(it, 'reject'); showToast('Rejected'); };
+          el.appendChild(accept); el.appendChild(reject);
+          container.appendChild(el);
+        })
+      }
+
+      async function review(item, decision){
+        const resp = await fetch('/api/review', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({domain:item.domain, entry_id:item.entry_id, decision})});
+        if(resp.ok){ loadQueue() }
+        else alert('Error')
+      }
+
+      function showToast(msg){
+        let t = document.getElementById('toast');
+        if(!t){ t = document.createElement('div'); t.id='toast'; t.style.position='fixed'; t.style.right='20px'; t.style.bottom='20px'; t.style.padding='10px 14px'; t.style.background='#111'; t.style.color='#fff'; t.style.borderRadius='6px'; document.body.appendChild(t); }
+        t.textContent = msg; t.style.opacity = '1'; setTimeout(()=>{ t.style.opacity='0'; }, 1600);
+      }
+
+      loadQueue();
+    </script>
+  </body>
+</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>

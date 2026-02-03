@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { api, type Entry } from '../../lib/api';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
@@ -114,8 +114,8 @@ export function DataPreview() {
                   </thead>
                   <tbody>
                     {entries.map((entry) => (
-                      <>
-                        <tr key={entry.id} className="border-b hover:bg-muted/50">
+                      <Fragment key={entry.id}>
+                        <tr className="border-b hover:bg-muted/50">
                           <td className="p-2">
                             <div className="max-w-md truncate">
                               {entry.title_de || 'No title'}
@@ -132,14 +132,24 @@ export function DataPreview() {
                             </Badge>
                           </td>
                           <td className="p-2">
-                            <span className={getQualityColor(entry.iqs)}>
-                              {entry.iqs?.toFixed(1) || 'N/A'}
-                            </span>
+                            {(() => {
+                              const iqsNum = entry.iqs !== undefined && entry.iqs !== null ? Number(entry.iqs) : undefined;
+                              return (
+                                <span className={getQualityColor(iqsNum)}>
+                                  {typeof iqsNum === 'number' && !Number.isNaN(iqsNum) ? iqsNum.toFixed(1) : 'N/A'}
+                                </span>
+                              );
+                            })()}
                           </td>
                           <td className="p-2">
-                            <span className={getQualityColor(entry.ais)}>
-                              {entry.ais?.toFixed(1) || 'N/A'}
-                            </span>
+                            {(() => {
+                              const aisNum = entry.ais !== undefined && entry.ais !== null ? Number(entry.ais) : undefined;
+                              return (
+                                <span className={getQualityColor(aisNum)}>
+                                  {typeof aisNum === 'number' && !Number.isNaN(aisNum) ? aisNum.toFixed(1) : 'N/A'}
+                                </span>
+                              );
+                            })()}
                           </td>
                           <td className="p-2 text-sm text-muted-foreground">
                             {entry.last_seen
@@ -190,7 +200,7 @@ export function DataPreview() {
                             </td>
                           </tr>
                         )}
-                      </>
+                      </Fragment>
                     ))}
                   </tbody>
                 </table>

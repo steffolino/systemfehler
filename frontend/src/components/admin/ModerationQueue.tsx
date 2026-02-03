@@ -27,8 +27,8 @@ export function ModerationQueue() {
     }
   };
 
-  const getActionBadgeVariant = (action: string) => {
-    switch (action) {
+  const getActionBadgeVariant = (action?: string) => {
+    switch (action?.toLowerCase()) {
       case 'create':
         return 'default';
       case 'update':
@@ -79,7 +79,7 @@ export function ModerationQueue() {
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         <Badge variant={getActionBadgeVariant(item.action)}>
-                          {item.action.toUpperCase()}
+                          {(item.action ?? 'unknown').toUpperCase()}
                         </Badge>
                         <Badge variant="outline">{item.domain}</Badge>
                         {item.title_de && (
@@ -99,7 +99,7 @@ export function ModerationQueue() {
                         </div>
                       )}
                       <div className="text-xs text-muted-foreground">
-                        Created: {new Date(item.created_at).toLocaleString()}
+                        Created: {item.created_at ? new Date(item.created_at).toLocaleString() : 'Unknown'}
                       </div>
                     </div>
                     <Button

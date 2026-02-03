@@ -38,6 +38,8 @@ def run_pilot(max_entries=100, out_file='data/pilot_translated.json'):
         'samples': []
     }
 
+    moderation_queue = []
+
     for domain, entry in entries:
         try:
             text = entry.get('content', {}).get('de') or entry.get('summary', {}).get('de') or ''
@@ -60,6 +62,18 @@ def run_pilot(max_entries=100, out_file='data/pilot_translated.json'):
             results['translated'] += 1
             if len(results['samples']) < 5:
                 results['samples'].append({'id': entry.get('id'), 'translation': entry['translations']['de-LEICHT']})
+            # Add moderation queue item
+            moderation_queue.append({
+                'domain': domain,
+                'entry_id': entry.get('id'),
+                'source': entry.get('url',''),
+                'original_text': text,
+                'translation_text': tg['text'],
+                'method': tg['method'],
+                'generator': tg['generator'],
+                'timestamp': tg['timestamp'],
+                'status': 'pending'
+            })
         except Exception:
             results['errors'] += 1
 
@@ -67,6 +81,23 @@ def run_pilot(max_entries=100, out_file='data/pilot_translated.json'):
     outp = { 'meta': { 'processed': results['processed'], 'translated': results['translated'], 'errors': results['errors'] }, 'samples': results['samples'] }
     Path(out_file).write_text(json.dumps(outp, ensure_ascii=False, indent=2), encoding='utf-8')
     print(f"Pilot complete. Processed={results['processed']} Translated={results['translated']} Errors={results['errors']}")
+    # Write moderation queue
+    mq_path = Path('moderation')
+    mq_path.mkdir(exist_ok=True)
+    mq_file = mq_path / 'review_queue.json'
+    if mq_file.exists():
+        try:
+            existing = json.loads(mq_file.read_text(encoding='utf-8'))
+        except Exception:
+            existing = []
+    else:
+        existing = []
+        # annotate items with status
+        for it in moderation_queue:
+            it.setdefault('status', 'pending')
+        existing.extend(moderation_queue)
+    mq_file.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding='utf-8')
+    print(f"Wrote moderation queue with {len(moderation_queue)} items to {mq_file}")
 
 
 if __name__ == '__main__':
