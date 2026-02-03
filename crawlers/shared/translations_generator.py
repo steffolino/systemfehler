@@ -10,6 +10,7 @@ so real MT/LLM clients can be wired in later.
 from typing import Callable, Optional
 import re
 import datetime
+from crawlers.shared.translations_clients import openai_llm_call_factory, mt_call_factory
 
 
 class TranslationGenerator:
@@ -21,8 +22,9 @@ class TranslationGenerator:
             llm_call: callable(text, instructions) -> str for LLM-based rewriting
             mt_call: callable(text, target_lang) -> str for machine translation
         """
-        self.llm_call = llm_call
-        self.mt_call = mt_call
+        # If no explicit hooks provided, try to instantiate default factories
+        self.llm_call = llm_call or openai_llm_call_factory()
+        self.mt_call = mt_call or mt_call_factory()
 
     def generate_easy_german(self, text: str) -> str:
         """Apply simple, deterministic transformations to produce an Easy German draft.
