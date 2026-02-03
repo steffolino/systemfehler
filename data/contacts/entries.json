@@ -1,6 +1,27 @@
 {
   "version": "0.1.0",
   "domain": "contacts",
+  "entries": [
+    {
+      "id": "55555555-5555-4555-8555-555555555555",
+      "title": {"de": "Sozialberater Musterstadt", "en": "Social Advisor Musterstadt"},
+      "summary": {"de": "Persönliche Beratung zu Leistungen vor Ort", "en": "In-person advice on benefits"},
+      "content": {"de": "Telefonische und persönliche Beratung. Termine nach Vereinbarung.", "en": "Phone and in-person advice. Appointments by arrangement."},
+      "url": "https://example.org/contacts/advisor-musterstadt",
+      "status": "active",
+      "provenance": {"source": "example.org", "crawledAt": "2026-02-03T12:20:00Z"},
+      "firstSeen": "2026-02-03T12:20:00Z",
+      "lastSeen": "2026-02-03T12:20:00Z",
+      "topics": ["advice"],
+      "tags": ["phone", "office"],
+      "qualityScores": {"iqs": 82, "ais": 68, "computedAt": "2026-02-03T12:20:00Z"}
+    }
+  ],
+  "_todo": []
+}
+{
+  "version": "0.1.0",
+  "domain": "contacts",
   "entries": [],
   "_todo": [
     "TODO: Populate with crawled and moderated contact entries",

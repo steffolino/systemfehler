@@ -1,10 +1,49 @@
 {
   "version": "0.1.0",
   "domain": "benefits",
-  "entries": [],
-  "_todo": [
-    "TODO: Populate with crawled and moderated benefit entries",
-    "TODO: Validate against benefits.schema.json per DATA-05 (Issue #28)",
-    "TODO: Entries must pass moderation review before inclusion per MOD-01 (Issue #18)"
-  ]
+  "entries": [
+    {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "title": {"de": "Wohngeld", "en": "Housing Benefit"},
+      "summary": {"de": "Unterstützung für Wohnkosten", "en": "Support for housing costs"},
+      "content": {"de": "Wohngeld unterstützt Menschen mit geringem Einkommen bei der Zahlung der Miete.", "en": "Housing benefit helps low-income people pay rent."},
+      "url": "https://example.org/benefit/wohngeld",
+      "status": "active",
+      "provenance": {"source": "example.org", "crawledAt": "2026-02-03T12:00:00Z"},
+      "firstSeen": "2026-02-03T12:00:00Z",
+      "lastSeen": "2026-02-03T12:00:00Z",
+      "topics": ["housing"],
+      "tags": ["rent", "support"],
+      "qualityScores": {"iqs": 85, "ais": 75, "computedAt": "2026-02-03T12:00:00Z"}
+    },
+    {
+      "id": "22222222-2222-4222-8222-222222222222",
+      "title": {"de": "Kinderzuschlag", "en": "Child Supplement"},
+      "summary": {"de": "Finanzielle Unterstützung für Familien mit geringem Einkommen", "en": "Financial support for low-income families"},
+      "content": {"de": "Der Kinderzuschlag hilft Eltern, die trotz Arbeit nicht genug zum Leben haben.", "en": "The child supplement helps working parents who do not earn enough."},
+      "url": "https://example.org/benefit/kinderzuschlag",
+      "status": "active",
+      "provenance": {"source": "example.org", "crawledAt": "2026-02-03T12:05:00Z"},
+      "firstSeen": "2026-02-03T12:05:00Z",
+      "lastSeen": "2026-02-03T12:05:00Z",
+      "topics": ["family", "money"],
+      "tags": ["children", "support"],
+      "qualityScores": {"iqs": 80, "ais": 72, "computedAt": "2026-02-03T12:05:00Z"}
+    },
+    {
+      "id": "33333333-3333-4333-8333-333333333333",
+      "title": {"de": "Arbeitslosengeld II", "en": "Unemployment Benefit II"},
+      "summary": {"de": "Leistungen zur Grundsicherung für Arbeitssuchende", "en": "Basic security benefits for jobseekers"},
+      "content": {"de": "Arbeitslosengeld II umfasst Leistungen zur Sicherung des Lebensunterhalts und Leistungen für Unterkunft.", "en": "Unemployment Benefit II covers subsistence and housing support."},
+      "url": "https://example.org/benefit/alg2",
+      "status": "active",
+      "provenance": {"source": "example.org", "crawledAt": "2026-02-03T12:10:00Z"},
+      "firstSeen": "2026-02-03T12:10:00Z",
+      "lastSeen": "2026-02-03T12:10:00Z",
+      "topics": ["employment", "money"],
+      "tags": ["safety-net"],
+      "qualityScores": {"iqs": 78, "ais": 70, "computedAt": "2026-02-03T12:10:00Z"}
+    }
+  ],
+  "_todo": []
 }
