@@ -121,8 +121,15 @@ async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> 
     });
 
     if (!response.ok) {
-      const error: ApiError = await response.json();
-      throw new Error(error.error || error.message || 'API request failed');
+      // Try to parse JSON error, fall back to text
+      let errorMsg = 'API request failed';
+      try {
+        const errJson = await response.json();
+        errorMsg = errJson.error || errJson.message || JSON.stringify(errJson);
+      } catch (e) {
+        try { errorMsg = await response.text(); } catch (_) {}
+      }
+      throw new Error(errorMsg);
     }
 
     return await response.json();

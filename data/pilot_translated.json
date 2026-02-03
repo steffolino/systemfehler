@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "processed": 3,
+    "translated": 3,
+    "errors": 0
+  },
+  "samples": [
+    {
+      "id": "11111111-1111-4111-8111-111111111111",
+      "translation": {
+        "title": "Wohngeld",
+        "summary": "Unterstützung für Wohnkosten",
+        "body": "Wohngeld unterstützt Menschen mit geringem Einkommen bei der Zahlung der Miete.",
+        "provenance": {
+          "source": "https://example.org/benefit/wohngeld",
+          "crawledAt": "2026-02-03T12:00:00Z"
+        },
+        "method": "rule",
+        "generator": "rule-based-simplifier-v1",
+        "timestamp": "2026-02-03T20:06:39.240836Z",
+        "reviewed": false
+      }
+    },
+    {
+      "id": "22222222-2222-4222-8222-222222222222",
+      "translation": {
+        "title": "Kinderzuschlag",
+        "summary": "Finanzielle Unterstützung für Familien mit geringem Einkommen",
+        "body": "Der Kinderzuschlag hilft Eltern, die trotz Arbeit nicht genug zum Leben haben.",
+        "provenance": {
+          "source": "https://example.org/benefit/kinderzuschlag",
+          "crawledAt": "2026-02-03T12:05:00Z"
+        },
+        "method": "rule",
+        "generator": "rule-based-simplifier-v1",
+        "timestamp": "2026-02-03T20:06:39.241285Z",
+        "reviewed": false
+      }
+    },
+    {
+      "id": "33333333-3333-4333-8333-333333333333",
+      "translation": {
+        "title": "Arbeitslosengeld II",
+        "summary": "Leistungen zur Grundsicherung für Arbeitssuchende",
+        "body": "Arbeitslosengeld II umfasst Leistungen zur Sicherung des Lebensunterhalts und Leistungen für Unterkunft.",
+        "provenance": {
+          "source": "https://example.org/benefit/alg2",
+          "crawledAt": "2026-02-03T12:10:00Z"
+        },
+        "method": "rule",
+        "generator": "rule-based-simplifier-v1",
+        "timestamp": "2026-02-03T20:06:39.241330Z",
+        "reviewed": false
+      }
+    }
+  ]
+}

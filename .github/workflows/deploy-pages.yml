@@ -1,0 +1,26 @@
+name: Deploy Cloudflare Pages (read-only API)
+
+on:
+    push:
+        branches:
+            - main
+            - feature/lang-translations
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 18
+
+            - name: Deploy to Cloudflare Pages
+              uses: cloudflare/pages-deploy-action@v1
+              with:
+                  apiToken: ${{ secrets.CF_PAGES_API_TOKEN }}
+                  accountId: ${{ secrets.CF_ACCOUNT_ID }}
+                  projectName: systemfehler
+                  directory: cloudflare-pages

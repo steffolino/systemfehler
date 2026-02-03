@@ -5,6 +5,8 @@
  */
 
 import { query } from './connection.js';
+import fs from 'fs/promises';
+import path from 'path';
 
 /**
  * Get all entries with optional filtering
@@ -56,7 +58,42 @@ export async function getAllEntries(options = {}) {
   `;
   
   const entriesResult = await query(entriesQuery, params);
-  
+
+  // Optionally attach translations from snapshot JSONs if requested
+  if (options.includeTranslations) {
+    const rows = entriesResult.rows;
+    // Group by domain to avoid reading the same file multiple times
+    const domains = {};
+    rows.forEach(r => {
+      if (!domains[r.domain]) domains[r.domain] = [];
+      domains[r.domain].push(r.id);
+    });
+
+    const translationsMap = {};
+    for (const domain of Object.keys(domains)) {
+      try {
+        const filePath = path.resolve(process.cwd(), 'data', domain, 'entries.json');
+        const txt = await fs.readFile(filePath, 'utf8');
+        const arr = JSON.parse(txt || '[]');
+        if (Array.isArray(arr)) {
+          arr.forEach(e => {
+            if (e && e.id && e.translations) {
+              translationsMap[e.id] = e.translations;
+            }
+          });
+        }
+      } catch (err) {
+        // ignore file read errors for non-existent domains
+      }
+    }
+
+    // attach translations where available
+    entriesResult.rows = entriesResult.rows.map(r => ({
+      ...r,
+      translations: translationsMap[r.id] || null
+    }));
+  }
+
   return {
     entries: entriesResult.rows,
     total,
@@ -100,7 +137,22 @@ export async function getEntryById(id) {
       entry.domainData = domainResult.rows[0];
     }
   }
-  
+
+  // Try to attach translations from JSON snapshot if present
+  try {
+    const filePath = path.resolve(process.cwd(), 'data', entry.domain, 'entries.json');
+    const txt = await fs.readFile(filePath, 'utf8');
+    const arr = JSON.parse(txt || '[]');
+    if (Array.isArray(arr)) {
+      const s = arr.find(e => e && e.id === id);
+      if (s && s.translations) {
+        entry.translations = s.translations;
+      }
+    }
+  } catch (err) {
+    // ignore read/parsing errors
+  }
+
   return entry;
 }
 
@@ -117,12 +169,13 @@ export async function getModerationQueue(options = {}) {
     offset = 0
   } = options;
   
-  let whereConditions = ['status = $1'];
+  // qualify columns with table alias to avoid ambiguity
+  let whereConditions = ['mq.status = $1'];
   let params = [status];
   let paramIndex = 2;
   
   if (domain) {
-    whereConditions.push(`domain = $${paramIndex++}`);
+    whereConditions.push(`mq.domain = $${paramIndex++}`);
     params.push(domain);
   }
   
