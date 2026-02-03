@@ -1,0 +1,38 @@
+name: Schema Validation
+
+on:
+  pull_request:
+    paths:
+      - 'data/_schemas/**'
+      - 'crawlers/**'
+      - 'tests/**'
+  push:
+    branches: [ main ]
+
+jobs:
+  validate-schemas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r crawlers/requirements.txt
+          python -m pip install pytest
+      - name: Run pytest
+        run: |
+          python -m pytest -q
+      - name: Lint JSON schemas
+        run: |
+          # Basic check: try to load core schema with python jsonschema
+          python - <<'PY'
+import json, sys
+from jsonschema import Draft7Validator
+with open('data/_schemas/core.schema.json','r',encoding='utf-8') as f:
+    s=json.load(f)
+print('Loaded core.schema.json, version', s.get('version'))
+PY
