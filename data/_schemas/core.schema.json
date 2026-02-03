@@ -85,6 +85,11 @@
       "$ref": "#/definitions/qualityScores",
       "description": "Computed quality and AI searchability scores"
     }
+    ,
+    "translations": {
+      "$ref": "#/definitions/translations",
+      "description": "Language-keyed translation and simplification objects (e.g. 'de-LEICHT', 'en')"
+    }
   },
   "required": ["id", "title", "url", "status", "provenance"],
   "definitions": {
@@ -97,6 +102,24 @@
       },
       "additionalProperties": { "type": "string" }
     },
+    "translations": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "summary": { "type": "string" },
+          "body": { "type": "string" },
+          "provenance": { "$ref": "#/definitions/provenanceDetailed" },
+          "method": { "type": "string", "enum": ["llm", "rule", "human", "mt"] },
+          "generator": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "reviewed": { "type": "boolean" }
+        },
+        "required": ["title", "timestamp", "provenance"]
+      },
+      "description": "Map of language codes to translation objects (keys SHOULD be IETF language tags or project-specific codes)"
+    },
     "provenance": {
       "type": "object",
       "properties": {
@@ -104,6 +127,18 @@
         "crawlId": { "type": "string", "description": "Identifier of the crawl run" },
         "checksum": { "type": "string", "description": "Content checksum for change detection" },
         "crawledAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["source", "crawledAt"]
+    },
+    "provenanceDetailed": {
+      "type": "object",
+      "properties": {
+        "source": { "type": "string", "description": "Source domain or organization" },
+        "crawlId": { "type": "string", "description": "Identifier of the crawl run" },
+        "checksum": { "type": "string", "description": "Content checksum for change detection" },
+        "crawledAt": { "type": "string", "format": "date-time" },
+        "method": { "type": "string", "description": "How translation was generated (llm|rule|human|mt)" },
+        "generator": { "type": "string", "description": "Model or tool used for generation" }
       },
       "required": ["source", "crawledAt"]
     },
