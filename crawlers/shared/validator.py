@@ -136,12 +136,20 @@ class SchemaValidator:
         # Check for multilingual completeness
         multilingual_fields = ['title', 'summary', 'content']
         languages = ['de', 'en', 'easy_de']
-        
+
         for field in multilingual_fields:
             if field in entry and isinstance(entry[field], dict):
                 for lang in languages:
                     if lang not in entry[field] or not entry[field][lang]:
                         warnings.append(f"Missing {lang} translation for {field}")
+
+        # Check for translations/simplifications (e.g. de-LEICHT)
+        if 'translations' not in entry or not isinstance(entry['translations'], dict) or len(entry['translations']) == 0:
+            warnings.append("No translations recorded (consider generating de-LEICHT / other languages)")
+        else:
+            # Prefer presence of Easy German variant for German entries
+            if 'de-LEICHT' not in entry['translations'] and 'easy_de' not in entry.get('title', {}):
+                warnings.append("Missing Easy German translation (de-LEICHT) in `translations` or `easy_de` in `title`")
         
         # Check for quality scores
         if 'qualityScores' not in entry or not entry['qualityScores']:
