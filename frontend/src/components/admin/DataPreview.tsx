@@ -28,6 +28,7 @@ export function DataPreview() {
         domain: selectedDomain,
         limit,
         offset: (page - 1) * limit,
+        includeTranslations: true,
       });
       setEntries(response.entries);
       setTotalPages(response.pages);
@@ -118,7 +119,7 @@ export function DataPreview() {
                         <tr className="border-b hover:bg-muted/50">
                           <td className="p-2">
                             <div className="max-w-md truncate">
-                              {entry.title_de || 'No title'}
+                              {entry.title?.de || entry.title_de || 'No title'}
                             </div>
                           </td>
                           <td className="p-2">
@@ -152,8 +153,11 @@ export function DataPreview() {
                             })()}
                           </td>
                           <td className="p-2 text-sm text-muted-foreground">
-                            {entry.last_seen
-                              ? new Date(entry.last_seen).toLocaleDateString()
+                            {(entry.lastSeen || entry.last_seen)
+                              ? (() => {
+                                  const lastSeenValue = entry.lastSeen || entry.last_seen;
+                                  return lastSeenValue ? new Date(lastSeenValue).toLocaleDateString() : 'N/A';
+                                })()
                               : 'N/A'}
                           </td>
                           <td className="p-2">
@@ -183,9 +187,15 @@ export function DataPreview() {
                                     {entry.url}
                                   </a>
                                 </div>
-                                {entry.summary_de && (
+                                {(entry.summary?.de || entry.summary_de) && (
                                   <div>
-                                    <strong>Summary:</strong> {entry.summary_de}
+                                    <strong>Summary:</strong> {entry.summary?.de || entry.summary_de}
+                                  </div>
+                                )}
+                                {entry.translationLanguages && entry.translationLanguages.length > 0 && (
+                                  <div>
+                                    <strong>Translations:</strong>{' '}
+                                    {entry.translationLanguages.join(', ')}
                                   </div>
                                 )}
                                 <details>

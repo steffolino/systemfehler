@@ -4,11 +4,6 @@
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
-interface ApiError {
-  error: string;
-  message?: string;
-}
-
 interface HealthResponse {
   status: string;
   timestamp: string;
@@ -28,26 +23,84 @@ interface StatusResponse {
   timestamp: string;
 }
 
+interface MultilingualText {
+  de?: string;
+  en?: string;
+  easy_de?: string;
+  [key: string]: string | undefined;
+}
+
+interface Provenance {
+  source: string;
+  crawlId?: string;
+  checksum?: string;
+  crawledAt: string;
+  method?: string;
+  generator?: string;
+  [key: string]: string | undefined;
+}
+
+interface TranslationRecord {
+  title?: string;
+  summary?: string;
+  body?: string;
+  provenance?: Provenance;
+  method?: 'llm' | 'rule' | 'human' | 'mt';
+  generator?: string;
+  timestamp: string;
+  reviewed?: boolean;
+}
+
+type TranslationsMap = Record<string, TranslationRecord>;
+
+interface QualityScores {
+  iqs?: number;
+  ais?: number;
+  computedAt?: string;
+  [key: string]: number | string | undefined;
+}
+
 interface Entry {
   id: string;
   domain: string;
-  title_de?: string;
-  title_en?: string;
-  title_easy_de?: string;
-  summary_de?: string;
-  summary_en?: string;
-  content_de?: string;
+  title?: MultilingualText;
+  summary?: MultilingualText;
+  content?: MultilingualText;
   url: string;
   topics?: string[];
   tags?: string[];
+  targetGroups?: string[];
   target_groups?: string[];
   status: string;
+  validFrom?: string;
+  validUntil?: string;
+  deadline?: string;
+  firstSeen?: string;
   first_seen?: string;
+  lastSeen?: string;
   last_seen?: string;
-  provenance?: any;
-  quality_scores?: any;
-  iqs?: number;
-  ais?: number;
+  sourceUnavailable?: boolean;
+  source_unavailable?: boolean;
+  provenance?: Provenance | null;
+  qualityScores?: QualityScores | null;
+  quality_scores?: QualityScores | null;
+  iqs?: number | null;
+  ais?: number | null;
+  translations?: TranslationsMap | null;
+  translationLanguages?: string[];
+  title_de?: string | null;
+  title_en?: string | null;
+  title_easy_de?: string | null;
+  summary_de?: string | null;
+  summary_en?: string | null;
+  summary_easy_de?: string | null;
+  content_de?: string | null;
+  content_en?: string | null;
+  content_easy_de?: string | null;
+  createdAt?: string;
+  created_at?: string;
+  updatedAt?: string;
+  updated_at?: string;
 }
 
 interface EntriesResponse {
@@ -61,16 +114,25 @@ interface EntriesResponse {
 
 interface ModerationQueueEntry {
   id: string;
+  entryId?: string;
   entry_id?: string;
   domain: string;
   action: string;
   status: string;
-  candidate_data: any;
+  candidateData?: any;
+  candidate_data?: any;
+  existingData?: any;
   existing_data?: any;
   diff?: any;
   provenance?: any;
-  created_at: string;
-  title_de?: string;
+  reviewedBy?: string | null;
+  reviewed_by?: string | null;
+  reviewedAt?: string | null;
+  reviewed_at?: string | null;
+  createdAt?: string;
+  created_at?: string;
+  title?: MultilingualText;
+  title_de?: string | null;
   url?: string;
 }
 
@@ -156,6 +218,7 @@ export const api = {
     limit?: number;
     offset?: number;
     search?: string;
+    includeTranslations?: boolean;
   }): Promise<EntriesResponse> => {
     const queryParams = new URLSearchParams();
     if (params?.domain) queryParams.append('domain', params.domain);
@@ -163,6 +226,7 @@ export const api = {
     if (params?.limit) queryParams.append('limit', params.limit.toString());
     if (params?.offset) queryParams.append('offset', params.offset.toString());
     if (params?.search) queryParams.append('search', params.search);
+    if (params?.includeTranslations) queryParams.append('includeTranslations', 'true');
 
     return fetchApi<EntriesResponse>(`/api/data/entries?${queryParams.toString()}`);
   },
@@ -199,4 +263,8 @@ export type {
   ModerationQueueEntry,
   ModerationQueueResponse,
   QualityReportResponse,
+  MultilingualText,
+  TranslationsMap,
+  TranslationRecord,
+  Provenance,
 };

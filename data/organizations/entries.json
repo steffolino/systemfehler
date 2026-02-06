@@ -1,47 +1,6 @@
 {
   "version": "0.1.0",
   "domain": "organizations",
-  "entries": [
-    {
-      "id": "66666666-6666-4666-8666-666666666666",
-      "title": {
-        "de": "Musterstadt Sozialamt",
-        "en": "Musterstadt Social Office"
-      },
-      "summary": {
-        "de": "Kommunales Amt für soziale Leistungen",
-        "en": "Municipal office for social services"
-      },
-      "content": {
-        "de": "Das Sozialamt der Stadt bietet Beratung und Antragsunterstützung.",
-        "en": "The city's social office provides advice and application assistance."
-      },
-      "url": "https://example.org/org/social-office",
-      "status": "active",
-      "provenance": {
-        "source": "example.org",
-        "crawledAt": "2026-02-03T12:25:00Z"
-      },
-      "firstSeen": "2026-02-03T12:25:00Z",
-      "lastSeen": "2026-02-03T12:25:00Z",
-      "topics": [
-        "administration"
-      ],
-      "tags": [
-        "office"
-      ],
-      "qualityScores": {
-        "iqs": 88,
-        "ais": 80,
-        "computedAt": "2026-02-03T12:25:00Z"
-      }
-    }
-  ],
-  "_todo": []
-}
-{
-  "version": "0.1.0",
-  "domain": "organizations",
   "entries": [],
   "_todo": [
     "TODO: Populate with crawled and moderated organization entries",

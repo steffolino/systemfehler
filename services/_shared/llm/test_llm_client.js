@@ -1,8 +1,8 @@
 /**
- * Simple test script for llm_client.js
- * 
- * This demonstrates basic usage and verifies the module works.
- * Run with: node services/_shared/llm/test_llm_client.js
+ * MOCK/TEST: Development-only test script for `llm_client.js`.
+ * This file demonstrates basic usage and verifies the module works.
+ * It uses mock responses when `USE_MOCK_LLM=true` and is not intended
+ * for production use. Run with: node services/_shared/llm/test_llm_client.js
  */
 
 import { 

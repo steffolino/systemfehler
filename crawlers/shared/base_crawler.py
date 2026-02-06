@@ -14,7 +14,7 @@ import hashlib
 import logging
 import time
 import urllib.parse
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, Iterable
 from urllib.robotparser import RobotFileParser
 
 import requests
@@ -150,6 +150,98 @@ class BaseCrawler:
             BeautifulSoup object
         """
         return BeautifulSoup(html, 'lxml')
+
+    # ------------------------------
+    # Title / Head helpers
+    # ------------------------------
+    def _is_nav_like(self, element: Optional[BeautifulSoup]) -> bool:
+        """
+        Heuristic to detect if an element is part of navigation/header/footer
+        or has nav-like classes/ids (e.g., 'navigation', 'hauptnavigation', 'menu').
+        Returns True when the element appears to be navigation rather than
+        meaningful page content.
+        """
+        if not element:
+            return False
+        for parent in element.parents:
+            if getattr(parent, 'name', None) in ("nav", "header", "footer", "aside"):
+                return True
+            cls = " ".join(parent.get("class", [])).lower() if parent.get("class") else ""
+            pid = (parent.get("id") or "").lower()
+            if any(tok in cls for tok in ("nav", "navigation", "menu", "hauptnavigation", "breadcrumb")):
+                return True
+            if any(tok in pid for tok in ("nav", "navigation", "menu", "hauptnavigation", "breadcrumb")):
+                return True
+        return False
+
+    def _extract_meta_tag(self, soup: Optional[BeautifulSoup], keys: Iterable[str]) -> str:
+        """Extract first matching meta tag content from the document head."""
+        if not soup:
+            return ""
+        head = soup.find("head")
+        if not head:
+            return ""
+        lookup = [key.lower() for key in keys]
+        for meta in head.find_all("meta"):
+            name_attr = (meta.get("name") or meta.get("property") or "").lower()
+            if name_attr not in lookup:
+                continue
+            content = (meta.get("content") or "").strip()
+            if content:
+                return content
+        return ""
+
+    def _extract_head_title(self, soup: Optional[BeautifulSoup]) -> str:
+        """Return the head <title> or common social meta titles (og: / twitter:).
+        Empty string when no head title is available."""
+        if not soup:
+            return ""
+        title_tag = soup.find("title")
+        if title_tag:
+            return (title_tag.get_text(strip=True) or "").strip()
+        return self._extract_meta_tag(soup, ["og:title", "twitter:title"]) or ""
+
+    def _get_best_title(self, soup: Optional[BeautifulSoup], seed_name: str = "", url: str = "") -> str:
+        """Choose the most useful title for an entry.
+
+        Preference order:
+        1. `h1` when not navigation/menu text
+        2. head `<title>`
+        3. `og:title` / `twitter:title`
+        4. meta description truncated as last resort when title is generic
+        5. fallback: "{seed_name} - {url}" or empty
+        """
+        title = ""
+        if soup:
+            try:
+                h1 = soup.find("h1")
+                if h1 and not self._is_nav_like(h1):
+                    title = (h1.get_text(strip=True) or "").strip()
+            except Exception:
+                title = ""
+
+        if not title:
+            title = self._extract_head_title(soup)
+
+        if not title:
+            title = self._extract_meta_tag(soup, ["og:title", "twitter:title"]) or ""
+
+        # Normalize obviously useless titles
+        if title and title.strip().lower() in ("navigation", "hauptnavigation", "haupt-navigation"):
+            # try head title or meta description instead
+            head_title = self._extract_head_title(soup) or ""
+            if head_title and head_title.strip().lower() not in ("navigation", "hauptnavigation"):
+                return head_title
+            meta_desc = self._extract_meta_tag(soup, ["description", "og:description", "twitter:description"]) or ""
+            if meta_desc:
+                return (meta_desc.strip()[:60] + "...") if len(meta_desc.strip()) > 60 else meta_desc.strip()
+
+        if not title:
+            if seed_name or url:
+                return f"{seed_name} - {url}".strip()
+            return ""
+
+        return title
     
     def extract_text(self, element, clean: bool = True) -> str:
         """

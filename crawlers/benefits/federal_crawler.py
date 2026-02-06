@@ -38,7 +38,7 @@ class FederalSourceCrawler(BaseCrawler):
         "cookie",
     )
     MAX_ALLOWED_PATHS = 25
-    MAX_SITEMAP_URLS = 50
+    MAX_SITEMAP_URLS = 500
     MAX_SITEMAP_DEPTH = 2
 
     def __init__(
@@ -424,6 +424,7 @@ class FederalSourceCrawler(BaseCrawler):
             "applicationChannel": [],
             "benefitType": [],
             "rawHtml": html,
+            "head": {},
         }
 
         provenance = self.generate_provenance(url)
@@ -433,33 +434,145 @@ class FederalSourceCrawler(BaseCrawler):
         scorer = QualityScorer()
         entry["qualityScores"] = scorer.calculate_scores(entry)
 
+        # Attach head metadata (title, description) if available
+        try:
+            head_title = self._extract_head_title(soup)
+            head_desc = self._extract_meta_tag(soup, ["description", "og:description", "twitter:description"]) or ""
+            if head_title or head_desc:
+                entry["head"] = {"title": head_title, "description": head_desc}
+        except Exception:
+            # Non-fatal: don't break crawling if head extraction fails
+            pass
+
         return entry, None
 
     def _extract_title(self, soup: BeautifulSoup, seed_name: str, url: str) -> str:
+        def is_nav_like(element: BeautifulSoup) -> bool:
+            """Return True if element is inside a nav/header/footer or has nav-like classes/ids"""
+            if not element:
+                return False
+            for parent in element.parents:
+                if parent.name in ("nav", "header", "footer", "aside"):
+                    return True
+                # check classes and ids for nav-like tokens
+                cls = " ".join(parent.get("class", [])).lower() if parent.get("class") else ""
+                pid = (parent.get("id") or "").lower()
+                if any(tok in cls for tok in ("nav", "navigation", "menu", "hauptnavigation", "breadcrumb")):
+                    return True
+                if any(tok in pid for tok in ("nav", "navigation", "menu", "hauptnavigation", "breadcrumb")):
+                    return True
+            return False
+
         title = ""
-        h1 = soup.find("h1") if soup else None
-        if h1:
-            title = h1.get_text(strip=True)
+        # Prefer H1 if it's not navigation/menu text
+        if soup:
+            h1 = soup.find("h1")
+            if h1 and not is_nav_like(h1):
+                title = h1.get_text(strip=True)
+
+        # Fall back to head <title>
         if not title:
             title_tag = soup.find("title") if soup else None
             if title_tag:
                 title = (title_tag.get_text(strip=True) or "").split("|")[0].strip()
+
+        # Fall back to og/twitter meta titles
         if not title:
-            title = self._extract_meta_tag(soup, ["og:title", "twitter:title"])
+            title = self._extract_meta_tag(soup, ["og:title", "twitter:title"]) or ""
+
+        # As a last resort, compose from seed name and URL
         if not title:
             title = f"{seed_name} - {url}"
+
+        # Normalize obviously useless titles
+        if title.strip().lower() in ("navigation", "hauptnavigation", "haupt-navigation"):
+            # Prefer head title or meta description instead
+            head_title = self._extract_head_title(soup) or ""
+            if head_title and head_title.strip().lower() not in ("navigation", "hauptnavigation"):
+                return head_title
+            meta_desc = self._extract_meta_tag(soup, ["description", "og:description", "twitter:description"]) or ""
+            if meta_desc:
+                # Use first 60 chars of meta description as a fallback title
+                return (meta_desc.strip()[:60] + "...") if len(meta_desc.strip()) > 60 else meta_desc.strip()
+
         return title
 
+    def _extract_head_title(self, soup: Optional[BeautifulSoup]) -> str:
+        if not soup:
+            return ""
+        title_tag = soup.find("title")
+        if title_tag:
+            return title_tag.get_text(strip=True)
+        return self._extract_meta_tag(soup, ["og:title", "twitter:title"]) or ""
+
+    def _extract_meta_description(self, soup: Optional[BeautifulSoup]) -> str:
+        """Return the best available description meta tag for the page."""
+        if not soup:
+            return ""
+
+        preferred_keys: List[Sequence[str]] = [
+            ("description",),
+            ("og:description",),
+            ("twitter:description",),
+            ("description", "og:description", "twitter:description"),
+        ]
+
+        for keys in preferred_keys:
+            meta_val = self._extract_meta_tag(soup, keys)
+            if meta_val:
+                return meta_val.strip()
+
+        head = soup.find("head")
+        if not head:
+            return ""
+
+        fuzzy_tokens = ("description", "teaser", "summary", "abstract", "intro")
+        for meta in head.find_all("meta"):
+            name_attr = (
+                meta.get("name")
+                or meta.get("property")
+                or meta.get("itemprop")
+                or meta.get("http-equiv")
+                or ""
+            ).lower()
+            if not name_attr or not any(token in name_attr for token in fuzzy_tokens):
+                continue
+            content = (meta.get("content") or meta.get("value") or "").strip()
+            if content:
+                return content
+
+        return ""
+
     def _extract_summary(self, soup: BeautifulSoup) -> str:
-        meta_summary = self._extract_meta_tag(soup, ["description", "og:description", "twitter:description"])
+        meta_summary = self._extract_meta_description(soup)
         if meta_summary:
             return meta_summary
+
         main = soup.find("main") if soup else None
         container = main or (soup.find("body") if soup else None)
-        if container:
-            first_paragraph = container.find("p")
-            if first_paragraph:
-                return first_paragraph.get_text(strip=True)[:500]
+        if not container:
+            return ""
+
+        call_to_action_tokens = (
+            "jetzt",
+            "starte",
+            "bewirb",
+            "bewerben",
+            "anmelden",
+            "los",
+            "hier klicken",
+        )
+        for paragraph in container.find_all("p"):
+            text = paragraph.get_text(strip=True)
+            if not text:
+                continue
+            normalized = text.lower()
+            if any(token in normalized for token in call_to_action_tokens):
+                continue
+            if len(text.split()) < 6:
+                continue
+            return text[:500]
+
         return ""
 
     def _extract_related_links(self, soup: BeautifulSoup, base_url: str, allowed_domains: Sequence[str]) -> List[Dict[str, Any]]:
@@ -523,7 +636,13 @@ class FederalSourceCrawler(BaseCrawler):
             return ""
         lookup = [key.lower() for key in keys]
         for meta in head.find_all("meta"):
-            name_attr = (meta.get("name") or meta.get("property") or "").lower()
+            name_attr = (
+                meta.get("name")
+                or meta.get("property")
+                or meta.get("itemprop")
+                or meta.get("http-equiv")
+                or ""
+            ).lower()
             if name_attr not in lookup:
                 continue
             content = (meta.get("content") or "").strip()
