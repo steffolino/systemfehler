@@ -9,6 +9,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import * as db from './database/connection.js';
 import * as queries from './database/queries.js';
+import fs from 'fs/promises';
+import path from 'path';
 
 dotenv.config();
 
@@ -16,8 +18,21 @@ const app = express();
 const PORT = process.env.API_PORT || 3001;
 
 // Middleware
+// Configure CORS to allow development ports. Prefer `CORS_ORIGIN` env var (comma-separated),
+// otherwise allow common local dev origins (Vite default ports).
+const rawOrigins = process.env.CORS_ORIGIN || 'http://localhost:5173,http://localhost:5174';
+const allowedOrigins = rawOrigins.split(',').map(s => s.trim()).filter(Boolean);
+
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+  origin: function (origin, callback) {
+    // allow requests with no origin (e.g., curl, server-to-server)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      return callback(null, true);
+    }
+    // Not allowed
+    return callback(new Error('CORS policy: origin not allowed'));
+  },
   credentials: true
 }));
 app.use(express.json());
@@ -94,14 +109,16 @@ app.get('/api/data/entries', async (req, res) => {
       status,
       limit = 50,
       offset = 0,
-      search
+      search,
+      includeTranslations = 'false'
     } = req.query;
     
     const options = {
       domain,
       status,
       limit: Math.min(parseInt(limit), 100),
-      offset: parseInt(offset)
+      offset: parseInt(offset),
+      includeTranslations: includeTranslations === 'true' || includeTranslations === '1'
     };
     
     let result;
@@ -154,7 +171,37 @@ app.get('/api/data/moderation-queue', async (req, res) => {
       limit: Math.min(parseInt(limit), 100),
       offset: parseInt(offset)
     });
-    
+    // If DB returned no results, fall back to file-based moderation queue
+    if ((!queue || queue.length === 0)) {
+      try {
+        const filePath = path.resolve(process.cwd(), 'moderation', 'review_queue.json');
+        const fq = await fs.readFile(filePath, 'utf8');
+        const fileItems = JSON.parse(fq || '[]');
+        // Map file items to a similar shape as DB rows if needed
+        const mapped = Array.isArray(fileItems) ? fileItems.map((it, idx) => ({
+          id: it.id || null,
+          entry_id: it.entry_id || it.entryId || null,
+          domain: it.domain || null,
+          status: it.status || 'pending',
+          candidate_data: it.translation_text ? { translation: it.translation_text } : it.candidate_data || null,
+          provenance: it.provenance || { source: it.source || null },
+          title_de: it.title_de || null,
+          url: it.source || it.url || null,
+          original_text: it.original_text || null,
+          translation_text: it.translation_text || null,
+          method: it.method || null,
+          generator: it.generator || null,
+          timestamp: it.timestamp || null,
+          created_at: it.created_at || it.timestamp || null
+        })) : [];
+
+        return res.json({ queue: mapped, total: mapped.length, status, domain });
+      } catch (err) {
+        // log file read errors and continue to return DB result (which may be empty)
+        console.error('Failed to read moderation queue file fallback:', err && err.message ? err.message : err);
+      }
+    }
+
     res.json({
       queue,
       total: queue.length,
@@ -163,7 +210,7 @@ app.get('/api/data/moderation-queue', async (req, res) => {
     });
   } catch (error) {
     console.error('Get moderation queue error:', error);
-    res.status(500).json({ error: 'Failed to fetch moderation queue' });
+    res.status(500).json({ error: 'Failed to fetch moderation queue', message: error && error.message ? error.message : undefined });
   }
 });
 

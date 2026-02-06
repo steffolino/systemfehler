@@ -3,8 +3,7 @@
   "domain": "benefits",
   "entries": [],
   "_todo": [
-    "TODO: Populate with crawled and moderated benefit entries",
-    "TODO: Validate against benefits.schema.json per DATA-05 (Issue #28)",
-    "TODO: Entries must pass moderation review before inclusion per MOD-01 (Issue #18)"
+    "TODO: Populate with moderated benefits records sourced from live crawls",
+    "TODO: Validate against benefits schema before import"
   ]
 }

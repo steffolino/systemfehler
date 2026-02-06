@@ -1,6 +1,49 @@
 {
   "version": "0.1.0",
   "domain": "tools",
+  "entries": [
+    {
+      "id": "77777777-7777-4777-8777-777777777777",
+      "title": {
+        "de": "Leistungsrechner",
+        "en": "Benefit Calculator"
+      },
+      "summary": {
+        "de": "Online-Rechner zur schnellen Schätzung möglicher Leistungen",
+        "en": "Online calculator for quick estimation of possible benefits"
+      },
+      "content": {
+        "de": "Tragen Sie Einkommen und Haushaltsgröße ein, um eine Schätzung zu erhalten.",
+        "en": "Enter income and household size to get an estimate."
+      },
+      "url": "https://example.org/tools/calculator",
+      "status": "active",
+      "provenance": {
+        "source": "example.org",
+        "crawledAt": "2026-02-03T12:30:00Z"
+      },
+      "firstSeen": "2026-02-03T12:30:00Z",
+      "lastSeen": "2026-02-03T12:30:00Z",
+      "topics": [
+        "tools",
+        "calculation"
+      ],
+      "tags": [
+        "calculator",
+        "estimation"
+      ],
+      "qualityScores": {
+        "iqs": 75,
+        "ais": 65,
+        "computedAt": "2026-02-03T12:30:00Z"
+      }
+    }
+  ],
+  "_todo": []
+}
+{
+  "version": "0.1.0",
+  "domain": "tools",
   "entries": [],
   "_todo": [
     "TODO: Populate with crawled and moderated tool entries",

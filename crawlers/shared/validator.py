@@ -31,6 +31,21 @@ class SchemaValidator:
         self.schemas_dir = Path(schemas_dir)
         self.core_schema = self._load_schema('core.schema.json')
         self.extension_schemas = self._load_extension_schemas()
+        # Build a resolver store to avoid remote $ref lookups for known schemas
+        self._schema_store = {}
+        try:
+            core_id = self.core_schema.get('$id')
+            if core_id:
+                self._schema_store[core_id] = self.core_schema
+        except Exception:
+            pass
+        for s in self.extension_schemas.values():
+            try:
+                sid = s.get('$id')
+                if sid:
+                    self._schema_store[sid] = s
+            except Exception:
+                continue
     
     def _load_schema(self, schema_file: str) -> Dict[str, Any]:
         """Load a JSON schema file"""
@@ -106,7 +121,8 @@ class SchemaValidator:
             # Create a validator with resolver for $ref support
             resolver = RefResolver(
                 base_uri=f"file://{self.schemas_dir}/",
-                referrer=schema
+                referrer=schema,
+                store=self._schema_store
             )
             validator = Draft7Validator(schema, resolver=resolver)
             
@@ -136,12 +152,20 @@ class SchemaValidator:
         # Check for multilingual completeness
         multilingual_fields = ['title', 'summary', 'content']
         languages = ['de', 'en', 'easy_de']
-        
+
         for field in multilingual_fields:
             if field in entry and isinstance(entry[field], dict):
                 for lang in languages:
                     if lang not in entry[field] or not entry[field][lang]:
                         warnings.append(f"Missing {lang} translation for {field}")
+
+        # Check for translations/simplifications (e.g. de-LEICHT)
+        if 'translations' not in entry or not isinstance(entry['translations'], dict) or len(entry['translations']) == 0:
+            warnings.append("No translations recorded (consider generating de-LEICHT / other languages)")
+        else:
+            # Prefer presence of Easy German variant for German entries
+            if 'de-LEICHT' not in entry['translations'] and 'easy_de' not in entry.get('title', {}):
+                warnings.append("Missing Easy German translation (de-LEICHT) in `translations` or `easy_de` in `title`")
         
         # Check for quality scores
         if 'qualityScores' not in entry or not entry['qualityScores']:
