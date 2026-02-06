@@ -1,6 +1,10 @@
 {
   "version": "0.1.0",
   "domain": "tools",
+  "_meta": {
+    "placeholder": true,
+    "note": "Seed URLs placeholder for development; mark as dev/test data and replace before production"
+  },
   "urls": [],
   "_todo": [
     "TODO: Add seed URLs for tools and calculators",

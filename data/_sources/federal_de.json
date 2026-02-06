@@ -1,0 +1,18 @@
+{
+    "version": "0.1.0",
+    "description": "Minimal federal registry for local testing",
+    "seed_groups": [
+        {
+            "name": "arbeitsagentur",
+            "provider_name": "Bundesagentur für Arbeit",
+            "provider_level": "federal",
+            "start_urls": [
+                "https://www.arbeitsagentur.de/arbeitslosengeld-2"
+            ],
+            "allowed_domains": [
+                "arbeitsagentur.de"
+            ],
+            "default_topic": "buergergeld"
+        }
+    ]
+}

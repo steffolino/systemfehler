@@ -95,6 +95,15 @@ class ArbeitsagenturCrawler(BaseCrawler):
             title = self._extract_title(soup)
             if title:
                 entry['title'] = {'de': title}
+
+            # Attach head metadata (title, description) when available
+            try:
+                head_title = self._extract_head_title(soup)
+                head_desc = self._extract_meta_tag(soup, ['description', 'og:description', 'twitter:description']) if hasattr(self, '_extract_meta_tag') else ''
+                if head_title or head_desc:
+                    entry['head'] = {'title': head_title, 'description': head_desc}
+            except Exception:
+                pass
             
             # Extract summary
             summary = self._extract_summary(soup)
@@ -138,18 +147,49 @@ class ArbeitsagenturCrawler(BaseCrawler):
         return entry if entry else None
     
     def _extract_title(self, soup: BeautifulSoup) -> str:
-        """Extract page title"""
-        # Try h1 first
-        h1 = soup.find('h1')
-        if h1:
-            return self.extract_text(h1)
-        
-        # Fallback to title tag
-        title = soup.find('title')
-        if title:
-            return self.extract_text(title)
-        
+        """Extract page title but avoid navigation/menu H1s like 'Navigation' or 'Hauptnavigation'"""
+        def is_nav_like(element: BeautifulSoup) -> bool:
+            if not element:
+                return False
+            for parent in element.parents:
+                if parent.name in ('nav', 'header', 'footer', 'aside'):
+                    return True
+                cls = ' '.join(parent.get('class', [])).lower() if parent.get('class') else ''
+                pid = (parent.get('id') or '').lower()
+                if any(tok in cls for tok in ('nav', 'navigation', 'menu', 'hauptnavigation', 'breadcrumb')):
+                    return True
+                if any(tok in pid for tok in ('nav', 'navigation', 'menu', 'hauptnavigation', 'breadcrumb')):
+                    return True
+            return False
+
+        # Prefer H1 if it's not navigation/menu text
+        if soup:
+            h1 = soup.find('h1')
+            if h1 and not is_nav_like(h1):
+                text = self.extract_text(h1)
+                if text and text.strip().lower() not in ('navigation', 'hauptnavigation', 'haupt-navigation'):
+                    return text
+
+        # Fallback to head <title>
+        title_tag = soup.find('title') if soup else None
+        if title_tag:
+            return self.extract_text(title_tag)
+
+        # Fallback: use a sensible default
         return "Bürgergeld (Arbeitslosengeld II)"
+
+    def _extract_head_title(self, soup: BeautifulSoup) -> str:
+        if not soup:
+            return ''
+        title_tag = soup.find('title')
+        if title_tag:
+            return self.extract_text(title_tag)
+        # Try common meta properties
+        for meta in soup.find_all('meta'):
+            name = (meta.get('name') or meta.get('property') or '').lower()
+            if name in ('og:title', 'twitter:title'):
+                return (meta.get('content') or '').strip()
+        return ''
     
     def _extract_summary(self, soup: BeautifulSoup) -> str:
         """Extract summary/introduction"""

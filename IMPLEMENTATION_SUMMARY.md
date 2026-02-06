@@ -4,6 +4,11 @@
 
 This PR implements the complete foundational infrastructure for the Systemfehler data platform, including Python crawlers, PostgreSQL database, Node.js API, and React admin panel.
 
+## Progress 2026-02-06
+- Hardened the federal benefits crawler to favour canonical meta descriptions and skip CTA-style hero copy, reducing noisy summaries in downstream data.
+- Purged all placeholder example.org records from domain JSON datasets so moderation no longer sees fictitious entries.
+- Pending: rerun the federal crawl, review generated diffs, and execute pytest plus the frontend production build before committing.
+
 ## What Was Built
 
 ### 1. Python Crawler Infrastructure ✅

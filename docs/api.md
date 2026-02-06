@@ -86,6 +86,7 @@ Retrieve entries with optional filtering and pagination.
 | `limit` | integer | Number of results per page (default: 50, max: 100) |
 | `offset` | integer | Offset for pagination (default: 0) |
 | `search` | string | Full-text search query |
+| `includeTranslations` | boolean | Include translation metadata when `true` |
 
 **Example Request:**
 
@@ -101,29 +102,47 @@ GET /api/data/entries?domain=benefits&limit=10&offset=0
     {
       "id": "550e8400-e29b-41d4-a716-446655440000",
       "domain": "benefits",
-      "title_de": "Bürgergeld (Arbeitslosengeld II)",
-      "title_en": null,
-      "title_easy_de": null,
-      "summary_de": "Das Bürgergeld ist eine Leistung...",
-      "content_de": "Ausführliche Informationen...",
+      "title": {
+        "de": "Bürgergeld (Arbeitslosengeld II)"
+      },
+      "summary": {
+        "de": "Das Bürgergeld ist eine Leistung..."
+      },
+      "content": {
+        "de": "Ausführliche Informationen..."
+      },
       "url": "https://www.arbeitsagentur.de/arbeitslosengeld-2",
       "topics": ["benefits", "unemployment", "buergergeld"],
       "tags": ["arbeitslosengeld", "grundsicherung"],
-      "target_groups": ["arbeitslose", "geringverdiener"],
+      "targetGroups": ["arbeitslose", "geringverdiener"],
       "status": "active",
-      "first_seen": "2026-01-16T10:00:00.000Z",
-      "last_seen": "2026-01-16T10:00:00.000Z",
+      "firstSeen": "2026-01-16T10:00:00.000Z",
+      "lastSeen": "2026-01-16T10:00:00.000Z",
       "provenance": {
         "source": "https://www.arbeitsagentur.de/arbeitslosengeld-2",
         "crawler": "arbeitsagentur",
         "crawledAt": "2026-01-16T10:00:00.000Z",
         "checksum": "abc123..."
       },
-      "quality_scores": {
+      "qualityScores": {
         "iqs": 85.5,
         "ais": 78.2,
         "computedAt": "2026-01-16T10:00:00.000Z"
       },
+      "translations": {
+        "de-LEICHT": {
+          "summary": "Einfacher Überblick",
+          "method": "rule",
+          "generator": "rule-based-simplifier-v1",
+          "timestamp": "2026-01-16T12:30:00.000Z",
+          "reviewed": false,
+          "provenance": {
+            "source": "https://www.arbeitsagentur.de/arbeitslosengeld-2",
+            "crawledAt": "2026-01-16T10:00:00.000Z"
+          }
+        }
+      },
+      "translationLanguages": ["de-LEICHT"],
       "iqs": 85.5,
       "ais": 78.2
     }
@@ -163,21 +182,42 @@ GET /api/data/entries/550e8400-e29b-41d4-a716-446655440000
   "entry": {
     "id": "550e8400-e29b-41d4-a716-446655440000",
     "domain": "benefits",
-    "title_de": "Bürgergeld (Arbeitslosengeld II)",
+      "title": {
+        "de": "Bürgergeld (Arbeitslosengeld II)"
+      },
     // ... all core fields ...
     "domainData": {
-      "entry_id": "550e8400-e29b-41d4-a716-446655440000",
-      "benefit_amount_de": "563 Euro pro Monat für Alleinstehende",
-      "eligibility_criteria_de": "Personen, die erwerbsfähig und hilfebedürftig sind...",
-      "application_steps": [
+      "benefitAmount": {
+        "de": "563 Euro pro Monat für Alleinstehende"
+      },
+      "eligibilityCriteria": {
+        "de": "Personen, die erwerbsfähig und hilfebedürftig sind..."
+      },
+      "applicationSteps": [
         { "de": "Antrag beim Jobcenter stellen" },
         { "de": "Erforderliche Unterlagen einreichen" }
       ],
-      "required_documents": [
+      "requiredDocuments": [
         { "de": "Personalausweis oder Reisepass" },
         { "de": "Meldebescheinigung" }
       ]
     }
+    "translations": {
+      "de-LEICHT": {
+        "summary": "Kurze Erklärung in Leichter Sprache.",
+        "timestamp": "2026-01-16T12:30:00.000Z",
+        "method": "llm",
+        "generator": "easy-german-v2",
+        "reviewed": true,
+        "provenance": {
+          "source": "https://www.arbeitsagentur.de/arbeitslosengeld-2",
+          "crawledAt": "2026-01-16T10:00:00.000Z",
+          "method": "llm",
+          "generator": "easy-german-v2"
+        }
+      }
+    },
+    "translationLanguages": ["de-LEICHT"]
   }
 }
 ```
@@ -220,7 +260,18 @@ GET /api/data/moderation-queue?status=pending
       "domain": "benefits",
       "action": "update",
       "status": "pending",
-      "candidate_data": { /* new entry data */ },
+      "candidateData": {
+        "title": {
+          "de": "Bürgergeld (Arbeitslosengeld II)"
+        },
+        "translations": {
+          "de-LEICHT": {
+            "summary": "Einfacher Überblick",
+            "method": "rule",
+            "timestamp": "2026-01-16T12:30:00.000Z"
+          }
+        }
+      },
       "existing_data": { /* current entry data */ },
       "diff": {
         "type": "update",
@@ -240,7 +291,9 @@ GET /api/data/moderation-queue?status=pending
         "crawledAt": "2026-01-16T10:00:00.000Z"
       },
       "created_at": "2026-01-16T10:00:00.000Z",
-      "title_de": "Bürgergeld",
+      "title": {
+        "de": "Bürgergeld"
+      },
       "url": "https://www.arbeitsagentur.de/arbeitslosengeld-2"
     }
   ],

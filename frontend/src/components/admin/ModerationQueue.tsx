@@ -72,8 +72,17 @@ export function ModerationQueue() {
             </div>
           ) : (
             <div className="space-y-4">
-              {queue.map((item) => (
-                <div key={item.id} className="border rounded-lg p-4 space-y-3">
+              {queue.map((item) => {
+                const itemTitle = item.title?.de ?? item.title_de;
+                const createdAt = item.createdAt ?? item.created_at;
+                const candidateData = item.candidateData ?? item.candidate_data;
+                const existingData = item.existingData ?? item.existing_data;
+                const translationEntries = candidateData?.translations
+                  ? Object.entries(candidateData.translations as Record<string, any>)
+                  : [];
+
+                return (
+                  <div key={item.id} className="border rounded-lg p-4 space-y-3">
                   {/* Header */}
                   <div className="flex items-start justify-between">
                     <div className="space-y-1">
@@ -82,8 +91,8 @@ export function ModerationQueue() {
                           {(item.action ?? 'unknown').toUpperCase()}
                         </Badge>
                         <Badge variant="outline">{item.domain}</Badge>
-                        {item.title_de && (
-                          <span className="font-medium">{item.title_de}</span>
+                        {itemTitle && (
+                          <span className="font-medium">{itemTitle}</span>
                         )}
                       </div>
                       {item.url && (
@@ -99,7 +108,7 @@ export function ModerationQueue() {
                         </div>
                       )}
                       <div className="text-xs text-muted-foreground">
-                        Created: {item.created_at ? new Date(item.created_at).toLocaleString() : 'Unknown'}
+                        Created: {createdAt ? new Date(createdAt).toLocaleString() : 'Unknown'}
                       </div>
                     </div>
                     <Button
@@ -116,6 +125,46 @@ export function ModerationQueue() {
                   {/* Expanded Details */}
                   {expandedId === item.id && (
                     <div className="space-y-4 pt-4 border-t">
+                      {/* Translations */}
+                      {translationEntries.length > 0 && (
+                        <div>
+                          <h4 className="font-semibold mb-2">Translations</h4>
+                          <div className="space-y-3">
+                            {translationEntries.map(([lang, data]) => (
+                              <div key={lang} className="rounded-lg border p-3 bg-muted/40 space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <span className="font-semibold">{lang}</span>
+                                  {typeof data.reviewed === 'boolean' && (
+                                    <Badge variant={data.reviewed ? 'default' : 'outline'}>
+                                      {data.reviewed ? 'Reviewed' : 'Pending Review'}
+                                    </Badge>
+                                  )}
+                                </div>
+                                {data.summary && (
+                                  <p className="text-sm text-foreground/80">{data.summary}</p>
+                                )}
+                                {data.body && (
+                                  <details className="text-xs">
+                                    <summary className="cursor-pointer font-medium">Full Text</summary>
+                                    <p className="mt-2 whitespace-pre-wrap">{data.body}</p>
+                                  </details>
+                                )}
+                                <div className="text-xs text-muted-foreground space-y-1">
+                                  {data.method && <div>Method: {data.method}</div>}
+                                  {data.generator && <div>Generator: {data.generator}</div>}
+                                  {data.timestamp && (
+                                    <div>Generated: {new Date(data.timestamp).toLocaleString()}</div>
+                                  )}
+                                  {data.provenance?.source && (
+                                    <div>Source: {data.provenance.source}</div>
+                                  )}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
                       {/* Provenance */}
                       {item.provenance && (
                         <div>
@@ -188,17 +237,17 @@ export function ModerationQueue() {
                           Candidate Data (JSON)
                         </summary>
                         <pre className="mt-2 p-4 bg-gray-900 text-gray-100 rounded overflow-x-auto text-xs">
-                          {JSON.stringify(item.candidate_data, null, 2)}
+                          {JSON.stringify(candidateData, null, 2)}
                         </pre>
                       </details>
 
-                      {item.existing_data && (
+                      {existingData && (
                         <details>
                           <summary className="cursor-pointer font-semibold text-sm">
                             Existing Data (JSON)
                           </summary>
                           <pre className="mt-2 p-4 bg-gray-900 text-gray-100 rounded overflow-x-auto text-xs">
-                            {JSON.stringify(item.existing_data, null, 2)}
+                            {JSON.stringify(existingData, null, 2)}
                           </pre>
                         </details>
                       )}
@@ -213,7 +262,8 @@ export function ModerationQueue() {
                     </div>
                   )}
                 </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </CardContent>
