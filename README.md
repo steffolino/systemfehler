@@ -268,6 +268,17 @@ See `cloudflare-pages/README.md` for setup details.
 
 ---
 
+## GitHub Pages Deployment
+
+The repository also includes a GitHub Pages workflow for static frontend hosting.
+
+- Workflow: `.github/workflows/deploy-github-pages.yml`
+- Build directory: `frontend/dist`
+- Base path: `/systemfehler/`
+- Expected URL: `https://steffolino.github.io/systemfehler/`
+
+---
+
 ## Architecture and Design
 
 For a detailed description of the architecture, see:
