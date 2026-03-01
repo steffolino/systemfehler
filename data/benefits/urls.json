@@ -2,12 +2,18 @@
   "version": "0.1.0",
   "domain": "benefits",
   "_meta": {
-    "placeholder": true,
-    "note": "Seed URLs placeholder for development; mark as dev/test data and replace before production"
+    "placeholder": false,
+    "seededFrom": "data/_sources/registered_sources.json",
+    "lastSeededAt": "2026-03-01",
+    "note": "Seed URLs initialized from active federal sources"
   },
-  "urls": [],
+  "urls": [
+    "https://www.arbeitsagentur.de/arbeitslosengeld-2",
+    "https://www.arbeitsagentur.de/familie-und-kinder",
+    "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen"
+  ],
   "_todo": [
-    "TODO: Add seed URLs for benefit crawling per CRAWL-02 (Issue #5)",
+    "TODO: Expand with additional federal and state benefit landing pages per CRAWL-02 (Issue #5)",
     "TODO: Implement URL canonicalization per CRAWL-06 (Issue #30)",
     "TODO: URLs should be discovered via link expansion per CRAWL-03 (Issue #6)"
   ]

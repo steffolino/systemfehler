@@ -2,12 +2,17 @@
   "version": "0.1.0",
   "domain": "aid",
   "_meta": {
-    "placeholder": true,
-    "note": "Seed URLs placeholder for development; mark as dev/test data and replace before production"
+    "placeholder": false,
+    "seededFrom": "data/_sources/registered_sources.json",
+    "lastSeededAt": "2026-03-01",
+    "note": "Seed URLs initialized from active federal sources"
   },
-  "urls": [],
+  "urls": [
+    "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen",
+    "https://www.bmbfsfj.bund.de/bmbfsfj/service"
+  ],
   "_todo": [
-    "TODO: Add seed URLs for aid program crawling",
+    "TODO: Expand with topic-specific aid program pages across additional ministries",
     "TODO: Implement URL canonicalization per CRAWL-06 (Issue #30)"
   ]
 }

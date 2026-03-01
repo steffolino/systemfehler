@@ -2,12 +2,18 @@
   "version": "0.1.0",
   "domain": "tools",
   "_meta": {
-    "placeholder": true,
-    "note": "Seed URLs placeholder for development; mark as dev/test data and replace before production"
+    "placeholder": false,
+    "seededFrom": "verified public pages",
+    "lastSeededAt": "2026-03-01",
+    "note": "Tool seeds initialized from official e-service and calculator pages"
   },
-  "urls": [],
+  "urls": [
+    "https://www.arbeitsagentur.de/eservices",
+    "https://www.arbeitsagentur.de/jobsuche/",
+    "http://www.familien-wegweiser.de/Elterngeldrechner"
+  ],
   "_todo": [
-    "TODO: Add seed URLs for tools and calculators",
+    "TODO: Expand with additional verified official calculators and self-service tools",
     "TODO: Implement URL canonicalization per CRAWL-06 (Issue #30)"
   ]
 }

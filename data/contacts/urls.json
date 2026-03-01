@@ -2,12 +2,18 @@
   "version": "0.1.0",
   "domain": "contacts",
   "_meta": {
-    "placeholder": true,
-    "note": "Seed URLs placeholder for development; mark as dev/test data and replace before production"
+    "placeholder": false,
+    "seededFrom": "verified public pages",
+    "lastSeededAt": "2026-03-01",
+    "note": "Contact seeds initialized from official federal service/contact pages"
   },
-  "urls": [],
+  "urls": [
+    "https://www.arbeitsagentur.de/service-bereich/so-erreichen-sie-uns",
+    "https://www.bmbfsfj.bund.de/bmbfsfj/service/kontakt",
+    "https://www.115.de/"
+  ],
   "_todo": [
-    "TODO: Add seed URLs for contact directories and helplines",
+    "TODO: Expand with verified state and municipal contact directories",
     "TODO: Implement URL canonicalization per CRAWL-06 (Issue #30)"
   ]
 }

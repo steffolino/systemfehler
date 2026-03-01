@@ -6,18 +6,29 @@
       "id": "arbeitsagentur",
       "name": "Bundesagentur für Arbeit",
       "baseUrl": "https://www.arbeitsagentur.de",
-      "domains": ["benefits", "tools"],
-      "languages": ["de", "en"],
+      "domains": [
+        "benefits",
+        "tools"
+      ],
+      "languages": [
+        "de",
+        "en"
+      ],
       "priority": "high",
       "license": "unknown",
       "status": "active"
     },
     {
       "id": "bmfsfj",
-      "name": "Bundesministerium für Familie, Senioren, Frauen und Jugend",
-      "baseUrl": "https://www.bmfsfj.de",
-      "domains": ["benefits", "aid"],
-      "languages": ["de"],
+      "name": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+      "baseUrl": "https://www.bmbfsfj.bund.de/bmbfsfj",
+      "domains": [
+        "benefits",
+        "aid"
+      ],
+      "languages": [
+        "de"
+      ],
       "priority": "high",
       "license": "unknown",
       "status": "active"
