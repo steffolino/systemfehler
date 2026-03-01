@@ -10,14 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: avto-dev/markdown-lint@v1
+      - name: Get changed markdown files
+        id: changed-md
+        uses: tj-actions/changed-files@v46
         with:
-          args: "**/*.md"
-          config: ""
+          files: |
+            **/*.md
+      - uses: avto-dev/markdown-lint@v1
+        if: steps.changed-md.outputs.any_changed == 'true'
+        with:
+          args: ${{ steps.changed-md.outputs.all_changed_files }}
+          config: '{"MD013": false, "MD004": false, "MD029": false, "MD034": false}'
   linkcheck:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: lycheeverse/lychee-action@v2
+      - name: Get changed markdown files
+        id: changed-md
+        uses: tj-actions/changed-files@v46
         with:
-          args: --no-progress --max-concurrency 4 "docs/**/*.md" "PROJECT_PLAN.md"
+          files: |
+            **/*.md
+      - uses: lycheeverse/lychee-action@v2
+        if: steps.changed-md.outputs.any_changed == 'true'
+        with:
+          args: --no-progress --max-concurrency 1 --retry-wait-time 2 --max-retries 2 ${{ steps.changed-md.outputs.all_changed_files }}

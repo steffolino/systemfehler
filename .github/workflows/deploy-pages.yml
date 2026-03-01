@@ -4,7 +4,6 @@ on:
     push:
         branches:
             - main
-            - feature/lang-translations
 
 jobs:
     deploy:
@@ -17,10 +16,9 @@ jobs:
               with:
                   node-version: 18
 
-            - name: Deploy to Cloudflare Pages
-              uses: cloudflare/pages-deploy-action@v1
+                        - name: Deploy to Cloudflare Pages
+                            uses: cloudflare/wrangler-action@v3
               with:
                   apiToken: ${{ secrets.CF_PAGES_API_TOKEN }}
                   accountId: ${{ secrets.CF_ACCOUNT_ID }}
-                  projectName: systemfehler
-                  directory: cloudflare-pages
+                                    command: pages deploy cloudflare-pages --project-name=systemfehler
