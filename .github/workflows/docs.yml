@@ -20,7 +20,7 @@ jobs:
         if: steps.changed-md.outputs.any_changed == 'true'
         with:
           args: ${{ steps.changed-md.outputs.all_changed_files }}
-          config: '{"MD013": false, "MD004": false, "MD029": false, "MD034": false}'
+          config: .markdownlint-ci.json
   linkcheck:
     runs-on: ubuntu-latest
     steps:
@@ -34,4 +34,4 @@ jobs:
       - uses: lycheeverse/lychee-action@v2
         if: steps.changed-md.outputs.any_changed == 'true'
         with:
-          args: --no-progress --max-concurrency 1 --retry-wait-time 2 --max-retries 2 ${{ steps.changed-md.outputs.all_changed_files }}
+          args: --no-progress --max-concurrency 1 --retry-wait-time 2 --max-retries 2 --exclude '^http://localhost(:[0-9]+)?/' --exclude '^http://127\.0\.0\.1(:[0-9]+)?/' ${{ steps.changed-md.outputs.all_changed_files }}
