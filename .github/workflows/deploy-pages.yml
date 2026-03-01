@@ -35,4 +35,4 @@ jobs:
               with:
                   apiToken: ${{ secrets.CF_PAGES_API_TOKEN }}
                   accountId: ${{ secrets.CF_ACCOUNT_ID }}
-                  command: pages deploy frontend/dist --project-name=systemfehler --branch=main --functions=cloudflare-pages/functions
+                command: pages deploy frontend/dist --project-name=systemfehler --branch=main

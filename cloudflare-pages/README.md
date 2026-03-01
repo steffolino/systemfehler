@@ -5,7 +5,9 @@ JSON snapshots from the repository.
 
 The deployment workflow builds the frontend app from `frontend/` and deploys:
 - static site: `frontend/dist`
-- Functions: `cloudflare-pages/functions`
+
+Pages Functions source remains in `cloudflare-pages/functions` and can be wired
+in a dedicated API deployment step.
 
 ## API Endpoints
 
