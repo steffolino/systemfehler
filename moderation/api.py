@@ -5,6 +5,20 @@ from urllib.parse import urlparse, parse_qs
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 QUEUE_PATH = os.path.join(ROOT, '..', 'review_queue.json')
+ALLOWED_DOMAINS = {'benefits', 'aid', 'tools', 'organizations', 'contacts'}
+
+
+def get_entries_file_for_domain(domain):
+    if domain not in ALLOWED_DOMAINS:
+        return None
+
+    data_root = os.path.normpath(os.path.join(ROOT, '..', 'data'))
+    data_dir = os.path.normpath(os.path.join(data_root, domain))
+
+    if not (data_dir == data_root or data_dir.startswith(data_root + os.sep)):
+        return None
+
+    return os.path.join(data_dir, 'entries.json')
 
 def read_queue():
     try:
@@ -45,9 +59,8 @@ class Handler(SimpleHTTPRequestHandler):
                     # apply accepted translations back into domain snapshot
                     if decision == 'accept':
                         try:
-                            data_dir = os.path.normpath(os.path.join(ROOT, '..', 'data', domain))
-                            entries_file = os.path.join(data_dir, 'entries.json')
-                            if os.path.exists(entries_file):
+                            entries_file = get_entries_file_for_domain(domain)
+                            if entries_file and os.path.exists(entries_file):
                                 with open(entries_file, 'r', encoding='utf-8') as ef:
                                     entries = json.load(ef)
                                 changed = False
@@ -88,9 +101,8 @@ class Handler(SimpleHTTPRequestHandler):
                         # apply accepted translation
                         if decision == 'accept':
                             try:
-                                data_dir = os.path.normpath(os.path.join(ROOT, '..', 'data', domain))
-                                entries_file = os.path.join(data_dir, 'entries.json')
-                                if os.path.exists(entries_file):
+                                entries_file = get_entries_file_for_domain(domain)
+                                if entries_file and os.path.exists(entries_file):
                                     with open(entries_file, 'r', encoding='utf-8') as ef:
                                         data = json.load(ef)
                                     if isinstance(data, dict) and 'entries' in data:

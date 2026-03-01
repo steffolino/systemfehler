@@ -7,6 +7,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import rateLimit from 'express-rate-limit';
 import * as db from './database/connection.js';
 import * as queries from './database/queries.js';
 import fs from 'fs/promises';
@@ -36,6 +37,13 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
+
+const moderationQueueLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false
+});
 
 // Request logging middleware
 app.use((req, res, next) => {
@@ -156,7 +164,7 @@ app.get('/api/data/entries/:id', async (req, res) => {
 });
 
 // Get moderation queue
-app.get('/api/data/moderation-queue', async (req, res) => {
+app.get('/api/data/moderation-queue', moderationQueueLimiter, async (req, res) => {
   try {
     const {
       status = 'pending',
