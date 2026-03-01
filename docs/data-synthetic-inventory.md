@@ -12,7 +12,7 @@ Last reviewed: 2026-03-01
 
 - `data/tools/entries.json`
   - Previous state contained synthetic `example.org` tool entry and malformed duplicate JSON blocks.
-  - Current state is normalized to empty entries with explicit placeholder metadata.
+  - Current state contains validated real entries from official public sources.
 
 - `data/benefits/urls.json`
 - `data/aid/urls.json`
@@ -20,22 +20,22 @@ Last reviewed: 2026-03-01
 - `data/organizations/urls.json`
 - `data/contacts/urls.json`
   - Previous state: empty placeholder seed files.
-  - Current state: populated with real official federal source URLs.
-
-## Remaining Placeholder Data (Visible, Not Yet Replaced)
-
-- `data/pilot_translated.json`
-  - Purpose: translation pilot format-reference artifact.
-  - Current state: `samples` is empty and synthetic example records were removed.
-  - Visibility marker: `meta.syntheticData: true` and explanatory `meta.note`.
+  - Current state: populated with real official source URLs (5 per domain).
 
 - `data/benefits/entries.json`
 - `data/aid/entries.json`
 - `data/tools/entries.json`
 - `data/organizations/entries.json`
 - `data/contacts/entries.json`
-  - Purpose: empty domain snapshots pending moderated crawl ingestion.
-  - Visibility marker: `_todo` replacement tasks (and `_meta.placeholder` for tools entries).
+  - Previous state: empty placeholders or synthetic data.
+  - Current state: populated with validated real entries (5 per domain, 25 total).
+
+## Remaining Synthetic/Reference Data
+
+- `data/pilot_translated.json`
+  - Purpose: translation pilot format-reference artifact.
+  - Current state: `samples` is empty and synthetic example records were removed.
+  - Visibility marker: `meta.syntheticData: true` and explanatory `meta.note`.
 
 ## Suggested Production Gate
 

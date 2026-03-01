@@ -2,6 +2,8 @@
 
 This guide provides detailed instructions for setting up the Systemfehler data platform for local development.
 
+Current baseline (2026-03-01): all five domains are populated with real snapshot data (25 entries total), and `npm run validate` passes with zero errors and warnings.
+
 ## Table of Contents
 
 1. [System Requirements](#system-requirements)
@@ -267,10 +269,9 @@ Checks included:
 - Unknown top-level field rejection
 - Taxonomy ID validation (topics/tags/targetGroups)
 - Lint warnings (missing recommended content/translations)
-- Validate each entry
-- Insert into PostgreSQL (upsert on ID)
-- Insert domain-specific data into benefits table
-- Generate import summary
+
+These validation commands do not import into PostgreSQL; they validate JSON snapshots only.
+Use `npm run db:seed` (or the Python import command) for database import.
 
 ---
 
@@ -398,6 +399,15 @@ This starts:
 - Check that CORS is enabled in backend/server.js
 - Verify the frontend is running on port 5173
 - Update CORS_ORIGIN in `.env` if needed
+
+### GitHub Pages Snapshot Mode
+
+When running on GitHub Pages, the app reads same-origin snapshot JSON instead of `http://localhost:3001`:
+
+- `/systemfehler/data/<domain>/entries.json`
+- `/systemfehler/moderation/review_queue.json`
+
+If the live site appears empty after a push, verify the latest `deploy-github-pages.yml` run succeeded and hard-refresh the page (`Ctrl+F5`).
 
 ---
 

@@ -3,6 +3,8 @@ Cloudflare Pages deployment
 This folder contains Cloudflare Pages Functions for a read-only API that serves
 JSON snapshots from the repository.
 
+Current production frontend hosting is GitHub Pages. Cloudflare deployment remains available as an optional alternative path.
+
 The deployment workflow builds the frontend app from `frontend/` and deploys:
 - static site: `frontend/dist`
 
@@ -33,3 +35,8 @@ Set these in repository settings (`Settings -> Secrets and variables -> Actions`
 Deployment runs from `.github/workflows/deploy-pages.yml` on:
 - pushes to `main`
 - manual workflow dispatch
+
+## Notes
+
+- GitHub Pages workflow: `.github/workflows/deploy-github-pages.yml`
+- GitHub Pages serves same-origin snapshot JSON from `/data/*` and `/moderation/review_queue.json` inside the static artifact.

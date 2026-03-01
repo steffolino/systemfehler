@@ -239,6 +239,12 @@ This structure is indicative and can be refined as the implementation matures.
 
    * Additional scripts generate exports for external tools, APIs, or UIs.
 
+9. **Static hosting delivery (GitHub Pages)**
+
+  * The GitHub Pages workflow copies `data/*` and `moderation/review_queue.json` into frontend public assets before build.
+  * The deployed frontend reads snapshot JSON from same-origin paths to avoid cross-origin API dependencies.
+  * This enables a fully static deployment while preserving read access to validated entries.
+
 ---
 
 ## 5. Long-Term Stability and Evolution

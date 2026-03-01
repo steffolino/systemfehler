@@ -4,6 +4,14 @@ Systemfehler is a modular, extensible, preservation-oriented data platform for s
 
 The goal is to make information about social rights and support more transparent, accessible, and robust against removal or silent change.
 
+## Current Snapshot (2026-03-01)
+
+- Real data is published for all five domains (`benefits`, `aid`, `tools`, `organizations`, `contacts`).
+- Current dataset size: **25 validated entries** (5 per domain).
+- Validation status: **0 schema/structural errors, 0 lint warnings** (`npm run validate`).
+- Public frontend is live on GitHub Pages at `https://steffolino.github.io/systemfehler/`.
+- GitHub Pages builds package snapshot JSON (`/data/*/entries.json`, `/moderation/review_queue.json`) into the static artifact for same-origin reads.
+
 ---
 
 ## Features
@@ -202,6 +210,7 @@ npm run dev:all                 # Start both API and frontend concurrently
 npm run validate                # Validate entries against schemas
 npm run validate:report         # Validate but do not fail on schema errors
 npm run validate:ci             # CI mode JSON report + non-zero exit on errors
+node scripts/enrich_real_entries.js  # Enrich summary/content text for current real entries
 npm run score                   # Calculate quality scores (legacy)
 
 # Reports (legacy)
@@ -264,6 +273,8 @@ The repository includes a Cloudflare Pages deployment workflow for the frontend.
 Read-only API Functions source is maintained in `cloudflare-pages/functions` and
 can be deployed in a dedicated API step.
 
+Note: production hosting currently uses GitHub Pages as the primary live target.
+
 See `cloudflare-pages/README.md` for setup details.
 
 ---
@@ -276,6 +287,11 @@ The repository also includes a GitHub Pages workflow for static frontend hosting
 - Build directory: `frontend/dist`
 - Base path: `/systemfehler/`
 - Expected URL: `https://steffolino.github.io/systemfehler/`
+- Pages configuration must be set to `build_type: workflow` (GitHub Actions), not legacy branch/docs mode.
+- Workflow copies `data/*` and `moderation/review_queue.json` into `frontend/public` before build, so snapshots are served from the same origin.
+- Frontend snapshot fallback reads from same-origin paths in production:
+  - `/systemfehler/data/<domain>/entries.json`
+  - `/systemfehler/moderation/review_queue.json`
 
 ---
 
@@ -317,4 +333,4 @@ To be defined. Until then, please consider the repository as "all rights reserve
 
 ## Status
 
-Systemfehler is under active design and early implementation. The architecture and documentation are intended to support incremental development while keeping long-term goals and data integrity in focus.
+Systemfehler is in active implementation with a live static deployment and validated real-data snapshots. Ongoing work focuses on broadening source coverage, deepening extraction quality, and maintaining strict schema/taxonomy compliance.
