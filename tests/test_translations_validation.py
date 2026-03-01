@@ -53,3 +53,38 @@ def test_translations_validate_ok(tmp_path):
     result = v.validate_entry(entry, domain='contacts')
 
     assert result['valid'], f"Validation failed: {result['errors']}"
+
+
+def test_rejects_unknown_top_level_key():
+    v = SchemaValidator()
+    entry = make_sample_entry()
+    entry['unexpectedField'] = 'not-allowed'
+
+    result = v.validate_entry(entry, domain='contacts')
+
+    assert result['valid'] is False
+    assert any("Unknown top-level field 'unexpectedField'" in err for err in result['errors'])
+
+
+def test_rejects_invalid_translation_payload():
+    v = SchemaValidator()
+    entry = make_sample_entry()
+    entry['translations']['de-LEICHT']['extra'] = 'invalid'
+    del entry['translations']['en']['provenance']
+
+    result = v.validate_entry(entry, domain='contacts')
+
+    assert result['valid'] is False
+    assert any('translations.de-LEICHT: Unknown field' in err for err in result['errors'])
+    assert any('translations.en.provenance: Missing required field' in err for err in result['errors'])
+
+
+def test_rejects_invalid_provenance_shape():
+    v = SchemaValidator()
+    entry = make_sample_entry()
+    entry['provenance'] = 'example.org'
+
+    result = v.validate_entry(entry, domain='contacts')
+
+    assert result['valid'] is False
+    assert any('provenance: Must be an object' in err for err in result['errors'])

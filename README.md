@@ -200,6 +200,8 @@ npm run dev:all                 # Start both API and frontend concurrently
 
 # Validation and Quality
 npm run validate                # Validate entries against schemas
+npm run validate:report         # Validate but do not fail on schema errors
+npm run validate:ci             # CI mode JSON report + non-zero exit on errors
 npm run score                   # Calculate quality scores (legacy)
 
 # Reports (legacy)
@@ -228,6 +230,26 @@ python crawlers/cli.py validate --domain benefits
 # Import to database
 python crawlers/cli.py import --domain benefits --to-db
 ```
+
+### Validation Pipeline (DATA-05)
+
+Use the Node validator for schema + taxonomy checks and lint warnings:
+
+```bash
+# Human-readable local report (fails on schema errors)
+npm run validate
+
+# Human-readable local report (never fails build)
+npm run validate:report
+
+# CI mode: JSON output + non-zero on validation errors
+npm run validate:ci
+
+# Optional flags
+node scripts/validate_entries.js --domain=benefits --max-samples=10 --fail-on-errors=false
+```
+
+The report includes entry counts, error/warning totals, and sample failures.
 
 ---
 

@@ -1,0 +1,45 @@
+{
+    "canonicalization": [
+        {
+            "name": "lowercase host, remove default https port, remove fragment",
+            "input": "HTTPS://Example.ORG:443/path/to/page/#section",
+            "expected": "https://example.org/path/to/page"
+        },
+        {
+            "name": "sort query params and strip tracking params",
+            "input": "https://example.org/search?b=2&utm_source=newsletter&a=1&utm_campaign=test",
+            "expected": "https://example.org/search?a=1&b=2"
+        },
+        {
+            "name": "normalize dot segments and trailing slash",
+            "input": "https://example.org/a/./b/../c/",
+            "expected": "https://example.org/a/c"
+        },
+        {
+            "name": "preserve non-default port",
+            "input": "http://example.org:8080/path/?x=1",
+            "expected": "http://example.org:8080/path?x=1"
+        }
+    ],
+    "duplicates": [
+        {
+            "name": "query tracking variant duplicate",
+            "input": "https://example.org/page?utm_medium=email&id=10",
+            "existing": [
+                "https://example.org/page?id=10",
+                "https://other.org/page?id=10"
+            ],
+            "isDuplicate": true,
+            "matchedUrl": "https://example.org/page?id=10"
+        },
+        {
+            "name": "not duplicate when canonical differs",
+            "input": "https://example.org/page?id=11",
+            "existing": [
+                "https://example.org/page?id=10"
+            ],
+            "isDuplicate": false,
+            "matchedUrl": null
+        }
+    ]
+}

@@ -238,6 +238,35 @@ python crawlers/cli.py import --domain benefits --to-db
 
 This will:
 - Read entries from `data/benefits/entries.json`
+
+---
+
+## Validation Pipeline (DATA-05)
+
+Run full schema validation + lint checks over all domain entries:
+
+```bash
+# Local readable output (fails on schema/structural errors)
+npm run validate
+
+# Local readable output (always exits 0)
+npm run validate:report
+
+# CI-friendly JSON report + non-zero on validation errors
+npm run validate:ci
+```
+
+Optional flags:
+
+```bash
+node scripts/validate_entries.js --domain=benefits --max-samples=10 --fail-on-errors=false
+```
+
+Checks included:
+- Core + extension schema validation
+- Unknown top-level field rejection
+- Taxonomy ID validation (topics/tags/targetGroups)
+- Lint warnings (missing recommended content/translations)
 - Validate each entry
 - Insert into PostgreSQL (upsert on ID)
 - Insert domain-specific data into benefits table

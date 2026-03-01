@@ -31,6 +31,11 @@ class SchemaValidator:
         self.schemas_dir = Path(schemas_dir)
         self.core_schema = self._load_schema('core.schema.json')
         self.extension_schemas = self._load_extension_schemas()
+        self._allowed_core_fields = set(self.core_schema.get('properties', {}).keys())
+        self._allowed_extension_fields = {
+            domain: set(schema.get('properties', {}).keys())
+            for domain, schema in self.extension_schemas.items()
+        }
         # Build a resolver store to avoid remote $ref lookups for known schemas
         self._schema_store = {}
         try:
@@ -86,6 +91,16 @@ class SchemaValidator:
         if core_errors:
             result['valid'] = False
             result['errors'].extend(core_errors)
+
+        unknown_key_errors = self._validate_unknown_top_level_keys(entry, domain)
+        if unknown_key_errors:
+            result['valid'] = False
+            result['errors'].extend(unknown_key_errors)
+
+        structure_errors = self._validate_translations_and_provenance_structure(entry)
+        if structure_errors:
+            result['valid'] = False
+            result['errors'].extend(structure_errors)
         
         # Then validate against extension schema if it exists
         if domain in self.extension_schemas:
@@ -103,6 +118,63 @@ class SchemaValidator:
             result['warnings'].extend(warnings)
         
         return result
+
+    def _validate_unknown_top_level_keys(self, entry: Dict[str, Any], domain: str) -> List[str]:
+        """Reject unknown top-level keys for a domain entry."""
+        if not isinstance(entry, dict):
+            return ["root: Entry must be an object"]
+
+        allowed = set(self._allowed_core_fields)
+        allowed.update(self._allowed_extension_fields.get(domain, set()))
+
+        unknown = sorted(key for key in entry.keys() if key not in allowed)
+        if not unknown:
+            return []
+
+        return [f"root: Unknown top-level field '{key}'" for key in unknown]
+
+    def _validate_translations_and_provenance_structure(self, entry: Dict[str, Any]) -> List[str]:
+        """Run strict structural checks for translations and provenance payloads."""
+        errors = []
+
+        provenance = entry.get('provenance')
+        if provenance is not None and not isinstance(provenance, dict):
+            errors.append("provenance: Must be an object")
+
+        translations = entry.get('translations')
+        if translations is not None:
+            if not isinstance(translations, dict):
+                errors.append("translations: Must be an object")
+                return errors
+
+            for lang, payload in translations.items():
+                if not isinstance(payload, dict):
+                    errors.append(f"translations.{lang}: Must be an object")
+                    continue
+
+                for required in ('title', 'timestamp', 'provenance'):
+                    if required not in payload:
+                        errors.append(f"translations.{lang}.{required}: Missing required field")
+
+                t_provenance = payload.get('provenance')
+                if t_provenance is not None and not isinstance(t_provenance, dict):
+                    errors.append(f"translations.{lang}.provenance: Must be an object")
+
+                allowed_translation_fields = {
+                    'title',
+                    'summary',
+                    'body',
+                    'provenance',
+                    'method',
+                    'generator',
+                    'timestamp',
+                    'reviewed'
+                }
+                for key in payload.keys():
+                    if key not in allowed_translation_fields:
+                        errors.append(f"translations.{lang}: Unknown field '{key}'")
+
+        return errors
     
     def _validate_against_schema(self, data: Dict[str, Any], schema: Dict[str, Any]) -> List[str]:
         """

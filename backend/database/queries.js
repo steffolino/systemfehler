@@ -25,7 +25,8 @@ function withLegacyKeys(entry, legacyMap) {
   return entry;
 }
 
-function mapEntryRow(row) {
+function mapEntryRow(row, options = {}) {
+  const { includeTranslations = false } = options;
   const title = buildMultilingual({
     de: row.title_de,
     en: row.title_en,
@@ -42,6 +43,7 @@ function mapEntryRow(row) {
     easyDe: row.content_easy_de
   });
 
+  const translations = includeTranslations ? (row.translations || null) : null;
   const base = {
     id: row.id,
     domain: row.domain,
@@ -65,8 +67,8 @@ function mapEntryRow(row) {
     ais: row.ais !== null && row.ais !== undefined ? Number(row.ais) : null,
     createdAt: row.created_at || undefined,
     updatedAt: row.updated_at || undefined,
-    translations: null,
-    translationLanguages: []
+    translations,
+    translationLanguages: translations ? Object.keys(translations) : []
   };
 
   const withBackCompat = withLegacyKeys(base, {
@@ -194,7 +196,9 @@ export async function getAllEntries(options = {}) {
   `;
   
   const entriesResult = await query(entriesQuery, params);
-  let entries = entriesResult.rows.map(mapEntryRow);
+  let entries = entriesResult.rows.map((row) => mapEntryRow(row, {
+    includeTranslations: Boolean(options.includeTranslations)
+  }));
 
   if (options.includeTranslations) {
     const domains = {};
@@ -257,7 +261,7 @@ export async function getEntryById(id) {
   }
   
   const entryRow = result.rows[0];
-  const entry = mapEntryRow(entryRow);
+  const entry = mapEntryRow(entryRow, { includeTranslations: true });
   
   // Fetch domain-specific data
   const domainTable = entry.domain;
@@ -271,20 +275,22 @@ export async function getEntryById(id) {
   }
 
   // Try to attach translations from JSON snapshot if present
-  try {
-    const filePath = path.resolve(process.cwd(), 'data', entry.domain, 'entries.json');
-    const txt = await fs.readFile(filePath, 'utf8');
-    const parsed = JSON.parse(txt || '{}');
-    const arr = Array.isArray(parsed) ? parsed : parsed.entries || [];
-    if (Array.isArray(arr)) {
-      const s = arr.find(e => e && e.id === id);
-      if (s && s.translations) {
-        entry.translations = s.translations;
-        entry.translationLanguages = Object.keys(s.translations);
+  if (!entry.translations) {
+    try {
+      const filePath = path.resolve(process.cwd(), 'data', entry.domain, 'entries.json');
+      const txt = await fs.readFile(filePath, 'utf8');
+      const parsed = JSON.parse(txt || '{}');
+      const arr = Array.isArray(parsed) ? parsed : parsed.entries || [];
+      if (Array.isArray(arr)) {
+        const s = arr.find(e => e && e.id === id);
+        if (s && s.translations) {
+          entry.translations = s.translations;
+          entry.translationLanguages = Object.keys(s.translations);
+        }
       }
+    } catch (err) {
+      // ignore read/parsing errors
     }
-  } catch (err) {
-    // ignore read/parsing errors
   }
 
   return entry;
@@ -465,6 +471,7 @@ export async function searchEntries(options = {}) {
     searchText,
     domain = null,
     language = 'german',
+    includeTranslations = false,
     limit = 50,
     offset = 0
   } = options;
@@ -514,14 +521,52 @@ export async function searchEntries(options = {}) {
   `;
   
   const result = await query(searchQuery, params);
+  let entries = result.rows.map((row) => mapEntryRow(row, { includeTranslations }));
+
+  if (includeTranslations) {
+    const domains = {};
+    entries.forEach((entry) => {
+      if (!domains[entry.domain]) domains[entry.domain] = [];
+      domains[entry.domain].push(entry.id);
+    });
+
+    const translationsMap = {};
+    for (const domainName of Object.keys(domains)) {
+      try {
+        const filePath = path.resolve(process.cwd(), 'data', domainName, 'entries.json');
+        const txt = await fs.readFile(filePath, 'utf8');
+        const parsed = JSON.parse(txt || '{}');
+        const arr = Array.isArray(parsed) ? parsed : parsed.entries || [];
+        if (Array.isArray(arr)) {
+          arr.forEach((entry) => {
+            if (entry && entry.id && entry.translations) {
+              translationsMap[entry.id] = entry.translations;
+            }
+          });
+        }
+      } catch (err) {
+        // ignore missing domains or parse errors
+      }
+    }
+
+    attachTranslations(entries, translationsMap);
+  }
   
   return {
-    entries: result.rows,
-    total: result.rows.length,
+    entries,
+    total: entries.length,
     limit,
     offset
   };
 }
+
+export const __private = {
+  mapEntryRow,
+  mapDomainRow,
+  buildMultilingual,
+  withLegacyKeys,
+  attachTranslations
+};
 
 export default {
   getAllEntries,
