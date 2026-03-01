@@ -1,9 +1,44 @@
 {
   "version": "0.1.0",
   "domain": "benefits",
-  "entries": [],
+  "entries": [
+    {
+      "title": {
+        "de": "Bürgergeld (Arbeitslosengeld II)"
+      },
+      "topics": [
+        "financial_support",
+        "employment"
+      ],
+      "tags": [
+        "means_tested",
+        "application_required"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "single_parents",
+        "families"
+      ],
+      "id": "c6fb568f-2e9a-4b26-b6c6-74c0e38205c9",
+      "url": "https://www.arbeitsagentur.de/arbeitslosengeld-2",
+      "status": "active",
+      "firstSeen": "2026-03-01T18:38:38.422093+00:00",
+      "lastSeen": "2026-03-01T18:38:38.422108+00:00",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/arbeitslosengeld-2",
+        "crawledAt": "2026-03-01T18:38:38.422182Z",
+        "crawlId": "arbeitsagentur-1772390318",
+        "checksum": "ffc0d29466a4c3d036b2d235d5654104d0978487c703a43f8b567679ad3963fc"
+      },
+      "qualityScores": {
+        "iqs": 78.12,
+        "ais": 46.5,
+        "computedAt": "2026-03-01T18:38:38.422231+00:00"
+      }
+    }
+  ],
   "_todo": [
-    "TODO: Populate with moderated benefits records sourced from live crawls",
     "TODO: Validate against benefits schema before import"
   ]
 }
