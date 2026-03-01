@@ -9,8 +9,10 @@
   },
   "urls": [
     "https://www.arbeitsagentur.de/arbeitslosengeld-2",
+    "https://www.arbeitsagentur.de/kurzarbeitergeld",
     "https://www.arbeitsagentur.de/familie-und-kinder",
-    "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen"
+    "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen",
+    "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kindergeld/kindergeld-73892"
   ],
   "_todo": [
     "TODO: Expand with additional federal and state benefit landing pages per CRAWL-02 (Issue #5)",

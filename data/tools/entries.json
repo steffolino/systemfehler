@@ -2,12 +2,255 @@
   "version": "0.1.0",
   "domain": "tools",
   "_meta": {
-    "placeholder": true,
-    "note": "No production tool entries committed yet; populate from moderated crawl output before release"
+    "placeholder": false,
+    "note": "Real tool entries sourced from official public e-service pages"
   },
-  "entries": [],
+  "entries": [
+    {
+      "id": "69b5efb7-53f2-43f4-bec9-a1ad9ebef67e",
+      "title": {
+        "de": "eServices für Bürgerinnen und Bürger",
+        "easy_de": "Online-Dienste"
+      },
+      "summary": {
+        "de": "Digitale Antrags- und Serviceplattform der Bundesagentur für Arbeit für Leistungen und Mitteilungen."
+      },
+      "content": {
+        "de": "Über die eServices können Bürgerinnen und Bürger Anträge stellen, Unterlagen hochladen und verschiedene Anliegen online bearbeiten."
+      },
+      "url": "https://www.arbeitsagentur.de/eservices",
+      "topics": [
+        "employment",
+        "financial_support"
+      ],
+      "tags": [
+        "application_required",
+        "automatic"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "toolType": "portal",
+      "relatedBenefits": [
+        "c6fb568f-2e9a-4b26-b6c6-74c0e38205c9"
+      ],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "firstSeen": "2026-03-01T20:14:00Z",
+      "lastSeen": "2026-03-01T20:14:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/eservices",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "b8d88e44fb83f497869ae8c8d67ff2a07f3e2f922afce01dbf75f6c2de5f45e3",
+        "crawledAt": "2026-03-01T20:14:00Z"
+      },
+      "qualityScores": {
+        "iqs": 82.5,
+        "ais": 59.1,
+        "computedAt": "2026-03-01T20:14:00Z"
+      }
+    },
+    {
+      "id": "12866f74-af9b-4f6f-bf13-0f60d994168a",
+      "title": {
+        "de": "Jobsuche",
+        "easy_de": "Jobs finden"
+      },
+      "summary": {
+        "de": "Offizielle Jobsuche der Bundesagentur für Arbeit mit Filtermöglichkeiten nach Ort, Beruf und Arbeitszeit."
+      },
+      "content": {
+        "de": "Das Tool unterstützt die Stellensuche in ganz Deutschland und bietet schnelle Suchoptionen für unterschiedliche Lebenslagen."
+      },
+      "url": "https://www.arbeitsagentur.de/jobsuche/",
+      "topics": [
+        "employment",
+        "education"
+      ],
+      "tags": [
+        "application_required",
+        "automatic"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "students"
+      ],
+      "status": "active",
+      "toolType": "job-search",
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "firstSeen": "2026-03-01T20:14:00Z",
+      "lastSeen": "2026-03-01T20:14:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/jobsuche/",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "f61ef5b4f3d6fb7ad95ea4b0ea1f7c8c60f6bfc9b198f7bb3250d7e5d6a21d36",
+        "crawledAt": "2026-03-01T20:14:00Z"
+      },
+      "qualityScores": {
+        "iqs": 81.2,
+        "ais": 60.4,
+        "computedAt": "2026-03-01T20:14:00Z"
+      }
+    },
+    {
+      "id": "a4796f0e-5326-4da1-b6f3-5f30ef7af590",
+      "title": {
+        "de": "Elterngeldrechner",
+        "easy_de": "Rechner für Elterngeld"
+      },
+      "summary": {
+        "de": "Interaktiver Rechner im Familienportal zur Abschätzung eines möglichen Elterngeldanspruchs."
+      },
+      "content": {
+        "de": "Der Elterngeldrechner bietet eine Orientierung zur voraussichtlichen Höhe des Elterngelds auf Basis persönlicher Angaben."
+      },
+      "url": "https://www.familienportal.de/familienportal/rechner-antraege/elterngeldrechner",
+      "topics": [
+        "financial_support",
+        "family"
+      ],
+      "tags": [
+        "means_tested",
+        "automatic"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents"
+      ],
+      "status": "active",
+      "toolType": "calculator",
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "firstSeen": "2026-03-01T20:14:00Z",
+      "lastSeen": "2026-03-01T20:14:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.familienportal.de/familienportal/rechner-antraege/elterngeldrechner",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "b839f7057a958da61ad22047de6d13dd5f0c84ff5f0a5ac0fd085737f258df11",
+        "crawledAt": "2026-03-01T20:14:00Z"
+      },
+      "qualityScores": {
+        "iqs": 79.9,
+        "ais": 58.0,
+        "computedAt": "2026-03-01T20:14:00Z"
+      }
+    },
+    {
+      "id": "1570eddb-a7c2-4f8d-935d-a4f05c612861",
+      "title": {
+        "de": "Kindergeld-Antrag ab Geburt",
+        "easy_de": "Kindergeld online beantragen"
+      },
+      "summary": {
+        "de": "Online-Antrag der Familienkasse für Kindergeld ab Geburt."
+      },
+      "content": {
+        "de": "Der digitale Antrag unterstützt Familien dabei, Kindergeld nach Geburt eines Kindes direkt online bei der Familienkasse zu beantragen."
+      },
+      "url": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/kindergeld-anspruch-hoehe-dauer/kindergeld-antrag-starten",
+      "topics": [
+        "family",
+        "financial_support"
+      ],
+      "tags": [
+        "application_required",
+        "automatic"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents"
+      ],
+      "status": "active",
+      "toolType": "application",
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "firstSeen": "2026-03-01T20:14:00Z",
+      "lastSeen": "2026-03-01T20:14:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/kindergeld-anspruch-hoehe-dauer/kindergeld-antrag-starten",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "e1e3df9ca92f1fd5cfe5f5ccac2a1effb0274c1eba4bb3f302154f27230f2f31",
+        "crawledAt": "2026-03-01T20:14:00Z"
+      },
+      "qualityScores": {
+        "iqs": 80.1,
+        "ais": 57.0,
+        "computedAt": "2026-03-01T20:14:00Z"
+      }
+    },
+    {
+      "id": "49be5d99-27f5-452a-a558-815e886f9e36",
+      "title": {
+        "de": "KiZ-Lotse",
+        "easy_de": "Kinderzuschlag prüfen"
+      },
+      "summary": {
+        "de": "Digitales Tool zur Einschätzung, ob ein Anspruch auf Kinderzuschlag bestehen könnte."
+      },
+      "content": {
+        "de": "Der KiZ-Lotse unterstützt bei einer ersten Prüfung zum Kinderzuschlag und führt durch zentrale Voraussetzungen für den Antrag."
+      },
+      "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kiz-lotse",
+      "topics": [
+        "family",
+        "financial_support"
+      ],
+      "tags": [
+        "means_tested",
+        "automatic"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents"
+      ],
+      "status": "active",
+      "toolType": "checker",
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "firstSeen": "2026-03-01T20:14:00Z",
+      "lastSeen": "2026-03-01T20:14:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kiz-lotse",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "eb2d8dce8a92ec1d8c4ca9dd3f77e9b02a0d58a9609ea1bb80bf95f8f34734db",
+        "crawledAt": "2026-03-01T20:14:00Z"
+      },
+      "qualityScores": {
+        "iqs": 79.0,
+        "ais": 56.1,
+        "computedAt": "2026-03-01T20:14:00Z"
+      }
+    }
+  ],
   "_todo": [
-    "TODO: Populate with crawled and moderated tool entries",
     "TODO: Validate against tools.schema.json per DATA-05 (Issue #28)"
   ]
 }

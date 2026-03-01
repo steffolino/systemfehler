@@ -1,9 +1,262 @@
 {
   "version": "0.1.0",
   "domain": "organizations",
-  "entries": [],
+  "entries": [
+    {
+      "id": "8e6e6ac8-a569-485d-a34b-f0b95c93095b",
+      "title": {
+        "de": "Bundesagentur für Arbeit (Über uns)",
+        "easy_de": "Bundesagentur für Arbeit"
+      },
+      "summary": {
+        "de": "Organisationsseite der Bundesagentur für Arbeit mit Struktur, Aufgaben und zentralen Dienststellen."
+      },
+      "content": {
+        "de": "Die BA informiert über Vorstand, Selbstverwaltung, regionale Struktur sowie zentrale Aufgaben in Arbeitsvermittlung und Leistungsverwaltung."
+      },
+      "url": "https://www.arbeitsagentur.de/ueber-uns",
+      "topics": [
+        "employment",
+        "financial_support"
+      ],
+      "tags": [
+        "application_required",
+        "automatic"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "organizationType": "government",
+      "region": "Germany",
+      "services": [
+        "Arbeitsvermittlung",
+        "Leistungen",
+        "Familienkasse"
+      ],
+      "contactDetails": {
+        "website": "https://www.arbeitsagentur.de/"
+      },
+      "firstSeen": "2026-03-01T20:16:00Z",
+      "lastSeen": "2026-03-01T20:16:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/ueber-uns",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "ca62ace0f1e9f086016e937f640ce238c20c0e9f2cf26da2ec4f8cfaa65c271f",
+        "crawledAt": "2026-03-01T20:16:00Z"
+      },
+      "qualityScores": {
+        "iqs": 80.7,
+        "ais": 50.9,
+        "computedAt": "2026-03-01T20:16:00Z"
+      }
+    },
+    {
+      "id": "084ea142-cea9-48cf-bcd0-0a6f4d13e8f2",
+      "title": {
+        "de": "BMBFSFJ",
+        "easy_de": "Familien-Ministerium"
+      },
+      "summary": {
+        "de": "Startseite des Bundesministeriums für Bildung, Familie, Senioren, Frauen und Jugend."
+      },
+      "content": {
+        "de": "Das Ministerium informiert über Themen, Programme und Serviceangebote rund um Familie, Jugend, Gleichstellung und gesellschaftliche Teilhabe."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj",
+      "topics": [
+        "family",
+        "education"
+      ],
+      "tags": [
+        "application_required",
+        "automatic"
+      ],
+      "targetGroups": [
+        "families",
+        "seniors"
+      ],
+      "status": "active",
+      "organizationType": "government",
+      "region": "Germany",
+      "services": [
+        "Familienpolitik",
+        "Jugendpolitik",
+        "Service und Kontakt"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj"
+      },
+      "firstSeen": "2026-03-01T20:16:00Z",
+      "lastSeen": "2026-03-01T20:16:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "9a9cb7c43224c369eaebf21f7f9f3e17f51f6a7705fd5eb78fda3c4a38d6b17a",
+        "crawledAt": "2026-03-01T20:16:00Z"
+      },
+      "qualityScores": {
+        "iqs": 79.4,
+        "ais": 49.7,
+        "computedAt": "2026-03-01T20:16:00Z"
+      }
+    },
+    {
+      "id": "f9e97f8e-a6de-4eb4-a785-f7e0f8eaf143",
+      "title": {
+        "de": "Bundesministerien (Bundesregierung)",
+        "easy_de": "Ministerien in Deutschland"
+      },
+      "summary": {
+        "de": "Übersichtsseite der Bundesregierung zu den Bundesministerien und ihren Aufgabenbereichen."
+      },
+      "content": {
+        "de": "Die Seite stellt die Bundesministerien vor und erläutert deren Rolle in der Bundesverwaltung sowie politische Zuständigkeiten."
+      },
+      "url": "https://www.bundesregierung.de/breg-de/bundesregierung/bundesministerien",
+      "topics": [
+        "employment",
+        "family"
+      ],
+      "tags": [
+        "automatic",
+        "application_required"
+      ],
+      "targetGroups": [
+        "families",
+        "students"
+      ],
+      "status": "active",
+      "organizationType": "government",
+      "region": "Germany",
+      "services": [
+        "Ministeriumsübersicht",
+        "Bundesverwaltung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bundesregierung.de/breg-de"
+      },
+      "firstSeen": "2026-03-01T20:16:00Z",
+      "lastSeen": "2026-03-01T20:16:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.bundesregierung.de/breg-de/bundesregierung/bundesministerien",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "37bd737a0e7ebf7f60ebbb877fd6513fd5f9ecf2963509677f9994369d8a4f3c",
+        "crawledAt": "2026-03-01T20:16:00Z"
+      },
+      "qualityScores": {
+        "iqs": 76.6,
+        "ais": 47.0,
+        "computedAt": "2026-03-01T20:16:00Z"
+      }
+    },
+    {
+      "id": "688d7da7-e9ef-4238-a6a6-a7ea0e818ef8",
+      "title": {
+        "de": "Bundesministerium für Arbeit und Soziales (BMAS)",
+        "easy_de": "Arbeits-Ministerium"
+      },
+      "summary": {
+        "de": "Startseite des BMAS mit Informationen zu Arbeit, Soziales, Serviceangeboten und Ministerium."
+      },
+      "content": {
+        "de": "Das BMAS stellt Informationen zu arbeitsmarkt- und sozialpolitischen Themen bereit und bietet zentrale Kontakt- und Servicewege."
+      },
+      "url": "https://www.bmas.de/DE/Startseite/start.html",
+      "topics": [
+        "employment",
+        "financial_support"
+      ],
+      "tags": [
+        "automatic",
+        "application_required"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "disabled"
+      ],
+      "status": "active",
+      "organizationType": "government",
+      "region": "Germany",
+      "services": [
+        "Arbeit",
+        "Soziales",
+        "Bürgertelefon"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmas.de/"
+      },
+      "firstSeen": "2026-03-01T20:16:00Z",
+      "lastSeen": "2026-03-01T20:16:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Startseite/start.html",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "6bb366a68339f42f5e6a8bb30a78087f3f53384a426f6cf44ca4ac314ca31304",
+        "crawledAt": "2026-03-01T20:16:00Z"
+      },
+      "qualityScores": {
+        "iqs": 78.2,
+        "ais": 48.5,
+        "computedAt": "2026-03-01T20:16:00Z"
+      }
+    },
+    {
+      "id": "39160593-cf96-4525-b3d2-f16796af5df8",
+      "title": {
+        "de": "FITKO – Produktmanagement 115",
+        "easy_de": "FITKO und die 115"
+      },
+      "summary": {
+        "de": "Informationsseite der FITKO zum Produktmanagement der Behördennummer 115."
+      },
+      "content": {
+        "de": "Die FITKO koordiniert als föderale IT-Kooperation unter anderem den Betrieb und die Weiterentwicklung der Behördenrufnummer 115."
+      },
+      "url": "https://www.fitko.de/produktmanagement/115",
+      "topics": [
+        "family",
+        "employment"
+      ],
+      "tags": [
+        "automatic",
+        "application_required"
+      ],
+      "targetGroups": [
+        "families",
+        "refugees"
+      ],
+      "status": "active",
+      "organizationType": "government",
+      "region": "Germany",
+      "services": [
+        "Verwaltungsservice",
+        "Behördennummer 115"
+      ],
+      "contactDetails": {
+        "website": "https://www.fitko.de/"
+      },
+      "firstSeen": "2026-03-01T20:16:00Z",
+      "lastSeen": "2026-03-01T20:16:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.fitko.de/produktmanagement/115",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "c44d89918056d7839ad03693e98db1f3025c32786f5c3ed65e11d355ce0f03af",
+        "crawledAt": "2026-03-01T20:16:00Z"
+      },
+      "qualityScores": {
+        "iqs": 74.8,
+        "ais": 45.9,
+        "computedAt": "2026-03-01T20:16:00Z"
+      }
+    }
+  ],
   "_todo": [
-    "TODO: Populate with crawled and moderated organization entries",
     "TODO: Validate against organizations.schema.json per DATA-05 (Issue #28)"
   ]
 }

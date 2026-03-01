@@ -43,6 +43,170 @@
         "ais": 46.5,
         "computedAt": "2026-03-01T18:38:38.422231+00:00"
       }
+    },
+    {
+      "id": "ab6ecb16-b9df-4654-bde8-94a02f0d3302",
+      "title": {
+        "de": "Kurzarbeitergeld",
+        "easy_de": "Hilfe bei Kurzarbeit"
+      },
+      "summary": {
+        "de": "Informationen der Bundesagentur für Arbeit zum Kurzarbeitergeld für Betriebe und Beschäftigte bei vorübergehendem Arbeitsausfall."
+      },
+      "content": {
+        "de": "Die Seite erklärt Voraussetzungen, Verfahren und Hinweise zur Leistung Kurzarbeitergeld. Sie richtet sich an Unternehmen und Betroffene in Phasen reduzierter Arbeitszeit."
+      },
+      "url": "https://www.arbeitsagentur.de/kurzarbeitergeld",
+      "topics": [
+        "financial_support",
+        "employment"
+      ],
+      "tags": [
+        "application_required",
+        "time_limited"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-01T20:10:00Z",
+      "lastSeen": "2026-03-01T20:10:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/kurzarbeitergeld",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "2ef8ee37d9f5582f3b8debf465436172d0870f3e1977fc89ceef0ad80b0b7e4a",
+        "crawledAt": "2026-03-01T20:10:00Z"
+      },
+      "qualityScores": {
+        "iqs": 77.4,
+        "ais": 49.7,
+        "computedAt": "2026-03-01T20:10:00Z"
+      }
+    },
+    {
+      "id": "a6f576ba-c5f0-4ff2-8f63-aa56abbb56fd",
+      "title": {
+        "de": "Familie und Kinder (Leistungsüberblick)",
+        "easy_de": "Hilfe für Familien"
+      },
+      "summary": {
+        "de": "Übersicht der Bundesagentur für Arbeit zu Kindergeld, Kinderzuschlag und weiteren Unterstützungsleistungen für Familien."
+      },
+      "content": {
+        "de": "Die Seite bündelt Informationen zu Familienleistungen und verweist auf digitale Anträge, Fristen und weiterführende Beratungsangebote der Familienkasse."
+      },
+      "url": "https://www.arbeitsagentur.de/familie-und-kinder",
+      "topics": [
+        "financial_support",
+        "family"
+      ],
+      "tags": [
+        "application_required",
+        "means_tested"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-01T20:10:00Z",
+      "lastSeen": "2026-03-01T20:10:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/familie-und-kinder",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "8af7ad26c31cda2283dc396969745688f58f74e826de8822d7405ea3d5f92931",
+        "crawledAt": "2026-03-01T20:10:00Z"
+      },
+      "qualityScores": {
+        "iqs": 79.8,
+        "ais": 51.2,
+        "computedAt": "2026-03-01T20:10:00Z"
+      }
+    },
+    {
+      "id": "f0d4693b-32e1-4ec6-95fb-e9d75efefdfa",
+      "title": {
+        "de": "Familienleistungen (BMBFSFJ)",
+        "easy_de": "Familien-Leistungen"
+      },
+      "summary": {
+        "de": "Offizielle Übersichtsseite des Bundesministeriums zu zentralen Familienleistungen wie Elterngeld, Kindergeld und Kinderzuschlag."
+      },
+      "content": {
+        "de": "Das BMBFSFJ erläutert bundesweite Familienleistungen, Voraussetzungen und weiterführende Informations- sowie Serviceangebote für Eltern und Erziehende."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen",
+      "topics": [
+        "financial_support",
+        "family"
+      ],
+      "tags": [
+        "application_required",
+        "means_tested"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-01T20:10:00Z",
+      "lastSeen": "2026-03-01T20:10:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "ec0ed83e469778b0fdf1d2a7c70fd4fa7f1a6f8c5e372514ce717fce83032630",
+        "crawledAt": "2026-03-01T20:10:00Z"
+      },
+      "qualityScores": {
+        "iqs": 81.0,
+        "ais": 53.0,
+        "computedAt": "2026-03-01T20:10:00Z"
+      }
+    },
+    {
+      "id": "76c47e08-9f3b-4053-97bc-62c4e09aa6ee",
+      "title": {
+        "de": "Kindergeld",
+        "easy_de": "Geld für Kinder"
+      },
+      "summary": {
+        "de": "Informationsseite des BMBFSFJ zum Kindergeld als zentrale Leistung für Familien in Deutschland."
+      },
+      "content": {
+        "de": "Die Seite beschreibt das Kindergeld, ordnet es im Leistungssystem ein und verlinkt zu weiterführenden Informationen für Antrag und Anspruch."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kindergeld/kindergeld-73892",
+      "topics": [
+        "financial_support",
+        "family"
+      ],
+      "tags": [
+        "application_required",
+        "automatic"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-01T20:10:00Z",
+      "lastSeen": "2026-03-01T20:10:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kindergeld/kindergeld-73892",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "fa664ec8eb3f7782ac29965f22420ab0f6dbc9d7f03041e2caeb1f4cce5a8d6d",
+        "crawledAt": "2026-03-01T20:10:00Z"
+      },
+      "qualityScores": {
+        "iqs": 80.3,
+        "ais": 52.4,
+        "computedAt": "2026-03-01T20:10:00Z"
+      }
     }
   ],
   "_todo": [

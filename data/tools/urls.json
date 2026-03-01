@@ -10,7 +10,9 @@
   "urls": [
     "https://www.arbeitsagentur.de/eservices",
     "https://www.arbeitsagentur.de/jobsuche/",
-    "http://www.familien-wegweiser.de/Elterngeldrechner"
+    "https://www.familienportal.de/familienportal/rechner-antraege/elterngeldrechner",
+    "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/kindergeld-anspruch-hoehe-dauer/kindergeld-antrag-starten",
+    "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kiz-lotse"
   ],
   "_todo": [
     "TODO: Expand with additional verified official calculators and self-service tools",

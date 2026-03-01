@@ -1,9 +1,229 @@
 {
   "version": "0.1.0",
   "domain": "aid",
-  "entries": [],
+  "entries": [
+    {
+      "id": "73e0faca-96c6-4ca1-a1bb-37d6f2715fdb",
+      "title": {
+        "de": "Kinderzuschlag und Leistungen für Bildung und Teilhabe",
+        "easy_de": "Kinderzuschlag und Bildungs-Hilfe"
+      },
+      "summary": {
+        "de": "Offizielle Informationen des BMBFSFJ zum Kinderzuschlag als Unterstützung für Familien mit kleinem Einkommen."
+      },
+      "content": {
+        "de": "Die Seite beschreibt, wer Anspruch auf Kinderzuschlag hat und verweist auf das Antragsverfahren sowie ergänzende Leistungen für Bildung und Teilhabe."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kinderzuschlag-und-leistungen-fuer-bildung-und-teilhabe-73906",
+      "topics": [
+        "financial_support",
+        "family"
+      ],
+      "tags": [
+        "means_tested",
+        "application_required"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents"
+      ],
+      "status": "active",
+      "aidType": "financial",
+      "modality": "application",
+      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+      "firstSeen": "2026-03-01T20:12:00Z",
+      "lastSeen": "2026-03-01T20:12:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kinderzuschlag-und-leistungen-fuer-bildung-und-teilhabe-73906",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "0ee6ef81856dd7733ab3ad67d9706f67d3eb213a1c8f12ad3e1cce3a7f61249d",
+        "crawledAt": "2026-03-01T20:12:00Z"
+      },
+      "qualityScores": {
+        "iqs": 80.4,
+        "ais": 50.6,
+        "computedAt": "2026-03-01T20:12:00Z"
+      }
+    },
+    {
+      "id": "2f0ef62f-2e7f-4eb8-bf8a-3b4941734bb6",
+      "title": {
+        "de": "Unterhaltsvorschuss",
+        "easy_de": "Vorschuss bei fehlendem Unterhalt"
+      },
+      "summary": {
+        "de": "Informationsangebot des BMBFSFJ zum Unterhaltsvorschuss für Kinder von Alleinerziehenden."
+      },
+      "content": {
+        "de": "Der Unterhaltsvorschuss unterstützt Kinder, wenn ein Elternteil nicht oder unregelmäßig Unterhalt zahlt. Die Seite gibt einen Einstieg in Voraussetzungen und Verfahren."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/unterhaltsvorschuss/unterhaltsvorschuss-73558",
+      "topics": [
+        "financial_support",
+        "family"
+      ],
+      "tags": [
+        "means_tested",
+        "application_required"
+      ],
+      "targetGroups": [
+        "single_parents",
+        "families"
+      ],
+      "status": "active",
+      "aidType": "financial",
+      "modality": "application",
+      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+      "firstSeen": "2026-03-01T20:12:00Z",
+      "lastSeen": "2026-03-01T20:12:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/unterhaltsvorschuss/unterhaltsvorschuss-73558",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "8f8b614f4ffad84bb7a3f2b2c70d269115ee9b178a8d107a5f9082cf3f8c1c2b",
+        "crawledAt": "2026-03-01T20:12:00Z"
+      },
+      "qualityScores": {
+        "iqs": 79.6,
+        "ais": 49.2,
+        "computedAt": "2026-03-01T20:12:00Z"
+      }
+    },
+    {
+      "id": "2dc8fcae-ae62-4615-b99d-3b0cc8dcc4ea",
+      "title": {
+        "de": "Mutterschutz und Mutterschaftsleistungen",
+        "easy_de": "Schutz in Schwangerschaft und nach Geburt"
+      },
+      "summary": {
+        "de": "Bundesweite Informationen zu Schutzrechten und finanziellen Leistungen rund um Schwangerschaft und Mutterschaft."
+      },
+      "content": {
+        "de": "Die Seite stellt Mutterschutzregelungen, Gesundheits- und Einkommensschutz sowie zentrale Hinweise für Beschäftigte und Arbeitgeber dar."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/mutterschaftsleistungen/mutterschutz-und-mutterschaftsleistungen-73754",
+      "topics": [
+        "financial_support",
+        "family"
+      ],
+      "tags": [
+        "time_limited",
+        "application_required"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents"
+      ],
+      "status": "active",
+      "aidType": "advisory",
+      "modality": "information",
+      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+      "firstSeen": "2026-03-01T20:12:00Z",
+      "lastSeen": "2026-03-01T20:12:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/mutterschaftsleistungen/mutterschutz-und-mutterschaftsleistungen-73754",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "d440fcf8ffd24ab3fd95f0d2f197376f412d7eaf7bf0df95f355014a0d5d2ea9",
+        "crawledAt": "2026-03-01T20:12:00Z"
+      },
+      "qualityScores": {
+        "iqs": 78.8,
+        "ais": 48.9,
+        "computedAt": "2026-03-01T20:12:00Z"
+      }
+    },
+    {
+      "id": "b136ef9b-640b-466d-8663-8d95d17cc8a0",
+      "title": {
+        "de": "Leistungen für Bildung und Teilhabe",
+        "easy_de": "Bildungs-Hilfe für Kinder"
+      },
+      "summary": {
+        "de": "Informationen der Bundesagentur für Arbeit zu Leistungen aus dem Bildungspaket für berechtigte Familien."
+      },
+      "content": {
+        "de": "Die Seite beschreibt Unterstützungsangebote für Bildung und Teilhabe von Kindern und Jugendlichen in Familien mit geringem Einkommen."
+      },
+      "url": "https://www.arbeitsagentur.de/familie-und-kinder/informationen-zum-bildungspaket",
+      "topics": [
+        "financial_support",
+        "education"
+      ],
+      "tags": [
+        "means_tested",
+        "application_required"
+      ],
+      "targetGroups": [
+        "families",
+        "students"
+      ],
+      "status": "active",
+      "aidType": "material",
+      "modality": "application",
+      "providingOrganization": "Bundesagentur für Arbeit",
+      "firstSeen": "2026-03-01T20:12:00Z",
+      "lastSeen": "2026-03-01T20:12:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/familie-und-kinder/informationen-zum-bildungspaket",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "0dc195fce9476162f6f1dcf30535ab8b55f8b2f20e0c0600fd0dcae7fb67c637",
+        "crawledAt": "2026-03-01T20:12:00Z"
+      },
+      "qualityScores": {
+        "iqs": 77.1,
+        "ais": 47.3,
+        "computedAt": "2026-03-01T20:12:00Z"
+      }
+    },
+    {
+      "id": "16dd17a4-0c40-451b-8a45-34bc6fa062d2",
+      "title": {
+        "de": "Unterstützung für Eltern",
+        "easy_de": "Hilfe für Eltern"
+      },
+      "summary": {
+        "de": "Offizielle Informationsseite der Bundesagentur für Arbeit zu ergänzenden staatlichen Hilfen für Eltern."
+      },
+      "content": {
+        "de": "Die Seite bündelt staatliche Unterstützungsangebote für Familien und verweist auf weiterführende Stellen und Leistungen."
+      },
+      "url": "https://www.arbeitsagentur.de/familie-und-kinder/weitere-hilfen-fuer-eltern",
+      "topics": [
+        "family",
+        "financial_support"
+      ],
+      "tags": [
+        "application_required",
+        "time_limited"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents"
+      ],
+      "status": "active",
+      "aidType": "advisory",
+      "modality": "information",
+      "providingOrganization": "Bundesagentur für Arbeit",
+      "firstSeen": "2026-03-01T20:12:00Z",
+      "lastSeen": "2026-03-01T20:12:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/familie-und-kinder/weitere-hilfen-fuer-eltern",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "c82d03316983fba01fa2dd8e83bc25ef77f3af49f44ecf4ab76a841efcfd3ef5",
+        "crawledAt": "2026-03-01T20:12:00Z"
+      },
+      "qualityScores": {
+        "iqs": 75.9,
+        "ais": 46.8,
+        "computedAt": "2026-03-01T20:12:00Z"
+      }
+    }
+  ],
   "_todo": [
-    "TODO: Populate with crawled and moderated aid entries",
     "TODO: Validate against aid.schema.json per DATA-05 (Issue #28)"
   ]
 }

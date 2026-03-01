@@ -9,7 +9,10 @@
   },
   "urls": [
     "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen",
-    "https://www.bmbfsfj.bund.de/bmbfsfj/service"
+    "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kinderzuschlag-und-leistungen-fuer-bildung-und-teilhabe-73906",
+    "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/unterhaltsvorschuss/unterhaltsvorschuss-73558",
+    "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/mutterschaftsleistungen/mutterschutz-und-mutterschaftsleistungen-73754",
+    "https://www.arbeitsagentur.de/familie-und-kinder/informationen-zum-bildungspaket"
   ],
   "_todo": [
     "TODO: Expand with topic-specific aid program pages across additional ministries",

@@ -10,7 +10,9 @@
   "urls": [
     "https://www.arbeitsagentur.de/service-bereich/so-erreichen-sie-uns",
     "https://www.bmbfsfj.bund.de/bmbfsfj/service/kontakt",
-    "https://www.115.de/"
+    "https://www.115.de/",
+    "https://www.bmas.de/DE/Service/Kontakt/kontakt.html",
+    "https://www.gebaerdentelefon.de/115"
   ],
   "_todo": [
     "TODO: Expand with verified state and municipal contact directories",

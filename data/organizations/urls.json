@@ -9,7 +9,10 @@
   },
   "urls": [
     "https://www.arbeitsagentur.de/ueber-uns",
-    "https://www.bmbfsfj.bund.de/bmbfsfj"
+    "https://www.bmbfsfj.bund.de/bmbfsfj",
+    "https://www.bundesregierung.de/breg-de/bundesregierung/bundesministerien",
+    "https://www.bmas.de/DE/Startseite/start.html",
+    "https://www.fitko.de/produktmanagement/115"
   ],
   "_todo": [
     "TODO: Expand with additional verified organization directories",

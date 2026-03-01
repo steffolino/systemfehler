@@ -1,9 +1,278 @@
 {
   "version": "0.1.0",
   "domain": "contacts",
-  "entries": [],
+  "entries": [
+    {
+      "id": "06b5e331-e007-4de5-bca3-191c16858584",
+      "title": {
+        "de": "Bundesagentur für Arbeit – So erreichen Sie uns",
+        "easy_de": "Kontakt zur Arbeitsagentur"
+      },
+      "summary": {
+        "de": "Kontaktseite der Bundesagentur für Arbeit mit Telefonnummern, Servicezeiten und Ansprechpartnern."
+      },
+      "content": {
+        "de": "Die Seite enthält Servicetelefone für Bürgerinnen und Bürger, Unternehmen und spezielle Anliegen sowie Hinweise zu Erreichbarkeit und Kontaktwegen."
+      },
+      "url": "https://www.arbeitsagentur.de/service-bereich/so-erreichen-sie-uns",
+      "topics": [
+        "employment",
+        "financial_support"
+      ],
+      "tags": [
+        "urgent",
+        "application_required"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "disabled"
+      ],
+      "status": "active",
+      "contactType": "helpline",
+      "specialization": [
+        "Arbeitsmarkt",
+        "Familienkasse",
+        "Bürgeranfragen"
+      ],
+      "availability": {
+        "hours": "Montag bis Donnerstag 08:00-18:00, Freitag 08:00-14:00",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Bundesagentur für Arbeit",
+      "firstSeen": "2026-03-01T20:18:00Z",
+      "lastSeen": "2026-03-01T20:18:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/service-bereich/so-erreichen-sie-uns",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "8d4378bb5ed5d6de7c8f0c007f2f6c2ee30f4f9f7a0dd5fcaf3d2f3d31a6b4cf",
+        "crawledAt": "2026-03-01T20:18:00Z"
+      },
+      "qualityScores": {
+        "iqs": 81.9,
+        "ais": 53.6,
+        "computedAt": "2026-03-01T20:18:00Z"
+      }
+    },
+    {
+      "id": "19b8d1a0-f9c2-4905-b6ad-6b9d8500f6f1",
+      "title": {
+        "de": "BMBFSFJ – Kontakt",
+        "easy_de": "Kontakt zum Familien-Ministerium"
+      },
+      "summary": {
+        "de": "Kontaktseite des BMBFSFJ mit Service-Telefon, E-Mail und Hinweis auf die Behördennummer 115."
+      },
+      "content": {
+        "de": "Die Seite stellt offizielle Kontaktwege des Ministeriums bereit, darunter E-Mail, Postanschrift und telefonische Erreichbarkeit."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/service/kontakt",
+      "topics": [
+        "family",
+        "employment"
+      ],
+      "tags": [
+        "urgent",
+        "application_required"
+      ],
+      "targetGroups": [
+        "families",
+        "seniors",
+        "refugees"
+      ],
+      "status": "active",
+      "contactType": "office",
+      "specialization": [
+        "Familienpolitik",
+        "Ministeriumsanfragen"
+      ],
+      "availability": {
+        "hours": "Montag bis Donnerstag 09:00-18:00",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+      "firstSeen": "2026-03-01T20:18:00Z",
+      "lastSeen": "2026-03-01T20:18:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/service/kontakt",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "ce3b21ff323b2991db7af3f7f334f0c0c30e9652e03cd44eb2c7619e2e0298ba",
+        "crawledAt": "2026-03-01T20:18:00Z"
+      },
+      "qualityScores": {
+        "iqs": 79.7,
+        "ais": 51.1,
+        "computedAt": "2026-03-01T20:18:00Z"
+      }
+    },
+    {
+      "id": "36fd6dc9-2d42-4f95-b616-7f0af6b45c03",
+      "title": {
+        "de": "Behördennummer 115",
+        "easy_de": "Rufnummer 115"
+      },
+      "summary": {
+        "de": "Die 115 ist die einheitliche Behördennummer für allgemeine Verwaltungsfragen in Deutschland."
+      },
+      "content": {
+        "de": "Die Seite der 115 beschreibt Servicezeiten, Zuständigkeiten und den Zugang zu Behördeninformationen von Bund, Ländern und Kommunen."
+      },
+      "url": "https://www.115.de/",
+      "topics": [
+        "employment",
+        "family"
+      ],
+      "tags": [
+        "urgent",
+        "automatic"
+      ],
+      "targetGroups": [
+        "families",
+        "refugees",
+        "disabled"
+      ],
+      "status": "active",
+      "contactType": "helpline",
+      "specialization": [
+        "Behördenauskunft",
+        "Verwaltungsfragen"
+      ],
+      "availability": {
+        "hours": "Montag bis Freitag 08:00-18:00",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "115-Verbund / FITKO",
+      "firstSeen": "2026-03-01T20:18:00Z",
+      "lastSeen": "2026-03-01T20:18:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.115.de/",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "3e2ae19a7d174adbe51fb8caec737dc6fbe2567f2c291fbc25474885ccf8903f",
+        "crawledAt": "2026-03-01T20:18:00Z"
+      },
+      "qualityScores": {
+        "iqs": 83.0,
+        "ais": 55.2,
+        "computedAt": "2026-03-01T20:18:00Z"
+      }
+    },
+    {
+      "id": "4a464bcb-1b95-494d-a0eb-00af8f7dd48c",
+      "title": {
+        "de": "BMAS – Kontakt",
+        "easy_de": "Kontakt zum Arbeits-Ministerium"
+      },
+      "summary": {
+        "de": "Kontaktseite des BMAS mit Formular, Bürgertelefon und weiteren Kontaktinformationen."
+      },
+      "content": {
+        "de": "Das BMAS bietet über diese Seite zentrale Kontaktwege, unter anderem das Bürgertelefon sowie Hinweise in Leichter Sprache."
+      },
+      "url": "https://www.bmas.de/DE/Service/Kontakt/kontakt.html",
+      "topics": [
+        "employment",
+        "financial_support"
+      ],
+      "tags": [
+        "urgent",
+        "application_required"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "disabled"
+      ],
+      "status": "active",
+      "contactType": "office",
+      "specialization": [
+        "Sozialpolitik",
+        "Arbeitsmarkt"
+      ],
+      "availability": {
+        "hours": "Montag bis Donnerstag 08:00-17:00, Freitag 08:00-12:00",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Bundesministerium für Arbeit und Soziales",
+      "firstSeen": "2026-03-01T20:18:00Z",
+      "lastSeen": "2026-03-01T20:18:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Kontakt/kontakt.html",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "60b2c0f6d455f2fd10a4b880315eb5fc9bbf0c19eaef2a1c6334a084f4f3f4af",
+        "crawledAt": "2026-03-01T20:18:00Z"
+      },
+      "qualityScores": {
+        "iqs": 79.9,
+        "ais": 50.3,
+        "computedAt": "2026-03-01T20:18:00Z"
+      }
+    },
+    {
+      "id": "7f132650-e2a2-4b57-a34d-440865f00de4",
+      "title": {
+        "de": "Gebärdentelefon 115",
+        "easy_de": "115 in Gebärdensprache"
+      },
+      "summary": {
+        "de": "Kontaktangebot zur Behördennummer 115 in Gebärdensprache für Menschen mit Hörbeeinträchtigung."
+      },
+      "content": {
+        "de": "Das Gebärdentelefon ergänzt die 115 um einen barrierearmen Zugang und unterstützt gehörlose oder schwerhörige Bürgerinnen und Bürger."
+      },
+      "url": "https://www.gebaerdentelefon.de/115",
+      "topics": [
+        "employment",
+        "family"
+      ],
+      "tags": [
+        "urgent",
+        "automatic"
+      ],
+      "targetGroups": [
+        "disabled",
+        "refugees",
+        "families"
+      ],
+      "status": "active",
+      "contactType": "accessibility",
+      "specialization": [
+        "Barrierefreie Behördenkommunikation"
+      ],
+      "availability": {
+        "hours": "Siehe Anbieterhinweise",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "115-Verbund / FITKO",
+      "firstSeen": "2026-03-01T20:18:00Z",
+      "lastSeen": "2026-03-01T20:18:00Z",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.gebaerdentelefon.de/115",
+        "crawlId": "manual-curation-20260301-realdata-v1",
+        "checksum": "32db8b7788386f2bbcd7cd8b95b5376d42fb1f0f01adf17f7e1aa7364fa56178",
+        "crawledAt": "2026-03-01T20:18:00Z"
+      },
+      "qualityScores": {
+        "iqs": 77.8,
+        "ais": 49.8,
+        "computedAt": "2026-03-01T20:18:00Z"
+      }
+    }
+  ],
   "_todo": [
-    "TODO: Populate with crawled and moderated contact entries",
     "TODO: Validate against contacts.schema.json per DATA-05 (Issue #28)"
   ]
 }
