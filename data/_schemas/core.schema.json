@@ -131,6 +131,10 @@
     },
     "translations": {
       "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "minLength": 2
+      },
       "additionalProperties": {
         "type": "object",
         "properties": {
@@ -166,6 +170,7 @@
             "type": "boolean"
           }
         },
+        "additionalProperties": false,
         "required": [
           "title",
           "timestamp",
@@ -197,7 +202,8 @@
       "required": [
         "source",
         "crawledAt"
-      ]
+      ],
+      "additionalProperties": false
     },
     "provenanceDetailed": {
       "type": "object",
@@ -230,7 +236,8 @@
       "required": [
         "source",
         "crawledAt"
-      ]
+      ],
+      "additionalProperties": false
     },
     "qualityScores": {
       "type": "object",

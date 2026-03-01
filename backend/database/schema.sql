@@ -48,6 +48,7 @@ CREATE TABLE entries (
     
     -- Metadata (JSONB for flexibility)
     provenance JSONB,
+    translations JSONB,
     quality_scores JSONB,
     
     -- Timestamps
@@ -199,6 +200,7 @@ CREATE INDEX idx_entries_topics ON entries USING GIN(topics);
 CREATE INDEX idx_entries_tags ON entries USING GIN(tags);
 CREATE INDEX idx_entries_target_groups ON entries USING GIN(target_groups);
 CREATE INDEX idx_entries_provenance ON entries USING GIN(provenance);
+CREATE INDEX idx_entries_translations ON entries USING GIN(translations);
 CREATE INDEX idx_entries_quality_scores ON entries USING GIN(quality_scores);
 
 -- Full-text search indexes

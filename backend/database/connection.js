@@ -26,13 +26,16 @@ pool.on('error', (err) => {
 });
 
 // Test connection on startup
-pool.query('SELECT NOW()', (err, res) => {
-  if (err) {
-    console.error('Database connection failed:', err);
-  } else {
-    console.log('Database connected successfully at', res.rows[0].now);
-  }
-});
+const skipStartupPing = process.env.SYSTEMFEHLER_SKIP_DB_PING === '1' || process.env.NODE_ENV === 'test';
+if (!skipStartupPing) {
+  pool.query('SELECT NOW()', (err, res) => {
+    if (err) {
+      console.error('Database connection failed:', err);
+    } else {
+      console.log('Database connected successfully at', res.rows[0].now);
+    }
+  });
+}
 
 /**
  * Execute a query with parameterized values

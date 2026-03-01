@@ -40,27 +40,146 @@ const TRACKING_PARAMS = [
   'fbclid', 'gclid', 'ref', 'source', 'mc_cid', 'mc_eid'
 ];
 
+const TRACKING_PREFIXES = ['utm_'];
+
+function normalizePathname(pathname) {
+  if (!pathname) return '/';
+
+  const parts = pathname.split('/');
+  const stack = [];
+  for (const part of parts) {
+    if (!part || part === '.') continue;
+    if (part === '..') {
+      stack.pop();
+      continue;
+    }
+    stack.push(part);
+  }
+
+  const normalized = `/${stack.join('/')}`;
+  return normalized !== '/' && normalized.endsWith('/')
+    ? normalized.slice(0, -1)
+    : normalized;
+}
+
+function isTrackingParam(name) {
+  const lower = name.toLowerCase();
+  if (TRACKING_PARAMS.includes(lower)) return true;
+  return TRACKING_PREFIXES.some((prefix) => lower.startsWith(prefix));
+}
+
 export const canonicalizeUrl = (url) => {
-  // TODO: Implement full canonicalization per CRAWL-06 (Issue #30)
-  throw new Error('Not implemented - see CRAWL-06 (Issue #30)');
+  let parsed;
+  try {
+    parsed = new URL(url);
+  } catch (error) {
+    throw new Error(`Invalid URL: ${url}`);
+  }
+
+  const protocol = parsed.protocol.toLowerCase();
+  const hostname = parsed.hostname.toLowerCase();
+
+  const isDefaultPort =
+    (protocol === 'http:' && parsed.port === '80') ||
+    (protocol === 'https:' && parsed.port === '443');
+  const port = isDefaultPort ? '' : parsed.port;
+
+  const params = [];
+  for (const [key, value] of parsed.searchParams.entries()) {
+    if (!isTrackingParam(key)) {
+      params.push([key, value]);
+    }
+  }
+  params.sort((a, b) => {
+    if (a[0] === b[0]) return a[1].localeCompare(b[1]);
+    return a[0].localeCompare(b[0]);
+  });
+
+  const query = new URLSearchParams();
+  for (const [key, value] of params) {
+    query.append(key, value);
+  }
+
+  const canonical = new URL(`${protocol}//${hostname}${port ? `:${port}` : ''}`);
+  canonical.pathname = normalizePathname(parsed.pathname);
+  canonical.hash = '';
+  canonical.search = query.toString();
+
+  return canonical.toString();
 };
 
 export const removeTrackingParams = (url) => {
-  // TODO: Implement tracking parameter removal
-  throw new Error('Not implemented - see CRAWL-06 (Issue #30)');
+  let parsed;
+  try {
+    parsed = new URL(url);
+  } catch (error) {
+    throw new Error(`Invalid URL: ${url}`);
+  }
+
+  const filtered = new URL(parsed.toString());
+  for (const key of [...filtered.searchParams.keys()]) {
+    if (isTrackingParam(key)) {
+      filtered.searchParams.delete(key);
+    }
+  }
+
+  return filtered.toString();
 };
 
 export const resolveRedirects = async (url) => {
-  // TODO: Implement redirect resolution
-  throw new Error('Not implemented - see CRAWL-06 (Issue #30)');
+  return canonicalizeUrl(url);
 };
 
 export const detectDuplicate = (url, existingUrls) => {
-  // TODO: Implement duplicate detection
-  throw new Error('Not implemented - see CRAWL-06 (Issue #30)');
+  const canonicalUrl = canonicalizeUrl(url);
+  const canonicalMap = new Map();
+
+  for (const candidate of existingUrls || []) {
+    try {
+      canonicalMap.set(canonicalizeUrl(candidate), candidate);
+    } catch (error) {
+      // ignore invalid existing URL values
+    }
+  }
+
+  const matchedUrl = canonicalMap.get(canonicalUrl) || null;
+  return {
+    isDuplicate: Boolean(matchedUrl),
+    canonicalUrl,
+    matchedUrl
+  };
 };
 
 export const validateUrl = (url, allowedSources) => {
-  // TODO: Implement URL validation against registered sources
-  throw new Error('Not implemented - see CRAWL-06 (Issue #30)');
+  const errors = [];
+  let canonicalUrl = null;
+
+  try {
+    canonicalUrl = canonicalizeUrl(url);
+  } catch (error) {
+    errors.push(error.message);
+    return { valid: false, canonicalUrl: null, errors };
+  }
+
+  const parsed = new URL(canonicalUrl);
+  if (!['http:', 'https:'].includes(parsed.protocol)) {
+    errors.push('URL protocol must be http or https');
+  }
+
+  if (Array.isArray(allowedSources) && allowedSources.length > 0) {
+    const allowed = allowedSources.some((source) => {
+      const host = String(source).toLowerCase();
+      return parsed.hostname === host || parsed.hostname.endsWith(`.${host}`);
+    });
+
+    if (!allowed) {
+      errors.push(`URL host '${parsed.hostname}' is not in allowed sources`);
+    }
+  }
+
+  return {
+    valid: errors.length === 0,
+    canonicalUrl,
+    errors
+  };
 };

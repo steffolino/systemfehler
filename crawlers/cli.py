@@ -260,10 +260,10 @@ def import_to_db(domain: str, data_dir: str):
                         url, topics, tags, target_groups,
                         valid_from, valid_until, deadline, status,
                         first_seen, last_seen, source_unavailable,
-                        provenance, quality_scores
+                        provenance, translations, quality_scores
                     ) VALUES (
                         %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
-                        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
                     )
                     ON CONFLICT (id) DO UPDATE SET
                         title_de = EXCLUDED.title_de,
@@ -286,6 +286,7 @@ def import_to_db(domain: str, data_dir: str):
                         last_seen = EXCLUDED.last_seen,
                         source_unavailable = EXCLUDED.source_unavailable,
                         provenance = EXCLUDED.provenance,
+                        translations = EXCLUDED.translations,
                         quality_scores = EXCLUDED.quality_scores,
                         updated_at = NOW()
                 """, (
@@ -296,7 +297,7 @@ def import_to_db(domain: str, data_dir: str):
                     entry['url'], entry.get('topics', []), entry.get('tags', []), entry.get('targetGroups', []),
                     entry.get('validFrom'), entry.get('validUntil'), entry.get('deadline'), entry['status'],
                     entry.get('firstSeen'), entry.get('lastSeen'), entry.get('sourceUnavailable', False),
-                    Json(entry.get('provenance', {})), Json(entry.get('qualityScores', {}))
+                    Json(entry.get('provenance', {})), Json(entry.get('translations', {})), Json(entry.get('qualityScores', {}))
                 ))
                 
                 # Insert into domain-specific table if applicable
