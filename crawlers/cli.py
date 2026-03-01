@@ -157,14 +157,21 @@ def generate_diffs(new_entries, existing_path, output_dir):
         with open(queue_path, 'r', encoding='utf-8') as f:
             queue_data = json.load(f)
     else:
-        queue_data = {'version': '0.1.0', 'queue': []}
-    
+        queue_data = []
+
+    if isinstance(queue_data, dict):
+        existing_queue = queue_data.get('queue', [])
+    elif isinstance(queue_data, list):
+        existing_queue = queue_data
+    else:
+        existing_queue = []
+
     # Add new entries to queue
-    queue_data['queue'].extend(moderation_queue)
+    existing_queue.extend(moderation_queue)
     
     # Save updated queue
     with open(queue_path, 'w', encoding='utf-8') as f:
-        json.dump(queue_data, f, indent=2, ensure_ascii=False)
+        json.dump(existing_queue, f, indent=2, ensure_ascii=False)
     
     logger.info(f"Added {len(moderation_queue)} entries to moderation queue")
 

@@ -260,6 +260,7 @@ For a detailed description of the architecture, see:
 * `docs/architecture.md` – architectural overview and data flow.
 * `docs/blueprint.md` – system diagrams (PlantUML and Mermaid).
 * `docs/vision.md` – strategic and stakeholder-focused overview.
+* `docs/data-synthetic-inventory.md` – current synthetic/placeholder data inventory and replacement status.
 
 ---
 
