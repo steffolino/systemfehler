@@ -253,6 +253,20 @@ The report includes entry counts, error/warning totals, and sample failures.
 
 ---
 
+## Cloudflare Deployment
+
+The repository includes a Cloudflare Pages deployment workflow for the frontend
+plus read-only API Functions.
+
+- Workflow: `.github/workflows/deploy-pages.yml`
+- Static output: `frontend/dist`
+- Functions: `cloudflare-pages/functions`
+- Required GitHub secrets: `CF_PAGES_API_TOKEN`, `CF_ACCOUNT_ID`
+
+See `cloudflare-pages/README.md` for setup details.
+
+---
+
 ## Architecture and Design
 
 For a detailed description of the architecture, see:
