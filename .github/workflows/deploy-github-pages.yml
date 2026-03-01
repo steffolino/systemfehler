@@ -33,6 +33,13 @@ jobs:
         run: npm ci
         working-directory: frontend
 
+      - name: Copy snapshot data into frontend public assets
+        run: |
+          mkdir -p frontend/public/data
+          cp -R data/* frontend/public/data/
+          mkdir -p frontend/public/moderation
+          cp moderation/review_queue.json frontend/public/moderation/review_queue.json
+
       - name: Build frontend for GitHub Pages
         run: npm run build
         working-directory: frontend

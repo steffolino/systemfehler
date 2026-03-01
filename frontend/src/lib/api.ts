@@ -3,9 +3,13 @@
  */
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const DEFAULT_SNAPSHOT_BASE_URL =
+  typeof window !== 'undefined'
+    ? `${window.location.origin}${import.meta.env.BASE_URL.replace(/\/$/, '')}`
+    : import.meta.env.BASE_URL.replace(/\/$/, '');
 const SNAPSHOT_BASE_URL =
   import.meta.env.VITE_SNAPSHOT_BASE_URL ||
-  'https://raw.githubusercontent.com/steffolino/systemfehler/main';
+  DEFAULT_SNAPSHOT_BASE_URL;
 const IS_GITHUB_PAGES =
   typeof window !== 'undefined' && window.location.hostname.endsWith('github.io');
 const DOMAINS = ['benefits', 'aid', 'tools', 'organizations', 'contacts'] as const;
@@ -210,7 +214,8 @@ async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> 
 }
 
 async function fetchSnapshot<T>(path: string): Promise<T> {
-  const url = `${SNAPSHOT_BASE_URL}${path}`;
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  const url = `${SNAPSHOT_BASE_URL}${normalizedPath}`;
   const response = await fetch(url, { headers: { 'Content-Type': 'application/json' } });
   if (!response.ok) {
     throw new Error(`Snapshot request failed (${response.status}): ${path}`);
