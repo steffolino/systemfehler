@@ -9,10 +9,10 @@
         "easy_de": "Bundesagentur für Arbeit"
       },
       "summary": {
-        "de": "Organisationsseite der Bundesagentur für Arbeit mit Struktur, Aufgaben und zentralen Dienststellen."
+        "de": "Die Organisationsseite der BA stellt Aufgaben, Struktur, Leitungsorgane und zentrale Dienststellen der Behörde vor."
       },
       "content": {
-        "de": "Die BA informiert über Vorstand, Selbstverwaltung, regionale Struktur sowie zentrale Aufgaben in Arbeitsvermittlung und Leistungsverwaltung."
+        "de": "Sie erläutert die Rolle der Bundesagentur im deutschen Arbeitsmarkt- und Leistungssystem sowie deren föderale Organisationslogik. Zusätzlich verweist sie auf spezialisierte Einrichtungen und weitere Servicebereiche."
       },
       "url": "https://www.arbeitsagentur.de/ueber-uns",
       "topics": [
@@ -60,10 +60,10 @@
         "easy_de": "Familien-Ministerium"
       },
       "summary": {
-        "de": "Startseite des Bundesministeriums für Bildung, Familie, Senioren, Frauen und Jugend."
+        "de": "Die Startseite des BMBFSFJ bündelt Themen, Programme, Serviceangebote und politische Schwerpunkte des Ministeriums."
       },
       "content": {
-        "de": "Das Ministerium informiert über Themen, Programme und Serviceangebote rund um Familie, Jugend, Gleichstellung und gesellschaftliche Teilhabe."
+        "de": "Sie dient als zentraler Einstieg für Familien-, Jugend- und Gleichstellungsthemen sowie zugehörige Services. Nutzerinnen und Nutzer erhalten von dort aus Zugang zu Fachinformationen, Kontakt und Publikationen."
       },
       "url": "https://www.bmbfsfj.bund.de/bmbfsfj",
       "topics": [
@@ -111,10 +111,10 @@
         "easy_de": "Ministerien in Deutschland"
       },
       "summary": {
-        "de": "Übersichtsseite der Bundesregierung zu den Bundesministerien und ihren Aufgabenbereichen."
+        "de": "Die Bundesregierung stellt hier alle Bundesministerien mit Zuständigkeitsbereichen im Überblick dar."
       },
       "content": {
-        "de": "Die Seite stellt die Bundesministerien vor und erläutert deren Rolle in der Bundesverwaltung sowie politische Zuständigkeiten."
+        "de": "Die Seite beschreibt die Rolle der Ministerien bei Gesetzgebung, Fachpolitik und Behördenaufsicht. Sie bietet einen offiziellen Einstieg in die Organisationsstruktur der Bundesverwaltung."
       },
       "url": "https://www.bundesregierung.de/breg-de/bundesregierung/bundesministerien",
       "topics": [
@@ -150,7 +150,7 @@
       },
       "qualityScores": {
         "iqs": 76.6,
-        "ais": 47.0,
+        "ais": 47,
         "computedAt": "2026-03-01T20:16:00Z"
       }
     },
@@ -161,10 +161,10 @@
         "easy_de": "Arbeits-Ministerium"
       },
       "summary": {
-        "de": "Startseite des BMAS mit Informationen zu Arbeit, Soziales, Serviceangeboten und Ministerium."
+        "de": "Die BMAS-Startseite bietet zentrale Informationen zu Arbeit, Soziales, Service und ministeriellen Themenfeldern."
       },
       "content": {
-        "de": "Das BMAS stellt Informationen zu arbeitsmarkt- und sozialpolitischen Themen bereit und bietet zentrale Kontakt- und Servicewege."
+        "de": "Sie verknüpft fachpolitische Inhalte mit praktischen Zugängen wie Kontaktmöglichkeiten und Bürgerinformationen. Dadurch entsteht ein zentraler Einstieg in arbeits- und sozialpolitische Bundesangebote."
       },
       "url": "https://www.bmas.de/DE/Startseite/start.html",
       "topics": [
@@ -212,10 +212,10 @@
         "easy_de": "FITKO und die 115"
       },
       "summary": {
-        "de": "Informationsseite der FITKO zum Produktmanagement der Behördennummer 115."
+        "de": "Die FITKO-Seite beschreibt das Produktmanagement der Behördennummer 115 im föderalen Kontext."
       },
       "content": {
-        "de": "Die FITKO koordiniert als föderale IT-Kooperation unter anderem den Betrieb und die Weiterentwicklung der Behördenrufnummer 115."
+        "de": "Sie erklärt organisatorische Zuständigkeiten und die Weiterentwicklung der 115 als verwaltungsübergreifenden Service. Damit wird die Einordnung der 115 im digitalen Verwaltungsverbund transparent gemacht."
       },
       "url": "https://www.fitko.de/produktmanagement/115",
       "topics": [

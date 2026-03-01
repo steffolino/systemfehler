@@ -13,10 +13,10 @@
         "easy_de": "Online-Dienste"
       },
       "summary": {
-        "de": "Digitale Antrags- und Serviceplattform der Bundesagentur für Arbeit für Leistungen und Mitteilungen."
+        "de": "Die eServices der Bundesagentur ermöglichen digitale Antragstellung, Dokumentenübermittlung und Statusprozesse über ein Benutzerkonto."
       },
       "content": {
-        "de": "Über die eServices können Bürgerinnen und Bürger Anträge stellen, Unterlagen hochladen und verschiedene Anliegen online bearbeiten."
+        "de": "Die Plattform deckt Anliegen zu Arbeitslosigkeit, Jobcenter-Leistungen, Familienkasse sowie Aus- und Weiterbildung ab. Sie reduziert Behördengänge und unterstützt standardisierte Online-Prozesse für Bürgerinnen und Bürger."
       },
       "url": "https://www.arbeitsagentur.de/eservices",
       "topics": [
@@ -64,10 +64,10 @@
         "easy_de": "Jobs finden"
       },
       "summary": {
-        "de": "Offizielle Jobsuche der Bundesagentur für Arbeit mit Filtermöglichkeiten nach Ort, Beruf und Arbeitszeit."
+        "de": "Die Jobsuche der BA bietet bundesweite Stellensuche mit Filtern nach Berufsfeld, Ort, Arbeitszeit und weiteren Kriterien."
       },
       "content": {
-        "de": "Das Tool unterstützt die Stellensuche in ganz Deutschland und bietet schnelle Suchoptionen für unterschiedliche Lebenslagen."
+        "de": "Das Tool unterstützt sowohl schnelle Einstiege als auch detaillierte Suchstrategien. Es ist ein zentraler digitaler Zugang zu offenen Stellen im öffentlichen Vermittlungssystem."
       },
       "url": "https://www.arbeitsagentur.de/jobsuche/",
       "topics": [
@@ -112,10 +112,10 @@
         "easy_de": "Rechner für Elterngeld"
       },
       "summary": {
-        "de": "Interaktiver Rechner im Familienportal zur Abschätzung eines möglichen Elterngeldanspruchs."
+        "de": "Der Elterngeldrechner im Familienportal ermöglicht eine unverbindliche Einschätzung des möglichen Elterngeldanspruchs."
       },
       "content": {
-        "de": "Der Elterngeldrechner bietet eine Orientierung zur voraussichtlichen Höhe des Elterngelds auf Basis persönlicher Angaben."
+        "de": "Das Angebot führt strukturiert durch relevante Angaben und zeigt orientierende Ergebnisse für die persönliche Planung. Es unterstützt Familien bei der Vorbereitung auf einen späteren Antrag."
       },
       "url": "https://www.familienportal.de/familienportal/rechner-antraege/elterngeldrechner",
       "topics": [
@@ -149,7 +149,7 @@
       },
       "qualityScores": {
         "iqs": 79.9,
-        "ais": 58.0,
+        "ais": 58,
         "computedAt": "2026-03-01T20:14:00Z"
       }
     },
@@ -160,10 +160,10 @@
         "easy_de": "Kindergeld online beantragen"
       },
       "summary": {
-        "de": "Online-Antrag der Familienkasse für Kindergeld ab Geburt."
+        "de": "Über den digitalen Startpunkt kann Kindergeld für neugeborene Kinder online beantragt werden."
       },
       "content": {
-        "de": "Der digitale Antrag unterstützt Familien dabei, Kindergeld nach Geburt eines Kindes direkt online bei der Familienkasse zu beantragen."
+        "de": "Die Seite bietet einen direkten Zugang zum Antragsverfahren der Familienkasse und erleichtert den Einstieg in den Prozess. Damit wird die formale Antragstellung zeitnah und medienbrucharm unterstützt."
       },
       "url": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/kindergeld-anspruch-hoehe-dauer/kindergeld-antrag-starten",
       "topics": [
@@ -197,7 +197,7 @@
       },
       "qualityScores": {
         "iqs": 80.1,
-        "ais": 57.0,
+        "ais": 57,
         "computedAt": "2026-03-01T20:14:00Z"
       }
     },
@@ -208,10 +208,10 @@
         "easy_de": "Kinderzuschlag prüfen"
       },
       "summary": {
-        "de": "Digitales Tool zur Einschätzung, ob ein Anspruch auf Kinderzuschlag bestehen könnte."
+        "de": "Der KiZ-Lotse hilft bei der Vorprüfung, ob ein Anspruch auf Kinderzuschlag bestehen könnte."
       },
       "content": {
-        "de": "Der KiZ-Lotse unterstützt bei einer ersten Prüfung zum Kinderzuschlag und führt durch zentrale Voraussetzungen für den Antrag."
+        "de": "Das digitale Prüftool führt durch zentrale Kriterien und bietet eine erste Orientierung vor der eigentlichen Antragstellung. Es unterstützt Familien bei der schnellen Einschätzung ihrer Ausgangslage."
       },
       "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kiz-lotse",
       "topics": [
@@ -244,7 +244,7 @@
         "crawledAt": "2026-03-01T20:14:00Z"
       },
       "qualityScores": {
-        "iqs": 79.0,
+        "iqs": 79,
         "ais": 56.1,
         "computedAt": "2026-03-01T20:14:00Z"
       }

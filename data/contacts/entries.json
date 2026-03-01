@@ -9,10 +9,10 @@
         "easy_de": "Kontakt zur Arbeitsagentur"
       },
       "summary": {
-        "de": "Kontaktseite der Bundesagentur für Arbeit mit Telefonnummern, Servicezeiten und Ansprechpartnern."
+        "de": "Die BA-Kontaktseite enthält Servicetelefone, Erreichbarkeiten und spezialisierte Ansprechpartner für unterschiedliche Anliegen."
       },
       "content": {
-        "de": "Die Seite enthält Servicetelefone für Bürgerinnen und Bürger, Unternehmen und spezielle Anliegen sowie Hinweise zu Erreichbarkeit und Kontaktwegen."
+        "de": "Sie bietet Kontaktwege für Privatpersonen, Unternehmen und besondere Themenbereiche einschließlich Familienkasse. Damit ist sie ein zentraler Zugangspunkt für direkte Kommunikation mit der Bundesagentur."
       },
       "url": "https://www.arbeitsagentur.de/service-bereich/so-erreichen-sie-uns",
       "topics": [
@@ -64,10 +64,10 @@
         "easy_de": "Kontakt zum Familien-Ministerium"
       },
       "summary": {
-        "de": "Kontaktseite des BMBFSFJ mit Service-Telefon, E-Mail und Hinweis auf die Behördennummer 115."
+        "de": "Die Kontaktseite des BMBFSFJ bietet E-Mail, Postanschrift, Servicetelefon und ergänzende Hinweise zur Behördennummer 115."
       },
       "content": {
-        "de": "Die Seite stellt offizielle Kontaktwege des Ministeriums bereit, darunter E-Mail, Postanschrift und telefonische Erreichbarkeit."
+        "de": "Sie strukturiert die offiziellen Kommunikationskanäle des Ministeriums und verweist auf rechtliche Informationsrechte. Dadurch erhalten Bürgerinnen und Bürger klare Wege für Anfragen und Rückmeldungen."
       },
       "url": "https://www.bmbfsfj.bund.de/bmbfsfj/service/kontakt",
       "topics": [
@@ -118,10 +118,10 @@
         "easy_de": "Rufnummer 115"
       },
       "summary": {
-        "de": "Die 115 ist die einheitliche Behördennummer für allgemeine Verwaltungsfragen in Deutschland."
+        "de": "Die 115 ist die zentrale Behördenrufnummer für allgemeine Verwaltungsfragen von Bund, Ländern und Kommunen."
       },
       "content": {
-        "de": "Die Seite der 115 beschreibt Servicezeiten, Zuständigkeiten und den Zugang zu Behördeninformationen von Bund, Ländern und Kommunen."
+        "de": "Die Seite erläutert Serviceversprechen, Erreichbarkeit und den Nutzen eines einheitlichen Zugangs zur Verwaltung. Sie unterstützt Bürgerinnen und Bürger bei der schnellen Orientierung in Verwaltungsanliegen."
       },
       "url": "https://www.115.de/",
       "topics": [
@@ -160,7 +160,7 @@
         "crawledAt": "2026-03-01T20:18:00Z"
       },
       "qualityScores": {
-        "iqs": 83.0,
+        "iqs": 83,
         "ais": 55.2,
         "computedAt": "2026-03-01T20:18:00Z"
       }
@@ -172,10 +172,10 @@
         "easy_de": "Kontakt zum Arbeits-Ministerium"
       },
       "summary": {
-        "de": "Kontaktseite des BMAS mit Formular, Bürgertelefon und weiteren Kontaktinformationen."
+        "de": "Die BMAS-Kontaktseite stellt Kontaktformular, Bürgertelefon und ergänzende Informationsangebote bereit."
       },
       "content": {
-        "de": "Das BMAS bietet über diese Seite zentrale Kontaktwege, unter anderem das Bürgertelefon sowie Hinweise in Leichter Sprache."
+        "de": "Sie bietet konkrete Kontaktwege für Fragen an das Bundesministerium für Arbeit und Soziales und enthält Hinweise in Leichter Sprache. Damit wird der Zugang zu ministeriellen Auskünften strukturiert erleichtert."
       },
       "url": "https://www.bmas.de/DE/Service/Kontakt/kontakt.html",
       "topics": [
@@ -225,10 +225,10 @@
         "easy_de": "115 in Gebärdensprache"
       },
       "summary": {
-        "de": "Kontaktangebot zur Behördennummer 115 in Gebärdensprache für Menschen mit Hörbeeinträchtigung."
+        "de": "Das Gebärdentelefon 115 erweitert den Zugang zur Behördennummer 115 um barrierearme Kommunikation für hörbeeinträchtigte Menschen."
       },
       "content": {
-        "de": "Das Gebärdentelefon ergänzt die 115 um einen barrierearmen Zugang und unterstützt gehörlose oder schwerhörige Bürgerinnen und Bürger."
+        "de": "Das Angebot ergänzt den regulären 115-Service um einen inklusiven Zugangskanal. Dadurch wird die Erreichbarkeit von Behördeninformationen für eine wichtige Zielgruppe verbessert."
       },
       "url": "https://www.gebaerdentelefon.de/115",
       "topics": [

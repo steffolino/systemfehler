@@ -8,10 +8,10 @@
         "easy_de": "Bürgergeld"
       },
       "summary": {
-        "de": "Bürgergeld unterstützt Menschen, deren Einkommen nicht für den Lebensunterhalt reicht, und umfasst Regelbedarf sowie angemessene Kosten für Unterkunft und Heizung."
+        "de": "Bürgergeld ist eine Leistung der Grundsicherung für erwerbsfähige Menschen mit zu geringem Einkommen oder ohne Arbeit und deckt Regelbedarf sowie angemessene Wohnkosten ab."
       },
       "content": {
-        "de": "Bürgergeld ist eine Leistung der Grundsicherung für erwerbsfähige Personen mit zu geringem Einkommen oder ohne Arbeit. Die Höhe richtet sich nach Bedarf, Einkommen und Vermögen der Bedarfsgemeinschaft. Der Antrag wird in der Regel beim zuständigen Jobcenter gestellt."
+        "de": "Die Informationsseite der Bundesagentur für Arbeit erläutert Anspruch, Antrag und zentrale Rahmenbedingungen für Bürgergeld. Sie verweist auf Zuständigkeiten der Jobcenter und auf Pflichten sowie Mitwirkungsanforderungen im Leistungsbezug."
       },
       "topics": [
         "financial_support",
@@ -51,10 +51,10 @@
         "easy_de": "Hilfe bei Kurzarbeit"
       },
       "summary": {
-        "de": "Informationen der Bundesagentur für Arbeit zum Kurzarbeitergeld für Betriebe und Beschäftigte bei vorübergehendem Arbeitsausfall."
+        "de": "Kurzarbeitergeld unterstützt Betriebe und Beschäftigte bei vorübergehendem Arbeitsausfall, um Beschäftigung zu stabilisieren."
       },
       "content": {
-        "de": "Die Seite erklärt Voraussetzungen, Verfahren und Hinweise zur Leistung Kurzarbeitergeld. Sie richtet sich an Unternehmen und Betroffene in Phasen reduzierter Arbeitszeit."
+        "de": "Die BA-Seite bündelt Voraussetzungen, Hinweise zur Beantragung und praktische Orientierung für die Umsetzung von Kurzarbeit. Sie ordnet die Leistung in den Kontext der Arbeitslosenversicherung und betrieblicher Krisenbewältigung ein."
       },
       "url": "https://www.arbeitsagentur.de/kurzarbeitergeld",
       "topics": [
@@ -92,10 +92,10 @@
         "easy_de": "Hilfe für Familien"
       },
       "summary": {
-        "de": "Übersicht der Bundesagentur für Arbeit zu Kindergeld, Kinderzuschlag und weiteren Unterstützungsleistungen für Familien."
+        "de": "Die Seite bietet einen zentralen Einstieg zu Kindergeld, Kinderzuschlag und weiteren Unterstützungsangeboten für Familien."
       },
       "content": {
-        "de": "Die Seite bündelt Informationen zu Familienleistungen und verweist auf digitale Anträge, Fristen und weiterführende Beratungsangebote der Familienkasse."
+        "de": "Sie enthält Schnellzugriffe auf eServices, Leistungsinformationen und weiterführende Hilfen für Eltern. Zusätzlich verweist sie auf regionale Familienkassen und ergänzende staatliche Unterstützungsangebote."
       },
       "url": "https://www.arbeitsagentur.de/familie-und-kinder",
       "topics": [
@@ -133,10 +133,10 @@
         "easy_de": "Familien-Leistungen"
       },
       "summary": {
-        "de": "Offizielle Übersichtsseite des Bundesministeriums zu zentralen Familienleistungen wie Elterngeld, Kindergeld und Kinderzuschlag."
+        "de": "Das BMBFSFJ stellt zentrale Familienleistungen wie Elterngeld, Kindergeld, Kinderzuschlag und weitere Unterstützungen im Überblick dar."
       },
       "content": {
-        "de": "Das BMBFSFJ erläutert bundesweite Familienleistungen, Voraussetzungen und weiterführende Informations- sowie Serviceangebote für Eltern und Erziehende."
+        "de": "Die Seite strukturiert bundesweite Familienleistungen und verlinkt auf vertiefende Informationen zu Anspruch, Zweck und Antrag. Damit dient sie als offizieller Orientierungspunkt für Familien in unterschiedlichen Lebenslagen."
       },
       "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen",
       "topics": [
@@ -162,8 +162,8 @@
         "crawledAt": "2026-03-01T20:10:00Z"
       },
       "qualityScores": {
-        "iqs": 81.0,
-        "ais": 53.0,
+        "iqs": 81,
+        "ais": 53,
         "computedAt": "2026-03-01T20:10:00Z"
       }
     },
@@ -174,10 +174,10 @@
         "easy_de": "Geld für Kinder"
       },
       "summary": {
-        "de": "Informationsseite des BMBFSFJ zum Kindergeld als zentrale Leistung für Familien in Deutschland."
+        "de": "Kindergeld ist eine zentrale familienpolitische Leistung zur finanziellen Entlastung von Familien in Deutschland."
       },
       "content": {
-        "de": "Die Seite beschreibt das Kindergeld, ordnet es im Leistungssystem ein und verlinkt zu weiterführenden Informationen für Antrag und Anspruch."
+        "de": "Die Ministeriumsseite ordnet das Kindergeld im Gesamtsystem der Familienleistungen ein und verweist auf weiterführende Informationen. Sie unterstützt die erste Orientierung zu Zweck, Anspruchsrahmen und Zuständigkeiten."
       },
       "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kindergeld/kindergeld-73892",
       "topics": [
