@@ -327,7 +327,11 @@ Guidelines:
 
 ## License
 
-To be defined. Until then, please consider the repository as "all rights reserved" by the project owner, unless a license file is added specifying otherwise.
+This project is licensed under the **MIT License**.
+
+See the [LICENSE](./LICENSE) file for the full text.
+
+Everyone is welcome to use, fork, adapt, and contribute.
 
 ---
 
