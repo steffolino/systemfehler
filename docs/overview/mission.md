@@ -1,5 +1,5 @@
 # Mission
-_Last updated: 2025-10-19_
+_Last updated: 2026-03-01_
 
 **Systemfehler** is a public-interest open platform designed to make information about social benefits, rights, and support programs in Germany accessible to everyone — especially to people facing bureaucratic, linguistic, or informational barriers.
 
@@ -14,3 +14,6 @@ _Last updated: 2025-10-19_
 2. Multilingual and inclusive design
 3. Traceable data provenance
 4. Collaboration through open-source governance
+
+### Recent Updates
+- See [Overview Changelog](./changelog.md) for current implementation milestones.
