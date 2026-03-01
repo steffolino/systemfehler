@@ -6,19 +6,19 @@ from urllib.parse import urlparse, parse_qs
 ROOT = os.path.dirname(os.path.abspath(__file__))
 QUEUE_PATH = os.path.join(ROOT, '..', 'review_queue.json')
 ALLOWED_DOMAINS = {'benefits', 'aid', 'tools', 'organizations', 'contacts'}
+DOMAIN_ENTRIES_FILES = {
+    'benefits': os.path.normpath(os.path.join(ROOT, '..', 'data', 'benefits', 'entries.json')),
+    'aid': os.path.normpath(os.path.join(ROOT, '..', 'data', 'aid', 'entries.json')),
+    'tools': os.path.normpath(os.path.join(ROOT, '..', 'data', 'tools', 'entries.json')),
+    'organizations': os.path.normpath(os.path.join(ROOT, '..', 'data', 'organizations', 'entries.json')),
+    'contacts': os.path.normpath(os.path.join(ROOT, '..', 'data', 'contacts', 'entries.json')),
+}
 
 
 def get_entries_file_for_domain(domain):
     if domain not in ALLOWED_DOMAINS:
         return None
-
-    data_root = os.path.normpath(os.path.join(ROOT, '..', 'data'))
-    data_dir = os.path.normpath(os.path.join(data_root, domain))
-
-    if not (data_dir == data_root or data_dir.startswith(data_root + os.sep)):
-        return None
-
-    return os.path.join(data_dir, 'entries.json')
+    return DOMAIN_ENTRIES_FILES.get(domain)
 
 def read_queue():
     try:
