@@ -38,11 +38,11 @@ jobs:
                   mkdir -p frontend/public/data
                   cp -R data/* frontend/public/data/
                   mkdir -p frontend/public/moderation
-                if [ -f moderation/review_queue.json ]; then
-                  cp moderation/review_queue.json frontend/public/moderation/review_queue.json
-                else
-                  echo '{"queue":[]}' > frontend/public/moderation/review_queue.json
-                fi
+                  if [ -f moderation/review_queue.json ]; then
+                    cp moderation/review_queue.json frontend/public/moderation/review_queue.json
+                  else
+                    echo '{"queue":[]}' > frontend/public/moderation/review_queue.json
+                  fi
 
             - name: Build frontend for GitHub Pages
               run: npm run build
