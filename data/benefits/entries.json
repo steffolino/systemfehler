@@ -4,7 +4,14 @@
   "entries": [
     {
       "title": {
-        "de": "Bürgergeld (Arbeitslosengeld II)"
+        "de": "Bürgergeld (Arbeitslosengeld II)",
+        "easy_de": "Bürgergeld"
+      },
+      "summary": {
+        "de": "Bürgergeld unterstützt Menschen, deren Einkommen nicht für den Lebensunterhalt reicht, und umfasst Regelbedarf sowie angemessene Kosten für Unterkunft und Heizung."
+      },
+      "content": {
+        "de": "Bürgergeld ist eine Leistung der Grundsicherung für erwerbsfähige Personen mit zu geringem Einkommen oder ohne Arbeit. Die Höhe richtet sich nach Bedarf, Einkommen und Vermögen der Bedarfsgemeinschaft. Der Antrag wird in der Regel beim zuständigen Jobcenter gestellt."
       },
       "topics": [
         "financial_support",
