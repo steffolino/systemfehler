@@ -53,5 +53,7 @@ This avoids cross-origin requests to raw GitHub URLs and prevents CORS failures 
 
 ## Deployment
 
-- Primary static deployment: `.github/workflows/deploy-github-pages.yml`
-- Expected public URL: `https://steffolino.github.io/systemfehler/`
+- Primary deployment (frontend + API): `.github/workflows/deploy-pages.yml`
+- Primary public URL: `https://systemfehler.pages.dev/`
+- Static fallback deployment: `.github/workflows/deploy-github-pages.yml`
+- Fallback URL: `https://steffolino.github.io/systemfehler/`

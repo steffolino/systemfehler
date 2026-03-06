@@ -4,13 +4,13 @@ Systemfehler is a modular, extensible, preservation-oriented data platform for s
 
 The goal is to make information about social rights and support more transparent, accessible, and robust against removal or silent change.
 
-## Current Snapshot (2026-03-01)
+## Current Snapshot (2026-03-06)
 
 - Real data is published for all five domains (`benefits`, `aid`, `tools`, `organizations`, `contacts`).
 - Current dataset size: **25 validated entries** (5 per domain).
 - Validation status: **0 schema/structural errors, 0 lint warnings** (`npm run validate`).
-- Public frontend is live on GitHub Pages at `https://steffolino.github.io/systemfehler/`.
-- GitHub Pages builds package snapshot JSON (`/data/*/entries.json`, `/moderation/review_queue.json`) into the static artifact for same-origin reads.
+- Public frontend and API are live on Cloudflare Pages at `https://systemfehler.pages.dev/`.
+- GitHub Pages remains available as a static snapshot fallback at `https://steffolino.github.io/systemfehler/`.
 
 ---
 
@@ -264,16 +264,16 @@ The report includes entry counts, error/warning totals, and sample failures.
 
 ## Cloudflare Deployment
 
-The repository includes a Cloudflare Pages deployment workflow for the frontend.
+The repository includes a Cloudflare Pages deployment workflow for production frontend + API.
 
 - Workflow: `.github/workflows/deploy-pages.yml`
 - Static output: `frontend/dist`
-- Required GitHub secrets: `CF_PAGES_API_TOKEN`, `CF_ACCOUNT_ID`
+- Required GitHub secrets: `CF_PAGES_API_TOKEN`, `CF_ACCOUNT_ID`, `PAGES_INGEST_URL`, `INGEST_TOKEN`
 
-Read-only API Functions source is maintained in `cloudflare-pages/functions` and
-can be deployed in a dedicated API step.
+Cloudflare Pages Functions source is maintained in `cloudflare-pages/functions`
+and is deployed together with the static build.
 
-Note: production hosting currently uses GitHub Pages as the primary live target.
+Note: production hosting currently uses Cloudflare Pages as the primary live target.
 
 See `cloudflare-pages/README.md` for setup details.
 
@@ -281,7 +281,7 @@ See `cloudflare-pages/README.md` for setup details.
 
 ## GitHub Pages Deployment
 
-The repository also includes a GitHub Pages workflow for static frontend hosting.
+The repository also includes a GitHub Pages workflow for static fallback hosting.
 
 - Workflow: `.github/workflows/deploy-github-pages.yml`
 - Build directory: `frontend/dist`

@@ -3,7 +3,7 @@ Cloudflare Pages deployment
 This folder contains Cloudflare Pages Functions for a D1-backed API used by the
 frontend when deployed to Cloudflare Pages.
 
-Current production frontend hosting is GitHub Pages. Cloudflare deployment remains available as an optional alternative path.
+Current production frontend + API hosting is Cloudflare Pages. GitHub Pages remains available as a static fallback path.
 
 The deployment workflow builds the frontend app from `frontend/` and deploys:
 - static site: `frontend/dist`
