@@ -56,6 +56,7 @@ def main():
         headers={
             'Authorization': f'Bearer {token}',
             'Content-Type': 'application/json',
+            'User-Agent': 'systemfehler-ingest-bot/1.0 (+https://github.com/steffolino/systemfehler)',
         },
         method='POST',
     )
