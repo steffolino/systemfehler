@@ -16,6 +16,27 @@ Currently, the API does not require authentication. Authentication will be added
 
 ## Endpoints
 
+### API Version
+
+Get lightweight runtime metadata for diagnostics and host detection.
+
+**Endpoint:** `GET /api/version`
+
+**Response:**
+
+```json
+{
+  "service": "systemfehler-api",
+  "version": "0.1.0",
+  "runtime": "cloudflare-pages-functions",
+  "deploymentTarget": "cloudflare-pages",
+  "host": "systemfehler.pages.dev",
+  "timestamp": "2026-03-06T12:00:00.000Z"
+}
+```
+
+---
+
 ### Health Check
 
 Check if the API and database are operational.

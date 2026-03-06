@@ -70,6 +70,18 @@ app.get('/api/health', async (req, res) => {
   }
 });
 
+// Version and runtime metadata endpoint
+app.get('/api/version', async (req, res) => {
+  res.json({
+    service: 'systemfehler-api',
+    version: process.env.npm_package_version || '0.1.0',
+    runtime: 'node-express',
+    deploymentTarget: process.env.DEPLOYMENT_TARGET || 'local-backend',
+    host: req.get('host') || null,
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Status endpoint
 app.get('/api/status', async (req, res) => {
   try {

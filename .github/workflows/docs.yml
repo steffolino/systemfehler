@@ -6,6 +6,13 @@ on:
     branches: ["main"]
     paths: ["docs/**", "PROJECT_PLAN.md", ".github/**"]
 jobs:
+  consistency:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check deployment wording consistency
+        run: node scripts/check_docs_consistency.js
+
   markdownlint:
     runs-on: ubuntu-latest
     steps:

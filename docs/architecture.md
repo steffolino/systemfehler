@@ -198,6 +198,28 @@ This structure is indicative and can be refined as the implementation matures.
 
 ---
 
+## 3.1 Deployment Targets (Canonical)
+
+The project has two deployment targets with distinct roles:
+
+1. **Cloudflare Pages (primary production target)**
+
+  * URL: `https://systemfehler.pages.dev/`
+  * Hosts frontend static assets and Pages Functions API (`/api/*`)
+  * Uses D1 (`DB` binding) for production API data
+  * Deployment workflow: `.github/workflows/deploy-pages.yml`
+
+2. **GitHub Pages (static fallback target)**
+
+  * URL: `https://steffolino.github.io/systemfehler/`
+  * Hosts static frontend plus bundled snapshot JSON only
+  * No dynamic `/api/*` backend endpoints
+  * Deployment workflow: `.github/workflows/deploy-github-pages.yml`
+
+When resolving deployment-related ambiguity, this section is the canonical source.
+
+---
+
 ## 4. Data Flow Overview
 
 1. **URL registration**
@@ -239,11 +261,11 @@ This structure is indicative and can be refined as the implementation matures.
 
    * Additional scripts generate exports for external tools, APIs, or UIs.
 
-9. **Static hosting delivery (GitHub Pages)**
+9. **Hosting delivery (Cloudflare primary, GitHub fallback)**
 
-  * The GitHub Pages workflow copies `data/*` and `moderation/review_queue.json` into frontend public assets before build.
-  * The deployed frontend reads snapshot JSON from same-origin paths to avoid cross-origin API dependencies.
-  * This enables a fully static deployment while preserving read access to validated entries.
+  * Cloudflare Pages deploys frontend assets and Pages Functions API for `/api/*`.
+  * GitHub Pages deploys a static fallback artifact with same-origin snapshot JSON.
+  * Snapshot packaging (`data/*` and `moderation/review_queue.json`) preserves read access in fallback mode.
 
 ---
 
