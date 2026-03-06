@@ -1,0 +1,42 @@
+name: Crawl and Ingest
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # daily at 03:00 UTC
+  workflow_dispatch:
+
+jobs:
+  crawl-and-ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: pip install -r crawlers/requirements.txt
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Run benefits crawler
+        run: python crawlers/cli.py crawl benefits --source arbeitsagentur
+
+      - name: Validate entries
+        run: npm run validate
+
+      - name: Ingest benefits entries into D1
+        run: python scripts/ingest_to_d1.py --domain benefits --snapshot data/benefits/entries.json
+        env:
+          PAGES_INGEST_URL: ${{ secrets.PAGES_INGEST_URL }}
+          INGEST_TOKEN: ${{ secrets.INGEST_TOKEN }}

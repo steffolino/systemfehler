@@ -1,5 +1,5 @@
 export async function onRequest(context) {
-  const { request } = context;
+  const { request, env } = context;
   const url = new URL(request.url);
   const domain = url.searchParams.get('domain');
   const limit = Math.min(parseInt(url.searchParams.get('limit') || '50', 10), 100);
@@ -7,49 +7,45 @@ export async function onRequest(context) {
   const includeTranslations = url.searchParams.get('includeTranslations') === 'true' || url.searchParams.get('includeTranslations') === '1';
 
   try {
-    const fs = await import('fs/promises');
-    const path = await import('path');
-    const base = path.resolve(process.cwd(), 'data');
+    const db = env.DB;
 
-    let entries = [];
-
+    let rowsQuery, countQuery, rowsParams, countParams;
     if (domain) {
-      const file = path.join(base, domain, 'entries.json');
-      const txt = await fs.readFile(file, 'utf8').catch(() => '[]');
-      const arr = JSON.parse(txt || '[]');
-      entries = Array.isArray(arr) ? arr : [];
+      rowsQuery = 'SELECT id, domain, url, status, title_de, updated_at, entry_json FROM entries WHERE domain = ? ORDER BY updated_at DESC LIMIT ? OFFSET ?';
+      rowsParams = [domain, limit, offset];
+      countQuery = 'SELECT COUNT(*) as count FROM entries WHERE domain = ?';
+      countParams = [domain];
     } else {
-      // read all domain folders under data
-      const dirs = await fs.readdir(base, { withFileTypes: true }).catch(() => []);
-      for (const d of dirs) {
-        if (!d.isDirectory()) continue;
-        const file = path.join(base, d.name, 'entries.json');
-        const txt = await fs.readFile(file, 'utf8').catch(() => null);
-        if (!txt) continue;
-        const arr = JSON.parse(txt || '[]');
-        if (Array.isArray(arr)) {
-          // attach domain field if missing
-          arr.forEach(e => { if (e && !e.domain) e.domain = d.name; });
-          entries.push(...arr);
-        }
+      rowsQuery = 'SELECT id, domain, url, status, title_de, updated_at, entry_json FROM entries ORDER BY updated_at DESC LIMIT ? OFFSET ?';
+      rowsParams = [limit, offset];
+      countQuery = 'SELECT COUNT(*) as count FROM entries';
+      countParams = [];
+    }
+
+    const [rowsResult, countRow] = await Promise.all([
+      db.prepare(rowsQuery).bind(...rowsParams).all(),
+      db.prepare(countQuery).bind(...countParams).first()
+    ]);
+
+    const total = countRow ? countRow.count : 0;
+
+    const entries = rowsResult.results.map(row => {
+      const entry = row.entry_json ? JSON.parse(row.entry_json) : {};
+      entry.id = row.id;
+      entry.domain = row.domain;
+      entry.url = row.url;
+      entry.status = row.status;
+      entry.title_de = row.title_de;
+      entry.updated_at = row.updated_at;
+      if (!includeTranslations && entry.translations) {
+        delete entry.translations;
       }
-    }
+      return entry;
+    });
 
-    // optionally attach translations (already present in snapshots)
-    if (!includeTranslations) {
-      // ensure we don't send huge translations objects accidentally
-      entries = entries.map(e => {
-        const copy = { ...e };
-        if (copy.translations) delete copy.translations;
-        return copy;
-      });
-    }
-
-    const total = entries.length;
     const page = Math.floor(offset / limit) + 1;
-    const pageItems = entries.slice(offset, offset + limit);
 
-    return new Response(JSON.stringify({ entries: pageItems, total, limit, offset, page, pages: Math.ceil(total / limit) }), {
+    return new Response(JSON.stringify({ entries, total, limit, offset, page, pages: Math.ceil(total / limit) }), {
       headers: { 'content-type': 'application/json' }
     });
   } catch (err) {
