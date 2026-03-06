@@ -7,9 +7,7 @@ Current production frontend hosting is GitHub Pages. Cloudflare deployment remai
 
 The deployment workflow builds the frontend app from `frontend/` and deploys:
 - static site: `frontend/dist`
-
-Pages Functions source remains in `cloudflare-pages/functions` and can be wired
-in a dedicated API deployment step.
+- Pages Functions from `cloudflare-pages/functions` (via `wrangler pages deploy --cwd=cloudflare-pages`)
 
 ## API Endpoints
 
@@ -26,6 +24,11 @@ Set these in repository settings (`Settings -> Secrets and variables -> Actions`
 
 - `CF_PAGES_API_TOKEN`
 - `CF_ACCOUNT_ID`
+
+For automated D1 ingest from `.github/workflows/crawl-and-ingest.yml`:
+
+- `PAGES_INGEST_URL` (e.g. `https://systemfehler.pages.dev`)
+- `INGEST_TOKEN` (must match the Cloudflare Pages secret `INGEST_TOKEN`)
 
 ## Cloudflare Project Setup
 

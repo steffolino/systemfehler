@@ -59,9 +59,16 @@ crawling logic to these files.
 
 | Component | Status | Notes |
 |-----------|--------|-------|
-| Pages deploy workflow (`.github/workflows/deploy-pages.yml`) | ✅ Working | Frontend build uses `VITE_API_URL=/api` |
+| Pages deploy workflow (`.github/workflows/deploy-pages.yml`) | ✅ Working | Frontend build uses `VITE_API_URL=/api`; deploy runs with `wrangler@4.71.0` and `--cwd=cloudflare-pages` |
 | Pages Functions API | ✅ Working | Worker-safe handlers for `/api/health`, `/api/status`, `/api/data/entries`, `/api/data/entries/:id`, `/api/data/moderation-queue`, `/api/data/quality-report` |
 | D1 schema (`cloudflare-pages/d1/schema.sql`) | ✅ Working | Includes `entries` and `moderation_queue` tables |
+
+### Automated ingest (`.github/workflows/crawl-and-ingest.yml`)
+
+| Component | Status | Notes |
+|-----------|--------|-------|
+| Crawl + ingest workflow | ✅ Working | Requires GitHub secrets `PAGES_INGEST_URL` and `INGEST_TOKEN` |
+| `scripts/ingest_to_d1.py` | ✅ Working | Accepts both JSON array snapshots and `{ "entries": [...] }` snapshots |
 
 ### Validation scripts (`scripts/`)
 
@@ -139,6 +146,9 @@ npm run db:seed
 
 # Import using Python directly
 python crawlers/cli.py import --domain benefits --to-db
+
+# Trigger crawl + ingest workflow
+gh workflow run "Crawl and Ingest" --repo steffolino/systemfehler
 ```
 
 ---
