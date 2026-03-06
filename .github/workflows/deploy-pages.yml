@@ -42,7 +42,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_PAGES_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
         with:
-          wranglerVersion: '4.71.0'
+          wranglerVersion: "4.71.0"
           apiToken: ${{ secrets.CF_PAGES_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          command: pages deploy dist-pages --project-name=systemfehler --branch=main --functions=cloudflare-pages/functions
+          command: pages deploy ../dist-pages --project-name=systemfehler --branch=main --cwd=cloudflare-pages
