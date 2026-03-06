@@ -29,12 +29,12 @@ jobs:
         working-directory: frontend
         env:
           PUBLIC_PATH: /
+          VITE_API_URL: /api
 
       - name: Assemble combined deploy directory
         run: |
           mkdir -p dist-pages
           cp -r frontend/dist/. dist-pages/
-          cp -r cloudflare-pages/functions dist-pages/functions
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
@@ -44,4 +44,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CF_PAGES_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          command: pages deploy dist-pages --project-name=systemfehler --branch=main
+          command: pages deploy dist-pages --project-name=systemfehler --branch=main --functions=cloudflare-pages/functions

@@ -1,7 +1,7 @@
 Cloudflare Pages deployment
 
-This folder contains Cloudflare Pages Functions for a read-only API that serves
-JSON snapshots from the repository.
+This folder contains Cloudflare Pages Functions for a D1-backed API used by the
+frontend when deployed to Cloudflare Pages.
 
 Current production frontend hosting is GitHub Pages. Cloudflare deployment remains available as an optional alternative path.
 
@@ -13,9 +13,12 @@ in a dedicated API deployment step.
 
 ## API Endpoints
 
-- `/api/data/entries` -> list entries (`domain`, `limit`, `offset`, `includeTranslations`)
-- `/api/data/moderation-queue` -> moderation queue from `moderation/review_queue.json`
 - `/api/health` -> health check
+- `/api/status` -> aggregated stats for dashboard cards
+- `/api/data/entries` -> list entries (`domain`, `status`, `search`, `limit`, `offset`, `includeTranslations`)
+- `/api/data/entries/:id` -> single entry
+- `/api/data/moderation-queue` -> moderation queue from D1 table `moderation_queue`
+- `/api/data/quality-report` -> quality metrics + missing translation report
 
 ## Required GitHub Secrets
 

@@ -55,6 +55,14 @@ crawling logic to these files.
 | Vite + React admin panel | ✅ Working |
 | Data preview, quality metrics, moderation queue views | ✅ Working |
 
+### Cloudflare Pages (`cloudflare-pages/`)
+
+| Component | Status | Notes |
+|-----------|--------|-------|
+| Pages deploy workflow (`.github/workflows/deploy-pages.yml`) | ✅ Working | Frontend build uses `VITE_API_URL=/api` |
+| Pages Functions API | ✅ Working | Worker-safe handlers for `/api/health`, `/api/status`, `/api/data/entries`, `/api/data/entries/:id`, `/api/data/moderation-queue`, `/api/data/quality-report` |
+| D1 schema (`cloudflare-pages/d1/schema.sql`) | ✅ Working | Includes `entries` and `moderation_queue` tables |
+
 ### Validation scripts (`scripts/`)
 
 | Script | `npm run` command | Status |

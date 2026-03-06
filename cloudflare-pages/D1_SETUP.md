@@ -14,6 +14,9 @@ Note the `database_id` from the output.
 npx wrangler d1 execute systemfehler-db --file=cloudflare-pages/d1/schema.sql
 ```
 
+This creates both `entries` and `moderation_queue` tables required by the
+Cloudflare Pages API endpoints.
+
 ## 3. Bind the database to the Pages project
 
 In the Cloudflare dashboard:

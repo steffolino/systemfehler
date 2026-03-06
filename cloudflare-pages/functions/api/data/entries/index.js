@@ -2,6 +2,8 @@ export async function onRequest(context) {
   const { request, env } = context;
   const url = new URL(request.url);
   const domain = url.searchParams.get('domain');
+  const status = url.searchParams.get('status');
+  const search = url.searchParams.get('search');
   const limit = Math.min(parseInt(url.searchParams.get('limit') || '50', 10), 100);
   const offset = parseInt(url.searchParams.get('offset') || '0', 10);
   const includeTranslations = url.searchParams.get('includeTranslations') === 'true' || url.searchParams.get('includeTranslations') === '1';
@@ -9,18 +11,27 @@ export async function onRequest(context) {
   try {
     const db = env.DB;
 
-    let rowsQuery, countQuery, rowsParams, countParams;
+    const clauses = [];
+    const filterParams = [];
+
     if (domain) {
-      rowsQuery = 'SELECT id, domain, url, status, title_de, updated_at, entry_json FROM entries WHERE domain = ? ORDER BY updated_at DESC LIMIT ? OFFSET ?';
-      rowsParams = [domain, limit, offset];
-      countQuery = 'SELECT COUNT(*) as count FROM entries WHERE domain = ?';
-      countParams = [domain];
-    } else {
-      rowsQuery = 'SELECT id, domain, url, status, title_de, updated_at, entry_json FROM entries ORDER BY updated_at DESC LIMIT ? OFFSET ?';
-      rowsParams = [limit, offset];
-      countQuery = 'SELECT COUNT(*) as count FROM entries';
-      countParams = [];
+      clauses.push('domain = ?');
+      filterParams.push(domain);
     }
+    if (status) {
+      clauses.push('status = ?');
+      filterParams.push(status);
+    }
+    if (search) {
+      clauses.push('(LOWER(title_de) LIKE LOWER(?) OR LOWER(url) LIKE LOWER(?))');
+      filterParams.push(`%${search}%`, `%${search}%`);
+    }
+
+    const whereClause = clauses.length > 0 ? ` WHERE ${clauses.join(' AND ')}` : '';
+    const rowsQuery = `SELECT id, domain, url, status, title_de, updated_at, entry_json FROM entries${whereClause} ORDER BY updated_at DESC LIMIT ? OFFSET ?`;
+    const countQuery = `SELECT COUNT(*) as count FROM entries${whereClause}`;
+    const rowsParams = [...filterParams, limit, offset];
+    const countParams = [...filterParams];
 
     const [rowsResult, countRow] = await Promise.all([
       db.prepare(rowsQuery).bind(...rowsParams).all(),
@@ -43,9 +54,10 @@ export async function onRequest(context) {
       return entry;
     });
 
-    const page = Math.floor(offset / limit) + 1;
+    const page = Math.floor(offset / Math.max(limit, 1)) + 1;
+    const pages = total > 0 ? Math.ceil(total / Math.max(limit, 1)) : 1;
 
-    return new Response(JSON.stringify({ entries, total, limit, offset, page, pages: Math.ceil(total / limit) }), {
+    return new Response(JSON.stringify({ entries, total, limit, offset, page, pages }), {
       headers: { 'content-type': 'application/json' }
     });
   } catch (err) {
