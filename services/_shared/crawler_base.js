@@ -1,12 +1,25 @@
 /**
+ * ============================================================
+ * REFERENCE ONLY – NOT THE ACTIVE CRAWLER IMPLEMENTATION
+ * ============================================================
+ * Node crawler code in services/ is design scaffolding only.
+ * The canonical crawling implementation is the Python pipeline.
+ *
+ * To run a crawl use:
+ *   python crawlers/cli.py crawl benefits --source arbeitsagentur
+ *
+ * See docs/status.md for the full list of working commands.
+ * ============================================================
+ *
  * Systemfehler - Shared Crawler Base Module
- * 
+ *
  * This module provides the foundation for all domain-specific crawlers.
  * It includes HTML fetching, text extraction, URL normalization, error handling,
  * logging, and deduplication functionality.
- * 
+ *
  * @see CRAWL-01 (Issue #4) - Implement shared base crawler module
  * @see docs/architecture.md - Section 2.5 Preservation-Oriented Crawling
+ * @see docs/status.md - Canonical implementation status
  */
 
 /**
@@ -43,7 +56,10 @@
 // Placeholder exports - implement per CRAWL-01
 export const fetchPage = async (url, options = {}) => {
   // TODO: Implement HTTP fetching with retry logic
-  throw new Error('Not implemented - see CRAWL-01 (Issue #4)');
+  throw new Error(
+    'Not implemented (Node stub – reference only). ' +
+    'Use: python crawlers/cli.py crawl benefits --source arbeitsagentur'
+  );
 };
 
 export const extractText = (element, clean = true) => {
