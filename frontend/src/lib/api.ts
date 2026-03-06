@@ -181,7 +181,13 @@ interface QualityReportResponse {
 }
 
 async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> {
-  const url = `${API_BASE_URL}${endpoint}`;
+  const normalizedBase = API_BASE_URL.replace(/\/+$/, '');
+  const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const dedupedEndpoint =
+    normalizedBase.endsWith('/api') && normalizedEndpoint.startsWith('/api/')
+      ? normalizedEndpoint.slice(4)
+      : normalizedEndpoint;
+  const url = `${normalizedBase}${dedupedEndpoint}`;
   
   try {
     const response = await fetch(url, {
