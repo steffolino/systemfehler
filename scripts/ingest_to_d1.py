@@ -40,8 +40,13 @@ def main():
         sys.exit(1)
 
     entries = json.loads(snapshot.read_text())
+    if isinstance(entries, dict):
+        nested_entries = entries.get('entries')
+        if isinstance(nested_entries, list):
+            entries = nested_entries
+
     if not isinstance(entries, list):
-        print('Error: snapshot must be a JSON array', file=sys.stderr)
+        print('Error: snapshot must be a JSON array or an object with an entries array', file=sys.stderr)
         sys.exit(1)
 
     payload = json.dumps({'domain': args.domain, 'entries': entries}).encode()
