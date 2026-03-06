@@ -1,11 +1,25 @@
 /**
+ * ============================================================
+ * REFERENCE ONLY – NOT THE ACTIVE CRAWLER IMPLEMENTATION
+ * ============================================================
+ * Node crawler code in services/ is design scaffolding only.
+ * The canonical crawling implementation is the Python pipeline.
+ *
+ * To run the benefits crawl use:
+ *   python crawlers/cli.py crawl benefits --source arbeitsagentur
+ *   npm run crawl:benefits
+ *
+ * See docs/status.md for the full list of working commands.
+ * ============================================================
+ *
  * Systemfehler - Benefits Domain Crawler
- * 
+ *
  * This crawler fetches and extracts benefit information from government
  * and NGO websites. It is the primary prototype crawler for Systemfehler.
- * 
+ *
  * @see CRAWL-02 (Issue #5) - Implement prototype crawler for benefit entries
  * @see docs/crawling/playbooks.md - Domain playbook structure
+ * @see docs/status.md - Canonical implementation status
  */
 
 import { fetchPage, extractText, createLogger, computeChecksum } from '../../_shared/crawler_base.js';
@@ -46,17 +60,26 @@ export const crawlBenefits = async (options = {}) => {
   logger.info('Starting benefits crawl...');
   
   // TODO: Implement benefit crawling per CRAWL-02 (Issue #5)
-  throw new Error('Not implemented - see CRAWL-02 (Issue #5)');
+  throw new Error(
+    'Not implemented (Node stub – reference only). ' +
+    'Use: python crawlers/cli.py crawl benefits --source arbeitsagentur'
+  );
 };
 
 export const extractBenefitFields = (html, rules) => {
   // TODO: Implement benefit-specific field extraction
-  throw new Error('Not implemented - see CRAWL-02 (Issue #5)');
+  throw new Error(
+    'Not implemented (Node stub – reference only). ' +
+    'Use: python crawlers/cli.py crawl benefits --source arbeitsagentur'
+  );
 };
 
 export const detectBenefitChanges = (newEntry, existingEntry) => {
   // TODO: Implement change detection for benefits
-  throw new Error('Not implemented - see CRAWL-02 (Issue #5)');
+  throw new Error(
+    'Not implemented (Node stub – reference only). ' +
+    'Use: python crawlers/cli.py crawl benefits --source arbeitsagentur'
+  );
 };
 
 // Entry point for npm run crawl:benefits

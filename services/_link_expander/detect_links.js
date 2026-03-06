@@ -1,10 +1,24 @@
 /**
+ * ============================================================
+ * REFERENCE ONLY – NOT THE ACTIVE IMPLEMENTATION
+ * ============================================================
+ * This link-expander module is design scaffolding only.
+ * The canonical crawling implementation is the Python pipeline.
+ *
+ * Link expansion is planned as a future Python feature (CRAWL-03, issue #6).
+ * When implemented it will live in crawlers/shared/ and be invoked via
+ * the Python CLI.
+ *
+ * See docs/status.md for the full list of working commands.
+ * ============================================================
+ *
  * Systemfehler - Link Expander Module
  * 
  * This module scans crawled pages for outgoing links and discovers
  * new candidate URLs for the crawler queue.
  * 
  * @see CRAWL-03 (Issue #6) - Build cross-link detection for new resources
+ * @see docs/status.md - Canonical implementation status
  */
 
 /**
