@@ -182,6 +182,12 @@ export function ModerationQueue() {
                                 {item.provenance.crawler}
                               </div>
                             )}
+                            {item.provenance.crawlerVersion && (
+                              <div>
+                                <span className="text-muted-foreground">Crawler Version:</span>{' '}
+                                {item.provenance.crawlerVersion}
+                              </div>
+                            )}
                             {item.provenance.crawledAt && (
                               <div>
                                 <span className="text-muted-foreground">Crawled:</span>{' '}

@@ -25,6 +25,33 @@ function withLegacyKeys(entry, legacyMap) {
   return entry;
 }
 
+function summarizeDiff(diff) {
+  if (!diff || typeof diff !== 'object') {
+    return {
+      type: 'update',
+      addedCount: 0,
+      modifiedCount: 0,
+      removedCount: 0,
+      unchangedCount: 0,
+      totalChanges: 0,
+    };
+  }
+
+  const added = diff.added && typeof diff.added === 'object' ? diff.added : {};
+  const modified = diff.modified && typeof diff.modified === 'object' ? diff.modified : {};
+  const removed = diff.removed && typeof diff.removed === 'object' ? diff.removed : {};
+  const unchanged = diff.unchanged && typeof diff.unchanged === 'object' ? diff.unchanged : {};
+
+  return {
+    type: diff.type || 'update',
+    addedCount: Object.keys(added).length,
+    modifiedCount: Object.keys(modified).length,
+    removedCount: Object.keys(removed).length,
+    unchangedCount: Object.keys(unchanged).length,
+    totalChanges: Object.keys(added).length + Object.keys(modified).length + Object.keys(removed).length,
+  };
+}
+
 function mapEntryRow(row, options = {}) {
   const { includeTranslations = false } = options;
   const title = buildMultilingual({
@@ -338,6 +365,8 @@ export async function getModerationQueue(options = {}) {
   const result = await query(queueQuery, params);
 
   return result.rows.map((row) => {
+    const diffSummary = summarizeDiff(row.diff);
+    const importantChanges = [];
     const base = {
     id: row.id,
     entryId: row.entry_id,
@@ -347,10 +376,13 @@ export async function getModerationQueue(options = {}) {
     candidateData: row.candidate_data,
     existingData: row.existing_data,
     diff: row.diff,
+    diffSummary,
+    importantChanges,
     provenance: row.provenance,
     reviewedBy: row.reviewed_by,
     reviewedAt: row.reviewed_at,
     createdAt: row.created_at,
+    updatedAt: row.updated_at,
     title: row.title_de ? { de: row.title_de } : undefined,
     url: row.url
     };
@@ -363,6 +395,7 @@ export async function getModerationQueue(options = {}) {
     entry_id: 'entryId',
     candidate_data: 'candidateData',
     existing_data: 'existingData',
+    updated_at: 'updatedAt',
     created_at: 'createdAt',
     reviewed_by: 'reviewedBy',
       reviewed_at: 'reviewedAt'

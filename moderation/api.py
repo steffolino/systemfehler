@@ -3,8 +3,10 @@ import json
 import os
 from urllib.parse import urlparse, parse_qs
 
+from crawlers.shared.moderation_queue import canonicalize_queue_payload
+
 ROOT = os.path.dirname(os.path.abspath(__file__))
-QUEUE_PATH = os.path.join(ROOT, '..', 'review_queue.json')
+QUEUE_PATH = os.path.join(ROOT, 'review_queue.json')
 ALLOWED_DOMAINS = {'benefits', 'aid', 'tools', 'organizations', 'contacts'}
 DOMAIN_ENTRIES_FILES = {
     'benefits': os.path.normpath(os.path.join(ROOT, '..', 'data', 'benefits', 'entries.json')),
@@ -23,7 +25,7 @@ def get_entries_file_for_domain(domain):
 def read_queue():
     try:
         with open(QUEUE_PATH, 'r', encoding='utf-8') as f:
-            return json.load(f)
+            return canonicalize_queue_payload(json.load(f))
     except FileNotFoundError:
         return []
 
@@ -50,11 +52,12 @@ class Handler(SimpleHTTPRequestHandler):
             body = self.rfile.read(length)
             payload = json.loads(body.decode('utf-8'))
             domain = payload.get('domain')
-            entry_id = payload.get('entry_id')
+            entry_id = payload.get('entryId') or payload.get('entry_id')
             decision = payload.get('decision')
             q = read_queue()
             for it in q:
-                if it.get('domain')==domain and it.get('entry_id')==entry_id:
+                current_entry_id = it.get('entryId') or it.get('entry_id')
+                if it.get('domain')==domain and current_entry_id==entry_id:
                     it['status'] = 'accepted' if decision=='accept' else 'rejected'
                     # apply accepted translations back into domain snapshot
                     if decision == 'accept':
@@ -89,11 +92,12 @@ class Handler(SimpleHTTPRequestHandler):
             updated = []
             for act in actions:
                 domain = act.get('domain')
-                entry_id = act.get('entry_id')
+                entry_id = act.get('entryId') or act.get('entry_id')
                 decision = act.get('decision')
                 reason = act.get('reason')
                 for it in q:
-                    if it.get('domain') == domain and it.get('entry_id') == entry_id:
+                    current_entry_id = it.get('entryId') or it.get('entry_id')
+                    if it.get('domain') == domain and current_entry_id == entry_id:
                         it['status'] = 'accepted' if decision == 'accept' else 'rejected'
                         if reason:
                             it['reason'] = reason
@@ -131,7 +135,7 @@ class Handler(SimpleHTTPRequestHandler):
                                                 json.dump(entries, ef, ensure_ascii=False, indent=2)
                             except Exception:
                                 pass
-                        updated.append({'domain': domain, 'entry_id': entry_id, 'status': it.get('status')})
+                        updated.append({'domain': domain, 'entryId': entry_id, 'status': it.get('status')})
             write_queue(q)
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')

@@ -197,23 +197,42 @@ app.get('/api/data/moderation-queue', moderationQueueLimiter, async (req, res) =
         const filePath = path.resolve(process.cwd(), 'moderation', 'review_queue.json');
         const fq = await fs.readFile(filePath, 'utf8');
         const fileItems = JSON.parse(fq || '[]');
-        // Map file items to a similar shape as DB rows if needed
-        const mapped = Array.isArray(fileItems) ? fileItems.map((it, idx) => ({
-          id: it.id || null,
-          entry_id: it.entry_id || it.entryId || null,
-          domain: it.domain || null,
-          status: it.status || 'pending',
-          candidate_data: it.translation_text ? { translation: it.translation_text } : it.candidate_data || null,
-          provenance: it.provenance || { source: it.source || null },
-          title_de: it.title_de || null,
-          url: it.source || it.url || null,
-          original_text: it.original_text || null,
-          translation_text: it.translation_text || null,
-          method: it.method || null,
-          generator: it.generator || null,
-          timestamp: it.timestamp || null,
-          created_at: it.created_at || it.timestamp || null
-        })) : [];
+        const mapped = Array.isArray(fileItems) ? fileItems.map((it) => {
+          const entryId = it.entryId || it.entry_id || null;
+          const candidateData = it.candidateData || it.candidate_data || null;
+          const existingData = it.existingData || it.existing_data || null;
+          const createdAt = it.createdAt || it.created_at || it.timestamp || null;
+          const reviewedAt = it.reviewedAt || it.reviewed_at || null;
+          const reviewedBy = it.reviewedBy || it.reviewed_by || null;
+          const titleDe = it.title?.de || it.title_de || candidateData?.title?.de || null;
+          const url = it.url || candidateData?.url || it.source || null;
+
+          return {
+            id: it.id || entryId || null,
+            entryId,
+            entry_id: entryId,
+            domain: it.domain || null,
+            action: it.action || 'update',
+            status: it.status || 'pending',
+            candidateData,
+            candidate_data: candidateData,
+            existingData,
+            existing_data: existingData,
+            diff: it.diff || null,
+            diffSummary: it.diffSummary || null,
+            importantChanges: Array.isArray(it.importantChanges) ? it.importantChanges : [],
+            provenance: it.provenance || { source: it.source || null },
+            reviewedBy,
+            reviewed_by: reviewedBy,
+            reviewedAt,
+            reviewed_at: reviewedAt,
+            createdAt,
+            created_at: createdAt,
+            title: titleDe ? { de: titleDe } : undefined,
+            title_de: titleDe,
+            url
+          };
+        }) : [];
 
         return res.json({ queue: mapped, total: mapped.length, status, domain });
       } catch (err) {

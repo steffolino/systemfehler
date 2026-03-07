@@ -1,6 +1,6 @@
 # Systemfehler – Implementation Status
 
-> **Last updated:** 2026-03-06
+> **Last updated:** 2026-03-07
 >
 > This document is the single source of truth for "what is implemented today
 > vs planned or stubbed". Update this file when the implementation status of
@@ -31,15 +31,11 @@ crawling logic to these files.
 | `crawlers/shared/validator.py` | ✅ Working | JSON schema validation |
 | `crawlers/shared/quality_scorer.py` | ✅ Working | IQS / AIS quality score calculation |
 | `crawlers/shared/diff_generator.py` | ✅ Working | Change detection and moderation-queue diff format |
-
-**Crawlers not yet implemented in Python:**
-
-| Domain | Status |
-|--------|--------|
-| `aid` | 🔲 Planned – no Python crawler yet |
-| `tools` | 🔲 Planned – no Python crawler yet |
-| `organizations` | 🔲 Planned – no Python crawler yet |
-| `contacts` | 🔲 Planned – no Python crawler yet |
+| `crawlers/aid/seeded_crawler.py` | ✅ Working | Crawls seeded aid URLs from `data/aid/urls.json` |
+| `crawlers/tools/seeded_crawler.py` | ✅ Working | Crawls seeded tools URLs from `data/tools/urls.json` |
+| `crawlers/organizations/seeded_crawler.py` | ✅ Working | Crawls seeded organization URLs from `data/organizations/urls.json` |
+| `crawlers/contacts/seeded_crawler.py` | ✅ Working | Crawls seeded contact URLs from `data/contacts/urls.json` |
+| `crawlers/shared/link_expander.py` | ✅ Working | Python link discovery and URL queue expansion (CRAWL-03) |
 
 ### Node.js API (`backend/`)
 
@@ -115,8 +111,20 @@ python crawlers/cli.py validate --domain benefits
 | PostgreSQL | `DATABASE_URL` is set | `moderation_queue` table |
 
 The Python CLI writes to the file-based queue automatically. The Node.js API
-reads from the database when `DATABASE_URL` is set, falling back to an empty
-list otherwise.
+reads from the database when `DATABASE_URL` is set, and falls back to
+`moderation/review_queue.json` when the DB queue is unavailable/empty.
+
+### Canonical moderation queue entry format
+
+`moderation/review_queue.json` and API responses now use a canonical camelCase
+entry shape and keep compatibility aliases where needed:
+
+- `id`, `entryId`, `domain`, `action`, `status`
+- `candidateData`, `existingData`, `diff`, `diffSummary`, `importantChanges`
+- `provenance` (must include `source`, `crawledAt`, `crawlerVersion`)
+- `reviewedBy`, `reviewedAt`, `createdAt`, `updatedAt`
+
+Reference schema: `data/_schemas/moderation_queue.schema.json`
 
 ---
 
@@ -127,9 +135,21 @@ list otherwise.
 npm run crawl:benefits
 # Equivalent: python crawlers/cli.py crawl benefits --source arbeitsagentur
 
+# Crawl additional domains (Python – seeded URLs)
+npm run crawl:aid
+npm run crawl:tools
+npm run crawl:organizations
+npm run crawl:contacts
+
+# Expand URL queues from discovered links (CRAWL-03)
+npm run expand:links
+
 # Validate all entries
 npm run validate
 npm run validate:ci
+
+# Migrate moderation queue to canonical format
+npm run moderation:migrate
 
 # Start API server (Node.js)
 npm run api
@@ -166,11 +186,11 @@ architecture but throw `Error('Not implemented …')` at runtime.
 | `services/tools/crawler/index.js` | CRAWL-01 (#4) | Node tools crawler design |
 | `services/organizations/crawler/index.js` | CRAWL-01 (#4) | Node organizations crawler design |
 | `services/contacts/crawler/index.js` | CRAWL-01 (#4) | Node contacts crawler design |
-| `services/_link_expander/detect_links.js` | CRAWL-03 (#6) | Link expansion design (planned) |
+| `services/_link_expander/detect_links.js` | CRAWL-03 (#6) | Node reference-only design; Python implementation is in `crawlers/shared/link_expander.py` |
 | `services/_shared/url_normalization.js` | CRAWL-06 (#30) | URL normalisation design |
 
-**`npm run crawl:aid/tools/organizations/contacts`** print an informative error
-and exit non-zero because no Python crawlers for those domains exist yet.
+Node crawler files remain reference-only stubs. Runtime crawling is implemented
+in Python and available through the CLI and npm wrappers.
 
 ---
 
@@ -178,8 +198,4 @@ and exit non-zero because no Python crawlers for those domains exist yet.
 
 See open issues and `IMPLEMENTATION_SUMMARY.md` for details.
 
-- Moderation workflow / diff alignment (MOD-01, #18)
-- Canonical moderation queue format
-- Cleanup TIME-03 duplicate
-- Python crawlers for `aid`, `tools`, `organizations`, `contacts`
-- Link expander (CRAWL-03, #6)
+- Additional source coverage and extraction quality improvements for existing crawlers

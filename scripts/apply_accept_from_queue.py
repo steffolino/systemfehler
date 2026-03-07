@@ -6,13 +6,15 @@ import json
 import os
 from datetime import datetime
 
+from crawlers.shared.moderation_queue import canonicalize_queue_payload
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 QUEUE = os.path.join(ROOT, 'moderation', 'review_queue.json')
 
 def load_queue():
     try:
         with open(QUEUE, 'r', encoding='utf-8') as f:
-            return json.load(f)
+            return canonicalize_queue_payload(json.load(f))
     except Exception:
         return []
 
@@ -22,7 +24,7 @@ def save_queue(q):
 
 def apply_item(item):
     domain = item.get('domain')
-    entry_id = item.get('entry_id')
+    entry_id = item.get('entryId') or item.get('entry_id')
     data_dir = os.path.join(ROOT, 'data', domain)
     entries_file = os.path.join(data_dir, 'entries.json')
     if not os.path.exists(entries_file):
@@ -61,7 +63,7 @@ def main():
     q = load_queue()
     for it in q:
         if it.get('status') == 'pending':
-            print('Applying item', it.get('entry_id'), 'from domain', it.get('domain'))
+            print('Applying item', it.get('entryId') or it.get('entry_id'), 'from domain', it.get('domain'))
             ok = apply_item(it)
             if ok:
                 it['status'] = 'accepted'

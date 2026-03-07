@@ -277,7 +277,7 @@ GET /api/data/moderation-queue?status=pending
   "queue": [
     {
       "id": "queue-entry-id",
-      "entry_id": "550e8400-e29b-41d4-a716-446655440000",
+      "entryId": "550e8400-e29b-41d4-a716-446655440000",
       "domain": "benefits",
       "action": "update",
       "status": "pending",
@@ -293,7 +293,7 @@ GET /api/data/moderation-queue?status=pending
           }
         }
       },
-      "existing_data": { /* current entry data */ },
+      "existingData": { /* current entry data */ },
       "diff": {
         "type": "update",
         "added": {},
@@ -306,12 +306,23 @@ GET /api/data/moderation-queue?status=pending
         "removed": {},
         "unchanged": {}
       },
+      "diffSummary": {
+        "type": "update",
+        "addedCount": 0,
+        "modifiedCount": 1,
+        "removedCount": 0,
+        "unchangedCount": 0,
+        "totalChanges": 1
+      },
+      "importantChanges": [
+        "Modified critical field: summary.de"
+      ],
       "provenance": {
         "source": "https://example.com",
-        "crawler": "arbeitsagentur",
+        "crawlerVersion": "0.1.0",
         "crawledAt": "2026-01-16T10:00:00.000Z"
       },
-      "created_at": "2026-01-16T10:00:00.000Z",
+      "createdAt": "2026-01-16T10:00:00.000Z",
       "title": {
         "de": "Bürgergeld"
       },

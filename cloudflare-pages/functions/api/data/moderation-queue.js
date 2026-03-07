@@ -45,23 +45,38 @@ export async function onRequest(context) {
       db.prepare(countQuery).bind(...countParams).first()
     ]);
 
-    const queue = (rowsResult.results || []).map((row) => ({
-      id: row.id,
-      entry_id: row.entry_id,
-      domain: row.domain,
-      status: row.status,
-      action: row.action,
-      title_de: row.title_de,
-      url: row.url,
-      candidate_data: parseJsonSafely(row.candidate_data),
-      existing_data: parseJsonSafely(row.existing_data),
-      diff: parseJsonSafely(row.diff),
-      provenance: parseJsonSafely(row.provenance),
-      reviewed_by: row.reviewed_by,
-      reviewed_at: row.reviewed_at,
-      created_at: row.created_at,
-      updated_at: row.updated_at
-    }));
+    const queue = (rowsResult.results || []).map((row) => {
+      const candidateData = parseJsonSafely(row.candidate_data);
+      const existingData = parseJsonSafely(row.existing_data);
+      const diff = parseJsonSafely(row.diff);
+      const provenance = parseJsonSafely(row.provenance);
+
+      return {
+        id: row.id,
+        entryId: row.entry_id,
+        entry_id: row.entry_id,
+        domain: row.domain,
+        status: row.status,
+        action: row.action,
+        title: row.title_de ? { de: row.title_de } : undefined,
+        title_de: row.title_de,
+        url: row.url,
+        candidateData,
+        candidate_data: candidateData,
+        existingData,
+        existing_data: existingData,
+        diff,
+        provenance,
+        reviewedBy: row.reviewed_by,
+        reviewed_by: row.reviewed_by,
+        reviewedAt: row.reviewed_at,
+        reviewed_at: row.reviewed_at,
+        createdAt: row.created_at,
+        created_at: row.created_at,
+        updatedAt: row.updated_at,
+        updated_at: row.updated_at
+      };
+    });
 
     const total = Number(countRow?.count || 0);
 

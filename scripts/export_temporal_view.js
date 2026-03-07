@@ -7,7 +7,7 @@
  * 
  * @see TIME-01 (Issue #24) - Add deadline and validity fields to core schema
  * @see TIME-02 (Issue #25) - Implement snapshot archival for outdated entries
- * @see TIME-03 (Issues #26, #27) - Add expiry detection and alert generation
+ * @see TIME-03 (Issue #26) - Add expiry detection and alert generation
  */
 
 /**
@@ -23,7 +23,7 @@
  *    - Generate change history reports
  *    - Export temporal dataset for research
  * 
- * 3. Expiry Alerts per TIME-03 (Issues #26, #27)
+ * 3. Expiry Alerts per TIME-03 (Issue #26)
  *    - Detect deadlines within 30-day window
  *    - Generate alerts for moderation queue
  *    - Trigger archival workflows for expired entries
@@ -40,7 +40,7 @@ export function getEntriesByValidityPeriod(entries, startDate, endDate) {
 }
 
 export function getExpiringEntries(entries, daysAhead = 30) {
-  // TODO: Implement expiry detection per TIME-03 (Issues #26, #27)
+  // TODO: Implement expiry detection per TIME-03 (Issue #26)
   throw new Error('Not implemented - see TIME-03');
 }
 

@@ -134,6 +134,15 @@ interface ModerationQueueEntry {
   existingData?: any;
   existing_data?: any;
   diff?: any;
+  diffSummary?: {
+    type?: string;
+    addedCount?: number;
+    modifiedCount?: number;
+    removedCount?: number;
+    unchangedCount?: number;
+    totalChanges?: number;
+  };
+  importantChanges?: string[];
   provenance?: any;
   reviewedBy?: string | null;
   reviewed_by?: string | null;
@@ -141,6 +150,8 @@ interface ModerationQueueEntry {
   reviewed_at?: string | null;
   createdAt?: string;
   created_at?: string;
+  updatedAt?: string;
+  updated_at?: string;
   title?: MultilingualText;
   title_de?: string | null;
   url?: string;

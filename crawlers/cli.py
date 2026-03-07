@@ -23,9 +23,19 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from dotenv import load_dotenv
 
 from crawlers.benefits.arbeitsagentur_crawler import ArbeitsagenturCrawler
+from crawlers.aid.seeded_crawler import SeededAidCrawler
+from crawlers.tools.seeded_crawler import SeededToolsCrawler
+from crawlers.organizations.seeded_crawler import SeededOrganizationsCrawler
+from crawlers.contacts.seeded_crawler import SeededContactsCrawler
 from crawlers.shared.validator import SchemaValidator
 from crawlers.shared.quality_scorer import QualityScorer
 from crawlers.shared.diff_generator import DiffGenerator
+from crawlers.shared.link_expander import LinkExpander
+from crawlers.shared.moderation_queue import (
+    canonicalize_queue_payload,
+    canonicalize_queue_entry,
+    validate_queue_entry,
+)
 
 
 # Load environment variables
@@ -89,7 +99,7 @@ def crawl_benefits(source: str, output_dir: str):
         existing_entries_path = os.path.join(output_dir, 'benefits', 'entries.json')
         if os.path.exists(existing_entries_path):
             logger.info("Generating diffs against existing entries")
-            generate_diffs(entries, existing_entries_path, output_dir)
+            generate_diffs(entries, existing_entries_path, output_dir, 'benefits')
         
         logger.info(f"Crawl completed successfully. {len(entries)} entries extracted.")
         return True
@@ -101,7 +111,55 @@ def crawl_benefits(source: str, output_dir: str):
         crawler.close()
 
 
-def generate_diffs(new_entries, existing_path, output_dir):
+def crawl_seeded_domain(domain: str, source: str, output_dir: str):
+    """Crawl non-benefits domains using seeded URL lists."""
+    logger.info(f"Starting {domain} crawl from source: {source}")
+
+    if source not in ('seeded', 'urls', 'auto'):
+        logger.error(f"Unknown source '{source}' for domain '{domain}'. Use --source seeded")
+        return False
+
+    user_agent = os.getenv('CRAWLER_USER_AGENT', 'Systemfehler/0.1.0')
+    rate_limit = float(os.getenv('CRAWLER_RATE_LIMIT_DELAY', '2000')) / 1000
+
+    crawler_map = {
+        'aid': SeededAidCrawler,
+        'tools': SeededToolsCrawler,
+        'organizations': SeededOrganizationsCrawler,
+        'contacts': SeededContactsCrawler,
+    }
+
+    crawler_cls = crawler_map.get(domain)
+    if not crawler_cls:
+        logger.error(f"Unsupported seeded crawler domain: {domain}")
+        return False
+
+    crawler = crawler_cls(user_agent, rate_limit, data_dir=output_dir)
+
+    try:
+        entries = crawler.crawl()
+        if not entries:
+            logger.warning(f"No entries extracted for domain {domain}")
+            return False
+
+        output_path = os.path.join(output_dir, domain, 'candidates.json')
+        crawler.save_candidates(entries, output_path)
+
+        existing_entries_path = os.path.join(output_dir, domain, 'entries.json')
+        if os.path.exists(existing_entries_path):
+            logger.info(f"Generating diffs against existing {domain} entries")
+            generate_diffs(entries, existing_entries_path, output_dir, domain)
+
+        logger.info(f"{domain} crawl completed successfully. {len(entries)} entries extracted.")
+        return True
+    except Exception as e:
+        logger.error(f"{domain} crawl failed: {e}", exc_info=True)
+        return False
+    finally:
+        crawler.close()
+
+
+def generate_diffs(new_entries, existing_path, output_dir, domain):
     """Generate diffs and add to moderation queue"""
     diff_generator = DiffGenerator()
     
@@ -124,11 +182,11 @@ def generate_diffs(new_entries, existing_path, output_dir):
         diff_summary = diff_generator.get_diff_summary(diff)
         important_changes = diff_generator.highlight_important_changes(diff)
         
-        # Create moderation queue entry
+        # Create moderation queue entry (canonical shape)
         queue_entry = {
             'id': new_entry['id'],
             'entryId': old_entry['id'] if old_entry else None,
-            'domain': 'benefits',
+            'domain': domain,
             'action': 'update' if old_entry else 'create',
             'status': 'pending',
             'candidateData': new_entry,
@@ -139,8 +197,16 @@ def generate_diffs(new_entries, existing_path, output_dir):
             'provenance': new_entry.get('provenance'),
             'createdAt': new_entry.get('provenance', {}).get('crawledAt')
         }
-        
-        moderation_queue.append(queue_entry)
+
+        canonical_entry = canonicalize_queue_entry(queue_entry)
+        validation_errors = validate_queue_entry(canonical_entry)
+        if validation_errors:
+            logger.error(f"Skipping moderation item for {url} due to invalid queue format")
+            for err in validation_errors:
+                logger.error(f"  - {err}")
+            continue
+
+        moderation_queue.append(canonical_entry)
         
         logger.info(f"Generated diff for {url}: {diff_summary['total_changes']} changes")
         if important_changes:
@@ -159,12 +225,7 @@ def generate_diffs(new_entries, existing_path, output_dir):
     else:
         queue_data = []
 
-    if isinstance(queue_data, dict):
-        existing_queue = queue_data.get('queue', [])
-    elif isinstance(queue_data, list):
-        existing_queue = queue_data
-    else:
-        existing_queue = []
+    existing_queue = canonicalize_queue_payload(queue_data)
 
     # Add new entries to queue
     existing_queue.extend(moderation_queue)
@@ -174,6 +235,31 @@ def generate_diffs(new_entries, existing_path, output_dir):
         json.dump(existing_queue, f, indent=2, ensure_ascii=False)
     
     logger.info(f"Added {len(moderation_queue)} entries to moderation queue")
+
+
+def run_link_expander(domain: str, data_dir: str, limit: int, verify: bool):
+    """Run Python link expansion for a domain URL queue."""
+    user_agent = os.getenv('CRAWLER_USER_AGENT', 'Systemfehler/0.1.0')
+    rate_limit = float(os.getenv('CRAWLER_RATE_LIMIT_DELAY', '2000')) / 1000
+
+    expander = LinkExpander(user_agent=user_agent, rate_limit_delay=rate_limit, data_dir=data_dir)
+    try:
+        report = expander.expand(domain=domain, limit=limit, verify=verify)
+        logger.info(
+            "Link expansion report for %s: scanned=%s discovered=%s added=%s broken=%s queued=%s",
+            report['domain'],
+            report['scanned'],
+            report['discovered'],
+            report['added'],
+            report['broken'],
+            report['queued'],
+        )
+        return True
+    except Exception as e:
+        logger.error(f"Link expansion failed for {domain}: {e}", exc_info=True)
+        return False
+    finally:
+        expander.close()
 
 
 def validate_domain(domain: str, data_dir: str):
@@ -390,6 +476,15 @@ def main():
                               help='Domain to import')
     import_parser.add_argument('--data-dir', default='./data', help='Data directory')
     import_parser.add_argument('--to-db', action='store_true', help='Import to PostgreSQL database')
+
+    # Link expansion command
+    expand_parser = subparsers.add_parser('expand-links', help='Discover additional URLs from existing source pages')
+    expand_parser.add_argument('--domain', required=True,
+                               choices=['benefits', 'aid', 'tools', 'organizations', 'contacts'],
+                               help='Domain URL queue to expand')
+    expand_parser.add_argument('--data-dir', default='./data', help='Data directory')
+    expand_parser.add_argument('--limit', type=int, default=25, help='Max seed URLs to scan')
+    expand_parser.add_argument('--no-verify', action='store_true', help='Skip HTTP verification of discovered links')
     
     args = parser.parse_args()
     
@@ -403,6 +498,8 @@ def main():
     if args.command == 'crawl':
         if args.domain == 'benefits':
             success = crawl_benefits(args.source, args.output)
+        elif args.domain in ('aid', 'tools', 'organizations', 'contacts'):
+            success = crawl_seeded_domain(args.domain, args.source, args.output)
         else:
             logger.error(f"Crawler for domain '{args.domain}' not yet implemented")
     
@@ -414,6 +511,14 @@ def main():
             success = import_to_db(args.domain, args.data_dir)
         else:
             logger.error("--to-db flag required for import command")
+
+    elif args.command == 'expand-links':
+        success = run_link_expander(
+            domain=args.domain,
+            data_dir=args.data_dir,
+            limit=args.limit,
+            verify=not args.no_verify,
+        )
     
     sys.exit(0 if success else 1)
 

@@ -346,7 +346,8 @@ class BaseCrawler:
         return {
             'source': source_url,
             'crawledAt': datetime.utcnow().isoformat() + 'Z',
-            'crawlId': crawl_id or f"{self.name}-{int(time.time())}"
+            'crawlId': crawl_id or f"{self.name}-{int(time.time())}",
+            'crawlerVersion': '0.1.0'
         }
     
     def close(self):

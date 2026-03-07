@@ -7,6 +7,11 @@ written to `data/pilot_translated.json`.
 import json
 from pathlib import Path
 from crawlers.shared.translations_generator import default_generator
+from crawlers.shared.moderation_queue import (
+    canonicalize_queue_entry,
+    canonicalize_queue_payload,
+    validate_queue_entry,
+)
 
 
 def load_entries(max_entries=100):
@@ -64,15 +69,31 @@ def run_pilot(max_entries=100, out_file='data/pilot_translated.json'):
                 results['samples'].append({'id': entry.get('id'), 'translation': entry['translations']['de-LEICHT']})
             # Add moderation queue item
             moderation_queue.append({
+                'id': entry.get('id'),
+                'entryId': entry.get('id'),
                 'domain': domain,
-                'entry_id': entry.get('id'),
-                'source': entry.get('url',''),
-                'original_text': text,
-                'translation_text': tg['text'],
-                'method': tg['method'],
-                'generator': tg['generator'],
-                'timestamp': tg['timestamp'],
-                'status': 'pending'
+                'action': 'update',
+                'status': 'pending',
+                'candidateData': entry,
+                'existingData': None,
+                'diff': {
+                    'type': 'update',
+                    'added': {
+                        'translations.de-LEICHT': 'generated'
+                    },
+                    'modified': {},
+                    'removed': {},
+                    'unchanged': {}
+                },
+                'importantChanges': ['Added translation: de-LEICHT'],
+                'provenance': {
+                    'source': entry.get('url',''),
+                    'crawledAt': entry.get('lastSeen','') or tg['timestamp'],
+                    'crawlerVersion': '0.1.0',
+                    'generator': tg['generator'],
+                    'method': tg['method']
+                },
+                'createdAt': tg['timestamp']
             })
         except Exception:
             results['errors'] += 1
@@ -87,15 +108,18 @@ def run_pilot(max_entries=100, out_file='data/pilot_translated.json'):
     mq_file = mq_path / 'review_queue.json'
     if mq_file.exists():
         try:
-            existing = json.loads(mq_file.read_text(encoding='utf-8'))
+            existing = canonicalize_queue_payload(json.loads(mq_file.read_text(encoding='utf-8')))
         except Exception:
             existing = []
     else:
         existing = []
-        # annotate items with status
-        for it in moderation_queue:
-            it.setdefault('status', 'pending')
-        existing.extend(moderation_queue)
+
+    for item in moderation_queue:
+        canonical = canonicalize_queue_entry(item)
+        if validate_queue_entry(canonical):
+            continue
+        existing.append(canonical)
+
     mq_file.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding='utf-8')
     print(f"Wrote moderation queue with {len(moderation_queue)} items to {mq_file}")
 
