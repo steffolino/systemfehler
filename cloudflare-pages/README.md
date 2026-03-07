@@ -46,3 +46,19 @@ Deployment runs from `.github/workflows/deploy-pages.yml` on:
 
 - GitHub Pages workflow: `.github/workflows/deploy-github-pages.yml`
 - GitHub Pages serves same-origin snapshot JSON from `/data/*` and `/moderation/review_queue.json` inside the static artifact.
+
+# Cloudflare Pages Auth Setup
+
+## Required Environment Variables
+
+- GITHUB_OAUTH_CLIENT_ID
+- GITHUB_OAUTH_CLIENT_SECRET
+- ADMIN_SESSION_SECRET
+- ADMIN_ALLOWLIST
+
+## Setup Notes
+
+- Set these in your Cloudflare Pages project environment variables.
+- Session cookie is HttpOnly, Secure, SameSite=Lax.
+- Only /admin is protected; public search stays open.
+- For local dev, use VITE_API_URL to point frontend to your backend.

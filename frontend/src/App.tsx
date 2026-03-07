@@ -1,39 +1,26 @@
-import { useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from './components/layout/Header';
 import { Sidebar } from './components/layout/Sidebar';
 import { DataPreview } from './components/admin/DataPreview';
 import { QualityMetrics } from './components/admin/QualityMetrics';
 import { ModerationQueue } from './components/admin/ModerationQueue';
+import Navbar from './components/Navbar';
+import SearchPage from './pages/SearchPage';
+import EntryPage from './pages/EntryPage';
+import AdminLogin from './pages/AdminLogin';
+import AdminApp from './pages/AdminApp';
 
-function App() {
-  const [currentView, setCurrentView] = useState('data');
-
-  const renderView = () => {
-    switch (currentView) {
-      case 'data':
-        return <DataPreview />;
-      case 'quality':
-        return <QualityMetrics />;
-      case 'moderation':
-        return <ModerationQueue />;
-      default:
-        return <DataPreview />;
-    }
-  };
-
+export default function App() {
   return (
-    <div className="min-h-screen bg-background">
+    <>
       <Header />
-      <div className="flex">
-        <Sidebar currentView={currentView} onViewChange={setCurrentView} />
-        <main className="flex-1 p-6">
-          <div className="container mx-auto max-w-7xl">
-            {renderView()}
-          </div>
-        </main>
-      </div>
-    </div>
+      <Routes>
+        <Route path="/" element={<SearchPage />} />
+        <Route path="/entry/:id" element={<EntryPage />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminApp />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </>
   );
 }
-
-export default App;

@@ -84,7 +84,10 @@ def crawl_benefits(source: str, output_dir: str):
         # Validate entries
         validator = SchemaValidator()
         for entry in entries:
-            result = validator.validate_entry(entry, 'benefits')
+            # Remove non-schema fields before validation
+            entry_for_validation = dict(entry)
+            entry_for_validation.pop('head', None)
+            result = validator.validate_entry(entry_for_validation, 'benefits')
             if not result['valid']:
                 logger.error(f"Validation failed for entry {entry.get('id')}")
                 for error in result['errors']:
@@ -291,9 +294,13 @@ def validate_domain(domain: str, data_dir: str):
     validator = SchemaValidator()
     results = validator.validate_batch(entries, domain)
     
-    # Print report
+    # Print report (force UTF-8 encoding)
     report = validator.generate_validation_report(results)
-    print(report)
+    try:
+        print(report)
+    except UnicodeEncodeError:
+        import sys
+        sys.stdout.buffer.write(report.encode('utf-8'))
     
     return results['invalid'] == 0
 

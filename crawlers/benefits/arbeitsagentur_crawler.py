@@ -89,61 +89,56 @@ class ArbeitsagenturCrawler(BaseCrawler):
             Benefit entry dictionary
         """
         entry = {}
-        
-        try:
-            # Extract title
-            title = self._extract_title(soup)
-            if title:
-                entry['title'] = {'de': title}
 
-            # Attach head metadata (title, description) when available
-            try:
-                head_title = self._extract_head_title(soup)
-                head_desc = self._extract_meta_tag(soup, ['description', 'og:description', 'twitter:description']) if hasattr(self, '_extract_meta_tag') else ''
-                if head_title or head_desc:
-                    entry['head'] = {'title': head_title, 'description': head_desc}
-            except Exception:
-                pass
-            
-            # Extract summary
-            summary = self._extract_summary(soup)
-            if summary:
-                entry['summary'] = {'de': summary}
-            
+        try:
+            # Always extract head <title> and <meta name='description'>
+            head_title = self._extract_head_title(soup)
+            head_desc = self._extract_meta_tag(soup, ['description', 'og:description', 'twitter:description'])
+            entry['head'] = {'title': head_title, 'description': head_desc}
+
+            # Use meta title/description as main title/summary if present
+            main_title = head_title if head_title else self._extract_title(soup)
+            if main_title:
+                entry['title'] = {'de': main_title}
+
+            main_summary = head_desc if head_desc else self._extract_summary(soup)
+            if main_summary:
+                entry['summary'] = {'de': main_summary}
+
             # Extract main content
             content = self._extract_content(soup)
             if content:
                 entry['content'] = {'de': content}
-            
+
             # Extract benefit amount
             benefit_amount = self._extract_benefit_amount(soup)
             if benefit_amount:
                 entry['benefitAmount'] = {'de': benefit_amount}
-            
+
             # Extract eligibility criteria
             eligibility = self._extract_eligibility(soup)
             if eligibility:
                 entry['eligibilityCriteria'] = {'de': eligibility}
-            
+
             # Extract application steps
             application_steps = self._extract_application_steps(soup)
             if application_steps:
                 entry['applicationSteps'] = [{'de': step} for step in application_steps]
-            
+
             # Extract required documents
             required_docs = self._extract_required_documents(soup)
             if required_docs:
                 entry['requiredDocuments'] = [{'de': doc} for doc in required_docs]
-            
+
             # Extract topics and tags
             entry['topics'] = ['benefits', 'unemployment', 'buergergeld']
             entry['tags'] = ['arbeitslosengeld', 'grundsicherung', 'sozialleistungen']
             entry['targetGroups'] = ['arbeitslose', 'geringverdiener', 'alleinerziehende']
-            
+
         except Exception as e:
             self.logger.error(f"Error extracting benefit entry: {e}")
             return None
-        
+
         return entry if entry else None
     
     def _extract_title(self, soup: BeautifulSoup) -> str:
@@ -230,32 +225,39 @@ class ArbeitsagenturCrawler(BaseCrawler):
     
     def _extract_benefit_amount(self, soup: BeautifulSoup) -> str:
         """Extract benefit amount information"""
-        # Look for amount-related sections
         keywords = ['regelbedarf', 'regelsatz', 'höhe', 'betrag', 'euro']
-        
+        # Try section-based extraction first
         for keyword in keywords:
-            # Search for sections containing these keywords
             sections = soup.find_all(['h2', 'h3', 'h4'])
             for section in sections:
                 section_text = self.extract_text(section).lower()
                 if keyword in section_text:
-                    # Get following paragraphs
                     amount_text = []
                     for sibling in section.find_next_siblings():
                         if sibling.name in ['h2', 'h3', 'h4']:
                             break
                         if sibling.name == 'p':
                             amount_text.append(self.extract_text(sibling))
-                    
                     if amount_text:
                         return ' '.join(amount_text)
-        
+        # Fallback: search all paragraphs for keywords
+        for p in soup.find_all('p'):
+            text = self.extract_text(p)
+            if any(k in text.lower() for k in keywords):
+                return text
+        # Fallback: try summary or content
+        summary = self._extract_summary(soup)
+        if any(k in summary.lower() for k in keywords):
+            return summary
+        content = self._extract_content(soup)
+        if any(k in content.lower() for k in keywords):
+            return content
         return ""
     
     def _extract_eligibility(self, soup: BeautifulSoup) -> str:
         """Extract eligibility criteria"""
         keywords = ['voraussetzung', 'anspruch', 'berechtigt', 'bedingung']
-        
+        # Try section-based extraction first
         for keyword in keywords:
             sections = soup.find_all(['h2', 'h3', 'h4'])
             for section in sections:
@@ -267,10 +269,20 @@ class ArbeitsagenturCrawler(BaseCrawler):
                             break
                         if sibling.name in ['p', 'ul', 'ol']:
                             eligibility_text.append(self.extract_text(sibling))
-                    
                     if eligibility_text:
                         return ' '.join(eligibility_text)
-        
+        # Fallback: search all paragraphs for keywords
+        for p in soup.find_all('p'):
+            text = self.extract_text(p)
+            if any(k in text.lower() for k in keywords):
+                return text
+        # Fallback: try summary or content
+        summary = self._extract_summary(soup)
+        if any(k in summary.lower() for k in keywords):
+            return summary
+        content = self._extract_content(soup)
+        if any(k in content.lower() for k in keywords):
+            return content
         return ""
     
     def _extract_application_steps(self, soup: BeautifulSoup) -> List[str]:

@@ -143,7 +143,8 @@ app.get('/api/data/entries', async (req, res) => {
     
     let result;
     if (search) {
-      result = await queries.searchEntries({
+      // Use substring autocomplete for all search queries (instant substring match)
+      result = await queries.searchEntriesForAutocomplete({
         ...options,
         searchText: search
       });

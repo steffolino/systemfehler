@@ -1,0 +1,25 @@
+[IMPORT ERROR]
+2026-03-07 15:12:24,095 - systemfehler.cli - INFO - Importing benefits entries to database
+2026-03-07 15:12:24,138 - systemfehler.cli - ERROR - Failed to import entry c6fb568f-2e9a-4b26-b6c6-74c0e38205c9: column "translations" of relation "entries" does not exist
+LINE 9:                         provenance, translations, quality_sc...
+                                            ^
+
+2026-03-07 15:12:24,140 - systemfehler.cli - ERROR - Failed to import entry ab6ecb16-b9df-4654-bde8-94a02f0d3302: column "translations" of relation "entries" does not exist
+LINE 9:                         provenance, translations, quality_sc...
+                                            ^
+
+2026-03-07 15:12:24,141 - systemfehler.cli - ERROR - Failed to import entry a6f576ba-c5f0-4ff2-8f63-aa56abbb56fd: column "translations" of relation "entries" does not exist
+LINE 9:                         provenance, translations, quality_sc...
+                                            ^
+
+2026-03-07 15:12:24,143 - systemfehler.cli - ERROR - Failed to import entry f0d4693b-32e1-4ec6-95fb-e9d75efefdfa: column "translations" of relation "entries" does not exist
+LINE 9:                         provenance, translations, quality_sc...
+                                            ^
+
+2026-03-07 15:12:24,145 - systemfehler.cli - ERROR - Failed to import entry 76c47e08-9f3b-4053-97bc-62c4e09aa6ee: column "translations" of relation "entries" does not exist
+LINE 9:                         provenance, translations, quality_sc...
+                                            ^
+
+2026-03-07 15:12:24,145 - systemfehler.cli - INFO - Successfully imported 0/5 entries
+
+

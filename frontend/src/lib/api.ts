@@ -581,6 +581,37 @@ export const api = {
       throw error;
     }
   },
+
+  getAIResults: async (params?: { query?: string; limit?: number }) => {
+    // Placeholder AI search stub: returns empty array or mock results
+    return [];
+  },
+
+  autocomplete: async ({ query, limit = 10 }: { query: string; limit?: number }) => {
+    if (!query || query.length < 1) return [];
+    const res = await api.getEntries({ search: query, limit });
+    const needle = query.toLowerCase();
+    const exclusionKeywords = [
+      'navigation', 'service', 'techn', 'tempo', 'relevanz', 'hauptnavigation', 'seitennavigation',
+      'bundesministerium', 'ausbildung', 'studium', 'migration', 'starte', 'toleranz', 'technologie',
+      'wohnen', 'stadtentwicklung', 'bauwesen', 'bundesagentur', 'arbeit', 'und', 'oder', 'mit', 'bei', 'für', 'nach', 'deutschland', 'und service', 'seitennavigation und service'
+    ];
+    return (res.entries || [])
+      .filter(e => {
+        const title = e.title?.de || e.title_de || e.title || '';
+        const lower = title.toLowerCase();
+        if (!lower.includes(needle)) return false;
+        for (const keyword of exclusionKeywords) {
+          if (lower.includes(keyword)) return false;
+        }
+        return true;
+      })
+      .map(e => ({
+        id: e.id,
+        title: e.title?.de || e.title_de || e.title || '',
+        category: e.domain || ''
+      }));
+  },
 };
 
 export type {

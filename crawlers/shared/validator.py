@@ -5,6 +5,7 @@ Validates crawled entries against JSON schemas.
 Integrates with existing schema files in data/_schemas/
 """
 
+from encodings import undefined
 import json
 import os
 from pathlib import Path
@@ -142,7 +143,7 @@ class SchemaValidator:
             errors.append("provenance: Must be an object")
 
         translations = entry.get('translations')
-        if translations is not None:
+        if translations is not None and translations is not undefined:
             if not isinstance(translations, dict):
                 errors.append("translations: Must be an object")
                 return errors

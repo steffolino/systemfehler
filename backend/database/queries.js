@@ -1,18 +1,20 @@
 /**
  * Database Query Layer
- * 
- * Encapsulates all SQL queries for the application
+ *
+ * Encapsulates all SQL queries for the application.
  */
 
-import { query } from './connection.js';
 import fs from 'fs/promises';
 import path from 'path';
+import { query } from './connection.js';
 
 function buildMultilingual({ de, en, easyDe }) {
   const result = {};
+
   if (de) result.de = de;
   if (en) result.en = en;
   if (easyDe) result.easy_de = easyDe;
+
   return Object.keys(result).length > 0 ? result : undefined;
 }
 
@@ -22,6 +24,7 @@ function withLegacyKeys(entry, legacyMap) {
       entry[legacyKey] = entry[sourceKey];
     }
   });
+
   return entry;
 }
 
@@ -33,7 +36,7 @@ function summarizeDiff(diff) {
       modifiedCount: 0,
       removedCount: 0,
       unchangedCount: 0,
-      totalChanges: 0,
+      totalChanges: 0
     };
   }
 
@@ -48,22 +51,28 @@ function summarizeDiff(diff) {
     modifiedCount: Object.keys(modified).length,
     removedCount: Object.keys(removed).length,
     unchangedCount: Object.keys(unchanged).length,
-    totalChanges: Object.keys(added).length + Object.keys(modified).length + Object.keys(removed).length,
+    totalChanges:
+      Object.keys(added).length +
+      Object.keys(modified).length +
+      Object.keys(removed).length
   };
 }
 
 function mapEntryRow(row, options = {}) {
   const { includeTranslations = false } = options;
+
   const title = buildMultilingual({
     de: row.title_de,
     en: row.title_en,
     easyDe: row.title_easy_de
   });
+
   const summary = buildMultilingual({
     de: row.summary_de,
     en: row.summary_en,
     easyDe: row.summary_easy_de
   });
+
   const content = buildMultilingual({
     de: row.content_de,
     en: row.content_en,
@@ -71,6 +80,7 @@ function mapEntryRow(row, options = {}) {
   });
 
   const translations = includeTranslations ? (row.translations || null) : null;
+
   const base = {
     id: row.id,
     domain: row.domain,
@@ -135,6 +145,7 @@ function mapDomainRow(domain, row) {
       en: row.benefit_amount_en,
       easyDe: row.benefit_amount_easy_de
     });
+
     const eligibility = buildMultilingual({
       de: row.eligibility_criteria_de,
       en: row.eligibility_criteria_en,
@@ -161,11 +172,11 @@ function mapDomainRow(domain, row) {
   return row;
 }
 
-function attachTranslations(entries, map) {
+function attachTranslations(entries, translationsMap) {
   entries.forEach((entry) => {
-    if (map[entry.id]) {
-      entry.translations = map[entry.id];
-      entry.translationLanguages = Object.keys(map[entry.id]);
+    if (translationsMap[entry.id]) {
+      entry.translations = translationsMap[entry.id];
+      entry.translationLanguages = Object.keys(translationsMap[entry.id]);
     } else {
       entry.translations = null;
       entry.translationLanguages = [];
@@ -173,46 +184,179 @@ function attachTranslations(entries, map) {
   });
 }
 
+function getLanguageColumns(language = 'german') {
+  const isEnglish = language === 'english';
+
+  return {
+    titleCol: isEnglish ? 'title_en' : 'title_de',
+    summaryCol: isEnglish ? 'summary_en' : 'summary_de',
+    contentCol: isEnglish ? 'content_en' : 'content_de'
+  };
+}
+
+function buildPagination(total, limit, offset) {
+  return {
+    total,
+    limit,
+    offset,
+    page: Math.floor(offset / limit) + 1,
+    pages: Math.ceil(total / limit)
+  };
+}
+
+async function loadTranslationsForDomains(domainNames = []) {
+  const translationsMap = {};
+
+  for (const domainName of domainNames) {
+    try {
+      const filePath = path.resolve(process.cwd(), 'data', domainName, 'entries.json');
+      const txt = await fs.readFile(filePath, 'utf8');
+      const parsed = JSON.parse(txt || '{}');
+      const entries = Array.isArray(parsed) ? parsed : parsed.entries || [];
+
+      if (Array.isArray(entries)) {
+        entries.forEach((entry) => {
+          if (entry && entry.id && entry.translations) {
+            translationsMap[entry.id] = entry.translations;
+          }
+        });
+      }
+    } catch {
+      // Ignore missing domains or parse errors.
+    }
+  }
+
+  return translationsMap;
+}
+
+async function loadTranslationsForEntries(entries) {
+  const domainNames = [...new Set(entries.map((entry) => entry.domain).filter(Boolean))];
+  const translationsMap = await loadTranslationsForDomains(domainNames);
+  attachTranslations(entries, translationsMap);
+}
+
+async function loadTranslationsForSingleEntry(entry) {
+  if (!entry?.domain || !entry?.id) {
+    return entry;
+  }
+
+  try {
+    const filePath = path.resolve(process.cwd(), 'data', entry.domain, 'entries.json');
+    const txt = await fs.readFile(filePath, 'utf8');
+    const parsed = JSON.parse(txt || '{}');
+    const entries = Array.isArray(parsed) ? parsed : parsed.entries || [];
+
+    if (Array.isArray(entries)) {
+      const matched = entries.find((item) => item && item.id === entry.id);
+
+      if (matched?.translations) {
+        entry.translations = matched.translations;
+        entry.translationLanguages = Object.keys(matched.translations);
+      }
+    }
+  } catch {
+    // Ignore missing file or parse errors.
+  }
+
+  return entry;
+}
+
 /**
- * Get all entries with optional filtering
- * @param {Object} options - Query options
- * @returns {Promise<Object>} Entries and metadata
+ * Dedicated substring search for autocomplete.
+ * Matches as soon as input is a substring of the title.
+ */
+export async function searchEntriesForAutocomplete(options = {}) {
+  const {
+    searchText,
+    domain = null,
+    limit = 10,
+    offset = 0
+  } = options;
+
+  const term = (searchText || '').trim();
+
+  if (!term) {
+    return { entries: [], total: 0, limit, offset };
+  }
+
+  const whereConditions = [
+    `(
+      COALESCE(e.title_de, '') ILIKE $1 OR
+      COALESCE(e.title_en, '') ILIKE $1 OR
+      COALESCE(e.title_easy_de, '') ILIKE $1
+    )`
+  ];
+
+  const params = [`%${term}%`];
+  let paramIndex = 2;
+
+  if (domain) {
+    whereConditions.push(`e.domain = $${paramIndex++}`);
+    params.push(domain);
+  }
+
+  const whereClause = whereConditions.join(' AND ');
+
+  const sql = `
+    SELECT
+      e.*,
+      (e.quality_scores->>'iqs')::numeric AS iqs,
+      (e.quality_scores->>'ais')::numeric AS ais
+    FROM entries e
+    WHERE ${whereClause}
+    ORDER BY e.created_at DESC
+    LIMIT $${paramIndex++} OFFSET $${paramIndex++}
+  `;
+
+  params.push(limit, offset);
+
+  const result = await query(sql, params);
+
+  return {
+    entries: result.rows.map((row) => mapEntryRow(row)),
+    total: result.rows.length,
+    limit,
+    offset
+  };
+}
+
+/**
+ * Get all entries with optional filtering.
  */
 export async function getAllEntries(options = {}) {
   const {
     domain = null,
     status = null,
+    includeTranslations = false,
     limit = 50,
     offset = 0
   } = options;
-  
-  let whereConditions = [];
-  let params = [];
+
+  const whereConditions = [];
+  const params = [];
   let paramIndex = 1;
-  
+
   if (domain) {
     whereConditions.push(`domain = $${paramIndex++}`);
     params.push(domain);
   }
-  
+
   if (status) {
     whereConditions.push(`status = $${paramIndex++}`);
     params.push(status);
   }
-  
-  const whereClause = whereConditions.length > 0 
-    ? `WHERE ${whereConditions.join(' AND ')}`
-    : '';
-  
-  // Get total count
-  const countQuery = `SELECT COUNT(*) FROM entries ${whereClause}`;
+
+  const whereClause =
+    whereConditions.length > 0
+      ? `WHERE ${whereConditions.join(' AND ')}`
+      : '';
+
+  const countQuery = `SELECT COUNT(*)::int AS total FROM entries ${whereClause}`;
   const countResult = await query(countQuery, params);
-  const total = parseInt(countResult.rows[0].count);
-  
-  // Get entries
-  params.push(limit, offset);
+  const total = countResult.rows[0]?.total || 0;
+
   const entriesQuery = `
-    SELECT 
+    SELECT
       e.*,
       (e.quality_scores->>'iqs')::numeric AS iqs,
       (e.quality_scores->>'ais')::numeric AS ais
@@ -221,39 +365,304 @@ export async function getAllEntries(options = {}) {
     ORDER BY e.created_at DESC
     LIMIT $${paramIndex++} OFFSET $${paramIndex++}
   `;
-  
-  const entriesResult = await query(entriesQuery, params);
-  let entries = entriesResult.rows.map((row) => mapEntryRow(row, {
-    includeTranslations: Boolean(options.includeTranslations)
-  }));
 
-  if (options.includeTranslations) {
-    const domains = {};
-    entries.forEach((entry) => {
-      if (!domains[entry.domain]) domains[entry.domain] = [];
-      domains[entry.domain].push(entry.id);
-    });
+  const entriesParams = [...params, limit, offset];
+  const entriesResult = await query(entriesQuery, entriesParams);
 
-    const translationsMap = {};
-    for (const domain of Object.keys(domains)) {
-      try {
-        const filePath = path.resolve(process.cwd(), 'data', domain, 'entries.json');
-        const txt = await fs.readFile(filePath, 'utf8');
-        const parsed = JSON.parse(txt || '{}');
-        const arr = Array.isArray(parsed) ? parsed : parsed.entries || [];
-        if (Array.isArray(arr)) {
-          arr.forEach((entry) => {
-            if (entry && entry.id && entry.translations) {
-              translationsMap[entry.id] = entry.translations;
-            }
-          });
-        }
-      } catch (err) {
-        // ignore missing domains or parse errors
-      }
+  const entries = entriesResult.rows.map((row) =>
+    mapEntryRow(row, { includeTranslations })
+  );
+
+  if (includeTranslations) {
+    await loadTranslationsForEntries(entries);
+  }
+
+  return {
+    entries,
+    ...buildPagination(total, limit, offset)
+  };
+}
+
+/**
+ * Get entry by ID with domain-specific data.
+ */
+export async function getEntryById(id) {
+  const entryQuery = `
+    SELECT
+      e.*,
+      (e.quality_scores->>'iqs')::numeric AS iqs,
+      (e.quality_scores->>'ais')::numeric AS ais
+    FROM entries e
+    WHERE e.id = $1
+  `;
+
+  const result = await query(entryQuery, [id]);
+
+  if (result.rows.length === 0) {
+    return null;
+  }
+
+  const entryRow = result.rows[0];
+  const entry = mapEntryRow(entryRow, { includeTranslations: true });
+
+  if (entry.domain) {
+    const domainQuery = `SELECT * FROM ${entry.domain} WHERE entry_id = $1`;
+    const domainResult = await query(domainQuery, [id]);
+
+    if (domainResult.rows.length > 0) {
+      entry.domainData = mapDomainRow(entry.domain, domainResult.rows[0]);
+    }
+  }
+
+  if (!entry.translations) {
+    await loadTranslationsForSingleEntry(entry);
+  }
+
+  return entry;
+}
+
+/**
+ * Get moderation queue entries.
+ */
+export async function getModerationQueue(options = {}) {
+  const {
+    status = 'pending',
+    domain = null,
+    limit = 100,
+    offset = 0
+  } = options;
+
+  const whereConditions = ['mq.status = $1'];
+  const params = [status];
+  let paramIndex = 2;
+
+  if (domain) {
+    whereConditions.push(`mq.domain = $${paramIndex++}`);
+    params.push(domain);
+  }
+
+  const whereClause = whereConditions.join(' AND ');
+
+  const queueQuery = `
+    SELECT
+      mq.*,
+      e.title_de,
+      e.url
+    FROM moderation_queue mq
+    LEFT JOIN entries e ON mq.entry_id = e.id
+    WHERE ${whereClause}
+    ORDER BY mq.created_at DESC
+    LIMIT $${paramIndex++} OFFSET $${paramIndex++}
+  `;
+
+  const result = await query(queueQuery, [...params, limit, offset]);
+
+  return result.rows.map((row) => {
+    const diffSummary = summarizeDiff(row.diff);
+
+    const base = {
+      id: row.id,
+      entryId: row.entry_id,
+      domain: row.domain,
+      action: row.action,
+      status: row.status,
+      candidateData: row.candidate_data,
+      existingData: row.existing_data,
+      diff: row.diff,
+      diffSummary,
+      importantChanges: [],
+      provenance: row.provenance,
+      reviewedBy: row.reviewed_by,
+      reviewedAt: row.reviewed_at,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+      title: row.title_de ? { de: row.title_de } : undefined,
+      url: row.url
+    };
+
+    if (row.title_de) {
+      base.title_de = row.title_de;
     }
 
-    attachTranslations(entries, translationsMap);
+    return withLegacyKeys(base, {
+      entry_id: 'entryId',
+      candidate_data: 'candidateData',
+      existing_data: 'existingData',
+      updated_at: 'updatedAt',
+      created_at: 'createdAt',
+      reviewed_by: 'reviewedBy',
+      reviewed_at: 'reviewedAt'
+    });
+  });
+}
+
+/**
+ * Get quality report statistics.
+ */
+export async function getQualityReport() {
+  const domainStatsQuery = `SELECT * FROM entry_statistics`;
+
+  const lowQualityQuery = `
+    SELECT
+      id,
+      domain,
+      title_de,
+      url,
+      (quality_scores->>'iqs')::numeric AS iqs,
+      (quality_scores->>'ais')::numeric AS ais
+    FROM entries
+    WHERE
+      (quality_scores->>'iqs')::numeric < 50
+      OR (quality_scores->>'ais')::numeric < 50
+    ORDER BY (quality_scores->>'iqs')::numeric ASC
+    LIMIT 20
+  `;
+
+  const missingTranslationsQuery = `
+    SELECT
+      id,
+      domain,
+      title_de,
+      url,
+      CASE WHEN title_en IS NULL OR title_en = '' THEN true ELSE false END AS missing_en,
+      CASE WHEN title_easy_de IS NULL OR title_easy_de = '' THEN true ELSE false END AS missing_easy_de
+    FROM entries
+    WHERE
+      (title_en IS NULL OR title_en = '')
+      OR (title_easy_de IS NULL OR title_easy_de = '')
+    LIMIT 50
+  `;
+
+  const [domainStats, lowQuality, missingTranslations] = await Promise.all([
+    query(domainStatsQuery),
+    query(lowQualityQuery),
+    query(missingTranslationsQuery)
+  ]);
+
+  return {
+    byDomain: domainStats.rows,
+    lowQualityEntries: lowQuality.rows,
+    missingTranslations: missingTranslations.rows
+  };
+}
+
+/**
+ * Get system statistics.
+ */
+export async function getStatistics() {
+  const entriesQuery = `
+    SELECT domain, status, COUNT(*) AS count
+    FROM entries
+    GROUP BY domain, status
+  `;
+
+  const moderationQuery = `
+    SELECT status, COUNT(*) AS count
+    FROM moderation_queue
+    GROUP BY status
+  `;
+
+  const qualityQuery = `
+    SELECT
+      AVG((quality_scores->>'iqs')::numeric) AS avg_iqs,
+      AVG((quality_scores->>'ais')::numeric) AS avg_ais
+    FROM entries
+    WHERE quality_scores IS NOT NULL
+  `;
+
+  const [entriesResult, moderationResult, qualityResult] = await Promise.all([
+    query(entriesQuery),
+    query(moderationQuery),
+    query(qualityQuery)
+  ]);
+
+  return {
+    entries: entriesResult.rows,
+    moderation: moderationResult.rows,
+    qualityScores: qualityResult.rows[0]
+  };
+}
+
+/**
+ * Search entries by text.
+ * Uses substring matching for title, summary, and content.
+ */
+export async function searchEntries(options = {}) {
+  const {
+    searchText,
+    domain = null,
+    includeTranslations = false,
+    limit = 50,
+    offset = 0
+  } = options;
+
+  const term = (searchText || '').trim();
+
+  if (!term) {
+    return getAllEntries({ domain, includeTranslations, limit, offset });
+  }
+
+  const whereConditions = [
+    `(
+      COALESCE(e.title_de, '') ILIKE $1 OR
+      COALESCE(e.title_en, '') ILIKE $1 OR
+      COALESCE(e.title_easy_de, '') ILIKE $1 OR
+      COALESCE(e.summary_de, '') ILIKE $1 OR
+      COALESCE(e.summary_en, '') ILIKE $1 OR
+      COALESCE(e.summary_easy_de, '') ILIKE $1 OR
+      COALESCE(e.content_de, '') ILIKE $1 OR
+      COALESCE(e.content_en, '') ILIKE $1 OR
+      COALESCE(e.content_easy_de, '') ILIKE $1
+    )`
+  ];
+
+  const params = [`%${term}%`];
+  let paramIndex = 2;
+
+  if (domain) {
+    whereConditions.push(`e.domain = $${paramIndex++}`);
+    params.push(domain);
+  }
+
+  const whereClause = whereConditions.join(' AND ');
+
+  const countQuery = `
+    SELECT COUNT(*)::int AS total
+    FROM entries e
+    WHERE ${whereClause}
+  `;
+
+  const countResult = await query(countQuery, params);
+  const total = countResult.rows[0]?.total || 0;
+
+  const sql = `
+    SELECT
+      e.*,
+      (e.quality_scores->>'iqs')::numeric AS iqs,
+      (e.quality_scores->>'ais')::numeric AS ais
+    FROM entries e
+    WHERE ${whereClause}
+    ORDER BY
+      CASE
+        WHEN COALESCE(e.title_de, '') ILIKE $1
+          OR COALESCE(e.title_en, '') ILIKE $1
+          OR COALESCE(e.title_easy_de, '') ILIKE $1
+        THEN 0
+        WHEN COALESCE(e.summary_de, '') ILIKE $1
+          OR COALESCE(e.summary_en, '') ILIKE $1
+          OR COALESCE(e.summary_easy_de, '') ILIKE $1
+        THEN 1
+        ELSE 2
+      END,
+      e.created_at DESC
+    LIMIT $${paramIndex++} OFFSET $${paramIndex++}
+  `;
+
+  const result = await query(sql, [...params, limit, offset]);
+  const entries = result.rows.map((row) => mapEntryRow(row, { includeTranslations }));
+
+  if (includeTranslations) {
+    await loadTranslationsForEntries(entries);
   }
 
   return {
@@ -266,339 +675,17 @@ export async function getAllEntries(options = {}) {
   };
 }
 
-/**
- * Get entry by ID with domain-specific data
- * @param {string} id - Entry UUID
- * @returns {Promise<Object|null>} Entry with domain data
- */
-export async function getEntryById(id) {
-  const entryQuery = `
-    SELECT 
-      e.*,
-      (e.quality_scores->>'iqs')::numeric AS iqs,
-      (e.quality_scores->>'ais')::numeric AS ais
-    FROM entries e
-    WHERE e.id = $1
-  `;
-  
-  const result = await query(entryQuery, [id]);
-  
-  if (result.rows.length === 0) {
-    return null;
-  }
-  
-  const entryRow = result.rows[0];
-  const entry = mapEntryRow(entryRow, { includeTranslations: true });
-  
-  // Fetch domain-specific data
-  const domainTable = entry.domain;
-  if (domainTable) {
-    const domainQuery = `SELECT * FROM ${domainTable} WHERE entry_id = $1`;
-    const domainResult = await query(domainQuery, [id]);
-    
-    if (domainResult.rows.length > 0) {
-      entry.domainData = mapDomainRow(domainTable, domainResult.rows[0]);
-    }
-  }
-
-  // Try to attach translations from JSON snapshot if present
-  if (!entry.translations) {
-    try {
-      const filePath = path.resolve(process.cwd(), 'data', entry.domain, 'entries.json');
-      const txt = await fs.readFile(filePath, 'utf8');
-      const parsed = JSON.parse(txt || '{}');
-      const arr = Array.isArray(parsed) ? parsed : parsed.entries || [];
-      if (Array.isArray(arr)) {
-        const s = arr.find(e => e && e.id === id);
-        if (s && s.translations) {
-          entry.translations = s.translations;
-          entry.translationLanguages = Object.keys(s.translations);
-        }
-      }
-    } catch (err) {
-      // ignore read/parsing errors
-    }
-  }
-
-  return entry;
-}
-
-/**
- * Get moderation queue entries
- * @param {Object} options - Query options
- * @returns {Promise<Array>} Queue entries
- */
-export async function getModerationQueue(options = {}) {
-  const {
-    status = 'pending',
-    domain = null,
-    limit = 100,
-    offset = 0
-  } = options;
-  
-  // qualify columns with table alias to avoid ambiguity
-  let whereConditions = ['mq.status = $1'];
-  let params = [status];
-  let paramIndex = 2;
-  
-  if (domain) {
-    whereConditions.push(`mq.domain = $${paramIndex++}`);
-    params.push(domain);
-  }
-  
-  const whereClause = whereConditions.join(' AND ');
-  
-  params.push(limit, offset);
-  
-  const queueQuery = `
-    SELECT 
-      mq.*,
-      e.title_de,
-      e.url
-    FROM moderation_queue mq
-    LEFT JOIN entries e ON mq.entry_id = e.id
-    WHERE ${whereClause}
-    ORDER BY mq.created_at DESC
-    LIMIT $${paramIndex++} OFFSET $${paramIndex++}
-  `;
-  
-  const result = await query(queueQuery, params);
-
-  return result.rows.map((row) => {
-    const diffSummary = summarizeDiff(row.diff);
-    const importantChanges = [];
-    const base = {
-    id: row.id,
-    entryId: row.entry_id,
-    domain: row.domain,
-    action: row.action,
-    status: row.status,
-    candidateData: row.candidate_data,
-    existingData: row.existing_data,
-    diff: row.diff,
-    diffSummary,
-    importantChanges,
-    provenance: row.provenance,
-    reviewedBy: row.reviewed_by,
-    reviewedAt: row.reviewed_at,
-    createdAt: row.created_at,
-    updatedAt: row.updated_at,
-    title: row.title_de ? { de: row.title_de } : undefined,
-    url: row.url
-    };
-
-    if (row.title_de) {
-      base.title_de = row.title_de;
-    }
-
-    return withLegacyKeys(base, {
-    entry_id: 'entryId',
-    candidate_data: 'candidateData',
-    existing_data: 'existingData',
-    updated_at: 'updatedAt',
-    created_at: 'createdAt',
-    reviewed_by: 'reviewedBy',
-      reviewed_at: 'reviewedAt'
-    });
-  });
-}
-
-/**
- * Get quality report statistics
- * @returns {Promise<Object>} Quality statistics
- */
-export async function getQualityReport() {
-  // Get statistics by domain
-  const domainStatsQuery = `
-    SELECT * FROM entry_statistics
-  `;
-  
-  const domainStats = await query(domainStatsQuery);
-  
-  // Get entries with low quality scores
-  const lowQualityQuery = `
-    SELECT 
-      id, domain, title_de, url,
-      (quality_scores->>'iqs')::numeric AS iqs,
-      (quality_scores->>'ais')::numeric AS ais
-    FROM entries
-    WHERE 
-      (quality_scores->>'iqs')::numeric < 50
-      OR (quality_scores->>'ais')::numeric < 50
-    ORDER BY (quality_scores->>'iqs')::numeric ASC
-    LIMIT 20
-  `;
-  
-  const lowQuality = await query(lowQualityQuery);
-  
-  // Get entries with missing translations
-  const missingTranslationsQuery = `
-    SELECT 
-      id, domain, title_de, url,
-      CASE WHEN title_en IS NULL OR title_en = '' THEN true ELSE false END AS missing_en,
-      CASE WHEN title_easy_de IS NULL OR title_easy_de = '' THEN true ELSE false END AS missing_easy_de
-    FROM entries
-    WHERE 
-      (title_en IS NULL OR title_en = '')
-      OR (title_easy_de IS NULL OR title_easy_de = '')
-    LIMIT 50
-  `;
-  
-  const missingTranslations = await query(missingTranslationsQuery);
-  
-  return {
-    byDomain: domainStats.rows,
-    lowQualityEntries: lowQuality.rows,
-    missingTranslations: missingTranslations.rows
-  };
-}
-
-/**
- * Get system statistics
- * @returns {Promise<Object>} System statistics
- */
-export async function getStatistics() {
-  // Total entries by domain
-  const entriesQuery = `
-    SELECT domain, status, COUNT(*) as count
-    FROM entries
-    GROUP BY domain, status
-  `;
-  
-  const entriesResult = await query(entriesQuery);
-  
-  // Moderation queue statistics
-  const moderationQuery = `
-    SELECT status, COUNT(*) as count
-    FROM moderation_queue
-    GROUP BY status
-  `;
-  
-  const moderationResult = await query(moderationQuery);
-  
-  // Average quality scores
-  const qualityQuery = `
-    SELECT 
-      AVG((quality_scores->>'iqs')::numeric) as avg_iqs,
-      AVG((quality_scores->>'ais')::numeric) as avg_ais
-    FROM entries
-    WHERE quality_scores IS NOT NULL
-  `;
-  
-  const qualityResult = await query(qualityQuery);
-  
-  return {
-    entries: entriesResult.rows,
-    moderation: moderationResult.rows,
-    qualityScores: qualityResult.rows[0]
-  };
-}
-
-/**
- * Search entries by text
- * @param {Object} options - Search options
- * @returns {Promise<Object>} Search results
- */
-export async function searchEntries(options = {}) {
-  const {
-    searchText,
-    domain = null,
-    language = 'german',
-    includeTranslations = false,
-    limit = 50,
-    offset = 0
-  } = options;
-  
-  if (!searchText) {
-    return getAllEntries({ domain, limit, offset });
-  }
-  
-  const langConfig = language === 'english' ? 'english' : 'german';
-  const titleCol = language === 'english' ? 'title_en' : 'title_de';
-  const summaryCol = language === 'english' ? 'summary_en' : 'summary_de';
-  const contentCol = language === 'english' ? 'content_en' : 'content_de';
-  
-  let whereConditions = [`
-    (
-      to_tsvector('${langConfig}', COALESCE(${titleCol}, '')) ||
-      to_tsvector('${langConfig}', COALESCE(${summaryCol}, '')) ||
-      to_tsvector('${langConfig}', COALESCE(${contentCol}, ''))
-    ) @@ plainto_tsquery('${langConfig}', $1)
-  `];
-  
-  let params = [searchText];
-  let paramIndex = 2;
-  
-  if (domain) {
-    whereConditions.push(`domain = $${paramIndex++}`);
-    params.push(domain);
-  }
-  
-  const whereClause = whereConditions.join(' AND ');
-  
-  params.push(limit, offset);
-  
-  const searchQuery = `
-    SELECT 
-      e.*,
-      (e.quality_scores->>'iqs')::numeric AS iqs,
-      (e.quality_scores->>'ais')::numeric AS ais,
-      ts_rank(
-        to_tsvector('${langConfig}', COALESCE(${titleCol}, '') || ' ' || COALESCE(${summaryCol}, '')),
-        plainto_tsquery('${langConfig}', $1)
-      ) AS rank
-    FROM entries e
-    WHERE ${whereClause}
-    ORDER BY rank DESC, e.created_at DESC
-    LIMIT $${paramIndex++} OFFSET $${paramIndex++}
-  `;
-  
-  const result = await query(searchQuery, params);
-  let entries = result.rows.map((row) => mapEntryRow(row, { includeTranslations }));
-
-  if (includeTranslations) {
-    const domains = {};
-    entries.forEach((entry) => {
-      if (!domains[entry.domain]) domains[entry.domain] = [];
-      domains[entry.domain].push(entry.id);
-    });
-
-    const translationsMap = {};
-    for (const domainName of Object.keys(domains)) {
-      try {
-        const filePath = path.resolve(process.cwd(), 'data', domainName, 'entries.json');
-        const txt = await fs.readFile(filePath, 'utf8');
-        const parsed = JSON.parse(txt || '{}');
-        const arr = Array.isArray(parsed) ? parsed : parsed.entries || [];
-        if (Array.isArray(arr)) {
-          arr.forEach((entry) => {
-            if (entry && entry.id && entry.translations) {
-              translationsMap[entry.id] = entry.translations;
-            }
-          });
-        }
-      } catch (err) {
-        // ignore missing domains or parse errors
-      }
-    }
-
-    attachTranslations(entries, translationsMap);
-  }
-  
-  return {
-    entries,
-    total: entries.length,
-    limit,
-    offset
-  };
-}
-
 export const __private = {
   mapEntryRow,
   mapDomainRow,
   buildMultilingual,
   withLegacyKeys,
-  attachTranslations
+  attachTranslations,
+  getLanguageColumns,
+  buildPagination,
+  loadTranslationsForDomains,
+  loadTranslationsForEntries,
+  loadTranslationsForSingleEntry
 };
 
 export default {
@@ -607,5 +694,6 @@ export default {
   getModerationQueue,
   getQualityReport,
   getStatistics,
-  searchEntries
+  searchEntries,
+  searchEntriesForAutocomplete
 };
