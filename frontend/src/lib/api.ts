@@ -2,7 +2,7 @@
  * API Client for Systemfehler Backend
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://systemfehler-api-worker.inequality.workers.dev/api';
 const DEFAULT_SNAPSHOT_BASE_URL =
   typeof window !== 'undefined'
     ? `${window.location.origin}${import.meta.env.BASE_URL.replace(/\/$/, '')}`
@@ -582,7 +582,7 @@ export const api = {
     }
   },
 
-  getAIResults: async (params?: { query?: string; limit?: number }) => {
+  getAIResults: async () => {
     // Placeholder AI search stub: returns empty array or mock results
     return [];
   },
@@ -591,20 +591,12 @@ export const api = {
     if (!query || query.length < 1) return [];
     const res = await api.getEntries({ search: query, limit });
     const needle = query.toLowerCase();
-    const exclusionKeywords = [
-      'navigation', 'service', 'techn', 'tempo', 'relevanz', 'hauptnavigation', 'seitennavigation',
-      'bundesministerium', 'ausbildung', 'studium', 'migration', 'starte', 'toleranz', 'technologie',
-      'wohnen', 'stadtentwicklung', 'bauwesen', 'bundesagentur', 'arbeit', 'und', 'oder', 'mit', 'bei', 'für', 'nach', 'deutschland', 'und service', 'seitennavigation und service'
-    ];
     return (res.entries || [])
       .filter(e => {
-        const title = e.title?.de || e.title_de || e.title || '';
+        const rawTitle = e.title?.de || e.title_de || e.title || '';
+        const title = typeof rawTitle === 'string' ? rawTitle : '';
         const lower = title.toLowerCase();
-        if (!lower.includes(needle)) return false;
-        for (const keyword of exclusionKeywords) {
-          if (lower.includes(keyword)) return false;
-        }
-        return true;
+        return lower.includes(needle);
       })
       .map(e => ({
         id: e.id,

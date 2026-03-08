@@ -34,7 +34,9 @@
     "llm:experiment": "node scripts/llm_experiments.js",
     "llm:costs": "node scripts/report_llm_costs.js",
     "test:url-normalization": "node tests/url_canonicalization_test.js",
-    "test:roundtrip": "node tests/db_roundtrip_translations_test.js"
+    "test:roundtrip": "node tests/db_roundtrip_translations_test.js",
+    "build:frontend": "cd frontend && npm run build",
+    "deploy:all": "python crawlers/cli.py crawl benefits --source arbeitsagentur && python crawlers/cli.py validate --domain benefits && python crawlers/cli.py import --domain benefits --to-db && wrangler d1 execute systemfehler-db --remote --file=cloudflare-pages/d1/schema.sql && wrangler deploy --config wrangler.toml && wrangler pages deploy"
   },
   "keywords": [
     "social-services",

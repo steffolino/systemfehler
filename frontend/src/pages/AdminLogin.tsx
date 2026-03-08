@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function AdminLogin() {
   return (
     <div className="max-w-md mx-auto p-8">

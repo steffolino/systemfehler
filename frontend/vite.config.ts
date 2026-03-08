@@ -5,7 +5,7 @@ import path from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   // Base path for GitHub Pages (project pages) — override with PUBLIC_PATH env if needed
-  base: process.env.PUBLIC_PATH || '/systemfehler/',
+  base: '/',
   plugins: [react()],
   resolve: {
     alias: {

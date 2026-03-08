@@ -335,7 +335,28 @@ This starts:
 
 ---
 
-## Troubleshooting
+## Cloudflare Worker API Deployment
+
+### Worker Deployment (API)
+
+1. Die API läuft als Cloudflare Worker unter https://systemfehler-api-worker.inequality.workers.dev
+2. Die wrangler.worker.toml muss enthalten:
+  - name = "systemfehler-api-worker"
+  - main = "cloudflare-workers/index.js"
+  - compatibility_date = "2026-03-08"
+  - workers_dev = true
+  - [[d1_databases]] mit korrektem database_id
+3. Deploy mit:
+  - `npx wrangler deploy --config wrangler.worker.toml`
+4. Die Route /api/data/entries muss exakt so angesprochen werden (Query-Parameter erlaubt).
+5. CORS-Header werden im Worker gesetzt (`Access-Control-Allow-Origin: *`).
+6. Bei "Not found" oder CORS-Fehler:
+  - Prüfe, ob die URL exakt /api/data/entries ist
+  - Prüfe, ob der Worker-Code deployed ist
+  - Prüfe, ob wrangler.worker.toml korrekt ist
+  - Deploy-Befehl muss den richtigen Dateinamen nutzen
+
+### Troubleshooting
 
 ### Database Connection Issues
 

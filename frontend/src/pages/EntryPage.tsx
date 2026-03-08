@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { Entry, Provenance } from '../lib/api';
 import { useParams } from 'react-router-dom';
 // import ResultCard from '../components/ResultCard';
 import { api } from '../lib/api';
 
 export default function EntryPage() {
-  const { id } = useParams();
-  const [result, setResult] = useState(null);
+  const { id } = useParams<{ id?: string }>();
+  const [entry, setEntry] = useState<Entry | null>(null);
 
   useEffect(() => {
-    api.getEntry(id).then(setResult);
+    if (id) {
+      api.getEntry(id).then(res => setEntry(res.entry));
+    }
   }, [id]);
 
-  if (!result) return <div className="p-4">Loading...</div>;
-  const entry = result.entry || result;
+  if (!entry) return <div className="p-4">Loading...</div>;
   const title = typeof entry.title === 'object' ? entry.title?.de || entry.title_de || '' : entry.title || entry.title_de || '';
   const content = typeof entry.content === 'object' ? entry.content?.de || entry.content_de || '' : entry.content || entry.content_de || '';
   const url = entry.url || '';
@@ -21,7 +23,7 @@ export default function EntryPage() {
   const tags = entry.tags || [];
   const targetGroups = entry.targetGroups || entry.target_groups || [];
   const status = entry.status || '';
-  const provenance = entry.provenance || {};
+  const provenance: Provenance | null = entry.provenance ?? null;
   const qualityScores = entry.qualityScores || entry.quality_scores || {};
   return (
     <div className="max-w-2xl mx-auto p-4 bg-white rounded shadow">
@@ -49,11 +51,11 @@ export default function EntryPage() {
       <div className="mb-2">
         <strong>Provenienz:</strong>
         <ul className="text-xs text-gray-600">
-          <li>Quelle: {provenance.source || '-'}</li>
-          <li>Crawler: {provenance.crawler || '-'}</li>
-          <li>Crawl-ID: {provenance.crawlId || '-'}</li>
-          <li>Checksum: {provenance.checksum || '-'}</li>
-          <li>Gecrawlt am: {provenance.crawledAt ? new Date(provenance.crawledAt).toLocaleString() : '-'}</li>
+          <li>Quelle: {provenance?.source || '-'}</li>
+          <li>Crawler: {provenance?.generator || provenance?.method || '-'}</li>
+          <li>Crawl-ID: {provenance?.crawlId || '-'}</li>
+          <li>Checksum: {provenance?.checksum || '-'}</li>
+          <li>Gecrawlt am: {provenance?.crawledAt ? new Date(provenance.crawledAt).toLocaleString() : '-'}</li>
         </ul>
       </div>
     </div>

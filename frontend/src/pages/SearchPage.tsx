@@ -3,16 +3,17 @@ import { api } from '../lib/api';
 import SearchInput from '../components/SearchInput';
 import ResultsList from '../components/ResultsList';
 
+import type { Entry } from '../lib/api';
 export default function SearchPage() {
   const [query, setQuery] = useState('');
-  const [standardResults, setStandardResults] = useState([]);
-  const [aiResults, setAiResults] = useState([]);
+  const [standardResults, setStandardResults] = useState<Entry[]>([]);
+  const [aiResults, setAiResults] = useState<Entry[]>([]);
   const [tab, setTab] = useState<'standard' | 'ai'>('standard');
 
   useEffect(() => {
     if (query) {
       api.getEntries({ search: query }).then(res => setStandardResults(res.entries));
-      api.getAIResults({ query }).then(setAiResults);
+      api.getAIResults().then(setAiResults);
     } else {
       api.getEntries({}).then(res => setStandardResults(res.entries));
       setAiResults([]);

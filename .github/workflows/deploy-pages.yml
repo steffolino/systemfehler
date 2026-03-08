@@ -28,7 +28,7 @@ jobs:
         run: npm run build
         working-directory: frontend
         env:
-          PUBLIC_PATH: /
+          PUBLIC_PATH: /systemfehler/
           VITE_API_URL: /api
 
       - name: Assemble combined deploy directory
