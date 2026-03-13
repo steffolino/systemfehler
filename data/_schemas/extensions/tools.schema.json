@@ -6,7 +6,9 @@
   "version": "0.1.0",
   "type": "object",
   "allOf": [
-    { "$ref": "../core.schema.json" }
+    {
+      "$ref": "../core.schema.json"
+    }
   ],
   "properties": {
     "toolType": {
@@ -15,19 +17,24 @@
     },
     "relatedBenefits": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "References to related benefit entries"
     },
     "accessibility": {
       "type": "object",
       "properties": {
-        "languages": { "type": "array", "items": { "type": "string" } },
-        "screenReaderCompatible": { "type": "boolean" }
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "screenReaderCompatible": {
+          "type": "boolean"
+        }
       }
     }
-  },
-  "_todo": [
-    "TODO: Define tool classification taxonomy per DATA-02 (Issue #8)",
-    "TODO: Add accessibility metadata validation"
-  ]
+  }
 }

@@ -1,3 +1,7 @@
+import sys
+import os
+# Ensure project root is in sys.path for absolute imports
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from crawlers.benefits.arbeitsagentur_crawler import ArbeitsagenturCrawler
 
 if __name__ == '__main__':

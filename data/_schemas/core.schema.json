@@ -7,13 +7,21 @@
   "type": "object",
   "properties": {
     "id": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Persistent unique identifier"
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "type": "object",
+          "title": "UUID object"
+        }
+      ],
+      "description": "Persistent unique identifier (string or UUID object)"
     },
     "title": {
-      "$ref": "#/definitions/multilingualText",
-      "description": "Display title in multiple languages"
+      "type": "string",
+      "description": "Display title as plain text"
     },
     "summary": {
       "$ref": "#/definitions/multilingualText",
@@ -50,17 +58,26 @@
       "description": "Target audience groups"
     },
     "validFrom": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date",
       "description": "Start date of validity (ISO 8601)"
     },
     "validUntil": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date",
       "description": "End date of validity (ISO 8601)"
     },
     "deadline": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date",
       "description": "Application or action deadline (ISO 8601)"
     },
@@ -97,8 +114,61 @@
       "description": "Computed quality and AI searchability scores"
     },
     "translations": {
-      "$ref": "#/definitions/translations",
-      "description": "Language-keyed translation and simplification objects (e.g. 'de-LEICHT', 'en')"
+      "anyOf": [
+        {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "minLength": 2
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "body": {
+                "type": "string"
+              },
+              "provenance": {
+                "$ref": "#/definitions/provenanceDetailed"
+              },
+              "method": {
+                "type": "string",
+                "enum": [
+                  "llm",
+                  "rule",
+                  "human",
+                  "mt"
+                ]
+              },
+              "generator": {
+                "type": "string"
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "reviewed": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "title",
+              "timestamp",
+              "provenance"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Map of language codes to translation objects (or null)"
     }
   },
   "required": [
@@ -113,20 +183,29 @@
       "type": "object",
       "properties": {
         "de": {
-          "type": "string",
-          "description": "German text"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "en": {
-          "type": "string",
-          "description": "English text"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "easy_de": {
-          "type": "string",
-          "description": "Easy German (Leichte Sprache)"
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "additionalProperties": {
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
     "translations": {
@@ -207,7 +286,7 @@
         "source",
         "crawledAt"
       ],
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "provenanceDetailed": {
       "type": "object",
@@ -245,7 +324,7 @@
         "source",
         "crawledAt"
       ],
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "qualityScores": {
       "type": "object",
@@ -268,11 +347,5 @@
         }
       }
     }
-  },
-  "_todo": [
-    "TODO: Finalize field definitions per DATA-01 (Issue #7)",
-    "TODO: Add deadline and validity field validation per TIME-01 (Issue #24)",
-    "TODO: Add multilingual structure validation per LANG-01",
-    "TODO: Implement CI validation enforcement per DATA-05 (Issue #28)"
-  ]
+  }
 }

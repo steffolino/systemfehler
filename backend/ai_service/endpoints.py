@@ -47,7 +47,7 @@ async def synthesize_answer(body: QueryRequest):
             "latency_ms": latency
         }
     # Stub: LLM call for synthesis
-    answer = f"Synthesized answer for: {query}"
+    answer = f"Synthesized answer for: {body.query}"
     sources = [ev.source for ev in evidence if ev.confidence >= min_confidence]
     latency = int((time.time() - start) * 1000)
     log_telemetry("synthesize", model, latency, True, 20, 0.002)

@@ -48,6 +48,8 @@ export async function onRequest(context) {
       entry.status = row.status;
       entry.title_de = row.title_de;
       entry.updated_at = row.updated_at;
+      // Always set title as string from title_de
+      entry.title = row.title_de;
       if (!includeTranslations && entry.translations) {
         delete entry.translations;
       }

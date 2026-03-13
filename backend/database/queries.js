@@ -61,11 +61,7 @@ function summarizeDiff(diff) {
 function mapEntryRow(row, options = {}) {
   const { includeTranslations = false } = options;
 
-  const title = buildMultilingual({
-    de: row.title_de,
-    en: row.title_en,
-    easyDe: row.title_easy_de
-  });
+  const title = row.title_de; // Use only the string from title_de
 
   const summary = buildMultilingual({
     de: row.summary_de,
@@ -476,7 +472,7 @@ export async function getModerationQueue(options = {}) {
       reviewedAt: row.reviewed_at,
       createdAt: row.created_at,
       updatedAt: row.updated_at,
-      title: row.title_de ? { de: row.title_de } : undefined,
+      title: row.title_de, // Use only the string from title_de
       url: row.url
     };
 

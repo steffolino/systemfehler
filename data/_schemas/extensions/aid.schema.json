@@ -6,7 +6,9 @@
   "version": "0.1.0",
   "type": "object",
   "allOf": [
-    { "$ref": "../core.schema.json" }
+    {
+      "$ref": "../core.schema.json"
+    }
   ],
   "properties": {
     "aidType": {
@@ -30,15 +32,19 @@
     "multilingualText": {
       "type": "object",
       "properties": {
-        "de": { "type": "string" },
-        "en": { "type": "string" },
-        "easy_de": { "type": "string" }
+        "de": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        },
+        "easy_de": {
+          "type": "string"
+        }
       },
-      "additionalProperties": { "type": "string" }
+      "additionalProperties": {
+        "type": "string"
+      }
     }
-  },
-  "_todo": [
-    "TODO: Define aid-specific fields per DATA-02 (Issue #8)",
-    "TODO: Add aid modality taxonomy validation"
-  ]
+  }
 }

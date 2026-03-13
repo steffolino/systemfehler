@@ -12,6 +12,20 @@ import jsonschema
 
 # ORM database access layer
 from .db import SessionLocal, Entry
+from sqlalchemy import text
+
+import datetime
+
+def _serialize_datetimes(obj):
+    # Recursively convert datetime/date objects to ISO strings, leave None untouched
+    if isinstance(obj, dict):
+        return {k: _serialize_datetimes(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [_serialize_datetimes(v) for v in obj]
+    elif isinstance(obj, (datetime.datetime, datetime.date)):
+        return obj.isoformat()
+    else:
+        return obj
 
 def query_entries(query: str, domain: str = None):
     try:
@@ -20,22 +34,29 @@ def query_entries(query: str, domain: str = None):
         sql = """
         SELECT * FROM entries
         WHERE (
-            title_de ILIKE :q OR title_en ILIKE :q OR
-            summary_de ILIKE :q OR summary_en ILIKE :q OR
-            content_de ILIKE :q OR content_en ILIKE :q
+            title_de ILIKE :q OR title_en ILIKE :q OR title_easy_de ILIKE :q OR
+            summary_de ILIKE :q OR summary_en ILIKE :q OR summary_easy_de ILIKE :q OR
+            content_de ILIKE :q OR content_en ILIKE :q OR content_easy_de ILIKE :q
         )
         """
         params = {"q": f"%{query}%"}
         if domain:
             sql += " AND domain = :domain"
             params["domain"] = domain
-        results = session.execute(sql, params).fetchall()
+        results = session.execute(text(sql), params).mappings().all()
         print(f"DEBUG: Found {len(results)} entries for query '{query}' (raw SQL)")
         for r in results:
             print(f"DEBUG ENTRY: {dict(r)}")
         session.close()
-        # Convert SQLAlchemy Row objects to dict
-        return [dict(r) for r in results]
+        # Always convert id to string UUID (no objects) and serialize datetimes
+        out = []
+        for r in results:
+            d = dict(r)
+            if 'id' in d and d['id'] is not None:
+                d['id'] = str(d['id'])
+            d = _serialize_datetimes(d)
+            out.append(d)
+        return out
     except Exception as e:
         print(f"DB error: {e}")
         return []
@@ -50,7 +71,9 @@ def validate_entry(entry):
     try:
         jsonschema.validate(instance=entry, schema=schema)
         return True
-    except jsonschema.ValidationError:
+    except jsonschema.ValidationError as e:
+        print("[VALIDATION ERROR]", e)
+        print("[INVALID ENTRY]", entry)
         return False
 
 def retrieve_evidence(query: str, domain: str = None) -> list:

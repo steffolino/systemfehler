@@ -49,6 +49,29 @@ def main():
         print('Error: snapshot must be a JSON array or an object with an entries array', file=sys.stderr)
         sys.exit(1)
 
+    # Fix multilingual fields for each entry
+    def merge_multilingual(entry, base):
+        obj = {}
+        for lang in ['de', 'en', 'easy_de']:
+            key = f"{base}_{lang}"
+            val = entry.get(key)
+            if val is not None:
+                obj[lang] = val
+        return obj if obj else None
+
+    for entry in entries:
+        for base in ['title', 'summary', 'content']:
+            ml = merge_multilingual(entry, base)
+            if ml:
+                entry[base] = ml
+            for lang in ['de', 'en', 'easy_de']:
+                key = f"{base}_{lang}"
+                if key in entry:
+                    del entry[key]
+        # targetGroups -> target_groups
+        if 'targetGroups' in entry:
+            entry['target_groups'] = entry.pop('targetGroups')
+
     payload = json.dumps({'domain': args.domain, 'entries': entries}).encode()
     req = urllib.request.Request(
         ingest_url,

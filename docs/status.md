@@ -39,9 +39,10 @@ crawling logic to these files.
 
 ### Node.js API (`backend/`)
 
+
 # Systemfehler – Implementation Status
 
-> **Last updated:** 2026-03-08
+> **Last updated:** 2026-03-13
 
 > This document is the single source of truth for "what is implemented today vs planned or stubbed". Update this file when the implementation status of any area changes.
 
@@ -106,12 +107,21 @@ Node.js files under `services/*/crawler/` are reference stubs only. Do not add r
 | Crawl + ingest workflow | ✅ Working | Requires GitHub secrets `PAGES_INGEST_URL` and `INGEST_TOKEN` |
 | `scripts/ingest_to_d1.py` | ✅ Working | Accepts both JSON array snapshots and `{ "entries": [...] }` snapshots |
 
+
 ### Validation scripts (`scripts/`)
 | PostgreSQL | `DATABASE_URL` is set | `moderation_queue` table |
 
-The Python CLI writes to the file-based queue automatically. The Node.js API
-reads from the database when `DATABASE_URL` is set, and falls back to
-`moderation/review_queue.json` when the DB queue is unavailable/empty.
+**Schema/data compliance:**
+- All `title` fields are now strings (never objects) across all domains and tests.
+- All IDs are UUID strings, not objects.
+- Datetime serialization allows `None` and uses ISO format.
+- Moderation queue format is canonical and validated.
+
+**Infra/config:**
+- Backend and scripts now use the `PORT` environment variable for configuration (no more hardcoded ports).
+- All Python and integration tests now pass.
+
+The Python CLI writes to the file-based queue automatically. The Node.js API reads from the database when `DATABASE_URL` is set, and falls back to `moderation/review_queue.json` when the DB queue is unavailable/empty.
 
 ### Canonical moderation queue entry format
 
@@ -192,12 +202,19 @@ Node crawler files remain reference-only stubs. Runtime crawling is implemented
 in Python and available through the CLI and npm wrappers.
 
 
+
 ## Next planned work
+
+- Finalize and document the canonical moderation queue format; ensure file and DB backends are fully interchangeable.
+- Update all schema docs to clarify that `title` is always a string and IDs are UUID strings.
+- Expand test coverage for edge cases (e.g., missing/optional fields, invalid UUIDs, datetime `None`).
+- Begin implementing Phase 4 of the AI roadmap (AI-assisted metadata tagging, duplicate detection, etc.).
+- Add more detailed logging and cost tracking for all AI/model calls.
+- Regularly update `docs/status.md` and `docs/ai-roadmap.md` as new features are stabilized.
 
 See open issues and `IMPLEMENTATION_SUMMARY.md` for details.
 
-  
----
+----
 
 ## Recent link expansion results
 

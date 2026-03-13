@@ -6,7 +6,9 @@
   "version": "0.1.0",
   "type": "object",
   "allOf": [
-    { "$ref": "../core.schema.json" }
+    {
+      "$ref": "../core.schema.json"
+    }
   ],
   "properties": {
     "contactType": {
@@ -15,23 +17,28 @@
     },
     "specialization": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "Areas of specialization"
     },
     "availability": {
       "type": "object",
       "properties": {
-        "hours": { "type": "string" },
-        "languages": { "type": "array", "items": { "type": "string" } }
+        "hours": {
+          "type": "string"
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "linkedOrganization": {
       "type": "string",
       "description": "Reference to parent organization"
     }
-  },
-  "_todo": [
-    "TODO: Define contact type taxonomy per DATA-02 (Issue #8)",
-    "TODO: Add language availability validation"
-  ]
+  }
 }

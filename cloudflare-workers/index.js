@@ -34,6 +34,8 @@ export default {
         entry.status = row.status;
         entry.title_de = row.title_de;
         entry.updated_at = row.updated_at;
+        // Always set title as string from title_de
+        entry.title = row.title_de;
         return new Response(JSON.stringify({ entry }), { headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
@@ -126,6 +128,8 @@ export default {
           entry.status = row.status;
           entry.title_de = row.title_de;
           entry.updated_at = row.updated_at;
+          // Always set title as string from title_de
+          entry.title = row.title_de;
           if (!includeTranslations && entry.translations) {
             delete entry.translations;
           }

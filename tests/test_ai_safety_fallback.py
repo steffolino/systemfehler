@@ -15,8 +15,8 @@ def test_synthesize_fallback_for_unsupported_query():
     assert data["sources"] == []
 
 def test_synthesize_success_for_supported_query():
-    # Query likely to match evidence (adjust as needed for your data)
-    response = client.post("/synthesize", json={"query": "Arbeitslosengeld"})
+    # Query matches seeded entry title
+    response = client.post("/synthesize", json={"query": "Bürgergeld"})
     assert response.status_code == 200
     data = response.json()
     assert data["fallback"] is False

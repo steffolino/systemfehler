@@ -19,9 +19,10 @@ from .routing import ModelRouter
 from .telemetry import log_telemetry
 
 
+import os
+
 app = FastAPI()
 app.include_router(router)
-
 
 class Telemetry(BaseModel):
     feature: str
@@ -38,6 +39,12 @@ async def log_requests(request: Request, call_next):
     latency = int((time.time() - start) * 1000)
     # TODO: log feature, model, latency, success, token/cost estimates
     return response
+
+# Allow running directly: python backend/ai_service/gateway.py
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.environ.get("PORT", 8010))
+    uvicorn.run("backend.ai_service.gateway:app", host="0.0.0.0", port=port, reload=True)
 
 # Placeholder endpoints
 @app.get("/health")

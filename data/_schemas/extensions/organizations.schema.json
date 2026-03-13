@@ -6,7 +6,9 @@
   "version": "0.1.0",
   "type": "object",
   "allOf": [
-    { "$ref": "../core.schema.json" }
+    {
+      "$ref": "../core.schema.json"
+    }
   ],
   "properties": {
     "organizationType": {
@@ -19,22 +21,32 @@
     },
     "services": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "List of services provided"
     },
     "contactDetails": {
       "type": "object",
       "properties": {
-        "address": { "type": "string" },
-        "phone": { "type": "string" },
-        "email": { "type": "string", "format": "email" },
-        "website": { "type": "string", "format": "uri" },
-        "openingHours": { "type": "string" }
+        "address": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "website": {
+          "type": "string",
+          "format": "uri"
+        },
+        "openingHours": {
+          "type": "string"
+        }
       }
     }
-  },
-  "_todo": [
-    "TODO: Define organization type taxonomy per DATA-02 (Issue #8)",
-    "TODO: Add region validation against geographic taxonomy"
-  ]
+  }
 }

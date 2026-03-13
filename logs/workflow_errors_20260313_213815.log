@@ -1,0 +1,28 @@
+[CRAWL ERROR]
+2026-03-13 21:38:16,710 - systemfehler.cli - INFO - Starting benefits crawl from source: arbeitsagentur
+2026-03-13 21:38:16,714 - systemfehler.crawler.arbeitsagentur - INFO - Starting crawl of https://www.arbeitsagentur.de/arbeitslosengeld-2
+2026-03-13 21:38:16,714 - systemfehler.crawler.arbeitsagentur - INFO - Starting crawl of https://www.arbeitsagentur.de/arbeitslosengeld-2
+2026-03-13 21:38:16,986 - systemfehler.crawler.arbeitsagentur - INFO - Fetching https://www.arbeitsagentur.de/arbeitslosengeld-2 (attempt 1/3)
+2026-03-13 21:38:16,986 - systemfehler.crawler.arbeitsagentur - INFO - Fetching https://www.arbeitsagentur.de/arbeitslosengeld-2 (attempt 1/3)
+2026-03-13 21:38:17,920 - systemfehler.crawler.arbeitsagentur - INFO - Successfully fetched https://www.arbeitsagentur.de/arbeitslosengeld-2
+2026-03-13 21:38:17,920 - systemfehler.crawler.arbeitsagentur - INFO - Successfully fetched https://www.arbeitsagentur.de/arbeitslosengeld-2
+2026-03-13 21:38:17,920 - systemfehler.cli - ERROR - Crawl failed: Couldn't find a tree builder with the features you requested: lxml. Do you need to install a parser library?
+Traceback (most recent call last):
+  File "C:\Users\StretzS\projects\systemfehler\crawlers\cli.py", line 74, in crawl_benefits
+    entries = crawler.crawl()
+              ^^^^^^^^^^^^^^^
+  File "C:\Users\StretzS\projects\systemfehler\crawlers\benefits\arbeitsagentur_crawler.py", line 50, in crawl
+    soup = self.parse_html(html)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\StretzS\projects\systemfehler\crawlers\shared\base_crawler.py", line 152, in parse_html
+    return BeautifulSoup(html, 'lxml')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\StretzS\projects\systemfehler\.venv\Lib\site-packages\bs4\__init__.py", line 366, in __init__
+    raise FeatureNotFound(
+bs4.exceptions.FeatureNotFound: Couldn't find a tree builder with the features you requested: lxml. Do you need to install a parser library?
+
+
+[VALIDATE ERROR]
+2026-03-13 21:38:18,695 - systemfehler.cli - INFO - Validating benefits entries
+
+

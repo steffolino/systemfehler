@@ -7,7 +7,7 @@ def make_sample_entry():
     now = datetime.datetime.utcnow().isoformat() + 'Z'
     return {
         "id": "11111111-1111-4111-8111-111111111111",
-        "title": {"de": "Beratung für Beispiel", "en": "Example Advice"},
+        "title": "Beratung für Beispiel / Example Advice",
         "summary": {"de": "Kurzbeschreibung", "en": "Short summary"},
         "content": {"de": "Voller Inhalt", "en": "Full content"},
         "url": "https://example.org/service/1",

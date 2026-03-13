@@ -198,6 +198,7 @@ app.get('/api/data/moderation-queue', moderationQueueLimiter, async (req, res) =
         const filePath = path.resolve(process.cwd(), 'moderation', 'review_queue.json');
         const fq = await fs.readFile(filePath, 'utf8');
         const fileItems = JSON.parse(fq || '[]');
+
         const mapped = Array.isArray(fileItems) ? fileItems.map((it) => {
           const entryId = it.entryId || it.entry_id || null;
           const candidateData = it.candidateData || it.candidate_data || null;
@@ -205,7 +206,8 @@ app.get('/api/data/moderation-queue', moderationQueueLimiter, async (req, res) =
           const createdAt = it.createdAt || it.created_at || it.timestamp || null;
           const reviewedAt = it.reviewedAt || it.reviewed_at || null;
           const reviewedBy = it.reviewedBy || it.reviewed_by || null;
-          const titleDe = it.title?.de || it.title_de || candidateData?.title?.de || null;
+          // Always use string for title
+          const titleDe = it.title_de || it.title?.de || candidateData?.title_de || candidateData?.title?.de || null;
           const url = it.url || candidateData?.url || it.source || null;
 
           return {
@@ -229,7 +231,7 @@ app.get('/api/data/moderation-queue', moderationQueueLimiter, async (req, res) =
             reviewed_at: reviewedAt,
             createdAt,
             created_at: createdAt,
-            title: titleDe ? { de: titleDe } : undefined,
+            title: titleDe || undefined,
             title_de: titleDe,
             url
           };
@@ -277,7 +279,7 @@ app.get('/api/data/quality-report', async (req, res) => {
       lowQualityEntries: report.lowQualityEntries.map(e => ({
         id: e.id,
         domain: e.domain,
-        title: e.title_de,
+        title: e.title_de, // always string
         url: e.url,
         iqs: parseFloat(e.iqs || 0),
         ais: parseFloat(e.ais || 0)
@@ -285,7 +287,7 @@ app.get('/api/data/quality-report', async (req, res) => {
       missingTranslations: report.missingTranslations.map(e => ({
         id: e.id,
         domain: e.domain,
-        title: e.title_de,
+        title: e.title_de, // always string
         url: e.url,
         missingEn: e.missing_en,
         missingEasyDe: e.missing_easy_de

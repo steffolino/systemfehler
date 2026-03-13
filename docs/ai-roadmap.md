@@ -42,12 +42,18 @@ The AI must **never invent facts outside retrieved evidence**.
 
 ---
 
+
 ## 2. Structured output requirement
 
 All AI features must produce **strict JSON outputs** validated by schemas.
 
-Example output types:
+**Schema/data requirements (2026-03-13):**
+- All `title` fields must be strings (never objects).
+- All IDs must be UUID strings, not objects.
+- Datetime fields must be ISO strings or `null`.
+- All outputs and data are validated against canonical schemas.
 
+Example output types:
 - query rewrite
 - synthesized answer
 - enrichment suggestion
@@ -55,7 +61,6 @@ Example output types:
 - moderation suggestion
 
 This ensures:
-
 - deterministic behavior
 - testability
 - UI reliability
@@ -126,13 +131,19 @@ Backend API
 
 ---
 
-# Development Phases
+
+# Development Phases (updated 2026-03-13)
 
 ---
 
 # Phase 1 — AI Infrastructure
 
+
 Goal: establish a safe and observable AI foundation.
+
+**Recent infra/config changes:**
+- Backend and scripts now use the `PORT` environment variable for configuration (no more hardcoded ports).
+- All Python and integration tests now pass with strict schema compliance.
 
 ### Deliverables
 
@@ -150,9 +161,10 @@ Goal: establish a safe and observable AI foundation.
 - Add telemetry
 - Implement safety fallbacks
 
+
 ### Outcome
 
-Systemfehler can safely call AI models in a controlled way.
+Systemfehler can safely call AI models in a controlled way, with all outputs and data strictly validated for type and schema compliance.
 
 No user-facing AI features yet.
 
@@ -235,38 +247,26 @@ The system must respond:
 
 "Keine verlässliche Information gefunden."
 
-Phase 4 — AI Editorial Assistance
+
+# Phase 4 — AI Editorial Assistance
 
 Goal: improve the quality of the database.
 
-Features
-
-AI-assisted:
-
-metadata tagging
-
-category suggestion
-
-missing field detection
-
-duplicate detection
-
-quality scoring hints
+Features (next planned work):
+- AI-assisted metadata tagging
+- category suggestion
+- missing field detection
+- duplicate detection
+- quality scoring hints
 
 Example enrichment suggestion:
-
 {
-  "suggested_tags": [
-    "housing_support",
-    "energy_costs"
-  ],
-  "missing_fields": [
-    "application_deadline"
-  ],
+  "suggested_tags": ["housing_support", "energy_costs"],
+  "missing_fields": ["application_deadline"],
   "quality_warning": "unclear eligibility criteria"
 }
 
-Moderators review these suggestions.
+Moderators review these suggestions. This phase is the next major focus after schema/data compliance and infra stabilization.
 
 Phase 5 — Advanced AI Capabilities
 

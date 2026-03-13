@@ -1,3 +1,26 @@
+if __name__ == "__main__":
+    import sys
+    import pprint
+    # Example usage: python validator.py <entry_json_file> <domain>
+    if len(sys.argv) < 3:
+        print("Usage: python validator.py <entry_json_file> <domain>")
+        sys.exit(1)
+    entry_file = sys.argv[1]
+    domain = sys.argv[2]
+    with open(entry_file, 'r', encoding='utf-8') as f:
+        entry = json.load(f)
+    validator = SchemaValidator()
+    result = validator.validate_entry(entry, domain)
+    print("\nValidation Result:")
+    pprint.pprint(result)
+    if not result['valid']:
+        print("\nErrors:")
+        for err in result['errors']:
+            print(f"  ❌ {err}")
+    if result['warnings']:
+        print("\nWarnings:")
+        for warn in result['warnings']:
+            print(f"  ⚠️  {warn}")
 """
 Systemfehler Schema Validator
 
@@ -16,7 +39,24 @@ from jsonschema import Draft7Validator, RefResolver
 
 
 class SchemaValidator:
-    """Validates entries against core and extension schemas"""
+    """
+    Validates entries against core and extension schemas
+    """
+
+    def check_field_name_mismatches(self, entry: Dict[str, Any], domain: str) -> List[str]:
+        """
+        Warn if entry fields do not match schema fields (case or underscore/camel mismatch).
+        """
+        errors = []
+        allowed = set(self._allowed_core_fields)
+        allowed.update(self._allowed_extension_fields.get(domain, set()))
+        for key in entry.keys():
+            if key not in allowed:
+                # Suggest possible match if only case/underscore differs
+                for allowed_key in allowed:
+                    if key.lower().replace('_', '') == allowed_key.lower().replace('_', ''):
+                        errors.append(f"Field name mismatch: entry uses '{key}', schema expects '{allowed_key}'")
+        return errors
     
     def __init__(self, schemas_dir: Optional[str] = None):
         """
@@ -97,6 +137,12 @@ class SchemaValidator:
         if unknown_key_errors:
             result['valid'] = False
             result['errors'].extend(unknown_key_errors)
+
+        # Field name mismatch check
+        mismatch_errors = self.check_field_name_mismatches(entry, domain)
+        if mismatch_errors:
+            result['valid'] = False
+            result['errors'].extend(mismatch_errors)
 
         structure_errors = self._validate_translations_and_provenance_structure(entry)
         if structure_errors:

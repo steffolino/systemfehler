@@ -6,7 +6,9 @@
   "version": "0.1.0",
   "type": "object",
   "allOf": [
-    { "$ref": "../core.schema.json" }
+    {
+      "$ref": "../core.schema.json"
+    }
   ],
   "properties": {
     "benefitAmount": {
@@ -23,12 +25,16 @@
     },
     "applicationSteps": {
       "type": "array",
-      "items": { "$ref": "#/definitions/multilingualText" },
+      "items": {
+        "$ref": "#/definitions/multilingualText"
+      },
       "description": "Step-by-step application process"
     },
     "requiredDocuments": {
       "type": "array",
-      "items": { "$ref": "#/definitions/multilingualText" },
+      "items": {
+        "$ref": "#/definitions/multilingualText"
+      },
       "description": "List of required documents"
     },
     "formLink": {
@@ -45,25 +51,49 @@
     "multilingualText": {
       "type": "object",
       "properties": {
-        "de": { "type": "string" },
-        "en": { "type": "string" },
-        "easy_de": { "type": "string" }
+        "de": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "en": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "easy_de": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       },
-      "additionalProperties": { "type": "string" }
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
     },
     "contactInfo": {
       "type": "object",
       "properties": {
-        "name": { "type": "string" },
-        "phone": { "type": "string" },
-        "email": { "type": "string", "format": "email" },
-        "address": { "type": "string" }
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "address": {
+          "type": "string"
+        }
       }
     }
-  },
-  "_todo": [
-    "TODO: Define domain-specific fields per DATA-02 (Issue #8)",
-    "TODO: Add validation for benefit amounts and durations",
-    "TODO: Ensure backward compatibility with core schema per DATA-03 (Issue #9)"
-  ]
+  }
 }
