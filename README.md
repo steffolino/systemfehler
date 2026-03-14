@@ -306,6 +306,19 @@ For a detailed description of the architecture, see:
 
 ---
 
+## Recent Changes (2026-03-14)
+
+- Enhanced TypeScript configuration and added path aliases for easier imports.
+- Added tailwindcss-animate and cross-env as dependencies.
+- Created new admin panel components: AdminLayout, AuditLog, DuplicateDetection, MetricCard, ModerationPanel, UserTrustProfile.
+- Implemented DataTable stub for future use.
+- Developed admin pages: AdminAuditLog, AdminDuplicates, AdminModeration, AdminQuality, AdminRawEntries, AdminUserTrust.
+- Added reusable UI components (Input, Card).
+- Introduced tests for moderation API and queue functionalities.
+- The frontend is now fully integrated as part of the monorepo (no separate git repo).
+
+---
+
 ## Contributing
 
 1. Check open issues in GitHub and pick an Epic or sub-issue that matches your interests.

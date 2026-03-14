@@ -341,6 +341,15 @@ After this PR, you can:
 - clsx
 - tailwind-merge
 
+## Recent Major Changes (2026-03-14)
+
+- Enhanced TypeScript config and path aliases
+- New admin panel components and pages
+- UI improvements and reusable components
+- Added tailwindcss-animate and cross-env
+- Expanded test coverage for moderation API/queue
+- Frontend is now fully integrated in the monorepo (no separate git repo)
+
 ## Conclusion
 
 This PR delivers a complete, working foundation for the Systemfehler data platform. All core infrastructure is in place and tested. The system is ready for end-to-end validation with a running database.

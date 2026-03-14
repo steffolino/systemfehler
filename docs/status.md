@@ -1,10 +1,8 @@
 # Systemfehler – Implementation Status
 
-> **Last updated:** 2026-03-07
+> **Last updated:** 2026-03-14
 >
-> This document is the single source of truth for "what is implemented today
-> vs planned or stubbed". Update this file when the implementation status of
-> any area changes.
+> Major frontend and admin dashboard improvements, TypeScript config enhancements, new reusable components, and expanded test coverage were completed in the latest session. The frontend is now fully integrated as part of the monorepo (no separate git repo). See below for details.
 
 ---
 
@@ -39,40 +37,6 @@ crawling logic to these files.
 
 ### Node.js API (`backend/`)
 
-
-# Systemfehler – Implementation Status
-
-> **Last updated:** 2026-03-13
-
-> This document is the single source of truth for "what is implemented today vs planned or stubbed". Update this file when the implementation status of any area changes.
-
----
-
-## Canonical crawling pipeline
-
-**Python `crawlers/` is authoritative for all crawling, diff generation, and schema validation steps.**
-
-Node.js files under `services/*/crawler/` are reference stubs only. Do not add runtime crawling logic to these files.
-
----
-
-## What is working today
-
-### Python crawler (`crawlers/`)
-
-| Component | Status | Notes |
-|-----------|--------|-------|
-| `crawlers/cli.py` | ✅ Working | Entrypoint for all crawl / validate / import commands |
-| `crawlers/benefits/arbeitsagentur_crawler.py` | ✅ Working | Fetches benefit info from Bundesagentur für Arbeit |
-| `crawlers/shared/base_crawler.py` | ✅ Working | Rate-limiting, robots.txt, HTTP retry logic |
-| `crawlers/shared/validator.py` | ✅ Working | JSON schema validation |
-| `crawlers/shared/quality_scorer.py` | ✅ Working | IQS / AIS quality score calculation |
-| `crawlers/shared/diff_generator.py` | ✅ Working | Change detection and moderation-queue diff format |
-| `crawlers/aid/seeded_crawler.py` | ✅ Working | Crawls seeded aid URLs from `data/aid/urls.json` |
-| `crawlers/tools/seeded_crawler.py` | ✅ Working | Crawls seeded tools URLs from `data/tools/urls.json` |
-| `crawlers/organizations/seeded_crawler.py` | ✅ Working | Crawls seeded organization URLs from `data/organizations/urls.json` |
-| `crawlers/contacts/seeded_crawler.py` | ✅ Working | Crawls seeded contact URLs from `data/contacts/urls.json` |
-| `crawlers/shared/link_expander.py` | ✅ Working | Python link discovery and URL queue expansion (CRAWL-03) |
 
 ### Cloudflare Worker API (`cloudflare-workers/`)
 
