@@ -13,10 +13,10 @@ const { Pool } = pg;
 
 // Create connection pool
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  max: 20,
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
+  connectionString: process.env.DATABASE_URL || `postgres://${process.env.POSTGRES_USER || 'systemfehler'}:${process.env.POSTGRES_PASSWORD || 'dev_password'}@localhost:${process.env.POSTGRES_PORT || '5432'}/${process.env.POSTGRES_DB || 'systemfehler'}`,
+  max: process.env.PG_MAX_CLIENTS ? parseInt(process.env.PG_MAX_CLIENTS) : 20,
+  idleTimeoutMillis: process.env.PG_IDLE_TIMEOUT ? parseInt(process.env.PG_IDLE_TIMEOUT) : 30000,
+  connectionTimeoutMillis: process.env.PG_CONN_TIMEOUT ? parseInt(process.env.PG_CONN_TIMEOUT) : 2000,
 });
 
 // Handle pool errors

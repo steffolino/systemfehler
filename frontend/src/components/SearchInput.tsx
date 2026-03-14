@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { api } from '../lib/api';
 import { useNavigate } from 'react-router-dom';
+import { Input } from '@/components/ui/input';
 
 import type { MultilingualText } from '../lib/api';
 
@@ -47,8 +48,8 @@ export default function SearchInput({ value, onChange, navbar }: SearchInputProp
 
   return (
     <div className="relative">
-      <input
-        className={`w-full border rounded px-3 py-2 ${navbar ? 'bg-gray-100' : ''}`}
+      <Input
+        className={`w-full ${navbar ? 'bg-muted' : ''}`}
         type="text"
         value={value}
         onChange={e => onChange(e.target.value)}
@@ -56,12 +57,12 @@ export default function SearchInput({ value, onChange, navbar }: SearchInputProp
         autoComplete="off"
       />
       {suggestions.length > 0 && (
-        <ul className="absolute left-0 right-0 bg-white border mt-1 z-10">
+        <ul className="absolute left-0 right-0 bg-background border mt-1 z-10 rounded shadow">
           {suggestions.map(s => (
-            <li key={s.id} className="px-3 py-2 flex justify-between cursor-pointer hover:bg-gray-100"
+            <li key={s.id} className="px-3 py-2 flex justify-between cursor-pointer hover:bg-muted"
                 onClick={() => navigate(`/entry/${s.id}`)}>
               <span dangerouslySetInnerHTML={{ __html: highlightMatch(typeof s.title === 'object' ? s.title.de || '' : s.title, value) }} />
-              <span className="text-xs text-gray-500">{s.category}</span>
+              <span className="text-xs text-muted-foreground">{s.category}</span>
             </li>
           ))}
         </ul>

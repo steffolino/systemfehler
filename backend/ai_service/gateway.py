@@ -13,13 +13,17 @@ Endpoints:
 """
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
+
 import time
+import os
 from .endpoints import router
 from .routing import ModelRouter
 from .telemetry import log_telemetry
 
 
-import os
+# Read config from environment variables
+AI_PORT = int(os.environ.get("AI_PORT", 8002))
+AI_HOST = os.environ.get("AI_HOST", "0.0.0.0")
 
 app = FastAPI()
 app.include_router(router)
