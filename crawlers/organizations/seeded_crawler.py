@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from bs4 import BeautifulSoup
 
 from ..shared.seeded_domain_crawler import SeededDomainCrawler
+from ..shared.source_registry import SourceProfile
 
 
 class SeededOrganizationsCrawler(SeededDomainCrawler):
@@ -21,30 +22,39 @@ class SeededOrganizationsCrawler(SeededDomainCrawler):
         )
 
     def default_topics(self) -> List[str]:
-        return ['public_institutions', 'organizations']
+        return ['organizations']
 
     def default_tags(self) -> List[str]:
-        return ['government', 'official_source']
+        return ['organization']
 
     def default_target_groups(self) -> List[str]:
         return ['general_public']
 
-    def build_domain_fields(self, url: str, soup: BeautifulSoup, entry: Dict[str, Any]) -> Dict[str, Any]:
-        title = (entry.get('title') or {}).get('de', '')
+    def build_domain_fields(
+        self,
+        url: str,
+        soup: BeautifulSoup,
+        entry: Dict[str, Any],
+        source_profile: Optional[SourceProfile] = None,
+    ) -> Dict[str, Any]:
+        organization_type = source_profile.institution_type if source_profile else 'unknown'
+        services = list(source_profile.services) if source_profile and source_profile.services else []
         domain_host = url.split('/')[2] if '://' in url else url
 
-        services = []
-        if 'arbeitsagentur' in domain_host:
-            services = ['Arbeitsvermittlung', 'Leistungsinformationen', 'Familienkasse']
-        elif 'bmas' in domain_host:
-            services = ['Arbeit', 'Soziales', 'Bürgerinformationen']
-        elif 'bmbfsfj' in domain_host:
-            services = ['Familie', 'Jugend', 'Gleichstellung']
-        else:
-            services = ['Informationsangebote', 'Service und Kontakt']
+        if not services:
+            if 'arbeitsagentur' in domain_host:
+                services = ['Arbeitsvermittlung', 'Leistungsinformationen', 'Familienkasse']
+            elif 'bmas' in domain_host:
+                services = ['Arbeit', 'Soziales', 'Buergerinformationen']
+            elif 'bmbfsfj' in domain_host:
+                services = ['Familie', 'Jugend', 'Gleichstellung']
+            elif 'sanktionsfrei.de' in domain_host:
+                services = ['Buergergeld-Beratung', 'Sozialrechtsinformation', 'Unterstuetzung bei Jobcenter-Themen']
+            else:
+                services = ['Informationsangebote', 'Service und Kontakt']
 
         return {
-            'organizationType': 'government',
+            'organizationType': organization_type,
             'region': 'Germany',
             'services': services,
             'contactDetails': {

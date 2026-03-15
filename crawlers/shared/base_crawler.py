@@ -543,8 +543,59 @@ class BaseCrawler:
             Hex-encoded SHA-256 checksum
         """
         return hashlib.sha256(content.encode('utf-8')).hexdigest()
+
+    def _classify_source_metadata(self, source_url: str) -> Dict[str, str]:
+        parsed = urllib.parse.urlparse(source_url or "")
+        host = (parsed.netloc or "").lower()
+        host = host[4:] if host.startswith("www.") else host
+
+        official_hosts = (
+            "arbeitsagentur.de",
+            "bmas.de",
+            "bmbfsfj.bund.de",
+            "bundesregierung.de",
+            "fitko.de",
+            "115.de",
+            "bafza.de",
+        )
+        ngo_hosts = (
+            "sanktionsfrei.de",
+            "plattform.sanktionsfrei.de",
+            "caritas.de",
+            "diakonie.de",
+            "weisser-ring.de",
+            "telefonseelsorge.de",
+            "nummergegenkummer.de",
+            "dajeb.de",
+            "frauenhauskoordinierung.de",
+            "deutsche-depressionshilfe.de",
+        )
+
+        if any(host == domain or host.endswith(f".{domain}") for domain in official_hosts):
+            return {
+                "sourceTier": "tier_1_official",
+                "institutionType": "government",
+                "jurisdiction": "DE",
+            }
+        if any(host == domain or host.endswith(f".{domain}") for domain in ngo_hosts):
+            return {
+                "sourceTier": "tier_2_ngo_watchdog",
+                "institutionType": "ngo",
+                "jurisdiction": "DE",
+            }
+
+        return {
+            "sourceTier": "tier_unknown",
+            "institutionType": "unknown",
+            "jurisdiction": "DE",
+        }
     
-    def generate_provenance(self, source_url: str, crawl_id: Optional[str] = None) -> Dict[str, Any]:
+    def generate_provenance(
+        self,
+        source_url: str,
+        crawl_id: Optional[str] = None,
+        source_metadata: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Any]:
         """
         Generate provenance metadata
         
@@ -557,12 +608,14 @@ class BaseCrawler:
         """
         from datetime import datetime
         
-        return {
+        provenance = {
             'source': source_url,
             'crawledAt': datetime.utcnow().isoformat() + 'Z',
             'crawlId': crawl_id or f"{self.name}-{int(time.time())}",
             'crawlerVersion': '0.1.0'
         }
+        provenance.update(source_metadata or self._classify_source_metadata(source_url))
+        return provenance
     
     def close(self):
         """Clean up resources"""

@@ -17,6 +17,7 @@ from bs4 import BeautifulSoup
 
 from .base_crawler import BaseCrawler
 from .quality_scorer import QualityScorer
+from .source_registry import SourceProfile, SourceRegistry
 from .url_registry import URLRegistry
 from .validator import SchemaValidator
 
@@ -40,6 +41,7 @@ class SeededDomainCrawler(BaseCrawler):
         self.quality_scorer = QualityScorer()
         self.validator = SchemaValidator()
         self.url_registry = URLRegistry(str(self.data_dir), domain, self.normalize_url)
+        self.source_registry = SourceRegistry(self.data_dir)
 
     # ------------------------------
     # Public API
@@ -85,8 +87,32 @@ class SeededDomainCrawler(BaseCrawler):
     def default_target_groups(self) -> List[str]:
         return ['general_public']
 
-    def build_domain_fields(self, url: str, soup: BeautifulSoup, entry: Dict[str, Any]) -> Dict[str, Any]:
+    def source_profiles(self) -> List[SourceProfile]:
+        return []
+
+    def build_domain_fields(
+        self,
+        url: str,
+        soup: BeautifulSoup,
+        entry: Dict[str, Any],
+        source_profile: Optional[SourceProfile] = None,
+    ) -> Dict[str, Any]:
         return {}
+
+    def _default_topics_for_url(self, source_profile: Optional[SourceProfile]) -> List[str]:
+        if source_profile and source_profile.default_topics:
+            return list(dict.fromkeys([*source_profile.default_topics, *self.default_topics()]))
+        return self.default_topics()
+
+    def _default_tags_for_url(self, source_profile: Optional[SourceProfile]) -> List[str]:
+        if source_profile and source_profile.default_tags:
+            return list(dict.fromkeys([*source_profile.default_tags, *self.default_tags()]))
+        return self.default_tags()
+
+    def _default_target_groups_for_url(self, source_profile: Optional[SourceProfile]) -> List[str]:
+        if source_profile and source_profile.default_target_groups:
+            return list(dict.fromkeys([*source_profile.default_target_groups, *self.default_target_groups()]))
+        return self.default_target_groups()
 
     # ------------------------------
     # Internals
@@ -118,10 +144,22 @@ class SeededDomainCrawler(BaseCrawler):
 
         normalized = []
         seen = set()
+        include_hosts = {
+            host.strip().lower()
+            for host in os.getenv('CRAWLER_INCLUDE_HOSTS', '').split(',')
+            if host.strip()
+        }
         for raw_url in urls:
             if not isinstance(raw_url, str) or not raw_url.strip():
                 continue
             cleaned = self.normalize_url(raw_url)
+            if include_hosts:
+                parsed = self._extract_domain(cleaned)
+                if not parsed:
+                    continue
+                host = parsed[4:] if parsed.startswith('www.') else parsed
+                if not any(host == allowed or host.endswith(f".{allowed}") for allowed in include_hosts):
+                    continue
             if self.url_registry.should_skip(cleaned):
                 continue
             preferred = self.url_registry.get_preferred_url(cleaned)
@@ -141,6 +179,12 @@ class SeededDomainCrawler(BaseCrawler):
             normalized.append(cleaned)
 
         return normalized[:max_urls] if max_urls > 0 else normalized
+
+    def _extract_domain(self, url: str) -> str:
+        try:
+            return url.split('/')[2].lower() if '://' in url else ''
+        except Exception:
+            return ''
 
     def _crawl_single_url(self, url: str) -> Optional[Dict[str, Any]]:
         response = self.fetch_page_details(url)
@@ -193,11 +237,22 @@ class SeededDomainCrawler(BaseCrawler):
             skip=False,
         )
 
-        entry = self._build_base_entry(canonical_url, soup)
-        entry.update(self.build_domain_fields(canonical_url, soup, entry))
+        source_profile = self.source_registry.resolve(canonical_url, self.domain, self.source_profiles())
+        entry = self._build_base_entry(canonical_url, soup, source_profile)
+        entry.update(self.build_domain_fields(canonical_url, soup, entry, source_profile))
 
         content_checksum = self.calculate_checksum(json.dumps(entry, sort_keys=True, ensure_ascii=False))
-        entry['provenance'] = self.generate_provenance(url)
+        source_metadata = None
+        if source_profile:
+            source_metadata = {
+                'sourceTier': source_profile.source_tier,
+                'institutionType': source_profile.institution_type,
+                'jurisdiction': source_profile.jurisdiction,
+                'sourceId': source_profile.source_id,
+                'providerName': source_profile.name,
+                'providerLevel': source_profile.provider_level,
+            }
+        entry['provenance'] = self.generate_provenance(url, source_metadata=source_metadata)
         entry['provenance']['checksum'] = content_checksum
         entry['qualityScores'] = self.quality_scorer.calculate_scores(entry)
 
@@ -219,7 +274,12 @@ class SeededDomainCrawler(BaseCrawler):
 
         return entry
 
-    def _build_base_entry(self, url: str, soup: BeautifulSoup) -> Dict[str, Any]:
+    def _build_base_entry(
+        self,
+        url: str,
+        soup: BeautifulSoup,
+        source_profile: Optional[SourceProfile] = None,
+    ) -> Dict[str, Any]:
         title = self._get_best_title(soup, seed_name=self.domain, url=url)
         summary = self._extract_summary(soup)
         content = self._extract_content(soup)
@@ -236,9 +296,9 @@ class SeededDomainCrawler(BaseCrawler):
             'summary': {'de': summary} if summary else {'de': title},
             'content': {'de': content} if content else {'de': summary or title},
             'url': self.normalize_url(url),
-            'topics': self.default_topics(),
-            'tags': self.default_tags(),
-            'targetGroups': self.default_target_groups(),
+            'topics': self._default_topics_for_url(source_profile),
+            'tags': self._default_tags_for_url(source_profile),
+            'targetGroups': self._default_target_groups_for_url(source_profile),
             'status': 'active',
             'firstSeen': now_iso,
             'lastSeen': now_iso,

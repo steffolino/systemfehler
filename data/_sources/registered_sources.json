@@ -32,6 +32,46 @@
       "priority": "high",
       "license": "unknown",
       "status": "active"
+    },
+    {
+      "id": "sanktionsfrei",
+      "name": "Sanktionsfrei",
+      "baseUrl": "https://sanktionsfrei.de",
+      "domains": [
+        "organizations",
+        "contacts",
+        "aid",
+        "tools"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_2_ngo_watchdog",
+      "institutionType": "ngo",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "financial_support",
+        "employment",
+        "rights"
+      ],
+      "defaultTags": [
+        "ngo",
+        "watchdog",
+        "advisory"
+      ],
+      "defaultTargetGroups": [
+        "unemployed",
+        "general_public"
+      ],
+      "services": [
+        "Buergergeld-Beratung",
+        "Jobcenter-Unterstuetzung",
+        "Sozialrechtsinformation"
+      ],
+      "license": "unknown",
+      "status": "active"
     }
   ],
   "_todo": [

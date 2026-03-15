@@ -24,31 +24,38 @@ class SeededContactsCrawler(SeededDomainCrawler):
         return ['contacts', 'public_service']
 
     def default_tags(self) -> List[str]:
-        return ['helpline', 'official_contact']
+        return ['contact']
 
     def default_target_groups(self) -> List[str]:
         return ['general_public', 'families', 'persons_with_disabilities']
 
     def build_domain_fields(self, url: str, soup: BeautifulSoup, entry: Dict[str, Any]) -> Dict[str, Any]:
-        text = f"{((entry.get('title') or {}).get('de', '')).lower()} {url.lower()}"
+        title = str(entry.get('title') or '')
+        text = f"{title.lower()} {url.lower()}"
 
         contact_type = 'office'
         if '115' in text or 'telefon' in text or 'helpline' in text:
             contact_type = 'helpline'
         if 'gebaerden' in text:
             contact_type = 'accessibility'
+        if 'sanktionsfrei.de' in text or 'beratung' in text or 'faq' in text:
+            contact_type = 'advisor'
 
-        linked_org = 'Öffentliche Verwaltung'
+        linked_org = 'Oeffentliche Verwaltung'
+        specialization = ['Buergeranfragen', 'Leistungsinformationen']
         if 'arbeitsagentur.de' in url:
-            linked_org = 'Bundesagentur für Arbeit'
+            linked_org = 'Bundesagentur fuer Arbeit'
         elif 'bmbfsfj.bund.de' in url:
-            linked_org = 'Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend'
+            linked_org = 'Bundesministerium fuer Bildung, Familie, Senioren, Frauen und Jugend'
         elif 'bmas.de' in url:
-            linked_org = 'Bundesministerium für Arbeit und Soziales'
+            linked_org = 'Bundesministerium fuer Arbeit und Soziales'
+        elif 'sanktionsfrei.de' in url:
+            linked_org = 'Sanktionsfrei'
+            specialization = ['Buergergeld', 'Jobcenter', 'Sozialrechtsberatung']
 
         return {
             'contactType': contact_type,
-            'specialization': ['Bürgeranfragen', 'Leistungsinformationen'],
+            'specialization': specialization,
             'availability': {
                 'hours': 'Siehe verlinkte Quelle',
                 'languages': ['de'],
