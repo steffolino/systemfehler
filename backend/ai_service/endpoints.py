@@ -5,6 +5,7 @@ REST endpoints for query rewrite, answer synthesis, and enrichment suggestion.
 from __future__ import annotations
 
 import json
+import os
 import time
 
 from fastapi import APIRouter
@@ -56,6 +57,8 @@ ENRICH_SYSTEM_PROMPT = (
     "Do not invent facts not grounded in the entry."
 )
 
+LOCAL_SYNTHESIS_STRATEGY = os.getenv("AI_LOCAL_SYNTHESIS_STRATEGY", "extractive").strip().lower()
+
 
 def _usage_totals(payload):
     usage = payload.get("usage", {}) if isinstance(payload, dict) else {}
@@ -67,6 +70,51 @@ def _cacheable_response(model):
     if hasattr(model, "model_dump"):
         return model.model_dump()
     return model
+
+
+def _parse_evidence_payload(content):
+    try:
+        payload = json.loads(content)
+    except Exception:
+        return None
+    return payload if isinstance(payload, dict) else None
+
+
+def _best_text(payload, field_name):
+    field = payload.get(field_name) if isinstance(payload, dict) else None
+    if not isinstance(field, dict):
+        return None
+    for key in ("de", "easy_de", "en"):
+        value = field.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    return None
+
+
+def _extractive_answer(evidence):
+    bullets = []
+    sources = []
+
+    for ev in [item for item in evidence if item.confidence >= 0.7][:3]:
+        payload = _parse_evidence_payload(ev.content)
+        if not payload:
+            continue
+        title = payload.get("title") or "Unbekannter Eintrag"
+        summary = _best_text(payload, "summary")
+        if not isinstance(title, str):
+            title = str(title)
+        if summary:
+            bullets.append(f"- {title}: {summary}")
+        else:
+            bullets.append(f"- {title}")
+        source = payload.get("url") or ev.source
+        if isinstance(source, str):
+            sources.append(source)
+
+    if not bullets:
+        return None, []
+
+    return "\n".join(bullets), sources
 
 
 def _compact_evidence_block(evidence):
@@ -209,6 +257,25 @@ async def synthesize_answer(body: QueryRequest):
             weak_evidence=True,
         )
         ai_cache.set(synth_cache_key, _cacheable_response(response), CACHE_TTL_SYNTHESIZE)
+        return response
+
+    use_extractive_local = provider.name == "ollama" and LOCAL_SYNTHESIS_STRATEGY == "extractive"
+    if use_extractive_local:
+        answer, sources = _extractive_answer(evidence)
+        latency = int((time.time() - start) * 1000)
+        response = AnswerResponse(
+            answer=answer,
+            explanation="Antwort basiert direkt auf den relevantesten Einträgen.",
+            sources=sources,
+            provider=provider.name,
+            model=f"{model}:extractive",
+            latency_ms=latency,
+            fallback=False,
+            evidence=evidence,
+            weak_evidence=False,
+        )
+        ai_cache.set(synth_cache_key, _cacheable_response(response), CACHE_TTL_SYNTHESIZE)
+        log_telemetry("synthesize", model, latency, True, 0, 0.0)
         return response
 
     if not provider.is_configured():
