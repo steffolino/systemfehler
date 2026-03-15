@@ -84,7 +84,7 @@ export function Header() {
               <div className="mt-0.5 flex items-center gap-2 text-xs text-muted-foreground md:text-sm">
                 <span>{subtitle}</span>
                 <span className="hidden sm:inline">•</span>
-                <span className="hidden sm:inline">v0.1.0</span>
+                <span className="hidden sm:inline">{t("app.version")} 0.1.0</span>
               </div>
             </div>
 
@@ -113,6 +113,13 @@ export function Header() {
           )}
 
           <div className="flex flex-wrap items-center gap-2">
+            <Button
+              variant={location.pathname === "/" ? "default" : "outline"}
+              size="sm"
+              onClick={() => navigate("/")}
+            >
+              {t("nav.home")}
+            </Button>
             <Button
               variant="outline"
               size="sm"

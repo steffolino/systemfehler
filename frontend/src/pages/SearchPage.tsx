@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import { api, type Entry } from '../lib/api';
 import type { AIHealthResponse, AIResultBundle } from '../lib/api';
 import SearchInput from '../components/SearchInput';
@@ -13,9 +14,9 @@ type TabKey = 'article' | 'ai';
 
 const AI_SUGGESTED_QUESTIONS = [
   'Ich bin arbeitslos geworden. Was nun?',
-  'Wie beantrage ich Bürgergeld beim Jobcenter?',
+  'Wie beantrage ich Buergergeld beim Jobcenter?',
   'Welche Online-Dienste der Arbeitsagentur sollte ich zuerst nutzen?',
-  'Wie erreiche ich schnell die richtige Stelle bei der Bundesagentur für Arbeit?',
+  'Wie erreiche ich schnell die richtige Stelle bei der Bundesagentur fuer Arbeit?',
 ];
 
 function parseEvidenceEntriesForPage(evidence: Array<{ content: string }>): Entry[] {
@@ -29,9 +30,7 @@ function parseEvidenceEntriesForPage(evidence: Array<{ content: string }>): Entr
       continue;
     }
 
-    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
-      continue;
-    }
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) continue;
 
     const entry = parsed as Partial<Entry>;
     if (typeof entry.id !== 'string' || typeof entry.url !== 'string' || typeof entry.status !== 'string') {
@@ -46,7 +45,10 @@ function parseEvidenceEntriesForPage(evidence: Array<{ content: string }>): Entr
   return Array.from(relatedEntriesMap.values());
 }
 
-function buildPendingAiResult(query: string): AIResultBundle {
+function buildPendingAiResult(
+  query: string,
+  t: (key: string, vars?: Record<string, string | number>) => string
+): AIResultBundle {
   return {
     rewrite: {
       rewritten_query: query,
@@ -54,11 +56,11 @@ function buildPendingAiResult(query: string): AIResultBundle {
       provider: 'none',
       latency_ms: 0,
       fallback: true,
-      explanation: 'Retrieval is running. A rewritten query will appear when the model responds.',
+      explanation: t('search.ready_rewrite'),
     },
     synthesis: {
       answer: null,
-      explanation: 'Evidence is loading. The final AI answer appears afterwards.',
+      explanation: t('search.ready_answer'),
       sources: [],
       provider: 'pending',
       model: 'pending',
@@ -71,8 +73,13 @@ function buildPendingAiResult(query: string): AIResultBundle {
   };
 }
 
+function statusText(value: boolean | undefined, t: (key: string) => string) {
+  return value ? t('common.yes') : t('common.no');
+}
+
 export default function SearchPage() {
   const { t } = useI18n();
+  const translate = t as unknown as (key: string, vars?: Record<string, string | number>) => string;
   const [standardQuery, setStandardQuery] = useState('');
   const [debouncedStandardQuery, setDebouncedStandardQuery] = useState('');
   const [aiDraftQuery, setAiDraftQuery] = useState('');
@@ -97,7 +104,6 @@ export default function SearchPage() {
     const timer = window.setTimeout(() => {
       setDebouncedStandardQuery(standardQuery.trim());
     }, 250);
-
     return () => window.clearTimeout(timer);
   }, [standardQuery]);
 
@@ -110,12 +116,10 @@ export default function SearchPage() {
     api
       .getEntries(debouncedStandardQuery ? { search: debouncedStandardQuery } : {})
       .then((res) => {
-        if (cancelled) return;
-        setStandardResults(res.entries);
+        if (!cancelled) setStandardResults(res.entries);
       })
       .catch((err) => {
-        if (cancelled) return;
-        setStandardError(err instanceof Error ? err.message : 'Failed to load results');
+        if (!cancelled) setStandardError(err instanceof Error ? err.message : t('common.error_title'));
       })
       .finally(() => {
         if (!cancelled) setStandardLoading(false);
@@ -124,7 +128,7 @@ export default function SearchPage() {
     return () => {
       cancelled = true;
     };
-  }, [debouncedStandardQuery]);
+  }, [debouncedStandardQuery, t]);
 
   useEffect(() => {
     if (tab !== 'ai') return;
@@ -138,25 +142,22 @@ export default function SearchPage() {
     }
 
     let cancelled = false;
+    const pendingResult = buildPendingAiResult(submittedAiQuery, translate);
 
     setAiLoading(true);
     setAiEvidenceLoading(true);
     setAiSynthesisLoading(true);
     setAiError(null);
-    setAiResult(buildPendingAiResult(submittedAiQuery));
+    setAiResult(pendingResult);
 
     Promise.allSettled([api.getAIRewrite(submittedAiQuery), api.getAIRetrieve(submittedAiQuery)])
       .then(async ([rewriteResult, retrieveResult]) => {
         if (cancelled) return;
 
-        const pendingResult = buildPendingAiResult(submittedAiQuery);
-        const rewrite =
-          rewriteResult.status === 'fulfilled' ? rewriteResult.value : pendingResult.rewrite;
-        const evidence =
-          retrieveResult.status === 'fulfilled' ? retrieveResult.value.evidence : [];
+        const rewrite = rewriteResult.status === 'fulfilled' ? rewriteResult.value : pendingResult.rewrite;
+        const evidence = retrieveResult.status === 'fulfilled' ? retrieveResult.value.evidence : [];
         const relatedEntries = parseEvidenceEntriesForPage(evidence);
-        const weakEvidence =
-          retrieveResult.status === 'fulfilled' ? Boolean(retrieveResult.value.weak_evidence) : true;
+        const weakEvidence = retrieveResult.status === 'fulfilled' ? Boolean(retrieveResult.value.weak_evidence) : true;
 
         setAiResult({
           rewrite,
@@ -164,10 +165,7 @@ export default function SearchPage() {
             ...pendingResult.synthesis,
             evidence,
             weak_evidence: weakEvidence,
-            explanation:
-              relatedEntries.length > 0
-                ? 'Evidence loaded. Generating the final answer now.'
-                : 'No strong evidence found yet.',
+            explanation: relatedEntries.length > 0 ? t('search.evidence_loading') : t('search.no_evidence_yet'),
           },
           relatedEntries,
         });
@@ -188,7 +186,7 @@ export default function SearchPage() {
             synthesis: {
               ...(current?.synthesis || pendingResult.synthesis),
               answer: null,
-              explanation: err instanceof Error ? err.message : 'AI synthesis failed',
+              explanation: err instanceof Error ? err.message : t('common.error_title'),
               provider: 'unknown',
               model: 'timeout',
               fallback: true,
@@ -204,7 +202,7 @@ export default function SearchPage() {
       })
       .catch((err) => {
         if (cancelled) return;
-        setAiError(err instanceof Error ? err.message : 'Failed to load AI results');
+        setAiError(err instanceof Error ? err.message : t('common.error_title'));
         setAiResult(null);
         setAiEvidenceLoading(false);
         setAiSynthesisLoading(false);
@@ -214,19 +212,14 @@ export default function SearchPage() {
     return () => {
       cancelled = true;
     };
-  }, [submittedAiQuery, tab]);
+  }, [submittedAiQuery, tab, translate]);
 
   useEffect(() => {
     if (tab !== 'ai') return;
-
     let cancelled = false;
-
     api.getAIHealth().then((health) => {
-      if (!cancelled) {
-        setAiHealth(health);
-      }
+      if (!cancelled) setAiHealth(health);
     });
-
     return () => {
       cancelled = true;
     };
@@ -243,7 +236,7 @@ export default function SearchPage() {
     const trimmed = aiDraftQuery.trim();
     const now = Date.now();
     if (now - lastAiSubmitAt < 3000) {
-      setAiError('Please wait a moment before sending another AI request.');
+      setAiError(t('search.ask_wait'));
       return;
     }
     setLastAiSubmitAt(now);
@@ -272,27 +265,22 @@ export default function SearchPage() {
   const activeQuery = tab === 'article' ? debouncedStandardQuery : submittedAiQuery;
 
   const resultLabel = useMemo(() => {
-    if (activeLoading) return 'Loading results...';
-    if (activeError) return 'Could not load results';
-    if (tab === 'ai') {
-      return `${activeResults.length} evidence entr${activeResults.length === 1 ? 'y' : 'ies'}`;
-    }
-    return `${activeResults.length} result${activeResults.length === 1 ? '' : 's'}`;
-  }, [activeLoading, activeError, activeResults.length, tab]);
+    if (activeLoading) return t('common.loading_results');
+    if (activeError) return t('common.error_title');
+    return tab === 'ai'
+      ? t('search.evidence_count', { count: activeResults.length })
+      : t('search.result_count', { count: activeResults.length });
+  }, [activeError, activeLoading, activeResults.length, t, tab]);
 
   return (
     <div className="mx-auto w-full max-w-5xl p-4 md:p-6">
-      <div className="mb-6">
-        <h1 className="text-2xl font-semibold tracking-tight">{t('search.title')}</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {t('search.subtitle')}
-        </p>
+      <div className="mb-6 rounded-3xl border bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.12),transparent_35%),linear-gradient(180deg,rgba(248,250,252,0.95),rgba(255,255,255,1))] p-5 shadow-sm md:p-6">
+        <h1 className="text-3xl font-semibold tracking-tight">{t('search.hero_title')}</h1>
+        <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">{t('search.hero_body')}</p>
         <div className="mt-3 text-sm text-muted-foreground">
-          Want to see where entries come from? Browse the{' '}
           <Link to="/sources" className="font-medium text-foreground underline underline-offset-4">
             {t('search.source_link')}
           </Link>
-          .
         </div>
       </div>
 
@@ -308,16 +296,10 @@ export default function SearchPage() {
               </div>
 
               <div className="flex items-center gap-2 rounded-lg border p-1">
-                <Button
-                  variant={tab === 'article' ? 'default' : 'ghost'}
-                  onClick={() => setTab('article')}
-                >
+                <Button variant={tab === 'article' ? 'default' : 'ghost'} onClick={() => setTab('article')}>
                   {t('search.mode_article')}
                 </Button>
-                <Button
-                  variant={tab === 'ai' ? 'default' : 'ghost'}
-                  onClick={() => setTab('ai')}
-                >
+                <Button variant={tab === 'ai' ? 'default' : 'ghost'} onClick={() => setTab('ai')}>
                   {t('search.mode_ai')}
                 </Button>
               </div>
@@ -364,12 +346,12 @@ export default function SearchPage() {
           <div className="min-h-80 rounded-xl border bg-background">
             {activeLoading ? (
               <div className="flex h-80 items-center justify-center text-sm text-muted-foreground">
-                Loading results...
+                {t('common.loading_results')}
               </div>
             ) : activeError ? (
               <div className="flex h-80 items-center justify-center p-6 text-center">
                 <div>
-                  <div className="font-medium text-red-600">Something went wrong</div>
+                  <div className="font-medium text-red-600">{t('common.error_title')}</div>
                   <div className="mt-1 text-sm text-muted-foreground">{activeError}</div>
                 </div>
               </div>
@@ -379,6 +361,7 @@ export default function SearchPage() {
                   <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                     {t('search.suggested_questions')}
                   </div>
+                  <div className="mt-2 text-sm text-muted-foreground">{t('search.suggested_questions_desc')}</div>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {AI_SUGGESTED_QUESTIONS.map((question) => (
                       <Button
@@ -391,109 +374,101 @@ export default function SearchPage() {
                       </Button>
                     ))}
                   </div>
-                  <div className="mt-3 text-xs text-muted-foreground">
-                    These starter questions preload retrieval and rewrite results to reduce first-click latency.
-                  </div>
+                  <div className="mt-3 text-xs text-muted-foreground">{t('search.warm_hint')}</div>
                 </Card>
 
-                <Card className="p-5">
-                  <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                    {t('search.ai_status')}
-                  </div>
-                  <div className="mt-2 text-sm text-foreground">
-                    Sidecar: {aiHealth?.status || 'unknown'}
-                  </div>
-                  <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
-                    <span>Provider: {aiHealth?.provider.provider || 'none'}</span>
-                    <span>Configured: {aiHealth?.provider.configured ? 'yes' : 'no'}</span>
-                    <span>Provider status: {aiHealth?.provider.status || 'unknown'}</span>
-                  </div>
-                  {aiHealth?.provider.models && aiHealth.provider.models.length > 0 && (
-                    <div className="mt-3 text-sm text-muted-foreground">
-                      Models: {aiHealth.provider.models.join(', ')}
-                    </div>
-                  )}
-                  {aiHealth?.provider.error && (
-                    <div className="mt-3 text-sm text-red-600">
-                      {aiHealth.provider.error}
-                    </div>
-                  )}
-                </Card>
+                <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
+                  <div className="space-y-4">
+                    <Card className="p-5">
+                      <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                        {t('search.ai_rewrite')}
+                      </div>
+                      <div className="mt-2 text-sm text-foreground">
+                        {submittedAiQuery
+                          ? aiResult?.rewrite.rewritten_query || t('search.enter_query')
+                          : aiDraftQuery.trim()
+                            ? t('search.ready_rewrite')
+                            : t('search.enter_query')}
+                      </div>
+                      {submittedAiQuery && (
+                        <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
+                          <span>{t('search.status_provider')}: {aiResult?.rewrite.provider || t('common.unknown')}</span>
+                          <span>{t('search.status_models')}: {aiResult?.rewrite.model || t('common.unknown')}</span>
+                          {aiResult?.rewrite.fallback && <span>{t('search.status_fallback')}</span>}
+                          {aiEvidenceLoading && <span>{t('search.status_loading')}</span>}
+                        </div>
+                      )}
+                      {submittedAiQuery && aiResult?.rewrite.explanation && (
+                        <div className="mt-3 text-sm text-muted-foreground">{aiResult.rewrite.explanation}</div>
+                      )}
+                    </Card>
 
-                <Card className="p-5">
-                  <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                    {t('search.ai_rewrite')}
-                  </div>
-                  <div className="mt-2 text-sm text-foreground">
-                    {submittedAiQuery
-                      ? aiResult?.rewrite.rewritten_query || 'No rewritten query available.'
-                      : aiDraftQuery.trim()
-                        ? 'Draft query ready. Submit to generate a rewritten retrieval query.'
-                        : t('search.enter_query')}
-                  </div>
-                  {submittedAiQuery && (
-                    <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
-                      <span>Provider: {aiResult?.rewrite.provider || 'unknown'}</span>
-                      <span>Model: {aiResult?.rewrite.model || 'unknown'}</span>
-                      {aiResult?.rewrite.fallback && <span>Fallback active</span>}
-                      {aiEvidenceLoading && <span>Loading</span>}
-                    </div>
-                  )}
-                  {submittedAiQuery && aiResult?.rewrite.explanation && (
-                    <div className="mt-3 text-sm text-muted-foreground">
-                      {aiResult.rewrite.explanation}
-                    </div>
-                  )}
-                </Card>
+                    <Card className="p-5">
+                      <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                        {t('search.ai_synthesis')}
+                      </div>
+                      <div className="mt-2 whitespace-pre-line text-sm leading-7 text-foreground">
+                        {submittedAiQuery
+                          ? aiResult?.synthesis.answer || aiResult?.synthesis.explanation || t('search.ready_answer')
+                          : aiDraftQuery.trim()
+                            ? t('search.ready_answer')
+                            : t('search.prompt_ai')}
+                      </div>
+                      {submittedAiQuery && (
+                        <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
+                          <span>{t('search.status_provider')}: {aiResult?.synthesis.provider || t('common.unknown')}</span>
+                          <span>{t('search.status_models')}: {aiResult?.synthesis.model || t('common.unknown')}</span>
+                          {aiResult?.synthesis.fallback && <span>{t('search.status_fallback')}</span>}
+                          {aiResult?.synthesis.weak_evidence && <span>{t('search.status_weak_evidence')}</span>}
+                          {aiSynthesisLoading && <span>{t('search.status_generating')}</span>}
+                        </div>
+                      )}
+                    </Card>
 
-                <Card className="p-5">
-                  <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                    {t('search.ai_synthesis')}
+                    {activeResults.length === 0 ? (
+                      <div className="rounded-xl border p-6 text-center">
+                        <div className="font-medium">{submittedAiQuery ? t('search.no_evidence') : t('search.enter_query')}</div>
+                        <div className="mt-1 text-sm text-muted-foreground">
+                          {submittedAiQuery ? t('search.ai_depends_on_entries') : t('search.submit_only_note')}
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <div className="mb-2 text-sm font-medium">{t('search.evidence_entries')}</div>
+                        <ResultsList results={activeResults} />
+                      </div>
+                    )}
                   </div>
-                  <div className="mt-2 whitespace-pre-line text-sm leading-7 text-foreground">
-                    {submittedAiQuery
-                      ? aiResult?.synthesis.answer || aiResult?.synthesis.explanation || 'No AI answer available.'
-                      : aiDraftQuery.trim()
-                        ? 'Ready to synthesize after you submit the current question.'
-                        : t('search.prompt_ai')}
-                  </div>
-                  {submittedAiQuery && (
-                    <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
-                      <span>Provider: {aiResult?.synthesis.provider || 'unknown'}</span>
-                      <span>Model: {aiResult?.synthesis.model || 'unknown'}</span>
-                      {aiResult?.synthesis.fallback && <span>Fallback active</span>}
-                      {aiResult?.synthesis.weak_evidence && <span>Weak evidence</span>}
-                      {aiSynthesisLoading && <span>Generating answer</span>}
-                    </div>
-                  )}
-                </Card>
 
-                {activeResults.length === 0 ? (
-                  <div className="rounded-xl border p-6 text-center">
-                    <div className="font-medium">{submittedAiQuery ? t('search.no_evidence') : t('search.enter_query')}</div>
-                    <div className="mt-1 text-sm text-muted-foreground">
-                      {submittedAiQuery
-                        ? 'The AI tab depends on retrieved entries from the database.'
-                        : 'AI mode only runs after you explicitly submit a query.'}
-                    </div>
+                  <div className="space-y-4">
+                    <Card className="p-5">
+                      <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                        {t('search.ai_status')}
+                      </div>
+                      <div className="mt-3 space-y-2 text-sm">
+                        <div>{t('search.status_sidecar')}: {aiHealth?.status || t('common.unknown')}</div>
+                        <div>{t('search.status_provider')}: {aiHealth?.provider.provider || 'none'}</div>
+                        <div>{t('search.status_configured')}: {statusText(aiHealth?.provider.configured, translate)}</div>
+                        <div>{t('search.status_provider_state')}: {aiHealth?.provider.status || t('common.unknown')}</div>
+                      </div>
+                      {aiHealth?.provider.models && aiHealth.provider.models.length > 0 && (
+                        <div className="mt-3 text-sm text-muted-foreground">
+                          {t('search.status_models')}: {aiHealth.provider.models.join(', ')}
+                        </div>
+                      )}
+                      {aiHealth?.provider.error && <div className="mt-3 text-sm text-red-600">{aiHealth.provider.error}</div>}
+                    </Card>
                   </div>
-                ) : (
-                  <div>
-                    <div className="mb-2 text-sm font-medium">{t('search.evidence_entries')}</div>
-                    <ResultsList results={activeResults} />
-                  </div>
-                )}
+                </div>
               </div>
             ) : activeResults.length === 0 ? (
               <div className="flex h-80 items-center justify-center p-6 text-center">
                 <div>
                   <div className="font-medium">
-                    {debouncedStandardQuery ? 'No results found' : 'No entries available'}
+                    {debouncedStandardQuery ? t('common.no_results') : t('common.no_data')}
                   </div>
                   <div className="mt-1 text-sm text-muted-foreground">
-                    {debouncedStandardQuery
-                      ? 'Try a different keyword or a shorter query.'
-                      : 'There is currently no data to display.'}
+                    {debouncedStandardQuery ? t('common.try_other_query') : t('search.subtitle')}
                   </div>
                 </div>
               </div>

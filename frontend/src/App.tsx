@@ -1,13 +1,12 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import type { JSX } from "react";
 
 import { Header } from "./components/layout/Header";
 import AdminLayout from "./components/admin/AdminLayout";
-
 import SearchPage from "./pages/SearchPage";
 import EntryPage from "./pages/EntryPage";
 import SourcesPage from "./pages/SourcesPage";
-
 import AdminApp from "./pages/AdminApp";
 import AdminModeration from "./pages/AdminModeration";
 import AdminQuality from "./pages/AdminQuality";
@@ -15,14 +14,13 @@ import AdminRawEntries from "./pages/AdminRawEntries";
 import AdminDuplicates from "./pages/AdminDuplicates";
 import AdminUserTrust from "./pages/AdminUserTrust";
 import AdminAuditLog from "./pages/AdminAuditLog";
-import type { JSX } from "react";
-import { I18nProvider } from "./lib/i18n";
+import { I18nProvider, useI18n } from "./lib/i18n";
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
   const { isAuthenticated, isLoading } = useAuth0();
+  const { t } = useI18n();
 
-  if (isLoading) return <div className="p-6">Loading…</div>;
-
+  if (isLoading) return <div className="p-6">{t("common.loading")}</div>;
   if (!isAuthenticated) return <Navigate to="/" replace />;
 
   return children;
