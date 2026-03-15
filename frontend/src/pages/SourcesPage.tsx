@@ -10,6 +10,27 @@ function prettyLabel(value: string) {
   return value.replace(/_/g, ' ');
 }
 
+const DOMAIN_ORDER = ['benefits', 'aid', 'tools', 'organizations', 'contacts'];
+
+function buildLetterGroups(items: SourceCatalogItem[]) {
+  const groups = new Map<string, SourceCatalogItem[]>();
+
+  for (const item of items) {
+    const first = item.name.trim().charAt(0).toUpperCase();
+    const letter = /^[A-ZÄÖÜ0-9]$/.test(first) ? first : '#';
+    const current = groups.get(letter) || [];
+    current.push(item);
+    groups.set(letter, current);
+  }
+
+  return Array.from(groups.entries())
+    .sort(([a], [b]) => a.localeCompare(b, 'de'))
+    .map(([letter, groupItems]) => ({
+      letter,
+      items: groupItems.sort((left, right) => left.name.localeCompare(right.name, 'de')),
+    }));
+}
+
 export default function SourcesPage() {
   const { locale, t } = useI18n();
   const [sources, setSources] = useState<SourceCatalogItem[]>([]);
@@ -48,6 +69,35 @@ export default function SourcesPage() {
         .includes(needle)
     );
   }, [filter, sources]);
+
+  const groupedByDomain = useMemo(() => {
+    const groups = new Map<string, SourceCatalogItem[]>();
+
+    for (const source of filtered) {
+      const sourceDomains = source.domains.length > 0 ? source.domains : ['unknown'];
+      for (const domain of sourceDomains) {
+        const current = groups.get(domain) || [];
+        current.push(source);
+        groups.set(domain, current);
+      }
+    }
+
+    return Array.from(groups.entries())
+      .sort(([a], [b]) => {
+        const aIndex = DOMAIN_ORDER.indexOf(a);
+        const bIndex = DOMAIN_ORDER.indexOf(b);
+        const safeA = aIndex === -1 ? Number.MAX_SAFE_INTEGER : aIndex;
+        const safeB = bIndex === -1 ? Number.MAX_SAFE_INTEGER : bIndex;
+        if (safeA !== safeB) return safeA - safeB;
+        return a.localeCompare(b);
+      })
+      .map(([domain, items]) => ({
+        domain,
+        title: t(`sources.domain_${domain}` as never),
+        items: items.sort((left, right) => right.entryCount - left.entryCount || left.name.localeCompare(right.name, 'de')),
+        letterGroups: buildLetterGroups(items),
+      }));
+  }, [filtered, t]);
 
   return (
     <div className="mx-auto w-full max-w-6xl p-4 md:p-6">
@@ -97,63 +147,107 @@ export default function SourcesPage() {
           <div className="p-8 text-sm text-muted-foreground">{t('sources.loading')}</div>
         ) : error ? (
           <div className="p-8 text-sm text-red-600">{error}</div>
-        ) : filtered.length === 0 ? (
+        ) : groupedByDomain.length === 0 ? (
           <div className="p-8 text-sm text-muted-foreground">{t('sources.empty')}</div>
         ) : (
-          <div className="space-y-4">
-            {filtered.map((source) => (
-              <div key={source.id} className="rounded-2xl border p-4 md:p-5">
-                <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                  <div className="min-w-0">
-                    <div className="text-lg font-semibold">{source.name}</div>
-                    <div className="mt-1 text-sm text-muted-foreground">{source.host}</div>
+          <div className="space-y-8">
+            <div className="rounded-2xl border bg-muted/20 p-4">
+              <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                {t('sources.jump_to_domain')}
+              </div>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {groupedByDomain.map(({ domain, title, items }) => (
+                  <a
+                    key={domain}
+                    href={`#domain-${domain}`}
+                    className="rounded-full border bg-background px-3 py-1 text-sm font-medium hover:border-foreground/30"
+                  >
+                    {title} ({items.length})
+                  </a>
+                ))}
+              </div>
+            </div>
 
-                    <div className="mt-3 flex flex-wrap gap-2 text-xs">
-                      <span className="rounded-full border px-3 py-1">{prettyLabel(source.sourceTier)}</span>
-                      <span className="rounded-full border px-3 py-1">{prettyLabel(source.institutionType)}</span>
-                      <span className="rounded-full border px-3 py-1">{source.jurisdiction}</span>
-                      {source.domains.map((domain) => (
-                        <span key={domain} className="rounded-full border px-3 py-1">
-                          {domain}
-                        </span>
+            {groupedByDomain.map(({ domain, title, items, letterGroups }) => (
+              <section key={domain} id={`domain-${domain}`} className="space-y-4 scroll-mt-24">
+                <div className="flex flex-col gap-3 border-b pb-3 md:flex-row md:items-end md:justify-between">
+                  <div>
+                    <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                      {t('sources.group_by_domain')}
+                    </div>
+                    <h2 className="mt-1 text-xl font-semibold tracking-tight">{title}</h2>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {t('sources.source_count')}: {items.length} · {t('sources.entries')}: {items.reduce((sum, item) => sum + item.entryCount, 0)}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {letterGroups.map(({ letter }) => (
+                      <a
+                        key={`${domain}-${letter}`}
+                        href={`#domain-${domain}-letter-${letter}`}
+                        className="rounded-full border px-3 py-1 text-xs font-medium hover:border-foreground/30"
+                      >
+                        {letter}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                {letterGroups.map(({ letter, items: letterItems }) => (
+                  <div key={`${domain}-${letter}`} id={`domain-${domain}-letter-${letter}`} className="space-y-4 scroll-mt-28">
+                    <div className="flex items-center gap-3">
+                      <div className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">{letter}</div>
+                      <div className="h-px flex-1 bg-border" />
+                    </div>
+
+                    <div className="space-y-4">
+                      {letterItems.map((source) => (
+                        <div key={`${domain}-${source.id}`} className="rounded-2xl border p-4 md:p-5">
+                          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                            <div className="min-w-0">
+                              <div className="text-lg font-semibold">{source.name}</div>
+                              <div className="mt-1 text-sm text-muted-foreground">{source.host}</div>
+
+                              <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                                <span className="rounded-full border px-3 py-1">{prettyLabel(source.sourceTier)}</span>
+                                <span className="rounded-full border px-3 py-1">{prettyLabel(source.institutionType)}</span>
+                                <span className="rounded-full border px-3 py-1">{source.jurisdiction}</span>
+                                {source.domains.map((entryDomain) => (
+                                  <span key={entryDomain} className="rounded-full border px-3 py-1">
+                                    {t(`sources.domain_${entryDomain}` as never)}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+
+                            {source.sampleUrl && (
+                              <Button asChild variant="outline" size="sm">
+                                <a href={source.sampleUrl} target="_blank" rel="noopener noreferrer">
+                                  {t('sources.open')}
+                                </a>
+                              </Button>
+                            )}
+                          </div>
+
+                          <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-2">
+                            <div className="rounded-xl border bg-muted/20 p-3">
+                              <div className="text-[11px] uppercase tracking-wide text-muted-foreground">{t('sources.entries')}</div>
+                              <div className="mt-1 text-lg font-semibold">{source.entryCount}</div>
+                            </div>
+                            <div className="rounded-xl border bg-muted/20 p-3">
+                              <div className="text-[11px] uppercase tracking-wide text-muted-foreground">{t('sources.last_seen')}</div>
+                              <div className="mt-1 text-sm font-medium">
+                                {source.lastSeen ? new Date(source.lastSeen).toLocaleDateString(dateLocale) : '-'}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       ))}
                     </div>
                   </div>
-
-                  {source.sampleUrl && (
-                    <Button asChild variant="outline" size="sm">
-                      <a href={source.sampleUrl} target="_blank" rel="noopener noreferrer">
-                        {t('sources.open')}
-                      </a>
-                    </Button>
-                  )}
-                </div>
-
-                <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
-                  <div className="rounded-xl border bg-muted/20 p-3">
-                    <div className="text-[11px] uppercase tracking-wide text-muted-foreground">{t('sources.entries')}</div>
-                    <div className="mt-1 text-lg font-semibold">{source.entryCount}</div>
-                  </div>
-                  <div className="rounded-xl border bg-muted/20 p-3">
-                    <div className="text-[11px] uppercase tracking-wide text-muted-foreground">{t('sources.avg_iqs')}</div>
-                    <div className="mt-1 text-lg font-semibold">
-                      {source.avgIqs != null ? source.avgIqs.toFixed(1) : '-'}
-                    </div>
-                  </div>
-                  <div className="rounded-xl border bg-muted/20 p-3">
-                    <div className="text-[11px] uppercase tracking-wide text-muted-foreground">{t('sources.avg_ais')}</div>
-                    <div className="mt-1 text-lg font-semibold">
-                      {source.avgAis != null ? source.avgAis.toFixed(1) : '-'}
-                    </div>
-                  </div>
-                  <div className="rounded-xl border bg-muted/20 p-3">
-                    <div className="text-[11px] uppercase tracking-wide text-muted-foreground">{t('sources.last_seen')}</div>
-                    <div className="mt-1 text-sm font-medium">
-                      {source.lastSeen ? new Date(source.lastSeen).toLocaleDateString(dateLocale) : '-'}
-                    </div>
-                  </div>
-                </div>
-              </div>
+                ))}
+              </section>
             ))}
           </div>
         )}
