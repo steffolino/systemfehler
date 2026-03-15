@@ -8,6 +8,9 @@ Current production frontend + API hosting is Cloudflare Pages. GitHub Pages rema
 The deployment workflow builds the frontend app from `frontend/` and deploys:
 - static site: `frontend/dist`
 - Pages Functions from `cloudflare-pages/functions` (via `wrangler pages deploy --cwd=cloudflare-pages`)
+- bundled same-origin snapshot fallback assets copied into the deploy artifact:
+  - `data/*`
+  - `moderation/review_queue.json`
 
 ## API Endpoints
 
@@ -45,6 +48,9 @@ Deployment runs from `.github/workflows/deploy-pages.yml` on:
 ## Notes
 
 - GitHub Pages workflow: `.github/workflows/deploy-github-pages.yml`
+- Cloudflare Pages workflow now also bundles same-origin snapshot JSON and the
+  moderation queue into the Pages artifact, mirroring the GitHub Pages fallback
+  behavior.
 - GitHub Pages serves same-origin snapshot JSON from `/data/*` and `/moderation/review_queue.json` inside the static artifact.
 
 # Cloudflare Pages Auth Setup

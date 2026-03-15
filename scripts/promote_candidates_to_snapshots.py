@@ -13,8 +13,10 @@ import json
 import sys
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from crawlers.shared.source_registry import SourceRegistry  # noqa: E402
 DEFAULT_DOMAINS = ["benefits", "aid", "tools", "organizations", "contacts"]
 LOW_SIGNAL_TITLE_TOKENS = (
     "datenschutz",
@@ -167,6 +169,22 @@ def source_tier(entry: dict) -> str:
     return str(provenance.get("sourceTier") or "").strip().lower()
 
 
+SOURCE_REGISTRY = SourceRegistry(ROOT / "data")
+
+
+def resolved_source_tier(entry: dict, domain: str) -> str:
+    tier = source_tier(entry)
+    if tier and tier != "tier_unknown":
+        return tier
+    url = str(entry.get("url") or "").strip()
+    if not url:
+        return tier
+    profile = SOURCE_REGISTRY.resolve(url, domain)
+    if not profile:
+        return tier
+    return profile.source_tier
+
+
 def normalize_url_key(url: str) -> str:
     cleaned = (url or "").strip()
     if cleaned.endswith("/"):
@@ -198,7 +216,7 @@ def keep_candidate(
         return False, "low_signal_url"
     if any(token in url for token in DOMAIN_LOW_SIGNAL_URL_TOKENS.get(domain, ())):
         return False, "domain_low_signal_url"
-    if source_tier(entry) in {"", "tier_unknown"}:
+    if resolved_source_tier(entry, domain) in {"", "tier_unknown"}:
         return False, "unknown_source_tier"
     if len(content.strip()) < min_content_length:
         return False, "thin_content"

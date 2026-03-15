@@ -115,6 +115,8 @@ class SourceRegistry:
             "fitko.de",
             "115.de",
             "bafza.de",
+            "bundesstiftung-mutter-und-kind.de",
+            "wege-zur-pflege.de",
         }:
             return "tier_1_official"
         if host in {
@@ -127,6 +129,14 @@ class SourceRegistry:
             "dajeb.de",
             "frauenhauskoordinierung.de",
             "deutsche-depressionshilfe.de",
+            "hilfetelefon-schwangere.de",
+            "maennerberatungsnetz.de",
+            "maennerhilfetelefon.de",
+            "bke-beratung.de",
+            "bke.de",
+            "dhs.de",
+            "drk.de",
+            "elternsein.info",
         }:
             return "tier_2_ngo_watchdog"
         return "tier_unknown"
@@ -139,6 +149,8 @@ class SourceRegistry:
             "fitko.de",
             "115.de",
             "bafza.de",
+            "bundesstiftung-mutter-und-kind.de",
+            "wege-zur-pflege.de",
         }:
             return "government"
         if host in {
@@ -151,15 +163,41 @@ class SourceRegistry:
             "dajeb.de",
             "frauenhauskoordinierung.de",
             "deutsche-depressionshilfe.de",
+            "hilfetelefon-schwangere.de",
+            "maennerberatungsnetz.de",
+            "maennerhilfetelefon.de",
+            "bke-beratung.de",
+            "bke.de",
+            "dhs.de",
+            "drk.de",
+            "elternsein.info",
         }:
             return "ngo"
         return "unknown"
 
     def _infer_provider_level(self, base_url: str) -> str:
         host = self._host(base_url)
-        if host.endswith(".bund.de") or host in {"arbeitsagentur.de", "bundesregierung.de", "bafza.de"}:
+        if host.endswith(".bund.de") or host in {
+            "arbeitsagentur.de",
+            "bundesregierung.de",
+            "bafza.de",
+            "bundesstiftung-mutter-und-kind.de",
+            "wege-zur-pflege.de",
+        }:
             return "federal"
-        if host in {"sanktionsfrei.de", "caritas.de", "diakonie.de"}:
+        if host in {
+            "sanktionsfrei.de",
+            "caritas.de",
+            "diakonie.de",
+            "hilfetelefon-schwangere.de",
+            "maennerberatungsnetz.de",
+            "maennerhilfetelefon.de",
+            "bke-beratung.de",
+            "bke.de",
+            "dhs.de",
+            "drk.de",
+            "elternsein.info",
+        }:
             return "civil_society"
         return "unknown"
 
@@ -174,14 +212,32 @@ class SourceRegistry:
             all_profiles.extend(extra_profiles)
 
         matches = [profile for profile in all_profiles if profile.matches(url, domain)]
-        if not matches:
+        if matches:
+            matches.sort(
+                key=lambda profile: (
+                    0 if profile.source_tier == "tier_1_official" else 1 if profile.source_tier == "tier_2_ngo_watchdog" else 2,
+                    0 if profile.priority == "high" else 1,
+                    len(profile.host),
+                )
+            )
+            return matches[0]
+
+        host = self._host(url)
+        if not host:
             return None
 
-        matches.sort(
-            key=lambda profile: (
-                0 if profile.source_tier == "tier_1_official" else 1 if profile.source_tier == "tier_2_ngo_watchdog" else 2,
-                0 if profile.priority == "high" else 1,
-                len(profile.host),
-            )
+        inferred_tier = self._infer_source_tier(url)
+        if inferred_tier == "tier_unknown":
+            return None
+
+        return SourceProfile(
+            source_id=host.replace(".", "_"),
+            name=host,
+            base_url=f"https://{host}",
+            domains=(domain,),
+            source_tier=inferred_tier,
+            institution_type=self._infer_institution_type(url),
+            jurisdiction="DE",
+            provider_level=self._infer_provider_level(url),
+            priority="normal",
         )
-        return matches[0]

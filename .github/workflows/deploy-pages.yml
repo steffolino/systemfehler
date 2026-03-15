@@ -35,6 +35,14 @@ jobs:
         run: |
           mkdir -p dist-pages
           cp -r frontend/dist/. dist-pages/
+          mkdir -p dist-pages/data
+          cp -R data/* dist-pages/data/
+          mkdir -p dist-pages/moderation
+          if [ -f moderation/review_queue.json ]; then
+            cp moderation/review_queue.json dist-pages/moderation/review_queue.json
+          else
+            echo '{"queue":[]}' > dist-pages/moderation/review_queue.json
+          fi
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

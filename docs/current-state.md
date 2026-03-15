@@ -81,7 +81,7 @@ Important verification finding:
   canonical `title` string contract while preserving Easy German titles in
   `translations["de-LEICHT"]`.
 - Current validation result after the March 15 crawl/promotion pass:
-  275 entries, 0 schema/structural errors, 263 lint warnings.
+  294 entries, 0 schema/structural errors, 282 lint warnings.
 - The remaining warnings are largely missing Easy German translations on newly
   promoted seeded entries, not schema failures.
 
@@ -198,11 +198,11 @@ The canonical snapshot corpus is no longer the original 25-entry bootstrap
 set. Current validated counts are:
 
 - `benefits`: 5
-- `aid`: 118
+- `aid`: 137
 - `tools`: 8
 - `organizations`: 35
 - `contacts`: 109
-- total: 275
+- total: 294
 
 That corpus is now also loaded into the local PostgreSQL database via
 `npm run db:seed`.
@@ -216,6 +216,10 @@ The key new workflow addition is deterministic seeded promotion:
 
 This is now the safest path for scaling entry volume without letting raw crawl
 noise overwrite the published dataset.
+
+Cloudflare Pages deployment was also corrected to package same-origin snapshot
+fallback assets (`data/*` and `moderation/review_queue.json`) into the Pages
+artifact, not just the compiled frontend bundle.
 
 ## Recommended Cleanup Next
 
