@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS entries (
   provenance TEXT,
   translations TEXT,
   quality_scores TEXT,
+  entry_json TEXT,
   created_at TEXT,
   updated_at TEXT
 );

@@ -23,7 +23,12 @@ const DEFAULT_LOCAL_API_BASE_URL =
     ? 'http://127.0.0.1:3001/api'
     : 'https://systemfehler-api-worker.inequality.workers.dev/api';
 const API_BASE_URL = import.meta.env.VITE_API_URL || DEFAULT_LOCAL_API_BASE_URL;
-const AI_API_BASE_URL = import.meta.env.VITE_AI_API_URL || 'http://localhost:8002';
+const DEFAULT_LOCAL_AI_BASE_URL =
+  typeof window !== 'undefined' &&
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'http://localhost:8002'
+    : '/api/ai';
+const AI_API_BASE_URL = import.meta.env.VITE_AI_API_URL || DEFAULT_LOCAL_AI_BASE_URL;
 const DEFAULT_SNAPSHOT_BASE_URL =
   typeof window !== 'undefined'
     ? `${window.location.origin}${import.meta.env.BASE_URL.replace(/\/$/, '')}`

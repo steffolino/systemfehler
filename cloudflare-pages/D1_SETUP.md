@@ -25,7 +25,10 @@ In the Cloudflare dashboard:
 2. Under **D1 database bindings**, add a binding:
    - **Variable name**: `DB`
    - **D1 database**: select `systemfehler-db`
-3. Save and redeploy.
+3. Under **AI bindings**, add a binding:
+   - **Variable name**: `AI`
+   - select a Workers AI binding
+4. Save and redeploy.
 
 Alternatively, add the binding via a `wrangler.toml` at the repo root or in
 `cloudflare-pages/` (not required for Pages deployments but useful for local
@@ -73,6 +76,10 @@ For bot protection and Auth0-enabled frontend builds, configure:
 
 These public frontend values are injected during the Pages build by
 `.github/workflows/deploy-pages.yml`.
+
+### Optional Cloudflare Pages variables
+
+- `CF_AI_MODEL` (defaults to `@cf/meta/llama-3.1-8b-instruct`)
 
 ## 5. Verify
 

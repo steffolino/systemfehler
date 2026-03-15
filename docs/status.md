@@ -83,6 +83,13 @@ crawling logic to these files.
 | D1 schema (`cloudflare-pages/d1/schema.sql`) | ✅ Working | Includes `entries` and `moderation_queue` tables |
 
 The current Cloudflare Pages deployment path uses Auth0 for `/admin`. The
+The same deployment now has an experimental same-origin Workers AI path at
+`/api/ai/*`, backed by Pages bindings `DB` and `AI`, with Turnstile protecting
+public AI requests when `TURNSTILE_SECRET_KEY` is configured.
+
+The D1 schema/runtime path also depends on the `entry_json` column for full
+entry hydration inside Pages Functions and Workers AI retrieval.
+
 legacy Pages-native GitHub auth function stubs remain in the repo but are not
 required for the active frontend.
 

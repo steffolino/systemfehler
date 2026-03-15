@@ -20,6 +20,11 @@ The deployment workflow builds the frontend app from `frontend/` and deploys:
 - `/api/data/entries/:id` -> single entry
 - `/api/data/moderation-queue` -> moderation queue from D1 table `moderation_queue`
 - `/api/data/quality-report` -> quality metrics + missing translation report
+- `/api/ai/health` -> Workers AI health/config
+- `/api/ai/rewrite` -> query rewrite
+- `/api/ai/retrieve` -> retrieval-only evidence
+- `/api/ai/synthesize` -> retrieval-backed answer synthesis
+- `/api/ai/enrich` -> lightweight enrichment fallback
 
 ## Required GitHub Secrets
 
@@ -44,6 +49,9 @@ Set these as repository or environment variables for the Pages frontend build:
 These are public frontend values and are injected at build time by
 `.github/workflows/deploy-pages.yml`.
 
+The Pages build also sets `VITE_AI_API_URL=/api/ai`, so deployed AI requests go
+to same-origin Cloudflare Pages Functions instead of the local Python sidecar.
+
 ## Cloudflare Project Setup
 
 1. Create a Cloudflare Pages project named `systemfehler`.
@@ -54,6 +62,11 @@ These are public frontend values and are injected at build time by
    - `INGEST_TOKEN`
 5. In **Pages -> Settings -> Environment variables**, add non-secret values if they are consumed by Functions:
    - `PAGES_BASE_URL` (for example `https://systemfehler.pages.dev`)
+6. In **Pages -> Settings -> Functions**, add bindings:
+   - D1 binding: `DB`
+   - Workers AI binding: `AI`
+7. Optionally add a non-secret environment variable:
+   - `CF_AI_MODEL` (defaults to `@cf/meta/llama-3.1-8b-instruct`)
 
 ## Deployment Trigger
 
