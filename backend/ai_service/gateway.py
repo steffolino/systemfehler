@@ -12,29 +12,20 @@ Endpoints:
     /health (GET)
 """
 from fastapi import FastAPI, Request
-from pydantic import BaseModel
 
 import time
 import os
 from .endpoints import router
-from .routing import ModelRouter
-from .telemetry import log_telemetry
+from .provider import get_provider
 
 
 # Read config from environment variables
 AI_PORT = int(os.environ.get("AI_PORT", 8002))
 AI_HOST = os.environ.get("AI_HOST", "0.0.0.0")
+provider = get_provider()
 
 app = FastAPI()
 app.include_router(router)
-
-class Telemetry(BaseModel):
-    feature: str
-    model: str
-    latency_ms: int
-    success: bool
-    token_estimate: int
-    cost_estimate: float
 
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
@@ -53,4 +44,9 @@ if __name__ == "__main__":
 # Placeholder endpoints
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    return {
+        "status": "ok",
+        "provider": provider.healthcheck(),
+        "host": AI_HOST,
+        "port": AI_PORT,
+    }

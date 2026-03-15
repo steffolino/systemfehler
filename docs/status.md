@@ -208,3 +208,10 @@ Expanded URL queues are now available for all domains, enabling broader crawling
 ## Crawler coverage summary
 
 All seeded domain crawlers (aid, tools, organizations, contacts) are implemented and working. Link expansion is fully integrated and operational. Moderation queue format is canonical and validated. See above for details.
+### AI sidecar (`backend/ai_service/`)
+
+| Component | Status | Notes |
+|-----------|--------|-------|
+| FastAPI gateway | ✅ Working | Runs via `npm run ai:api` |
+| Provider adapter layer | ✅ Working | Supports `AI_PROVIDER=none|ollama|openai` |
+| Query rewrite / synthesize / enrich endpoints | 🟡 Experimental | Real provider calls when configured; graceful fallback when disabled or unreachable |

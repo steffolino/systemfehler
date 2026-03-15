@@ -1,72 +1,248 @@
 """
-REST endpoints for query rewrite, answer synthesis, enrichment suggestion
+REST endpoints for query rewrite, answer synthesis, and enrichment suggestion.
 """
 
+from __future__ import annotations
 
-from fastapi import APIRouter, Request
-from pydantic import BaseModel
-from .schemas import Answer, EnrichmentSuggestion
+import time
+
+from fastapi import APIRouter
+
+from .provider import AIProviderError, get_provider
 from .retrieval import retrieve_evidence
 from .routing import ModelRouter
-from .telemetry import log_telemetry, handle_weak_evidence
-import time
+from .schemas import (
+    AnswerResponse,
+    EnrichmentRequest,
+    EnrichmentSuggestion,
+    Evidence,
+    QueryRequest,
+    RewriteResponse,
+)
+from .telemetry import log_telemetry
 
 router = APIRouter()
 model_router = ModelRouter()
+provider = get_provider()
 
-class QueryRequest(BaseModel):
-    query: str
+REWRITE_SYSTEM_PROMPT = (
+    "You rewrite search queries for a German social-services retrieval system. "
+    "Return a short German search query that improves recall but does not add new facts."
+)
 
-@router.post("/rewrite")
-async def rewrite_query(query: str, request: Request):
+SYNTHESIZE_SYSTEM_PROMPT = (
+    "You are a retrieval-first assistant for German social-service information. "
+    "Use only the provided evidence. If the evidence is weak, say so and do not guess. "
+    "Answer in German, concise and factual."
+)
+
+ENRICH_SYSTEM_PROMPT = (
+    "You are assisting editors of a structured public-information database. "
+    "Based on the supplied entry excerpt, propose short, concrete metadata improvements in German. "
+    "Do not invent facts not grounded in the entry."
+)
+
+
+def _usage_totals(payload):
+    usage = payload.get("usage", {}) if isinstance(payload, dict) else {}
+    total_tokens = int(usage.get("total_tokens", 0) or 0)
+    return usage, total_tokens
+
+
+@router.post("/rewrite", response_model=RewriteResponse)
+async def rewrite_query(body: QueryRequest):
     start = time.time()
-    model = model_router.route("rewrite")
-    # Stub: LLM call
-    rewritten_query = query.upper()  # Replace with real LLM call
-    latency = int((time.time() - start) * 1000)
-    log_telemetry("rewrite", model, latency, True, 10, 0.001)
-    return {"rewritten_query": rewritten_query, "model": model, "latency_ms": latency}
+    model = model_router.route("rewrite", explicit_escalation=body.explicit_escalation)
 
-@router.post("/synthesize")
+    if not provider.is_configured():
+        latency = int((time.time() - start) * 1000)
+        log_telemetry("rewrite", model, latency, False, 0, 0.0)
+        return RewriteResponse(
+            rewritten_query=body.query,
+            model=model,
+            provider=provider.name,
+            latency_ms=latency,
+            fallback=True,
+            explanation="No AI provider configured; returning the original query.",
+        )
+
+    try:
+        completion = provider.generate_text(
+            model=model,
+            system_prompt=REWRITE_SYSTEM_PROMPT,
+            user_prompt=(
+                "Original query:\n"
+                f"{body.query}\n\n"
+                "Return only the rewritten query."
+            ),
+            temperature=0.1,
+        )
+        usage, total_tokens = _usage_totals(completion)
+        rewritten_query = completion["text"].strip()
+        latency = int((time.time() - start) * 1000)
+        log_telemetry("rewrite", model, latency, True, total_tokens, 0.0)
+        return RewriteResponse(
+            rewritten_query=rewritten_query,
+            model=model,
+            provider=provider.name,
+            latency_ms=latency,
+            fallback=False,
+        )
+    except AIProviderError as exc:
+        latency = int((time.time() - start) * 1000)
+        log_telemetry("rewrite", model, latency, False, 0, 0.0)
+        return RewriteResponse(
+            rewritten_query=body.query,
+            model=model,
+            provider=provider.name,
+            latency_ms=latency,
+            fallback=True,
+            explanation=str(exc),
+        )
+
+
+@router.post("/synthesize", response_model=AnswerResponse)
 async def synthesize_answer(body: QueryRequest):
     start = time.time()
-    model = model_router.route("synthesize")
+    model = model_router.route("synthesize", explicit_escalation=body.explicit_escalation)
     evidence = retrieve_evidence(body.query)
-    # Enforce minimum evidence threshold
-    min_confidence = 0.7
-    sufficient = any(ev.confidence >= min_confidence for ev in evidence)
+    sufficient = any(ev.confidence >= 0.7 for ev in evidence)
+
     if not sufficient:
         latency = int((time.time() - start) * 1000)
-        log_telemetry("synthesize", model, latency, False, 10, 0.001)
-        return {
-            "answer": None,
-            "explanation": "Keine verlässliche Information gefunden.",
-            "sources": [],
-            "fallback": True,
-            "model": model,
-            "latency_ms": latency
-        }
-    # Stub: LLM call for synthesis
-    answer = f"Synthesized answer for: {body.query}"
-    sources = [ev.source for ev in evidence if ev.confidence >= min_confidence]
-    latency = int((time.time() - start) * 1000)
-    log_telemetry("synthesize", model, latency, True, 20, 0.002)
-    return {
-        "answer": answer,
-        "explanation": "Antwort basiert auf verlässlichen Daten.",
-        "sources": sources,
-        "fallback": False,
-        "model": model,
-        "latency_ms": latency
-    }
+        log_telemetry("synthesize", model, latency, False, 0, 0.0)
+        return AnswerResponse(
+            answer=None,
+            explanation="Keine verlässliche Information gefunden.",
+            sources=[],
+            provider=provider.name,
+            model=model,
+            latency_ms=latency,
+            fallback=True,
+            evidence=evidence,
+            weak_evidence=True,
+        )
 
-@router.post("/enrich")
-async def suggest_enrichment(entry_id: str, request: Request):
+    if not provider.is_configured():
+        latency = int((time.time() - start) * 1000)
+        log_telemetry("synthesize", model, latency, False, 0, 0.0)
+        return AnswerResponse(
+            answer=None,
+            explanation="AI provider not configured. Evidence retrieval worked, but no synthesis backend is available.",
+            sources=[ev.source for ev in evidence if ev.confidence >= 0.7],
+            provider=provider.name,
+            model=model,
+            latency_ms=latency,
+            fallback=True,
+            evidence=evidence,
+            weak_evidence=False,
+        )
+
+    evidence_block = "\n\n".join(
+        f"Source: {ev.source}\nConfidence: {ev.confidence}\nContent: {ev.content}"
+        for ev in evidence
+        if ev.confidence >= 0.7
+    )
+
+    try:
+        completion = provider.generate_text(
+            model=model,
+            system_prompt=SYNTHESIZE_SYSTEM_PROMPT,
+            user_prompt=(
+                f"User question:\n{body.query}\n\n"
+                f"Retrieved evidence:\n{evidence_block}\n\n"
+                "Provide a short German answer grounded only in the evidence."
+            ),
+            temperature=0.2,
+        )
+        usage, total_tokens = _usage_totals(completion)
+        latency = int((time.time() - start) * 1000)
+        log_telemetry("synthesize", model, latency, True, total_tokens, 0.0)
+        return AnswerResponse(
+            answer=completion["text"],
+            explanation="Antwort basiert auf abgerufenen Einträgen.",
+            sources=[ev.source for ev in evidence if ev.confidence >= 0.7],
+            provider=provider.name,
+            model=model,
+            latency_ms=latency,
+            fallback=False,
+            evidence=evidence,
+            usage=usage,
+        )
+    except AIProviderError as exc:
+        latency = int((time.time() - start) * 1000)
+        log_telemetry("synthesize", model, latency, False, 0, 0.0)
+        return AnswerResponse(
+            answer=None,
+            explanation=str(exc),
+            sources=[ev.source for ev in evidence if ev.confidence >= 0.7],
+            provider=provider.name,
+            model=model,
+            latency_ms=latency,
+            fallback=True,
+            evidence=evidence,
+        )
+
+
+@router.post("/enrich", response_model=EnrichmentSuggestion)
+async def suggest_enrichment(body: EnrichmentRequest):
     start = time.time()
-    model = model_router.route("enrich")
-    # Stub: LLM call for enrichment suggestion
-    suggestions = [f"Enrichment suggestion for entry {entry_id}"]
-    latency = int((time.time() - start) * 1000)
-    log_telemetry("enrich", model, latency, True, 15, 0.0015)
-    # Do NOT write directly to production data; moderation required
-    return EnrichmentSuggestion(entry_id=entry_id, suggestions=suggestions, provenance={"model": model, "latency_ms": latency})
+    model = model_router.route("enrich", explicit_escalation=body.explicit_escalation)
+
+    if not provider.is_configured():
+        latency = int((time.time() - start) * 1000)
+        log_telemetry("enrich", model, latency, False, 0, 0.0)
+        return EnrichmentSuggestion(
+            entry_id=body.entry_id,
+            suggestions=[],
+            provenance={
+                "provider": provider.name,
+                "model": model,
+                "latency_ms": latency,
+                "fallback": True,
+                "message": "No AI provider configured.",
+            },
+        )
+
+    try:
+        completion = provider.generate_text(
+            model=model,
+            system_prompt=ENRICH_SYSTEM_PROMPT,
+            user_prompt=(
+                f"Entry ID: {body.entry_id}\n\n"
+                "Suggest up to 5 short metadata or quality improvements as separate bullet points."
+            ),
+            temperature=0.2,
+        )
+        usage, total_tokens = _usage_totals(completion)
+        suggestions = [
+            line.lstrip("- ").strip()
+            for line in completion["text"].splitlines()
+            if line.strip()
+        ][:5]
+        latency = int((time.time() - start) * 1000)
+        log_telemetry("enrich", model, latency, True, total_tokens, 0.0)
+        return EnrichmentSuggestion(
+            entry_id=body.entry_id,
+            suggestions=suggestions,
+            provenance={
+                "provider": provider.name,
+                "model": model,
+                "latency_ms": latency,
+                "usage": usage,
+            },
+        )
+    except AIProviderError as exc:
+        latency = int((time.time() - start) * 1000)
+        log_telemetry("enrich", model, latency, False, 0, 0.0)
+        return EnrichmentSuggestion(
+            entry_id=body.entry_id,
+            suggestions=[],
+            provenance={
+                "provider": provider.name,
+                "model": model,
+                "latency_ms": latency,
+                "fallback": True,
+                "message": str(exc),
+            },
+        )

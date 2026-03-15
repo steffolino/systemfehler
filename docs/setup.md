@@ -127,6 +127,19 @@ CRAWLER_RATE_LIMIT_DELAY=2000
 
 # OpenAI (for existing LLM features - optional)
 OPENAI_API_KEY=sk-your-api-key-here
+
+# AI sidecar provider selection
+# AI_PROVIDER=none|ollama|openai
+AI_PROVIDER=none
+AI_DEFAULT_MODEL=disabled
+# Ollama example:
+# AI_PROVIDER=ollama
+# OLLAMA_BASE_URL=http://127.0.0.1:11434
+# AI_DEFAULT_MODEL=llama3.1:8b
+# OpenAI example:
+# AI_PROVIDER=openai
+# OPENAI_API_KEY=sk-your-api-key-here
+# AI_DEFAULT_MODEL=gpt-4o-mini
 ```
 
 ---
