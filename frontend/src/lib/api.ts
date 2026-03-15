@@ -230,6 +230,19 @@ interface AIResultBundle {
   relatedEntries: Entry[];
 }
 
+interface AIHealthResponse {
+  status: string;
+  provider: {
+    provider: string;
+    configured: boolean;
+    status?: string;
+    models?: string[];
+    error?: string;
+  };
+  host: string;
+  port: number;
+}
+
 async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const normalizedBase = API_BASE_URL.replace(/\/+$/, '');
   const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
@@ -792,6 +805,37 @@ export const api = {
     };
   },
 
+  getAIHealth: async (): Promise<AIHealthResponse> => {
+    if (IS_GITHUB_PAGES) {
+      return {
+        status: 'unavailable',
+        provider: {
+          provider: 'none',
+          configured: false,
+          status: 'disabled',
+        },
+        host: 'github-pages',
+        port: 0,
+      };
+    }
+
+    try {
+      return await fetchAiApi<AIHealthResponse>('/health');
+    } catch {
+      return {
+        status: 'unreachable',
+        provider: {
+          provider: 'none',
+          configured: false,
+          status: 'unreachable',
+          error: 'AI sidecar is not reachable at the configured URL.',
+        },
+        host: AI_API_BASE_URL,
+        port: 0,
+      };
+    }
+  },
+
   autocomplete: async ({ query, limit = 10 }: { query: string; limit?: number }) => {
     if (!query || query.length < 1) return [];
     const res = await api.getEntries({ search: query, limit });
@@ -826,4 +870,5 @@ export type {
   AIRewriteResponse,
   AISynthesizeResponse,
   AIResultBundle,
+  AIHealthResponse,
 };

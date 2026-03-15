@@ -142,6 +142,37 @@ AI_DEFAULT_MODEL=disabled
 # AI_DEFAULT_MODEL=gpt-4o-mini
 ```
 
+### Ollama quick start
+
+If you want local no-per-call-cost AI:
+
+```bash
+ollama serve
+ollama pull llama3.1:8b
+```
+
+Recommended local env:
+
+```bash
+AI_PROVIDER=ollama
+OLLAMA_BASE_URL=http://127.0.0.1:11434
+AI_DEFAULT_MODEL=llama3.1:8b
+AI_MODEL_REWRITE=llama3.1:8b
+AI_MODEL_SYNTHESIZE=llama3.1:8b
+AI_MODEL_ENRICH=llama3.1:8b
+VITE_AI_API_URL=http://localhost:8002
+```
+
+Then run:
+
+```bash
+npm run ai:api
+npm run dev
+```
+
+The AI tab will show sidecar/provider health, fallback state, rewritten query,
+synthesized answer, and evidence entries.
+
 ---
 
 ## Database Setup

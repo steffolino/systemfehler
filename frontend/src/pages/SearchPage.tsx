@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { api, type Entry } from '../lib/api';
-import type { AIResultBundle } from '../lib/api';
+import type { AIHealthResponse, AIResultBundle } from '../lib/api';
 import SearchInput from '../components/SearchInput';
 import ResultsList from '../components/ResultsList';
 import { Button } from '@/components/ui/button';
@@ -17,6 +17,7 @@ export default function SearchPage() {
 
   const [standardResults, setStandardResults] = useState<Entry[]>([]);
   const [aiResult, setAiResult] = useState<AIResultBundle | null>(null);
+  const [aiHealth, setAiHealth] = useState<AIHealthResponse | null>(null);
 
   const [standardLoading, setStandardLoading] = useState(false);
   const [aiLoading, setAiLoading] = useState(false);
@@ -85,6 +86,22 @@ export default function SearchPage() {
       cancelled = true;
     };
   }, [debouncedQuery, isAuthenticated, tab]);
+
+  useEffect(() => {
+    if (!isAuthenticated || tab !== 'ai') return;
+
+    let cancelled = false;
+
+    api.getAIHealth().then((health) => {
+      if (!cancelled) {
+        setAiHealth(health);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isAuthenticated, tab]);
 
   useEffect(() => {
     if (!isAuthenticated && tab === 'ai') {
@@ -164,6 +181,30 @@ export default function SearchPage() {
               </div>
             ) : tab === 'ai' ? (
               <div className="space-y-4 p-4 md:p-5">
+                <Card className="p-5">
+                  <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    AI Status
+                  </div>
+                  <div className="mt-2 text-sm text-foreground">
+                    Sidecar: {aiHealth?.status || 'unknown'}
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
+                    <span>Provider: {aiHealth?.provider.provider || 'none'}</span>
+                    <span>Configured: {aiHealth?.provider.configured ? 'yes' : 'no'}</span>
+                    <span>Provider status: {aiHealth?.provider.status || 'unknown'}</span>
+                  </div>
+                  {aiHealth?.provider.models && aiHealth.provider.models.length > 0 && (
+                    <div className="mt-3 text-sm text-muted-foreground">
+                      Models: {aiHealth.provider.models.join(', ')}
+                    </div>
+                  )}
+                  {aiHealth?.provider.error && (
+                    <div className="mt-3 text-sm text-red-600">
+                      {aiHealth.provider.error}
+                    </div>
+                  )}
+                </Card>
+
                 <Card className="p-5">
                   <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                     AI Rewrite
