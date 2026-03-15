@@ -54,6 +54,13 @@ INTENT_KEYWORDS = {
     },
 }
 
+NEGATIVE_HINTS = {
+    "unemployment": {
+        "kurzarbeitergeld": 4.5,
+        "kurzarbeit": 4.5,
+    },
+}
+
 
 def _pick_text(*values):
     for value in values:
@@ -179,6 +186,10 @@ def _rerank_entries(entries: list[dict], query: str, terms: list[str]):
                 score += 3.0
             if "unemployed" in target_groups:
                 score += 3.0
+            if "buergergeld" in blob or "bürgergeld" in blob:
+                score += 4.0
+            if "arbeitslosengeld" in blob:
+                score += 3.5
             if "jobcenter" in blob or "arbeitsagentur" in blob:
                 score += 2.5
             if domain == "benefits":
@@ -191,6 +202,9 @@ def _rerank_entries(entries: list[dict], query: str, terms: list[str]):
                 score -= 3.5
             if target_groups.issubset({"families", "single_parents"}) and "family" not in intents:
                 score -= 4.0
+            for phrase, penalty in NEGATIVE_HINTS["unemployment"].items():
+                if phrase in blob or phrase in title:
+                    score -= penalty
 
         if "contact" in intents and domain == "contacts":
             score += 3.0

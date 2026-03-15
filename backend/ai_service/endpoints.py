@@ -58,6 +58,7 @@ ENRICH_SYSTEM_PROMPT = (
 )
 
 LOCAL_SYNTHESIS_STRATEGY = os.getenv("AI_LOCAL_SYNTHESIS_STRATEGY", "extractive").strip().lower()
+LOCAL_REWRITE_STRATEGY = os.getenv("AI_LOCAL_REWRITE_STRATEGY", "deterministic").strip().lower()
 
 
 def _usage_totals(payload):
@@ -92,7 +93,7 @@ def _best_text(payload, field_name):
 
 
 def _extractive_answer(evidence):
-    bullets = []
+    cards = []
     sources = []
 
     for ev in [item for item in evidence if item.confidence >= 0.7][:3]:
@@ -101,20 +102,58 @@ def _extractive_answer(evidence):
             continue
         title = payload.get("title") or "Unbekannter Eintrag"
         summary = _best_text(payload, "summary")
+        domain = payload.get("domain")
         if not isinstance(title, str):
             title = str(title)
-        if summary:
-            bullets.append(f"- {title}: {summary}")
-        else:
-            bullets.append(f"- {title}")
+        cards.append(
+            {
+                "title": title,
+                "summary": summary,
+                "domain": domain if isinstance(domain, str) else None,
+            }
+        )
         source = payload.get("url") or ev.source
         if isinstance(source, str):
             sources.append(source)
 
-    if not bullets:
+    if not cards:
         return None, []
 
-    return "\n".join(bullets), sources
+    lead = cards[0]
+    lines = [
+        "Wahrscheinlich zuerst relevant:",
+        f"- {lead['title']}: {lead['summary'] or 'Direkt pruefen.'}",
+    ]
+
+    follow_ups = cards[1:3]
+    if follow_ups:
+        lines.append("")
+        lines.append("Was du jetzt tun kannst:")
+        for card in follow_ups:
+            if card["domain"] == "tools":
+                lines.append(f"- Online starten ueber {card['title']}.")
+            elif card["domain"] == "contacts":
+                lines.append(f"- Kontakt aufnehmen ueber {card['title']}.")
+            else:
+                lines.append(f"- Danach {card['title']} pruefen.")
+
+    return "\n".join(lines), sources
+
+
+def _deterministic_local_rewrite(query):
+    normalized = " ".join((query or "").strip().split())
+    lowered = normalized.lower()
+
+    if any(term in lowered for term in ("arbeitslos", "job verloren", "job weg", "gekündigt", "gekuendigt")):
+        return "arbeitslos jobcenter bürgergeld arbeitsagentur hilfe"
+    if any(term in lowered for term in ("buergergeld", "bürgergeld", "jobcenter")):
+        return "bürgergeld jobcenter antrag voraussetzungen"
+    if any(term in lowered for term in ("kontakt", "telefon", "erreichen", "anrufen")):
+        return "arbeitsagentur kontakt telefon beratung"
+    if any(term in lowered for term in ("antrag", "beantragen", "formular", "online")):
+        return "antrag online arbeitsagentur jobcenter"
+
+    return normalized.lower()
 
 
 def _compact_evidence_block(evidence):
@@ -187,6 +226,22 @@ async def rewrite_query(body: QueryRequest):
             explanation="No AI provider configured; returning the original query.",
         )
         ai_cache.set(rewrite_cache_key, _cacheable_response(response), CACHE_TTL_REWRITE)
+        return response
+
+    use_deterministic_local = provider.name == "ollama" and LOCAL_REWRITE_STRATEGY == "deterministic"
+    if use_deterministic_local:
+        rewritten_query = _deterministic_local_rewrite(body.query)
+        latency = int((time.time() - start) * 1000)
+        response = RewriteResponse(
+            rewritten_query=rewritten_query,
+            model=f"{model}:deterministic",
+            provider=provider.name,
+            latency_ms=latency,
+            fallback=False,
+            explanation="Local rewrite uses fast deterministic normalization for stable retrieval.",
+        )
+        ai_cache.set(rewrite_cache_key, _cacheable_response(response), CACHE_TTL_REWRITE)
+        log_telemetry("rewrite", model, latency, True, 0, 0.0)
         return response
 
     try:
