@@ -74,6 +74,37 @@ test('getLanguageColumns switches between German and English columns', () => {
   });
 });
 
+test('withLegacyKeys copies aliased keys onto the target object', () => {
+  const entry = { targetGroups: ['unemployed'], createdAt: '2026-01-01' };
+  const result = __private.withLegacyKeys(entry, {
+    target_groups: 'targetGroups',
+    created_at: 'createdAt',
+  });
+
+  assert.equal(result, entry);
+  assert.deepEqual(result.target_groups, ['unemployed']);
+  assert.equal(result.created_at, '2026-01-01');
+});
+
+test('summarizeDiff counts added, modified, removed, and unchanged keys', () => {
+  const result = __private.summarizeDiff({
+    type: 'replace',
+    added: { a: 1, b: 2 },
+    modified: { c: { before: 1, after: 2 } },
+    removed: { d: true },
+    unchanged: { e: true, f: true },
+  });
+
+  assert.deepEqual(result, {
+    type: 'replace',
+    addedCount: 2,
+    modifiedCount: 1,
+    removedCount: 1,
+    unchangedCount: 2,
+    totalChanges: 4,
+  });
+});
+
 test('loadTranslationsForDomains picks up translations from snapshot files', async () => {
   const tmpdir = await fs.mkdtemp(path.join(os.tmpdir(), 'systemfehler-translations-'));
   const originalCwd = process.cwd();
@@ -100,6 +131,38 @@ test('loadTranslationsForDomains picks up translations from snapshot files', asy
     const result = await __private.loadTranslationsForDomains(['benefits']);
     assert.deepEqual(Object.keys(result), ['entry-1']);
     assert.equal(result['entry-1'].en.title, 'Benefit');
+  } finally {
+    process.chdir(originalCwd);
+    await fs.rm(tmpdir, { recursive: true, force: true });
+  }
+});
+
+test('loadTranslationsForSingleEntry enriches a single entry from snapshots', async () => {
+  const tmpdir = await fs.mkdtemp(path.join(os.tmpdir(), 'systemfehler-single-translation-'));
+  const originalCwd = process.cwd();
+
+  try {
+    const dataDir = path.join(tmpdir, 'data', 'aid');
+    await fs.mkdir(dataDir, { recursive: true });
+    await fs.writeFile(
+      path.join(dataDir, 'entries.json'),
+      JSON.stringify({
+        entries: [
+          {
+            id: 'entry-99',
+            translations: {
+              en: { title: 'Aid', provenance: { source: 'test' }, timestamp: '2026-01-01' },
+            },
+          },
+        ],
+      }),
+      'utf8'
+    );
+
+    process.chdir(tmpdir);
+    const entry = await __private.loadTranslationsForSingleEntry({ id: 'entry-99', domain: 'aid' });
+    assert.equal(entry.translations.en.title, 'Aid');
+    assert.deepEqual(entry.translationLanguages, ['en']);
   } finally {
     process.chdir(originalCwd);
     await fs.rm(tmpdir, { recursive: true, force: true });

@@ -1,8 +1,9 @@
 import os
+import socket
 import unittest
 from unittest.mock import patch
 
-from backend.ai_service.provider import AIProviderError, NullProvider, get_provider
+from backend.ai_service.provider import AIProviderError, NullProvider, OllamaProvider, get_provider
 
 
 class AIProviderUnitTests(unittest.TestCase):
@@ -22,6 +23,15 @@ class AIProviderUnitTests(unittest.TestCase):
         with patch.dict(os.environ, {}, clear=True):
             provider = get_provider()
         self.assertEqual(provider.name, "none")
+
+    def test_ollama_timeout_becomes_provider_error(self):
+        provider = OllamaProvider()
+
+        with patch("urllib.request.urlopen", side_effect=socket.timeout("slow")):
+            with self.assertRaises(AIProviderError) as exc:
+                provider.generate_text(model="qwen2.5:3b", system_prompt="s", user_prompt="u")
+
+        self.assertIn("timed out", str(exc.exception).lower())
 
 
 if __name__ == "__main__":

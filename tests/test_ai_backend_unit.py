@@ -1,10 +1,13 @@
 import json
 import unittest
+from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 
-from backend.ai_service.cache import TTLCache, fingerprint_payload, normalize_query
+from backend.ai_service.cache import TTLCache, ai_cache, fingerprint_payload, normalize_query
 from backend.ai_service.gateway import app
+from backend.ai_service.provider import AIProviderError
+from backend.ai_service.schemas import Evidence
 
 
 client = TestClient(app)
@@ -18,6 +21,10 @@ def load_sample_entry():
 
 
 class AIBackendUnitTests(unittest.TestCase):
+    def setUp(self):
+        with ai_cache._lock:
+            ai_cache._store.clear()
+
     def test_normalize_query_collapses_whitespace_and_case(self):
         self.assertEqual(normalize_query("  Ich   BIN  arbeitslos  "), "ich bin arbeitslos")
 
@@ -52,6 +59,82 @@ class AIBackendUnitTests(unittest.TestCase):
         )
         self.assertIn("confidence", payload["metadata"]["topics"])
         self.assertIsInstance(payload["summary"], list)
+
+    def test_rewrite_endpoint_uses_deterministic_local_strategy(self):
+        with patch("backend.ai_service.endpoints.provider.name", "ollama"), patch(
+            "backend.ai_service.endpoints.provider.is_configured",
+            return_value=True,
+        ), patch("backend.ai_service.endpoints.LOCAL_REWRITE_STRATEGY", "deterministic"):
+            response = client.post("/rewrite", json={"query": "Ich habe meinen Job verloren. Was nun?"})
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertEqual(payload["provider"], "ollama")
+        self.assertIn("deterministic", payload["model"])
+        self.assertIn("jobcenter", payload["rewritten_query"])
+
+    def test_synthesize_endpoint_uses_extractive_fast_path(self):
+        fake_evidence = [
+            Evidence(
+                source="https://example.org",
+                content=json.dumps(
+                    {
+                        "title": "Buergergeld",
+                        "summary": {"de": "Kurzinfo"},
+                        "url": "https://example.org",
+                        "domain": "benefits",
+                    }
+                ),
+                confidence=0.91,
+            )
+        ]
+
+        with patch("backend.ai_service.endpoints.provider.name", "ollama"), patch(
+            "backend.ai_service.endpoints.LOCAL_SYNTHESIS_STRATEGY",
+            "extractive",
+        ), patch(
+            "backend.ai_service.endpoints.retrieve_evidence",
+            return_value=fake_evidence,
+        ):
+            response = client.post("/synthesize", json={"query": "Ich bin arbeitslos geworden. Was nun?"})
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertFalse(payload["fallback"])
+        self.assertIn("extractive", payload["model"])
+        self.assertTrue(payload["answer"].startswith("Wahrscheinlich zuerst relevant:"))
+        self.assertGreaterEqual(len(payload["evidence"]), 1)
+
+    def test_synthesize_endpoint_falls_back_when_provider_errors(self):
+        fake_evidence = [
+            Evidence(
+                source="https://example.org",
+                content=json.dumps(
+                    {
+                        "title": "Buergergeld",
+                        "summary": {"de": "Kurzinfo"},
+                        "url": "https://example.org",
+                        "domain": "benefits",
+                    }
+                ),
+                confidence=0.91,
+            )
+        ]
+
+        with patch("backend.ai_service.endpoints.LOCAL_SYNTHESIS_STRATEGY", "llm"), patch(
+            "backend.ai_service.endpoints.retrieve_evidence",
+            return_value=fake_evidence,
+        ), patch(
+            "backend.ai_service.endpoints.provider.generate_text",
+            side_effect=AIProviderError("provider exploded"),
+        ):
+            response = client.post("/synthesize", json={"query": "Buergergeld"})
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertTrue(payload["fallback"])
+        self.assertEqual(payload["explanation"], "provider exploded")
+        self.assertEqual(payload["sources"], ["https://example.org"])
 
     def test_health_endpoint_reports_provider_shape(self):
         response = client.get("/health")

@@ -676,6 +676,7 @@ export const __private = {
   mapDomainRow,
   buildMultilingual,
   withLegacyKeys,
+  summarizeDiff,
   attachTranslations,
   getLanguageColumns,
   buildPagination,

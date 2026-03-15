@@ -42,6 +42,38 @@ test('health endpoint reports database connectivity', async () => {
   });
 });
 
+test('health endpoint reports database disconnection', async () => {
+  await withServer(
+    async (baseUrl) => {
+      const response = await fetch(`${baseUrl}/api/health`);
+      assert.equal(response.status, 503);
+      const payload = await response.json();
+      assert.equal(payload.status, 'error');
+      assert.equal(payload.database, 'disconnected');
+      assert.match(payload.error, /db offline/);
+    },
+    {
+      dbModule: {
+        async query() {
+          throw new Error('db offline');
+        },
+        async closePool() {},
+      },
+    }
+  );
+});
+
+test('version endpoint returns service metadata', async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/version`);
+    assert.equal(response.status, 200);
+    const payload = await response.json();
+    assert.equal(payload.service, 'systemfehler-api');
+    assert.equal(payload.runtime, 'node-express');
+    assert.equal(payload.host.includes('127.0.0.1'), true);
+  });
+});
+
 test('entries endpoint forwards search requests to autocomplete query', async () => {
   const calls = [];
   await withServer(
@@ -70,6 +102,56 @@ test('entries endpoint forwards search requests to autocomplete query', async ()
   assert.equal(calls[0][1].limit, 12);
 });
 
+test('entries endpoint forwards non-search requests to getAllEntries', async () => {
+  const calls = [];
+  await withServer(
+    async (baseUrl) => {
+      const response = await fetch(`${baseUrl}/api/data/entries?domain=aid&status=active&limit=7&offset=14&includeTranslations=true`);
+      assert.equal(response.status, 200);
+      const payload = await response.json();
+      assert.equal(payload.total, 2);
+      assert.equal(payload.entries[1].id, 'entry-2');
+    },
+    {
+      queriesModule: {
+        async searchEntriesForAutocomplete() {
+          throw new Error('should not be called');
+        },
+        async getAllEntries(options) {
+          calls.push(options);
+          return { entries: [{ id: 'entry-1' }, { id: 'entry-2' }], total: 2, limit: 7, offset: 14 };
+        },
+      },
+    }
+  );
+
+  assert.deepEqual(calls[0], {
+    domain: 'aid',
+    status: 'active',
+    limit: 7,
+    offset: 14,
+    includeTranslations: true,
+  });
+});
+
+test('entries endpoint returns 500 on query failure', async () => {
+  await withServer(
+    async (baseUrl) => {
+      const response = await fetch(`${baseUrl}/api/data/entries`);
+      assert.equal(response.status, 500);
+      const payload = await response.json();
+      assert.equal(payload.error, 'Failed to fetch entries');
+    },
+    {
+      queriesModule: {
+        async getAllEntries() {
+          throw new Error('boom');
+        },
+      },
+    }
+  );
+});
+
 test('entry detail endpoint returns 404 for missing entry', async () => {
   await withServer(
     async (baseUrl) => {
@@ -82,6 +164,82 @@ test('entry detail endpoint returns 404 for missing entry', async () => {
       queriesModule: {
         async getEntryById() {
           return null;
+        },
+      },
+    }
+  );
+});
+
+test('moderation queue falls back to file when DB queue is empty', async () => {
+  await withServer(
+    async (baseUrl) => {
+      const response = await fetch(`${baseUrl}/api/data/moderation-queue`);
+      assert.equal(response.status, 200);
+      const payload = await response.json();
+      assert.equal(Array.isArray(payload.queue), true);
+      assert.equal(payload.total >= 1, true);
+      assert.equal(payload.queue[0].status, 'pending');
+    },
+    {
+      queriesModule: {
+        async getModerationQueue() {
+          return [];
+        },
+      },
+    }
+  );
+});
+
+test('quality report endpoint transforms query payload', async () => {
+  await withServer(
+    async (baseUrl) => {
+      const response = await fetch(`${baseUrl}/api/data/quality-report`);
+      assert.equal(response.status, 200);
+      const payload = await response.json();
+      assert.equal(payload.byDomain.benefits.totalEntries, 3);
+      assert.equal(payload.lowQualityEntries[0].title, 'Low quality');
+      assert.equal(payload.missingTranslations[0].missingEn, true);
+    },
+    {
+      queriesModule: {
+        async getQualityReport() {
+          return {
+            byDomain: [
+              {
+                domain: 'benefits',
+                total_entries: '3',
+                active_entries: '2',
+                avg_iqs: '77.1',
+                avg_ais: '74.6',
+                missing_en_translation: '1',
+                missing_easy_de_translation: '2',
+              },
+            ],
+            lowQualityEntries: [
+              { id: 'entry-1', domain: 'benefits', title_de: 'Low quality', url: 'https://example.org', iqs: '42.2', ais: '41.3' },
+            ],
+            missingTranslations: [
+              { id: 'entry-2', domain: 'aid', title_de: 'Missing', url: 'https://example.org/2', missing_en: true, missing_easy_de: false },
+            ],
+          };
+        },
+      },
+    }
+  );
+});
+
+test('quality report endpoint returns 500 on query failure', async () => {
+  await withServer(
+    async (baseUrl) => {
+      const response = await fetch(`${baseUrl}/api/data/quality-report`);
+      assert.equal(response.status, 500);
+      const payload = await response.json();
+      assert.equal(payload.error, 'Failed to fetch quality report');
+    },
+    {
+      queriesModule: {
+        async getQualityReport() {
+          throw new Error('report failed');
         },
       },
     }
