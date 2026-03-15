@@ -12,6 +12,7 @@ Endpoints:
     /health (GET)
 """
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 
 import time
 import os
@@ -25,6 +26,17 @@ AI_HOST = os.environ.get("AI_HOST", "0.0.0.0")
 provider = get_provider()
 
 app = FastAPI()
+
+raw_origins = os.environ.get("CORS_ORIGIN", "http://localhost:5173,http://localhost:5174")
+allowed_origins = [origin.strip() for origin in raw_origins.split(",") if origin.strip()]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(router)
 
 @app.middleware("http")

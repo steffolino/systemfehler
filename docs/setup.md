@@ -179,6 +179,10 @@ npm run ai:api:ollama
 The AI tab will show sidecar/provider health, fallback state, rewritten query,
 synthesized answer, and evidence entries.
 
+`npm run dev:all` now also starts or reuses a local Ollama instance through the
+repo helper script, so local full-stack development can bring up API, frontend,
+AI sidecar, Ollama, and Docker-backed services together.
+
 ---
 
 ## Database Setup
