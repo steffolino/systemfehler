@@ -52,10 +52,7 @@ These are public frontend values and are injected at build time by
 4. In **Pages -> Settings -> Environment variables / Secrets**, add server-side secrets:
    - `TURNSTILE_SECRET_KEY`
    - `INGEST_TOKEN`
-   - `GITHUB_OAUTH_CLIENT_SECRET`
-   - `ADMIN_SESSION_SECRET`
 5. In **Pages -> Settings -> Environment variables**, add non-secret values if they are consumed by Functions:
-   - `ADMIN_ALLOWLIST`
    - `PAGES_BASE_URL` (for example `https://systemfehler.pages.dev`)
 
 ## Deployment Trigger
@@ -76,14 +73,13 @@ Deployment runs from `.github/workflows/deploy-pages.yml` on:
 
 ## Required Environment Variables
 
-- GITHUB_OAUTH_CLIENT_ID
-- GITHUB_OAUTH_CLIENT_SECRET
-- ADMIN_SESSION_SECRET
-- ADMIN_ALLOWLIST
+- VITE_AUTH0_DOMAIN
+- VITE_AUTH0_CLIENT_ID
 
 ## Setup Notes
 
-- Set these in your Cloudflare Pages project environment variables.
-- Session cookie is HttpOnly, Secure, SameSite=Lax.
+- The active frontend admin flow uses Auth0, not the legacy Pages-native GitHub
+  auth routes in `cloudflare-pages/functions/api/auth/github/*`.
+- Set Auth0 values through the GitHub Actions frontend build variables.
 - Only /admin is protected; public search stays open.
 - For local dev, use VITE_API_URL to point frontend to your backend.

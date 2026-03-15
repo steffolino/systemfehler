@@ -1,9 +1,9 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useMemo, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
 import SearchInput from "../SearchInput";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
+import { useAppAuth } from "@/lib/auth";
 
 const ROLES_CLAIM = "https://systemfehler/roles";
 
@@ -22,8 +22,8 @@ export function Header() {
   const [searchValue, setSearchValue] = useState("");
   const { locale, setLocale, t } = useI18n();
 
-  const { isAuthenticated, loginWithRedirect, logout, user, isLoading } =
-    useAuth0();
+  const { isAuthenticated, loginWithRedirect, logout, user, isLoading, isConfigured } =
+    useAppAuth();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -157,7 +157,7 @@ export function Header() {
               </Button>
             )}
 
-            {!isAuthenticated && !isLoading && (
+            {isConfigured && !isAuthenticated && !isLoading && (
               <Button variant="outline" size="sm" onClick={handleLogin}>
                 {t("nav.login")}
               </Button>

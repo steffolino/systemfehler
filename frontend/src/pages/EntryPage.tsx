@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
 
 import { api, getEntrySourceMeta } from '../lib/api';
 import type { Entry, Provenance } from '../lib/api';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/lib/i18n';
+import { useAppAuth } from '@/lib/auth';
 
 const ROLES_CLAIM = 'https://systemfehler/roles';
 
@@ -83,7 +83,7 @@ function SectionCard({ title, children }: { title: string; children: React.React
 
 export default function EntryPage() {
   const { id } = useParams<{ id?: string }>();
-  const { user } = useAuth0();
+  const { user } = useAppAuth();
   const { locale, t } = useI18n();
   const dateLocale = locale === 'de' ? 'de-DE' : 'en-US';
 

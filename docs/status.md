@@ -82,6 +82,10 @@ crawling logic to these files.
 | Pages Functions API | ✅ Working | Worker-safe handlers for `/api/health`, `/api/status`, `/api/data/entries`, `/api/data/entries/:id`, `/api/data/moderation-queue`, `/api/data/quality-report` |
 | D1 schema (`cloudflare-pages/d1/schema.sql`) | ✅ Working | Includes `entries` and `moderation_queue` tables |
 
+The current Cloudflare Pages deployment path uses Auth0 for `/admin`. The
+legacy Pages-native GitHub auth function stubs remain in the repo but are not
+required for the active frontend.
+
 ### Automated ingest (`.github/workflows/crawl-and-ingest.yml`)
 
 | Component | Status | Notes |

@@ -64,8 +64,6 @@ For bot protection and Auth0-enabled frontend builds, configure:
 ### Cloudflare Pages secrets
 
 - `TURNSTILE_SECRET_KEY`
-- `GITHUB_OAUTH_CLIENT_SECRET`
-- `ADMIN_SESSION_SECRET`
 
 ### GitHub Actions variables
 
