@@ -174,13 +174,22 @@ def crawl_seeded_domain(domain: str, source: str, output_dir: str):
 
         output_path = os.path.join(output_dir, domain, 'candidates.json')
         crawler.save_candidates(entries, output_path)
+        metrics_path = os.path.join(output_dir, domain, 'crawl_metrics.json')
+        metrics = crawler.save_metrics(metrics_path)
 
         existing_entries_path = os.path.join(output_dir, domain, 'entries.json')
         if os.path.exists(existing_entries_path):
             logger.info(f"Generating diffs against existing {domain} entries")
             generate_diffs(entries, existing_entries_path, output_dir, domain)
 
-        logger.info(f"{domain} crawl completed successfully. {len(entries)} entries extracted.")
+        logger.info(
+            "%s crawl completed successfully. entries=%s avg_iqs=%s avg_ais=%s metrics=%s",
+            domain,
+            len(entries),
+            metrics['quality']['avgIqs'],
+            metrics['quality']['avgAis'],
+            metrics_path,
+        )
         return True
     except Exception as e:
         logger.error(f"{domain} crawl failed: {e}", exc_info=True)

@@ -43,6 +43,7 @@ crawling logic to these files.
 | `crawlers/contacts/seeded_crawler.py` | ✅ Working | Crawls seeded contact URLs from `data/contacts/urls.json` |
 | `crawlers/shared/link_expander.py` | ✅ Working | Python link discovery and URL queue expansion (CRAWL-03) |
 | `data/<domain>/url_status.jsonl` | ✅ Working | Persistent URL crawl state for redirects, canonical aliases, and skip-worthy failures |
+| `data/<domain>/crawl_metrics.json` | ✅ Working | Per-run crawl metrics with quality averages, failure reasons, source-tier distribution, and improvement hints |
 
 ### Node.js API (`backend/`)
 

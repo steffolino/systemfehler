@@ -16,6 +16,7 @@ from typing import Any, Dict, List, Optional
 from bs4 import BeautifulSoup
 
 from .base_crawler import BaseCrawler
+from .crawl_metrics import CrawlMetrics
 from .quality_scorer import QualityScorer
 from .source_registry import SourceProfile, SourceRegistry
 from .url_registry import URLRegistry
@@ -42,12 +43,14 @@ class SeededDomainCrawler(BaseCrawler):
         self.validator = SchemaValidator()
         self.url_registry = URLRegistry(str(self.data_dir), domain, self.normalize_url)
         self.source_registry = SourceRegistry(self.data_dir)
+        self.metrics = CrawlMetrics(domain, crawler_name)
 
     # ------------------------------
     # Public API
     # ------------------------------
     def crawl(self) -> List[Dict[str, Any]]:
         urls = self._load_seed_urls()
+        self.metrics.note_seed_urls(urls)
         entries: List[Dict[str, Any]] = []
 
         try:
@@ -74,6 +77,14 @@ class SeededDomainCrawler(BaseCrawler):
 
         output_file.write_text(json.dumps(output_data, indent=2, ensure_ascii=False), encoding='utf-8')
         self.logger.info(f"Saved {len(entries)} candidate entries to {output_file}")
+
+    def save_metrics(self, output_path: str) -> Dict[str, Any]:
+        output_file = Path(output_path)
+        output_file.parent.mkdir(parents=True, exist_ok=True)
+        report = self.metrics.build_report(self.url_registry.iter_records())
+        output_file.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding='utf-8')
+        self.logger.info("Saved crawl metrics to %s", output_file)
+        return report
 
     # ------------------------------
     # Overridables
@@ -189,6 +200,7 @@ class SeededDomainCrawler(BaseCrawler):
     def _crawl_single_url(self, url: str) -> Optional[Dict[str, Any]]:
         response = self.fetch_page_details(url)
         if not response:
+            self.metrics.note_url_status('fetch_failed', reason='fetch_failed')
             self.url_registry.record(
                 url,
                 status='fetch_failed',
@@ -204,6 +216,7 @@ class SeededDomainCrawler(BaseCrawler):
         canonical_url = self._extract_canonical_url(soup, base_url=final_url) or final_url
 
         if final_url != self.normalize_url(url):
+            self.metrics.note_url_status('redirect_alias', reason='http_redirect')
             self.url_registry.record(
                 url,
                 status='redirect_alias',
@@ -216,6 +229,7 @@ class SeededDomainCrawler(BaseCrawler):
             )
 
         if canonical_url != final_url:
+            self.metrics.note_url_status('canonical_alias', reason='head_canonical')
             self.url_registry.record(
                 final_url,
                 status='canonical_alias',
@@ -258,6 +272,7 @@ class SeededDomainCrawler(BaseCrawler):
 
         validation = self.validator.validate_entry(entry, self.domain)
         if not validation['valid']:
+            self.metrics.note_url_status('validation_failed', reason='validation_failed')
             self.logger.error(f"Validation failed for {entry.get('id')} ({url})")
             for error in validation['errors']:
                 self.logger.error(f"  - {error}")
@@ -272,6 +287,8 @@ class SeededDomainCrawler(BaseCrawler):
             )
             return None
 
+        self.metrics.note_url_status('ok')
+        self.metrics.note_entry(entry)
         return entry
 
     def _build_base_entry(
