@@ -127,7 +127,61 @@ CRAWLER_RATE_LIMIT_DELAY=2000
 
 # OpenAI (for existing LLM features - optional)
 OPENAI_API_KEY=sk-your-api-key-here
+
+# AI sidecar provider selection
+# AI_PROVIDER=none|ollama|openai
+AI_PROVIDER=none
+AI_DEFAULT_MODEL=disabled
+# Ollama example:
+# AI_PROVIDER=ollama
+# OLLAMA_BASE_URL=http://127.0.0.1:11434
+# AI_DEFAULT_MODEL=llama3.1:8b
+# OpenAI example:
+# AI_PROVIDER=openai
+# OPENAI_API_KEY=sk-your-api-key-here
+# AI_DEFAULT_MODEL=gpt-4o-mini
 ```
+
+### Ollama quick start
+
+If you want local no-per-call-cost AI:
+
+```bash
+ollama serve
+ollama pull llama3.1:8b
+```
+
+Recommended local env:
+
+```bash
+AI_PROVIDER=ollama
+OLLAMA_BASE_URL=http://127.0.0.1:11434
+AI_DEFAULT_MODEL=llama3.1:8b
+AI_MODEL_REWRITE=llama3.1:8b
+AI_MODEL_SYNTHESIZE=llama3.1:8b
+AI_MODEL_ENRICH=llama3.1:8b
+VITE_AI_API_URL=http://localhost:8002
+```
+
+Then run:
+
+```bash
+npm run ai:api
+npm run dev
+```
+
+Or use the Ollama-flavoured helper script:
+
+```bash
+npm run ai:api:ollama
+```
+
+The AI tab will show sidecar/provider health, fallback state, rewritten query,
+synthesized answer, and evidence entries.
+
+`npm run dev:all` now also starts or reuses a local Ollama instance through the
+repo helper script, so local full-stack development can bring up API, frontend,
+AI sidecar, Ollama, and Docker-backed services together.
 
 ---
 

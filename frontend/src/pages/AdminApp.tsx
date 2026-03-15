@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
+import { useAppAuth } from '@/lib/auth';
 
 const ROLES_CLAIM = 'https://systemfehler/roles';
 
@@ -17,7 +17,7 @@ function getDisplayName(user: Record<string, unknown> | undefined) {
 }
 
 export default function AdminApp() {
-  const { isAuthenticated, loginWithRedirect, logout, user, isLoading } = useAuth0();
+  const { isAuthenticated, loginWithRedirect, logout, user, isLoading, isConfigured } = useAppAuth();
 
   const roles = useMemo(() => {
     const rawRoles = user?.[ROLES_CLAIM as keyof typeof user];
@@ -28,6 +28,22 @@ export default function AdminApp() {
   const displayName = getDisplayName(user as Record<string, unknown> | undefined);
   const email =
     typeof user?.email === 'string' && user.email ? user.email : null;
+
+  if (!isConfigured) {
+    return (
+      <div className="mx-auto flex min-h-[60vh] w-full max-w-3xl items-center justify-center p-6">
+        <Card className="w-full max-w-xl p-8 text-center">
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border text-lg font-semibold">
+            A
+          </div>
+          <h1 className="text-2xl font-semibold tracking-tight">Admin authentication unavailable</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Public search is available, but admin access is disabled until Auth0 is configured for this environment.
+          </p>
+        </Card>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (

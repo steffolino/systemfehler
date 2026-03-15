@@ -55,6 +55,60 @@
         "easy_de": "Lernen und Schule"
       },
       "children": []
+    },
+    {
+      "id": "aid",
+      "label": {
+        "de": "Hilfe und Unterstützung",
+        "en": "Aid and Support",
+        "easy_de": "Hilfe"
+      },
+      "children": []
+    },
+    {
+      "id": "digital_service",
+      "label": {
+        "de": "Digitale Dienste",
+        "en": "Digital Services",
+        "easy_de": "Online-Hilfe"
+      },
+      "children": []
+    },
+    {
+      "id": "tools",
+      "label": {
+        "de": "Werkzeuge und Rechner",
+        "en": "Tools and Calculators",
+        "easy_de": "Werkzeuge"
+      },
+      "children": []
+    },
+    {
+      "id": "organizations",
+      "label": {
+        "de": "Organisationen",
+        "en": "Organizations",
+        "easy_de": "Organisationen"
+      },
+      "children": []
+    },
+    {
+      "id": "contacts",
+      "label": {
+        "de": "Kontaktstellen",
+        "en": "Contact Points",
+        "easy_de": "Kontakte"
+      },
+      "children": []
+    },
+    {
+      "id": "public_service",
+      "label": {
+        "de": "Öffentliche Dienste",
+        "en": "Public Services",
+        "easy_de": "Ämter-Hilfe"
+      },
+      "children": []
     }
   ],
   "_todo": [

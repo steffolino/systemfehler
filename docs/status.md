@@ -1,6 +1,6 @@
 # Systemfehler – Implementation Status
 
-> **Last updated:** 2026-03-14
+> **Last updated:** 2026-03-15
 >
 > Major frontend and admin dashboard improvements, TypeScript config enhancements, new reusable components, and expanded test coverage were completed in the latest session. The frontend is now fully integrated as part of the monorepo (no separate git repo). See below for details.
 
@@ -9,8 +9,10 @@ code, also see `docs/current-state.md`.
 
 Verification note:
 
-- Validation was re-run on 2026-03-15 after data/schema reconciliation.
-- Current result: 25 entries, 0 schema/structural errors, 0 lint warnings.
+- Validation was re-run on 2026-03-15 after the seeded crawl scaling pass.
+- Current result: 1006 entries, 0 schema/structural errors, 994 lint warnings.
+- The remaining warnings are currently dominated by missing Easy German
+  translations on newly promoted seeded entries.
 
 ---
 
@@ -44,7 +46,8 @@ crawling logic to these files.
 | `crawlers/shared/link_expander.py` | ✅ Working | Python link discovery and URL queue expansion (CRAWL-03) |
 | `data/<domain>/seeds.json` | ✅ Working | Curated high-value seed manifests for seeded domains; `urls.json` remains the expanded queue |
 | `data/<domain>/url_status.jsonl` | ✅ Working | Persistent URL crawl state for redirects, canonical aliases, and skip-worthy failures |
-| Provenance source metadata | ✅ Working | Crawlers emit `sourceTier`, `institutionType`, `jurisdiction`, and publication timestamps in `provenance` when detectable |
+| `data/<domain>/crawl_metrics.json` | ✅ Working | Per-run crawl metrics with quality averages, failure reasons, source-tier distribution, and improvement hints |
+| `scripts/promote_candidates_to_snapshots.py` | ✅ Working | Deterministic promotion filter that merges only high-quality crawler candidates into canonical snapshots |
 
 ### Node.js API (`backend/`)
 
@@ -65,16 +68,35 @@ crawling logic to these files.
 | Component | Status |
 |-----------|--------|
 | Vite + React admin panel | ✅ Working |
+| Public source directory (`/sources`) | ✅ Working | Aggregates visible sources from entry provenance with tier, jurisdiction, domain coverage, and average quality signals |
+| Backend unit-test harness | ✅ Working | `node:test` covers Express/query helpers and `unittest` covers AI sidecar cache/provider/endpoints without extra dependencies |
+| Public AI search mode | ✅ Working | AI search is now the default public search mode; classic search remains available as article-based search |
+| Frontend language toggle | 🟡 Experimental | Lightweight app-level `de` / `en` UI translation support exists for the public shell and search/source pages |
 | Data preview, quality metrics, moderation queue views | ✅ Working |
-| Search source filters | ✅ Working |
+| AI search tab | 🟡 Experimental |
 
 ### Cloudflare Pages (`cloudflare-pages/`)
 
 | Component | Status | Notes |
 |-----------|--------|-------|
-| Pages deploy workflow (`.github/workflows/deploy-pages.yml`) | ✅ Working | Frontend build uses `VITE_API_URL=/api`; deploy runs with `wrangler@4.71.0` and `--cwd=cloudflare-pages` |
+| Pages deploy workflow (`.github/workflows/deploy-pages.yml`) | ✅ Working | Frontend build uses `VITE_API_URL=/api` and injects public frontend vars for Turnstile/Auth0; deploy runs with `wrangler@4.71.0` and `--cwd=cloudflare-pages` |
 | Pages Functions API | ✅ Working | Worker-safe handlers for `/api/health`, `/api/status`, `/api/data/entries`, `/api/data/entries/:id`, `/api/data/moderation-queue`, `/api/data/quality-report` |
 | D1 schema (`cloudflare-pages/d1/schema.sql`) | ✅ Working | Includes `entries` and `moderation_queue` tables |
+
+The current Cloudflare Pages deployment path uses Auth0 for `/admin`. The
+The same deployment now has an experimental same-origin Workers AI path at
+`/api/ai/*`, backed by Pages bindings `DB` and `AI`, with Turnstile protecting
+public AI requests when `TURNSTILE_SECRET_KEY` is configured.
+
+The D1 schema/runtime path also depends on the `entry_json` column for full
+entry hydration inside Pages Functions and Workers AI retrieval.
+
+The Pages AI layer now also applies per-IP rate limiting and short edge-cache
+TTL responses for rewrite, retrieve, and synthesize to reduce repeated Workers
+AI cost on common prompts.
+
+legacy Pages-native GitHub auth function stubs remain in the repo but are not
+required for the active frontend.
 
 ### Automated ingest (`.github/workflows/crawl-and-ingest.yml`)
 
@@ -92,7 +114,7 @@ crawling logic to these files.
 - All IDs are UUID strings, not objects.
 - Datetime serialization allows `None` and uses ISO format.
 - Moderation queue format is canonical and validated.
-- Provenance accepts additional metadata such as `sourceTier`, `institutionType`, `jurisdiction`, `publishedAt`, `modifiedAt`, and `contentType`.
+- Seeded snapshot promotion is now deterministic and taxonomy-aware.
 
 **Infra/config:**
 - Backend and scripts now use the `PORT` environment variable for configuration (no more hardcoded ports).
@@ -180,6 +202,22 @@ in Python and available through the CLI and npm wrappers.
 
 
 
+## Current scaled dataset
+
+Validated canonical snapshot counts after the March 15 crawl/promotion pass:
+
+| Domain | Entries |
+|--------|---------|
+| `benefits` | 5 |
+| `aid` | 140 |
+| `tools` | 127 |
+| `organizations` | 379 |
+| `contacts` | 355 |
+| **Total** | **1006** |
+
+The local PostgreSQL refresh path (`npm run db:seed`) was re-run successfully
+against this 1006-entry corpus.
+
 ## Next planned work
 
 - Finalize and document the canonical moderation queue format; ensure file and DB backends are fully interchangeable.
@@ -187,7 +225,8 @@ in Python and available through the CLI and npm wrappers.
 - Expand test coverage for edge cases (e.g., missing/optional fields, invalid UUIDs, datetime `None`).
 - Begin implementing Phase 4 of the AI roadmap (AI-assisted metadata tagging, duplicate detection, etc.).
 - Add more detailed logging and cost tracking for all AI/model calls.
-- Thread structured source metadata into retrieval ranking and frontend filtering.
+- Improve Easy German coverage on newly promoted seeded entries to reduce the
+  remaining validator warnings.
 - Regularly update `docs/status.md` and `docs/ai-roadmap.md` as new features are stabilized.
 
 See open issues and `IMPLEMENTATION_SUMMARY.md` for details.
@@ -213,3 +252,11 @@ Expanded URL queues are now available for all domains, enabling broader crawling
 ## Crawler coverage summary
 
 All seeded domain crawlers (aid, tools, organizations, contacts) are implemented and working. Link expansion is fully integrated and operational. Moderation queue format is canonical and validated. See above for details.
+### AI sidecar (`backend/ai_service/`)
+
+| Component | Status | Notes |
+|-----------|--------|-------|
+| FastAPI gateway | ✅ Working | Runs via `npm run ai:api` |
+| Provider adapter layer | ✅ Working | Supports `AI_PROVIDER=none|ollama|openai` |
+| Query rewrite / synthesize / enrich endpoints | 🟡 Experimental | Real provider calls when configured; graceful fallback when disabled or unreachable |
+| Structured metadata enrichment suggestions | ✅ Working | `/enrich` returns deterministic-first suggestions for `topics`, `tags`, `target_groups`, and `keywords`, with quality flags and admin-facing rationale |

@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from bs4 import BeautifulSoup
 
 from ..shared.seeded_domain_crawler import SeededDomainCrawler
+from ..shared.source_registry import SourceProfile
 
 
 class SeededAidCrawler(SeededDomainCrawler):
@@ -24,7 +25,7 @@ class SeededAidCrawler(SeededDomainCrawler):
         return ['financial_support', 'aid']
 
     def default_tags(self) -> List[str]:
-        return ['application_required', 'public_service']
+        return ['aid']
 
     def default_target_groups(self) -> List[str]:
         return ['families', 'single_parents', 'general_public']
@@ -34,7 +35,7 @@ class SeededAidCrawler(SeededDomainCrawler):
         url: str,
         soup: BeautifulSoup,
         entry: Dict[str, Any],
-        seed: Dict[str, Any] | None = None,
+        source_profile: Optional[SourceProfile] = None,
     ) -> Dict[str, Any]:
         title = str(entry.get('title') or '').lower()
         summary = str((entry.get('summary') or {}).get('de') or '').lower()
@@ -42,13 +43,11 @@ class SeededAidCrawler(SeededDomainCrawler):
 
         aid_type = 'advisory'
         modality = 'information'
-        if any(token in text for token in ('geld', 'zuschlag', 'finanz', 'leistung', 'unterhalt')):
+        if any(token in text for token in ('geld', 'zuschlag', 'finanz', 'leistung', 'unterhalt', 'buergergeld', 'bürgergeld')):
             aid_type = 'financial'
             modality = 'application'
 
-        provider = 'Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend'
-        if 'arbeitsagentur.de' in url:
-            provider = 'Bundesagentur für Arbeit'
+        provider = source_profile.name if source_profile else 'Unbekannte Organisation'
 
         return {
             'aidType': aid_type,

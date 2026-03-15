@@ -6,7 +6,11 @@
     { "id": "time_limited", "label": { "de": "Zeitlich begrenzt", "en": "Time-limited" } },
     { "id": "means_tested", "label": { "de": "Einkommensabhängig", "en": "Means-tested" } },
     { "id": "application_required", "label": { "de": "Antrag erforderlich", "en": "Application required" } },
-    { "id": "automatic", "label": { "de": "Automatisch", "en": "Automatic" } }
+    { "id": "automatic", "label": { "de": "Automatisch", "en": "Automatic" } },
+    { "id": "aid", "label": { "de": "Hilfe", "en": "Aid" } },
+    { "id": "tool", "label": { "de": "Werkzeug", "en": "Tool" } },
+    { "id": "contact", "label": { "de": "Kontakt", "en": "Contact" } },
+    { "id": "organization", "label": { "de": "Organisation", "en": "Organization" } }
   ],
   "_todo": [
     "TODO: Expand tags based on crawler output analysis",

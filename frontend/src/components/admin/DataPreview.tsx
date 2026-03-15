@@ -3,6 +3,7 @@ import { api, getEntryTitleText, type Entry } from '../../lib/api';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
+import { MetadataEnrichmentCard } from './MetadataEnrichmentCard';
 
 const DOMAINS = ['benefits', 'aid', 'tools', 'organizations', 'contacts'];
 
@@ -198,6 +199,7 @@ export function DataPreview() {
                                     {entry.translationLanguages.join(', ')}
                                   </div>
                                 )}
+                                <MetadataEnrichmentCard entry={entry} autoLoad={false} />
                                 <details>
                                   <summary className="cursor-pointer font-semibold">
                                     Raw JSON

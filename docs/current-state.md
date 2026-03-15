@@ -72,7 +72,11 @@ High-confidence implemented areas confirmed in code:
 - Express API in `backend/server.js`
 - Cloudflare Pages Functions API in `cloudflare-pages/functions/api`
 - React frontend and admin shell in `frontend/src`
-- provenance-aware search filtering in the React frontend and local/API query paths
+- Public source transparency page at `frontend/src/pages/SourcesPage.tsx` aggregates visible provenance into a browseable source directory
+- Public search now defaults to the AI retrieval flow, with the old standard mode retained as article-based search
+- Lightweight `de` / `en` frontend i18n scaffolding exists via `frontend/src/lib/i18n.tsx`
+- Basic backend test harnesses now exist for the Express API (`node:test`) and AI sidecar (`unittest`)
+- Admin raw-entry review now includes structured metadata-enrichment suggestions (`topics`, `tags`, `target_groups`, `keywords`) from the AI sidecar for editor review
 - URL canonicalization helpers in `services/_shared/url_normalization.js`
 - URL canonicalization tests in `tests/url_canonicalization_test.js`
 
@@ -83,8 +87,10 @@ Important verification finding:
 - That mismatch has now been resolved by migrating snapshot entries to the
   canonical `title` string contract while preserving Easy German titles in
   `translations["de-LEICHT"]`.
-- Current validation result: 25 entries, 0 schema/structural errors, 0 lint
-  warnings.
+- Current validation result after the March 15 crawl/promotion pass:
+  1006 entries, 0 schema/structural errors, 994 lint warnings.
+- The remaining warnings are largely missing Easy German translations on newly
+  promoted seeded entries, not schema failures.
 
 Implemented but still mixed or incomplete:
 
@@ -184,6 +190,35 @@ If a doc conflicts with code, use this order:
 3. `docs/current-state.md`
 4. `README.md`
 5. planning/reference docs
+
+## Snapshot Scale State
+
+The canonical snapshot corpus is no longer the original 25-entry bootstrap
+set. Current validated counts are:
+
+- `benefits`: 5
+- `aid`: 140
+- `tools`: 127
+- `organizations`: 379
+- `contacts`: 355
+- total: 1006
+
+That corpus is now also loaded into the local PostgreSQL database via
+`npm run db:seed`.
+
+The key new workflow addition is deterministic seeded promotion:
+
+- crawler output lands in `data/<domain>/candidates.json`
+- `scripts/promote_candidates_to_snapshots.py` applies quality/source/taxonomy
+  filters
+- only accepted candidates are merged into canonical `data/<domain>/entries.json`
+
+This is now the safest path for scaling entry volume without letting raw crawl
+noise overwrite the published dataset.
+
+Cloudflare Pages deployment was also corrected to package same-origin snapshot
+fallback assets (`data/*` and `moderation/review_queue.json`) into the Pages
+artifact, not just the compiled frontend bundle.
 
 ## Recommended Cleanup Next
 
