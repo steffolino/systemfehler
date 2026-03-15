@@ -66,6 +66,9 @@ High-confidence implemented areas confirmed in code:
 - Cloudflare Pages Functions API in `cloudflare-pages/functions/api`
 - React frontend and admin shell in `frontend/src`
 - Public source transparency page at `frontend/src/pages/SourcesPage.tsx` aggregates visible provenance into a browseable source directory
+- Public search now defaults to the AI retrieval flow, with the old standard mode retained as article-based search
+- Lightweight `de` / `en` frontend i18n scaffolding exists via `frontend/src/lib/i18n.tsx`
+- Basic backend test harnesses now exist for the Express API (`node:test`) and AI sidecar (`unittest`)
 - Admin raw-entry review now includes structured metadata-enrichment suggestions (`topics`, `tags`, `target_groups`, `keywords`) from the AI sidecar for editor review
 - URL canonicalization helpers in `services/_shared/url_normalization.js`
 - URL canonicalization tests in `tests/url_canonicalization_test.js`

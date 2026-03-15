@@ -65,6 +65,9 @@ crawling logic to these files.
 |-----------|--------|
 | Vite + React admin panel | ✅ Working |
 | Public source directory (`/sources`) | ✅ Working | Aggregates visible sources from entry provenance with tier, jurisdiction, domain coverage, and average quality signals |
+| Backend unit-test harness | ✅ Working | `node:test` covers Express/query helpers and `unittest` covers AI sidecar cache/provider/endpoints without extra dependencies |
+| Public AI search mode | ✅ Working | AI search is now the default public search mode; classic search remains available as article-based search |
+| Frontend language toggle | 🟡 Experimental | Lightweight app-level `de` / `en` UI translation support exists for the public shell and search/source pages |
 | Data preview, quality metrics, moderation queue views | ✅ Working |
 | AI search tab | 🟡 Experimental |
 

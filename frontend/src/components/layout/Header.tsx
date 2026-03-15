@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import SearchInput from "../SearchInput";
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/lib/i18n";
 
 const ROLES_CLAIM = "https://systemfehler/roles";
 
@@ -19,6 +20,7 @@ function getDisplayName(user: Record<string, unknown> | undefined) {
 
 export function Header() {
   const [searchValue, setSearchValue] = useState("");
+  const { locale, setLocale, t } = useI18n();
 
   const { isAuthenticated, loginWithRedirect, logout, user, isLoading } =
     useAuth0();
@@ -61,10 +63,10 @@ export function Header() {
   };
 
   const subtitle = isAdminRoute
-    ? "Admin workspace"
+    ? t("app.admin_workspace")
     : isSourcesRoute
-      ? "Source transparency"
-    : "Search and validate entries";
+      ? t("app.source_transparency")
+    : t("app.search_validate");
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
@@ -93,7 +95,7 @@ export function Header() {
                 </div>
 
                 <div className="text-xs text-muted-foreground">
-                  {isAdmin ? "Admin access" : "Authenticated"}
+                  {isAdmin ? t("auth.admin_access") : t("auth.authenticated")}
                 </div>
               </div>
             )}
@@ -105,17 +107,25 @@ export function Header() {
                 navbar
                 value={searchValue}
                 onChange={setSearchValue}
+                placeholder={t("search.article_placeholder")}
               />
             </div>
           )}
 
           <div className="flex flex-wrap items-center gap-2">
             <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setLocale(locale === "de" ? "en" : "de")}
+            >
+              {locale.toUpperCase()}
+            </Button>
+            <Button
               variant={isSourcesRoute ? "default" : "outline"}
               size="sm"
               onClick={() => navigate("/sources")}
             >
-              Sources
+              {t("nav.sources")}
             </Button>
 
             {/* Admin button only when logged in */}
@@ -125,7 +135,7 @@ export function Header() {
                 size="sm"
                 onClick={handleAdminClick}
               >
-                Admin
+                {t("nav.admin")}
               </Button>
             )}
 
@@ -136,19 +146,19 @@ export function Header() {
                 size="sm"
                 onClick={() => navigate("/")}
               >
-                Search
+                {t("nav.search")}
               </Button>
             )}
 
             {!isAuthenticated && !isLoading && (
               <Button variant="outline" size="sm" onClick={handleLogin}>
-                Login
+                {t("nav.login")}
               </Button>
             )}
 
             {isAuthenticated && (
               <Button variant="outline" size="sm" onClick={handleLogout}>
-                Logout
+                {t("nav.logout")}
               </Button>
             )}
           </div>
@@ -157,13 +167,13 @@ export function Header() {
         {displayName && (
           <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground lg:hidden">
             <span className="truncate">{displayName}</span>
-            <span>{isAdmin ? "Admin access" : "Authenticated"}</span>
+            <span>{isAdmin ? t("auth.admin_access") : t("auth.authenticated")}</span>
           </div>
         )}
 
         {isEntryRoute && (
           <div className="mt-3 text-xs text-muted-foreground">
-            Viewing entry details
+            {t("app.viewing_entry")}
           </div>
         )}
       </div>

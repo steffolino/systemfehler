@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { api, type SourceCatalogItem } from '@/lib/api';
+import { useI18n } from '@/lib/i18n';
 
 function prettyLabel(value: string) {
   if (!value) return 'unknown';
@@ -10,6 +11,7 @@ function prettyLabel(value: string) {
 }
 
 export default function SourcesPage() {
+  const { t } = useI18n();
   const [sources, setSources] = useState<SourceCatalogItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -50,9 +52,9 @@ export default function SourcesPage() {
     <div className="mx-auto w-full max-w-6xl p-4 md:p-6">
       <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Sources</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">{t('sources.title')}</h1>
           <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
-            Transparent overview of the organizations and institutions behind the current entries, including source type, jurisdiction, and basic data-quality signals.
+            {t('sources.subtitle')}
           </p>
         </div>
 
@@ -60,7 +62,7 @@ export default function SourcesPage() {
           <input
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            placeholder="Filter sources..."
+            placeholder={t('sources.filter')}
             className="h-10 w-full rounded-md border bg-background px-3 text-sm"
           />
         </div>
@@ -118,11 +120,11 @@ export default function SourcesPage() {
                   </div>
 
                   {source.sampleUrl && (
-                    <Button asChild variant="outline" size="sm">
-                      <a href={source.sampleUrl} target="_blank" rel="noopener noreferrer">
-                        Open source
-                      </a>
-                    </Button>
+                        <Button asChild variant="outline" size="sm">
+                          <a href={source.sampleUrl} target="_blank" rel="noopener noreferrer">
+                            {t('sources.open')}
+                          </a>
+                        </Button>
                   )}
                 </div>
 

@@ -40,6 +40,9 @@
     "llm:costs": "node scripts/report_llm_costs.js",
     "test:url-normalization": "node tests/url_canonicalization_test.js",
     "test:roundtrip": "node tests/db_roundtrip_translations_test.js",
+    "test:backend:js": "node --test tests/backend_queries.test.js tests/backend_server.test.js",
+    "test:backend:py": "python -m unittest tests.test_ai_backend_unit tests.test_ai_provider_unit",
+    "test:backend": "npm run test:backend:js && npm run test:backend:py",
     "build:frontend": "cd frontend && npm run build",
     "deploy:all": "python crawlers/cli.py crawl benefits --source arbeitsagentur && python crawlers/cli.py validate --domain benefits && python crawlers/cli.py import --domain benefits --to-db && wrangler d1 execute systemfehler-db --remote --file=cloudflare-pages/d1/schema.sql && wrangler deploy --config wrangler.toml && wrangler pages deploy"
   },

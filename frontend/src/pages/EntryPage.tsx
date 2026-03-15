@@ -6,6 +6,7 @@ import { api, getEntrySourceMeta } from '../lib/api';
 import type { Entry, Provenance } from '../lib/api';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useI18n } from '@/lib/i18n';
 
 const ROLES_CLAIM = 'https://systemfehler/roles';
 
@@ -115,6 +116,7 @@ function SectionCard({
 export default function EntryPage() {
   const { id } = useParams<{ id?: string }>();
   const { user } = useAuth0();
+  const { t } = useI18n();
 
   const roles: string[] = useMemo(() => {
     const raw = user?.[ROLES_CLAIM as keyof typeof user];
@@ -223,7 +225,7 @@ export default function EntryPage() {
           <p className="mt-2 text-sm text-muted-foreground">{error}</p>
           <div className="mt-6">
             <Button asChild variant="outline">
-              <Link to="/">Zur Suche</Link>
+              <Link to="/">{t('entry.back')}</Link>
             </Button>
           </div>
         </Card>
@@ -241,7 +243,7 @@ export default function EntryPage() {
           </p>
           <div className="mt-6">
             <Button asChild variant="outline">
-              <Link to="/">Zur Suche</Link>
+              <Link to="/">{t('entry.back')}</Link>
             </Button>
           </div>
         </Card>
@@ -273,13 +275,13 @@ export default function EntryPage() {
       <div className="mb-6 flex flex-col gap-4">
         <div className="flex flex-wrap items-center gap-2">
           <Button asChild variant="outline" size="sm">
-            <Link to="/">Zur Suche</Link>
+            <Link to="/">{t('entry.back')}</Link>
           </Button>
 
           {url && (
             <Button asChild variant="outline" size="sm">
               <a href={url} target="_blank" rel="noopener noreferrer">
-                Originalquelle
+                {t('entry.original_source')}
               </a>
             </Button>
           )}
@@ -313,7 +315,7 @@ export default function EntryPage() {
           </h1>
           {!isAdmin && (
             <p className="mt-2 text-sm text-muted-foreground">
-              Detailansicht des Eintrags.
+              {t('entry.detail_view')}
             </p>
           )}
         </div>
@@ -419,7 +421,7 @@ export default function EntryPage() {
             />
           </SectionCard>
 
-          <SectionCard title="Quelle und Datenqualitaet">
+          <SectionCard title={t('entry.source_quality')}>
             <InfoList
               items={[
                 { label: 'Quelle', value: sourceMeta.source },
@@ -431,7 +433,7 @@ export default function EntryPage() {
               ]}
             />
             <div className="mt-4 text-sm text-muted-foreground">
-              Transparenzhinweis: Diese Angaben stammen aus der erfassten Provenienz und den berechneten Qualitaetswerten des Eintrags.
+              {t('entry.transparency_note')}
             </div>
           </SectionCard>
         </div>

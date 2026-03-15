@@ -12,12 +12,14 @@ Endpoints:
     /health (GET)
 """
 from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
 import time
 import os
 from pathlib import Path
+from collections import defaultdict, deque
 from .endpoints import router
 from .provider import get_provider
 
@@ -28,6 +30,9 @@ load_dotenv(PROJECT_ROOT / ".env", override=True)
 AI_PORT = int(os.environ.get("AI_PORT", 8002))
 AI_HOST = os.environ.get("AI_HOST", "0.0.0.0")
 provider = get_provider()
+RATE_LIMIT_WINDOW_SECONDS = int(os.environ.get("AI_RATE_LIMIT_WINDOW_SECONDS", "60"))
+RATE_LIMIT_MAX_REQUESTS = int(os.environ.get("AI_RATE_LIMIT_MAX_REQUESTS", "30"))
+RATE_LIMIT_BUCKETS = defaultdict(deque)
 
 app = FastAPI()
 
@@ -45,6 +50,22 @@ app.include_router(router)
 
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
+    if request.method == "POST" and request.url.path in {"/rewrite", "/retrieve", "/synthesize", "/enrich"}:
+        client_ip = request.client.host if request.client else "unknown"
+        bucket = RATE_LIMIT_BUCKETS[(client_ip, request.url.path)]
+        now = time.time()
+        while bucket and (now - bucket[0]) > RATE_LIMIT_WINDOW_SECONDS:
+            bucket.popleft()
+        if len(bucket) >= RATE_LIMIT_MAX_REQUESTS:
+            return JSONResponse(
+                status_code=429,
+                content={
+                    "error": "rate_limited",
+                    "message": "Too many AI requests. Please wait and try again.",
+                },
+            )
+        bucket.append(now)
+
     start = time.time()
     response = await call_next(request)
     latency = int((time.time() - start) * 1000)
