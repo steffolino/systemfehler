@@ -1,0 +1,210 @@
+{
+  "version": "0.1.0",
+  "domain": "aid",
+  "crawler": "aid-seeded",
+  "startedAt": "2026-03-15T17:44:01.367801+00:00",
+  "finishedAt": "2026-03-15T17:47:33.216777+00:00",
+  "durationSeconds": 211.849,
+  "counts": {
+    "seedUrls": 203,
+    "processedUrls": 203,
+    "entriesExtracted": 185,
+    "fetchFailures": 18,
+    "validationFailures": 0,
+    "redirectAliases": 0,
+    "canonicalAliases": 0,
+    "emptySummary": 0,
+    "emptyContent": 0
+  },
+  "quality": {
+    "avgIqs": 84.58,
+    "avgAis": 82.56,
+    "lowQualityCount": 0,
+    "lowQualitySamples": []
+  },
+  "distribution": {
+    "hosts": [
+      [
+        "bmbfsfj.bund.de",
+        110
+      ],
+      [
+        "bmas.de",
+        18
+      ],
+      [
+        "bafza.de",
+        16
+      ],
+      [
+        "arbeitsagentur.de",
+        14
+      ],
+      [
+        "web.arbeitsagentur.de",
+        6
+      ],
+      [
+        "caritas.de",
+        4
+      ],
+      [
+        "hilfe-portal-missbrauch.de",
+        3
+      ],
+      [
+        "wiki.ubuntuusers.de",
+        2
+      ],
+      [
+        "maennerberatungsnetz.de",
+        2
+      ],
+      [
+        "dajeb.de",
+        2
+      ],
+      [
+        "deutsche-depressionshilfe.de",
+        2
+      ],
+      [
+        "de.facebook.com",
+        1
+      ],
+      [
+        "facebook.de",
+        1
+      ],
+      [
+        "instagram.com",
+        1
+      ],
+      [
+        "x.com",
+        1
+      ]
+    ],
+    "sourceTier": [
+      [
+        "tier_1_official",
+        165
+      ],
+      [
+        "tier_2_ngo_watchdog",
+        16
+      ],
+      [
+        "tier_unknown",
+        4
+      ]
+    ],
+    "institutionType": [
+      [
+        "government",
+        165
+      ],
+      [
+        "ngo",
+        16
+      ],
+      [
+        "unknown",
+        4
+      ]
+    ],
+    "topics": [
+      [
+        "financial_support",
+        185
+      ],
+      [
+        "aid",
+        185
+      ],
+      [
+        "employment",
+        18
+      ],
+      [
+        "family",
+        16
+      ],
+      [
+        "contacts",
+        2
+      ]
+    ],
+    "tags": [
+      [
+        "aid",
+        185
+      ],
+      [
+        "application_required",
+        34
+      ],
+      [
+        "contact",
+        2
+      ]
+    ],
+    "targetGroups": [
+      [
+        "families",
+        185
+      ],
+      [
+        "single_parents",
+        185
+      ],
+      [
+        "general_public",
+        185
+      ],
+      [
+        "unemployed",
+        18
+      ]
+    ]
+  },
+  "urlRegistry": {
+    "statuses": [
+      [
+        "ok",
+        202
+      ],
+      [
+        "redirect_alias",
+        19
+      ],
+      [
+        "fetch_failed",
+        18
+      ],
+      [
+        "canonical_alias",
+        6
+      ]
+    ],
+    "failureReasons": [
+      [
+        "fetch_failed",
+        20
+      ],
+      [
+        "http_redirect",
+        19
+      ],
+      [
+        "head_canonical",
+        6
+      ]
+    ]
+  },
+  "improvementHints": [
+    "Investigate network, robots, or host restrictions for failed seeds.",
+    "Refresh urls.json from preferred canonical URLs to reduce alias churn.",
+    "Use failure reasons to suppress noisy seeds or create manual-review candidates."
+  ]
+}

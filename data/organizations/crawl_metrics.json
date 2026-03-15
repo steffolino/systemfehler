@@ -1,0 +1,214 @@
+{
+  "version": "0.1.0",
+  "domain": "organizations",
+  "crawler": "organizations-seeded",
+  "startedAt": "2026-03-15T17:24:51.842675+00:00",
+  "finishedAt": "2026-03-15T17:30:30.229667+00:00",
+  "durationSeconds": 338.387,
+  "counts": {
+    "seedUrls": 500,
+    "processedUrls": 501,
+    "entriesExtracted": 451,
+    "fetchFailures": 49,
+    "validationFailures": 0,
+    "redirectAliases": 1,
+    "canonicalAliases": 0,
+    "emptySummary": 0,
+    "emptyContent": 0
+  },
+  "quality": {
+    "avgIqs": 84.58,
+    "avgAis": 83.14,
+    "lowQualityCount": 0,
+    "lowQualitySamples": []
+  },
+  "distribution": {
+    "hosts": [
+      [
+        "bmas.de",
+        232
+      ],
+      [
+        "bmbfsfj.bund.de",
+        157
+      ],
+      [
+        "arbeitsagentur.de",
+        39
+      ],
+      [
+        "de.facebook.com",
+        21
+      ],
+      [
+        "twitter.com",
+        21
+      ],
+      [
+        "bafza.de",
+        9
+      ],
+      [
+        "web.arbeitsagentur.de",
+        3
+      ],
+      [
+        "social.bund.de",
+        2
+      ],
+      [
+        "bundesregierung.de",
+        1
+      ],
+      [
+        "fitko.de",
+        1
+      ],
+      [
+        "tiktok.com",
+        1
+      ],
+      [
+        "deutsche-rechtsgeschichte.uni-goettingen.de",
+        1
+      ],
+      [
+        "facebook.de",
+        1
+      ],
+      [
+        "instagram.com",
+        1
+      ],
+      [
+        "x.com",
+        1
+      ]
+    ],
+    "sourceTier": [
+      [
+        "tier_1_official",
+        443
+      ],
+      [
+        "tier_unknown",
+        8
+      ]
+    ],
+    "institutionType": [
+      [
+        "government",
+        443
+      ],
+      [
+        "unknown",
+        8
+      ]
+    ],
+    "topics": [
+      [
+        "organizations",
+        451
+      ],
+      [
+        "employment",
+        232
+      ],
+      [
+        "financial_support",
+        232
+      ],
+      [
+        "family",
+        9
+      ],
+      [
+        "aid",
+        9
+      ],
+      [
+        "public_service",
+        1
+      ],
+      [
+        "contacts",
+        1
+      ]
+    ],
+    "tags": [
+      [
+        "organization",
+        451
+      ],
+      [
+        "application_required",
+        241
+      ],
+      [
+        "contact",
+        1
+      ]
+    ],
+    "targetGroups": [
+      [
+        "general_public",
+        451
+      ],
+      [
+        "unemployed",
+        232
+      ],
+      [
+        "families",
+        9
+      ]
+    ]
+  },
+  "urlRegistry": {
+    "statuses": [
+      [
+        "ok",
+        455
+      ],
+      [
+        "fetch_failed",
+        50
+      ],
+      [
+        "redirect_alias",
+        40
+      ],
+      [
+        "validation_failed",
+        33
+      ],
+      [
+        "canonical_alias",
+        1
+      ]
+    ],
+    "failureReasons": [
+      [
+        "validation_failed",
+        94
+      ],
+      [
+        "fetch_failed",
+        50
+      ],
+      [
+        "http_redirect",
+        40
+      ],
+      [
+        "head_canonical",
+        1
+      ]
+    ]
+  },
+  "improvementHints": [
+    "Investigate network, robots, or host restrictions for failed seeds.",
+    "Refresh urls.json from preferred canonical URLs to reduce alias churn.",
+    "Use failure reasons to suppress noisy seeds or create manual-review candidates."
+  ]
+}

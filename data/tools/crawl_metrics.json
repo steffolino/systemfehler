@@ -1,0 +1,190 @@
+{
+  "version": "0.1.0",
+  "domain": "tools",
+  "crawler": "tools-seeded",
+  "startedAt": "2026-03-15T17:23:16.704869+00:00",
+  "finishedAt": "2026-03-15T17:26:58.809685+00:00",
+  "durationSeconds": 222.105,
+  "counts": {
+    "seedUrls": 320,
+    "processedUrls": 344,
+    "entriesExtracted": 284,
+    "fetchFailures": 36,
+    "validationFailures": 0,
+    "redirectAliases": 21,
+    "canonicalAliases": 3,
+    "emptySummary": 0,
+    "emptyContent": 0
+  },
+  "quality": {
+    "avgIqs": 84.58,
+    "avgAis": 80.71,
+    "lowQualityCount": 0,
+    "lowQualitySamples": []
+  },
+  "distribution": {
+    "hosts": [
+      [
+        "bmbfsfj.bund.de",
+        145
+      ],
+      [
+        "bafza.de",
+        62
+      ],
+      [
+        "web.arbeitsagentur.de",
+        30
+      ],
+      [
+        "arbeitsagentur.de",
+        25
+      ],
+      [
+        "familienportal.de",
+        20
+      ],
+      [
+        "de.facebook.com",
+        16
+      ],
+      [
+        "twitter.com",
+        16
+      ],
+      [
+        "facebook.de",
+        1
+      ],
+      [
+        "instagram.com",
+        1
+      ],
+      [
+        "x.com",
+        1
+      ],
+      [
+        "de.linkedin.com",
+        1
+      ],
+      [
+        "mein-now.de",
+        1
+      ],
+      [
+        "wege-zur-pflege.de",
+        1
+      ]
+    ],
+    "sourceTier": [
+      [
+        "tier_1_official",
+        283
+      ],
+      [
+        "tier_unknown",
+        1
+      ]
+    ],
+    "institutionType": [
+      [
+        "government",
+        283
+      ],
+      [
+        "unknown",
+        1
+      ]
+    ],
+    "topics": [
+      [
+        "digital_service",
+        284
+      ],
+      [
+        "tools",
+        284
+      ],
+      [
+        "family",
+        82
+      ],
+      [
+        "aid",
+        62
+      ],
+      [
+        "financial_support",
+        20
+      ]
+    ],
+    "tags": [
+      [
+        "tool",
+        284
+      ],
+      [
+        "application_required",
+        82
+      ]
+    ],
+    "targetGroups": [
+      [
+        "general_public",
+        284
+      ],
+      [
+        "families",
+        284
+      ],
+      [
+        "job_seekers",
+        284
+      ],
+      [
+        "single_parents",
+        20
+      ]
+    ]
+  },
+  "urlRegistry": {
+    "statuses": [
+      [
+        "ok",
+        285
+      ],
+      [
+        "fetch_failed",
+        36
+      ],
+      [
+        "redirect_alias",
+        26
+      ],
+      [
+        "canonical_alias",
+        2
+      ]
+    ],
+    "failureReasons": [
+      [
+        "fetch_failed",
+        36
+      ],
+      [
+        "http_redirect",
+        26
+      ],
+      [
+        "head_canonical",
+        2
+      ]
+    ]
+  },
+  "improvementHints": [
+    "Investigate network, robots, or host restrictions for failed seeds.",
+    "Refresh urls.json from preferred canonical URLs to reduce alias churn.",
+    "Use failure reasons to suppress noisy seeds or create manual-review candidates."
+  ]
+}
