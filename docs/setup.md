@@ -170,6 +170,12 @@ npm run ai:api
 npm run dev
 ```
 
+Or use the Ollama-flavoured helper script:
+
+```bash
+npm run ai:api:ollama
+```
+
 The AI tab will show sidecar/provider health, fallback state, rewritten query,
 synthesized answer, and evidence entries.
 

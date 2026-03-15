@@ -50,3 +50,14 @@ def health():
         "host": AI_HOST,
         "port": AI_PORT,
     }
+
+
+@app.get("/version")
+def version():
+    return {
+        "service": "systemfehler-ai-sidecar",
+        "version": os.environ.get("npm_package_version", "0.1.0"),
+        "provider": provider.healthcheck(),
+        "host": AI_HOST,
+        "port": AI_PORT,
+    }

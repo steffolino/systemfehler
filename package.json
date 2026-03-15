@@ -25,6 +25,7 @@
     "dev": "cd frontend && npm run dev",
     "dev:all": "cross-env API_PORT=3001 AI_PORT=8002 DATABASE_URL=postgresql://systemfehler:dev_password@localhost:5432/systemfehler concurrently -k -n api,frontend,ai,docker -c blue,green,magenta,cyan \"npm run api\" \"npm run dev\" \"npm run ai:api\" \"docker-compose up\"",
     "ai:api": "cross-env AI_PORT=8002 uvicorn backend.ai_service.gateway:app --reload --port %AI_PORT%",
+    "ai:api:ollama": "cross-env AI_PORT=8002 AI_PROVIDER=ollama AI_DEFAULT_MODEL=llama3.1:8b AI_MODEL_REWRITE=llama3.1:8b AI_MODEL_SYNTHESIZE=llama3.1:8b AI_MODEL_ENRICH=llama3.1:8b uvicorn backend.ai_service.gateway:app --reload --port %AI_PORT%",
     "db:migrate": "psql $DATABASE_URL -f backend/database/schema.sql",
     "gen:types": "node scripts/generate_ts_interfaces.js",
     "db:seed": "python scripts/refresh_postgres_from_snapshots.py",
