@@ -217,9 +217,21 @@ The key new workflow addition is deterministic seeded promotion:
 This is now the safest path for scaling entry volume without letting raw crawl
 noise overwrite the published dataset.
 
-Cloudflare Pages deployment was also corrected to package same-origin snapshot
-fallback assets (`data/*` and `moderation/review_queue.json`) into the Pages
-artifact, not just the compiled frontend bundle.
+Cloudflare Pages deployment now intentionally excludes the large `data/*`
+snapshot files. The active production Pages app uses Pages Functions + D1 for
+data access, while GitHub Pages remains the static snapshot fallback path.
+
+Production AI is now live on `systemfehler.pages.dev` through Pages Functions
+plus Cloudflare Workers AI. The active production stack is:
+
+- Cloudflare Pages frontend
+- Cloudflare Pages Functions API at `/api/*`
+- D1-backed entry storage
+- Workers AI at `/api/ai/*`
+- Turnstile for public AI requests
+
+The standalone `systemfehler-api-worker` remains a separate future deployment
+target and is not the active production API path today.
 
 ## Recommended Cleanup Next
 

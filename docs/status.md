@@ -55,7 +55,7 @@ crawling logic to these files.
 
 | Component | Status | Notes |
 |-----------|--------|-------|
-| Worker deploy workflow (`wrangler.worker.toml`) | ✅ Working | API live: https://systemfehler-api-worker.inequality.workers.dev, deploy with `npx wrangler deploy --config wrangler.worker.toml` |
+| Worker deploy workflow (`wrangler.worker.toml`) | 🟡 Optional / separate | Standalone API worker remains available as a separate deployment target, but it is not the active production API path for `systemfehler.pages.dev` |
 | Worker API Routing | ✅ Working | Endpoints `/api/health`, `/api/version`, `/api/data/entries`, `/api/data/entries/:id` |
 | D1 Binding | ✅ Working | [[d1_databases]] in wrangler.worker.toml, database_id correct |
 | CORS Handling | ✅ Working | Access-Control-Allow-Origin set everywhere |
@@ -81,6 +81,7 @@ crawling logic to these files.
 | Pages deploy workflow (`.github/workflows/deploy-pages.yml`) | ✅ Working | Frontend build uses `VITE_API_URL=/api` and injects public frontend vars for Turnstile/Auth0; deploy runs with `wrangler@4.71.0` and `--cwd=cloudflare-pages` |
 | Pages Functions API | ✅ Working | Worker-safe handlers for `/api/health`, `/api/status`, `/api/data/entries`, `/api/data/entries/:id`, `/api/data/moderation-queue`, `/api/data/quality-report` |
 | D1 schema (`cloudflare-pages/d1/schema.sql`) | ✅ Working | Includes `entries` and `moderation_queue` tables |
+| Production Pages deployment | ✅ Working | `https://systemfehler.pages.dev` is live with Pages Functions, D1, Workers AI, Turnstile, and the 1006-entry production corpus |
 
 The current Cloudflare Pages deployment path uses Auth0 for `/admin`. The
 The same deployment now has an experimental same-origin Workers AI path at
@@ -96,6 +97,11 @@ AI cost on common prompts.
 
 legacy Pages-native GitHub auth function stubs remain in the repo but are not
 required for the active frontend.
+
+The standalone Cloudflare API worker is not currently the active production
+path. Production traffic for the public app now goes through Cloudflare Pages
+Functions on `systemfehler.pages.dev`. Deploying or re-aligning the separate
+API worker remains future follow-up work.
 
 ### Automated ingest (`.github/workflows/crawl-and-ingest.yml`)
 
