@@ -13,12 +13,16 @@ Endpoints:
 """
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
 
 import time
 import os
+from pathlib import Path
 from .endpoints import router
 from .provider import get_provider
 
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+load_dotenv(PROJECT_ROOT / ".env", override=True)
 
 # Read config from environment variables
 AI_PORT = int(os.environ.get("AI_PORT", 8002))

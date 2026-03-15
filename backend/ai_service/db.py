@@ -2,8 +2,13 @@ from sqlalchemy import create_engine, Column, String, Date, DateTime, Boolean, J
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import declarative_base, sessionmaker
 import os
+from pathlib import Path
+from dotenv import load_dotenv
 
 Base = declarative_base()
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+load_dotenv(PROJECT_ROOT / ".env", override=False)
 
 class Entry(Base):
     __tablename__ = 'entries'
@@ -37,6 +42,6 @@ class Entry(Base):
 
 # Add domain extension models as needed (e.g. Benefits, Aid, etc.)
 
-DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://systemfehler:dev_password@localhost:5432/systemfehler')
+DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://systemfehler:dev_password@127.0.0.1:5432/systemfehler')
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
