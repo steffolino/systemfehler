@@ -16,7 +16,9 @@ from typing import Any, Dict, List, Optional
 from bs4 import BeautifulSoup
 
 from .base_crawler import BaseCrawler
+from .crawl_metrics import CrawlMetrics
 from .quality_scorer import QualityScorer
+from .source_registry import SourceProfile, SourceRegistry
 from .url_registry import URLRegistry
 from .validator import SchemaValidator
 
@@ -40,17 +42,20 @@ class SeededDomainCrawler(BaseCrawler):
         self.quality_scorer = QualityScorer()
         self.validator = SchemaValidator()
         self.url_registry = URLRegistry(str(self.data_dir), domain, self.normalize_url)
+        self.source_registry = SourceRegistry(self.data_dir)
+        self.metrics = CrawlMetrics(domain, crawler_name)
 
     # ------------------------------
     # Public API
     # ------------------------------
     def crawl(self) -> List[Dict[str, Any]]:
         urls = self._load_seed_urls()
+        self.metrics.note_seed_urls(urls)
         entries: List[Dict[str, Any]] = []
 
         try:
-            for url in urls:
-                entry = self._crawl_single_url(url)
+            for seed_record in seed_records:
+                entry = self._crawl_single_url(seed_record)
                 if entry:
                     entries.append(entry)
         finally:
@@ -73,6 +78,14 @@ class SeededDomainCrawler(BaseCrawler):
         output_file.write_text(json.dumps(output_data, indent=2, ensure_ascii=False), encoding='utf-8')
         self.logger.info(f"Saved {len(entries)} candidate entries to {output_file}")
 
+    def save_metrics(self, output_path: str) -> Dict[str, Any]:
+        output_file = Path(output_path)
+        output_file.parent.mkdir(parents=True, exist_ok=True)
+        report = self.metrics.build_report(self.url_registry.iter_records())
+        output_file.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding='utf-8')
+        self.logger.info("Saved crawl metrics to %s", output_file)
+        return report
+
     # ------------------------------
     # Overridables
     # ------------------------------
@@ -85,26 +98,102 @@ class SeededDomainCrawler(BaseCrawler):
     def default_target_groups(self) -> List[str]:
         return ['general_public']
 
-    def build_domain_fields(self, url: str, soup: BeautifulSoup, entry: Dict[str, Any]) -> Dict[str, Any]:
+    def source_profiles(self) -> List[SourceProfile]:
+        return []
+
+    def build_domain_fields(
+        self,
+        url: str,
+        soup: BeautifulSoup,
+        entry: Dict[str, Any],
+        source_profile: Optional[SourceProfile] = None,
+    ) -> Dict[str, Any]:
         return {}
+
+    def _default_topics_for_url(self, source_profile: Optional[SourceProfile]) -> List[str]:
+        if source_profile and source_profile.default_topics:
+            return list(dict.fromkeys([*source_profile.default_topics, *self.default_topics()]))
+        return self.default_topics()
+
+    def _default_tags_for_url(self, source_profile: Optional[SourceProfile]) -> List[str]:
+        if source_profile and source_profile.default_tags:
+            return list(dict.fromkeys([*source_profile.default_tags, *self.default_tags()]))
+        return self.default_tags()
+
+    def _default_target_groups_for_url(self, source_profile: Optional[SourceProfile]) -> List[str]:
+        if source_profile and source_profile.default_target_groups:
+            return list(dict.fromkeys([*source_profile.default_target_groups, *self.default_target_groups()]))
+        return self.default_target_groups()
 
     # ------------------------------
     # Internals
     # ------------------------------
-    def _load_seed_urls(self) -> List[str]:
+    def _normalize_seed_record(self, raw_seed: Any) -> Optional[Dict[str, Any]]:
+        if isinstance(raw_seed, str):
+            return {'url': raw_seed.strip(), 'enabled': True}
+
+        if not isinstance(raw_seed, dict):
+            return None
+
+        url = raw_seed.get('url')
+        if not isinstance(url, str) or not url.strip():
+            return None
+
+        record: Dict[str, Any] = {
+            'url': url.strip(),
+            'enabled': raw_seed.get('enabled', True) is not False,
+        }
+
+        for key in (
+            'label',
+            'sourceTier',
+            'institutionType',
+            'jurisdiction',
+            'seedCategory',
+            'notes',
+            'source',
+        ):
+            value = raw_seed.get(key)
+            if isinstance(value, str) and value.strip():
+                record[key] = value.strip()
+
+        for key in ('topics', 'tags', 'targetGroups', 'allowedPaths'):
+            value = raw_seed.get(key)
+            if isinstance(value, list):
+                cleaned = [item.strip() for item in value if isinstance(item, str) and item.strip()]
+                if cleaned:
+                    record[key] = cleaned
+
+        priority = raw_seed.get('priority')
+        if isinstance(priority, int):
+            record['priority'] = priority
+
+        return record
+
+    def _load_seed_records(self) -> List[Dict[str, Any]]:
+        seed_file = self.data_dir / self.domain / 'seeds.json'
         url_file = self.data_dir / self.domain / 'urls.json'
-        if not url_file.exists():
-            self.logger.warning(f"Seed URL file missing: {url_file}")
+        payload: Any = None
+        source_file = seed_file if seed_file.exists() else url_file
+
+        if not source_file.exists():
+            self.logger.warning(f"Seed file missing: {source_file}")
             return []
 
         try:
-            payload = json.loads(url_file.read_text(encoding='utf-8'))
+            payload = json.loads(source_file.read_text(encoding='utf-8'))
         except Exception as exc:
-            self.logger.error(f"Failed to parse {url_file}: {exc}")
+            self.logger.error(f"Failed to parse {source_file}: {exc}")
             return []
 
-        urls = payload.get('urls', []) if isinstance(payload, dict) else []
-        if not isinstance(urls, list):
+        raw_seeds = []
+        if isinstance(payload, dict):
+            if isinstance(payload.get('seeds'), list):
+                raw_seeds = payload.get('seeds', [])
+            elif isinstance(payload.get('urls'), list):
+                raw_seeds = payload.get('urls', [])
+
+        if not isinstance(raw_seeds, list):
             return []
 
         max_urls = 0
@@ -116,12 +205,24 @@ class SeededDomainCrawler(BaseCrawler):
             except ValueError:
                 max_urls = 0
 
-        normalized = []
+        normalized: List[Dict[str, Any]] = []
         seen = set()
+        include_hosts = {
+            host.strip().lower()
+            for host in os.getenv('CRAWLER_INCLUDE_HOSTS', '').split(',')
+            if host.strip()
+        }
         for raw_url in urls:
             if not isinstance(raw_url, str) or not raw_url.strip():
                 continue
             cleaned = self.normalize_url(raw_url)
+            if include_hosts:
+                parsed = self._extract_domain(cleaned)
+                if not parsed:
+                    continue
+                host = parsed[4:] if parsed.startswith('www.') else parsed
+                if not any(host == allowed or host.endswith(f".{allowed}") for allowed in include_hosts):
+                    continue
             if self.url_registry.should_skip(cleaned):
                 continue
             preferred = self.url_registry.get_preferred_url(cleaned)
@@ -138,13 +239,22 @@ class SeededDomainCrawler(BaseCrawler):
             if cleaned in seen:
                 continue
             seen.add(cleaned)
-            normalized.append(cleaned)
+            normalized_record = dict(seed_record)
+            normalized_record['url'] = cleaned
+            normalized.append(normalized_record)
 
         return normalized[:max_urls] if max_urls > 0 else normalized
+
+    def _extract_domain(self, url: str) -> str:
+        try:
+            return url.split('/')[2].lower() if '://' in url else ''
+        except Exception:
+            return ''
 
     def _crawl_single_url(self, url: str) -> Optional[Dict[str, Any]]:
         response = self.fetch_page_details(url)
         if not response:
+            self.metrics.note_url_status('fetch_failed', reason='fetch_failed')
             self.url_registry.record(
                 url,
                 status='fetch_failed',
@@ -160,6 +270,7 @@ class SeededDomainCrawler(BaseCrawler):
         canonical_url = self._extract_canonical_url(soup, base_url=final_url) or final_url
 
         if final_url != self.normalize_url(url):
+            self.metrics.note_url_status('redirect_alias', reason='http_redirect')
             self.url_registry.record(
                 url,
                 status='redirect_alias',
@@ -172,6 +283,7 @@ class SeededDomainCrawler(BaseCrawler):
             )
 
         if canonical_url != final_url:
+            self.metrics.note_url_status('canonical_alias', reason='head_canonical')
             self.url_registry.record(
                 final_url,
                 status='canonical_alias',
@@ -193,16 +305,30 @@ class SeededDomainCrawler(BaseCrawler):
             skip=False,
         )
 
-        entry = self._build_base_entry(canonical_url, soup)
-        entry.update(self.build_domain_fields(canonical_url, soup, entry))
+        source_profile = self.source_registry.resolve(canonical_url, self.domain, self.source_profiles())
+        entry = self._build_base_entry(canonical_url, soup, source_profile)
+        entry.update(self.build_domain_fields(canonical_url, soup, entry, source_profile))
 
         content_checksum = self.calculate_checksum(json.dumps(entry, sort_keys=True, ensure_ascii=False))
-        entry['provenance'] = self.generate_provenance(url)
+        source_metadata = None
+        if source_profile:
+            source_metadata = {
+                'sourceTier': source_profile.source_tier,
+                'institutionType': source_profile.institution_type,
+                'jurisdiction': source_profile.jurisdiction,
+                'sourceId': source_profile.source_id,
+                'providerName': source_profile.name,
+                'providerLevel': source_profile.provider_level,
+            }
+        entry['provenance'] = self.generate_provenance(url, source_metadata=source_metadata)
         entry['provenance']['checksum'] = content_checksum
         entry['qualityScores'] = self.quality_scorer.calculate_scores(entry)
 
-        validation = self.validator.validate_entry(entry, self.domain)
+        schema_entry = dict(entry)
+        schema_entry.pop('head', None)
+        validation = self.validator.validate_entry(schema_entry, self.domain)
         if not validation['valid']:
+            self.metrics.note_url_status('validation_failed', reason='validation_failed')
             self.logger.error(f"Validation failed for {entry.get('id')} ({url})")
             for error in validation['errors']:
                 self.logger.error(f"  - {error}")
@@ -217,9 +343,17 @@ class SeededDomainCrawler(BaseCrawler):
             )
             return None
 
+        entry.pop('head', None)
+        self.metrics.note_url_status('ok')
+        self.metrics.note_entry(entry)
         return entry
 
-    def _build_base_entry(self, url: str, soup: BeautifulSoup) -> Dict[str, Any]:
+    def _build_base_entry(
+        self,
+        url: str,
+        soup: BeautifulSoup,
+        source_profile: Optional[SourceProfile] = None,
+    ) -> Dict[str, Any]:
         title = self._get_best_title(soup, seed_name=self.domain, url=url)
         summary = self._extract_summary(soup)
         content = self._extract_content(soup)
@@ -236,9 +370,9 @@ class SeededDomainCrawler(BaseCrawler):
             'summary': {'de': summary} if summary else {'de': title},
             'content': {'de': content} if content else {'de': summary or title},
             'url': self.normalize_url(url),
-            'topics': self.default_topics(),
-            'tags': self.default_tags(),
-            'targetGroups': self.default_target_groups(),
+            'topics': self._default_topics_for_url(source_profile),
+            'tags': self._default_tags_for_url(source_profile),
+            'targetGroups': self._default_target_groups_for_url(source_profile),
             'status': 'active',
             'firstSeen': now_iso,
             'lastSeen': now_iso,

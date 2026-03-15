@@ -200,6 +200,22 @@ function buildPagination(total, limit, offset) {
   };
 }
 
+function buildSourcePriorityOrder(alias = 'e') {
+  return `
+    CASE COALESCE(${alias}.provenance->>'sourceTier', 'tier_unknown')
+      WHEN 'tier_1_official' THEN 0
+      WHEN 'tier_2_ngo_watchdog' THEN 1
+      WHEN 'tier_4_academic' THEN 2
+      WHEN 'tier_3_press' THEN 3
+      ELSE 4
+    END,
+    COALESCE((${alias}.quality_scores->>'ais')::numeric, 0) DESC,
+    COALESCE((${alias}.quality_scores->>'iqs')::numeric, 0) DESC,
+    ${alias}.last_seen DESC NULLS LAST,
+    ${alias}.created_at DESC NULLS LAST
+  `;
+}
+
 async function loadTranslationsForDomains(domainNames = []) {
   const translationsMap = {};
 
@@ -265,6 +281,8 @@ export async function searchEntriesForAutocomplete(options = {}) {
   const {
     searchText,
     domain = null,
+    sourceTier = null,
+    jurisdiction = null,
     limit = 10,
     offset = 0
   } = options;
@@ -291,6 +309,16 @@ export async function searchEntriesForAutocomplete(options = {}) {
     params.push(domain);
   }
 
+  if (sourceTier) {
+    whereConditions.push(`COALESCE(e.provenance->>'sourceTier', '') = $${paramIndex++}`);
+    params.push(sourceTier);
+  }
+
+  if (jurisdiction) {
+    whereConditions.push(`COALESCE(e.provenance->>'jurisdiction', '') = $${paramIndex++}`);
+    params.push(jurisdiction);
+  }
+
   const whereClause = whereConditions.join(' AND ');
 
   const sql = `
@@ -300,7 +328,7 @@ export async function searchEntriesForAutocomplete(options = {}) {
       (e.quality_scores->>'ais')::numeric AS ais
     FROM entries e
     WHERE ${whereClause}
-    ORDER BY e.created_at DESC
+    ORDER BY ${buildSourcePriorityOrder('e')}
     LIMIT $${paramIndex++} OFFSET $${paramIndex++}
   `;
 
@@ -323,6 +351,8 @@ export async function getAllEntries(options = {}) {
   const {
     domain = null,
     status = null,
+    sourceTier = null,
+    jurisdiction = null,
     includeTranslations = false,
     limit = 50,
     offset = 0
@@ -342,6 +372,16 @@ export async function getAllEntries(options = {}) {
     params.push(status);
   }
 
+  if (sourceTier) {
+    whereConditions.push(`COALESCE(provenance->>'sourceTier', '') = $${paramIndex++}`);
+    params.push(sourceTier);
+  }
+
+  if (jurisdiction) {
+    whereConditions.push(`COALESCE(provenance->>'jurisdiction', '') = $${paramIndex++}`);
+    params.push(jurisdiction);
+  }
+
   const whereClause =
     whereConditions.length > 0
       ? `WHERE ${whereConditions.join(' AND ')}`
@@ -358,7 +398,7 @@ export async function getAllEntries(options = {}) {
       (e.quality_scores->>'ais')::numeric AS ais
     FROM entries e
     ${whereClause}
-    ORDER BY e.created_at DESC
+    ORDER BY ${buildSourcePriorityOrder('e')}
     LIMIT $${paramIndex++} OFFSET $${paramIndex++}
   `;
 
@@ -676,6 +716,7 @@ export const __private = {
   mapDomainRow,
   buildMultilingual,
   withLegacyKeys,
+  summarizeDiff,
   attachTranslations,
   getLanguageColumns,
   buildPagination,

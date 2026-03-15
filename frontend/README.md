@@ -49,6 +49,9 @@ This avoids cross-origin requests to raw GitHub URLs and prevents CORS failures 
 
 - `VITE_API_URL`: Override backend API base URL.
 - `VITE_SNAPSHOT_BASE_URL`: Optional override for snapshot JSON base URL.
+- `VITE_TURNSTILE_SITE_KEY`: Public Cloudflare Turnstile site key for AI search protection.
+- `VITE_AUTH0_DOMAIN`: Public Auth0 tenant/domain for frontend login.
+- `VITE_AUTH0_CLIENT_ID`: Public Auth0 SPA client id.
 - `PUBLIC_PATH`: Build-time Vite base path (set by deployment workflow).
 
 ## Deployment

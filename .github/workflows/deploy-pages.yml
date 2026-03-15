@@ -30,11 +30,21 @@ jobs:
         env:
           PUBLIC_PATH: /systemfehler/
           VITE_API_URL: /api
+          VITE_AI_API_URL: /api/ai
+          VITE_TURNSTILE_SITE_KEY: ${{ vars.VITE_TURNSTILE_SITE_KEY }}
+          VITE_AUTH0_DOMAIN: ${{ vars.VITE_AUTH0_DOMAIN }}
+          VITE_AUTH0_CLIENT_ID: ${{ vars.VITE_AUTH0_CLIENT_ID }}
 
       - name: Assemble combined deploy directory
         run: |
           mkdir -p dist-pages
           cp -r frontend/dist/. dist-pages/
+          mkdir -p dist-pages/moderation
+          if [ -f moderation/review_queue.json ]; then
+            cp moderation/review_queue.json dist-pages/moderation/review_queue.json
+          else
+            echo '{"queue":[]}' > dist-pages/moderation/review_queue.json
+          fi
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

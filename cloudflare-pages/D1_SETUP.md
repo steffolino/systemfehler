@@ -25,7 +25,10 @@ In the Cloudflare dashboard:
 2. Under **D1 database bindings**, add a binding:
    - **Variable name**: `DB`
    - **D1 database**: select `systemfehler-db`
-3. Save and redeploy.
+3. Under **AI bindings**, add a binding:
+   - **Variable name**: `AI`
+   - select a Workers AI binding
+4. Save and redeploy.
 
 Alternatively, add the binding via a `wrangler.toml` at the repo root or in
 `cloudflare-pages/` (not required for Pages deployments but useful for local
@@ -56,6 +59,32 @@ variables → Actions → New repository secret):
 Also add the Pages base URL as a repository secret:
 - **Name**: `PAGES_INGEST_URL`
 - **Value**: e.g. `https://systemfehler.pages.dev`
+
+## 4b. Add Turnstile and frontend build variables
+
+For bot protection and Auth0-enabled frontend builds, configure:
+
+### Cloudflare Pages secrets
+
+- `TURNSTILE_SECRET_KEY`
+
+### GitHub Actions variables
+
+- `VITE_TURNSTILE_SITE_KEY`
+- `VITE_AUTH0_DOMAIN`
+- `VITE_AUTH0_CLIENT_ID`
+
+These public frontend values are injected during the Pages build by
+`.github/workflows/deploy-pages.yml`.
+
+### Optional Cloudflare Pages variables
+
+- `CF_AI_MODEL` (defaults to `@cf/meta/llama-3.1-8b-instruct`)
+- `AI_RATE_LIMIT_WINDOW_SECONDS` (defaults to `60`)
+- `AI_RATE_LIMIT_MAX_REQUESTS` (defaults to `12`)
+- `AI_CACHE_TTL_RETRIEVE_SECONDS` (defaults to `180`)
+- `AI_CACHE_TTL_REWRITE_SECONDS` (defaults to `3600`)
+- `AI_CACHE_TTL_SYNTHESIZE_SECONDS` (defaults to `900`)
 
 ## 5. Verify
 

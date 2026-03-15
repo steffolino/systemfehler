@@ -15,6 +15,22 @@
         "en"
       ],
       "priority": "high",
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "providerLevel": "federal",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "employment",
+        "financial_support"
+      ],
+      "defaultTags": [
+        "application_required",
+        "public_service"
+      ],
+      "defaultTargetGroups": [
+        "unemployed",
+        "general_public"
+      ],
       "license": "unknown",
       "status": "active"
     },
@@ -30,6 +46,518 @@
         "de"
       ],
       "priority": "high",
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "providerLevel": "federal",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "family",
+        "financial_support"
+      ],
+      "defaultTags": [
+        "application_required",
+        "public_service"
+      ],
+      "defaultTargetGroups": [
+        "families",
+        "single_parents",
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "bmas",
+      "name": "Bundesministerium für Arbeit und Soziales",
+      "baseUrl": "https://www.bmas.de",
+      "domains": [
+        "aid",
+        "contacts",
+        "organizations"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "providerLevel": "federal",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "employment",
+        "financial_support"
+      ],
+      "defaultTags": [
+        "application_required"
+      ],
+      "defaultTargetGroups": [
+        "unemployed",
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "bafza",
+      "name": "Bundesamt für Familie und zivilgesellschaftliche Aufgaben",
+      "baseUrl": "https://www.bafza.de",
+      "domains": [
+        "aid",
+        "contacts",
+        "organizations",
+        "tools"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "providerLevel": "federal",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "family",
+        "aid"
+      ],
+      "defaultTags": [
+        "application_required"
+      ],
+      "defaultTargetGroups": [
+        "families",
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "familienportal",
+      "name": "Familienportal",
+      "baseUrl": "https://familienportal.de",
+      "domains": [
+        "aid",
+        "contacts",
+        "tools"
+      ],
+      "languages": [
+        "de",
+        "en"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "providerLevel": "federal",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "family",
+        "financial_support"
+      ],
+      "defaultTags": [
+        "application_required"
+      ],
+      "defaultTargetGroups": [
+        "families",
+        "single_parents",
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "fitko",
+      "name": "FITKO",
+      "baseUrl": "https://www.fitko.de",
+      "domains": [
+        "contacts",
+        "organizations"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "providerLevel": "federal",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "public_service",
+        "contacts"
+      ],
+      "defaultTags": [
+        "contact"
+      ],
+      "defaultTargetGroups": [
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "service115",
+      "name": "Behördennummer 115",
+      "baseUrl": "https://www.115.de",
+      "domains": [
+        "contacts",
+        "organizations"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "providerLevel": "federal",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "contacts",
+        "public_service"
+      ],
+      "defaultTags": [
+        "contact"
+      ],
+      "defaultTargetGroups": [
+        "general_public"
+      ],
+      "services": [
+        "Behoerdenauskunft",
+        "Telefonservice",
+        "Barrierefreie Kontaktwege"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "sanktionsfrei",
+      "name": "Sanktionsfrei",
+      "baseUrl": "https://sanktionsfrei.de",
+      "domains": [
+        "organizations",
+        "contacts",
+        "aid",
+        "tools"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_2_ngo_watchdog",
+      "institutionType": "ngo",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "financial_support",
+        "employment",
+        "rights"
+      ],
+      "defaultTags": [
+        "ngo",
+        "watchdog",
+        "advisory"
+      ],
+      "defaultTargetGroups": [
+        "unemployed",
+        "general_public"
+      ],
+      "services": [
+        "Buergergeld-Beratung",
+        "Jobcenter-Unterstuetzung",
+        "Sozialrechtsinformation"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "hilfetelefon",
+      "name": "Hilfetelefon",
+      "baseUrl": "https://www.hilfetelefon.de",
+      "domains": [
+        "aid",
+        "contacts"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_2_ngo_watchdog",
+      "institutionType": "ngo",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "aid",
+        "contacts"
+      ],
+      "defaultTags": [
+        "contact"
+      ],
+      "defaultTargetGroups": [
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "fruehehilfen",
+      "name": "Frühe Hilfen",
+      "baseUrl": "https://www.fruehehilfen.de",
+      "domains": [
+        "aid",
+        "contacts"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_2_ngo_watchdog",
+      "institutionType": "ngo",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "family",
+        "aid"
+      ],
+      "defaultTags": [
+        "contact"
+      ],
+      "defaultTargetGroups": [
+        "families",
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "maennerberatungsnetz",
+      "name": "Maennerberatungsnetz",
+      "baseUrl": "https://maennerberatungsnetz.de",
+      "domains": [
+        "aid"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "medium",
+      "sourceTier": "tier_2_ngo_watchdog",
+      "institutionType": "ngo",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "aid",
+        "rights"
+      ],
+      "defaultTags": [
+        "advisory",
+        "contact"
+      ],
+      "defaultTargetGroups": [
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "maennerhilfetelefon",
+      "name": "Maennerhilfetelefon",
+      "baseUrl": "https://www.maennerhilfetelefon.de",
+      "domains": [
+        "aid"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "medium",
+      "sourceTier": "tier_2_ngo_watchdog",
+      "institutionType": "ngo",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "aid",
+        "contacts"
+      ],
+      "defaultTags": [
+        "contact",
+        "advisory"
+      ],
+      "defaultTargetGroups": [
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "nummergegenkummer",
+      "name": "Nummer gegen Kummer",
+      "baseUrl": "https://www.nummergegenkummer.de",
+      "domains": [
+        "aid",
+        "contacts"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "medium",
+      "sourceTier": "tier_2_ngo_watchdog",
+      "institutionType": "ngo",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "aid",
+        "contacts"
+      ],
+      "defaultTags": [
+        "contact",
+        "advisory"
+      ],
+      "defaultTargetGroups": [
+        "families",
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "frauenhauskoordinierung",
+      "name": "Frauenhauskoordinierung",
+      "baseUrl": "https://www.frauenhauskoordinierung.de",
+      "domains": [
+        "aid"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "medium",
+      "sourceTier": "tier_2_ngo_watchdog",
+      "institutionType": "ngo",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "aid",
+        "rights"
+      ],
+      "defaultTags": [
+        "advisory",
+        "contact"
+      ],
+      "defaultTargetGroups": [
+        "families",
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "weisser_ring",
+      "name": "WEISSER RING",
+      "baseUrl": "https://weisser-ring.de",
+      "domains": [
+        "aid"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "medium",
+      "sourceTier": "tier_2_ngo_watchdog",
+      "institutionType": "ngo",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "aid",
+        "rights"
+      ],
+      "defaultTags": [
+        "advisory",
+        "contact"
+      ],
+      "defaultTargetGroups": [
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "wege_zur_pflege",
+      "name": "Wege zur Pflege",
+      "baseUrl": "https://www.wege-zur-pflege.de",
+      "domains": [
+        "aid",
+        "tools"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "providerLevel": "federal",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "family",
+        "aid"
+      ],
+      "defaultTags": [
+        "public_service",
+        "contact"
+      ],
+      "defaultTargetGroups": [
+        "families",
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "gebaerdentelefon",
+      "name": "Gebaerdentelefon",
+      "baseUrl": "https://www.gebaerdentelefon.de",
+      "domains": [
+        "contacts"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "medium",
+      "sourceTier": "tier_1_official",
+      "institutionType": "public_service",
+      "providerLevel": "federal",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "contacts",
+        "public_service"
+      ],
+      "defaultTags": [
+        "contact",
+        "accessibility"
+      ],
+      "defaultTargetGroups": [
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "bundesregierung",
+      "name": "Bundesregierung",
+      "baseUrl": "https://www.bundesregierung.de",
+      "domains": [
+        "organizations"
+      ],
+      "languages": [
+        "de",
+        "en"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "providerLevel": "federal",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "public_service",
+        "organizations"
+      ],
+      "defaultTags": [
+        "public_service"
+      ],
+      "defaultTargetGroups": [
+        "general_public"
+      ],
       "license": "unknown",
       "status": "active"
     }

@@ -138,8 +138,16 @@ class ArbeitsagenturCrawler(BaseCrawler):
         checksum = self.calculate_checksum(content_for_checksum)
         
         # Add provenance
-        entry['provenance'] = self.generate_provenance(canonical_url)
-        entry['provenance']['checksum'] = checksum
+        provenance = self.generate_provenance(canonical_url)
+        provenance.update(
+            {
+                key: value
+                for key, value in self._extract_publication_metadata(soup).items()
+                if value
+            }
+        )
+        provenance['checksum'] = checksum
+        entry['provenance'] = provenance
         
         # Calculate quality scores
         entry['qualityScores'] = self.quality_scorer.calculate_scores(entry)

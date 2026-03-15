@@ -15,6 +15,12 @@ export interface DbProvenance {
   crawledAt: string;
   method?: string;
   generator?: string;
+  sourceTier?: string;
+  institutionType?: string;
+  jurisdiction?: string;
+  publishedAt?: string;
+  modifiedAt?: string;
+  contentType?: string;
   [key: string]: string | undefined;
 }
 

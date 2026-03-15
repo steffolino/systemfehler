@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import os
+import socket
 import urllib.error
 import urllib.request
 from typing import Any, Dict, Optional
@@ -34,6 +35,7 @@ class BaseProvider:
         system_prompt: str,
         user_prompt: str,
         temperature: float = 0.1,
+        max_tokens: int | None = None,
     ) -> Dict[str, Any]:
         raise AIProviderError("No AI provider configured")
 
@@ -74,6 +76,8 @@ class OllamaProvider(BaseProvider):
             raise AIProviderError(f"Ollama HTTP {exc.code}: {detail}") from exc
         except urllib.error.URLError as exc:
             raise AIProviderError(f"Ollama unreachable at {self.base_url}") from exc
+        except (TimeoutError, socket.timeout) as exc:
+            raise AIProviderError("Ollama request timed out") from exc
 
     def healthcheck(self) -> Dict[str, Any]:
         request = urllib.request.Request(f"{self.base_url}/api/tags", method="GET")
@@ -102,7 +106,11 @@ class OllamaProvider(BaseProvider):
         system_prompt: str,
         user_prompt: str,
         temperature: float = 0.1,
+        max_tokens: int | None = None,
     ) -> Dict[str, Any]:
+        options: Dict[str, Any] = {"temperature": temperature}
+        if max_tokens is not None:
+            options["num_predict"] = max_tokens
         payload = {
             "model": model,
             "messages": [
@@ -110,7 +118,7 @@ class OllamaProvider(BaseProvider):
                 {"role": "user", "content": user_prompt},
             ],
             "stream": False,
-            "options": {"temperature": temperature},
+            "options": options,
         }
         response = self._post("/api/chat", payload)
         message = response.get("message", {}) if isinstance(response, dict) else {}
@@ -160,6 +168,8 @@ class OpenAIProvider(BaseProvider):
             raise AIProviderError(f"OpenAI HTTP {exc.code}: {detail}") from exc
         except urllib.error.URLError as exc:
             raise AIProviderError("OpenAI API is unreachable") from exc
+        except (TimeoutError, socket.timeout) as exc:
+            raise AIProviderError("OpenAI request timed out") from exc
 
     def healthcheck(self) -> Dict[str, Any]:
         if not self.api_key:
@@ -190,6 +200,7 @@ class OpenAIProvider(BaseProvider):
         system_prompt: str,
         user_prompt: str,
         temperature: float = 0.1,
+        max_tokens: int | None = None,
     ) -> Dict[str, Any]:
         payload = {
             "model": model,
@@ -199,6 +210,8 @@ class OpenAIProvider(BaseProvider):
             ],
             "temperature": temperature,
         }
+        if max_tokens is not None:
+            payload["max_tokens"] = max_tokens
         response = self._request("/chat/completions", payload)
         choices = response.get("choices", []) if isinstance(response, dict) else []
         if not choices:

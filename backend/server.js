@@ -12,49 +12,91 @@ import * as db from './database/connection.js';
 import * as queries from './database/queries.js';
 import fs from 'fs/promises';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { isTurnstileConfigured, verifyTurnstileToken } from './turnstile.js';
 
 dotenv.config();
 
-const app = express();
 const PORT = process.env.API_PORT || 3001;
 
-// Middleware
-// Configure CORS to allow development ports. Prefer `CORS_ORIGIN` env var (comma-separated),
-// otherwise allow common local dev origins (Vite default ports).
-const rawOrigins = process.env.CORS_ORIGIN || 'http://localhost:5173,http://localhost:5174';
-const allowedOrigins = rawOrigins.split(',').map(s => s.trim()).filter(Boolean);
+export function createApp({
+  dbModule = db,
+  queriesModule = queries,
+  logger = console,
+} = {}) {
+  const app = express();
+  const rawOrigins = process.env.CORS_ORIGIN || 'http://localhost:5173,http://localhost:5174';
+  const allowedOrigins = rawOrigins.split(',').map(s => s.trim()).filter(Boolean);
 
-app.use(cors({
-  origin: function (origin, callback) {
-    // allow requests with no origin (e.g., curl, server-to-server)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      return callback(null, true);
+  app.use(cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        return callback(null, true);
+      }
+      return callback(new Error('CORS policy: origin not allowed'));
+    },
+    credentials: true
+  }));
+  app.use(express.json());
+
+  const moderationQueueLimiter = rateLimit({
+    windowMs: 60 * 1000,
+    max: 30,
+    standardHeaders: true,
+    legacyHeaders: false
+  });
+  const searchLimiter = rateLimit({
+    windowMs: 60 * 1000,
+    max: 120,
+    standardHeaders: true,
+    legacyHeaders: false
+  });
+  const requireTurnstileForSearch =
+    (process.env.API_REQUIRE_TURNSTILE_FOR_SEARCH || 'false').toLowerCase() === 'true';
+
+  app.use((req, res, next) => {
+    logger.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+    next();
+  });
+
+  async function maybeVerifyTurnstile(req, res, next) {
+    if (!requireTurnstileForSearch || !isTurnstileConfigured()) {
+      return next();
     }
-    // Not allowed
-    return callback(new Error('CORS policy: origin not allowed'));
-  },
-  credentials: true
-}));
-app.use(express.json());
 
-const moderationQueueLimiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 30,
-  standardHeaders: true,
-  legacyHeaders: false
-});
+    const searchValue =
+      typeof req.query?.search === 'string' ? req.query.search.trim() : '';
+    if (!searchValue) {
+      return next();
+    }
 
-// Request logging middleware
-app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
-  next();
-});
+    try {
+      const verification = await verifyTurnstileToken({
+        token: req.get('x-turnstile-token') || '',
+        remoteIp: req.ip,
+      });
 
-// Health check endpoint
-app.get('/api/health', async (req, res) => {
+      if (!verification.success) {
+        return res.status(403).json({
+          error: 'turnstile_verification_failed',
+          message: 'Bot protection verification failed.',
+          errorCodes: verification.errorCodes,
+        });
+      }
+      return next();
+    } catch (error) {
+      logger.error('Turnstile verification error:', error);
+      return res.status(503).json({
+        error: 'turnstile_unavailable',
+        message: 'Bot protection service is temporarily unavailable.',
+      });
+    }
+  }
+
+  app.get('/api/health', async (req, res) => {
   try {
-    await db.query('SELECT 1');
+    await dbModule.query('SELECT 1');
     res.json({
       status: 'ok',
       timestamp: new Date().toISOString(),
@@ -68,10 +110,9 @@ app.get('/api/health', async (req, res) => {
       error: error.message
     });
   }
-});
+  });
 
-// Version and runtime metadata endpoint
-app.get('/api/version', async (req, res) => {
+  app.get('/api/version', async (req, res) => {
   res.json({
     service: 'systemfehler-api',
     version: process.env.npm_package_version || '0.1.0',
@@ -80,12 +121,11 @@ app.get('/api/version', async (req, res) => {
     host: req.get('host') || null,
     timestamp: new Date().toISOString()
   });
-});
+  });
 
-// Status endpoint
-app.get('/api/status', async (req, res) => {
+  app.get('/api/status', async (req, res) => {
   try {
-    const stats = await queries.getStatistics();
+    const stats = await queriesModule.getStatistics();
     
     // Transform stats for response
     const byDomain = {};
@@ -116,17 +156,18 @@ app.get('/api/status', async (req, res) => {
       timestamp: new Date().toISOString()
     });
   } catch (error) {
-    console.error('Status endpoint error:', error);
+    logger.error('Status endpoint error:', error);
     res.status(500).json({ error: 'Failed to fetch status' });
   }
-});
+  });
 
-// Get entries with filtering and pagination
-app.get('/api/data/entries', async (req, res) => {
+  app.get('/api/data/entries', searchLimiter, maybeVerifyTurnstile, async (req, res) => {
   try {
     const {
       domain,
       status,
+      sourceTier,
+      jurisdiction,
       limit = 50,
       offset = 0,
       search,
@@ -136,6 +177,8 @@ app.get('/api/data/entries', async (req, res) => {
     const options = {
       domain,
       status,
+      sourceTier,
+      jurisdiction,
       limit: Math.min(parseInt(limit), 100),
       offset: parseInt(offset),
       includeTranslations: includeTranslations === 'true' || includeTranslations === '1'
@@ -143,27 +186,25 @@ app.get('/api/data/entries', async (req, res) => {
     
     let result;
     if (search) {
-      // Use substring autocomplete for all search queries (instant substring match)
-      result = await queries.searchEntriesForAutocomplete({
+      result = await queriesModule.searchEntriesForAutocomplete({
         ...options,
         searchText: search
       });
     } else {
-      result = await queries.getAllEntries(options);
+      result = await queriesModule.getAllEntries(options);
     }
     
     res.json(result);
   } catch (error) {
-    console.error('Get entries error:', error);
+    logger.error('Get entries error:', error);
     res.status(500).json({ error: 'Failed to fetch entries' });
   }
-});
+  });
 
-// Get single entry by ID
-app.get('/api/data/entries/:id', async (req, res) => {
+  app.get('/api/data/entries/:id', searchLimiter, async (req, res) => {
   try {
     const { id } = req.params;
-    const entry = await queries.getEntryById(id);
+    const entry = await queriesModule.getEntryById(id);
     
     if (!entry) {
       return res.status(404).json({ error: 'Entry not found' });
@@ -171,13 +212,12 @@ app.get('/api/data/entries/:id', async (req, res) => {
     
     res.json({ entry });
   } catch (error) {
-    console.error('Get entry error:', error);
+    logger.error('Get entry error:', error);
     res.status(500).json({ error: 'Failed to fetch entry' });
   }
-});
+  });
 
-// Get moderation queue
-app.get('/api/data/moderation-queue', moderationQueueLimiter, async (req, res) => {
+  app.get('/api/data/moderation-queue', moderationQueueLimiter, async (req, res) => {
   try {
     const {
       status = 'pending',
@@ -186,7 +226,7 @@ app.get('/api/data/moderation-queue', moderationQueueLimiter, async (req, res) =
       offset = 0
     } = req.query;
     
-    const queue = await queries.getModerationQueue({
+    const queue = await queriesModule.getModerationQueue({
       status,
       domain,
       limit: Math.min(parseInt(limit), 100),
@@ -240,7 +280,7 @@ app.get('/api/data/moderation-queue', moderationQueueLimiter, async (req, res) =
         return res.json({ queue: mapped, total: mapped.length, status, domain });
       } catch (err) {
         // log file read errors and continue to return DB result (which may be empty)
-        console.error('Failed to read moderation queue file fallback:', err && err.message ? err.message : err);
+        logger.error('Failed to read moderation queue file fallback:', err && err.message ? err.message : err);
       }
     }
 
@@ -251,15 +291,14 @@ app.get('/api/data/moderation-queue', moderationQueueLimiter, async (req, res) =
       domain
     });
   } catch (error) {
-    console.error('Get moderation queue error:', error);
+    logger.error('Get moderation queue error:', error);
     res.status(500).json({ error: 'Failed to fetch moderation queue', message: error && error.message ? error.message : undefined });
   }
-});
+  });
 
-// Get quality report
-app.get('/api/data/quality-report', async (req, res) => {
+  app.get('/api/data/quality-report', async (req, res) => {
   try {
-    const report = await queries.getQualityReport();
+    const report = await queriesModule.getQualityReport();
     
     // Transform domain statistics
     const byDomain = {};
@@ -294,51 +333,62 @@ app.get('/api/data/quality-report', async (req, res) => {
       }))
     });
   } catch (error) {
-    console.error('Get quality report error:', error);
+    logger.error('Get quality report error:', error);
     res.status(500).json({ error: 'Failed to fetch quality report' });
   }
-});
+  });
 
-// 404 handler
-app.use((req, res) => {
+  app.use((req, res) => {
   res.status(404).json({ error: 'Not found' });
-});
+  });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error('Unhandled error:', err);
+  app.use((err, req, res, next) => {
+  logger.error('Unhandled error:', err);
   res.status(500).json({
     error: 'Internal server error',
     message: process.env.NODE_ENV === 'development' ? err.message : undefined
   });
-});
-
-// Start server
-const server = app.listen(PORT, () => {
-  console.log(`🚀 Systemfehler API server running on port ${PORT}`);
-  console.log(`   Health check: http://localhost:${PORT}/api/health`);
-  console.log(`   Status: http://localhost:${PORT}/api/status`);
-});
-
-// Graceful shutdown
-process.on('SIGTERM', async () => {
-  console.log('SIGTERM signal received: closing HTTP server');
-  server.close(() => {
-    console.log('HTTP server closed');
   });
-  
-  await db.closePool();
-  process.exit(0);
-});
 
-process.on('SIGINT', async () => {
-  console.log('SIGINT signal received: closing HTTP server');
-  server.close(() => {
-    console.log('HTTP server closed');
+  return app;
+}
+
+export function startServer({
+  port = PORT,
+  dbModule = db,
+  queriesModule = queries,
+  logger = console,
+} = {}) {
+  const app = createApp({ dbModule, queriesModule, logger });
+  const server = app.listen(port, () => {
+    logger.log(`🚀 Systemfehler API server running on port ${port}`);
+    logger.log(`   Health check: http://localhost:${port}/api/health`);
+    logger.log(`   Status: http://localhost:${port}/api/status`);
   });
-  
-  await db.closePool();
-  process.exit(0);
-});
 
-export default app;
+  const shutdown = async (signal) => {
+    logger.log(`${signal} signal received: closing HTTP server`);
+    server.close(() => {
+      logger.log('HTTP server closed');
+    });
+    await dbModule.closePool();
+    process.exit(0);
+  };
+
+  process.on('SIGTERM', () => {
+    void shutdown('SIGTERM');
+  });
+
+  process.on('SIGINT', () => {
+    void shutdown('SIGINT');
+  });
+
+  return { app, server };
+}
+
+const isMainModule = process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
+if (isMainModule) {
+  startServer();
+}
+
+export default createApp();

@@ -1,8 +1,9 @@
 """
 Strict JSON schemas for outputs
 """
+from typing import Any, Dict, List, Optional
+
 from pydantic import BaseModel, Field
-from typing import List, Optional, Dict, Any
 
 class Evidence(BaseModel):
     source: str
@@ -23,6 +24,12 @@ class RewriteResponse(BaseModel):
     explanation: Optional[str] = None
 
 
+class RetrieveResponse(BaseModel):
+    evidence: List[Evidence] = Field(default_factory=list)
+    weak_evidence: bool = False
+    latency_ms: int
+
+
 class AnswerResponse(BaseModel):
     answer: Optional[str]
     explanation: str
@@ -35,12 +42,32 @@ class AnswerResponse(BaseModel):
     weak_evidence: Optional[bool] = False
     usage: Dict[str, Any] = Field(default_factory=dict)
 
+
+class EnrichmentFacet(BaseModel):
+    current: List[str] = Field(default_factory=list)
+    suggested: List[str] = Field(default_factory=list)
+    added: List[str] = Field(default_factory=list)
+    removed: List[str] = Field(default_factory=list)
+    confidence: float = 0.0
+    rationale: str = ""
+
+
+class EnrichmentPayload(BaseModel):
+    topics: EnrichmentFacet = Field(default_factory=EnrichmentFacet)
+    tags: EnrichmentFacet = Field(default_factory=EnrichmentFacet)
+    target_groups: EnrichmentFacet = Field(default_factory=EnrichmentFacet)
+    keywords: EnrichmentFacet = Field(default_factory=EnrichmentFacet)
+
+
 class EnrichmentSuggestion(BaseModel):
     entry_id: str
-    suggestions: List[str]
-    provenance: dict
+    summary: List[str] = Field(default_factory=list)
+    quality_flags: List[str] = Field(default_factory=list)
+    metadata: EnrichmentPayload = Field(default_factory=EnrichmentPayload)
+    provenance: Dict[str, Any] = Field(default_factory=dict)
 
 
 class EnrichmentRequest(BaseModel):
     entry_id: str
+    entry: Dict[str, Any] = Field(default_factory=dict)
     explicit_escalation: bool = False

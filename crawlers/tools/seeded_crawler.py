@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from bs4 import BeautifulSoup
 
 from ..shared.seeded_domain_crawler import SeededDomainCrawler
+from ..shared.source_registry import SourceProfile
 
 
 class SeededToolsCrawler(SeededDomainCrawler):
@@ -17,20 +18,27 @@ class SeededToolsCrawler(SeededDomainCrawler):
             user_agent=user_agent,
             rate_limit_delay=rate_limit_delay,
             data_dir=data_dir,
-            source_label='urls-seeded',
+            source_label='seed-manifest',
         )
 
     def default_topics(self) -> List[str]:
         return ['digital_service', 'tools']
 
     def default_tags(self) -> List[str]:
-        return ['online_tool', 'official_service']
+        return ['tool']
 
     def default_target_groups(self) -> List[str]:
         return ['general_public', 'families', 'job_seekers']
 
-    def build_domain_fields(self, url: str, soup: BeautifulSoup, entry: Dict[str, Any]) -> Dict[str, Any]:
-        text = f"{((entry.get('title') or {}).get('de', '')).lower()} {url.lower()}"
+    def build_domain_fields(
+        self,
+        url: str,
+        soup: BeautifulSoup,
+        entry: Dict[str, Any],
+        source_profile: Optional[SourceProfile] = None,
+    ) -> Dict[str, Any]:
+        title = str(entry.get('title') or '')
+        text = f"{title.lower()} {url.lower()}"
 
         tool_type = 'portal'
         if any(token in text for token in ('rechner', 'calculator')):
@@ -39,7 +47,7 @@ class SeededToolsCrawler(SeededDomainCrawler):
             tool_type = 'application'
         elif 'jobsuche' in text:
             tool_type = 'job-search'
-        elif 'lotse' in text:
+        elif 'lotse' in text or 'check' in text:
             tool_type = 'checker'
 
         return {

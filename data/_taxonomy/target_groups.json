@@ -3,6 +3,10 @@
   "description": "Target groups taxonomy for audience classification",
   "targetGroups": [
     {
+      "id": "general_public",
+      "label": { "de": "Allgemeine Öffentlichkeit", "en": "General Public", "easy_de": "Alle Menschen" }
+    },
+    {
       "id": "unemployed",
       "label": { "de": "Arbeitslose", "en": "Unemployed", "easy_de": "Menschen ohne Arbeit" }
     },
@@ -29,6 +33,14 @@
     {
       "id": "disabled",
       "label": { "de": "Menschen mit Behinderung", "en": "People with disabilities", "easy_de": "Menschen mit Behinderung" }
+    },
+    {
+      "id": "job_seekers",
+      "label": { "de": "Arbeitssuchende", "en": "Job Seekers", "easy_de": "Menschen auf Jobsuche" }
+    },
+    {
+      "id": "persons_with_disabilities",
+      "label": { "de": "Menschen mit Behinderung", "en": "People with Disabilities", "easy_de": "Menschen mit Behinderung" }
     }
   ],
   "_todo": [

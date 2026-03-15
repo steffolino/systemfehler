@@ -15,8 +15,20 @@ import type {
   entries as DbEntryRow,
   moderationQueue as DbModerationQueueRow,
 } from './db_types';
+import registeredSources from '../../../data/_sources/registered_sources.json';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://systemfehler-api-worker.inequality.workers.dev/api';
+const DEFAULT_LOCAL_API_BASE_URL =
+  typeof window !== 'undefined' &&
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'http://127.0.0.1:3001/api'
+    : 'https://systemfehler-api-worker.inequality.workers.dev/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || DEFAULT_LOCAL_API_BASE_URL;
+const DEFAULT_LOCAL_AI_BASE_URL =
+  typeof window !== 'undefined' &&
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'http://localhost:8002'
+    : '/api/ai';
+const AI_API_BASE_URL = import.meta.env.VITE_AI_API_URL || DEFAULT_LOCAL_AI_BASE_URL;
 const DEFAULT_SNAPSHOT_BASE_URL =
   typeof window !== 'undefined'
     ? `${window.location.origin}${import.meta.env.BASE_URL.replace(/\/$/, '')}`
@@ -50,8 +62,50 @@ interface StatusResponse {
 type EntryTitle = string | MultilingualText;
 type JsonRecord = Record<string, unknown>;
 
+type RegisteredSourceRecord = {
+  name?: string;
+  baseUrl?: string;
+  sourceTier?: string;
+  institutionType?: string;
+  jurisdiction?: string;
+};
+
 function isJsonRecord(value: unknown): value is JsonRecord {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+}
+
+const REGISTERED_SOURCE_LOOKUP = (() => {
+  const lookup = new Map<string, RegisteredSourceRecord>();
+  const payload = registeredSources as { sources?: RegisteredSourceRecord[] };
+
+  for (const source of payload.sources || []) {
+    if (!source.baseUrl) continue;
+    try {
+      const host = new URL(source.baseUrl).hostname.replace(/^www\./, '');
+      lookup.set(host, source);
+    } catch {
+      continue;
+    }
+  }
+
+  return lookup;
+})();
+
+function inferSourceMetaFromUrl(url: string) {
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, '');
+    const source = REGISTERED_SOURCE_LOOKUP.get(host);
+    if (!source) return null;
+
+    return {
+      source: source.name?.trim() || host,
+      sourceTier: source.sourceTier?.trim() || 'unknown',
+      institutionType: source.institutionType?.trim() || 'unknown',
+      jurisdiction: source.jurisdiction?.trim() || 'unknown',
+    };
+  } catch {
+    return null;
+  }
 }
 
 type Entry = Omit<
@@ -195,6 +249,99 @@ interface QualityReportResponse {
   }>;
 }
 
+interface AIRewriteResponse {
+  rewritten_query: string;
+  model: string;
+  provider: string;
+  latency_ms: number;
+  fallback: boolean;
+  explanation?: string | null;
+}
+
+interface AIEvidence {
+  source: string;
+  content: string;
+  confidence: number;
+}
+
+interface AIRetrieveResponse {
+  evidence: AIEvidence[];
+  weak_evidence?: boolean;
+  latency_ms: number;
+}
+
+interface AISynthesizeResponse {
+  answer: string | null;
+  explanation: string;
+  sources: string[];
+  provider: string;
+  model: string;
+  latency_ms: number;
+  fallback: boolean;
+  evidence: AIEvidence[];
+  weak_evidence?: boolean;
+  usage?: Record<string, unknown>;
+}
+
+interface AIEnrichmentFacet {
+  current: string[];
+  suggested: string[];
+  added: string[];
+  removed: string[];
+  confidence: number;
+  rationale: string;
+}
+
+interface AIEnrichmentResponse {
+  entry_id: string;
+  summary: string[];
+  quality_flags: string[];
+  metadata: {
+    topics: AIEnrichmentFacet;
+    tags: AIEnrichmentFacet;
+    target_groups: AIEnrichmentFacet;
+    keywords: AIEnrichmentFacet;
+  };
+  provenance: Record<string, unknown>;
+}
+
+interface AIResultBundle {
+  rewrite: AIRewriteResponse;
+  synthesis: AISynthesizeResponse;
+  relatedEntries: Entry[];
+}
+
+interface AIHealthResponse {
+  status: string;
+  provider: {
+    provider: string;
+    configured: boolean;
+    status?: string;
+    models?: string[];
+    error?: string;
+  };
+  turnstile?: {
+    configured: boolean;
+  };
+  host: string;
+  port: number;
+}
+
+interface SourceCatalogItem {
+  id: string;
+  name: string;
+  host: string;
+  sourceTier: string;
+  institutionType: string;
+  jurisdiction: string;
+  entryCount: number;
+  domains: string[];
+  avgIqs: number | null;
+  avgAis: number | null;
+  lastSeen: string | null;
+  sampleUrl: string | null;
+}
+
 async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const normalizedBase = API_BASE_URL.replace(/\/+$/, '');
   const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
@@ -254,6 +401,182 @@ async function fetchSnapshot<T>(path: string): Promise<T> {
   return (await response.json()) as T;
 }
 
+async function fetchAiApi<T>(endpoint: string, options?: RequestInit): Promise<T> {
+  const normalizedBase = AI_API_BASE_URL.replace(/\/+$/, '');
+  const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const url = `${normalizedBase}${normalizedEndpoint}`;
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 45000);
+
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+      headers: {
+        'Content-Type': 'application/json',
+        ...options?.headers,
+      },
+    });
+  } catch (error) {
+    window.clearTimeout(timeout);
+    if (error instanceof DOMException && error.name === 'AbortError') {
+      throw new Error('AI request timed out after 45 seconds');
+    }
+    throw error;
+  }
+  window.clearTimeout(timeout);
+
+  if (!response.ok) {
+    let errorMsg = `AI request failed (${response.status})`;
+    try {
+      const payload = await response.json();
+      errorMsg = JSON.stringify(payload);
+    } catch {
+      try {
+        errorMsg = await response.text();
+      } catch {
+        errorMsg = `AI request failed (${response.status})`;
+      }
+    }
+    throw new Error(errorMsg);
+  }
+
+  return (await response.json()) as T;
+}
+
+function buildAiTimeoutRewrite(query: string, message: string): AIRewriteResponse {
+  return {
+    rewritten_query: query,
+    model: 'timeout',
+    provider: 'unknown',
+    latency_ms: 45000,
+    fallback: true,
+    explanation: message,
+  };
+}
+
+function buildAiTimeoutSynthesis(message: string): AISynthesizeResponse {
+  return {
+    answer: null,
+    explanation: message,
+    sources: [],
+    provider: 'unknown',
+    model: 'timeout',
+    latency_ms: 45000,
+    fallback: true,
+    evidence: [],
+    weak_evidence: true,
+  };
+}
+
+function parseEvidenceEntries(evidence: AIEvidence[]): Entry[] {
+  const relatedEntriesMap = new Map<string, Entry>();
+  for (const item of evidence || []) {
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(item.content);
+    } catch {
+      continue;
+    }
+
+    const normalized = normalizeEntriesPayload([parsed]);
+    for (const entry of normalized) {
+      if (!relatedEntriesMap.has(entry.id)) {
+        relatedEntriesMap.set(entry.id, entry);
+      }
+    }
+  }
+
+  return Array.from(relatedEntriesMap.values());
+}
+
+async function fetchAIResultBundle(query: string): Promise<AIResultBundle> {
+  const trimmed = query.trim();
+  const [rewriteResult, retrieveResult, synthesisResult] = await Promise.allSettled([
+    getAIRewrite(trimmed),
+    getAIRetrieve(trimmed),
+    getAISynthesis(trimmed),
+  ]);
+
+  const rewrite =
+    rewriteResult.status === 'fulfilled'
+      ? rewriteResult.value
+      : buildAiTimeoutRewrite(trimmed, rewriteResult.reason instanceof Error ? rewriteResult.reason.message : 'AI rewrite failed');
+
+  const synthesis =
+    synthesisResult.status === 'fulfilled'
+      ? synthesisResult.value
+      : buildAiTimeoutSynthesis(
+          synthesisResult.reason instanceof Error ? synthesisResult.reason.message : 'AI synthesis failed'
+        );
+  const retrievalEvidence =
+    retrieveResult.status === 'fulfilled'
+      ? retrieveResult.value.evidence
+      : synthesis.evidence || [];
+  const relatedEntries = parseEvidenceEntries(retrievalEvidence);
+  const finalSynthesis =
+    retrieveResult.status === 'fulfilled'
+      ? {
+          ...synthesis,
+          evidence: retrievalEvidence,
+          weak_evidence: synthesis.weak_evidence ?? retrieveResult.value.weak_evidence,
+        }
+      : synthesis;
+
+  return {
+    rewrite,
+    synthesis: finalSynthesis,
+    relatedEntries,
+  };
+}
+
+async function getAIRewrite(
+  query: string,
+  options?: { turnstileToken?: string }
+): Promise<AIRewriteResponse> {
+  const trimmed = query.trim();
+  return fetchAiApi<AIRewriteResponse>('/rewrite', {
+    method: 'POST',
+    body: JSON.stringify({ query: trimmed }),
+    headers: options?.turnstileToken ? { 'x-turnstile-token': options.turnstileToken } : undefined,
+  });
+}
+
+async function getAIRetrieve(
+  query: string,
+  options?: { turnstileToken?: string }
+): Promise<AIRetrieveResponse> {
+  const trimmed = query.trim();
+  return fetchAiApi<AIRetrieveResponse>('/retrieve', {
+    method: 'POST',
+    body: JSON.stringify({ query: trimmed }),
+    headers: options?.turnstileToken ? { 'x-turnstile-token': options.turnstileToken } : undefined,
+  });
+}
+
+async function getAISynthesis(
+  query: string,
+  options?: { turnstileToken?: string }
+): Promise<AISynthesizeResponse> {
+  const trimmed = query.trim();
+  return fetchAiApi<AISynthesizeResponse>('/synthesize', {
+    method: 'POST',
+    body: JSON.stringify({ query: trimmed }),
+    headers: options?.turnstileToken ? { 'x-turnstile-token': options.turnstileToken } : undefined,
+  });
+}
+
+async function getAIEnrichment(entry: Entry): Promise<AIEnrichmentResponse> {
+  return fetchAiApi<AIEnrichmentResponse>('/enrich', {
+    method: 'POST',
+    body: JSON.stringify({
+      entry_id: entry.id,
+      entry,
+    }),
+  });
+}
+
 function getLocalizedTitle(value: EntryTitle | undefined, fallback?: string | null, locale: keyof MultilingualText = 'de'): string {
   if (typeof value === 'string') return value;
   if (value && typeof value === 'object') {
@@ -270,9 +593,57 @@ function getTranslationTitle(translations: TranslationsMap | null | undefined, k
   return record?.title ?? null;
 }
 
+function getEntryProvenanceRecord(entry: Entry): Record<string, unknown> | null {
+  return entry.provenance && typeof entry.provenance === 'object'
+    ? (entry.provenance as Record<string, unknown>)
+    : null;
+}
+
+function getEntrySourceMeta(entry: Entry) {
+  const provenance = getEntryProvenanceRecord(entry);
+  const inferred = inferSourceMetaFromUrl(entry.url);
+  const source =
+    typeof provenance?.source === 'string' && provenance.source.trim()
+      ? (() => {
+          const raw = provenance.source.trim();
+          if (/^https?:\/\//i.test(raw)) {
+            return inferred?.source || new URL(raw).hostname.replace(/^www\./, '');
+          }
+          return raw;
+        })()
+      : inferred?.source || (() => {
+          try {
+            return new URL(entry.url).hostname.replace(/^www\./, '');
+          } catch {
+            return 'Unknown source';
+          }
+        })();
+  const sourceTier =
+    typeof provenance?.sourceTier === 'string' && provenance.sourceTier.trim()
+      ? provenance.sourceTier.trim()
+      : inferred?.sourceTier || 'unknown';
+  const institutionType =
+    typeof provenance?.institutionType === 'string' && provenance.institutionType.trim()
+      ? provenance.institutionType.trim()
+      : inferred?.institutionType || 'unknown';
+  const jurisdiction =
+    typeof provenance?.jurisdiction === 'string' && provenance.jurisdiction.trim()
+      ? provenance.jurisdiction.trim()
+      : inferred?.jurisdiction || 'unknown';
+
+  return {
+    source,
+    sourceTier,
+    institutionType,
+    jurisdiction,
+  };
+}
+
 export function getEntryTitleText(entry: Pick<Entry, 'title' | 'title_de' | 'title_en'>, locale: keyof MultilingualText = 'de'): string {
   return getLocalizedTitle(entry.title, locale === 'en' ? entry.title_en ?? entry.title_de ?? '' : entry.title_de, locale);
 }
+
+export { getEntrySourceMeta };
 
 function normalizeEntriesPayload(payload: unknown, domainFallback?: string): Entry[] {
   const payloadRecord = isJsonRecord(payload) ? payload : null;
@@ -318,6 +689,8 @@ async function loadSnapshotEntries(domain?: string): Promise<Entry[]> {
 function filterEntries(entries: Entry[], params?: {
   status?: string;
   search?: string;
+  sourceTier?: string;
+  jurisdiction?: string;
   includeTranslations?: boolean;
 }): Entry[] {
   let filtered = [...entries];
@@ -340,6 +713,50 @@ function filterEntries(entries: Entry[], params?: {
     });
   }
 
+  if (params?.sourceTier) {
+    filtered = filtered.filter(
+      (entry) => entry.provenance?.sourceTier === params.sourceTier
+    );
+  }
+
+  if (params?.jurisdiction) {
+    filtered = filtered.filter(
+      (entry) => entry.provenance?.jurisdiction === params.jurisdiction
+    );
+  }
+
+  filtered.sort((left, right) => {
+    const rank = (entry: Entry): number => {
+      switch (entry.provenance?.sourceTier) {
+        case 'tier_1_official':
+          return 0;
+        case 'tier_2_ngo_watchdog':
+          return 1;
+        case 'tier_4_academic':
+          return 2;
+        case 'tier_3_press':
+          return 3;
+        default:
+          return 4;
+      }
+    };
+
+    const tierDiff = rank(left) - rank(right);
+    if (tierDiff !== 0) return tierDiff;
+
+    const leftAis = Number(left.ais ?? left.qualityScores?.ais ?? 0);
+    const rightAis = Number(right.ais ?? right.qualityScores?.ais ?? 0);
+    if (rightAis !== leftAis) return rightAis - leftAis;
+
+    const leftIqs = Number(left.iqs ?? left.qualityScores?.iqs ?? 0);
+    const rightIqs = Number(right.iqs ?? right.qualityScores?.iqs ?? 0);
+    if (rightIqs !== leftIqs) return rightIqs - leftIqs;
+
+    const leftSeen = left.lastSeen ?? left.last_seen ?? left.createdAt ?? left.created_at ?? '';
+    const rightSeen = right.lastSeen ?? right.last_seen ?? right.createdAt ?? right.created_at ?? '';
+    return rightSeen.localeCompare(leftSeen);
+  });
+
   if (!params?.includeTranslations) {
     filtered = filtered.map((entry) => {
       const { translations, ...clone } = entry;
@@ -357,6 +774,8 @@ async function getEntriesFromSnapshots(params?: {
   limit?: number;
   offset?: number;
   search?: string;
+  sourceTier?: string;
+  jurisdiction?: string;
   includeTranslations?: boolean;
 }): Promise<EntriesResponse> {
   const limit = Math.min(params?.limit ?? 50, 100);
@@ -378,6 +797,87 @@ async function getEntriesFromSnapshots(params?: {
     page,
     pages,
   };
+}
+
+async function getAllEntriesForCatalog(): Promise<Entry[]> {
+  if (IS_GITHUB_PAGES) {
+    return loadSnapshotEntries();
+  }
+
+  const limit = 250;
+  let offset = 0;
+  let total = Infinity;
+  const entries: Entry[] = [];
+
+  while (offset < total) {
+    const response = await fetchApi<EntriesResponse>(`/api/data/entries?limit=${limit}&offset=${offset}&includeTranslations=true`);
+    entries.push(...response.entries);
+    total = response.total;
+    offset += response.entries.length;
+    if (response.entries.length === 0) break;
+  }
+
+  return entries;
+}
+
+function buildSourceCatalog(entries: Entry[]): SourceCatalogItem[] {
+  const groups = new Map<string, SourceCatalogItem>();
+
+  for (const entry of entries) {
+    const meta = getEntrySourceMeta(entry);
+    const host = (() => {
+      try {
+        return new URL(entry.url).hostname.replace(/^www\./, '');
+      } catch {
+        return 'unknown';
+      }
+    })();
+    const id = `${meta.source.toLowerCase()}::${host}`;
+    const current = groups.get(id);
+    const iqs = Number(entry.iqs ?? entry.qualityScores?.iqs ?? 0);
+    const ais = Number(entry.ais ?? entry.qualityScores?.ais ?? 0);
+    const lastSeen = entry.lastSeen || entry.last_seen || entry.updatedAt || entry.updated_at || null;
+
+    if (!current) {
+      groups.set(id, {
+        id,
+        name: meta.source,
+        host,
+        sourceTier: meta.sourceTier,
+        institutionType: meta.institutionType,
+        jurisdiction: meta.jurisdiction,
+        entryCount: 1,
+        domains: [entry.domain],
+        avgIqs: Number.isFinite(iqs) ? iqs : null,
+        avgAis: Number.isFinite(ais) ? ais : null,
+        lastSeen,
+        sampleUrl: entry.url,
+      });
+      continue;
+    }
+
+    current.entryCount += 1;
+    if (!current.domains.includes(entry.domain)) {
+      current.domains.push(entry.domain);
+    }
+    current.avgIqs =
+      current.avgIqs == null
+        ? (Number.isFinite(iqs) ? iqs : null)
+        : (current.avgIqs * (current.entryCount - 1) + (Number.isFinite(iqs) ? iqs : 0)) / current.entryCount;
+    current.avgAis =
+      current.avgAis == null
+        ? (Number.isFinite(ais) ? ais : null)
+        : (current.avgAis * (current.entryCount - 1) + (Number.isFinite(ais) ? ais : 0)) / current.entryCount;
+    if (lastSeen && (!current.lastSeen || new Date(lastSeen).getTime() > new Date(current.lastSeen).getTime())) {
+      current.lastSeen = lastSeen;
+    }
+  }
+
+  return Array.from(groups.values()).sort((a, b) => {
+    const tierSort = a.sourceTier.localeCompare(b.sourceTier);
+    if (tierSort !== 0) return tierSort;
+    return b.entryCount - a.entryCount;
+  });
 }
 
 async function getModerationQueueFromSnapshots(params?: {
@@ -563,6 +1063,8 @@ export const api = {
     limit?: number;
     offset?: number;
     search?: string;
+    sourceTier?: string;
+    jurisdiction?: string;
     includeTranslations?: boolean;
   }): Promise<EntriesResponse> => {
     const queryParams = new URLSearchParams();
@@ -571,6 +1073,8 @@ export const api = {
     if (params?.limit) queryParams.append('limit', params.limit.toString());
     if (params?.offset) queryParams.append('offset', params.offset.toString());
     if (params?.search) queryParams.append('search', params.search);
+    if (params?.sourceTier) queryParams.append('sourceTier', params.sourceTier);
+    if (params?.jurisdiction) queryParams.append('jurisdiction', params.jurisdiction);
     if (params?.includeTranslations) queryParams.append('includeTranslations', 'true');
 
     if (IS_GITHUB_PAGES) {
@@ -640,9 +1144,113 @@ export const api = {
     }
   },
 
-  getAIResults: async () => {
-    // Placeholder AI search stub: returns empty array or mock results
-    return [];
+  getAIResults: async (query: string): Promise<AIResultBundle> => {
+    const trimmed = query.trim();
+    if (!trimmed) {
+      return {
+        rewrite: {
+          rewritten_query: '',
+          model: 'disabled',
+          provider: 'none',
+          latency_ms: 0,
+          fallback: true,
+          explanation: 'Enter a search query to use the AI assistant.',
+        },
+        synthesis: {
+          answer: null,
+          explanation: 'Enter a search query to use the AI assistant.',
+          sources: [],
+          provider: 'none',
+          model: 'disabled',
+          latency_ms: 0,
+          fallback: true,
+          evidence: [],
+          weak_evidence: true,
+        },
+        relatedEntries: [],
+      };
+    }
+
+    if (IS_GITHUB_PAGES) {
+      return {
+        rewrite: {
+          rewritten_query: trimmed,
+          model: 'disabled',
+          provider: 'none',
+          latency_ms: 0,
+          fallback: true,
+          explanation: 'AI sidecar is not available on GitHub Pages.',
+        },
+        synthesis: {
+          answer: null,
+          explanation: 'AI sidecar is not available on GitHub Pages.',
+          sources: [],
+          provider: 'none',
+          model: 'disabled',
+          latency_ms: 0,
+          fallback: true,
+          evidence: [],
+          weak_evidence: true,
+        },
+        relatedEntries: [],
+      };
+    }
+
+    return fetchAIResultBundle(trimmed);
+  },
+
+  warmAIResults: async (queries: string[]): Promise<void> => {
+    if (IS_GITHUB_PAGES || queries.length === 0) return;
+    await Promise.allSettled(
+      queries.flatMap((query) => [
+        getAIRewrite(query).catch(() => null),
+        getAIRetrieve(query).catch(() => null),
+      ])
+    );
+  },
+
+  getAIRewrite,
+
+  getAIRetrieve,
+
+  getAISynthesis,
+
+  getAIEnrichment,
+
+  getAIHealth: async (): Promise<AIHealthResponse> => {
+    if (IS_GITHUB_PAGES) {
+      return {
+        status: 'unavailable',
+        provider: {
+          provider: 'none',
+          configured: false,
+          status: 'disabled',
+        },
+        host: 'github-pages',
+        port: 0,
+      };
+    }
+
+    try {
+      return await fetchAiApi<AIHealthResponse>('/health');
+    } catch {
+      return {
+        status: 'unreachable',
+        provider: {
+          provider: 'none',
+          configured: false,
+          status: 'unreachable',
+          error: 'AI sidecar is not reachable at the configured URL.',
+        },
+        host: AI_API_BASE_URL,
+        port: 0,
+      };
+    }
+  },
+
+  getSourceCatalog: async (): Promise<SourceCatalogItem[]> => {
+    const entries = await getAllEntriesForCatalog();
+    return buildSourceCatalog(entries);
   },
 
   autocomplete: async ({ query, limit = 10 }: { query: string; limit?: number }) => {
@@ -676,4 +1284,10 @@ export type {
   TranslationsMap,
   TranslationRecord,
   Provenance,
+  AIRewriteResponse,
+  AISynthesizeResponse,
+  AIEnrichmentResponse,
+  AIResultBundle,
+  AIHealthResponse,
+  SourceCatalogItem,
 };

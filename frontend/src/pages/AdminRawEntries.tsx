@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { api, getEntryTitleText, type Entry } from '@/lib/api';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { MetadataEnrichmentCard } from '@/components/admin/MetadataEnrichmentCard';
 
 function getEntryTitle(entry: Entry) {
   return getEntryTitleText(entry) || getEntryTitleText(entry, 'en') || 'Untitled entry';
@@ -373,6 +374,10 @@ export default function AdminRawEntries() {
                           </div>
                         ))}
                       </div>
+                    </section>
+
+                    <section>
+                      <MetadataEnrichmentCard entry={selectedEntry} />
                     </section>
 
                     {showRawJson && (
