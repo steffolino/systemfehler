@@ -9,6 +9,15 @@ import time
 
 from fastapi import APIRouter
 
+from .cache import (
+    CACHE_TTL_RETRIEVE,
+    CACHE_TTL_REWRITE,
+    CACHE_TTL_SYNTHESIZE,
+    ai_cache,
+    cache_key,
+    fingerprint_evidence,
+    normalize_query,
+)
 from .provider import AIProviderError, get_provider
 from .retrieval import retrieve_evidence
 from .routing import ModelRouter
@@ -37,7 +46,8 @@ REWRITE_SYSTEM_PROMPT = (
 SYNTHESIZE_SYSTEM_PROMPT = (
     "You are a retrieval-first assistant for German social-service information. "
     "Use only the provided evidence. If the evidence is weak, say so and do not guess. "
-    "Answer in German, concise and factual."
+    "Answer in German, concise and factual. Ignore evidence that is only loosely related "
+    "to the user question, especially family-only tools when the question is about unemployment."
 )
 
 ENRICH_SYSTEM_PROMPT = (
@@ -51,6 +61,12 @@ def _usage_totals(payload):
     usage = payload.get("usage", {}) if isinstance(payload, dict) else {}
     total_tokens = int(usage.get("total_tokens", 0) or 0)
     return usage, total_tokens
+
+
+def _cacheable_response(model):
+    if hasattr(model, "model_dump"):
+        return model.model_dump()
+    return model
 
 
 def _compact_evidence_block(evidence):
@@ -83,25 +99,38 @@ def _compact_evidence_block(evidence):
 @router.post("/retrieve", response_model=RetrieveResponse)
 async def retrieve_only(body: QueryRequest):
     start = time.time()
+    normalized_query = normalize_query(body.query)
+    retrieve_cache_key = cache_key("retrieve", normalized_query)
+    cached = ai_cache.get(retrieve_cache_key)
+    if cached is not None:
+        return RetrieveResponse(**cached)
+
     evidence = retrieve_evidence(body.query)
     sufficient = any(ev.confidence >= 0.7 for ev in evidence)
     latency = int((time.time() - start) * 1000)
-    return RetrieveResponse(
+    response = RetrieveResponse(
         evidence=evidence,
         weak_evidence=not sufficient,
         latency_ms=latency,
     )
+    ai_cache.set(retrieve_cache_key, _cacheable_response(response), CACHE_TTL_RETRIEVE)
+    return response
 
 
 @router.post("/rewrite", response_model=RewriteResponse)
 async def rewrite_query(body: QueryRequest):
     start = time.time()
     model = model_router.route("rewrite", explicit_escalation=body.explicit_escalation)
+    normalized_query = normalize_query(body.query)
+    rewrite_cache_key = cache_key("rewrite", model, normalized_query)
+    cached = ai_cache.get(rewrite_cache_key)
+    if cached is not None:
+        return RewriteResponse(**cached)
 
     if not provider.is_configured():
         latency = int((time.time() - start) * 1000)
         log_telemetry("rewrite", model, latency, False, 0, 0.0)
-        return RewriteResponse(
+        response = RewriteResponse(
             rewritten_query=body.query,
             model=model,
             provider=provider.name,
@@ -109,6 +138,8 @@ async def rewrite_query(body: QueryRequest):
             fallback=True,
             explanation="No AI provider configured; returning the original query.",
         )
+        ai_cache.set(rewrite_cache_key, _cacheable_response(response), CACHE_TTL_REWRITE)
+        return response
 
     try:
         completion = provider.generate_text(
@@ -126,17 +157,19 @@ async def rewrite_query(body: QueryRequest):
         rewritten_query = completion["text"].strip()
         latency = int((time.time() - start) * 1000)
         log_telemetry("rewrite", model, latency, True, total_tokens, 0.0)
-        return RewriteResponse(
+        response = RewriteResponse(
             rewritten_query=rewritten_query,
             model=model,
             provider=provider.name,
             latency_ms=latency,
             fallback=False,
         )
+        ai_cache.set(rewrite_cache_key, _cacheable_response(response), CACHE_TTL_REWRITE)
+        return response
     except AIProviderError as exc:
         latency = int((time.time() - start) * 1000)
         log_telemetry("rewrite", model, latency, False, 0, 0.0)
-        return RewriteResponse(
+        response = RewriteResponse(
             rewritten_query=body.query,
             model=model,
             provider=provider.name,
@@ -144,6 +177,8 @@ async def rewrite_query(body: QueryRequest):
             fallback=True,
             explanation=str(exc),
         )
+        ai_cache.set(rewrite_cache_key, _cacheable_response(response), CACHE_TTL_REWRITE)
+        return response
 
 
 @router.post("/synthesize", response_model=AnswerResponse)
@@ -152,11 +187,17 @@ async def synthesize_answer(body: QueryRequest):
     model = model_router.route("synthesize", explicit_escalation=body.explicit_escalation)
     evidence = retrieve_evidence(body.query)
     sufficient = any(ev.confidence >= 0.7 for ev in evidence)
+    normalized_query = normalize_query(body.query)
+    evidence_hash = fingerprint_evidence(evidence)
+    synth_cache_key = cache_key("synthesize", model, normalized_query, evidence_hash)
+    cached = ai_cache.get(synth_cache_key)
+    if cached is not None:
+        return AnswerResponse(**cached)
 
     if not sufficient:
         latency = int((time.time() - start) * 1000)
         log_telemetry("synthesize", model, latency, False, 0, 0.0)
-        return AnswerResponse(
+        response = AnswerResponse(
             answer=None,
             explanation="Keine verlässliche Information gefunden.",
             sources=[],
@@ -167,11 +208,13 @@ async def synthesize_answer(body: QueryRequest):
             evidence=evidence,
             weak_evidence=True,
         )
+        ai_cache.set(synth_cache_key, _cacheable_response(response), CACHE_TTL_SYNTHESIZE)
+        return response
 
     if not provider.is_configured():
         latency = int((time.time() - start) * 1000)
         log_telemetry("synthesize", model, latency, False, 0, 0.0)
-        return AnswerResponse(
+        response = AnswerResponse(
             answer=None,
             explanation="AI provider not configured. Evidence retrieval worked, but no synthesis backend is available.",
             sources=[ev.source for ev in evidence if ev.confidence >= 0.7],
@@ -182,6 +225,8 @@ async def synthesize_answer(body: QueryRequest):
             evidence=evidence,
             weak_evidence=False,
         )
+        ai_cache.set(synth_cache_key, _cacheable_response(response), CACHE_TTL_SYNTHESIZE)
+        return response
 
     evidence_block = _compact_evidence_block(evidence)
 
@@ -193,7 +238,8 @@ async def synthesize_answer(body: QueryRequest):
                 f"User question:\n{body.query}\n\n"
                 f"Retrieved evidence:\n{evidence_block}\n\n"
                 "Provide a short German answer grounded only in the evidence. "
-                "Use at most 4 bullet points or 4 short sentences."
+                "Prefer the most directly relevant unemployment/help entries first. "
+                "Use at most 3 bullet points or 3 short sentences."
             ),
             temperature=0.2,
             max_tokens=MAX_SYNTHESIS_TOKENS,
@@ -201,7 +247,7 @@ async def synthesize_answer(body: QueryRequest):
         usage, total_tokens = _usage_totals(completion)
         latency = int((time.time() - start) * 1000)
         log_telemetry("synthesize", model, latency, True, total_tokens, 0.0)
-        return AnswerResponse(
+        response = AnswerResponse(
             answer=completion["text"],
             explanation="Antwort basiert auf abgerufenen Einträgen.",
             sources=[ev.source for ev in evidence if ev.confidence >= 0.7],
@@ -212,10 +258,12 @@ async def synthesize_answer(body: QueryRequest):
             evidence=evidence,
             usage=usage,
         )
+        ai_cache.set(synth_cache_key, _cacheable_response(response), CACHE_TTL_SYNTHESIZE)
+        return response
     except AIProviderError as exc:
         latency = int((time.time() - start) * 1000)
         log_telemetry("synthesize", model, latency, False, 0, 0.0)
-        return AnswerResponse(
+        response = AnswerResponse(
             answer=None,
             explanation=str(exc),
             sources=[ev.source for ev in evidence if ev.confidence >= 0.7],
@@ -225,6 +273,8 @@ async def synthesize_answer(body: QueryRequest):
             fallback=True,
             evidence=evidence,
         )
+        ai_cache.set(synth_cache_key, _cacheable_response(response), CACHE_TTL_SYNTHESIZE)
+        return response
 
 
 @router.post("/enrich", response_model=EnrichmentSuggestion)

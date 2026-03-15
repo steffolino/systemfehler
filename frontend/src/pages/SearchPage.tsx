@@ -10,6 +10,66 @@ import { Card } from '@/components/ui/card';
 
 type TabKey = 'standard' | 'ai';
 
+const AI_SUGGESTED_QUESTIONS = [
+  'Ich bin arbeitslos geworden. Was nun?',
+  'Wie beantrage ich Bürgergeld beim Jobcenter?',
+  'Welche Online-Dienste der Arbeitsagentur sollte ich zuerst nutzen?',
+  'Wie erreiche ich schnell die richtige Stelle bei der Bundesagentur für Arbeit?',
+];
+
+function parseEvidenceEntriesForPage(evidence: Array<{ content: string }>): Entry[] {
+  const relatedEntriesMap = new Map<string, Entry>();
+
+  for (const item of evidence) {
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(item.content);
+    } catch {
+      continue;
+    }
+
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      continue;
+    }
+
+    const entry = parsed as Partial<Entry>;
+    if (typeof entry.id !== 'string' || typeof entry.url !== 'string' || typeof entry.status !== 'string') {
+      continue;
+    }
+
+    if (!relatedEntriesMap.has(entry.id)) {
+      relatedEntriesMap.set(entry.id, entry as Entry);
+    }
+  }
+
+  return Array.from(relatedEntriesMap.values());
+}
+
+function buildPendingAiResult(query: string): AIResultBundle {
+  return {
+    rewrite: {
+      rewritten_query: query,
+      model: 'pending',
+      provider: 'none',
+      latency_ms: 0,
+      fallback: true,
+      explanation: 'Retrieval is running. A rewritten query will appear when the model responds.',
+    },
+    synthesis: {
+      answer: null,
+      explanation: 'Evidence is loading. The final AI answer appears afterwards.',
+      sources: [],
+      provider: 'pending',
+      model: 'pending',
+      latency_ms: 0,
+      fallback: true,
+      evidence: [],
+      weak_evidence: true,
+    },
+    relatedEntries: [],
+  };
+}
+
 export default function SearchPage() {
   const [standardQuery, setStandardQuery] = useState('');
   const [debouncedStandardQuery, setDebouncedStandardQuery] = useState('');
@@ -23,9 +83,12 @@ export default function SearchPage() {
 
   const [standardLoading, setStandardLoading] = useState(false);
   const [aiLoading, setAiLoading] = useState(false);
+  const [aiEvidenceLoading, setAiEvidenceLoading] = useState(false);
+  const [aiSynthesisLoading, setAiSynthesisLoading] = useState(false);
 
   const [standardError, setStandardError] = useState<string | null>(null);
   const [aiError, setAiError] = useState<string | null>(null);
+  const [aiSuggestionsWarmed, setAiSuggestionsWarmed] = useState(false);
   const { isAuthenticated, isLoading: authLoading } = useAuth0();
 
   useEffect(() => {
@@ -65,6 +128,8 @@ export default function SearchPage() {
     if (!isAuthenticated || tab !== 'ai') return;
     if (!submittedAiQuery) {
       setAiLoading(false);
+      setAiEvidenceLoading(false);
+      setAiSynthesisLoading(false);
       setAiError(null);
       setAiResult(null);
       return;
@@ -73,21 +138,75 @@ export default function SearchPage() {
     let cancelled = false;
 
     setAiLoading(true);
+    setAiEvidenceLoading(true);
+    setAiSynthesisLoading(true);
     setAiError(null);
+    setAiResult(buildPendingAiResult(submittedAiQuery));
 
-    api
-      .getAIResults(submittedAiQuery)
-      .then((result) => {
+    Promise.allSettled([api.getAIRewrite(submittedAiQuery), api.getAIRetrieve(submittedAiQuery)])
+      .then(async ([rewriteResult, retrieveResult]) => {
         if (cancelled) return;
-        setAiResult(result);
+
+        const pendingResult = buildPendingAiResult(submittedAiQuery);
+        const rewrite =
+          rewriteResult.status === 'fulfilled' ? rewriteResult.value : pendingResult.rewrite;
+        const evidence =
+          retrieveResult.status === 'fulfilled' ? retrieveResult.value.evidence : [];
+        const relatedEntries = parseEvidenceEntriesForPage(evidence);
+        const weakEvidence =
+          retrieveResult.status === 'fulfilled' ? Boolean(retrieveResult.value.weak_evidence) : true;
+
+        setAiResult({
+          rewrite,
+          synthesis: {
+            ...pendingResult.synthesis,
+            evidence,
+            weak_evidence: weakEvidence,
+            explanation:
+              relatedEntries.length > 0
+                ? 'Evidence loaded. Generating the final answer now.'
+                : 'No strong evidence found yet.',
+          },
+          relatedEntries,
+        });
+        setAiEvidenceLoading(false);
+
+        try {
+          const synthesis = await api.getAISynthesis(submittedAiQuery);
+          if (cancelled) return;
+          setAiResult((current) => ({
+            rewrite: current?.rewrite || rewrite,
+            synthesis,
+            relatedEntries: current?.relatedEntries || relatedEntries,
+          }));
+        } catch (err) {
+          if (cancelled) return;
+          setAiResult((current) => ({
+            rewrite: current?.rewrite || rewrite,
+            synthesis: {
+              ...(current?.synthesis || pendingResult.synthesis),
+              answer: null,
+              explanation: err instanceof Error ? err.message : 'AI synthesis failed',
+              provider: 'unknown',
+              model: 'timeout',
+              fallback: true,
+            },
+            relatedEntries: current?.relatedEntries || relatedEntries,
+          }));
+        } finally {
+          if (!cancelled) {
+            setAiSynthesisLoading(false);
+            setAiLoading(false);
+          }
+        }
       })
       .catch((err) => {
         if (cancelled) return;
         setAiError(err instanceof Error ? err.message : 'Failed to load AI results');
         setAiResult(null);
-      })
-      .finally(() => {
-        if (!cancelled) setAiLoading(false);
+        setAiEvidenceLoading(false);
+        setAiSynthesisLoading(false);
+        setAiLoading(false);
       });
 
     return () => {
@@ -112,6 +231,13 @@ export default function SearchPage() {
   }, [isAuthenticated, tab]);
 
   useEffect(() => {
+    if (!isAuthenticated || tab !== 'ai' || aiSuggestionsWarmed) return;
+    api.warmAIResults(AI_SUGGESTED_QUESTIONS).finally(() => {
+      setAiSuggestionsWarmed(true);
+    });
+  }, [aiSuggestionsWarmed, isAuthenticated, tab]);
+
+  useEffect(() => {
     if (!isAuthenticated && tab === 'ai') {
       setTab('standard');
     }
@@ -126,6 +252,11 @@ export default function SearchPage() {
     }
   }
 
+  function useSuggestedQuestion(question: string) {
+    setAiDraftQuery(question);
+    setSubmittedAiQuery(question);
+  }
+
   useEffect(() => {
     if (tab !== 'ai') return;
     if (aiDraftQuery.trim()) return;
@@ -134,7 +265,7 @@ export default function SearchPage() {
   }, [aiDraftQuery, standardQuery, tab]);
 
   const activeResults = tab === 'standard' ? standardResults : aiResult?.relatedEntries || [];
-  const activeLoading = tab === 'standard' ? standardLoading : aiLoading;
+  const activeLoading = tab === 'standard' ? standardLoading : aiEvidenceLoading;
   const activeError = tab === 'standard' ? standardError : aiError;
   const activeQuery = tab === 'standard' ? debouncedStandardQuery : submittedAiQuery;
 
@@ -209,7 +340,7 @@ export default function SearchPage() {
               {tab === 'ai' && (
                 <div className="md:w-44">
                   <Button className="w-full" onClick={submitAiQuery} disabled={aiLoading || !aiDraftQuery.trim()}>
-                    {aiLoading ? 'Asking...' : 'Ask AI'}
+                    {aiLoading ? 'Working...' : 'Ask AI'}
                   </Button>
                 </div>
               )}
@@ -244,6 +375,27 @@ export default function SearchPage() {
               </div>
             ) : tab === 'ai' ? (
               <div className="space-y-4 p-4 md:p-5">
+                <Card className="p-5">
+                  <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    Suggested Questions
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {AI_SUGGESTED_QUESTIONS.map((question) => (
+                      <Button
+                        key={question}
+                        variant="outline"
+                        className="h-auto whitespace-normal text-left"
+                        onClick={() => useSuggestedQuestion(question)}
+                      >
+                        {question}
+                      </Button>
+                    ))}
+                  </div>
+                  <div className="mt-3 text-xs text-muted-foreground">
+                    These starter questions preload retrieval and rewrite results to reduce first-click latency.
+                  </div>
+                </Card>
+
                 <Card className="p-5">
                   <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                     AI Status
@@ -284,6 +436,7 @@ export default function SearchPage() {
                       <span>Provider: {aiResult?.rewrite.provider || 'unknown'}</span>
                       <span>Model: {aiResult?.rewrite.model || 'unknown'}</span>
                       {aiResult?.rewrite.fallback && <span>Fallback active</span>}
+                      {aiEvidenceLoading && <span>Loading</span>}
                     </div>
                   )}
                   {submittedAiQuery && aiResult?.rewrite.explanation && (
@@ -310,6 +463,7 @@ export default function SearchPage() {
                       <span>Model: {aiResult?.synthesis.model || 'unknown'}</span>
                       {aiResult?.synthesis.fallback && <span>Fallback active</span>}
                       {aiResult?.synthesis.weak_evidence && <span>Weak evidence</span>}
+                      {aiSynthesisLoading && <span>Generating answer</span>}
                     </div>
                   )}
                 </Card>

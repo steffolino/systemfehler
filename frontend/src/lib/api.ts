@@ -398,6 +398,70 @@ function parseEvidenceEntries(evidence: AIEvidence[]): Entry[] {
   return Array.from(relatedEntriesMap.values());
 }
 
+async function fetchAIResultBundle(query: string): Promise<AIResultBundle> {
+  const trimmed = query.trim();
+  const [rewriteResult, retrieveResult, synthesisResult] = await Promise.allSettled([
+    getAIRewrite(trimmed),
+    getAIRetrieve(trimmed),
+    getAISynthesis(trimmed),
+  ]);
+
+  const rewrite =
+    rewriteResult.status === 'fulfilled'
+      ? rewriteResult.value
+      : buildAiTimeoutRewrite(trimmed, rewriteResult.reason instanceof Error ? rewriteResult.reason.message : 'AI rewrite failed');
+
+  const synthesis =
+    synthesisResult.status === 'fulfilled'
+      ? synthesisResult.value
+      : buildAiTimeoutSynthesis(
+          synthesisResult.reason instanceof Error ? synthesisResult.reason.message : 'AI synthesis failed'
+        );
+  const retrievalEvidence =
+    retrieveResult.status === 'fulfilled'
+      ? retrieveResult.value.evidence
+      : synthesis.evidence || [];
+  const relatedEntries = parseEvidenceEntries(retrievalEvidence);
+  const finalSynthesis =
+    retrieveResult.status === 'fulfilled'
+      ? {
+          ...synthesis,
+          evidence: retrievalEvidence,
+          weak_evidence: synthesis.weak_evidence ?? retrieveResult.value.weak_evidence,
+        }
+      : synthesis;
+
+  return {
+    rewrite,
+    synthesis: finalSynthesis,
+    relatedEntries,
+  };
+}
+
+async function getAIRewrite(query: string): Promise<AIRewriteResponse> {
+  const trimmed = query.trim();
+  return fetchAiApi<AIRewriteResponse>('/rewrite', {
+    method: 'POST',
+    body: JSON.stringify({ query: trimmed }),
+  });
+}
+
+async function getAIRetrieve(query: string): Promise<AIRetrieveResponse> {
+  const trimmed = query.trim();
+  return fetchAiApi<AIRetrieveResponse>('/retrieve', {
+    method: 'POST',
+    body: JSON.stringify({ query: trimmed }),
+  });
+}
+
+async function getAISynthesis(query: string): Promise<AISynthesizeResponse> {
+  const trimmed = query.trim();
+  return fetchAiApi<AISynthesizeResponse>('/synthesize', {
+    method: 'POST',
+    body: JSON.stringify({ query: trimmed }),
+  });
+}
+
 function getLocalizedTitle(value: EntryTitle | undefined, fallback?: string | null, locale: keyof MultilingualText = 'de'): string {
   if (typeof value === 'string') return value;
   if (value && typeof value === 'object') {
@@ -836,52 +900,24 @@ export const api = {
       };
     }
 
-    const [rewriteResult, retrieveResult, synthesisResult] = await Promise.allSettled([
-      fetchAiApi<AIRewriteResponse>('/rewrite', {
-        method: 'POST',
-        body: JSON.stringify({ query: trimmed }),
-      }),
-      fetchAiApi<AIRetrieveResponse>('/retrieve', {
-        method: 'POST',
-        body: JSON.stringify({ query: trimmed }),
-      }),
-      fetchAiApi<AISynthesizeResponse>('/synthesize', {
-        method: 'POST',
-        body: JSON.stringify({ query: trimmed }),
-      }),
-    ]);
-
-    const rewrite =
-      rewriteResult.status === 'fulfilled'
-        ? rewriteResult.value
-        : buildAiTimeoutRewrite(trimmed, rewriteResult.reason instanceof Error ? rewriteResult.reason.message : 'AI rewrite failed');
-
-    const synthesis =
-      synthesisResult.status === 'fulfilled'
-        ? synthesisResult.value
-        : buildAiTimeoutSynthesis(
-            synthesisResult.reason instanceof Error ? synthesisResult.reason.message : 'AI synthesis failed'
-          );
-    const retrievalEvidence =
-      retrieveResult.status === 'fulfilled'
-        ? retrieveResult.value.evidence
-        : synthesis.evidence || [];
-    const relatedEntries = parseEvidenceEntries(retrievalEvidence);
-    const finalSynthesis =
-      retrieveResult.status === 'fulfilled'
-        ? {
-            ...synthesis,
-            evidence: retrievalEvidence,
-            weak_evidence: synthesis.weak_evidence ?? retrieveResult.value.weak_evidence,
-          }
-        : synthesis;
-
-    return {
-      rewrite,
-      synthesis: finalSynthesis,
-      relatedEntries,
-    };
+    return fetchAIResultBundle(trimmed);
   },
+
+  warmAIResults: async (queries: string[]): Promise<void> => {
+    if (IS_GITHUB_PAGES || queries.length === 0) return;
+    await Promise.allSettled(
+      queries.flatMap((query) => [
+        getAIRewrite(query).catch(() => null),
+        getAIRetrieve(query).catch(() => null),
+      ])
+    );
+  },
+
+  getAIRewrite,
+
+  getAIRetrieve,
+
+  getAISynthesis,
 
   getAIHealth: async (): Promise<AIHealthResponse> => {
     if (IS_GITHUB_PAGES) {

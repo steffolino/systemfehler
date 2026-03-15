@@ -35,6 +35,25 @@ SYNONYM_EXPANSIONS = {
     "arbeitslosigkeit": ["arbeitslosengeld", "buergergeld", "jobcenter"],
 }
 
+INTENT_KEYWORDS = {
+    "unemployment": {
+        "arbeitslos", "arbeitslosigkeit", "job", "arbeitsplatz", "jobcenter",
+        "buergergeld", "bürgergeld", "arbeitsagentur", "arbeitslosengeld",
+        "kuendigung", "kündigung",
+    },
+    "family": {
+        "familie", "familien", "kind", "kinder", "eltern", "elterngeld",
+        "schwanger", "schwangerschaft",
+    },
+    "contact": {
+        "kontakt", "telefon", "anrufen", "sprechstunde", "erreichen",
+        "beratung", "hotline",
+    },
+    "application": {
+        "antrag", "beantragen", "anmelden", "formular", "online", "weiterbewilligung",
+    },
+}
+
 
 def _pick_text(*values):
     for value in values:
@@ -116,6 +135,83 @@ def _extract_terms(query: str):
 
     return terms[:8]
 
+
+def _detect_intents(query: str, terms: list[str]):
+    normalized = (query or "").lower()
+    tokens = set(terms)
+    intents = set()
+    for name, keywords in INTENT_KEYWORDS.items():
+        if any(keyword in normalized for keyword in keywords) or tokens.intersection(keywords):
+            intents.add(name)
+    return intents
+
+
+def _text_blob(entry):
+    summary = entry.get("summary", {}) or {}
+    content = entry.get("content", {}) or {}
+    return " ".join(
+        [
+            str(entry.get("title") or ""),
+            str(summary.get("de") or summary.get("en") or ""),
+            str(content.get("de") or content.get("en") or ""),
+            " ".join(entry.get("topics") or []),
+            " ".join(entry.get("tags") or []),
+            " ".join(entry.get("targetGroups") or []),
+            str(entry.get("domain") or ""),
+        ]
+    ).lower()
+
+
+def _rerank_entries(entries: list[dict], query: str, terms: list[str]):
+    intents = _detect_intents(query, terms)
+    reranked = []
+
+    for entry in entries:
+        title = str(entry.get("title") or "").lower()
+        blob = _text_blob(entry)
+        topics = set(entry.get("topics") or [])
+        target_groups = set(entry.get("targetGroups") or [])
+        domain = entry.get("domain")
+        score = float(entry.get("_term_score") or 0)
+
+        if "unemployment" in intents:
+            if "employment" in topics:
+                score += 3.0
+            if "unemployed" in target_groups:
+                score += 3.0
+            if "jobcenter" in blob or "arbeitsagentur" in blob:
+                score += 2.5
+            if domain == "benefits":
+                score += 1.5
+            if domain == "tools":
+                score += 1.0
+            if domain == "contacts":
+                score += 0.5
+            if "family" in topics and "family" not in intents:
+                score -= 3.5
+            if target_groups.issubset({"families", "single_parents"}) and "family" not in intents:
+                score -= 4.0
+
+        if "contact" in intents and domain == "contacts":
+            score += 3.0
+        if "application" in intents and ("application_required" in set(entry.get("tags") or []) or domain == "tools"):
+            score += 1.5
+        if title and any(term in title for term in terms):
+            score += 1.5
+
+        reranked.append((score, entry))
+
+    reranked.sort(
+        key=lambda item: (
+            item[0],
+            float(((item[1].get("qualityScores") or {}).get("ais") or 0)),
+            float(((item[1].get("qualityScores") or {}).get("iqs") or 0)),
+        ),
+        reverse=True,
+    )
+
+    return [entry for score, entry in reranked if score > 0.5][:6]
+
 def query_entries(query: str, domain: str = None):
     try:
         session = SessionLocal()
@@ -159,7 +255,7 @@ def query_entries(query: str, domain: str = None):
             COALESCE((quality_scores->>'ais')::numeric, 0) DESC,
             COALESCE((quality_scores->>'iqs')::numeric, 0) DESC,
             last_seen DESC NULLS LAST
-        LIMIT 8
+        LIMIT 24
         """
         results = session.execute(text(sql), params).mappings().all()
         session.close()
@@ -168,8 +264,13 @@ def query_entries(query: str, domain: str = None):
             d = dict(r)
             if "id" in d and d["id"] is not None:
                 d["id"] = str(d["id"])
-            out.append(_normalize_db_entry(d))
-        return out
+            normalized = _normalize_db_entry(d)
+            normalized["_term_score"] = d.get("term_score", 0)
+            out.append(normalized)
+        ranked = _rerank_entries(out, query, terms)
+        for entry in ranked:
+            entry.pop("_term_score", None)
+        return ranked
     except Exception as e:
         print(f"DB error: {e}")
         return []
