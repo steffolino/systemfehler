@@ -2,7 +2,9 @@
 
 This guide provides detailed instructions for setting up the Systemfehler data platform for local development.
 
-Current baseline (2026-03-01): all five domains are populated with real snapshot data (25 entries total), and `npm run validate` passes with zero errors and warnings.
+Current baseline: all five domains are populated with real snapshot data
+(25 entries total), and validation was re-verified on 2026-03-15 with
+0 schema/structural errors and 0 lint warnings.
 
 ## Table of Contents
 
@@ -239,7 +241,9 @@ python crawlers/cli.py import --domain benefits --to-db
 ```
 
 This will:
-- Read entries from `data/benefits/entries.json`
+- Replace existing PostgreSQL rows for all five domains from the current `data/*/entries.json` snapshots
+- Preserve the canonical snapshot contract used by the frontend and API
+- Allow single-domain imports through the Python CLI when needed
 
 ---
 
@@ -271,7 +275,7 @@ Checks included:
 - Lint warnings (missing recommended content/translations)
 
 These validation commands do not import into PostgreSQL; they validate JSON snapshots only.
-Use `npm run db:seed` (or the Python import command) for database import.
+Use `npm run db:seed` to replace PostgreSQL data from the current snapshots, or the Python import command for one domain.
 
 ---
 

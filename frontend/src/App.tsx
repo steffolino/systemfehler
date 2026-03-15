@@ -14,6 +14,7 @@ import AdminRawEntries from "./pages/AdminRawEntries";
 import AdminDuplicates from "./pages/AdminDuplicates";
 import AdminUserTrust from "./pages/AdminUserTrust";
 import AdminAuditLog from "./pages/AdminAuditLog";
+import type { JSX } from "react";
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
   const { isAuthenticated, isLoading } = useAuth0();

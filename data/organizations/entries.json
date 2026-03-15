@@ -4,9 +4,18 @@
   "entries": [
     {
       "id": "8e6e6ac8-a569-485d-a34b-f0b95c93095b",
-      "title": {
-        "de": "Bundesagentur für Arbeit (Über uns)",
-        "easy_de": "Bundesagentur für Arbeit"
+      "title": "Bundesagentur für Arbeit (Über uns)",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Bundesagentur für Arbeit",
+          "timestamp": "2026-03-01T20:16:00Z",
+          "provenance": {
+            "source": "https://www.arbeitsagentur.de/ueber-uns",
+            "crawledAt": "2026-03-01T20:16:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Die Organisationsseite der BA stellt Aufgaben, Struktur, Leitungsorgane und zentrale Dienststellen der Behörde vor."
@@ -55,9 +64,18 @@
     },
     {
       "id": "084ea142-cea9-48cf-bcd0-0a6f4d13e8f2",
-      "title": {
-        "de": "BMBFSFJ",
-        "easy_de": "Familien-Ministerium"
+      "title": "BMBFSFJ",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Familien-Ministerium",
+          "timestamp": "2026-03-01T20:16:00Z",
+          "provenance": {
+            "source": "https://www.bmbfsfj.bund.de/bmbfsfj",
+            "crawledAt": "2026-03-01T20:16:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Die Startseite des BMBFSFJ bündelt Themen, Programme, Serviceangebote und politische Schwerpunkte des Ministeriums."
@@ -106,9 +124,18 @@
     },
     {
       "id": "f9e97f8e-a6de-4eb4-a785-f7e0f8eaf143",
-      "title": {
-        "de": "Bundesministerien (Bundesregierung)",
-        "easy_de": "Ministerien in Deutschland"
+      "title": "Bundesministerien (Bundesregierung)",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Ministerien in Deutschland",
+          "timestamp": "2026-03-01T20:16:00Z",
+          "provenance": {
+            "source": "https://www.bundesregierung.de/breg-de/bundesregierung/bundesministerien",
+            "crawledAt": "2026-03-01T20:16:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Die Bundesregierung stellt hier alle Bundesministerien mit Zuständigkeitsbereichen im Überblick dar."
@@ -156,9 +183,18 @@
     },
     {
       "id": "688d7da7-e9ef-4238-a6a6-a7ea0e818ef8",
-      "title": {
-        "de": "Bundesministerium für Arbeit und Soziales (BMAS)",
-        "easy_de": "Arbeits-Ministerium"
+      "title": "Bundesministerium für Arbeit und Soziales (BMAS)",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Arbeits-Ministerium",
+          "timestamp": "2026-03-01T20:16:00Z",
+          "provenance": {
+            "source": "https://www.bmas.de/DE/Ministerium/ministerium.html",
+            "crawledAt": "2026-03-01T20:16:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Die BMAS-Startseite bietet zentrale Informationen zu Arbeit, Soziales, Service und ministeriellen Themenfeldern."
@@ -207,9 +243,18 @@
     },
     {
       "id": "39160593-cf96-4525-b3d2-f16796af5df8",
-      "title": {
-        "de": "FITKO – Produktmanagement 115",
-        "easy_de": "FITKO und die 115"
+      "title": "FITKO – Produktmanagement 115",
+      "translations": {
+        "de-LEICHT": {
+          "title": "FITKO und die 115",
+          "timestamp": "2026-03-01T20:16:00Z",
+          "provenance": {
+            "source": "https://www.fitko.de/produktmanagement/115",
+            "crawledAt": "2026-03-01T20:16:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Die FITKO-Seite beschreibt das Produktmanagement der Behördennummer 115 im föderalen Kontext."

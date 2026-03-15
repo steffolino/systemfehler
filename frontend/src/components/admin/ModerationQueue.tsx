@@ -4,6 +4,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 
+function getTextValue(value: unknown): string | null {
+  return typeof value === 'string' && value.trim() ? value : null;
+}
+
+function getRecordValue(value: unknown): Record<string, unknown> | null {
+  return value && typeof value === 'object' && !Array.isArray(value)
+    ? (value as Record<string, unknown>)
+    : null;
+}
+
 export function ModerationQueue() {
   const [queue, setQueue] = useState<ModerationQueueEntry[]>([]);
   const [loading, setLoading] = useState(true);
@@ -73,12 +83,19 @@ export function ModerationQueue() {
           ) : (
             <div className="space-y-4">
               {queue.map((item) => {
-                const itemTitle = item.title?.de ?? item.title_de;
+                const itemTitle =
+                  typeof item.title === 'string'
+                    ? item.title
+                    : item.title?.de ?? item.title_de;
                 const createdAt = item.createdAt ?? item.created_at;
                 const candidateData = item.candidateData ?? item.candidate_data;
                 const existingData = item.existingData ?? item.existing_data;
+                const diff = getRecordValue(item.diff);
+                const added = getRecordValue(diff?.added);
+                const modified = getRecordValue(diff?.modified);
+                const removed = getRecordValue(diff?.removed);
                 const translationEntries = candidateData?.translations
-                  ? Object.entries(candidateData.translations as Record<string, any>)
+                  ? Object.entries(candidateData.translations as Record<string, Record<string, unknown>>)
                   : [];
 
                 return (
@@ -140,23 +157,23 @@ export function ModerationQueue() {
                                     </Badge>
                                   )}
                                 </div>
-                                {data.summary && (
-                                  <p className="text-sm text-foreground/80">{data.summary}</p>
+                                {getTextValue(data.summary) && (
+                                  <p className="text-sm text-foreground/80">{getTextValue(data.summary)}</p>
                                 )}
-                                {data.body && (
+                                {getTextValue(data.body) && (
                                   <details className="text-xs">
                                     <summary className="cursor-pointer font-medium">Full Text</summary>
-                                    <p className="mt-2 whitespace-pre-wrap">{data.body}</p>
+                                    <p className="mt-2 whitespace-pre-wrap">{getTextValue(data.body)}</p>
                                   </details>
                                 )}
                                 <div className="text-xs text-muted-foreground space-y-1">
-                                  {data.method && <div>Method: {data.method}</div>}
-                                  {data.generator && <div>Generator: {data.generator}</div>}
-                                  {data.timestamp && (
-                                    <div>Generated: {new Date(data.timestamp).toLocaleString()}</div>
+                                  {getTextValue(data.method) && <div>Method: {getTextValue(data.method)}</div>}
+                                  {getTextValue(data.generator) && <div>Generator: {getTextValue(data.generator)}</div>}
+                                  {getTextValue(data.timestamp) && (
+                                    <div>Generated: {new Date(getTextValue(data.timestamp) as string).toLocaleString()}</div>
                                   )}
-                                  {data.provenance?.source && (
-                                    <div>Source: {data.provenance.source}</div>
+                                  {typeof data.provenance === 'object' && data.provenance && getTextValue((data.provenance as Record<string, unknown>).source) && (
+                                    <div>Source: {getTextValue((data.provenance as Record<string, unknown>).source)}</div>
                                   )}
                                 </div>
                               </div>
@@ -199,37 +216,37 @@ export function ModerationQueue() {
                       )}
 
                       {/* Diff */}
-                      {item.diff && (
+                      {diff && (
                         <div>
                           <h4 className="font-semibold mb-2">Changes</h4>
                           <div className="space-y-2">
-                            {item.diff.added && Object.keys(item.diff.added).length > 0 && (
+                            {added && Object.keys(added).length > 0 && (
                               <div>
                                 <div className="text-sm font-medium text-green-600">
-                                  Added Fields ({Object.keys(item.diff.added).length})
+                                  Added Fields ({Object.keys(added).length})
                                 </div>
                                 <div className="text-xs bg-green-50 p-2 rounded mt-1 max-h-40 overflow-auto">
-                                  <pre>{JSON.stringify(item.diff.added, null, 2)}</pre>
+                                  <pre>{JSON.stringify(added, null, 2)}</pre>
                                 </div>
                               </div>
                             )}
-                            {item.diff.modified && Object.keys(item.diff.modified).length > 0 && (
+                            {modified && Object.keys(modified).length > 0 && (
                               <div>
                                 <div className="text-sm font-medium text-yellow-600">
-                                  Modified Fields ({Object.keys(item.diff.modified).length})
+                                  Modified Fields ({Object.keys(modified).length})
                                 </div>
                                 <div className="text-xs bg-yellow-50 p-2 rounded mt-1 max-h-40 overflow-auto">
-                                  <pre>{JSON.stringify(item.diff.modified, null, 2)}</pre>
+                                  <pre>{JSON.stringify(modified, null, 2)}</pre>
                                 </div>
                               </div>
                             )}
-                            {item.diff.removed && Object.keys(item.diff.removed).length > 0 && (
+                            {removed && Object.keys(removed).length > 0 && (
                               <div>
                                 <div className="text-sm font-medium text-red-600">
-                                  Removed Fields ({Object.keys(item.diff.removed).length})
+                                  Removed Fields ({Object.keys(removed).length})
                                 </div>
                                 <div className="text-xs bg-red-50 p-2 rounded mt-1 max-h-40 overflow-auto">
-                                  <pre>{JSON.stringify(item.diff.removed, null, 2)}</pre>
+                                  <pre>{JSON.stringify(removed, null, 2)}</pre>
                                 </div>
                               </div>
                             )}

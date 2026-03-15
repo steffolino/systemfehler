@@ -15,6 +15,7 @@ from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
 
 from .base_crawler import BaseCrawler
+from .url_registry import URLRegistry
 
 
 class LinkExpander(BaseCrawler):
@@ -27,10 +28,28 @@ class LinkExpander(BaseCrawler):
     }
 
     IGNORED_SCHEMES = ('mailto:', 'tel:', 'javascript:')
+    IGNORED_URL_TOKENS = (
+        'facebook.com/sharer',
+        'twitter.com/intent',
+        'x.com/intent',
+        'wa.me/',
+        '/newsletter',
+        '/impressum',
+        '/datenschutz',
+        '/privacy',
+        '/cookie',
+        '/rechtliche-hinweise',
+        '/erklaerung-barrierefreiheit',
+        '/gebaerdensprache',
+        '/leichte-sprache',
+        '/meta/',
+        '/rss',
+    )
 
     def __init__(self, user_agent: str, rate_limit_delay: float = 2.0, data_dir: str = './data') -> None:
         super().__init__('link-expander', user_agent, rate_limit_delay)
         self.data_dir = Path(data_dir)
+        self.registries: Dict[str, URLRegistry] = {}
 
     def expand(self, domain: str, limit: int = 50, verify: bool = True) -> Dict[str, Any]:
         seeds = self._load_domain_urls(domain)
@@ -47,21 +66,98 @@ class LinkExpander(BaseCrawler):
         discovered_by_domain: Dict[str, Set[str]] = {k: set() for k in self.DOMAIN_HINTS.keys()}
         broken: List[str] = []
         scanned = 0
+        registry = self._get_registry(domain)
 
-        for seed in seeds[: max(1, limit)]:
-            html = self.fetch_page(seed)
-            scanned += 1
-            if not html:
-                broken.append(seed)
-                continue
-
-            links = self.extract_links(html, seed)
-            for link in links:
-                target_domain = self.classify_link(link, fallback=domain)
-                if verify and not self.verify_link(link):
-                    broken.append(link)
+        try:
+            for seed in seeds[: max(1, limit)]:
+                page = self.fetch_page_details(seed)
+                scanned += 1
+                if not page:
+                    broken.append(seed)
+                    registry.record(
+                        seed,
+                        status='fetch_failed',
+                        reason='fetch_failed',
+                        source='link_expander',
+                    )
                     continue
-                discovered_by_domain[target_domain].add(link)
+
+                html = page['html']
+                final_url = self.normalize_url(page.get('final_url') or seed)
+                soup = self.parse_html(html)
+                canonical_url = self._extract_canonical_url(soup, base_url=final_url) or final_url
+                if final_url != self.normalize_url(seed):
+                    registry.record(
+                        seed,
+                        status='redirect_alias',
+                        final_url=final_url,
+                        canonical_url=canonical_url,
+                        reason='http_redirect',
+                        status_code=page.get('status_code'),
+                        source='link_expander',
+                        skip=True,
+                    )
+                if canonical_url != final_url:
+                    registry.record(
+                        final_url,
+                        status='canonical_alias',
+                        final_url=final_url,
+                        canonical_url=canonical_url,
+                        reason='head_canonical',
+                        status_code=page.get('status_code'),
+                        source='link_expander',
+                        skip=True,
+                    )
+                registry.record(
+                    canonical_url,
+                    status='ok',
+                    final_url=final_url,
+                    canonical_url=canonical_url,
+                    status_code=page.get('status_code'),
+                    source='link_expander',
+                    skip=False,
+                )
+
+                links = self.extract_links(html, canonical_url)
+                for link in links:
+                    target_domain = self.classify_link(link, fallback=domain)
+                    verification = self.verify_link_details(link) if verify else {'ok': True, 'final_url': link, 'status_code': None}
+                    if not verification['ok']:
+                        broken.append(link)
+                        self._get_registry(target_domain).record(
+                            link,
+                            status='head_failed',
+                            final_url=verification.get('final_url'),
+                            reason='link_verify_failed',
+                            status_code=verification.get('status_code'),
+                            source='link_expander',
+                        )
+                        continue
+                    final_link = self.normalize_url(verification.get('final_url') or link)
+                    if final_link != self.normalize_url(link):
+                        self._get_registry(target_domain).record(
+                            link,
+                            status='redirect_alias',
+                            final_url=final_link,
+                            canonical_url=final_link,
+                            reason='http_redirect',
+                            status_code=verification.get('status_code'),
+                            source='link_expander',
+                            skip=True,
+                        )
+                    self._get_registry(target_domain).record(
+                        final_link,
+                        status='discovered',
+                        final_url=final_link,
+                        canonical_url=final_link,
+                        status_code=verification.get('status_code'),
+                        source='link_expander',
+                        skip=False,
+                    )
+                    discovered_by_domain[target_domain].add(final_link)
+        finally:
+            for current_registry in self.registries.values():
+                current_registry.persist()
 
         added_count = 0
         queued_count = 0
@@ -94,6 +190,8 @@ class LinkExpander(BaseCrawler):
             parsed = urlparse(candidate)
             if parsed.scheme not in ('http', 'https') or not parsed.netloc:
                 continue
+            if self._should_ignore_candidate(candidate):
+                continue
             if candidate in seen:
                 continue
 
@@ -101,6 +199,10 @@ class LinkExpander(BaseCrawler):
             links.append(candidate)
 
         return links
+
+    def _should_ignore_candidate(self, url: str) -> bool:
+        lowered = url.lower()
+        return any(token in lowered for token in self.IGNORED_URL_TOKENS)
 
     def classify_link(self, url: str, fallback: str = 'benefits') -> str:
         text = url.lower()
@@ -110,16 +212,35 @@ class LinkExpander(BaseCrawler):
         return fallback if fallback in self.DOMAIN_HINTS else 'benefits'
 
     def verify_link(self, url: str) -> bool:
+        return self.verify_link_details(url)['ok']
+
+    def verify_link_details(self, url: str) -> Dict[str, Any]:
         try:
             response = self.session.head(url, allow_redirects=True, timeout=15)
             if response.status_code < 400:
-                return True
+                return {
+                    'ok': True,
+                    'final_url': response.url,
+                    'status_code': response.status_code,
+                }
             if response.status_code in (405, 403):
                 get_response = self.session.get(url, timeout=20)
-                return get_response.status_code < 400
-            return False
+                return {
+                    'ok': get_response.status_code < 400,
+                    'final_url': get_response.url,
+                    'status_code': get_response.status_code,
+                }
+            return {
+                'ok': False,
+                'final_url': response.url,
+                'status_code': response.status_code,
+            }
         except Exception:
-            return False
+            return {
+                'ok': False,
+                'final_url': url,
+                'status_code': None,
+            }
 
     def add_to_url_queue(self, urls: List[str], domain: str) -> int:
         urls_path = self.data_dir / domain / 'urls.json'
@@ -182,13 +303,34 @@ class LinkExpander(BaseCrawler):
 
         unique: List[str] = []
         seen: Set[str] = set()
+        registry = self._get_registry(domain)
         for raw in urls:
             if not isinstance(raw, str):
                 continue
             normalized = self.normalize_url(raw)
+            if registry.should_skip(normalized):
+                continue
+            preferred = registry.get_preferred_url(normalized)
+            if preferred != normalized:
+                registry.record(
+                    normalized,
+                    status='canonical_alias',
+                    canonical_url=preferred,
+                    reason='preferred_url_from_registry',
+                    source='link_expander',
+                    skip=True,
+                )
+                normalized = preferred
             if normalized in seen:
                 continue
             seen.add(normalized)
             unique.append(normalized)
 
         return unique
+
+    def _get_registry(self, domain: str) -> URLRegistry:
+        registry = self.registries.get(domain)
+        if registry is None:
+            registry = URLRegistry(str(self.data_dir), domain, self.normalize_url)
+            self.registries[domain] = registry
+        return registry

@@ -1,18 +1,18 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useMemo, useState } from 'react';
-import { api, type Entry } from '@/lib/api';
+import { api, getEntryTitleText, type Entry } from '@/lib/api';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
 function getEntryTitle(entry: Entry) {
-  return entry.title?.de || entry.title_de || entry.title?.en || entry.title_en || 'Untitled entry';
+  return getEntryTitleText(entry) || getEntryTitleText(entry, 'en') || 'Untitled entry';
 }
 
 function getEntrySubtitle(entry: Entry) {
   return [
-    entry.category,
+    entry.domain,
     entry.status,
-    entry.language,
-    entry.created_at ? new Date(entry.created_at).toLocaleString() : null,
+    entry.updated_at ? new Date(entry.updated_at).toLocaleString() : entry.created_at ? new Date(entry.created_at).toLocaleString() : null,
   ]
     .filter(Boolean)
     .join(' • ');
@@ -45,7 +45,7 @@ function renderValue(value: unknown) {
 
   if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
     return (
-      <div className="break-words text-sm leading-5 text-foreground">
+      <div className="wrap-break-word text-sm leading-5 text-foreground">
         {String(value)}
       </div>
     );
@@ -163,12 +163,10 @@ export default function AdminRawEntries() {
   const priorityFields = [
     'id',
     'status',
-    'category',
-    'language',
+    'domain',
     'created_at',
     'updated_at',
-    'source',
-    'slug',
+    'url',
   ];
 
   const selectedPriorityEntries = selectedEntry
@@ -182,7 +180,7 @@ export default function AdminRawEntries() {
     : [];
 
   return (
-    <div className="mx-auto w-full max-w-[1600px] p-4 md:p-6">
+    <div className="mx-auto w-full max-w-400 p-4 md:p-6">
       <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Raw Entries</h1>

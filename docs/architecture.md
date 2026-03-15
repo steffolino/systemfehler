@@ -21,15 +21,20 @@ The platform emphasizes data preservation, especially when public agencies modif
 
 ### 2.1 Modularity
 
-Each domain (e.g. benefits, aid, tools, organizations, contacts) functions as an independent module with its own data and crawler:
+Each domain (e.g. benefits, aid, tools, organizations, contacts) functions as
+an independent module with its own data and crawler:
 
 ```text
-services/<domain>/crawler/
+crawlers/<domain>/
 data/<domain>/entries.json
 data/<domain>/urls.json
 ```
 
 This ensures clean separation of concerns and future extensibility.
+
+Note: Node files under `services/*/crawler/` exist as reference-only design
+scaffolding. The runtime crawling pipeline is implemented in Python under
+`crawlers/`.
 
 ### 2.2 Schema Extensibility
 
@@ -146,27 +151,15 @@ systemfehler/
       entries.json
       urls.json
 
-  services/
+  crawlers/
     benefits/
-      crawler/
-      extract/
-      config/
     aid/
-      crawler/
-      extract/
-      config/
     tools/
-      crawler/
-      extract/
-      config/
     organizations/
-      crawler/
-      extract/
-      config/
     contacts/
-      crawler/
-      extract/
-      config/
+    shared/
+
+  services/
     _link_expander/
       detect_links.js
     _shared/
@@ -228,8 +221,9 @@ When resolving deployment-related ambiguity, this section is the canonical sourc
 
 2. **Crawling and extraction**
 
-   * Domain-specific crawlers in `services/<domain>/crawler/` fetch HTML.
-   * Shared extraction and normalization logic converts HTML into candidates that match the core + extension schemas.
+   * Domain-specific Python crawlers in `crawlers/<domain>/` fetch HTML.
+   * Shared extraction and normalization logic converts HTML into candidates
+     that match the core + extension schemas.
 
 3. **Diff generation**
 

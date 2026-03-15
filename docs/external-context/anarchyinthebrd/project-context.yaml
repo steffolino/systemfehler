@@ -1,0 +1,67 @@
+project_name: AnarchyInTheBRD
+
+project_summary: >
+  AnarchyInTheBRD is a research and analysis project focused on the political,
+  legal, historical, and institutional structure of the Federal Republic of
+  Germany, with special attention to state power, surveillance, civil
+  liberties, democratic accountability, constitutional order, policing,
+  intelligence services, and the tensions between authority and autonomy.
+
+primary_geographic_scope:
+  - Germany
+  - European Union
+
+secondary_scope:
+  - Council of Europe
+  - International human-rights frameworks
+  - Comparative democratic governance
+
+core_research_themes:
+  - German constitutional order
+  - Federal and Länder institutional power
+  - Police, domestic intelligence, and security law
+  - Surveillance, data retention, digital rights
+  - Freedom of information and state transparency
+  - Protest, dissent, civil society, and anti-authoritarian politics
+  - Historical continuities from Weimar to the EU era
+  - Democratic accountability and rule-of-law safeguards
+  - Investigative reporting on abuses, secrecy, corruption, and institutional failure
+
+important_institutions:
+  - Deutscher Bundestag
+  - Bundesrat
+  - Bundesverfassungsgericht
+  - Bundeskanzleramt
+  - Bundesministerium des Innern
+  - Bundeskriminalamt
+  - Bundesamt für Verfassungsschutz
+  - Landesregierungen
+  - Landespolizei
+  - EU institutions
+  - Civil-liberties NGOs
+  - Investigative journalism organizations
+
+preferred_source_order:
+  - primary_law_and_official_records
+  - constitutional_court_materials
+  - parliamentary_records
+  - government_and_agency_publications
+  - ngo_and_watchdog_reports
+  - investigative_journalism
+  - academic_sources
+  - mainstream_press_for_context_only
+
+analytical_priorities:
+  - Prefer primary documents over commentary
+  - Separate law from policy and policy from practice
+  - Distinguish federal from state competence
+  - Identify concrete legal basis whenever possible
+  - Flag contested claims and ideological framing
+  - Note publication date and jurisdiction
+  - Treat NGO and media claims as secondary unless tied to documents or data
+
+style_constraints:
+  - Be precise and source-driven
+  - Avoid flattening distinctions between institutions
+  - Surface constitutional, administrative, and civil-liberties implications
+  - Highlight where powers are discretionary, opaque, or weakly supervised

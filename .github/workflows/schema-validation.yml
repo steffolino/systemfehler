@@ -3,8 +3,11 @@ name: Schema Validation
 on:
   pull_request:
     paths:
+      - 'backend/database/schema.sql'
       - 'data/_schemas/**'
       - 'crawlers/**'
+      - 'frontend/src/lib/db_types.ts'
+      - 'scripts/generate_ts_interfaces.js'
       - 'tests/**'
   push:
     branches: [ main ]
@@ -14,6 +17,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install Node dependencies
+        run: npm ci
+      - name: Verify generated TypeScript interfaces are in sync
+        run: |
+          npm run gen:types
+          git diff --exit-code -- frontend/src/lib/db_types.ts
       - name: Set up Python
         uses: actions/setup-python@v4
         with:

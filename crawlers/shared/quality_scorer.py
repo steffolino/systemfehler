@@ -288,6 +288,8 @@ class QualityScorer:
     def _has_multilingual_field(self, entry: Dict[str, Any], field: str) -> bool:
         """Check if a multilingual field has at least one language"""
         value = entry.get(field)
+        if field == 'title' and isinstance(value, str):
+            return bool(value.strip())
         if not isinstance(value, dict):
             return False
         return any(value.get(lang) for lang in ['de', 'en', 'easy_de'])
@@ -295,6 +297,8 @@ class QualityScorer:
     def _get_multilingual_field(self, entry: Dict[str, Any], field: str, lang: str) -> Optional[str]:
         """Get a specific language from a multilingual field"""
         value = entry.get(field)
+        if field == 'title' and isinstance(value, str):
+            return value if lang == 'de' else None
         if isinstance(value, dict):
             return value.get(lang)
         return None

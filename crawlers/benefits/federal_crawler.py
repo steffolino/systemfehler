@@ -447,55 +447,7 @@ class FederalSourceCrawler(BaseCrawler):
         return entry, None
 
     def _extract_title(self, soup: BeautifulSoup, seed_name: str, url: str) -> str:
-        def is_nav_like(element: BeautifulSoup) -> bool:
-            """Return True if element is inside a nav/header/footer or has nav-like classes/ids"""
-            if not element:
-                return False
-            for parent in element.parents:
-                if parent.name in ("nav", "header", "footer", "aside"):
-                    return True
-                # check classes and ids for nav-like tokens
-                cls = " ".join(parent.get("class", [])).lower() if parent.get("class") else ""
-                pid = (parent.get("id") or "").lower()
-                if any(tok in cls for tok in ("nav", "navigation", "menu", "hauptnavigation", "breadcrumb")):
-                    return True
-                if any(tok in pid for tok in ("nav", "navigation", "menu", "hauptnavigation", "breadcrumb")):
-                    return True
-            return False
-
-        title = ""
-        # Prefer H1 if it's not navigation/menu text
-        if soup:
-            h1 = soup.find("h1")
-            if h1 and not is_nav_like(h1):
-                title = h1.get_text(strip=True)
-
-        # Fall back to head <title>
-        if not title:
-            title_tag = soup.find("title") if soup else None
-            if title_tag:
-                title = (title_tag.get_text(strip=True) or "").split("|")[0].strip()
-
-        # Fall back to og/twitter meta titles
-        if not title:
-            title = self._extract_meta_tag(soup, ["og:title", "twitter:title"]) or ""
-
-        # As a last resort, compose from seed name and URL
-        if not title:
-            title = f"{seed_name} - {url}"
-
-        # Normalize obviously useless titles
-        if title.strip().lower() in ("navigation", "hauptnavigation", "haupt-navigation"):
-            # Prefer head title or meta description instead
-            head_title = self._extract_head_title(soup) or ""
-            if head_title and head_title.strip().lower() not in ("navigation", "hauptnavigation"):
-                return head_title
-            meta_desc = self._extract_meta_tag(soup, ["description", "og:description", "twitter:description"]) or ""
-            if meta_desc:
-                # Use first 60 chars of meta description as a fallback title
-                return (meta_desc.strip()[:60] + "...") if len(meta_desc.strip()) > 60 else meta_desc.strip()
-
-        return title
+        return self._get_best_title(soup, seed_name=seed_name, url=url)
 
     def _extract_head_title(self, soup: Optional[BeautifulSoup]) -> str:
         if not soup:

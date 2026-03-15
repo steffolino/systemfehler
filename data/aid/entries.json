@@ -4,9 +4,18 @@
   "entries": [
     {
       "id": "73e0faca-96c6-4ca1-a1bb-37d6f2715fdb",
-      "title": {
-        "de": "Kinderzuschlag und Leistungen für Bildung und Teilhabe",
-        "easy_de": "Kinderzuschlag und Bildungs-Hilfe"
+      "title": "Kinderzuschlag und Leistungen für Bildung und Teilhabe",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Kinderzuschlag und Bildungs-Hilfe",
+          "timestamp": "2026-03-01T20:12:00Z",
+          "provenance": {
+            "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kinderzuschlag-und-leistungen-fuer-bildung-und-teilhabe-73906",
+            "crawledAt": "2026-03-01T20:12:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Kinderzuschlag unterstützt Familien mit kleinerem Einkommen und kann durch Leistungen für Bildung und Teilhabe ergänzt werden."
@@ -48,9 +57,18 @@
     },
     {
       "id": "2f0ef62f-2e7f-4eb8-bf8a-3b4941734bb6",
-      "title": {
-        "de": "Unterhaltsvorschuss",
-        "easy_de": "Vorschuss bei fehlendem Unterhalt"
+      "title": "Unterhaltsvorschuss",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Vorschuss bei fehlendem Unterhalt",
+          "timestamp": "2026-03-01T20:12:00Z",
+          "provenance": {
+            "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/unterhaltsvorschuss/unterhaltsvorschuss-73558",
+            "crawledAt": "2026-03-01T20:12:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Unterhaltsvorschuss hilft Kindern von Alleinerziehenden, wenn Unterhalt ausbleibt oder unregelmäßig gezahlt wird."
@@ -92,9 +110,18 @@
     },
     {
       "id": "2dc8fcae-ae62-4615-b99d-3b0cc8dcc4ea",
-      "title": {
-        "de": "Mutterschutz und Mutterschaftsleistungen",
-        "easy_de": "Schutz in Schwangerschaft und nach Geburt"
+      "title": "Mutterschutz und Mutterschaftsleistungen",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Schutz in Schwangerschaft und nach Geburt",
+          "timestamp": "2026-03-01T20:12:00Z",
+          "provenance": {
+            "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/schwangerschaft-und-kinderwunsch/mutterschutz",
+            "crawledAt": "2026-03-01T20:12:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Mutterschutz und Mutterschaftsleistungen sichern Gesundheit, Beschäftigungsschutz und finanzielle Stabilität rund um die Geburt."
@@ -136,9 +163,18 @@
     },
     {
       "id": "b136ef9b-640b-466d-8663-8d95d17cc8a0",
-      "title": {
-        "de": "Leistungen für Bildung und Teilhabe",
-        "easy_de": "Bildungs-Hilfe für Kinder"
+      "title": "Leistungen für Bildung und Teilhabe",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Bildungs-Hilfe für Kinder",
+          "timestamp": "2026-03-01T20:12:00Z",
+          "provenance": {
+            "source": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Leistungen-fuer-Bildung-und-Teilhabe/leistungen-bildung-und-teilhabe-art.html",
+            "crawledAt": "2026-03-01T20:12:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Leistungen für Bildung und Teilhabe unterstützen Kinder und Jugendliche bei schulischen, kulturellen und sozialen Aktivitäten."
@@ -180,9 +216,18 @@
     },
     {
       "id": "16dd17a4-0c40-451b-8a45-34bc6fa062d2",
-      "title": {
-        "de": "Unterstützung für Eltern",
-        "easy_de": "Hilfe für Eltern"
+      "title": "Unterstützung für Eltern",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Hilfe für Eltern",
+          "timestamp": "2026-03-01T20:12:00Z",
+          "provenance": {
+            "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen",
+            "crawledAt": "2026-03-01T20:12:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Die Seite bündelt staatliche Unterstützungsangebote für Eltern über Kindergeld und Kinderzuschlag hinaus."

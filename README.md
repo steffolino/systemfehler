@@ -4,11 +4,13 @@ Systemfehler is a modular, extensible, preservation-oriented data platform for s
 
 The goal is to make information about social rights and support more transparent, accessible, and robust against removal or silent change.
 
-## Current Snapshot (2026-03-06)
+## Current Snapshot (2026-03-15)
 
 - Real data is published for all five domains (`benefits`, `aid`, `tools`, `organizations`, `contacts`).
-- Current dataset size: **25 validated entries** (5 per domain).
-- Validation status: **0 schema/structural errors, 0 lint warnings** (`npm run validate`).
+- Current dataset size: **25 entries** (5 per domain).
+- Validation status: **0 schema/structural errors, 0 lint warnings**
+  (`node scripts/validate_entries.js --fail-on-errors=false`, re-verified on
+  2026-03-15 after data/schema reconciliation).
 - Public frontend and API are live on Cloudflare Pages at `https://systemfehler.pages.dev/`.
 - GitHub Pages remains available as a static snapshot fallback at `https://steffolino.github.io/systemfehler/`.
 
@@ -92,6 +94,9 @@ docs/
 
 For details, see `docs/architecture.md`.
 
+For the consolidated, current repo state across docs, code, and live GitHub
+issues, see `docs/current-state.md`.
+
 ---
 
 ## Getting Started
@@ -164,7 +169,7 @@ cd ..
 npm run crawl:benefits
 ```
 
-**Import crawled data to database:**
+**Replace local PostgreSQL data from current snapshots:**
 
 ```bash
 npm run db:seed
@@ -199,7 +204,8 @@ npm run crawl:all               # Run all available crawlers
 
 # Database
 npm run db:migrate              # Run database migrations
-npm run db:seed                 # Import crawled data to database
+npm run db:seed                 # Replace PostgreSQL data from all current snapshots
+npm run db:seed:benefits        # Import only benefits snapshot into PostgreSQL
 
 # API and Frontend
 npm run api                     # Start Express API server (port 3001)
@@ -236,7 +242,7 @@ python crawlers/cli.py crawl benefits --source arbeitsagentur
 # Validate data
 python crawlers/cli.py validate --domain benefits
 
-# Import to database
+# Import one domain to database
 python crawlers/cli.py import --domain benefits --to-db
 ```
 

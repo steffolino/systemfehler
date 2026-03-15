@@ -17,6 +17,7 @@ from bs4 import BeautifulSoup
 
 from .base_crawler import BaseCrawler
 from .quality_scorer import QualityScorer
+from .url_registry import URLRegistry
 from .validator import SchemaValidator
 
 
@@ -38,6 +39,7 @@ class SeededDomainCrawler(BaseCrawler):
         self.source_label = source_label
         self.quality_scorer = QualityScorer()
         self.validator = SchemaValidator()
+        self.url_registry = URLRegistry(str(self.data_dir), domain, self.normalize_url)
 
     # ------------------------------
     # Public API
@@ -46,10 +48,13 @@ class SeededDomainCrawler(BaseCrawler):
         urls = self._load_seed_urls()
         entries: List[Dict[str, Any]] = []
 
-        for url in urls:
-            entry = self._crawl_single_url(url)
-            if entry:
-                entries.append(entry)
+        try:
+            for url in urls:
+                entry = self._crawl_single_url(url)
+                if entry:
+                    entries.append(entry)
+        finally:
+            self.url_registry.persist()
 
         return entries
 
@@ -117,6 +122,19 @@ class SeededDomainCrawler(BaseCrawler):
             if not isinstance(raw_url, str) or not raw_url.strip():
                 continue
             cleaned = self.normalize_url(raw_url)
+            if self.url_registry.should_skip(cleaned):
+                continue
+            preferred = self.url_registry.get_preferred_url(cleaned)
+            if preferred != cleaned:
+                self.url_registry.record(
+                    cleaned,
+                    status='canonical_alias',
+                    canonical_url=preferred,
+                    reason='preferred_url_from_registry',
+                    source='seeded_domain_crawler',
+                    skip=True,
+                )
+                cleaned = preferred
             if cleaned in seen:
                 continue
             seen.add(cleaned)
@@ -125,14 +143,58 @@ class SeededDomainCrawler(BaseCrawler):
         return normalized[:max_urls] if max_urls > 0 else normalized
 
     def _crawl_single_url(self, url: str) -> Optional[Dict[str, Any]]:
-        html = self.fetch_page(url)
-        if not html:
+        response = self.fetch_page_details(url)
+        if not response:
+            self.url_registry.record(
+                url,
+                status='fetch_failed',
+                reason='fetch_failed',
+                source='seeded_domain_crawler',
+            )
             self.logger.warning(f"Skipping unavailable URL: {url}")
             return None
 
+        html = response['html']
         soup = self.parse_html(html)
-        entry = self._build_base_entry(url, soup)
-        entry.update(self.build_domain_fields(url, soup, entry))
+        final_url = self.normalize_url(response.get('final_url') or url)
+        canonical_url = self._extract_canonical_url(soup, base_url=final_url) or final_url
+
+        if final_url != self.normalize_url(url):
+            self.url_registry.record(
+                url,
+                status='redirect_alias',
+                final_url=final_url,
+                canonical_url=canonical_url,
+                reason='http_redirect',
+                status_code=response.get('status_code'),
+                source='seeded_domain_crawler',
+                skip=True,
+            )
+
+        if canonical_url != final_url:
+            self.url_registry.record(
+                final_url,
+                status='canonical_alias',
+                final_url=final_url,
+                canonical_url=canonical_url,
+                reason='head_canonical',
+                status_code=response.get('status_code'),
+                source='seeded_domain_crawler',
+                skip=True,
+            )
+
+        self.url_registry.record(
+            canonical_url,
+            status='ok',
+            final_url=final_url,
+            canonical_url=canonical_url,
+            status_code=response.get('status_code'),
+            source='seeded_domain_crawler',
+            skip=False,
+        )
+
+        entry = self._build_base_entry(canonical_url, soup)
+        entry.update(self.build_domain_fields(canonical_url, soup, entry))
 
         content_checksum = self.calculate_checksum(json.dumps(entry, sort_keys=True, ensure_ascii=False))
         entry['provenance'] = self.generate_provenance(url)
@@ -144,6 +206,15 @@ class SeededDomainCrawler(BaseCrawler):
             self.logger.error(f"Validation failed for {entry.get('id')} ({url})")
             for error in validation['errors']:
                 self.logger.error(f"  - {error}")
+            self.url_registry.record(
+                canonical_url,
+                status='validation_failed',
+                final_url=final_url,
+                canonical_url=canonical_url,
+                reason='validation_failed',
+                status_code=response.get('status_code'),
+                source='seeded_domain_crawler',
+            )
             return None
 
         return entry
@@ -152,11 +223,16 @@ class SeededDomainCrawler(BaseCrawler):
         title = self._get_best_title(soup, seed_name=self.domain, url=url)
         summary = self._extract_summary(soup)
         content = self._extract_content(soup)
+        head_title = self._extract_head_title(soup)
+        head_description = self._extract_meta_tag(
+            soup,
+            ['description', 'og:description', 'twitter:description'],
+        )
         now_iso = datetime.now(timezone.utc).isoformat()
 
         entry: Dict[str, Any] = {
             'id': str(uuid.uuid4()),
-            'title': {'de': title},
+            'title': title,
             'summary': {'de': summary} if summary else {'de': title},
             'content': {'de': content} if content else {'de': summary or title},
             'url': self.normalize_url(url),
@@ -169,31 +245,17 @@ class SeededDomainCrawler(BaseCrawler):
             'sourceUnavailable': False,
         }
 
+        if head_title or head_description:
+            entry['head'] = {
+                'title': head_title,
+                'description': head_description,
+            }
+
         return entry
 
     def _extract_summary(self, soup: BeautifulSoup) -> str:
-        meta_desc = self._extract_meta_tag(soup, ['description', 'og:description', 'twitter:description'])
-        if meta_desc:
-            return meta_desc
-
-        for paragraph in soup.find_all('p'):
-            text = self.extract_text(paragraph)
-            if len(text) >= 80:
-                return text
-
-        return ''
+        return self._extract_best_summary(soup)
 
     def _extract_content(self, soup: BeautifulSoup) -> str:
-        container = soup.find('main') or soup.find('article') or soup.find('body')
-        if not container:
-            return ''
-
-        parts: List[str] = []
-        for paragraph in container.find_all('p'):
-            text = self.extract_text(paragraph)
-            if text:
-                parts.append(text)
-            if len(parts) >= 12:
-                break
-
-        return ' '.join(parts)
+        summary = self._extract_summary(soup)
+        return self._extract_best_content(soup, summary=summary, max_parts=6)

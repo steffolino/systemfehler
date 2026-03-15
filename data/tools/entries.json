@@ -8,9 +8,18 @@
   "entries": [
     {
       "id": "69b5efb7-53f2-43f4-bec9-a1ad9ebef67e",
-      "title": {
-        "de": "eServices für Bürgerinnen und Bürger",
-        "easy_de": "Online-Dienste"
+      "title": "eServices für Bürgerinnen und Bürger",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Online-Dienste",
+          "timestamp": "2026-03-01T20:14:00Z",
+          "provenance": {
+            "source": "https://www.arbeitsagentur.de/eservices",
+            "crawledAt": "2026-03-01T20:14:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Die eServices der Bundesagentur ermöglichen digitale Antragstellung, Dokumentenübermittlung und Statusprozesse über ein Benutzerkonto."
@@ -59,9 +68,18 @@
     },
     {
       "id": "12866f74-af9b-4f6f-bf13-0f60d994168a",
-      "title": {
-        "de": "Jobsuche",
-        "easy_de": "Jobs finden"
+      "title": "Jobsuche",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Jobs finden",
+          "timestamp": "2026-03-01T20:14:00Z",
+          "provenance": {
+            "source": "https://www.arbeitsagentur.de/jobsuche/",
+            "crawledAt": "2026-03-01T20:14:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Die Jobsuche der BA bietet bundesweite Stellensuche mit Filtern nach Berufsfeld, Ort, Arbeitszeit und weiteren Kriterien."
@@ -107,9 +125,18 @@
     },
     {
       "id": "a4796f0e-5326-4da1-b6f3-5f30ef7af590",
-      "title": {
-        "de": "Elterngeldrechner",
-        "easy_de": "Rechner für Elterngeld"
+      "title": "Elterngeldrechner",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Rechner für Elterngeld",
+          "timestamp": "2026-03-01T20:14:00Z",
+          "provenance": {
+            "source": "https://familienportal.de/familienportal/rechner-antraege/elterngeldrechner",
+            "crawledAt": "2026-03-01T20:14:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Der Elterngeldrechner im Familienportal ermöglicht eine unverbindliche Einschätzung des möglichen Elterngeldanspruchs."
@@ -155,9 +182,18 @@
     },
     {
       "id": "1570eddb-a7c2-4f8d-935d-a4f05c612861",
-      "title": {
-        "de": "Kindergeld-Antrag ab Geburt",
-        "easy_de": "Kindergeld online beantragen"
+      "title": "Kindergeld-Antrag ab Geburt",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Kindergeld online beantragen",
+          "timestamp": "2026-03-01T20:14:00Z",
+          "provenance": {
+            "source": "https://www.arbeitsagentur.de/familie-und-kinder/angebote-rund-ums-kind/kindergeld-ab-geburt-beantragen",
+            "crawledAt": "2026-03-01T20:14:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Über den digitalen Startpunkt kann Kindergeld für neugeborene Kinder online beantragt werden."
@@ -203,9 +239,18 @@
     },
     {
       "id": "49be5d99-27f5-452a-a558-815e886f9e36",
-      "title": {
-        "de": "KiZ-Lotse",
-        "easy_de": "Kinderzuschlag prüfen"
+      "title": "KiZ-Lotse",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Kinderzuschlag prüfen",
+          "timestamp": "2026-03-01T20:14:00Z",
+          "provenance": {
+            "source": "https://www.arbeitsagentur.de/familie-und-kinder/kiz-lotse",
+            "crawledAt": "2026-03-01T20:14:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Der KiZ-Lotse hilft bei der Vorprüfung, ob ein Anspruch auf Kinderzuschlag bestehen könnte."

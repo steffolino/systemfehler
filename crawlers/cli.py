@@ -49,6 +49,33 @@ logging.basicConfig(
 logger = logging.getLogger('systemfehler.cli')
 
 
+def _get_localized_value(entry: dict, field: str, lang: str) -> str | None:
+    value = entry.get(field)
+    if isinstance(value, str):
+        return value if lang == 'de' else None
+    if isinstance(value, dict):
+        return value.get(lang)
+    return None
+
+
+def _get_easy_title(entry: dict) -> str | None:
+    direct = _get_localized_value(entry, 'title', 'easy_de')
+    if direct:
+        return direct
+
+    translations = entry.get('translations') or {}
+    easy = translations.get('de-LEICHT') if isinstance(translations, dict) else None
+    if isinstance(easy, dict):
+        title = easy.get('title')
+        if isinstance(title, str):
+            return title
+    return None
+
+
+def _json_value(raw):
+    return raw if raw not in (None, '', [], {}) else None
+
+
 def crawl_benefits(source: str, output_dir: str):
     """
     Crawl benefits data from specified source
@@ -351,6 +378,16 @@ def import_to_db(domain: str, data_dir: str):
         
         for entry in entries:
             try:
+                title_de = _get_localized_value(entry, 'title', 'de')
+                title_en = _get_localized_value(entry, 'title', 'en')
+                title_easy_de = _get_easy_title(entry)
+                summary_de = _get_localized_value(entry, 'summary', 'de')
+                summary_en = _get_localized_value(entry, 'summary', 'en')
+                summary_easy_de = _get_localized_value(entry, 'summary', 'easy_de')
+                content_de = _get_localized_value(entry, 'content', 'de')
+                content_en = _get_localized_value(entry, 'content', 'en')
+                content_easy_de = _get_localized_value(entry, 'content', 'easy_de')
+
                 # Insert into entries table
                 cur.execute("""
                     INSERT INTO entries (
@@ -391,9 +428,9 @@ def import_to_db(domain: str, data_dir: str):
                         updated_at = NOW()
                 """, (
                     entry['id'], domain,
-                    entry.get('title', {}).get('de'), entry.get('title', {}).get('en'), entry.get('title', {}).get('easy_de'),
-                    entry.get('summary', {}).get('de'), entry.get('summary', {}).get('en'), entry.get('summary', {}).get('easy_de'),
-                    entry.get('content', {}).get('de'), entry.get('content', {}).get('en'), entry.get('content', {}).get('easy_de'),
+                    title_de, title_en, title_easy_de,
+                    summary_de, summary_en, summary_easy_de,
+                    content_de, content_en, content_easy_de,
                     entry['url'], entry.get('topics', []), entry.get('tags', []), entry.get('targetGroups', []),
                     entry.get('validFrom'), entry.get('validUntil'), entry.get('deadline'), entry['status'],
                     entry.get('firstSeen'), entry.get('lastSeen'), entry.get('sourceUnavailable', False),
@@ -422,17 +459,141 @@ def import_to_db(domain: str, data_dir: str):
                             contact_info = EXCLUDED.contact_info
                     """, (
                         entry['id'],
-                        entry.get('benefitAmount', {}).get('de'),
-                        entry.get('benefitAmount', {}).get('en'),
-                        entry.get('benefitAmount', {}).get('easy_de'),
+                        _get_localized_value(entry, 'benefitAmount', 'de'),
+                        _get_localized_value(entry, 'benefitAmount', 'en'),
+                        _get_localized_value(entry, 'benefitAmount', 'easy_de'),
                         entry.get('duration'),
-                        entry.get('eligibilityCriteria', {}).get('de'),
-                        entry.get('eligibilityCriteria', {}).get('en'),
-                        entry.get('eligibilityCriteria', {}).get('easy_de'),
+                        _get_localized_value(entry, 'eligibilityCriteria', 'de'),
+                        _get_localized_value(entry, 'eligibilityCriteria', 'en'),
+                        _get_localized_value(entry, 'eligibilityCriteria', 'easy_de'),
                         Json(entry.get('applicationSteps', [])),
                         Json(entry.get('requiredDocuments', [])),
                         entry.get('formLink'),
-                        Json(entry.get('contactInfo', {}))
+                        Json(_json_value(entry.get('contactInfo')))
+                    ))
+                elif domain == 'aid':
+                    cur.execute("""
+                        INSERT INTO aid (
+                            entry_id, aid_type, provider,
+                            amount_de, amount_en, amount_easy_de,
+                            eligibility_de, eligibility_en, eligibility_easy_de,
+                            application_process, required_documents, form_link, contact_info
+                        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                        ON CONFLICT (entry_id) DO UPDATE SET
+                            aid_type = EXCLUDED.aid_type,
+                            provider = EXCLUDED.provider,
+                            amount_de = EXCLUDED.amount_de,
+                            amount_en = EXCLUDED.amount_en,
+                            amount_easy_de = EXCLUDED.amount_easy_de,
+                            eligibility_de = EXCLUDED.eligibility_de,
+                            eligibility_en = EXCLUDED.eligibility_en,
+                            eligibility_easy_de = EXCLUDED.eligibility_easy_de,
+                            application_process = EXCLUDED.application_process,
+                            required_documents = EXCLUDED.required_documents,
+                            form_link = EXCLUDED.form_link,
+                            contact_info = EXCLUDED.contact_info
+                    """, (
+                        entry['id'],
+                        entry.get('aidType'),
+                        entry.get('providingOrganization'),
+                        _get_localized_value(entry, 'amount', 'de'),
+                        _get_localized_value(entry, 'amount', 'en'),
+                        _get_localized_value(entry, 'amount', 'easy_de'),
+                        _get_localized_value(entry, 'eligibility', 'de'),
+                        _get_localized_value(entry, 'eligibility', 'en'),
+                        _get_localized_value(entry, 'eligibility', 'easy_de'),
+                        Json(entry.get('applicationProcess', [])),
+                        Json(entry.get('requiredDocuments', [])),
+                        entry.get('formLink'),
+                        Json(_json_value(entry.get('contactInfo')))
+                    ))
+                elif domain == 'tools':
+                    cur.execute("""
+                        INSERT INTO tools (
+                            entry_id, tool_type, tool_url,
+                            instructions_de, instructions_en, instructions_easy_de,
+                            features, requirements
+                        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                        ON CONFLICT (entry_id) DO UPDATE SET
+                            tool_type = EXCLUDED.tool_type,
+                            tool_url = EXCLUDED.tool_url,
+                            instructions_de = EXCLUDED.instructions_de,
+                            instructions_en = EXCLUDED.instructions_en,
+                            instructions_easy_de = EXCLUDED.instructions_easy_de,
+                            features = EXCLUDED.features,
+                            requirements = EXCLUDED.requirements
+                    """, (
+                        entry['id'],
+                        entry.get('toolType'),
+                        entry.get('toolUrl') or entry.get('url'),
+                        _get_localized_value(entry, 'instructions', 'de'),
+                        _get_localized_value(entry, 'instructions', 'en'),
+                        _get_localized_value(entry, 'instructions', 'easy_de'),
+                        Json(entry.get('features', [])),
+                        entry.get('requirements')
+                    ))
+                elif domain == 'organizations':
+                    cur.execute("""
+                        INSERT INTO organizations (
+                            entry_id, organization_type,
+                            description_de, description_en, description_easy_de,
+                            services_offered, locations,
+                            contact_info, operating_hours, accessibility_info
+                        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                        ON CONFLICT (entry_id) DO UPDATE SET
+                            organization_type = EXCLUDED.organization_type,
+                            description_de = EXCLUDED.description_de,
+                            description_en = EXCLUDED.description_en,
+                            description_easy_de = EXCLUDED.description_easy_de,
+                            services_offered = EXCLUDED.services_offered,
+                            locations = EXCLUDED.locations,
+                            contact_info = EXCLUDED.contact_info,
+                            operating_hours = EXCLUDED.operating_hours,
+                            accessibility_info = EXCLUDED.accessibility_info
+                    """, (
+                        entry['id'],
+                        entry.get('organizationType'),
+                        _get_localized_value(entry, 'description', 'de'),
+                        _get_localized_value(entry, 'description', 'en'),
+                        _get_localized_value(entry, 'description', 'easy_de'),
+                        Json(entry.get('servicesOffered', [])),
+                        Json(entry.get('locations', [])),
+                        Json(_json_value(entry.get('contactInfo'))),
+                        entry.get('operatingHours'),
+                        entry.get('accessibilityInfo')
+                    ))
+                elif domain == 'contacts':
+                    availability = entry.get('availability') if isinstance(entry.get('availability'), dict) else {}
+                    cur.execute("""
+                        INSERT INTO contacts (
+                            entry_id, contact_type,
+                            name, phone, email, address,
+                            description_de, description_en, description_easy_de,
+                            available_hours, languages_supported
+                        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                        ON CONFLICT (entry_id) DO UPDATE SET
+                            contact_type = EXCLUDED.contact_type,
+                            name = EXCLUDED.name,
+                            phone = EXCLUDED.phone,
+                            email = EXCLUDED.email,
+                            address = EXCLUDED.address,
+                            description_de = EXCLUDED.description_de,
+                            description_en = EXCLUDED.description_en,
+                            description_easy_de = EXCLUDED.description_easy_de,
+                            available_hours = EXCLUDED.available_hours,
+                            languages_supported = EXCLUDED.languages_supported
+                    """, (
+                        entry['id'],
+                        entry.get('contactType'),
+                        entry.get('name'),
+                        entry.get('phone'),
+                        entry.get('email'),
+                        entry.get('address'),
+                        _get_localized_value(entry, 'description', 'de'),
+                        _get_localized_value(entry, 'description', 'en'),
+                        _get_localized_value(entry, 'description', 'easy_de'),
+                        availability.get('hours'),
+                        availability.get('languages', [])
                     ))
                 
                 imported_count += 1

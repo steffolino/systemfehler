@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useMemo, useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { api, type Entry } from '../lib/api';
 import SearchInput from '../components/SearchInput';
 import ResultsList from '../components/ResultsList';
@@ -20,9 +22,7 @@ export default function SearchPage() {
 
   const [standardError, setStandardError] = useState<string | null>(null);
   const [aiError, setAiError] = useState<string | null>(null);
-
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authLoading, setAuthLoading] = useState(true);
+  const { isAuthenticated, isLoading: authLoading } = useAuth0();
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -31,30 +31,6 @@ export default function SearchPage() {
 
     return () => window.clearTimeout(timer);
   }, [query]);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    setAuthLoading(true);
-
-    api
-      .getMe?.()
-      .then((user) => {
-        if (cancelled) return;
-        setIsAuthenticated(Boolean(user));
-      })
-      .catch(() => {
-        if (cancelled) return;
-        setIsAuthenticated(false);
-      })
-      .finally(() => {
-        if (!cancelled) setAuthLoading(false);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -169,20 +145,20 @@ export default function SearchPage() {
             <div className="text-sm text-muted-foreground">{resultLabel}</div>
           </div>
 
-          <div className="min-h-[320px] rounded-xl border bg-background">
+          <div className="min-h-80 rounded-xl border bg-background">
             {activeLoading ? (
-              <div className="flex h-[320px] items-center justify-center text-sm text-muted-foreground">
+              <div className="flex h-80 items-center justify-center text-sm text-muted-foreground">
                 Loading results…
               </div>
             ) : activeError ? (
-              <div className="flex h-[320px] items-center justify-center p-6 text-center">
+              <div className="flex h-80 items-center justify-center p-6 text-center">
                 <div>
                   <div className="font-medium text-red-600">Something went wrong</div>
                   <div className="mt-1 text-sm text-muted-foreground">{activeError}</div>
                 </div>
               </div>
             ) : activeResults.length === 0 ? (
-              <div className="flex h-[320px] items-center justify-center p-6 text-center">
+              <div className="flex h-80 items-center justify-center p-6 text-center">
                 <div>
                   <div className="font-medium">
                     {debouncedQuery ? 'No results found' : 'No entries available'}

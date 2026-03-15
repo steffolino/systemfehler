@@ -16,6 +16,7 @@ from bs4 import BeautifulSoup
 
 from ..shared.base_crawler import BaseCrawler
 from ..shared.quality_scorer import QualityScorer
+from ..shared.url_registry import URLRegistry
 from ..shared.validator import SchemaValidator
 from ..shared.diff_generator import DiffGenerator
 
@@ -23,13 +24,17 @@ from ..shared.diff_generator import DiffGenerator
 class ArbeitsagenturCrawler(BaseCrawler):
     """Crawler for Arbeitsagentur benefits information"""
     
-    TARGET_URL = "https://www.arbeitsagentur.de/arbeitslosengeld-2"
+    TARGET_URL = "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld"
+    LEGACY_URLS = (
+        "https://www.arbeitsagentur.de/arbeitslosengeld-2",
+    )
     
     def __init__(self, user_agent: str, rate_limit_delay: float = 2.0):
         super().__init__('arbeitsagentur', user_agent, rate_limit_delay)
         self.quality_scorer = QualityScorer()
         self.validator = SchemaValidator()
         self.diff_generator = DiffGenerator()
+        self.url_registry = URLRegistry('./data', 'benefits', self.normalize_url)
     
     def crawl(self) -> List[Dict[str, Any]]:
         """
@@ -41,22 +46,88 @@ class ArbeitsagenturCrawler(BaseCrawler):
         self.logger.info(f"Starting crawl of {self.TARGET_URL}")
         
         # Fetch the page
-        html = self.fetch_page(self.TARGET_URL)
-        if not html:
+        response = self.fetch_page_details(self.TARGET_URL)
+        if not response:
+            self.url_registry.record(
+                self.TARGET_URL,
+                status='fetch_failed',
+                reason='fetch_failed',
+                source='arbeitsagentur_crawler',
+            )
+            self.url_registry.persist()
             self.logger.error("Failed to fetch page")
             return []
         
         # Parse and extract data
+        html = response['html']
         soup = self.parse_html(html)
+        final_url = self.normalize_url(response.get('final_url') or self.TARGET_URL)
+        canonical_url = self._extract_canonical_url(soup, base_url=final_url) or final_url
+
+        if final_url != self.normalize_url(self.TARGET_URL):
+            self.url_registry.record(
+                self.TARGET_URL,
+                status='redirect_alias',
+                final_url=final_url,
+                canonical_url=canonical_url,
+                reason='http_redirect',
+                status_code=response.get('status_code'),
+                source='arbeitsagentur_crawler',
+                skip=True,
+            )
+
+        if canonical_url != final_url:
+            self.url_registry.record(
+                final_url,
+                status='canonical_alias',
+                final_url=final_url,
+                canonical_url=canonical_url,
+                reason='head_canonical',
+                status_code=response.get('status_code'),
+                source='arbeitsagentur_crawler',
+                skip=True,
+            )
+
+        self.url_registry.record(
+            canonical_url,
+            status='ok',
+            final_url=final_url,
+            canonical_url=canonical_url,
+            status_code=response.get('status_code'),
+            source='arbeitsagentur_crawler',
+            skip=False,
+        )
+        for legacy_url in self.LEGACY_URLS:
+            self.url_registry.record(
+                legacy_url,
+                status='canonical_alias',
+                final_url=legacy_url,
+                canonical_url=canonical_url,
+                reason='known_legacy_alias',
+                status_code=response.get('status_code'),
+                source='arbeitsagentur_crawler',
+                skip=True,
+            )
+
         entry = self.extract_benefit_entry(soup)
         
         if not entry:
+            self.url_registry.record(
+                canonical_url,
+                status='content_empty',
+                final_url=final_url,
+                canonical_url=canonical_url,
+                reason='extraction_failed',
+                status_code=response.get('status_code'),
+                source='arbeitsagentur_crawler',
+            )
+            self.url_registry.persist()
             self.logger.error("Failed to extract benefit data")
             return []
         
         # Add metadata
         entry['id'] = str(uuid.uuid4())
-        entry['url'] = self.normalize_url(self.TARGET_URL)
+        entry['url'] = canonical_url
         entry['status'] = 'active'
         entry['firstSeen'] = datetime.now(timezone.utc).isoformat()
         entry['lastSeen'] = datetime.now(timezone.utc).isoformat()
@@ -67,7 +138,7 @@ class ArbeitsagenturCrawler(BaseCrawler):
         checksum = self.calculate_checksum(content_for_checksum)
         
         # Add provenance
-        entry['provenance'] = self.generate_provenance(self.TARGET_URL)
+        entry['provenance'] = self.generate_provenance(canonical_url)
         entry['provenance']['checksum'] = checksum
         
         # Calculate quality scores
@@ -75,6 +146,8 @@ class ArbeitsagenturCrawler(BaseCrawler):
         
         self.logger.info(f"Extracted entry with IQS: {entry['qualityScores']['iqs']}, "
                         f"AIS: {entry['qualityScores']['ais']}")
+
+        self.url_registry.persist()
         
         return [entry]
     
@@ -97,9 +170,9 @@ class ArbeitsagenturCrawler(BaseCrawler):
             entry['head'] = {'title': head_title, 'description': head_desc}
 
             # Use meta title/description as main title/summary if present
-            main_title = head_title if head_title else self._extract_title(soup)
+            main_title = self._get_best_title(soup, seed_name='benefits', url=self.TARGET_URL)
             if main_title:
-                entry['title'] = {'de': main_title}
+                entry['title'] = main_title
 
             main_summary = head_desc if head_desc else self._extract_summary(soup)
             if main_summary:
@@ -188,40 +261,11 @@ class ArbeitsagenturCrawler(BaseCrawler):
     
     def _extract_summary(self, soup: BeautifulSoup) -> str:
         """Extract summary/introduction"""
-        # Look for intro paragraph or lead text
-        intro_selectors = [
-            {'class': 'lead'},
-            {'class': 'intro'},
-            {'class': 'teaser'},
-            {'name': 'p'}  # First paragraph as fallback
-        ]
-        
-        for selector in intro_selectors:
-            element = soup.find(**selector)
-            if element:
-                text = self.extract_text(element)
-                if len(text) > 50:  # Meaningful summary
-                    return text
-        
-        return ""
+        return self._extract_best_summary(soup)
     
     def _extract_content(self, soup: BeautifulSoup) -> str:
         """Extract main content"""
-        # Look for main content area
-        main_content = soup.find('main') or soup.find('article') or soup.find('div', class_='content')
-        
-        if main_content:
-            # Remove navigation, headers, footers
-            for unwanted in main_content.find_all(['nav', 'header', 'footer', 'aside']):
-                unwanted.decompose()
-            
-            # Extract all paragraphs
-            paragraphs = main_content.find_all('p')
-            content_parts = [self.extract_text(p) for p in paragraphs if self.extract_text(p)]
-            
-            return ' '.join(content_parts)
-        
-        return ""
+        return self._extract_best_content(soup, summary=self._extract_summary(soup), max_parts=6)
     
     def _extract_benefit_amount(self, soup: BeautifulSoup) -> str:
         """Extract benefit amount information"""

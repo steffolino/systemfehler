@@ -85,7 +85,7 @@ export function Header() {
 
             {displayName && (
               <div className="hidden shrink-0 rounded-lg border px-3 py-1.5 text-right lg:block">
-                <div className="max-w-[180px] truncate text-sm font-medium">
+                <div className="max-w-45 truncate text-sm font-medium">
                   {displayName}
                 </div>
 

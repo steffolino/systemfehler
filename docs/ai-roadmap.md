@@ -109,7 +109,7 @@ Human moderators must confirm any changes.
 # High-Level Architecture
 
 
-Frontend (Nuxt)
+Frontend (React/Vite)
 │
 │ API calls
 ▼
@@ -160,6 +160,13 @@ Goal: establish a safe and observable AI foundation.
 - Add schema validation
 - Add telemetry
 - Implement safety fallbacks
+
+Current repo note:
+
+- The AI gateway scaffold exists under `backend/ai_service/`.
+- Supporting RAG and LLM helper modules exist under `services/_shared/`.
+- Several live GitHub issues in the `#44-#60` range still represent partial or
+  unfinished work, not fully production-ready features.
 
 
 ### Outcome

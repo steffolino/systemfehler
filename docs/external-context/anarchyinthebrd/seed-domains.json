@@ -1,0 +1,90 @@
+{
+  "project": "AnarchyInTheBRD",
+  "seed_domains": {
+    "official_germany": [
+      "bundestag.de",
+      "bundesrat.de",
+      "bundesregierung.de",
+      "bundesverfassungsgericht.de",
+      "bmi.bund.de",
+      "bka.de",
+      "bfv.bund.de",
+      "bundesanzeiger.de",
+      "gesetze-im-internet.de",
+      "dip.bundestag.de",
+      "destatis.de"
+    ],
+    "eu_and_international_institutions": [
+      "europa.eu",
+      "commission.europa.eu",
+      "europarl.europa.eu",
+      "coe.int",
+      "echr.coe.int",
+      "ohchr.org",
+      "un.org"
+    ],
+    "civil_society_germany": [
+      "correctiv.org",
+      "fragdenstaat.de",
+      "digitalcourage.de",
+      "netzpolitik.org",
+      "abgeordnetenwatch.de",
+      "gesellschaft-fuer-freiheitsrechte.de"
+    ],
+    "ngo_international": [
+      "amnesty.org",
+      "amnesty.de",
+      "hrw.org",
+      "transparency.org",
+      "transparency.de",
+      "freedomhouse.org",
+      "accessnow.org",
+      "edri.org",
+      "privacyinternational.org",
+      "epic.org",
+      "rsf.org",
+      "reporter-ohne-grenzen.de"
+    ],
+    "journalism_context": [
+      "spiegel.de",
+      "zeit.de",
+      "faz.net",
+      "sueddeutsche.de",
+      "tagesschau.de",
+      "taz.de"
+    ],
+    "academic_policy": [
+      "swp-berlin.org",
+      "wzb.eu",
+      "mpg.de",
+      "uni-heidelberg.de",
+      "hu-berlin.de",
+      "fu-berlin.de",
+      "tu-berlin.de",
+      "uni-koeln.de",
+      "ifo.de",
+      "zew.de",
+      "difu.de"
+    ],
+    "safe_allowlist_minimal": [
+      "bundestag.de",
+      "bundesverfassungsgericht.de",
+      "gesetze-im-internet.de",
+      "dip.bundestag.de",
+      "bundesregierung.de",
+      "bmi.bund.de",
+      "correctiv.org",
+      "fragdenstaat.de",
+      "digitalcourage.de",
+      "netzpolitik.org",
+      "amnesty.de",
+      "hrw.org",
+      "accessnow.org",
+      "edri.org",
+      "transparency.org",
+      "rsf.org",
+      "europa.eu",
+      "commission.europa.eu"
+    ]
+  }
+}

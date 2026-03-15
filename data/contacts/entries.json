@@ -4,9 +4,18 @@
   "entries": [
     {
       "id": "06b5e331-e007-4de5-bca3-191c16858584",
-      "title": {
-        "de": "Bundesagentur für Arbeit – So erreichen Sie uns",
-        "easy_de": "Kontakt zur Arbeitsagentur"
+      "title": "Bundesagentur für Arbeit – So erreichen Sie uns",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Kontakt zur Arbeitsagentur",
+          "timestamp": "2026-03-01T20:18:00Z",
+          "provenance": {
+            "source": "https://www.arbeitsagentur.de/service-bereich/so-erreichen-sie-uns",
+            "crawledAt": "2026-03-01T20:18:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Die BA-Kontaktseite enthält Servicetelefone, Erreichbarkeiten und spezialisierte Ansprechpartner für unterschiedliche Anliegen."
@@ -59,9 +68,18 @@
     },
     {
       "id": "19b8d1a0-f9c2-4905-b6ad-6b9d8500f6f1",
-      "title": {
-        "de": "BMBFSFJ – Kontakt",
-        "easy_de": "Kontakt zum Familien-Ministerium"
+      "title": "BMBFSFJ – Kontakt",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Kontakt zum Familien-Ministerium",
+          "timestamp": "2026-03-01T20:18:00Z",
+          "provenance": {
+            "source": "https://www.bmbfsfj.bund.de/bmbfsfj/service/kontakt",
+            "crawledAt": "2026-03-01T20:18:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Die Kontaktseite des BMBFSFJ bietet E-Mail, Postanschrift, Servicetelefon und ergänzende Hinweise zur Behördennummer 115."
@@ -113,9 +131,18 @@
     },
     {
       "id": "36fd6dc9-2d42-4f95-b616-7f0af6b45c03",
-      "title": {
-        "de": "Behördennummer 115",
-        "easy_de": "Rufnummer 115"
+      "title": "Behördennummer 115",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Rufnummer 115",
+          "timestamp": "2026-03-01T20:18:00Z",
+          "provenance": {
+            "source": "https://www.115.de/DE/Home/home_node.html",
+            "crawledAt": "2026-03-01T20:18:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Die 115 ist die zentrale Behördenrufnummer für allgemeine Verwaltungsfragen von Bund, Ländern und Kommunen."
@@ -167,9 +194,18 @@
     },
     {
       "id": "4a464bcb-1b95-494d-a0eb-00af8f7dd48c",
-      "title": {
-        "de": "BMAS – Kontakt",
-        "easy_de": "Kontakt zum Arbeits-Ministerium"
+      "title": "BMAS – Kontakt",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Kontakt zum Arbeits-Ministerium",
+          "timestamp": "2026-03-01T20:18:00Z",
+          "provenance": {
+            "source": "https://www.bmas.de/DE/Service/Kontakt/kontakt.html",
+            "crawledAt": "2026-03-01T20:18:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Die BMAS-Kontaktseite stellt Kontaktformular, Bürgertelefon und ergänzende Informationsangebote bereit."
@@ -220,9 +256,18 @@
     },
     {
       "id": "7f132650-e2a2-4b57-a34d-440865f00de4",
-      "title": {
-        "de": "Gebärdentelefon 115",
-        "easy_de": "115 in Gebärdensprache"
+      "title": "Gebärdentelefon 115",
+      "translations": {
+        "de-LEICHT": {
+          "title": "115 in Gebärdensprache",
+          "timestamp": "2026-03-01T20:18:00Z",
+          "provenance": {
+            "source": "https://www.115.de/DE/Service/Gebaerdentelefon/gebaerdentelefon_node.html",
+            "crawledAt": "2026-03-01T20:18:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Das Gebärdentelefon 115 erweitert den Zugang zur Behördennummer 115 um barrierearme Kommunikation für hörbeeinträchtigte Menschen."

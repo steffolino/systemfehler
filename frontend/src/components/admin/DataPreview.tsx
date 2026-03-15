@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from 'react';
-import { api, type Entry } from '../../lib/api';
+import { api, getEntryTitleText, type Entry } from '../../lib/api';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
@@ -119,7 +119,7 @@ export function DataPreview() {
                         <tr className="border-b hover:bg-muted/50">
                           <td className="p-2">
                             <div className="max-w-md truncate">
-                              {entry.title?.de || entry.title_de || 'No title'}
+                              {getEntryTitleText(entry) || 'No title'}
                             </div>
                           </td>
                           <td className="p-2">

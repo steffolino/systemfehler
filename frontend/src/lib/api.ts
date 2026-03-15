@@ -2,6 +2,20 @@
  * API Client for Systemfehler Backend
  */
 
+import type {
+  DbMultilingualText as MultilingualText,
+  DbProvenance as Provenance,
+  DbTranslationRecord as TranslationRecord,
+  DbTranslationsMap as TranslationsMap,
+  DbQualityScores as QualityScores,
+  domain_type as DomainType,
+  entry_status as EntryStatus,
+  moderation_action as ModerationAction,
+  moderation_status as ModerationStatus,
+  entries as DbEntryRow,
+  moderationQueue as DbModerationQueueRow,
+} from './db_types';
+
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://systemfehler-api-worker.inequality.workers.dev/api';
 const DEFAULT_SNAPSHOT_BASE_URL =
   typeof window !== 'undefined'
@@ -33,47 +47,34 @@ interface StatusResponse {
   timestamp: string;
 }
 
-interface MultilingualText {
-  de?: string;
-  en?: string;
-  easy_de?: string;
-  [key: string]: string | undefined;
+type EntryTitle = string | MultilingualText;
+type JsonRecord = Record<string, unknown>;
+
+function isJsonRecord(value: unknown): value is JsonRecord {
+  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 }
 
-interface Provenance {
-  source: string;
-  crawlId?: string;
-  checksum?: string;
-  crawledAt: string;
-  method?: string;
-  generator?: string;
-  [key: string]: string | undefined;
-}
-
-interface TranslationRecord {
-  title?: string;
-  summary?: string;
-  body?: string;
-  provenance?: Provenance;
-  method?: 'llm' | 'rule' | 'human' | 'mt';
-  generator?: string;
-  timestamp: string;
-  reviewed?: boolean;
-}
-
-type TranslationsMap = Record<string, TranslationRecord>;
-
-interface QualityScores {
-  iqs?: number;
-  ais?: number;
-  computedAt?: string;
-  [key: string]: number | string | undefined;
-}
-
-interface Entry {
+type Entry = Omit<
+  DbEntryRow,
+  | 'domain'
+  | 'status'
+  | 'provenance'
+  | 'translations'
+  | 'quality_scores'
+  | 'target_groups'
+  | 'title_de'
+  | 'title_en'
+  | 'title_easy_de'
+  | 'summary_de'
+  | 'summary_en'
+  | 'summary_easy_de'
+  | 'content_de'
+  | 'content_en'
+  | 'content_easy_de'
+> & {
   id: string;
-  domain: string;
-  title?: MultilingualText;
+  domain: DomainType | string;
+  title?: EntryTitle;
   summary?: MultilingualText;
   content?: MultilingualText;
   url: string;
@@ -81,7 +82,7 @@ interface Entry {
   tags?: string[];
   targetGroups?: string[];
   target_groups?: string[];
-  status: string;
+  status: EntryStatus | string;
   validFrom?: string;
   validUntil?: string;
   deadline?: string;
@@ -111,7 +112,7 @@ interface Entry {
   created_at?: string;
   updatedAt?: string;
   updated_at?: string;
-}
+};
 
 interface EntriesResponse {
   entries: Entry[];
@@ -122,18 +123,21 @@ interface EntriesResponse {
   pages: number;
 }
 
-interface ModerationQueueEntry {
+type ModerationQueueEntry = Omit<
+  DbModerationQueueRow,
+  'domain' | 'action' | 'status' | 'provenance' | 'candidate_data' | 'existing_data' | 'reviewed_by' | 'reviewed_at'
+> & {
   id: string;
   entryId?: string;
   entry_id?: string;
-  domain: string;
-  action: string;
-  status: string;
-  candidateData?: any;
-  candidate_data?: any;
-  existingData?: any;
-  existing_data?: any;
-  diff?: any;
+  domain: DomainType | string;
+  action: ModerationAction | string;
+  status: ModerationStatus | string;
+  candidateData?: JsonRecord | null;
+  candidate_data?: JsonRecord | null;
+  existingData?: JsonRecord | null;
+  existing_data?: JsonRecord | null;
+  diff?: JsonRecord | null;
   diffSummary?: {
     type?: string;
     addedCount?: number;
@@ -143,7 +147,7 @@ interface ModerationQueueEntry {
     totalChanges?: number;
   };
   importantChanges?: string[];
-  provenance?: any;
+  provenance?: Provenance | null;
   reviewedBy?: string | null;
   reviewed_by?: string | null;
   reviewedAt?: string | null;
@@ -152,10 +156,10 @@ interface ModerationQueueEntry {
   created_at?: string;
   updatedAt?: string;
   updated_at?: string;
-  title?: MultilingualText;
+  title?: EntryTitle;
   title_de?: string | null;
   url?: string;
-}
+};
 
 interface ModerationQueueResponse {
   queue: ModerationQueueEntry[];
@@ -214,9 +218,19 @@ async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> 
       let errorMsg = 'API request failed';
       try {
         const errJson = await response.json();
-        errorMsg = errJson.error || errJson.message || JSON.stringify(errJson);
-      } catch (e) {
-        try { errorMsg = await response.text(); } catch (_) {}
+        if (isJsonRecord(errJson)) {
+          const recordError = typeof errJson.error === 'string' ? errJson.error : null;
+          const recordMessage = typeof errJson.message === 'string' ? errJson.message : null;
+          errorMsg = recordError || recordMessage || JSON.stringify(errJson);
+        } else {
+          errorMsg = JSON.stringify(errJson);
+        }
+      } catch {
+        try {
+          errorMsg = await response.text();
+        } catch {
+          errorMsg = 'API request failed';
+        }
       }
       throw new Error(errorMsg);
     }
@@ -240,16 +254,49 @@ async function fetchSnapshot<T>(path: string): Promise<T> {
   return (await response.json()) as T;
 }
 
+function getLocalizedTitle(value: EntryTitle | undefined, fallback?: string | null, locale: keyof MultilingualText = 'de'): string {
+  if (typeof value === 'string') return value;
+  if (value && typeof value === 'object') {
+    const localized = value[locale];
+    if (typeof localized === 'string') return localized;
+    if (typeof value.de === 'string') return value.de;
+    if (typeof value.en === 'string') return value.en;
+  }
+  return fallback || '';
+}
+
+function getTranslationTitle(translations: TranslationsMap | null | undefined, key: string): string | null {
+  const record = translations?.[key];
+  return record?.title ?? null;
+}
+
+export function getEntryTitleText(entry: Pick<Entry, 'title' | 'title_de' | 'title_en'>, locale: keyof MultilingualText = 'de'): string {
+  return getLocalizedTitle(entry.title, locale === 'en' ? entry.title_en ?? entry.title_de ?? '' : entry.title_de, locale);
+}
+
 function normalizeEntriesPayload(payload: unknown, domainFallback?: string): Entry[] {
+  const payloadRecord = isJsonRecord(payload) ? payload : null;
   const list: unknown[] = Array.isArray(payload)
     ? payload
-    : payload && typeof payload === 'object' && Array.isArray((payload as any).entries)
-    ? (payload as any).entries
+    : payloadRecord && Array.isArray(payloadRecord.entries)
+    ? payloadRecord.entries
     : [];
 
   return list
-    .filter((entry: unknown): entry is Record<string, any> => Boolean(entry && typeof entry === 'object'))
-    .map((entry: Record<string, any>) => ({ ...entry, domain: entry.domain || domainFallback || 'unknown' })) as Entry[];
+    .filter((entry: unknown): entry is JsonRecord => isJsonRecord(entry))
+    .filter(
+      (entry): entry is JsonRecord & Pick<Entry, 'id' | 'url' | 'status'> =>
+        typeof entry.id === 'string' &&
+        typeof entry.url === 'string' &&
+        typeof entry.status === 'string'
+    )
+    .map((entry): Entry => ({
+      ...(entry as Partial<Entry>),
+      domain: typeof entry.domain === 'string' ? entry.domain : domainFallback || 'unknown',
+      id: entry.id,
+      url: entry.url,
+      status: entry.status,
+    }));
 }
 
 async function loadSnapshotEntries(domain?: string): Promise<Entry[]> {
@@ -282,11 +329,11 @@ function filterEntries(entries: Entry[], params?: {
   if (params?.search) {
     const needle = params.search.toLowerCase();
     filtered = filtered.filter((entry) => {
-      const title = entry.title?.de || entry.title_de || '';
+      const title = getLocalizedTitle(entry.title, entry.title_de).toLowerCase();
       const summary = entry.summary?.de || entry.summary_de || '';
       const url = entry.url || '';
       return (
-        title.toLowerCase().includes(needle) ||
+        title.includes(needle) ||
         summary.toLowerCase().includes(needle) ||
         url.toLowerCase().includes(needle)
       );
@@ -295,10 +342,8 @@ function filterEntries(entries: Entry[], params?: {
 
   if (!params?.includeTranslations) {
     filtered = filtered.map((entry) => {
-      const clone = { ...entry };
-      if ('translations' in clone) {
-        delete (clone as any).translations;
-      }
+      const { translations, ...clone } = entry;
+      void translations;
       return clone;
     });
   }
@@ -344,10 +389,11 @@ async function getModerationQueueFromSnapshots(params?: {
   const limit = Math.min(params?.limit ?? 100, 100);
   const offset = Math.max(params?.offset ?? 0, 0);
   const payload = await fetchSnapshot<unknown>('/moderation/review_queue.json').catch(() => []);
+  const payloadRecord = isJsonRecord(payload) ? payload : null;
   const list: unknown[] = Array.isArray(payload)
     ? payload
-    : payload && typeof payload === 'object' && Array.isArray((payload as any).queue)
-    ? (payload as any).queue
+    : payloadRecord && Array.isArray(payloadRecord.queue)
+    ? payloadRecord.queue
     : [];
 
   let queue = list.filter(
@@ -387,10 +433,16 @@ async function getQualityReportFromSnapshots(): Promise<QualityReportResponse> {
         ? domainEntries.reduce((acc, entry) => acc + Number(entry.ais ?? entry.qualityScores?.ais ?? 0), 0) / totalEntries
         : 0;
     const missingEnTranslation = domainEntries.filter(
-      (entry) => !entry.title?.en && !entry.title_en && !(entry.translations && entry.translations.en)
+      (entry) =>
+        !(typeof entry.title === 'object' && entry.title?.en) &&
+        !entry.title_en &&
+        !getTranslationTitle(entry.translations, 'en')
     ).length;
     const missingEasyDeTranslation = domainEntries.filter(
-      (entry) => !entry.title?.easy_de && !entry.title_easy_de && !(entry.translations && entry.translations['de-LEICHT'])
+      (entry) =>
+        !(typeof entry.title === 'object' && entry.title?.easy_de) &&
+        !entry.title_easy_de &&
+        !getTranslationTitle(entry.translations, 'de-LEICHT')
     ).length;
 
     byDomain[domain] = {
@@ -408,7 +460,7 @@ async function getQualityReportFromSnapshots(): Promise<QualityReportResponse> {
     .map((entry) => ({
       id: entry.id,
       domain: entry.domain,
-      title: entry.title?.de || entry.title_de || 'Untitled',
+      title: getLocalizedTitle(entry.title, entry.title_de) || 'Untitled',
       url: entry.url,
       iqs: Number(entry.iqs ?? entry.qualityScores?.iqs ?? 0),
       ais: Number(entry.ais ?? entry.qualityScores?.ais ?? 0),
@@ -416,12 +468,18 @@ async function getQualityReportFromSnapshots(): Promise<QualityReportResponse> {
 
   const missingTranslations = entries
     .map((entry) => {
-      const missingEn = !entry.title?.en && !entry.title_en && !(entry.translations && entry.translations.en);
-      const missingEasyDe = !entry.title?.easy_de && !entry.title_easy_de && !(entry.translations && entry.translations['de-LEICHT']);
+      const missingEn =
+        !(typeof entry.title === 'object' && entry.title?.en) &&
+        !entry.title_en &&
+        !getTranslationTitle(entry.translations, 'en');
+      const missingEasyDe =
+        !(typeof entry.title === 'object' && entry.title?.easy_de) &&
+        !entry.title_easy_de &&
+        !getTranslationTitle(entry.translations, 'de-LEICHT');
       return {
         id: entry.id,
         domain: entry.domain,
-        title: entry.title?.de || entry.title_de || 'Untitled',
+        title: getLocalizedTitle(entry.title, entry.title_de) || 'Untitled',
         url: entry.url,
         missingEn,
         missingEasyDe,
@@ -593,14 +651,14 @@ export const api = {
     const needle = query.toLowerCase();
     return (res.entries || [])
       .filter(e => {
-        const rawTitle = e.title?.de || e.title_de || e.title || '';
+        const rawTitle = getLocalizedTitle(e.title, e.title_de);
         const title = typeof rawTitle === 'string' ? rawTitle : '';
         const lower = title.toLowerCase();
         return lower.includes(needle);
       })
       .map(e => ({
         id: e.id,
-        title: e.title?.de || e.title_de || e.title || '',
+        title: getLocalizedTitle(e.title, e.title_de),
         category: e.domain || ''
       }));
   },

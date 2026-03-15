@@ -44,26 +44,31 @@ See `docs/status.md` for the definitive, up-to-date picture of:
 - Planned next work items
 
 Always consult `docs/status.md` before adding new features or pointing
-contributors to commands.
+contributors to commands. For issue and docs reconciliation, also consult
+`docs/current-state.md`.
 
 ---
 
 ## Current priorities (next work items)
 
-Based on open issues, these are the next areas to tackle in priority order:
+Use `docs/current-state.md` plus `docs/status.md` before prioritizing work.
 
-1. **Moderation workflow / diff alignment** – align `moderation/review_queue.json`
-   format with the `moderation_queue` DB table so both paths are interchangeable
-   (MOD-01, issue #18).
-2. **Canonical moderation queue format** – document and enforce a single schema
-   for queue entries regardless of storage backend.
-3. **TIME-03 duplicate cleanup** – remove or merge the duplicate time-related
-   entry (see issue tracker).
-4. **Python crawlers for additional domains** – `aid`, `tools`, `organizations`,
-   `contacts` do not have Python crawlers yet; follow the pattern in
-   `crawlers/benefits/arbeitsagentur_crawler.py`.
-5. **Link expander** (CRAWL-03, issue #6) – planned Python implementation that
-   scans pages for outgoing links and discovers new candidate URLs.
+Based on the live repo and open issues, the highest-value areas are:
+
+1. **Issue reconciliation**
+   - review and likely close or rewrite stale open issues such as `#6`, `#18`,
+     and `#28`
+   - merge duplicate issue pairs such as `#45/#46` and `#85/#86`
+2. **Investigation/source workflow track**
+   - focus on issues `#63-#86`, which define the current product expansion:
+     source submission, validation, evidence linking, reviewer queues, and
+     dashboard support
+3. **AI roadmap hardening**
+   - issues `#44-#60` remain active; treat the AI gateway and helper modules as
+     partial scaffolding unless `docs/status.md` says otherwise
+4. **Documentation drift cleanup**
+   - keep contributor-facing docs aligned with the Python-first crawler model
+     and Cloudflare Pages as the primary deployment target
 
 ---
 

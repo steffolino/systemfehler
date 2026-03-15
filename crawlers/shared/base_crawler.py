@@ -12,9 +12,10 @@ Provides foundational functionality for all domain-specific crawlers including:
 
 import hashlib
 import logging
+import re
 import time
 import urllib.parse
-from typing import Optional, Dict, Any, Iterable
+from typing import Optional, Dict, Any, Iterable, List
 from urllib.robotparser import RobotFileParser
 
 import requests
@@ -97,8 +98,12 @@ class BaseCrawler:
             return True
     
     def fetch_page(self, url: str, retry_count: int = 3, timeout: int = 30) -> Optional[str]:
+        result = self.fetch_page_details(url, retry_count=retry_count, timeout=timeout)
+        return result.get('html') if result else None
+
+    def fetch_page_details(self, url: str, retry_count: int = 3, timeout: int = 30) -> Optional[Dict[str, Any]]:
         """
-        Fetch HTML content from URL with retry logic
+        Fetch HTML content from URL with retry logic.
         
         Args:
             url: URL to fetch
@@ -106,7 +111,7 @@ class BaseCrawler:
             timeout: Request timeout in seconds
             
         Returns:
-            HTML content as string, or None on failure
+            Metadata dictionary containing HTML and response details, or None on failure
         """
         if not self.check_robots_txt(url):
             return None
@@ -123,7 +128,13 @@ class BaseCrawler:
                 response.encoding = response.apparent_encoding
                 
                 self.logger.info(f"Successfully fetched {url}")
-                return response.text
+                return {
+                    'html': response.text,
+                    'requested_url': url,
+                    'final_url': response.url,
+                    'status_code': response.status_code,
+                    'headers': dict(response.headers),
+                }
                 
             except requests.exceptions.RequestException as e:
                 self.logger.warning(f"Attempt {attempt + 1} failed for {url}: {e}")
@@ -198,40 +209,243 @@ class BaseCrawler:
             return ""
         title_tag = soup.find("title")
         if title_tag:
-            return (title_tag.get_text(strip=True) or "").strip()
+            return self._normalize_title_text((title_tag.get_text(strip=True) or "").strip())
         return self._extract_meta_tag(soup, ["og:title", "twitter:title"]) or ""
+
+    def _normalize_title_text(self, value: str) -> str:
+        """Normalize page titles and strip common site-brand suffixes."""
+        text = " ".join((value or "").split()).strip()
+        if not text:
+            return ""
+
+        for separator in (" | ", " \u2013 ", " \u2014 ", " - "):
+            if separator not in text:
+                continue
+            left, right = text.split(separator, 1)
+            left = left.strip()
+            right = right.strip()
+            if left and right and len(left) >= 12:
+                return left
+
+        return text
+
+    def _normalize_text_block(self, value: str) -> str:
+        """Collapse whitespace and trim common decorative separators."""
+        text = " ".join((value or "").split()).strip()
+        text = re.sub(r"\s+([,.;:!?])", r"\1", text)
+        return text.strip(" -|")
+
+    def _is_low_quality_title(self, value: str) -> bool:
+        text = (value or "").strip().lower()
+        if not text:
+            return True
+
+        generic_titles = {
+            "navigation",
+            "hauptnavigation",
+            "haupt-navigation",
+            "startseite",
+            "home",
+            "homepage",
+            "menu",
+        }
+        if text in generic_titles:
+            return True
+
+        low_signal_tokens = (
+            "jetzt",
+            "hier klicken",
+            "mehr erfahren",
+            "loslegen",
+            "starten",
+            "anmelden",
+        )
+        return any(token in text for token in low_signal_tokens)
+
+    def _is_low_quality_description(self, value: str) -> bool:
+        text = self._normalize_text_block(value).lower()
+        if len(text) < 40:
+            return True
+
+        low_signal_tokens = (
+            "cookie",
+            "datenschutz",
+            "javascript",
+            "newsletter",
+            "anmelden",
+            "registrieren",
+            "suche",
+            "navigation",
+            "zum inhalt",
+            "barrierefreiheit",
+            "impressum",
+        )
+        return any(token in text for token in low_signal_tokens)
+
+    def _is_boilerplate_node(self, element: Optional[BeautifulSoup]) -> bool:
+        """Detect nodes that likely belong to page chrome instead of main content."""
+        if not element:
+            return False
+
+        current = element
+        while current is not None:
+            name = getattr(current, "name", None)
+            if name in ("nav", "header", "footer", "aside", "form", "dialog", "noscript"):
+                return True
+            class_names = " ".join(current.get("class", [])).lower() if current.get("class") else ""
+            element_id = (current.get("id") or "").lower()
+            marker = f"{class_names} {element_id}"
+            if any(
+                token in marker
+                for token in (
+                    "nav",
+                    "menu",
+                    "breadcrumb",
+                    "cookie",
+                    "footer",
+                    "header",
+                    "sidebar",
+                    "toolbar",
+                    "pagination",
+                    "search",
+                    "newsletter",
+                    "share",
+                    "social",
+                )
+            ):
+                return True
+            current = current.parent
+        return False
+
+    def _extract_candidate_paragraphs(self, soup: Optional[BeautifulSoup], limit: int = 12) -> List[str]:
+        """Collect meaningful paragraphs from the main content area."""
+        if not soup:
+            return []
+
+        container = soup.find("main") or soup.find("article") or soup.find(attrs={"role": "main"}) or soup.find("body")
+        if not container:
+            return []
+
+        paragraphs: List[str] = []
+        seen = set()
+
+        for paragraph in container.find_all(["p", "li"]):
+            if self._is_boilerplate_node(paragraph):
+                continue
+            text = self._normalize_text_block(self.extract_text(paragraph))
+            if len(text) < 50 or text in seen:
+                continue
+            seen.add(text)
+            paragraphs.append(text)
+            if len(paragraphs) >= limit:
+                break
+
+        return paragraphs
+
+    def _extract_best_summary(self, soup: Optional[BeautifulSoup]) -> str:
+        """Pick a frontend-usable short description for the entry."""
+        if not soup:
+            return ""
+
+        selectors = [
+            {"name": "meta", "attrs": {"name": "description"}},
+            {"name": "meta", "attrs": {"property": "og:description"}},
+            {"name": "meta", "attrs": {"name": "twitter:description"}},
+            {"attrs": {"class": re.compile(r"(lead|intro|teaser|summary|abstract)", re.I)}},
+            {"attrs": {"id": re.compile(r"(lead|intro|teaser|summary|abstract)", re.I)}},
+        ]
+
+        for selector in selectors:
+            if selector.get("name") == "meta":
+                candidate = self._extract_meta_tag(soup, [selector["attrs"].get("name") or selector["attrs"].get("property")])
+            else:
+                element = soup.find(**selector)
+                candidate = self.extract_text(element) if element else ""
+            candidate = self._normalize_text_block(candidate)
+            if candidate and not self._is_low_quality_description(candidate):
+                return candidate
+
+        for paragraph in self._extract_candidate_paragraphs(soup, limit=4):
+            if not self._is_low_quality_description(paragraph):
+                return paragraph
+
+        return ""
+
+    def _extract_canonical_url(self, soup: Optional[BeautifulSoup], base_url: str = "") -> str:
+        """Return canonical URL from the document head when available."""
+        if not soup:
+            return ""
+        head = soup.find("head")
+        if not head:
+            return ""
+        link = head.find("link", rel=lambda value: isinstance(value, str) and "canonical" in value.lower())
+        if not link:
+            return ""
+        href = (link.get("href") or "").strip()
+        if not href:
+            return ""
+        try:
+            resolved = urllib.parse.urljoin(base_url, href) if base_url else href
+            return self.normalize_url(resolved)
+        except Exception:
+            return href
+
+    def _extract_best_content(self, soup: Optional[BeautifulSoup], summary: str = "", max_parts: int = 6) -> str:
+        """Build a concise body text from the main content area."""
+        parts: List[str] = []
+        normalized_summary = self._normalize_text_block(summary)
+
+        for paragraph in self._extract_candidate_paragraphs(soup, limit=max_parts + 2):
+            if normalized_summary and paragraph == normalized_summary:
+                continue
+            parts.append(paragraph)
+            if len(parts) >= max_parts:
+                break
+
+        if not parts and normalized_summary:
+            return normalized_summary
+
+        return " ".join(parts)
 
     def _get_best_title(self, soup: Optional[BeautifulSoup], seed_name: str = "", url: str = "") -> str:
         """Choose the most useful title for an entry.
 
         Preference order:
-        1. `h1` when not navigation/menu text
+        1. `og:title` / `twitter:title`
         2. head `<title>`
-        3. `og:title` / `twitter:title`
+        3. `h1` when not navigation/menu text and not CTA-like
         4. meta description truncated as last resort when title is generic
         5. fallback: "{seed_name} - {url}" or empty
         """
         title = ""
+        meta_title = self._normalize_title_text(
+            self._extract_meta_tag(soup, ["og:title", "twitter:title"]) or ""
+        )
+        head_title = self._normalize_title_text(self._extract_head_title(soup))
+
+        if meta_title and not self._is_low_quality_title(meta_title):
+            title = meta_title
+
+        if not title and head_title and not self._is_low_quality_title(head_title):
+            title = head_title
+
         if soup:
             try:
                 h1 = soup.find("h1")
                 if h1 and not self._is_nav_like(h1):
-                    title = (h1.get_text(strip=True) or "").strip()
+                    h1_title = self._normalize_title_text(h1.get_text(strip=True) or "")
+                    if h1_title and not self._is_low_quality_title(h1_title):
+                        title = h1_title
             except Exception:
-                title = ""
-
-        if not title:
-            title = self._extract_head_title(soup)
-
-        if not title:
-            title = self._extract_meta_tag(soup, ["og:title", "twitter:title"]) or ""
+                pass
 
         # Normalize obviously useless titles
-        if title and title.strip().lower() in ("navigation", "hauptnavigation", "haupt-navigation"):
+        if title and self._is_low_quality_title(title):
             # try head title or meta description instead
-            head_title = self._extract_head_title(soup) or ""
-            if head_title and head_title.strip().lower() not in ("navigation", "hauptnavigation"):
+            if head_title and not self._is_low_quality_title(head_title):
                 return head_title
+            if meta_title and not self._is_low_quality_title(meta_title):
+                return meta_title
             meta_desc = self._extract_meta_tag(soup, ["description", "og:description", "twitter:description"]) or ""
             if meta_desc:
                 return (meta_desc.strip()[:60] + "...") if len(meta_desc.strip()) > 60 else meta_desc.strip()

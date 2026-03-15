@@ -3,16 +3,33 @@
   "domain": "benefits",
   "entries": [
     {
-      "title": {
-        "de": "Bürgergeld (Arbeitslosengeld II)",
-        "easy_de": "Bürgergeld"
+      "title": "Bürgergeld (Arbeitslosengeld II)",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Bürgergeld",
+          "timestamp": "2026-03-01T18:38:38.422182Z",
+          "provenance": {
+            "source": "https://www.arbeitsagentur.de/arbeitslosengeld-2",
+            "crawledAt": "2026-03-01T18:38:38.422182Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
-        "de": "Bürgergeld ist eine Leistung der Grundsicherung für erwerbsfähige Menschen mit zu geringem Einkommen oder ohne Arbeit und deckt Regelbedarf sowie angemessene Wohnkosten ab."
+        "de": "Informieren Sie sich über Bürgergeld, wenn Sie schon länger arbeitslos sind, keinen Anspruch auf Arbeitslosengeld haben oder Ihr Einkommen nicht für den Lebensunterhalt reicht."
       },
       "content": {
-        "de": "Die Informationsseite der Bundesagentur für Arbeit erläutert Anspruch, Antrag und zentrale Rahmenbedingungen für Bürgergeld. Sie verweist auf Zuständigkeiten der Jobcenter und auf Pflichten sowie Mitwirkungsanforderungen im Leistungsbezug."
+        "de": "Stellen Sie den Antrag auf Bürgergeld online bei Ihrem Jobcenter. Beantragen Sie online die Weiterbewilligung von Bürgergeld. Teilen Sie online Veränderungen Ihrer persönlichen und finanziellen Verhältnisse mit. Tauschen Sie Nachrichten online mit Ihrem Jobcenter aus. Melden Sie sich dazu in Ihrem Profil an. Schritt für Schritt: Wie Sie Bürgergeld online bei Ihrem Jobcenter beantragen. Was Sie über Antrag und Bezug der Leistung wissen sollten."
       },
+      "eligibilityCriteria": {
+        "de": "Ihr Jobcenter unterstützt Sie, wenn Sie länger arbeitslos sind, keinen Anspruch auf Arbeitslosengeld haben oder Ihr Einkommen nicht für den Lebensunterhalt ausreicht. Informieren Sie sich zum Beispiel, wie Sie Bürgergeld erhalten und wie das Jobcenter Ihnen hilft, neue Arbeit zu finden."
+      },
+      "applicationSteps": [
+        {
+          "de": "Bundesministerium für Arbeit und Soziales: Bürgergeld auf einen Blick"
+        }
+      ],
       "topics": [
         "financial_support",
         "employment"
@@ -27,28 +44,38 @@
         "families"
       ],
       "id": "c6fb568f-2e9a-4b26-b6c6-74c0e38205c9",
-      "url": "https://www.arbeitsagentur.de/arbeitslosengeld-2",
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld",
       "status": "active",
       "firstSeen": "2026-03-01T18:38:38.422093+00:00",
-      "lastSeen": "2026-03-01T18:38:38.422108+00:00",
+      "lastSeen": "2026-03-15T07:13:17.338461+00:00",
       "sourceUnavailable": false,
       "provenance": {
-        "source": "https://www.arbeitsagentur.de/arbeitslosengeld-2",
-        "crawledAt": "2026-03-01T18:38:38.422182Z",
-        "crawlId": "arbeitsagentur-1772390318",
-        "checksum": "ffc0d29466a4c3d036b2d235d5654104d0978487c703a43f8b567679ad3963fc"
+        "source": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld",
+        "crawledAt": "2026-03-15T07:13:17.339351Z",
+        "crawlId": "arbeitsagentur-1773558797",
+        "checksum": "20acd53f2652d47309a2d5a3c74928281b146a896770ca1341a40114dc346b4a",
+        "crawlerVersion": "0.1.0"
       },
       "qualityScores": {
-        "iqs": 78.12,
-        "ais": 46.5,
-        "computedAt": "2026-03-01T18:38:38.422231+00:00"
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T07:13:17.339351+00:00"
       }
     },
     {
       "id": "ab6ecb16-b9df-4654-bde8-94a02f0d3302",
-      "title": {
-        "de": "Kurzarbeitergeld",
-        "easy_de": "Hilfe bei Kurzarbeit"
+      "title": "Kurzarbeitergeld",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Hilfe bei Kurzarbeit",
+          "timestamp": "2026-03-01T20:10:00Z",
+          "provenance": {
+            "source": "https://www.arbeitsagentur.de/kurzarbeitergeld",
+            "crawledAt": "2026-03-01T20:10:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Kurzarbeitergeld unterstützt Betriebe und Beschäftigte bei vorübergehendem Arbeitsausfall, um Beschäftigung zu stabilisieren."
@@ -87,9 +114,18 @@
     },
     {
       "id": "a6f576ba-c5f0-4ff2-8f63-aa56abbb56fd",
-      "title": {
-        "de": "Familie und Kinder (Leistungsüberblick)",
-        "easy_de": "Hilfe für Familien"
+      "title": "Familie und Kinder (Leistungsüberblick)",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Hilfe für Familien",
+          "timestamp": "2026-03-01T20:10:00Z",
+          "provenance": {
+            "source": "https://www.arbeitsagentur.de/familie-und-kinder",
+            "crawledAt": "2026-03-01T20:10:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Die Seite bietet einen zentralen Einstieg zu Kindergeld, Kinderzuschlag und weiteren Unterstützungsangeboten für Familien."
@@ -128,9 +164,18 @@
     },
     {
       "id": "f0d4693b-32e1-4ec6-95fb-e9d75efefdfa",
-      "title": {
-        "de": "Familienleistungen (BMBFSFJ)",
-        "easy_de": "Familien-Leistungen"
+      "title": "Familienleistungen (BMBFSFJ)",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Familien-Leistungen",
+          "timestamp": "2026-03-01T20:10:00Z",
+          "provenance": {
+            "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen",
+            "crawledAt": "2026-03-01T20:10:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Das BMBFSFJ stellt zentrale Familienleistungen wie Elterngeld, Kindergeld, Kinderzuschlag und weitere Unterstützungen im Überblick dar."
@@ -169,9 +214,18 @@
     },
     {
       "id": "76c47e08-9f3b-4053-97bc-62c4e09aa6ee",
-      "title": {
-        "de": "Kindergeld",
-        "easy_de": "Geld für Kinder"
+      "title": "Kindergeld",
+      "translations": {
+        "de-LEICHT": {
+          "title": "Geld für Kinder",
+          "timestamp": "2026-03-01T20:10:00Z",
+          "provenance": {
+            "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kindergeld/kindergeld-73892",
+            "crawledAt": "2026-03-01T20:10:00Z"
+          },
+          "method": "human",
+          "reviewed": true
+        }
       },
       "summary": {
         "de": "Kindergeld ist eine zentrale familienpolitische Leistung zur finanziellen Entlastung von Familien in Deutschland."

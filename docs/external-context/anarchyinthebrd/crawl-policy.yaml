@@ -1,0 +1,95 @@
+project: AnarchyInTheBRD
+
+crawl:
+  concurrency: 8
+  request_timeout_seconds: 25
+  retries: 2
+  user_agent: "AnarchyInTheBRD-RAG/1.0"
+  respect_robots_txt: true
+  store_html: false
+  store_clean_text: true
+  store_pdf_text: true
+  extract_main_content_only: true
+  deduplicate_by_canonical_url: true
+  deduplicate_by_content_hash: true
+
+crawl_policy:
+  include_subdomains: true
+  max_depth_default: 3
+  follow_pdfs: true
+  follow_sitemaps: true
+  respect_robots_txt: true
+
+  preferred_content:
+    - laws
+    - regulations
+    - court decisions
+    - parliamentary documents
+    - committee papers
+    - official press releases
+    - ngo reports
+    - transparency requests and released documents
+    - investigative journalism
+    - policy reports
+    - academic papers
+
+  de_prio_content:
+    - opinion columns
+    - generic tag pages
+    - thin event listings
+    - donation pages
+    - shop pages
+    - duplicate translated mirrors
+    - image galleries without text
+    - homepage-only indexes
+
+  exclude_url_patterns:
+    - "/search"
+    - "/tag/"
+    - "/tags/"
+    - "/author/"
+    - "/login"
+    - "/shop"
+    - "/donate"
+    - "/spenden"
+    - "?output=1"
+    - "?share="
+    - "#comments"
+
+  file_types:
+    allow:
+      - html
+      - pdf
+    deny:
+      - jpg
+      - png
+      - zip
+      - mp4
+
+retrieval:
+  ranking_policy: >
+    official law, court, and parliament sources rank above official executive
+    publications; these rank above NGO reports; these rank above investigative
+    journalism; these rank above academic commentary and mainstream context reporting.
+  dense_top_k: 10
+  bm25_top_k: 10
+  rerank_to: 5
+
+chunking:
+  strategy: markdown_semantic
+  target_tokens: 700
+  overlap_tokens: 120
+  preserve_headings: true
+
+metadata:
+  capture:
+    - title
+    - url
+    - domain
+    - published_at
+    - modified_at
+    - language
+    - content_type
+    - institution_type
+    - source_tier
+    - jurisdiction

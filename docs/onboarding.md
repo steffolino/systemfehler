@@ -35,8 +35,10 @@ Key directories:
 
 - `data/`
   - Schemas, taxonomies, and the actual entries for each domain.
+- `crawlers/`
+  - Canonical Python crawl, validation, import, and link-expansion pipeline.
 - `services/`
-  - Domain-specific crawlers and shared crawling utilities.
+  - Shared JS utilities, embeddings, LLM helpers, and reference-only crawler stubs.
 - `moderation/`
   - Moderation queue, audit log, and dashboard.
 - `scripts/`
@@ -78,14 +80,19 @@ Each domain can be extended over time. New domains can be added if they follow t
 
 ### 4.3 Crawlers
 
-Crawlers live under `services/<domain>/crawler/`. They:
+Runtime crawlers live under `crawlers/`. They:
 
 - Load URLs from `data/<domain>/urls.json`.
 - Fetch and parse pages.
 - Extract candidate data into normalized objects.
 - Pass candidate data to the diff and moderation pipeline.
 
-A shared base module under `services/_shared/` provides common functionality such as HTTP fetching, error handling, URL normalization, and logging.
+The shared Python modules under `crawlers/shared/` provide common functionality
+such as HTTP fetching, robots handling, validation, diff generation, link
+expansion, and moderation queue canonicalization.
+
+Node files under `services/*/crawler/` are reference-only scaffolding and do
+not execute the production crawling pipeline.
 
 ### 4.4 Moderation and Audit
 
@@ -160,7 +167,7 @@ These aspects are critical and must be respected in all changes.
 3. **Implement changes**
 
    * For schema work: modify files in `data/_schemas/` and update documentation.
-   * For crawler work: adjust `services/<domain>/crawler/` and/or configuration.
+   * For crawler work: adjust `crawlers/` and related data/configuration files.
    * For moderation/dashboard: update files under `moderation/` and `scripts/`.
 
 4. **Run checks**
