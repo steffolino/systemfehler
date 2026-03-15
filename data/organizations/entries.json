@@ -3,182 +3,52 @@
   "domain": "organizations",
   "entries": [
     {
-      "id": "8e6e6ac8-a569-485d-a34b-f0b95c93095b",
-      "title": "Bundesagentur für Arbeit (Über uns)",
-      "translations": {
-        "de-LEICHT": {
-          "title": "Bundesagentur für Arbeit",
-          "timestamp": "2026-03-01T20:16:00Z",
-          "provenance": {
-            "source": "https://www.arbeitsagentur.de/ueber-uns",
-            "crawledAt": "2026-03-01T20:16:00Z"
-          },
-          "method": "human",
-          "reviewed": true
-        }
-      },
+      "id": "2ec45c4d-f563-46d4-b03f-c35bb830f5a3",
+      "title": "Über uns | Bundesagentur für Arbeit",
       "summary": {
-        "de": "Die Organisationsseite der BA stellt Aufgaben, Struktur, Leitungsorgane und zentrale Dienststellen der Behörde vor."
+        "de": "Auf Über uns erhalten Sie einen Überblick über Leitung, Organisation, Dienststellen, Fachdienste, Ziele und Richtlinien der Bundesagentur für Arbeit."
       },
       "content": {
-        "de": "Sie erläutert die Rolle der Bundesagentur im deutschen Arbeitsmarkt- und Leistungssystem sowie deren föderale Organisationslogik. Zusätzlich verweist sie auf spezialisierte Einrichtungen und weitere Servicebereiche."
+        "de": "Informieren Sie sich, wer die Bundesagentur für Arbeit leitet und ihre Geschäfte führt. Erfahren Sie mehr über den Verwaltungsrat und die Verwaltungsausschüsse. Der Geschäftsbericht der Bundesagentur für Arbeit informiert über die Geschäfts- und Rechnungsergebnisse für das Jahr 2024. Vorstand und Verwaltungsrat legen die Strategie der BA fest. Die Zentrale entwickelt hierzu Produkte und Programme und führt die Regionaldirektionen. Die 10 Regionaldirektionen setzen die Strategie der BA deutschlandweit um und leiten die Agenturen für Arbeit vor Ort. Die 146 Agenturen für Arbeit mit ihren etwa 600 Niederlassungen setzen die Aufgaben der BA vor Ort um. Außerdem haben die Agenturen gemeinsam mit Landkreisen oder kreisfreien Städten 300 Jobcenter eingerichtet. Dazu kommen die Familienkassen der BA mit rund 100 Standorten."
       },
       "url": "https://www.arbeitsagentur.de/ueber-uns",
       "topics": [
-        "employment",
-        "financial_support"
+        "organizations"
       ],
       "tags": [
-        "application_required",
-        "automatic"
+        "organization"
       ],
       "targetGroups": [
-        "unemployed",
-        "families"
+        "general_public"
       ],
       "status": "active",
-      "organizationType": "government",
+      "firstSeen": "2026-03-15T15:59:57.090269+00:00",
+      "lastSeen": "2026-03-15T15:59:57.090269+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
       "region": "Germany",
       "services": [
         "Arbeitsvermittlung",
-        "Leistungen",
+        "Leistungsinformationen",
         "Familienkasse"
       ],
       "contactDetails": {
-        "website": "https://www.arbeitsagentur.de/"
+        "website": "https://www.arbeitsagentur.de/ueber-uns"
       },
-      "firstSeen": "2026-03-01T20:16:00Z",
-      "lastSeen": "2026-03-01T20:16:00Z",
-      "sourceUnavailable": false,
       "provenance": {
         "source": "https://www.arbeitsagentur.de/ueber-uns",
-        "crawlId": "manual-curation-20260301-realdata-v1",
-        "checksum": "ca62ace0f1e9f086016e937f640ce238c20c0e9f2cf26da2ec4f8cfaa65c271f",
-        "crawledAt": "2026-03-01T20:16:00Z"
+        "crawledAt": "2026-03-15T15:59:57.090269Z",
+        "crawlId": "organizations-seeded-1773590397",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "4167266d0ad1ff4fd15e12d4f2c6cdcd312520ec193acf60e2793395e4f931de"
       },
       "qualityScores": {
-        "iqs": 80.7,
-        "ais": 50.9,
-        "computedAt": "2026-03-01T20:16:00Z"
-      }
-    },
-    {
-      "id": "084ea142-cea9-48cf-bcd0-0a6f4d13e8f2",
-      "title": "BMBFSFJ",
-      "translations": {
-        "de-LEICHT": {
-          "title": "Familien-Ministerium",
-          "timestamp": "2026-03-01T20:16:00Z",
-          "provenance": {
-            "source": "https://www.bmbfsfj.bund.de/bmbfsfj",
-            "crawledAt": "2026-03-01T20:16:00Z"
-          },
-          "method": "human",
-          "reviewed": true
-        }
-      },
-      "summary": {
-        "de": "Die Startseite des BMBFSFJ bündelt Themen, Programme, Serviceangebote und politische Schwerpunkte des Ministeriums."
-      },
-      "content": {
-        "de": "Sie dient als zentraler Einstieg für Familien-, Jugend- und Gleichstellungsthemen sowie zugehörige Services. Nutzerinnen und Nutzer erhalten von dort aus Zugang zu Fachinformationen, Kontakt und Publikationen."
-      },
-      "url": "https://www.bmbfsfj.bund.de/bmbfsfj",
-      "topics": [
-        "family",
-        "education"
-      ],
-      "tags": [
-        "application_required",
-        "automatic"
-      ],
-      "targetGroups": [
-        "families",
-        "seniors"
-      ],
-      "status": "active",
-      "organizationType": "government",
-      "region": "Germany",
-      "services": [
-        "Familienpolitik",
-        "Jugendpolitik",
-        "Service und Kontakt"
-      ],
-      "contactDetails": {
-        "website": "https://www.bmbfsfj.bund.de/bmbfsfj"
-      },
-      "firstSeen": "2026-03-01T20:16:00Z",
-      "lastSeen": "2026-03-01T20:16:00Z",
-      "sourceUnavailable": false,
-      "provenance": {
-        "source": "https://www.bmbfsfj.bund.de/bmbfsfj",
-        "crawlId": "manual-curation-20260301-realdata-v1",
-        "checksum": "9a9cb7c43224c369eaebf21f7f9f3e17f51f6a7705fd5eb78fda3c4a38d6b17a",
-        "crawledAt": "2026-03-01T20:16:00Z"
-      },
-      "qualityScores": {
-        "iqs": 79.4,
-        "ais": 49.7,
-        "computedAt": "2026-03-01T20:16:00Z"
-      }
-    },
-    {
-      "id": "f9e97f8e-a6de-4eb4-a785-f7e0f8eaf143",
-      "title": "Bundesministerien (Bundesregierung)",
-      "translations": {
-        "de-LEICHT": {
-          "title": "Ministerien in Deutschland",
-          "timestamp": "2026-03-01T20:16:00Z",
-          "provenance": {
-            "source": "https://www.bundesregierung.de/breg-de/bundesregierung/bundesministerien",
-            "crawledAt": "2026-03-01T20:16:00Z"
-          },
-          "method": "human",
-          "reviewed": true
-        }
-      },
-      "summary": {
-        "de": "Die Bundesregierung stellt hier alle Bundesministerien mit Zuständigkeitsbereichen im Überblick dar."
-      },
-      "content": {
-        "de": "Die Seite beschreibt die Rolle der Ministerien bei Gesetzgebung, Fachpolitik und Behördenaufsicht. Sie bietet einen offiziellen Einstieg in die Organisationsstruktur der Bundesverwaltung."
-      },
-      "url": "https://www.bundesregierung.de/breg-de/bundesregierung/bundesministerien",
-      "topics": [
-        "employment",
-        "family"
-      ],
-      "tags": [
-        "automatic",
-        "application_required"
-      ],
-      "targetGroups": [
-        "families",
-        "students"
-      ],
-      "status": "active",
-      "organizationType": "government",
-      "region": "Germany",
-      "services": [
-        "Ministeriumsübersicht",
-        "Bundesverwaltung"
-      ],
-      "contactDetails": {
-        "website": "https://www.bundesregierung.de/breg-de"
-      },
-      "firstSeen": "2026-03-01T20:16:00Z",
-      "lastSeen": "2026-03-01T20:16:00Z",
-      "sourceUnavailable": false,
-      "provenance": {
-        "source": "https://www.bundesregierung.de/breg-de/bundesregierung/bundesministerien",
-        "crawlId": "manual-curation-20260301-realdata-v1",
-        "checksum": "37bd737a0e7ebf7f60ebbb877fd6513fd5f9ecf2963509677f9994369d8a4f3c",
-        "crawledAt": "2026-03-01T20:16:00Z"
-      },
-      "qualityScores": {
-        "iqs": 76.6,
-        "ais": 47,
-        "computedAt": "2026-03-01T20:16:00Z"
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T15:59:57.090269+00:00"
       }
     },
     {
@@ -242,66 +112,1619 @@
       }
     },
     {
-      "id": "39160593-cf96-4525-b3d2-f16796af5df8",
-      "title": "FITKO – Produktmanagement 115",
-      "translations": {
-        "de-LEICHT": {
-          "title": "FITKO und die 115",
-          "timestamp": "2026-03-01T20:16:00Z",
-          "provenance": {
-            "source": "https://www.fitko.de/produktmanagement/115",
-            "crawledAt": "2026-03-01T20:16:00Z"
-          },
-          "method": "human",
-          "reviewed": true
-        }
-      },
+      "id": "e7641fb6-e9ef-46d8-acf1-77f79850e1a5",
+      "title": "BMBFSFJ",
       "summary": {
-        "de": "Die FITKO-Seite beschreibt das Produktmanagement der Behördennummer 115 im föderalen Kontext."
+        "de": "Hier finden Sie aktuelle Informationen des Bundesministeriums für Bildung, Familie, Senioren, Frauen und Jugend (BMBFSFJ)."
       },
       "content": {
-        "de": "Sie erklärt organisatorische Zuständigkeiten und die Weiterentwicklung der 115 als verwaltungsübergreifenden Service. Damit wird die Einordnung der 115 im digitalen Verwaltungsverbund transparent gemacht."
+        "de": "Gleichstellungspolitik gelingt nur, wenn auch Jungen und Männer adressiert werden. Das Frauentags-Vernetzungstreffen anlässlich des Internationalen Frauentags rückte daher die Rolle von Männlichkeitsbildern für die Gleichstellung in den Fokus. Am 8. März ist Bundesfrauenministern Karin Prien nach New York gereist, um an der 70. Frauenrechtskommission der Vereinten Nationen (UN) teilzunehmen. Im Fokus der Konferenz: der Zugang zu Recht und Justiz für Frauen und Mädchen weltweit. Mit der Braunschweiger Zeitung hat Bundesfrauenministerin Karin Prien darüber gesprochen, wie es um die Gleichstellung von Frauen steht und welche Rolle Künstliche Intelligenz (KI) dabei spielt. Am 10. März hat die Parlamentarische Staatssekretärin im Bundesbildungsministerium, Mareike Wulf, in Köln die didacta miteröffnet. Das Motto \"Alles im Wandel. Bildung im Fokus\" stellt Innovationen und mentale Gesundheit ins Zentrum. Das Bundesfamilienministerium bietet einen umfassenden Überblick über finanzielle Unterstützung für Familien in 2026. Informieren Sie sich über Kindergeld, Elterngeld, Kinderzuschlag und mehr. Flyer Das Pflegetelefon - Schnelle Hilfe für Angehörige"
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T15:59:57.891368+00:00",
+      "lastSeen": "2026-03-15T15:59:57.891368+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj",
+        "crawledAt": "2026-03-15T15:59:57.891969Z",
+        "crawlId": "organizations-seeded-1773590397",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "80e71844c605089d9216c3b1bd97242924e069be3ac07e23d317302f77d24368"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T15:59:57.891969+00:00"
+      }
+    },
+    {
+      "id": "d3c249df-9ac1-4baf-9613-496127569a81",
+      "title": "Das Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+      "summary": {
+        "de": "Hier finden Sie Informationen über das Bundesfamilienministerium, nachgeordnete Behörden, Beiräte und Gremien sowie die Ministerin und die Staatssekretäre."
+      },
+      "content": {
+        "de": "Gleichstellungspolitik gelingt nur, wenn auch Jungen und Männer adressiert werden. Das Frauentags-Vernetzungstreffen anlässlich des Internationalen Frauentags rückte daher die Rolle von Männlichkeitsbildern für die Gleichstellung in den Fokus. Die ehemalige Bundesfrauenministerin und Bundestagspräsidentin Prof. Dr. Rita Süssmuth ist verstorben. Karin Prien und Nina Warken würdigten sie als großes Vorbild und Vorkämpferin für Frauenrechte und sozialen Zusammenhalt. Wie weit ist Deutschland bei der Gleichstellung? Der Evaluierungsbericht zum Bundesgleichstellungsgesetz zeigt, dass die Maßnahmen Wirkung zeigen. Doch auch im Bundesdienst gibt es noch einiges zu tun."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:01.455044+00:00",
+      "lastSeen": "2026-03-15T16:00:01.455044+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium",
+        "crawledAt": "2026-03-15T16:00:01.455044Z",
+        "crawlId": "organizations-seeded-1773590401",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "1621ddd7508453ca824115e53f14a632aa501917888e3d543f219fe4b5bdc5e9"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:01.455984+00:00"
+      }
+    },
+    {
+      "id": "0b4decfb-f134-4cc5-90a7-36f58536f75f",
+      "title": "Ausschreibungen und Förderungen",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/ausschreibungen-foerderung",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:01.965005+00:00",
+      "lastSeen": "2026-03-15T16:00:01.965005+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/ausschreibungen-foerderung"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/ausschreibungen-foerderung",
+        "crawledAt": "2026-03-15T16:00:01.965005Z",
+        "crawlId": "organizations-seeded-1773590401",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "9b3a8cc683ade3c61f6f979408a2caa0d233397ea1534c69f8f2c4725244c03a"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:01.965923+00:00"
+      }
+    },
+    {
+      "id": "07eb8b80-3fc7-4a7d-837a-c33b9e111cd7",
+      "title": "Ausschreibungen und Stellenangebote",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/ausschreibungen-foerderung/ausschreibungen",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:02.461911+00:00",
+      "lastSeen": "2026-03-15T16:00:02.461911+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/ausschreibungen-foerderung/ausschreibungen"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/ausschreibungen-foerderung/ausschreibungen",
+        "crawledAt": "2026-03-15T16:00:02.461911Z",
+        "crawlId": "organizations-seeded-1773590402",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "2a63c8a8c7291a0692eabd1ac149b5a51773788680860aaddf857dc4c1b28470"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:02.462416+00:00"
+      }
+    },
+    {
+      "id": "c060d1eb-62fc-4149-83a2-aaad1559be21",
+      "title": "Förderrichtlinien des Bundes",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Richtlinien für den Bundesaltenplan Die Richtlinien für den Bundesaltenplan legen Vorhaben fest, die vom Bundesseniorenministerium gefördert werden können. Die Vorhaben sollen dazu führen, dass ältere Menschen selbstständiger und gleichberechtigter in der Gesellschaft leben können. Die Richtlinien für den Bundesaltenplan legen Vorhaben fest, die vom Bundesseniorenministerium gefördert werden können. Die Vorhaben sollen dazu führen, dass ältere Menschen selbstständiger und gleichberechtigter in der Gesellschaft leben können. Familienförderrichtlinien des Bundes Das Bundesfamilienministerium setzt sich für eine familienfreundliche Gesellschaft ein. Dafür werden Träger und Projekte mit familienpolitischem Bezug unterstützt. Ziel ist, dass sich Familien nach eigenen Vorstellungen optimal entwickeln können. Das Bundesfamilienministerium setzt sich für eine familienfreundliche Gesellschaft ein. Dafür werden Träger und Projekte mit familienpolitischem Bezug unterstützt. Ziel ist, dass sich Familien nach eigenen Vorstellungen optimal entwickeln können. Richtlinien des Kinder- und Jugendplans des Bundes Das Bundesjugendministerium fördert die Kinder- und Jugendhilfe, wenn diese von überregionaler Bedeutung ist und ihre Tätigkeit nicht durch ein Land allein wirksam gefördert werden kann. Das Bundesjugendministerium fördert die Kinder- und Jugendhilfe, wenn diese von überregionaler Bedeutung ist und ihre Tätigkeit nicht durch ein Land allein wirksam gefördert werden kann."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/ausschreibungen-foerderung/foerderrichtlinien",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:02.967981+00:00",
+      "lastSeen": "2026-03-15T16:00:02.967981+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/ausschreibungen-foerderung/foerderrichtlinien"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/ausschreibungen-foerderung/foerderrichtlinien",
+        "crawledAt": "2026-03-15T16:00:02.967981Z",
+        "crawlId": "organizations-seeded-1773590402",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "a7501fa4707e3f930b82bca62df98cd030c5958d63fe5a7392752f4906228843"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:02.967981+00:00"
+      }
+    },
+    {
+      "id": "875d6d97-2028-4e75-a714-fe7880612adb",
+      "title": "Behörden, Beauftragte, Beiräte, Gremien und Kommissionen",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Bundesamt für Familie und zivilgesellschaftliche Aufgaben Unabhängige Bundesbeauftragte gegen sexuellen Missbrauch Beauftragte für Akzeptanz sexueller und geschlechtlicher Vielfalt Beauftragter gegen Antiziganismus und für das Leben der Sinti und Roma Gleichstellungspolitik gelingt nur, wenn auch Jungen und Männer adressiert werden. Das Frauentags-Vernetzungstreffen anlässlich des Internationalen Frauentags rückte daher die Rolle von Männlichkeitsbildern für die Gleichstellung in den Fokus. Die ehemalige Bundesfrauenministerin und Bundestagspräsidentin Prof. Dr. Rita Süssmuth ist verstorben. Karin Prien und Nina Warken würdigten sie als großes Vorbild und Vorkämpferin für Frauenrechte und sozialen Zusammenhalt."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:03.471912+00:00",
+      "lastSeen": "2026-03-15T16:00:03.471912+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien",
+        "crawledAt": "2026-03-15T16:00:03.471912Z",
+        "crawlId": "organizations-seeded-1773590403",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "f0f5322abc90c8a652040446bdaf43f26c31efe111704a1a54afa9e97824de0d"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:03.471912+00:00"
+      }
+    },
+    {
+      "id": "a7616238-21f1-4141-a01d-bf9b9050975f",
+      "title": "Antidiskriminierungsstelle des Bundes",
+      "summary": {
+        "de": "Die Antidiskriminierungsstelle des Bundes ist eine unabhängige Anlaufstelle für Menschen, die von Diskriminierung betroffen sind. Ihre Aufgaben sind im Antidiskriminierungsgesetz festgeschrieben."
+      },
+      "content": {
+        "de": "Gesetzliche Aufgaben der Antidiskriminierungsstelle sind Information, Beratung und auf Wunsch Unterstützung von Betroffenen bei einer gütlichen Beilegung, ggf. Vermittlung ortsnaher Unterstützungsangebote, regelmäßige Vorlage eines Berichtes an den Deutschen Bundestag, verbunden mit Empfehlungen zur Beseitigung und Vermeidung von Benachteiligungen. Eine Zusammenarbeit ist gesetzlich vorgeschrieben mit den Beauftragten der Bundesregierung und des Deutschen Bundestages, deren Zuständigkeit berührt ist (zum Beispiel Integrationsbeauftragte, Behindertenbeauftragte), Nichtregierungsorganisationen sowie Einrichtungen, die auf europäischer, Bundes-, Landes- oder regionaler Ebene zum Schutz vor Benachteiligungen tätig sind."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/antidiskriminierungsstelle",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:03.965692+00:00",
+      "lastSeen": "2026-03-15T16:00:03.965692+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/antidiskriminierungsstelle"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/antidiskriminierungsstelle",
+        "crawledAt": "2026-03-15T16:00:03.965692Z",
+        "crawlId": "organizations-seeded-1773590403",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "cfb45fa0ec171bcad90e6530d0146ba79d5de91aa82d95e823dc239e13414fcc"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:03.967228+00:00"
+      }
+    },
+    {
+      "id": "1456b423-02c3-44c1-ae66-51bbd573ae63",
+      "title": "Beauftragter der Bundesregierung gegen Antiziganismus und für das Leben der Sinti und Roma in Deutschland",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Kontaktformular Mithilfe des Kontaktformulars können Sie dem Beauftragten der Bundesregierung gegen Antiziganismus und für das Leben der Sinti und Roma in Deutschland eine Nachricht zukommen lassen. Mithilfe des Kontaktformulars können Sie dem Beauftragten der Bundesregierung gegen Antiziganismus und für das Leben der Sinti und Roma in Deutschland eine Nachricht zukommen lassen. Kooperationsverbund gegen Antiziganismus Der Kooperationsverbund besteht aus fünf zivilgesllschaftlichen Akteure. Sie vernetzen die diverse Akteursstruktur bundesweit. So soll eine tragfähige Basis für die Arbeit gegen Antiziganismus geschaffen und zu Teilhabe sowie Empowerment von Sinti und Roma beigetragen werden. Der Kooperationsverbund besteht aus fünf zivilgesllschaftlichen Akteure. Sie vernetzen die diverse Akteursstruktur bundesweit. So soll eine tragfähige Basis für die Arbeit gegen Antiziganismus geschaffen und zu Teilhabe sowie Empowerment von Sinti und Roma beigetragen werden. Michael Brand gedachte gemeinsam mit Vertreterinnen und Vertretern der Zivilgesellschaft und dem Holocaust-Überlebenden Dieter Flack der im Holocaust ermordeten Sinti und Roma Europas. Die Bund-Länder-Kommission zur Bekämpfung von Antiziganismus und für das Leben der Sinti und Roma diskutierte am 5. Dezember Herausforderungen, Ansätze und Empfehlungen zur Antiziganismusprävention in der schulischen Bildung."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/antiziganismusbeauftragter-der-bundesregierung",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:04.464164+00:00",
+      "lastSeen": "2026-03-15T16:00:04.464164+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/antiziganismusbeauftragter-der-bundesregierung"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/antiziganismusbeauftragter-der-bundesregierung",
+        "crawledAt": "2026-03-15T16:00:04.464164Z",
+        "crawlId": "organizations-seeded-1773590404",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "6f076fe31acda0b130c35aab0a2d4827fd88d2946adb50c1feaa6578d8b11ceb"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:04.464164+00:00"
+      }
+    },
+    {
+      "id": "2aa994dc-ce00-4735-85eb-1bfee6bb7a5c",
+      "title": "Ausschuss für Mutterschutz",
+      "summary": {
+        "de": "Der Ausschuss für Mutterschutz besteht aus 15 Mitgliedern und befasst sich ehrenamtlich im Rahmen seiner gesetzlichen Zuständigkeit mit der Umsetzung des Mutterschutzgesetzes."
+      },
+      "content": {
+        "de": "In § 30 des Mutterschutzgesetzes wurde mit der Reform 2018 die Bildung des Ausschusses für Mutterschutz festgelegt. Seine Aufgabe ist es, praxisgerechte Regeln zu entwickeln, die es Arbeitgeberinnen und Arbeitgebern erleichtern, bei der Umsetzung des Mutterschutzes den jeweils aktuellen Stand der Technik, Arbeitsmedizin und Hygiene sowie sonstige gesicherte wissenschaftliche Erkenntnisse zu berücksichtigen. Es gehört auch zu den Aufgaben des Ausschusses, Art, Ausmaß und Dauer einer möglichen unverantwortbaren Gefährdung einer schwangeren oder stillenden Frau und ihres Kindes am Arbeitsplatz zu ermitteln. Der Ausschuss für Mutterschutz arbeitet eng mit den arbeitsschutzrechtlichen Ausschüssen des Bundesarbeitsministeriums zusammen. Die Mitglieder werden alle vier Jahre vom Bundesfamilienministerium im Einvernehmen mit dem Bundesarbeitsministerium, dem Bundesgesundheitsministerium und dem Bundesforschungsministerium berufen. Alle weiterführenden Informationen über den Ausschuss und Informationen zum Mutterschutz finden Sie hier. Die Geschäftsstelle des Ausschusses ist im Bundesamt für Familie und zivilgesellschaftliche Aufgaben (BAFzA) angesiedelt. Die Geschäftsstelle unterstützt den Ausschuss für Mutterschutz sowohl organisatorisch als auch fachlich. Die Geschäftsstelle ist für Fragen oder die Kontaktaufnahme mit dem Ausschuss erreichbar: Bundesamt für Familie und zivilgesellschaftliche Aufgaben Geschäftsstelle Ausschuss für Mutterschutz"
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/ausschuss-fuer-mutterschutz",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:04.964729+00:00",
+      "lastSeen": "2026-03-15T16:00:04.964729+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/ausschuss-fuer-mutterschutz"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/ausschuss-fuer-mutterschutz",
+        "crawledAt": "2026-03-15T16:00:04.964729Z",
+        "crawlId": "organizations-seeded-1773590404",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "782937c30a61cc2322443cea27b89cdb4d4cb60d9be954c3516e0a58524d5287"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:04.964729+00:00"
+      }
+    },
+    {
+      "id": "dfa26a59-32ff-472e-b83d-1a0a6c86f878",
+      "title": "Bundesamt für Familie und zivilgesellschaftliche Aufgaben (BAFzA)",
+      "summary": {
+        "de": "Das Bundesamt ist als selbstständige Bundesoberbehörde in vielen Themenbereichen tätig. Dazu zählt unter anderem die Durchführung des Bundesfreiwilligendienstes sowie Aufgaben im freiwilligen..."
+      },
+      "content": {
+        "de": "Das Bundesamt ist als selbstständige Bundesoberbehörde in vielen Themenbereichen tätig. Dazu zählt unter anderem die Durchführung des Bundesfreiwilligendienstes sowie Aufgaben im freiwilligen Engagement. Am 1. Oktober 1973 wurde das Bundesamt für den Zivildienst (BAZ) in Köln errichtet. Das Bundesamt hatte die Aufgabe den Zivildienst nach dem Zivildienstgesetz durchzuführen. Am 1. Januar 1984 übernahm das Bundesamt als zusätzliche Aufgabe die Prüfung und Entscheidung von Anträgen auf Anerkennung als Kriegsdienstverweigerer nach dem Kriegsdienstverweigerungsgesetz. Mit der Aussetzung der allgemeinen Wehr- und Zivildienstpflicht zum 1. Juli 2011 und der gleichzeitigen Einführung eines Bundesfreiwilligendienstes wurde das Bundesamt in Bundesamt für Familie und zivilgesellschaftliche Aufgaben (BAFzA) umbenannt und zu einer modernen Dienstleistungsbehörde mit einem großen und vielseitigen Aufgabenspektrum umstrukturiert. Inzwischen nehmen die mehr als 1500 Beschäftigten des BAFzA vielfältige Aufgaben aus dem Geschäftsbereich des Bundesfamilienministeriums wahr. Dies sind vor allem die gesetzlichen Aufgaben der Durchführung des Bundesfreiwilligendienstgesetzes, des Familienpflegezeitgesetzes und des Hilfetelefongesetzes, die Aufgaben als Geschäftsstelle der Conterganstiftung und als Geschäftsstelle des Fonds Sexueller Missbrauch sowie die Umsetzung verschiedener nationaler und ESF-Förderprogramme aus den Bereichen Kinder- und Jugend-, Familien- und Seniorenförderung. Postanschrift: Bundesamt für Familie und zivilgesellschaftliche Aufgaben, 50964 Köln Besucheranschrift: An den Gelenkbogenhallen 2-6, 50679 Köln Telefon: 0221/ 3673-0 Fax: 0221/ 3673-4661 E-Mail: service@bafza.bund.de"
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/bafza",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:05.466984+00:00",
+      "lastSeen": "2026-03-15T16:00:05.466984+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/bafza"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/bafza",
+        "crawledAt": "2026-03-15T16:00:05.466984Z",
+        "crawlId": "organizations-seeded-1773590405",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "48abf4acbb1c28b89f8c2a976d9abd000c728b09ac7d22fe1ad861b75a5075ac"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:05.466984+00:00"
+      }
+    },
+    {
+      "id": "ddfe6fd6-672e-4cf1-b7d7-c317b03a704b",
+      "title": "Beauftragte der Bundesregierung für die Akzeptanz sexueller und geschlechtlicher Vielfalt",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Kontaktformular Mithilfe des Kontaktformulars können Sie der Beauftragten der Bundesregierung für die Akzeptanz sexueller und geschlechtlicher Vielfalt eine Nachricht zukommen lassen. Mithilfe des Kontaktformulars können Sie der Beauftragten der Bundesregierung für die Akzeptanz sexueller und geschlechtlicher Vielfalt eine Nachricht zukommen lassen."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/beauftragte-der-bundesregierung-fuer-die-akzeptanz-sexueller-und-geschlechtlicher-vielfalt",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:06.011571+00:00",
+      "lastSeen": "2026-03-15T16:00:06.011571+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/beauftragte-der-bundesregierung-fuer-die-akzeptanz-sexueller-und-geschlechtlicher-vielfalt"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/beauftragte-der-bundesregierung-fuer-die-akzeptanz-sexueller-und-geschlechtlicher-vielfalt",
+        "crawledAt": "2026-03-15T16:00:06.011571Z",
+        "crawlId": "organizations-seeded-1773590406",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "1c7731bfdc63f70edc0a95d95c79844eed57658e4e8d70e89288686288eda446"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:06.011571+00:00"
+      }
+    },
+    {
+      "id": "a5ceb186-9d68-4416-b3b8-9053f0e6b9bf",
+      "title": "Beirat für den Bundesfreiwilligendienst",
+      "summary": {
+        "de": "Der Beirat für den Bundesfreiwilligendienst berät das Bundesfamilienministerium in Fragen des Bundesfreiwilligendienstes."
+      },
+      "content": {
+        "de": "Der Beirat tagt jährlich und besteht aus insgesamt 23 Mitgliedern, die für die Dauer von vier Jahren berufen werden. Zu den Mitgliedern gehören Vertreterinnen und Vertreter der Zentralstellen des Bundesfreiwilligendienstes, der Kirchen, der Arbeitnehmer- und Arbeitgeberorganisationen, der Länder und der kommunalen Spitzenverbände sowie sieben Bundessprecherinnen und Bundessprecher der Freiwilligen. Aufgaben und Zusammensetzung sind in § 15 des Gesetzes über den Bundesfreiwilligendienst (BFDG) geregelt. Der Beirat gewährleistet durch seine Besetzung eine praxisorientierte Beratung auf einer breiten gesellschaftlichen Basis und kann dem Bundesfamilienministerium dadurch Impulse für die weitere Entwicklung des Bundesfreiwilligendienstes geben."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/beirat-bundesfreiwilligendienst",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:06.462498+00:00",
+      "lastSeen": "2026-03-15T16:00:06.462498+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/beirat-bundesfreiwilligendienst"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/beirat-bundesfreiwilligendienst",
+        "crawledAt": "2026-03-15T16:00:06.462498Z",
+        "crawlId": "organizations-seeded-1773590406",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "183051aaeb792983a2011b29ff103abbb30528c8cac68573dfd4e8adda113b50"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:06.462498+00:00"
+      }
+    },
+    {
+      "id": "90781026-d6d4-4d4f-abf5-06e40a9f756e",
+      "title": "Wissenschaftlicher Beirat für Familienfragen",
+      "summary": {
+        "de": "Der Wissenschaftliche Beirat für Familienfragen berät das Bundesfamilienministerium unabhängig und ehrenamtlich in allen Fragen der Familienforschung und Familienpolitik."
+      },
+      "content": {
+        "de": "Der Beirat wurde in seiner jetzigen Form 1970 gegründet und ist damit eines der ältesten politischen Beratungsgremien der Bundesrepublik Deutschland. Er äußert sich eigenständig und unabhängig zu Schwerpunktfragen der Familienpolitik. Dazu zählen unter anderem Fragen zu Generationenbeziehungen, zur bildungspolitischen Bedeutung der Familie, zum Familienlastenausgleich oder auch zu Pflegefamilien und Migration. Die Bestimmung des jeweiligen Gegenstands der Beratungen nimmt der Beirat selbstständig vor, er trägt jedoch den Wünschen der Bundesfamilienministerin auf Beratung zu bestimmten Themen Rechnung. Im Beirat widmen sich aktuell 18 Wissenschaftlerinnen und Wissenschaftler aus verschiedenen Fachdisziplinen, die das Thema Familie als Arbeitsschwerpunkt haben, ehrenamtlich der wissenschaftlichen Politikberatung. Die Mitglieder werden auf Vorschlag des Beirats von der Bundesfamilienministerin berufen. Als neuestes Mitglied wurde Prof. Dr. Christina Boll vom Deutschen Jugendinstitut e.V. im Dezember 2024 in den Beirat berufen. Schuler-Harms, Prof. em. Dr., Margarete (Vorsitzende) Helmut Schmidt Universität/Universität der Bundeswehr Hamburg Professur für Öffentliches Recht, insbesondere Öffentliches Wirtschafts- und Umweltrecht Spieß, Prof. Dr., C. Katharina (Stellvertretende Vorsitzende) Bundesinstitut für Bevölkerungsforschung (BiB), Direktorin Johannes Gutenberg-Universität Mainz, Professur für Bevölkerungsökonomie Kreyenfeld, Prof. Dr., Michaela (Stellvertretende Vorsitzende) Hertie School Professor of Sociology"
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/beirat-familienfragen",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:06.975410+00:00",
+      "lastSeen": "2026-03-15T16:00:06.975410+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/beirat-familienfragen"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/beirat-familienfragen",
+        "crawledAt": "2026-03-15T16:00:06.975410Z",
+        "crawlId": "organizations-seeded-1773590406",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "c0e5cf4172eea2d9fc96b1208adac9c4bc19573e2f67fa6626061bffcda44d53"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:06.975410+00:00"
+      }
+    },
+    {
+      "id": "f63fa2f2-eda8-4658-b2c8-7c302819a758",
+      "title": "Bundesjugendkuratorium",
+      "summary": {
+        "de": "Das Bundesjugendkuratorium berät die Bundesregierung in grundsätzlichen Fragen der Jugendhilfe und in Querschnittsfragen der Kinder- und Jugendpolitik."
+      },
+      "content": {
+        "de": "Dem Bundesjugendkuratorium gehören bis zu 15 Sachverständige an, die für die Dauer einer Legislaturperiode des Deutschen Bundestages durch die Bundesministerin für Bildung, Familie, Senioren, Frauen und Jugend im Benehmen mit den anderen Bundesministerinnen und -ministern berufen werden. Das Kuratorium bezieht junge Menschen in geeigneter Weise in seine Beratungen ein. Die neue Berufung der Mitglieder des Bundesjugendkuratoriums erfolgt zeitnah. Aufgaben und Zusammensetzung sind im § 83 Abs. 2 SGB VIII Kinder- und Jugendhilfegesetz beziehungsweise in der Allgemeinen Verwaltungsvorschrift über das Bundesjugendkuratorium geregelt. Weitere Informationen zur Zusammensetzung des unabhängigen Beratungsgremiums sowie die veröffentlichten Stellungnahmen und Zwischenrufe können auf der Website des Bundesjugendkuratoriums eingesehen werdenDie Arbeit des Bundesjugendkuratoriums wird durch die vom Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend finanzierte Arbeitsstelle \"Kinder- und Jugendpolitik\" beim Deutschen Jugendinstitut e. V. unterstützt."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/bundesjugendkuratorium",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:07.468821+00:00",
+      "lastSeen": "2026-03-15T16:00:07.468821+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/bundesjugendkuratorium"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/bundesjugendkuratorium",
+        "crawledAt": "2026-03-15T16:00:07.468821Z",
+        "crawlId": "organizations-seeded-1773590407",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "7892e9a3900846df69159d9eabe3d7ca3312c4d68fd4723582b76c67b2033061"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:07.468821+00:00"
+      }
+    },
+    {
+      "id": "e2c15843-27ee-4a61-a26f-67896ef330df",
+      "title": "Bundeszentrale für Kinder- und Jugendmedienschutz",
+      "summary": {
+        "de": "Die Bundeszentrale für Kinder- und Jugendmedienschutz ist eine selbstständige Bundesoberbehörde im Geschäftsbereich des Bundesministeriums für Familie, Senioren, Frauen und Jugend (BMFSFJ). Ihre..."
+      },
+      "content": {
+        "de": "Die Bundeszentrale für Kinder- und Jugendmedienschutz (BzKJ) ist eine selbstständige Bundesoberbehörde im Geschäftsbereich des Bundesministeriums für Familie, Senioren, Frauen und Jugend (BMFSFJ) mit Dienstsitz in Bonn. Ihre Aufgaben ergeben sich aus dem Jugendschutzgesetz (JuSchG). Am 14. Juli 1953 trat das vom Deutschen Bundestag zur Stärkung des Kinder- und Jugendmedienschutzes beschlossene \"Gesetz über die Verbreitung jugendgefährdender Schriften\" (GjS) in Kraft. Mit der Durchführung der dort normierten Aufgaben wurde die neu geschaffene \"Bundesprüfstelle für jugendgefährdende Schriften\" (BPjS) betraut. Mit dem Informations- und Kommunikationsdienste-Gesetz (IuKDG) vom 22. Juli 1997 wurde die Zuständigkeit der BPjS für Teledienste normiert. Die Gesetzesabkürzung GjS stand von da an für \"Gesetz über die Verbreitung jugendgefährdender Schriften und Medieninhalte\" (GjS). Mit dem Jugendschutzgesetz (JuSchG) vom 23. Juli 2002 (BGBl. I S. 2730) wurden das \"Gesetz zum Schutze der Jugend in der Öffentlichkeit\" (JÖSchG) und das GjS zusammengefasst. Neben Verfahrensänderungen wurde unter anderem die BPjS in \"Bundesprüfstelle für jugendgefährdende Medien\" (BPjM) umbenannt. Mit Inkrafttreten des Zweiten Gesetzes zur Änderung des Jugendschutzgesetzes am 1. Mai 2021 wurde die BPjM schließlich zur heutigen \"Bundeszentrale für Kinder- und Jugendmedienschutz\" (BzKJ) mit einem deutlich erweiterten Aufgabenbereich weiterentwickelt: Die BzKJ ist weiterhin zuständig für die Indizierung jugendgefährdender Medien und unterhält hierfür eine entsprechende Prüfstelle. Des Weiteren ist die BzKJ umfangreich zuständig für die Förderung der Weiterentwicklung des Kinder- und Jugendmedienschutzes. Sie erfüllt eine Orientierungsfunktion für Eltern, Fachkräfte sowie Kinder und Jugendliche selbst. Zudem wacht die bei ihr verortete Stelle zur Durchsetzung von Kinderrechten in digitalen Diensten (KidD) über die Einhaltung struktureller Vorsorgemaßnahmen bei Online-Plattformen (zum Beispiel sichere Voreinstellungen, Melde- und Abhilfeverfahren) und ist zur Verhängung hoher Bußgelder (bis zu 50 Millionen Euro) befugt. Die Zuständigkeit der KidD erstreckt sich auf Online-Plattformen mit Sitz oder einer Vertretung in Deutschland. Sie kann auch außerhalb der Europäischen Union (EU) tätig werden, wenn Anbieter aus Drittstaaten keine gesetzliche Vertretung in der EU benannt haben. Für sehr große Angebote ist die EU-Kommission zuständig. Gesetzliche Grundlage sind der europäische Digital Services Act (DSA), das nationale Digitale-Dienste-Gesetz (DDG) und das deutsche Jugendschutzgesetz (JuSchG)."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/bzkj",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:07.988852+00:00",
+      "lastSeen": "2026-03-15T16:00:07.988852+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/bzkj"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/bzkj",
+        "crawledAt": "2026-03-15T16:00:07.988852Z",
+        "crawlId": "organizations-seeded-1773590407",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "0bc9b44956c448a407c06f1022045342c6e0ace394565d3f4b868aae4d010e03"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:07.988852+00:00"
+      }
+    },
+    {
+      "id": "1577c193-fa06-446b-bf59-a65d7dc57c81",
+      "title": "Koordinierungsstelle zur Umsetzung der \"UN-Dekade für Menschen afrikanischer Herkunft\"",
+      "summary": {
+        "de": "Die Generalversammlung der Vereinten Nationen hat die \"UN-Dekade für Menschen afrikanischer Herkunft\" ausgerufen. Alle Mitgliedstaaten - darunter auch Deutschland - sind aufgerufen, die Rechte..."
+      },
+      "content": {
+        "de": "Die Generalversammlung der Vereinten Nationen hat die \"UN-Dekade für Menschen afrikanischer Herkunft\" ausgerufen. Alle Mitgliedstaaten - darunter auch Deutschland - sind aufgerufen, die Rechte und die Anerkennung Menschen afrikanischer Herkunft zu fördern, Diskriminierung und Rassismus zu bekämpfen. Um einen Beitrag zur \"UN-Dekade für Menschen afrikanischer Herkunft\" zu leisten, hat die deutsche Bundesregierung eine Koordinierungsstelle zur Umsetzung der UN-Dekade eingerichtet. Mit der Koordinierungsstelle soll auf die Perspektiven und Lebenssituationen von Menschen afrikanischer Herkunft aufmerksam gemacht werden. Die \"UN-Dekade für Menschen afrikanischer Herkunft\" wurde 2015 durch die Generalversammlung der Vereinten Nationen ausgerufen. Die Mitgliedstaaten wurden damit aufgefordert, einen Beitrag zur Stärkung und Verwirklichung wirtschaftlicher, sozialer, kultureller und politischer Rechte von Schwarzen, afrikanischen und afrodiasporischen Menschen und deren gesellschaftlicher Teilhabe zu leisten. Die Bundesregierung hat sich im Rahmen des Kabinettsausschusses zur Bekämpfung von Rechtsextremismus und Rassismus zur Einrichtung einer Koordinierungsstelle zur Umsetzung der UN-Dekade verpflichtet. Das Bundesgleichstellungsministerium hat die Koordinierungsstelle gemeinsam mit dem Bundesministerium des Innern und für Heimat und der Beauftragten der Bundesregierung für Migration, Flüchtlinge und Integration am 25. Februar 2022 offiziell eingerichtet. Mit der Schaffung einer Koordinierungsstelle zur nationalen Unterstützung/Umsetzung der \"UN-Dekade für Menschen afrikanischer Herkunft\" möchte die Bundesregierung die verbleibende Zeit der Dekade nutzen, um den Fokus auf besondere Fragestellungen zur spezifischen Situation von Menschen afrikanischer Herkunft zu legen und um themenbezogene Aktivitäten der Bundesregierung, der Länder und weiterer Akteure, insbesondere der Zivilgesellschaft und der Wissenschaft zu bündeln. Die Koordinierungsstelle soll in den nächsten drei Jahren Veranstaltungen und Fachgespräche durchführen, die auf die Perspektiven und Lebenssituationen von Menschen afrikanischer Herkunft aufmerksam machen, Anti-Schwarzen Rassismus und damit zusammenhängende Diskriminierung in Gesellschaft und Strukturen adressieren und dieser entgegenwirken sowie das Empowerment von und für die Schwarze Community befördern. Ziel ist es ebenso, zu einer besseren Kenntnis und größeren Achtung der Vielfalt des Erbes und der Kultur von Menschen afrikanischer Herkunft beizutragen. Beides stellt eine Voraussetzung für die erfolgreiche Bekämpfung von Rassismus und Diskriminierung gegenüber Menschen afrikanischer Herkunft dar. Das Aktivitätenprogramm der UN-Dekade wird dabei die Arbeit der Koordinierungsstelle leiten. Die Koordinierungsstelle zur UN-Dekade soll eng mit Menschen afrikanischer Herkunft und Selbstorganisationen insbesondere aus der Schwarzen Community zusammenarbeiten."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/un-dekade",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:08.473001+00:00",
+      "lastSeen": "2026-03-15T16:00:08.473001+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/un-dekade"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/un-dekade",
+        "crawledAt": "2026-03-15T16:00:08.473001Z",
+        "crawlId": "organizations-seeded-1773590408",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "e4de13343d9a7f853ff735f3f54cc40aaefd650430299b15cf1282b54c806a54"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:08.473001+00:00"
+      }
+    },
+    {
+      "id": "e30faa13-b960-48bc-af7f-fa85f9a19e25",
+      "title": "Unabhängige Bundesbeauftragte gegen sexuellen Missbrauch von Kindern und Jugendlichen",
+      "summary": {
+        "de": "Die Unabhängige Bundesbeauftragte gegen sexuellen Missbrauch von Kindern und Jugendlichen (UBSKM) ist das Amt der Bundesregierung für die Anliegen von Betroffenen und deren Angehörigen und für..."
+      },
+      "content": {
+        "de": "Die Unabhängige Bundesbeauftragte gegen sexuellen Missbrauch von Kindern und Jugendlichen (UBSKM) ist das Amt der Bundesregierung für die Anliegen von Betroffenen und deren Angehörigen und für alle, die sich gegen sexuelle Gewalt engagieren. Die Unabhängige Bundesbeauftragte gegen sexuellen Missbrauch von Kindern und Jugendlichen (UBSKM) ist das Amt der Bundesregierung für die Anliegen von Betroffenen und deren Angehörigen, für Expertinnen und Experten aus Praxis und Wissenschaft sowie für alle Menschen in Politik und Gesellschaft, die sich gegen sexuelle Gewalt engagieren. Im März 2022 wurde Kerstin Claus das Amt der Unabhängigen Bundesbeauftragten übertragen. Seit dem 1. Juli 2025 ist das Amt durch das \" Gesetz zur Stärkung der Strukturen gegen sexuelle Gewalt an Kindern und Jugendlichen\" (BGBl. 2025 I Nr. 107 vom 08. April 2025) gesetzlich verankert. Kerstin Claus wurde 1969 in München geboren, ist Journalistin und seit 2015 in der Politik- und Strategieberatung im Themenbereich sexualisierter Gewalt gegen Kinder und Jugendliche tätig. Bevor sie das neue Amt antrat, war sie Mitglied im Betroffenenrat des UBSKM. Claus ist als Unabhängige Bundesbeauftragte nicht weisungsgebunden. Organisatorisch, personell und finanziell erfolgt die Anbindung beim Bundesfamilienministerium. Der Unabhängigen Bundesbeauftragten ist ein Arbeitsstab zugeordnet. Eintreten für die Belange und die Beteiligung von Menschen, die in ihrer Kindheit oder Jugend sexuelle Gewalt oder Ausbeutung erfahren oder erfahren haben, Entwicklung von Vorschlägen und Maßnahmen zur Verbesserung der Prävention und Intervention, Förderung des Zugangs zu Hilfe- und Unterstützungsleistungen,"
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/unabhaengige-beauftragte",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:08.971205+00:00",
+      "lastSeen": "2026-03-15T16:00:08.971205+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/unabhaengige-beauftragte"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/unabhaengige-beauftragte",
+        "crawledAt": "2026-03-15T16:00:08.971205Z",
+        "crawlId": "organizations-seeded-1773590408",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "151fe96a2cc62830cab11b55e8abd037860e03232bca7437ddf0512d02922264"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:08.971205+00:00"
+      }
+    },
+    {
+      "id": "23ef060c-3aec-4a74-8d99-dafa5783dd54",
+      "title": "Unabhängiger Beirat für die Vereinbarkeit von Pflege und Beruf",
+      "summary": {
+        "de": "Ein unabhängiger Beirat befasst sich ehrenamtlich mit Fragen der Vereinbarkeit von Pflege und Beruf und ihrer gesetzlichen Umsetzung. Mehr Informationen."
+      },
+      "content": {
+        "de": "Der unabhängige Beirat für die Vereinbarkeit von Pflege und Beruf besteht aus 21 Mitgliedern und befasst sich ehrenamtlich mit Fragen der Vereinbarkeit von Pflege und Beruf und ihrer gesetzlichen Umsetzung. Der Beirat für die Vereinbarkeit von Pflege und Beruf wurde 2015 durch das Bundesfamilienministerium eingesetzt. Er befasst sich als nicht öffentliches Gremium mit allgemeinen und spezifischen Fragen zur Vereinbarkeit von Pflege und Beruf. Als weitere Hauptaufgabe begleitet er die Umsetzung der einschlägigen gesetzlichen Regelungen - insbesondere des Pflegezeitgesetzes und des Familienpflegezeitgesetzes - und berät über deren Auswirkungen. Die Auswahl und Bearbeitung von Themenstellungen erfolgt selbstständig durch den Beirat, es können aber auch Themen zur Beratung durch das Bundesfamilienministerium vorgegeben werden. Die Beiratsmitglieder legen dem Bundesfamilienministerium alle vier Jahre einen Bericht vor. Den ersten Bericht hat der Beirat im Juni 2019 an das Bundesfamilienministerium übergeben. Der Bericht enthält Handlungsempfehlungen zur Weiterentwicklung der gesetzlichen Regelungen sowie eine Bestandsaufnahme bezüglich des Pflegezeitgesetzes und des Familienpflegezeitgesetzes. Zudem werden die im Beirat behandelten Themenstellungen und Ergebnisse beschrieben und Erkenntnisse von Sachverständigen, Auswertungen von Fachliteratur, Statistiken und Datensätzen sowie der Rechtsprechung dargelegt. Den zweiten Bericht hat der Beirat im Juli 2023 an das Bundesfamilienministerium übergeben. Kern des Berichts sind zukunftsweisende Empfehlungen zur Ausgestaltung einer praxistauglichen Familienpflegezeit und zur Einführung eines Familienpflegegelds für häuslich pflegende Erwerbstätige. Darüber hinaus enthält der Bericht wichtige Ausführungen zu Pflegenden in kleinen und mittelständischen Unternehmen und auch zu den herausfordernden Vereinbarkeitserfordernissen von Angehörigen, die pflegebedürftige Kinder, Jugendliche und junge Erwachsene versorgen. Der Beirat besteht aus 21 Mitgliedern, die sich aus Vertreterinnen oder Vertretern der fachlich betroffenen Interessenverbände, der Gewerkschaften, der Arbeitgeber, der Wohlfahrtsverbände und der Seniorenorganisationen sowie der sozialen und der privaten Pflege-Pflichtversicherung zusammensetzen. Des Weiteren gehören dem Beirat Wissenschaftlerinnen und Wissenschaftler, Vertreterinnen und Vertreter der Konferenz der Ministerinnen und Minister, Senatorinnen und Senatoren für Jugend und Familie, der Konferenz der Ministerinnen und Minister, Senatorinnen und Senatoren für Arbeit und Soziales sowie der kommunalen Spitzenverbände an. Die Vorsitzende des Beirats ist die Sozialwissenschaftlerin und Gerontologin Frau Prof. Dr. Annette Franke, stellvertretender Vorsitzender ist der Familien- und Gesundheitssoziologe Prof. Dr. Christian Deindl. Eine detaillierte Übersicht zur Arbeit des Beirates finden Sie hier. Unter anderem ist dort auch der erste Bericht des Beirates in zwei Sprachen verfügbar."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/unabhaengiger-beirat-fuer-die-vereinbarkeit-von-pflege-und-beruf-108568",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:11:43.243297+00:00",
+      "lastSeen": "2026-03-15T16:11:43.243297+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/unabhaengiger-beirat-fuer-die-vereinbarkeit-von-pflege-und-beruf-108568"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/unabhaengiger-beirat-fuer-die-vereinbarkeit-von-pflege-und-beruf-108568",
+        "crawledAt": "2026-03-15T16:11:43.243297Z",
+        "crawlId": "organizations-seeded-1773591103",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "10d5084f5b004080823c649efbb1160e1094fdf9597ed127ec6254ca00c37133"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:11:43.243297+00:00"
+      }
+    },
+    {
+      "id": "844be8b1-bbfd-40d2-8b79-8bd7023c0fae",
+      "title": "Berichte der Bundesregierung",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/berichte-der-bundesregierung",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:09.475426+00:00",
+      "lastSeen": "2026-03-15T16:00:09.475426+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/berichte-der-bundesregierung"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/berichte-der-bundesregierung",
+        "crawledAt": "2026-03-15T16:00:09.475426Z",
+        "crawlId": "organizations-seeded-1773590409",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "7ae2ebfe33523a234e101152d98e5d5c2a181ad29d4ec95a03b4e4160ca10bda"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:09.475426+00:00"
+      }
+    },
+    {
+      "id": "f26ddb3c-848a-4906-896b-cf349d0fdbe9",
+      "title": "Besucherdienst",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Der Besucherdienst ist ein Angebot des Bundesministeriums für Bildung, Familie, Senioren, Frauen und Jugend. Er informiert Bürgerinnen und Bürger über die Struktur und Aufgaben des Ministeriums in den Politikbereichen Familie, Ältere Menschen, Gleichstellung, Kinder und Jugend, Demokratie und Engagement. Anmeldungen sind nur für Gruppen möglich. Einzelanmeldungen können aus organisatorischen Gründen leider nicht bearbeitet werden."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/besucherdienst",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:10.051093+00:00",
+      "lastSeen": "2026-03-15T16:00:10.051093+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/besucherdienst"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/besucherdienst",
+        "crawledAt": "2026-03-15T16:00:10.051093Z",
+        "crawlId": "organizations-seeded-1773590410",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "742cc063d43b22fd0fcc0d0613af6c84925ae3613434a45a6eabdbfc7deb625b"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:10.051093+00:00"
+      }
+    },
+    {
+      "id": "41415069-22cf-461a-a8b4-bfb1e9ab46c5",
+      "title": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend als Arbeitgeber",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Stellenangebote Aktuelle Stellenangebote des Bundesministeriums für Bildung, Familie, Senioren, Frauen und Jugend. Aktuelle Stellenangebote des Bundesministeriums für Bildung, Familie, Senioren, Frauen und Jugend. Praktikum und juristisches Referendariat Das Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend ermöglicht Studierenden ein vorgeschriebenes Pflichtpraktikum und bietet ein juristisches Referendariat an. Das Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend ermöglicht Studierenden ein vorgeschriebenes Pflichtpraktikum und bietet ein juristisches Referendariat an. Ausbildung Das Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend stellt jedes Jahr neue Auszubildende für den Ausbildungsberuf der Kauffrau und des Kaufmannes für Büromanagement ein. Das Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend stellt jedes Jahr neue Auszubildende für den Ausbildungsberuf der Kauffrau und des Kaufmannes für Büromanagement ein."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:10.535515+00:00",
+      "lastSeen": "2026-03-15T16:00:10.535515+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber",
+        "crawledAt": "2026-03-15T16:00:10.535515Z",
+        "crawlId": "organizations-seeded-1773590410",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "dea2c8326637b7b5c48c231d578ec41c34c32126d395c8bc8c0e61174d27a536"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:10.535515+00:00"
+      }
+    },
+    {
+      "id": "6390e2e2-7d45-411d-b8bd-6d0817908a72",
+      "title": "Aktionsplan zur Umsetzung der UN-Behindertenrechtskonvention",
+      "summary": {
+        "de": "Mit einem Aktionsplan zur UN-Behindertenrechtskonvention möchte das Bundesfamilienministerium dazu beitragen, dass auch den Beschäftigten mit Behinderung eine selbstbestimmte und..."
+      },
+      "content": {
+        "de": "Mit einem Aktionsplan zur UN-Behindertenrechtskonvention möchte das Bundesfamilienministerium dazu beitragen, dass auch den Beschäftigten mit Behinderung eine selbstbestimmte und gleichberechtigte Teilhabe möglich ist. Ziel der UN-Behindertenrechtskonvention ist es, Menschen mit Behinderung die Teilhabe an allen gesellschaftlichen Prozessen zu garantieren. Die UN-Behindertenrechtskonvention ist seit dem Jahr 2009 in Deutschland verbindlich. Das Bundeskabinett hat im Jahr 2011 den Aktionsplan zur Umsetzung der UN-Behindertenkonvention \"Auf dem Weg in eine inklusive Gesellschaft\" beschlossen. Mit diesem Aktionsplan sollen zugleich auch Länder, Kommunen, Unternehmen der Privatwirtschaft und andere angeregt werden, in ihren eigenen Kompetenzbereichen eigene Aktionspläne zur Umsetzung der Behindertenrechtskonvention zu entwickeln. Das Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend greift diese Anregung mit einem Aktionsplan auf und gestaltet damit aktiv den Weg von der Integration zur Inklusion. Bereits seit dem Jahr 2002 gibt es im Bundesfamilienministerium die Vereinbarung zur Integration schwerbehinderter Menschen und damit zahlreiche Regelungen zur Gleichberechtigung Beschäftigter mit Behinderung. In Abkehr vom Gedanken der Integration gibt es jedoch viele Bereiche, in denen die UN-Konvention heute weiter geht und dem Gedanken der Inklusion wichtige Impulse gibt. Ausgehend von dieser Basis wurden Handlungsfelder identifiziert, in denen konkrete Maßnahmen das Ziel der Inklusion in den Vordergrund stellen und damit dazu beitragen, dass allen, auch den Beschäftigten mit Behinderung in allen Bereichen eine selbstbestimmte und gleichberechtigte Teilhabe möglich ist."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/aktionsplan-behindertenrechtskonvention",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:11.031879+00:00",
+      "lastSeen": "2026-03-15T16:00:11.031879+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/aktionsplan-behindertenrechtskonvention"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/aktionsplan-behindertenrechtskonvention",
+        "crawledAt": "2026-03-15T16:00:11.031879Z",
+        "crawlId": "organizations-seeded-1773590411",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "c8f6116bfd187735e36b43fecf6eab03466e9d4d55e82772a164c0b6a28ca36f"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:11.031879+00:00"
+      }
+    },
+    {
+      "id": "ed75c590-b7fc-4e9b-be56-20208992f56a",
+      "title": "Duale Berufsausbildung zur Kauffrau und zum Kaufmann für Büromanagement",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Deine Ausbildung im Bundesministerium für Familie, Senioren, Frauen und Jugend Die Ausbildung im Bundesministerium für Familie, Senioren, Frauen und Familie bietet Dir viele Vorteile. Ein Überblick. Die Ausbildung im Bundesministerium für Familie, Senioren, Frauen und Familie bietet Dir viele Vorteile. Ein Überblick. Deine Bewerbung beim Bundesministerium für Familie, Senioren, Frauen und Jugend Was Du für Deine Bewerbung brauchst, wer Deine Ansprechpersonen sind und wie das Bewerbungsverfahren abläuft, erfährst Du hier. Was Du für Deine Bewerbung brauchst, wer Deine Ansprechpersonen sind und wie das Bewerbungsverfahren abläuft, erfährst Du hier. Aktuelle Stellenausschreibungen Jährlich werden neue Auszubildende für den Beruf der Kaufleute für Büromanagement gesucht. Wenn es neue Stellenausschreibungen gibt, findest du diese hier. Jährlich werden neue Auszubildende für den Beruf der Kaufleute für Büromanagement gesucht. Wenn es neue Stellenausschreibungen gibt, findest du diese hier."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/ausbildung",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:11.549766+00:00",
+      "lastSeen": "2026-03-15T16:00:11.549766+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/ausbildung"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/ausbildung",
+        "crawledAt": "2026-03-15T16:00:11.549766Z",
+        "crawlId": "organizations-seeded-1773590411",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "11558975e414d08473aa3d6b64f9b8f1615679fa3d61b47f1be969bfbc7267de"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:11.549766+00:00"
+      }
+    },
+    {
+      "id": "4d9e7a46-9610-40b9-892b-038b6df8a53b",
+      "title": "Stellenangebote",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/ausschreibungen",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:12.103674+00:00",
+      "lastSeen": "2026-03-15T16:00:12.103674+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/ausschreibungen"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/ausschreibungen",
+        "crawledAt": "2026-03-15T16:00:12.104674Z",
+        "crawlId": "organizations-seeded-1773590412",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "0b1c26703ab5461fc2df49669a3ac7cbbbdb89df61c6535c64bffb938abcadd4"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:12.104674+00:00"
+      }
+    },
+    {
+      "id": "81a510bf-09cd-4efe-9a1d-adbb1caa6cbe",
+      "title": "Veröffentlichung nach § 6 Abs. 1 Bundesgremienbesetzungsgesetz",
+      "summary": {
+        "de": "Die Veröffentlichung nach dem Bundesgremienbesetzungsgesetz schafft Transparenz und soll die Fortschritte des Bundes über die Besetzung der Gremien mit Frauen und Männern abbilden."
+      },
+      "content": {
+        "de": "Das Bundesgremienbesetzungsgesetz sieht vor, dass die Institutionen des Bundes auf ihrer Internetseite eine Aufstellung über ihre Aufsichts- und wesentlichen Gremien sowie über die Anzahl der durch den Bund zu bestimmenden Mitglieder veröffentlichen. Die aktuelle Veröffentlichung des Bundesministeriums für Bildung, Familie, Senioren, Frauen und Jugend (Stand Dezember 2024) ist hier zu finden. Wie hoch der Frauenanteil in den Gremien der übrigen Bundesressorts ist, kann in einer interaktiven Anwendung des Bundesfamilienministeriums nachvollzogen werden. Das neue Bundesgremienbesetzungsgesetz ist am 1. Mai 2015 in Kraft getreten und als Artikel 1 im Gesetz für die gleichberechtigte Teilhabe von Frauen und Männern an Führungspositionen in der Privatwirtschaft und im öffentlichen Dienst verankert."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/bundesgremiengesetz",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:12.573403+00:00",
+      "lastSeen": "2026-03-15T16:00:12.573403+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/bundesgremiengesetz"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/bundesgremiengesetz",
+        "crawledAt": "2026-03-15T16:00:12.573403Z",
+        "crawlId": "organizations-seeded-1773590412",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "4c2728b929d7bedc4f4d07d363ba443b6190544c726e0d02598509b3d569ac98"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:12.573403+00:00"
+      }
+    },
+    {
+      "id": "5cc9b3c0-912d-4d87-af64-60a6c14f91d3",
+      "title": "Das Bundesfamilienministerium als familienfreundlicher Arbeitgeber",
+      "summary": {
+        "de": "Auch als Arbeitgeber ist das Bundesfamilienministerium dem Ziel der Vereinbarkeit von Familie und Beruf verpflichtet. In den vergangenen Jahren wurde das Angebot familienfreundlicher Maßnahmen..."
+      },
+      "content": {
+        "de": "Auch als Arbeitgeber ist das Bundesfamilienministerium dem Ziel der Vereinbarkeit von Familie und Beruf verpflichtet. In den vergangenen Jahren wurde das Angebot familienfreundlicher Maßnahmen kontinuierlich weiterentwickelt. Die bessere Vereinbarkeit von Beruf und Familie ist ein zentraler Gegenstand der gesellschaftspolitischen Agenda des Bundesministeriums für Bildung, Familie, Senioren, Frauen und Jugend. Auch als Dienststelle und für das Bundesgleichstellungsgesetz federführendes Ressort ist das Bildungs- und Familienministerium dem Ziel der Vereinbarkeit von Familie und Beruf verpflichtet und geht mit gutem Beispiel voran. In den vergangenen Jahren wurde das Angebot familien- lebensphasenbewusster Maßnahmen kontinuierlich ausgebaut. Am 17. Juni 2025 ist das Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend zum siebten Mal mit dem audit berufundfamilie ausgezeichnet worden. Damit trägt das Ministerium dieses Gütesiegel, das für eine familienfreundliche Personalpolitik verliehen wird, bereits seit mehr als zwanzig Jahren. Das von der gemeinnützigen Hertie-Stiftung entwickelte Audit ist ein Instrument zur kontinuierlichen Verbesserung einer familien- und lebensphasenbewussten Personalpolitik. Zertifizierte Unternehmen und Behörden stellen sich in regelmäßigen Abständen erneut einem Überprüfungsverfahren, mit dem Ziel einer langfristigen Implementierung. In den vergangenen Jahren wurde das bestehende Angebot familienfreundlicher Maßnahmen im Bildungs- und Familienministerium kontinuierlich weiterentwickelt. Zu nennen sind insbesondere folgende Schwerpunkte: Mit der mobilen und flexiblen Arbeit schafft das Bundesbildungs- und -familienministerium die Rahmenbedingungen für eine möglichst optimale Vereinbarkeit von Beruf und Privatleben, stärkt die Motivation und Leistungsbereitschaft aller Mitarbeitenden und ist Vorbild für vereinbarkeitsorientierte Arbeitsbedingungen innerhalb der Bundesverwaltung."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/familienfreundlicher-arbeitgeber",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:13.030215+00:00",
+      "lastSeen": "2026-03-15T16:00:13.030215+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/familienfreundlicher-arbeitgeber"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/familienfreundlicher-arbeitgeber",
+        "crawledAt": "2026-03-15T16:00:13.030215Z",
+        "crawlId": "organizations-seeded-1773590413",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "37a7d06e6c2a3b251a0d3f310697d3f995d6b8d6338c24e4a96ebe53e92f4484"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:13.030215+00:00"
+      }
+    },
+    {
+      "id": "bdc35056-e3a5-4d62-adb8-daba87af02da",
+      "title": "Praktikum und juristisches Referendariat",
+      "summary": {
+        "de": "Das Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend ermöglicht Studierenden ein vorgeschriebenes Pflichtpraktikum und bietet ein juristisches Referendariat an."
+      },
+      "content": {
+        "de": "Das Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend (BMBFSFJ) ermöglicht Studierenden ein nach der Hochschul- beziehungsweise Studienordnung vorgeschriebenes Pflichtpraktikum. Bitte benennen Sie für Ihr beabsichtigtes Praktikum den gewünschten Einsatzbereich mit Einsatzort (Berlin/Bonn). Die Fachabteilungen des Bundesministerium für Familie, Senioren, Frauen und Jugend finden Sie im Organisationsplan. Bitte richten Sie Ihre Bewerbung per E-Mail an: Praktika@bmbfsfj.bund.de. Aus organisatorischen Gründen sollte Ihre Bewerbung mindestens sechs Monate vor Praktikumsbeginn eingereicht werden. Für ein Praktikum wird eine steuerpflichtige Aufwandsentschädigung in Höhe von 450 Euro pro Kalendermonat gezahlt. Das Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend hat besonderes Interesse an der Beschäftigung von Rechtsreferendarinnen und Rechtsreferendaren über einen Zeitraum von drei Monaten."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/praktika",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:00:13.534460+00:00",
+      "lastSeen": "2026-03-15T16:00:13.534460+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/praktika"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/bmbfsfj-als-arbeitgeber/praktika",
+        "crawledAt": "2026-03-15T16:00:13.534460Z",
+        "crawlId": "organizations-seeded-1773590413",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "4141f7ea121772f5229b6c85513659ace034316231b2f55d92f6f5dee43cd2bf"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:13.534460+00:00"
+      }
+    },
+    {
+      "id": "3ea1d104-1fbd-43bf-bf5a-31f2501ab6c5",
+      "title": "Geschichte des Ministeriums",
+      "summary": {
+        "de": "Die Geschichte des für Familien zuständigen Bundesministeriums ist vielfältig - deshalb lohnt sich ein Blick auf all jene, die als Ministerin und Minister in den vergangenen Jahrzehnten in der..."
+      },
+      "content": {
+        "de": "Die Geschichte des für Familien zuständigen Bundesministeriums ist vielfältig - deshalb lohnt sich ein Blick auf all jene, die als Ministerin und Minister in den vergangenen Jahrzehnten in der Bundesregierung politisch für die Belange und Bedürfnisse der Familien Verantwortung getragen haben. Anne Spiegel bekleidete das Amt der Bundesministerin für Familie, Senioren, Frauen und Jugend von Dezember 2021 bis April 2022. In dieser Zeit gab sie den Anstoß für eine Kindergrundsicherung. Diese bündelt familienpolitische Leistungen und verbessert so die Chancen für alle Kinder. Als ersten Meilenstein brachte die Grünen-Politikerin einen Sofortzuschlag von monatlich 20 Euro pro Kind auf den Weg. Ebenfalls in Anne Spiegels Amtszeit fiel die Streichung des § 219a Strafgesetzbuch. Damit entfiel die strafrechtliche Verfolgung von Ärztinnen und Ärzten, die dazu informieren, dass sie Schwangerschaftsabbrüche vornehmen und welche Methoden sie dafür anwenden. Denn Schwangere, die überlegen, die Schwangerschaft abzubrechen, brauchen individuelle Beratung und Unterstützung - und keine Verbote. Mit Beginn des Krieges Russlands gegen die Ukraine im Februar 2022 setzte Anne Spiegel sich insbesondere für die gute Unterbringung von geflüchteten Heim- und Waisenkindern und den Schutz von geflüchteten Frauen ein. Christine Lambrecht, SPD, wurde im Mai 2021 zur Bundesministerin für Familie, Senioren, Frauen und Jugend ernannt. Sie übernahm diese Funktion zusätzlich zu ihrem Amt als Bundesministerin für Justiz und Verbraucherschutz. Bund und Länder einigten sich unter der Leitung von Bundesfamilien- und -justizministerin Christine Lambrecht auf die schrittweise Einführung eines Rechtsanspruchs auf Ganztagsbetreuung für Grundschulkinder ab 2026. Einen weiteren Schwerpunkt ihrer Arbeit bildete die Umsetzung des Aktionsprogramms \"Aufholen nach Corona für Kinder- und Jugendliche\". Während ihrer gut halbjährigen Amtszeit trat darüber hinaus das Zweite Führungspositionen-Gesetz in Kraft, an dessen Erarbeitung sie als Bundesjustizministerin mitgewirkt hatte. \"Damit es jedes Kind packt!\" - mit diesem Ziel gestaltete Franziska Giffey ihre Arbeit für Kinder und Familien. Im Jahr 2018 übernahm die Sozialdemokratin das Amt der Bundesministerin für Familie, Senioren, Frauen und Jugend."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/geschichte",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:11:35.708785+00:00",
+      "lastSeen": "2026-03-15T16:11:35.708785+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/geschichte"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/geschichte",
+        "crawledAt": "2026-03-15T16:11:35.708785Z",
+        "crawlId": "organizations-seeded-1773591095",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "fed26adefbda69f0e3012ff512a3c8257081ecdfa6c5a3744c09c6d7ecab0f09"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:11:35.708785+00:00"
+      }
+    },
+    {
+      "id": "12b11b57-76e0-4490-9722-fe5b33a16183",
+      "title": "Inklusion",
+      "summary": {
+        "de": "Das Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend trägt dazu bei, eine inklusive Gesellschaft mitzugestalten."
+      },
+      "content": {
+        "de": "Inklusion bedeutet, die gleichberechtigte Teilhabe eines jeden Menschen am gesellschaftlichen Leben zu sichern. Und zwar vom frühen Lebensbeginn an bis ins hohe Lebensalter, unabhängig vom Grad eines eventuellen Hilfebedarfs. Das Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend nimmt hierbei die unterschiedlichen Bevölkerungsgruppen in den Blick, vor allem Kinder und Jugendliche, Familien, Frauen und ältere Menschen. Die Achtung der Würde jedes Menschen und die Gewährleistung von Teilhabe sind Grundvoraussetzungen, um die Menschenrechte aller zu sichern. Die Förderung von Chancengleichheit sowie eine Gleichbehandlung aller Menschen gelten als Voraussetzungen für die Sicherstellung der Teilhabe behinderter Menschen. Daher verbietet das Grundgesetz der Bundesrepublik Deutschland in Artikel 3 Benachteiligungen aufgrund einer Behinderung. Nach Schätzungen leben weltweit mehr als eine Milliarde Menschen mit einer Behinderung. Das entspricht etwa 16 Prozent der gesamten Weltbevölkerung. Die Generalversammlung der Vereinten Nationen hat 2001 beschlossen, dass Vorschläge für ein umfassendes internationales Übereinkommen zur Förderung und zum Schutz der Rechte von Menschen mit Behinderungen entwickelt werden sollen. Am 3. Mai 2008 trat das Übereinkommen der Vereinten Nationen über die Rechte von Menschen mit Behinderungen (UN-Behindertenrechtskonvention, kurz UN-BRK) in Kraft. In Deutschland ist die UN-BRK seit 2009 verbindlich. Die UN-BRK schafft keine Sonderrechte, sondern konkretisiert und spezifiziert die universellen Menschenrechte aus der Perspektive der Menschen mit Behinderungen vor dem Hintergrund ihrer Lebenslagen, die im Menschenrechtsschutz Beachtung finden müssen. Dazu greift sie auf die Allgemeine Erklärung der Menschenrechte sowie auf die wichtigsten Menschenrechtsverträge der Vereinten Nationen zurück und formuliert zentrale Bestimmungen dieser Dokumente für die Lebenssituation von Menschen mit Behinderungen. Zur konkreten Umsetzung der UN-BRK hat die Bundesregierung unter Einbeziehung der Zivilgesellschaft einen Nationalen Aktionsplan erarbeitet, der die Ziele und Maßnahmen der Bundesregierung in einer Gesamtstrategie zusammenfasst. Derzeit befindet sich bereits die zweite Auflage des Nationalen Aktionsplans zur UN-Behindertenrechtskonvention (NAP 2.0) in der Umsetzung und trägt dazu bei, Inklusion als in allen Lebensbereichen zu berücksichtigendes Prinzip durchzusetzen. Der NAP 2.0 setzt auf den ersten Aktionsplan aus dem Jahr 2011 auf und ist als dynamisches Instrument zu verstehen, denn seine Maßnahmen werden regelmäßig fortgeschrieben. Die Ziele Teilhabe, Selbstbestimmung und vollständige Gleichstellung werden durch unterschiedliche Maßnahmen gefördert, um alle Menschen zu befähigen, ihr Leben selbstbestimmt nach den eigenen Vorstellungen und Wünschen führen zu können. Das Bundesbildungs- und -familienministerium hat, neben dem für Inklusion federführend zuständigen Bundesministerium für Arbeit und Soziales, dabei die meisten Maßnahmen in Umsetzung. Zu den Maßnahmen des Bundesbildungs- und -familienministeriums gehört das Familienportal, auf welchem alle relevanten Informationen zu staatlichen Familienleistungen, gesetzlichen Regelungen und Unterstützungsmöglichkeiten gebündelt sind. Es orientiert sich an den unterschiedlichen Lebenslagen von Familien, darunter befindet sich auch die Lebenslage \"Leben mit Behinderung\". Daneben fördert das Bundesbildungs- und -familienministerium das Projekt \" Politische Interessenvertretung behinderter Frauen im Kontext Intersektionalität, Sexismus, Ableismus und Gewaltschutz \" des Vereins Weibernetz. Durch die Förderung des Projektes werden neue Impulse gesetzt, um die Lebenssituation von Frauen mit Beeinträchtigungen zu verbessern. Eine weitere Maßnahme ist die beauftragte Studie zu Gewalterfahrungen von Menschen mit Behinderungen in Werkstätten und in Einrichtungen. Die Abschlussberichte enthalten die Ergebnisse der quantitativen und qualitativen Befragungen sowie Handlungsempfehlungen und Beispiele guter Praxis zur Verbesserung des Gewaltschutzes."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/inklusion",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:11:37.199068+00:00",
+      "lastSeen": "2026-03-15T16:11:37.199068+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/inklusion"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/inklusion",
+        "crawledAt": "2026-03-15T16:11:37.199068Z",
+        "crawlId": "organizations-seeded-1773591097",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "47da9ad92de0f83ae390f64250e17242afe20f424f78464358486dc2c616dffd"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:11:37.199068+00:00"
+      }
+    },
+    {
+      "id": "2d2f174b-e4ec-4bc9-8ff3-bd1a28341c9e",
+      "title": "Korruptionsprävention",
+      "summary": {
+        "de": "Korruption ist ein Thema, welches in der täglichen Arbeit auf den ersten Blick kaum oder gar nicht relevant erscheint. Dabei verläuft Korruption in der Regel unbemerkt, hat viele Facetten und..."
+      },
+      "content": {
+        "de": "Korruption ist ein Thema, welches in der täglichen Arbeit auf den ersten Blick kaum oder gar nicht relevant erscheint. Dabei verläuft Korruption in der Regel unbemerkt, hat viele Facetten und bedeutet schwerwiegende Konsequenzen für alle Beteiligten. Im Bereich der öffentlichen Verwaltung führt Korruption zu hohen materiellen Schäden, weniger Effizienz des Verwaltungshandelns und auch zu immateriellen Auswirkungen wie Vertrauensverlust der Bürgerinnen und Bürger in die Verwaltung. Die für alle Bundesministerien verpflichtende \"Richtlinie der Bundesregierung zur Korruptionsprävention in der Bundesverwaltung vom 30. Juli 2004\" ist Basis und Ausgangspunkt der Korruptionspräventionsarbeit im Bundesfamilienministerium und wird durch das Konzept \"Korruptionsmanagement im Bundesfamilienministerium\" konkret umgesetzt. Dieses umfasst eine ganzheitliche und systematische Präventionsstrategie sowie ein entsprechendes Risikomanagementsystem. Das Risikomanagementsystem sieht unter anderem die Umsetzung von risikominimierenden beziehungsweise risikoabsichernden Präventionsmaßnahmen vor. Eine wesentliche organisatorische Präventionsmaßnahme stellt hierbei die Bestellung einer Ansprechperson für Korruptionsprävention gemäß Nr. 5 der \"Richtlinie der Bundesregierung zur Korruptionsprävention in der Bundesverwaltung vom 30. Juli 2004\" dar. Die Ansprechperson für Korruptionsprävention hat ein unmittelbares Vortragsrecht bei der Behördenleitung. Sollten Sie begründete Hinweise oder Verdachtsmomente auf Angelegenheiten beziehungsweise Abläufe in Bezug auf korruptives Verhalten von Beschäftigten des Bundesfamilienministeriums haben, nimmt die Ansprechperson für Korruptionsprävention im Bundesfamilienministerium diese per E-Mail vertraulich entgegen. Der Zugriff auf dieses Mailpostfach erfolgt ausschließlich durch die Ansprechperson. Ein Zugriff durch Dritte (beispielsweise Vertretungen) ist nicht möglich. Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend Ansprechperson für Korruptionsprävention Doreen Herz 10117 Berlin"
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/korruptionspraevention",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:11:37.671302+00:00",
+      "lastSeen": "2026-03-15T16:11:37.671302+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/korruptionspraevention"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/korruptionspraevention",
+        "crawledAt": "2026-03-15T16:11:37.672299Z",
+        "crawlId": "organizations-seeded-1773591097",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "7351129cd2f0a6fc1aeae05ff530a85a5c2f1467f4edf37b6e905474f99454b7"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:11:37.672299+00:00"
+      }
+    },
+    {
+      "id": "a27638ca-7ad3-4d91-9042-64f088e4ca1a",
+      "title": "Ressortforschung",
+      "summary": {
+        "de": "Politik braucht wissensbasierte Beratung. Eine besondere Stellung nehmen dabei die Einrichtungen mit Ressortforschungsaufgaben ein. Sie sind besonders praxisnah und interdisziplinär ausgerichtet."
+      },
+      "content": {
+        "de": "Die Forschungs- und Entwicklungsaktivitäten des Bundes werden als \"Ressortforschung\" bezeichnet. An der Schnittstelle von Wissenschaft und Politik ist Ressortforschung besonders praxisnah und interdisziplinär ausgerichtet. Gleichzeitig werden in der Ressortforschung wissenschaftliche Fragestellungen auch langfristig und kontinuierlich bearbeitet. Damit bildet sie eine unverzichtbare Grundlage für viele politische Entscheidungen. Der Ressortforschung des Bundesministeriums für Bildung, Familie, Senioren, Frauen und Jugend kommt aufgrund seines gesellschaftspolitischen Auftrages eine besondere Bedeutung zu. Sie hat das Ziel, Datenlücken zu schließen, fachliche Fragestellungen zu beantworten und politische Entscheidungen sowie Gesetzesvorhaben vorzubereiten. Das Deutsche Jugendinstitut e.V. (DJI) ist europaweit eines der größten außeruniversitären sozialwissenschaftlichen Forschungsinstitute. Der Schwerpunkt liegt in der anwendungsorientierten Forschung sowie der Politikberatung zu Lebensverhältnissen von Kindern, Jugendlichen und Familien. Die Themen sind vielfältig: sie reichen von Fragen der Kinderbetreuung, des Kinderschutzes über Fragen der Jugendkriminalität, des sexuellen Missbrauchs bis hin zu Trennungsfamilien oder der Entwicklung von Ganztagsschulen. Teil der Politikberatung sind zum Beispiel die Kinder- und Jugendberichte. Sie werden von unabhängigen Sachverständigenkommissionen erstellt, die von der Bundesregierung berufen und vom DJI fachlich begleitet werden. Träger des 1963 gegründeten Instituts ist ein gemeinnütziger Verein mit Mitgliedern aus Politik, Wissenschaft, Verbänden und Einrichtungen der Kinder-, Jugend- und Familienhilfe. Das DJI wird institutionell durch das Bundesfamilienministerium gefördert, auch die Bundesländer sind zu einem geringeren Anteil am Haushalt beteiligt. Hinzu kommen zahlreiche Projekte des Ministeriums, anderer Bundes- und Landesministerien sowie weiterer Förderer. Das DJI wächst kontinuierlich: Inzwischen arbeiten mehr als 360 Beschäftigte, davon über 235 Wissenschaftlerinnen und Wissenschaftler, am Hauptsitz in München und an den Außenstellen in Halle/Saale und Leipzig. Das 1974 gegründete Deutsche Zentrum für Altersfragen e.V. (DZA) ist als Forschungsinstitut auf dem Gebiet der sozial- und verhaltenswissenschaftlichen Gerontologie tätig. Als Gerontologie wird die Wissenschaft vom Altern des Menschen bezeichnet. Das vom Bundesseniorenministerium finanzierte, in Vereinsform organisierte Institut hat die Aufgabe, Erkenntnisse über die Lebenslage alternder und alter Menschen zu erweitern und für die Politikberatung zu nutzen. Ein wichtiges Instrument dafür ist der Deutsche Alterssurvey, eine repräsentative Quer- und Längsschnittbefragung von Personen in der zweiten Lebenshälfte, die das DZA seit 1996 in regelmäßigen Abständen durchführt. Dabei geht es um die wirtschaftliche Lage und Wohnsituation, um familiäre und sonstige soziale Kontakte, das berufliche und ehrenamtliche Engagement sowie um Gesundheit, Wohlbefinden und Lebensziele der Menschen im mittleren und höheren Lebensalter. Hinzu kommen weitere Projekte des Ministeriums und von Drittmittelgebern."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/ressortforschung",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:11:41.697591+00:00",
+      "lastSeen": "2026-03-15T16:11:41.697591+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Familie",
+        "Jugend",
+        "Gleichstellung"
+      ],
+      "contactDetails": {
+        "website": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/ressortforschung"
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/ressortforschung",
+        "crawledAt": "2026-03-15T16:11:41.697591Z",
+        "crawlId": "organizations-seeded-1773591101",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "9dc7d68e5c5f69a1323d291bc36d0c7694e7bce18ee15fcab9ee3513495bcd8f"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:11:41.697591+00:00"
+      }
+    },
+    {
+      "id": "d5dd541e-7309-4c2e-9d70-d4a163675362",
+      "title": "Die Bundesministerien im Überblick",
+      "summary": {
+        "de": "Die Bundesministerien bereiten Gesetze vor und beraten die Regierung. Hier finden Sie alle Ministerien auf einen Blick."
+      },
+      "content": {
+        "de": "Bundesministerium für Forschung, Technologie und Raumfahrt Bundesministerium der Justiz und für Verbraucherschutz Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend Bundesministerium für Digitales und Staatsmodernisierung Bundesministerium für Umwelt, Klimaschutz, Naturschutz und nukleare Sicherheit Bundesministerium für Landwirtschaft, Ernährung und Heimat"
+      },
+      "url": "https://www.bundesregierung.de/breg-de/bundesregierung/bundesministerien",
+      "topics": [
+        "organizations"
+      ],
+      "tags": [
+        "organization"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:11:19.968489+00:00",
+      "lastSeen": "2026-03-15T16:11:19.968489+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
+      "region": "Germany",
+      "services": [
+        "Informationsangebote",
+        "Service und Kontakt"
+      ],
+      "contactDetails": {
+        "website": "https://www.bundesregierung.de/breg-de/bundesregierung/bundesministerien"
+      },
+      "provenance": {
+        "source": "https://www.bundesregierung.de/breg-de/bundesregierung/bundesministerien",
+        "crawledAt": "2026-03-15T16:11:19.968489Z",
+        "crawlId": "organizations-seeded-1773591079",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "b1ae4a491a7bc21c42fc5b2470b7b845a924ecb836a8919906c30b3fe4b1ed04"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:11:19.968489+00:00"
+      }
+    },
+    {
+      "id": "62f9dd41-8aa0-4214-b47e-ba7be02e646a",
+      "title": "115",
+      "summary": {
+        "de": "Einheitliche Behördennummer für Bürger:innen und Unternehmen Die bundesweit einheitliche Rufnummer 115 ist ein bürger:innennaher und direkter Kanal in die Verwaltung. Ihr Kern ist die telefonische Antwort auf Fragen zu allen Angelegenheiten der öffentlichen Verwaltung auf kommunaler, Landes- und Bundesebene. Für gehörlose oder hörgeschädigte Personen steht das 115-Gebärdentelefon zur Verfügung. Zur Website von 115"
+      },
+      "content": {
+        "de": "Die bundesweit einheitliche Rufnummer 115 ist ein bürger:innennaher und direkter Kanal in die Verwaltung. Ihr Kern ist die telefonische Antwort auf Fragen zu allen Angelegenheiten der öffentlichen Verwaltung auf kommunaler, Landes- und Bundesebene. Für gehörlose oder hörgeschädigte Personen steht das 115-Gebärdentelefon zur Verfügung. Thorsten Maid Teamleitung | Produktmanagement 115 Telefon +49 (69) 401270 106 E-Mail Kontakt aufnehmen Antje Zahn Produktmanagement 115 | Flächendeckung und Qualitätsmanagement Telefon +49 (69) 401270 151 E-Mail Kontakt aufnehmen Produktmanagement 115 | Flächendeckung und Qualitätsmanagement"
       },
       "url": "https://www.fitko.de/produktmanagement/115",
       "topics": [
-        "family",
-        "employment"
+        "organizations"
       ],
       "tags": [
-        "automatic",
-        "application_required"
+        "organization"
       ],
       "targetGroups": [
-        "families",
-        "refugees"
+        "general_public"
       ],
       "status": "active",
-      "organizationType": "government",
+      "firstSeen": "2026-03-15T16:00:01.276134+00:00",
+      "lastSeen": "2026-03-15T16:00:01.276134+00:00",
+      "sourceUnavailable": false,
+      "organizationType": "unknown",
       "region": "Germany",
       "services": [
-        "Verwaltungsservice",
-        "Behördennummer 115"
+        "Informationsangebote",
+        "Service und Kontakt"
       ],
       "contactDetails": {
-        "website": "https://www.fitko.de/"
+        "website": "https://www.fitko.de/produktmanagement/115"
       },
-      "firstSeen": "2026-03-01T20:16:00Z",
-      "lastSeen": "2026-03-01T20:16:00Z",
-      "sourceUnavailable": false,
       "provenance": {
         "source": "https://www.fitko.de/produktmanagement/115",
-        "crawlId": "manual-curation-20260301-realdata-v1",
-        "checksum": "c44d89918056d7839ad03693e98db1f3025c32786f5c3ed65e11d355ce0f03af",
-        "crawledAt": "2026-03-01T20:16:00Z"
+        "crawledAt": "2026-03-15T16:00:01.276810Z",
+        "crawlId": "organizations-seeded-1773590401",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "a2e45abe8822e656f92552e34c699840a3e1e053bb2696f28afa09d20cc8980e"
       },
       "qualityScores": {
-        "iqs": 74.8,
-        "ais": 45.9,
-        "computedAt": "2026-03-01T20:16:00Z"
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:00:01.276810+00:00"
       }
     }
-  ],
-  "_todo": [
-    "TODO: Validate against organizations.schema.json per DATA-05 (Issue #28)"
   ]
 }

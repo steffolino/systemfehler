@@ -80,8 +80,10 @@ Important verification finding:
 - That mismatch has now been resolved by migrating snapshot entries to the
   canonical `title` string contract while preserving Easy German titles in
   `translations["de-LEICHT"]`.
-- Current validation result: 25 entries, 0 schema/structural errors, 0 lint
-  warnings.
+- Current validation result after the March 15 crawl/promotion pass:
+  275 entries, 0 schema/structural errors, 263 lint warnings.
+- The remaining warnings are largely missing Easy German translations on newly
+  promoted seeded entries, not schema failures.
 
 Implemented but still mixed or incomplete:
 
@@ -189,6 +191,31 @@ If a doc conflicts with code, use this order:
 3. `docs/current-state.md`
 4. `README.md`
 5. planning/reference docs
+
+## Snapshot Scale State
+
+The canonical snapshot corpus is no longer the original 25-entry bootstrap
+set. Current validated counts are:
+
+- `benefits`: 5
+- `aid`: 118
+- `tools`: 8
+- `organizations`: 35
+- `contacts`: 109
+- total: 275
+
+That corpus is now also loaded into the local PostgreSQL database via
+`npm run db:seed`.
+
+The key new workflow addition is deterministic seeded promotion:
+
+- crawler output lands in `data/<domain>/candidates.json`
+- `scripts/promote_candidates_to_snapshots.py` applies quality/source/taxonomy
+  filters
+- only accepted candidates are merged into canonical `data/<domain>/entries.json`
+
+This is now the safest path for scaling entry volume without letting raw crawl
+noise overwrite the published dataset.
 
 ## Recommended Cleanup Next
 

@@ -1,6 +1,6 @@
 # Systemfehler – Implementation Status
 
-> **Last updated:** 2026-03-14
+> **Last updated:** 2026-03-15
 >
 > Major frontend and admin dashboard improvements, TypeScript config enhancements, new reusable components, and expanded test coverage were completed in the latest session. The frontend is now fully integrated as part of the monorepo (no separate git repo). See below for details.
 
@@ -9,8 +9,10 @@ code, also see `docs/current-state.md`.
 
 Verification note:
 
-- Validation was re-run on 2026-03-15 after data/schema reconciliation.
-- Current result: 25 entries, 0 schema/structural errors, 0 lint warnings.
+- Validation was re-run on 2026-03-15 after the seeded crawl scaling pass.
+- Current result: 275 entries, 0 schema/structural errors, 263 lint warnings.
+- The remaining warnings are currently dominated by missing Easy German
+  translations on newly promoted seeded entries.
 
 ---
 
@@ -44,6 +46,7 @@ crawling logic to these files.
 | `crawlers/shared/link_expander.py` | ✅ Working | Python link discovery and URL queue expansion (CRAWL-03) |
 | `data/<domain>/url_status.jsonl` | ✅ Working | Persistent URL crawl state for redirects, canonical aliases, and skip-worthy failures |
 | `data/<domain>/crawl_metrics.json` | ✅ Working | Per-run crawl metrics with quality averages, failure reasons, source-tier distribution, and improvement hints |
+| `scripts/promote_candidates_to_snapshots.py` | ✅ Working | Deterministic promotion filter that merges only high-quality crawler candidates into canonical snapshots |
 
 ### Node.js API (`backend/`)
 
@@ -95,6 +98,7 @@ crawling logic to these files.
 - All IDs are UUID strings, not objects.
 - Datetime serialization allows `None` and uses ISO format.
 - Moderation queue format is canonical and validated.
+- Seeded snapshot promotion is now deterministic and taxonomy-aware.
 
 **Infra/config:**
 - Backend and scripts now use the `PORT` environment variable for configuration (no more hardcoded ports).
@@ -182,6 +186,22 @@ in Python and available through the CLI and npm wrappers.
 
 
 
+## Current scaled dataset
+
+Validated canonical snapshot counts after the March 15 crawl/promotion pass:
+
+| Domain | Entries |
+|--------|---------|
+| `benefits` | 5 |
+| `aid` | 118 |
+| `tools` | 8 |
+| `organizations` | 35 |
+| `contacts` | 109 |
+| **Total** | **275** |
+
+The local PostgreSQL refresh path (`npm run db:seed`) was re-run successfully
+against this 275-entry corpus.
+
 ## Next planned work
 
 - Finalize and document the canonical moderation queue format; ensure file and DB backends are fully interchangeable.
@@ -189,6 +209,8 @@ in Python and available through the CLI and npm wrappers.
 - Expand test coverage for edge cases (e.g., missing/optional fields, invalid UUIDs, datetime `None`).
 - Begin implementing Phase 4 of the AI roadmap (AI-assisted metadata tagging, duplicate detection, etc.).
 - Add more detailed logging and cost tracking for all AI/model calls.
+- Improve Easy German coverage on newly promoted seeded entries to reduce the
+  remaining validator warnings.
 - Regularly update `docs/status.md` and `docs/ai-roadmap.md` as new features are stabilized.
 
 See open issues and `IMPLEMENTATION_SUMMARY.md` for details.

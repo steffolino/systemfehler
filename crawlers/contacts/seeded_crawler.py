@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from bs4 import BeautifulSoup
 
 from ..shared.seeded_domain_crawler import SeededDomainCrawler
+from ..shared.source_registry import SourceProfile
 
 
 class SeededContactsCrawler(SeededDomainCrawler):
@@ -29,7 +30,13 @@ class SeededContactsCrawler(SeededDomainCrawler):
     def default_target_groups(self) -> List[str]:
         return ['general_public', 'families', 'persons_with_disabilities']
 
-    def build_domain_fields(self, url: str, soup: BeautifulSoup, entry: Dict[str, Any]) -> Dict[str, Any]:
+    def build_domain_fields(
+        self,
+        url: str,
+        soup: BeautifulSoup,
+        entry: Dict[str, Any],
+        source_profile: Optional[SourceProfile] = None,
+    ) -> Dict[str, Any]:
         title = str(entry.get('title') or '')
         text = f"{title.lower()} {url.lower()}"
 
@@ -41,10 +48,15 @@ class SeededContactsCrawler(SeededDomainCrawler):
         if 'sanktionsfrei.de' in text or 'beratung' in text or 'faq' in text:
             contact_type = 'advisor'
 
-        linked_org = 'Oeffentliche Verwaltung'
-        specialization = ['Buergeranfragen', 'Leistungsinformationen']
+        linked_org = source_profile.name if source_profile else 'Oeffentliche Verwaltung'
+        specialization = list(source_profile.services) if source_profile and source_profile.services else [
+            'Buergeranfragen',
+            'Leistungsinformationen',
+        ]
         if 'arbeitsagentur.de' in url:
             linked_org = 'Bundesagentur fuer Arbeit'
+            if not specialization:
+                specialization = ['Arbeitsvermittlung', 'Leistungsinformationen']
         elif 'bmbfsfj.bund.de' in url:
             linked_org = 'Bundesministerium fuer Bildung, Familie, Senioren, Frauen und Jugend'
         elif 'bmas.de' in url:

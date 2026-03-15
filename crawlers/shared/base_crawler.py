@@ -248,6 +248,12 @@ class BaseCrawler:
             "home",
             "homepage",
             "menu",
+            "hinweis zum datenschutz",
+            "datenschutz",
+            "datenschutzhinweis",
+            "impressum",
+            "cookie-hinweis",
+            "cookie hinweis",
         }
         if text in generic_titles:
             return True
@@ -259,6 +265,9 @@ class BaseCrawler:
             "loslegen",
             "starten",
             "anmelden",
+            "datenschutz",
+            "cookie",
+            "impressum",
         )
         return any(token in text for token in low_signal_tokens)
 

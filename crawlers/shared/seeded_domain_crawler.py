@@ -270,7 +270,9 @@ class SeededDomainCrawler(BaseCrawler):
         entry['provenance']['checksum'] = content_checksum
         entry['qualityScores'] = self.quality_scorer.calculate_scores(entry)
 
-        validation = self.validator.validate_entry(entry, self.domain)
+        schema_entry = dict(entry)
+        schema_entry.pop('head', None)
+        validation = self.validator.validate_entry(schema_entry, self.domain)
         if not validation['valid']:
             self.metrics.note_url_status('validation_failed', reason='validation_failed')
             self.logger.error(f"Validation failed for {entry.get('id')} ({url})")
@@ -287,6 +289,7 @@ class SeededDomainCrawler(BaseCrawler):
             )
             return None
 
+        entry.pop('head', None)
         self.metrics.note_url_status('ok')
         self.metrics.note_entry(entry)
         return entry

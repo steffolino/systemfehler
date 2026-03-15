@@ -1,11 +1,57 @@
 {
   "version": "0.1.0",
   "domain": "tools",
-  "_meta": {
-    "placeholder": false,
-    "note": "Real tool entries sourced from official public e-service pages"
-  },
   "entries": [
+    {
+      "id": "f20707ad-4c16-4a8d-a812-c31a6200b0b2",
+      "title": "New Plan – Online-Tool zur beruflichen Entwicklung",
+      "summary": {
+        "de": "Nutzen Sie das Online-Tool New Plan für Ihre berufliche Weiterbildung: Möglichkeiten testen, inspirieren lassen und passende Weiterbildungen finden."
+      },
+      "content": {
+        "de": "Bitte beachten Sie: New Plan ist seit dem 25. Juni 2024 in „mein NOW“ integriert. Alle Funktionen von New Plan bleiben auch zukünftig in neuem Design erhalten. Testen Sie Ihr Können, lernen Sie Ihre Stärken kennen und finden Sie heraus, was beruflich zu Ihnen passt. Erfahren Sie, wohin andere Personen mit Ihrem Beruf gewechselt sind und informieren Sie sich über diese Berufe. Falls Sie bereits wissen, wohin Sie sich entwickeln möchten, können Sie hier direkt nach passenden Weiterbildungen suchen. Sie möchten sich beruflich verändern und suchen den richtigen Weg? New Plan bietet Ihnen: Entwicklungsmöglichkeiten und alternative Tätigkeiten, die zu Ihren Stärken passen"
+      },
+      "url": "https://mein-now.de/new-plan",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:05:40.586335+00:00",
+      "lastSeen": "2026-03-15T16:05:40.586335+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://mein-now.de/new-plan",
+        "crawledAt": "2026-03-15T16:05:40.586335Z",
+        "crawlId": "tools-seeded-1773590740",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_unknown",
+        "institutionType": "unknown",
+        "jurisdiction": "DE",
+        "checksum": "cbc615a1be5a03814469ce06ea33214c5cfef52f4cfd52813daa0ca96e3217d9"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:05:40.587335+00:00"
+      }
+    },
     {
       "id": "69b5efb7-53f2-43f4-bec9-a1ad9ebef67e",
       "title": "eServices für Bürgerinnen und Bürger",
@@ -67,6 +113,112 @@
       }
     },
     {
+      "id": "4c775d10-830d-4dcf-ad58-019e98fbe5ff",
+      "title": "Familienkasse: Kindergeld-Antrag stellen",
+      "summary": {
+        "de": "Beantragen Sie Kindergeld für Ihr neugeborenes Kind bei der Familienkasse. Jetzt Antrag stellen!"
+      },
+      "content": {
+        "de": "Nach der Geburt Ihres Kindes erhalten Sie vom Bundeszentralamt für Steuern die steuerliche Identifikationsnummer (Steuer-IdNr.) für Ihr Kind. Wenige Tage danach folgt automatisch ein Begrüßungsschreiben Ihrer Familienkasse mit Ihrem persönlichen Zugangscode für den Kindergeldantrag. Wenn Sie den Zugangscode verwenden, sind die meisten Angaben für Sie bereits ausgefüllt. Unsere Empfehlung: Warten Sie das Schreiben ab, bevor Sie den Kindergeld-Antrag stellen. Starten Sie Ihren personalisierten Antrag auf Kindergeld. Halten Sie das Schreiben mit dem Zugangscode bereit. Sie können den Antrag mit Ihrer BundID direkt online abschicken. Starten Sie den Antrag ohne Zugangscode. Halten Sie Ihre Steuer-ID, die Ihres Kindes und Ihre Bankverbindung bereit. Hinweis zur Verwendung von Bildern: Weitere Informationen zu Copyright und Markenschutz finden Sie in unserem Impressum."
+      },
+      "url": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/kindergeld-anspruch-hoehe-dauer/kindergeld-antrag-starten",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:05:20.113343+00:00",
+      "lastSeen": "2026-03-15T16:05:20.113343+00:00",
+      "sourceUnavailable": false,
+      "toolType": "application",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/kindergeld-anspruch-hoehe-dauer/kindergeld-antrag-starten",
+        "crawledAt": "2026-03-15T16:05:20.113343Z",
+        "crawlId": "tools-seeded-1773590720",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "e959eb1b03b53eee793823f2b29ec85abbcfb05ab9224c1f08f31039ba920358"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:05:20.113343+00:00"
+      }
+    },
+    {
+      "id": "c5afa8a3-18c7-4ba7-9ebe-a37bd4830e1d",
+      "title": "KiZ-Lotse: Anspruch auf Kinderzuschlag online prüfen",
+      "summary": {
+        "de": "Finden Sie einfach und schnell heraus, ob Sie Kinderzuschlag beantragen können. Jetzt Anspruch prüfen und online beantragen!"
+      },
+      "content": {
+        "de": "Wichtig: Wichtig: Der KiZ-Lotse berechnet nicht die Höhe des KiZ. Wenn Sie einen Antrag auf KiZ stellen, informieren wir Sie danach, ob Sie ihn erhalten und falls ja, in welcher Höhe. Der KiZ-Lotse besteht aus 4 kurzen Videos: Sie erfahren darin, welche Informationen von Ihnen benötigt werden, damit Ihr Anspruch auf Kinderzuschlag direkt online geprüft werden kann. Geben Sie die entsprechenden Informationen über Ihre Computer- oder Handytastatur ein. Anschließend errechnet der KiZ-Lotse, ob Sie einen Anspruch auf KiZ haben könnten. Wichtig: Tipp: Sie haben in der Vergangenheit beim KiZ-Lotsen ein negatives Ergebnis erhalten? Dann könnte es sich lohnen, heute noch einmal zu testen – denn durch den Sofortzuschlag für Kinder hat sich die Höchstgrenze erhöht. Auch bei höheren Betriebs- oder Heizkosten könnten sich Ihr individueller Anspruch auf Kinderzuschlag ändern. Der KiZ-Lotse: Anspruch auf Kinderzuschlag ermitteln Zu viel erhaltenes Kindergeld oder Kinderzuschlag zurückzahlen"
+      },
+      "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kiz-lotse",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:05:20.625519+00:00",
+      "lastSeen": "2026-03-15T16:05:20.625519+00:00",
+      "sourceUnavailable": false,
+      "toolType": "checker",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kiz-lotse",
+        "crawledAt": "2026-03-15T16:05:20.625519Z",
+        "crawlId": "tools-seeded-1773590720",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "cf5f4968986dbb5621e1ade8bf981e63f25bd81e2115f36207cf48ef52659678"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:05:20.625519+00:00"
+      }
+    },
+    {
       "id": "12866f74-af9b-4f6f-bf13-0f60d994168a",
       "title": "Jobsuche",
       "translations": {
@@ -121,6 +273,106 @@
         "iqs": 81.2,
         "ais": 60.4,
         "computedAt": "2026-03-01T20:14:00Z"
+      }
+    },
+    {
+      "id": "ba2d2089-01a2-4303-ba39-4cb01aac89cb",
+      "title": "Online-Rechner und interaktive Anwendungen",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Kinderzuschlag Digital Mit dem Kinderzuschlag Digital können Sie den Kinderzuschlag auch online beantragen. (Externer Link) Mit dem Kinderzuschlag Digital können Sie den Kinderzuschlag auch online beantragen. (Externer Link) Kinderzuschlags-Lotse Ob Sie Anspruch auf Kinderzuschlag (KiZ) oder Notfall-KiZ haben, finden Sie mit dem \"KiZ-Lotsen\" heraus. (Externer Link) Ob Sie Anspruch auf Kinderzuschlag (KiZ) oder Notfall-KiZ haben, finden Sie mit dem \"KiZ-Lotsen\" heraus. (Externer Link) ElterngeldDigital Das Elterngeld können Sie im Portal ElterngeldDigital online beantragen. Dieser Service steht für zehn Bundesländer zur Verfügung. (Externer Link) Das Elterngeld können Sie im Portal ElterngeldDigital online beantragen. Dieser Service steht für zehn Bundesländer zur Verfügung. (Externer Link)"
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/service/online-rechner",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:05:25.735231+00:00",
+      "lastSeen": "2026-03-15T16:05:25.735231+00:00",
+      "sourceUnavailable": false,
+      "toolType": "calculator",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/service/online-rechner",
+        "crawledAt": "2026-03-15T16:05:25.735231Z",
+        "crawlId": "tools-seeded-1773590725",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "167dfc3de275e8faa2cf695701b5d43740d43781716caf4fef576fdf5c47c12f"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:05:25.735231+00:00"
+      }
+    },
+    {
+      "id": "003bda3e-e626-40c5-89d4-062ff864530c",
+      "title": "Projekt-Landkarte",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/service/online-rechner/projekt-landkarte",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-15T16:05:26.223020+00:00",
+      "lastSeen": "2026-03-15T16:05:26.223020+00:00",
+      "sourceUnavailable": false,
+      "toolType": "calculator",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/service/online-rechner/projekt-landkarte",
+        "crawledAt": "2026-03-15T16:05:26.223020Z",
+        "crawlId": "tools-seeded-1773590726",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "9a1f8c31e8cefc2bb16598cddccdd502d0b6e9ad946edf53354bc671c4c88883"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-15T16:05:26.223020+00:00"
       }
     },
     {
@@ -179,123 +431,6 @@
         "ais": 58,
         "computedAt": "2026-03-01T20:14:00Z"
       }
-    },
-    {
-      "id": "1570eddb-a7c2-4f8d-935d-a4f05c612861",
-      "title": "Kindergeld-Antrag ab Geburt",
-      "translations": {
-        "de-LEICHT": {
-          "title": "Kindergeld online beantragen",
-          "timestamp": "2026-03-01T20:14:00Z",
-          "provenance": {
-            "source": "https://www.arbeitsagentur.de/familie-und-kinder/angebote-rund-ums-kind/kindergeld-ab-geburt-beantragen",
-            "crawledAt": "2026-03-01T20:14:00Z"
-          },
-          "method": "human",
-          "reviewed": true
-        }
-      },
-      "summary": {
-        "de": "Über den digitalen Startpunkt kann Kindergeld für neugeborene Kinder online beantragt werden."
-      },
-      "content": {
-        "de": "Die Seite bietet einen direkten Zugang zum Antragsverfahren der Familienkasse und erleichtert den Einstieg in den Prozess. Damit wird die formale Antragstellung zeitnah und medienbrucharm unterstützt."
-      },
-      "url": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/kindergeld-anspruch-hoehe-dauer/kindergeld-antrag-starten",
-      "topics": [
-        "family",
-        "financial_support"
-      ],
-      "tags": [
-        "application_required",
-        "automatic"
-      ],
-      "targetGroups": [
-        "families",
-        "single_parents"
-      ],
-      "status": "active",
-      "toolType": "application",
-      "accessibility": {
-        "languages": [
-          "de"
-        ],
-        "screenReaderCompatible": true
-      },
-      "firstSeen": "2026-03-01T20:14:00Z",
-      "lastSeen": "2026-03-01T20:14:00Z",
-      "sourceUnavailable": false,
-      "provenance": {
-        "source": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/kindergeld-anspruch-hoehe-dauer/kindergeld-antrag-starten",
-        "crawlId": "manual-curation-20260301-realdata-v1",
-        "checksum": "e1e3df9ca92f1fd5cfe5f5ccac2a1effb0274c1eba4bb3f302154f27230f2f31",
-        "crawledAt": "2026-03-01T20:14:00Z"
-      },
-      "qualityScores": {
-        "iqs": 80.1,
-        "ais": 57,
-        "computedAt": "2026-03-01T20:14:00Z"
-      }
-    },
-    {
-      "id": "49be5d99-27f5-452a-a558-815e886f9e36",
-      "title": "KiZ-Lotse",
-      "translations": {
-        "de-LEICHT": {
-          "title": "Kinderzuschlag prüfen",
-          "timestamp": "2026-03-01T20:14:00Z",
-          "provenance": {
-            "source": "https://www.arbeitsagentur.de/familie-und-kinder/kiz-lotse",
-            "crawledAt": "2026-03-01T20:14:00Z"
-          },
-          "method": "human",
-          "reviewed": true
-        }
-      },
-      "summary": {
-        "de": "Der KiZ-Lotse hilft bei der Vorprüfung, ob ein Anspruch auf Kinderzuschlag bestehen könnte."
-      },
-      "content": {
-        "de": "Das digitale Prüftool führt durch zentrale Kriterien und bietet eine erste Orientierung vor der eigentlichen Antragstellung. Es unterstützt Familien bei der schnellen Einschätzung ihrer Ausgangslage."
-      },
-      "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kiz-lotse",
-      "topics": [
-        "family",
-        "financial_support"
-      ],
-      "tags": [
-        "means_tested",
-        "automatic"
-      ],
-      "targetGroups": [
-        "families",
-        "single_parents"
-      ],
-      "status": "active",
-      "toolType": "checker",
-      "accessibility": {
-        "languages": [
-          "de"
-        ],
-        "screenReaderCompatible": true
-      },
-      "firstSeen": "2026-03-01T20:14:00Z",
-      "lastSeen": "2026-03-01T20:14:00Z",
-      "sourceUnavailable": false,
-      "provenance": {
-        "source": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kiz-lotse",
-        "crawlId": "manual-curation-20260301-realdata-v1",
-        "checksum": "eb2d8dce8a92ec1d8c4ca9dd3f77e9b02a0d58a9609ea1bb80bf95f8f34734db",
-        "crawledAt": "2026-03-01T20:14:00Z"
-      },
-      "qualityScores": {
-        "iqs": 79,
-        "ais": 56.1,
-        "computedAt": "2026-03-01T20:14:00Z"
-      }
     }
-  ],
-  "_todo": [
-    "TODO: Validate against tools.schema.json per DATA-05 (Issue #28)"
   ]
 }
