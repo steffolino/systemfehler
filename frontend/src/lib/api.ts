@@ -17,6 +17,7 @@ import type {
 } from './db_types';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://systemfehler-api-worker.inequality.workers.dev/api';
+const AI_API_BASE_URL = import.meta.env.VITE_AI_API_URL || 'http://localhost:8002';
 const DEFAULT_SNAPSHOT_BASE_URL =
   typeof window !== 'undefined'
     ? `${window.location.origin}${import.meta.env.BASE_URL.replace(/\/$/, '')}`
@@ -195,6 +196,40 @@ interface QualityReportResponse {
   }>;
 }
 
+interface AIRewriteResponse {
+  rewritten_query: string;
+  model: string;
+  provider: string;
+  latency_ms: number;
+  fallback: boolean;
+  explanation?: string | null;
+}
+
+interface AIEvidence {
+  source: string;
+  content: string;
+  confidence: number;
+}
+
+interface AISynthesizeResponse {
+  answer: string | null;
+  explanation: string;
+  sources: string[];
+  provider: string;
+  model: string;
+  latency_ms: number;
+  fallback: boolean;
+  evidence: AIEvidence[];
+  weak_evidence?: boolean;
+  usage?: Record<string, unknown>;
+}
+
+interface AIResultBundle {
+  rewrite: AIRewriteResponse;
+  synthesis: AISynthesizeResponse;
+  relatedEntries: Entry[];
+}
+
 async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const normalizedBase = API_BASE_URL.replace(/\/+$/, '');
   const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
@@ -251,6 +286,37 @@ async function fetchSnapshot<T>(path: string): Promise<T> {
   if (!response.ok) {
     throw new Error(`Snapshot request failed (${response.status}): ${path}`);
   }
+  return (await response.json()) as T;
+}
+
+async function fetchAiApi<T>(endpoint: string, options?: RequestInit): Promise<T> {
+  const normalizedBase = AI_API_BASE_URL.replace(/\/+$/, '');
+  const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const url = `${normalizedBase}${normalizedEndpoint}`;
+
+  const response = await fetch(url, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options?.headers,
+    },
+  });
+
+  if (!response.ok) {
+    let errorMsg = `AI request failed (${response.status})`;
+    try {
+      const payload = await response.json();
+      errorMsg = JSON.stringify(payload);
+    } catch {
+      try {
+        errorMsg = await response.text();
+      } catch {
+        errorMsg = `AI request failed (${response.status})`;
+      }
+    }
+    throw new Error(errorMsg);
+  }
+
   return (await response.json()) as T;
 }
 
@@ -640,9 +706,90 @@ export const api = {
     }
   },
 
-  getAIResults: async () => {
-    // Placeholder AI search stub: returns empty array or mock results
-    return [];
+  getAIResults: async (query: string): Promise<AIResultBundle> => {
+    const trimmed = query.trim();
+    if (!trimmed) {
+      return {
+        rewrite: {
+          rewritten_query: '',
+          model: 'disabled',
+          provider: 'none',
+          latency_ms: 0,
+          fallback: true,
+          explanation: 'Enter a search query to use the AI assistant.',
+        },
+        synthesis: {
+          answer: null,
+          explanation: 'Enter a search query to use the AI assistant.',
+          sources: [],
+          provider: 'none',
+          model: 'disabled',
+          latency_ms: 0,
+          fallback: true,
+          evidence: [],
+          weak_evidence: true,
+        },
+        relatedEntries: [],
+      };
+    }
+
+    if (IS_GITHUB_PAGES) {
+      return {
+        rewrite: {
+          rewritten_query: trimmed,
+          model: 'disabled',
+          provider: 'none',
+          latency_ms: 0,
+          fallback: true,
+          explanation: 'AI sidecar is not available on GitHub Pages.',
+        },
+        synthesis: {
+          answer: null,
+          explanation: 'AI sidecar is not available on GitHub Pages.',
+          sources: [],
+          provider: 'none',
+          model: 'disabled',
+          latency_ms: 0,
+          fallback: true,
+          evidence: [],
+          weak_evidence: true,
+        },
+        relatedEntries: [],
+      };
+    }
+
+    const rewrite = await fetchAiApi<AIRewriteResponse>('/rewrite', {
+      method: 'POST',
+      body: JSON.stringify({ query: trimmed }),
+    });
+
+    const synthesis = await fetchAiApi<AISynthesizeResponse>('/synthesize', {
+      method: 'POST',
+      body: JSON.stringify({ query: rewrite.rewritten_query || trimmed }),
+    });
+
+    const relatedEntriesMap = new Map<string, Entry>();
+    for (const evidence of synthesis.evidence || []) {
+      let parsed: unknown;
+      try {
+        parsed = JSON.parse(evidence.content);
+      } catch {
+        continue;
+      }
+
+      const normalized = normalizeEntriesPayload([parsed]);
+      for (const entry of normalized) {
+        if (!relatedEntriesMap.has(entry.id)) {
+          relatedEntriesMap.set(entry.id, entry);
+        }
+      }
+    }
+
+    return {
+      rewrite,
+      synthesis,
+      relatedEntries: Array.from(relatedEntriesMap.values()),
+    };
   },
 
   autocomplete: async ({ query, limit = 10 }: { query: string; limit?: number }) => {
@@ -676,4 +823,7 @@ export type {
   TranslationsMap,
   TranslationRecord,
   Provenance,
+  AIRewriteResponse,
+  AISynthesizeResponse,
+  AIResultBundle,
 };

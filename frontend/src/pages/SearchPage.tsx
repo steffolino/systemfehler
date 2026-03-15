@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { api, type Entry } from '../lib/api';
+import type { AIResultBundle } from '../lib/api';
 import SearchInput from '../components/SearchInput';
 import ResultsList from '../components/ResultsList';
 import { Button } from '@/components/ui/button';
@@ -15,7 +16,7 @@ export default function SearchPage() {
   const [tab, setTab] = useState<TabKey>('standard');
 
   const [standardResults, setStandardResults] = useState<Entry[]>([]);
-  const [aiResults, setAiResults] = useState<Entry[]>([]);
+  const [aiResult, setAiResult] = useState<AIResultBundle | null>(null);
 
   const [standardLoading, setStandardLoading] = useState(false);
   const [aiLoading, setAiLoading] = useState(false);
@@ -66,14 +67,15 @@ export default function SearchPage() {
     setAiError(null);
 
     api
-      .getAIResults()
-      .then((results) => {
+      .getAIResults(debouncedQuery)
+      .then((result) => {
         if (cancelled) return;
-        setAiResults(results);
+        setAiResult(result);
       })
       .catch((err) => {
         if (cancelled) return;
         setAiError(err instanceof Error ? err.message : 'Failed to load AI results');
+        setAiResult(null);
       })
       .finally(() => {
         if (!cancelled) setAiLoading(false);
@@ -82,7 +84,7 @@ export default function SearchPage() {
     return () => {
       cancelled = true;
     };
-  }, [isAuthenticated, tab]);
+  }, [debouncedQuery, isAuthenticated, tab]);
 
   useEffect(() => {
     if (!isAuthenticated && tab === 'ai') {
@@ -90,15 +92,18 @@ export default function SearchPage() {
     }
   }, [isAuthenticated, tab]);
 
-  const activeResults = tab === 'standard' ? standardResults : aiResults;
+  const activeResults = tab === 'standard' ? standardResults : aiResult?.relatedEntries || [];
   const activeLoading = tab === 'standard' ? standardLoading : aiLoading;
   const activeError = tab === 'standard' ? standardError : aiError;
 
   const resultLabel = useMemo(() => {
     if (activeLoading) return 'Loading results…';
     if (activeError) return 'Could not load results';
+    if (tab === 'ai') {
+      return `${activeResults.length} evidence entr${activeResults.length === 1 ? 'y' : 'ies'}`;
+    }
     return `${activeResults.length} result${activeResults.length === 1 ? '' : 's'}`;
-  }, [activeLoading, activeError, activeResults.length]);
+  }, [activeLoading, activeError, activeResults.length, tab]);
 
   return (
     <div className="mx-auto w-full max-w-5xl p-4 md:p-6">
@@ -156,6 +161,58 @@ export default function SearchPage() {
                   <div className="font-medium text-red-600">Something went wrong</div>
                   <div className="mt-1 text-sm text-muted-foreground">{activeError}</div>
                 </div>
+              </div>
+            ) : tab === 'ai' ? (
+              <div className="space-y-4 p-4 md:p-5">
+                <Card className="p-5">
+                  <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    AI Rewrite
+                  </div>
+                  <div className="mt-2 text-sm text-foreground">
+                    {aiResult?.rewrite.rewritten_query || 'No rewritten query available.'}
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
+                    <span>Provider: {aiResult?.rewrite.provider || 'none'}</span>
+                    <span>Model: {aiResult?.rewrite.model || 'disabled'}</span>
+                    {aiResult?.rewrite.fallback && <span>Fallback active</span>}
+                  </div>
+                  {aiResult?.rewrite.explanation && (
+                    <div className="mt-3 text-sm text-muted-foreground">
+                      {aiResult.rewrite.explanation}
+                    </div>
+                  )}
+                </Card>
+
+                <Card className="p-5">
+                  <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    AI Synthesis
+                  </div>
+                  <div className="mt-2 whitespace-pre-line text-sm leading-7 text-foreground">
+                    {aiResult?.synthesis.answer || aiResult?.synthesis.explanation || 'No AI answer available.'}
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
+                    <span>Provider: {aiResult?.synthesis.provider || 'none'}</span>
+                    <span>Model: {aiResult?.synthesis.model || 'disabled'}</span>
+                    {aiResult?.synthesis.fallback && <span>Fallback active</span>}
+                    {aiResult?.synthesis.weak_evidence && <span>Weak evidence</span>}
+                  </div>
+                </Card>
+
+                {activeResults.length === 0 ? (
+                  <div className="rounded-xl border p-6 text-center">
+                    <div className="font-medium">
+                      {debouncedQuery ? 'No evidence entries found' : 'Enter a query to use the AI assistant'}
+                    </div>
+                    <div className="mt-1 text-sm text-muted-foreground">
+                      The AI tab depends on retrieved entries from the database.
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <div className="mb-2 text-sm font-medium">Evidence entries</div>
+                    <ResultsList results={activeResults} />
+                  </div>
+                )}
               </div>
             ) : activeResults.length === 0 ? (
               <div className="flex h-80 items-center justify-center p-6 text-center">

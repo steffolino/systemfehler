@@ -64,6 +64,7 @@ crawling logic to these files.
 |-----------|--------|
 | Vite + React admin panel | ✅ Working |
 | Data preview, quality metrics, moderation queue views | ✅ Working |
+| AI search tab | 🟡 Experimental |
 
 ### Cloudflare Pages (`cloudflare-pages/`)
 
