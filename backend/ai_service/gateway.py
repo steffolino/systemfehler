@@ -22,6 +22,7 @@ from pathlib import Path
 from collections import defaultdict, deque
 from .endpoints import router
 from .provider import get_provider
+from .turnstile import is_turnstile_configured, verify_turnstile_token
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(PROJECT_ROOT / ".env", override=True)
@@ -51,6 +52,22 @@ app.include_router(router)
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
     if request.method == "POST" and request.url.path in {"/rewrite", "/retrieve", "/synthesize", "/enrich"}:
+        if request.url.path in {"/rewrite", "/retrieve", "/synthesize"} and is_turnstile_configured():
+            token = request.headers.get("x-turnstile-token")
+            verification = verify_turnstile_token(
+                token,
+                request.client.host if request.client else None,
+            )
+            if not verification.get("success"):
+                return JSONResponse(
+                    status_code=403,
+                    content={
+                        "error": "turnstile_verification_failed",
+                        "message": "Bot protection verification failed.",
+                        "errorCodes": verification.get("error_codes", []),
+                    },
+                )
+
         client_ip = request.client.host if request.client else "unknown"
         bucket = RATE_LIMIT_BUCKETS[(client_ip, request.url.path)]
         now = time.time()
@@ -84,6 +101,9 @@ def health():
     return {
         "status": "ok",
         "provider": provider.healthcheck(),
+        "turnstile": {
+            "configured": is_turnstile_configured(),
+        },
         "host": AI_HOST,
         "port": AI_PORT,
     }
@@ -95,6 +115,9 @@ def version():
         "service": "systemfehler-ai-sidecar",
         "version": os.environ.get("npm_package_version", "0.1.0"),
         "provider": provider.healthcheck(),
+        "turnstile": {
+            "configured": is_turnstile_configured(),
+        },
         "host": AI_HOST,
         "port": AI_PORT,
     }

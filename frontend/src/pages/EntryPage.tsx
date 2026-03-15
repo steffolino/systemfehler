@@ -41,6 +41,10 @@ function badgeLabel(value: string) {
   return value.replace(/_/g, ' ');
 }
 
+function isKnownBadgeValue(value: string | null | undefined) {
+  return Boolean(value) && value !== 'unknown' && value !== '-';
+}
+
 function InfoList({ items }: { items: Array<{ label: string; value: React.ReactNode }> }) {
   return (
     <dl className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -219,7 +223,7 @@ export default function EntryPage() {
             <span className="inline-flex rounded-full border px-3 py-1 text-xs font-medium">
               {t('entry.field_source')}: {sourceMeta.source}
             </span>
-            {!isAdmin && sourceMeta.jurisdiction !== 'unknown' && (
+            {!isAdmin && isKnownBadgeValue(sourceMeta.jurisdiction) && (
               <span className="inline-flex rounded-full border px-3 py-1 text-xs font-medium">
                 {t('entry.field_jurisdiction')}: {sourceMeta.jurisdiction}
               </span>
@@ -320,9 +324,15 @@ export default function EntryPage() {
             <InfoList
               items={[
                 { label: t('entry.field_source'), value: sourceMeta.source },
-                { label: t('entry.field_source_type'), value: badgeLabel(sourceMeta.institutionType) },
-                { label: t('entry.field_source_tier'), value: badgeLabel(sourceMeta.sourceTier) },
-                { label: t('entry.field_jurisdiction'), value: sourceMeta.jurisdiction },
+                ...(isKnownBadgeValue(sourceMeta.institutionType)
+                  ? [{ label: t('entry.field_source_type'), value: badgeLabel(sourceMeta.institutionType) }]
+                  : []),
+                ...(isKnownBadgeValue(sourceMeta.sourceTier)
+                  ? [{ label: t('entry.field_source_tier'), value: badgeLabel(sourceMeta.sourceTier) }]
+                  : []),
+                ...(isKnownBadgeValue(sourceMeta.jurisdiction)
+                  ? [{ label: t('entry.field_jurisdiction'), value: sourceMeta.jurisdiction }]
+                  : []),
                 { label: 'IQS', value: scoreValue(iqs) },
                 { label: 'AIS', value: scoreValue(ais) },
               ]}

@@ -6,6 +6,7 @@ import { api, type Entry } from '../lib/api';
 import type { AIHealthResponse, AIResultBundle } from '../lib/api';
 import SearchInput from '../components/SearchInput';
 import ResultsList from '../components/ResultsList';
+import TurnstileWidget from '../components/TurnstileWidget';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useI18n } from '@/lib/i18n';
@@ -80,6 +81,8 @@ function statusText(value: boolean | undefined, t: (key: string) => string) {
 export default function SearchPage() {
   const { t } = useI18n();
   const translate = t as unknown as (key: string, vars?: Record<string, string | number>) => string;
+  const turnstileSiteKey = (import.meta.env.VITE_TURNSTILE_SITE_KEY || '').trim();
+  const turnstileEnabled = Boolean(turnstileSiteKey);
   const [standardQuery, setStandardQuery] = useState('');
   const [debouncedStandardQuery, setDebouncedStandardQuery] = useState('');
   const [aiDraftQuery, setAiDraftQuery] = useState('');
@@ -99,6 +102,7 @@ export default function SearchPage() {
   const [standardError, setStandardError] = useState<string | null>(null);
   const [aiError, setAiError] = useState<string | null>(null);
   const [aiSuggestionsWarmed, setAiSuggestionsWarmed] = useState(false);
+  const [getTurnstileToken, setGetTurnstileToken] = useState<(() => Promise<string>) | null>(null);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -150,7 +154,23 @@ export default function SearchPage() {
     setAiError(null);
     setAiResult(pendingResult);
 
-    Promise.allSettled([api.getAIRewrite(submittedAiQuery), api.getAIRetrieve(submittedAiQuery)])
+    const fetchWithTurnstile = async <T,>(
+      request: (turnstileToken?: string) => Promise<T>
+    ): Promise<T> => {
+      if (!turnstileEnabled) {
+        return request();
+      }
+      if (!getTurnstileToken) {
+        throw new Error(t('search.bot_protection_failed'));
+      }
+      const token = await getTurnstileToken();
+      return request(token);
+    };
+
+    Promise.allSettled([
+      fetchWithTurnstile((turnstileToken) => api.getAIRewrite(submittedAiQuery, { turnstileToken })),
+      fetchWithTurnstile((turnstileToken) => api.getAIRetrieve(submittedAiQuery, { turnstileToken })),
+    ])
       .then(async ([rewriteResult, retrieveResult]) => {
         if (cancelled) return;
 
@@ -172,7 +192,9 @@ export default function SearchPage() {
         setAiEvidenceLoading(false);
 
         try {
-          const synthesis = await api.getAISynthesis(submittedAiQuery);
+          const synthesis = await fetchWithTurnstile((turnstileToken) =>
+            api.getAISynthesis(submittedAiQuery, { turnstileToken })
+          );
           if (cancelled) return;
           setAiResult((current) => ({
             rewrite: current?.rewrite || rewrite,
@@ -212,7 +234,7 @@ export default function SearchPage() {
     return () => {
       cancelled = true;
     };
-  }, [submittedAiQuery, tab, translate]);
+  }, [getTurnstileToken, submittedAiQuery, t, tab, translate, turnstileEnabled]);
 
   useEffect(() => {
     if (tab !== 'ai') return;
@@ -226,17 +248,21 @@ export default function SearchPage() {
   }, [tab]);
 
   useEffect(() => {
-    if (tab !== 'ai' || aiSuggestionsWarmed) return;
+    if (tab !== 'ai' || aiSuggestionsWarmed || turnstileEnabled) return;
     api.warmAIResults(AI_SUGGESTED_QUESTIONS).finally(() => {
       setAiSuggestionsWarmed(true);
     });
-  }, [aiSuggestionsWarmed, tab]);
+  }, [aiSuggestionsWarmed, tab, turnstileEnabled]);
 
   function submitAiQuery() {
     const trimmed = aiDraftQuery.trim();
     const now = Date.now();
     if (now - lastAiSubmitAt < 3000) {
       setAiError(t('search.ask_wait'));
+      return;
+    }
+    if (turnstileEnabled && !getTurnstileToken) {
+      setAiError(t('search.bot_protection_loading'));
       return;
     }
     setLastAiSubmitAt(now);
@@ -286,6 +312,19 @@ export default function SearchPage() {
 
       <Card className="p-4 md:p-5">
         <div className="flex flex-col gap-4">
+          {turnstileEnabled && (
+            <>
+              <TurnstileWidget
+                siteKey={turnstileSiteKey}
+                onReady={(executor) => {
+                  setGetTurnstileToken(() => executor);
+                }}
+              />
+              <div className="rounded-xl border bg-muted/30 px-4 py-3 text-xs text-muted-foreground">
+                {t('search.bot_protection_note')}
+              </div>
+            </>
+          )}
           <div className="flex flex-col gap-3 border-b pb-4">
             <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
               <div>
@@ -321,7 +360,11 @@ export default function SearchPage() {
 
               {tab === 'ai' && (
                 <div className="md:w-44">
-                  <Button className="w-full" onClick={submitAiQuery} disabled={aiLoading || !aiDraftQuery.trim()}>
+                  <Button
+                    className="w-full"
+                    onClick={submitAiQuery}
+                    disabled={aiLoading || !aiDraftQuery.trim() || (turnstileEnabled && !getTurnstileToken)}
+                  >
                     {aiLoading ? t('search.working') : t('search.ask_ai')}
                   </Button>
                 </div>
@@ -450,6 +493,7 @@ export default function SearchPage() {
                         <div>{t('search.status_provider')}: {aiHealth?.provider.provider || 'none'}</div>
                         <div>{t('search.status_configured')}: {statusText(aiHealth?.provider.configured, translate)}</div>
                         <div>{t('search.status_provider_state')}: {aiHealth?.provider.status || t('common.unknown')}</div>
+                        <div>{t('search.status_bot_protection')}: {statusText(turnstileEnabled, translate)}</div>
                       </div>
                       {aiHealth?.provider.models && aiHealth.provider.models.length > 0 && (
                         <div className="mt-3 text-sm text-muted-foreground">

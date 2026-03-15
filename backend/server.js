@@ -13,6 +13,7 @@ import * as queries from './database/queries.js';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { isTurnstileConfigured, verifyTurnstileToken } from './turnstile.js';
 
 dotenv.config();
 
@@ -51,11 +52,47 @@ export function createApp({
     standardHeaders: true,
     legacyHeaders: false
   });
+  const requireTurnstileForSearch =
+    (process.env.API_REQUIRE_TURNSTILE_FOR_SEARCH || 'false').toLowerCase() === 'true';
 
   app.use((req, res, next) => {
     logger.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
     next();
   });
+
+  async function maybeVerifyTurnstile(req, res, next) {
+    if (!requireTurnstileForSearch || !isTurnstileConfigured()) {
+      return next();
+    }
+
+    const searchValue =
+      typeof req.query?.search === 'string' ? req.query.search.trim() : '';
+    if (!searchValue) {
+      return next();
+    }
+
+    try {
+      const verification = await verifyTurnstileToken({
+        token: req.get('x-turnstile-token') || '',
+        remoteIp: req.ip,
+      });
+
+      if (!verification.success) {
+        return res.status(403).json({
+          error: 'turnstile_verification_failed',
+          message: 'Bot protection verification failed.',
+          errorCodes: verification.errorCodes,
+        });
+      }
+      return next();
+    } catch (error) {
+      logger.error('Turnstile verification error:', error);
+      return res.status(503).json({
+        error: 'turnstile_unavailable',
+        message: 'Bot protection service is temporarily unavailable.',
+      });
+    }
+  }
 
   app.get('/api/health', async (req, res) => {
   try {
@@ -124,7 +161,7 @@ export function createApp({
   }
   });
 
-  app.get('/api/data/entries', searchLimiter, async (req, res) => {
+  app.get('/api/data/entries', searchLimiter, maybeVerifyTurnstile, async (req, res) => {
   try {
     const {
       domain,

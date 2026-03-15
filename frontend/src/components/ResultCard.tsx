@@ -33,6 +33,10 @@ function tierLabel(value: string) {
   }
 }
 
+function isKnownBadgeValue(value: string | null | undefined) {
+  return Boolean(value) && value !== 'unknown' && value !== '-';
+}
+
 export default function ResultCard({ result }: { result: Entry }) {
   const { locale, t } = useI18n();
   const title = getEntryTitleText(result) || 'Kein Titel';
@@ -59,8 +63,8 @@ export default function ResultCard({ result }: { result: Entry }) {
         <CardContent className="space-y-4 p-4">
           <div className="flex flex-wrap items-center gap-2">
             <Badge variant="secondary">{result.domain || 'unknown'}</Badge>
-            <Badge variant="outline">{tierLabel(meta.sourceTier)}</Badge>
-            {meta.jurisdiction !== 'unknown' && <Badge variant="outline">{meta.jurisdiction}</Badge>}
+            {isKnownBadgeValue(meta.sourceTier) && <Badge variant="outline">{tierLabel(meta.sourceTier)}</Badge>}
+            {isKnownBadgeValue(meta.jurisdiction) && <Badge variant="outline">{meta.jurisdiction}</Badge>}
           </div>
 
           <div className="space-y-2">
@@ -72,7 +76,9 @@ export default function ResultCard({ result }: { result: Entry }) {
             <div>
               <div className="text-[11px] uppercase tracking-wide text-muted-foreground">{t('entry.field_source')}</div>
               <div className="font-medium text-foreground">{meta.source}</div>
-              <div className="text-xs text-muted-foreground">{meta.institutionType.replace(/_/g, ' ')}</div>
+              {isKnownBadgeValue(meta.institutionType) && (
+                <div className="text-xs text-muted-foreground">{meta.institutionType.replace(/_/g, ' ')}</div>
+              )}
             </div>
 
             <div>

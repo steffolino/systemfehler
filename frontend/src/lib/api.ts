@@ -15,8 +15,14 @@ import type {
   entries as DbEntryRow,
   moderationQueue as DbModerationQueueRow,
 } from './db_types';
+import registeredSources from '../../../data/_sources/registered_sources.json';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://systemfehler-api-worker.inequality.workers.dev/api';
+const DEFAULT_LOCAL_API_BASE_URL =
+  typeof window !== 'undefined' &&
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'http://127.0.0.1:3001/api'
+    : 'https://systemfehler-api-worker.inequality.workers.dev/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || DEFAULT_LOCAL_API_BASE_URL;
 const AI_API_BASE_URL = import.meta.env.VITE_AI_API_URL || 'http://localhost:8002';
 const DEFAULT_SNAPSHOT_BASE_URL =
   typeof window !== 'undefined'
@@ -51,8 +57,50 @@ interface StatusResponse {
 type EntryTitle = string | MultilingualText;
 type JsonRecord = Record<string, unknown>;
 
+type RegisteredSourceRecord = {
+  name?: string;
+  baseUrl?: string;
+  sourceTier?: string;
+  institutionType?: string;
+  jurisdiction?: string;
+};
+
 function isJsonRecord(value: unknown): value is JsonRecord {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+}
+
+const REGISTERED_SOURCE_LOOKUP = (() => {
+  const lookup = new Map<string, RegisteredSourceRecord>();
+  const payload = registeredSources as { sources?: RegisteredSourceRecord[] };
+
+  for (const source of payload.sources || []) {
+    if (!source.baseUrl) continue;
+    try {
+      const host = new URL(source.baseUrl).hostname.replace(/^www\./, '');
+      lookup.set(host, source);
+    } catch {
+      continue;
+    }
+  }
+
+  return lookup;
+})();
+
+function inferSourceMetaFromUrl(url: string) {
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, '');
+    const source = REGISTERED_SOURCE_LOOKUP.get(host);
+    if (!source) return null;
+
+    return {
+      source: source.name?.trim() || host,
+      sourceTier: source.sourceTier?.trim() || 'unknown',
+      institutionType: source.institutionType?.trim() || 'unknown',
+      jurisdiction: source.jurisdiction?.trim() || 'unknown',
+    };
+  } catch {
+    return null;
+  }
 }
 
 type Entry = Omit<
@@ -267,6 +315,9 @@ interface AIHealthResponse {
     models?: string[];
     error?: string;
   };
+  turnstile?: {
+    configured: boolean;
+  };
   host: string;
   port: number;
 }
@@ -475,27 +526,39 @@ async function fetchAIResultBundle(query: string): Promise<AIResultBundle> {
   };
 }
 
-async function getAIRewrite(query: string): Promise<AIRewriteResponse> {
+async function getAIRewrite(
+  query: string,
+  options?: { turnstileToken?: string }
+): Promise<AIRewriteResponse> {
   const trimmed = query.trim();
   return fetchAiApi<AIRewriteResponse>('/rewrite', {
     method: 'POST',
     body: JSON.stringify({ query: trimmed }),
+    headers: options?.turnstileToken ? { 'x-turnstile-token': options.turnstileToken } : undefined,
   });
 }
 
-async function getAIRetrieve(query: string): Promise<AIRetrieveResponse> {
+async function getAIRetrieve(
+  query: string,
+  options?: { turnstileToken?: string }
+): Promise<AIRetrieveResponse> {
   const trimmed = query.trim();
   return fetchAiApi<AIRetrieveResponse>('/retrieve', {
     method: 'POST',
     body: JSON.stringify({ query: trimmed }),
+    headers: options?.turnstileToken ? { 'x-turnstile-token': options.turnstileToken } : undefined,
   });
 }
 
-async function getAISynthesis(query: string): Promise<AISynthesizeResponse> {
+async function getAISynthesis(
+  query: string,
+  options?: { turnstileToken?: string }
+): Promise<AISynthesizeResponse> {
   const trimmed = query.trim();
   return fetchAiApi<AISynthesizeResponse>('/synthesize', {
     method: 'POST',
     body: JSON.stringify({ query: trimmed }),
+    headers: options?.turnstileToken ? { 'x-turnstile-token': options.turnstileToken } : undefined,
   });
 }
 
@@ -533,10 +596,17 @@ function getEntryProvenanceRecord(entry: Entry): Record<string, unknown> | null 
 
 function getEntrySourceMeta(entry: Entry) {
   const provenance = getEntryProvenanceRecord(entry);
+  const inferred = inferSourceMetaFromUrl(entry.url);
   const source =
     typeof provenance?.source === 'string' && provenance.source.trim()
-      ? provenance.source.trim()
-      : (() => {
+      ? (() => {
+          const raw = provenance.source.trim();
+          if (/^https?:\/\//i.test(raw)) {
+            return inferred?.source || new URL(raw).hostname.replace(/^www\./, '');
+          }
+          return raw;
+        })()
+      : inferred?.source || (() => {
           try {
             return new URL(entry.url).hostname.replace(/^www\./, '');
           } catch {
@@ -546,15 +616,15 @@ function getEntrySourceMeta(entry: Entry) {
   const sourceTier =
     typeof provenance?.sourceTier === 'string' && provenance.sourceTier.trim()
       ? provenance.sourceTier.trim()
-      : 'unknown';
+      : inferred?.sourceTier || 'unknown';
   const institutionType =
     typeof provenance?.institutionType === 'string' && provenance.institutionType.trim()
       ? provenance.institutionType.trim()
-      : 'unknown';
+      : inferred?.institutionType || 'unknown';
   const jurisdiction =
     typeof provenance?.jurisdiction === 'string' && provenance.jurisdiction.trim()
       ? provenance.jurisdiction.trim()
-      : 'unknown';
+      : inferred?.jurisdiction || 'unknown';
 
   return {
     source,
