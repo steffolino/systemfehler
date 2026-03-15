@@ -1,4 +1,9 @@
 const DEFAULT_MODEL = '@cf/meta/llama-3.1-8b-instruct';
+const DEFAULT_RATE_LIMIT_WINDOW_SECONDS = 60;
+const DEFAULT_RATE_LIMIT_MAX_REQUESTS = 12;
+const DEFAULT_CACHE_TTL_RETRIEVE_SECONDS = 180;
+const DEFAULT_CACHE_TTL_REWRITE_SECONDS = 3600;
+const DEFAULT_CACHE_TTL_SYNTHESIZE_SECONDS = 900;
 
 function parseJsonSafe(value, fallback = {}) {
   if (typeof value !== 'string' || !value.trim()) return fallback;
@@ -54,6 +59,102 @@ function normalizedQueryTokens(query) {
     .split(/\s+/)
     .map((token) => token.trim())
     .filter(Boolean);
+}
+
+export function normalizeQuery(query) {
+  return normalizedQueryTokens(query).join(' ').trim();
+}
+
+function getClientIp(request) {
+  return (
+    request.headers.get('CF-Connecting-IP') ||
+    request.headers.get('x-forwarded-for') ||
+    'unknown'
+  );
+}
+
+function parsePositiveInt(value, fallback) {
+  const parsed = Number.parseInt(String(value ?? ''), 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+}
+
+async function sha256Hex(value) {
+  const bytes = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  return Array.from(new Uint8Array(digest))
+    .map((byte) => byte.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+export async function enforceRateLimit(request, env, routeName) {
+  const limit = parsePositiveInt(env.AI_RATE_LIMIT_MAX_REQUESTS, DEFAULT_RATE_LIMIT_MAX_REQUESTS);
+  const windowSeconds = parsePositiveInt(env.AI_RATE_LIMIT_WINDOW_SECONDS, DEFAULT_RATE_LIMIT_WINDOW_SECONDS);
+  const bucketSeconds = Math.floor(Date.now() / 1000 / windowSeconds);
+  const clientIp = getClientIp(request);
+  const key = `ai-rate:${routeName}:${clientIp}:${bucketSeconds}`;
+  const cache = caches.default;
+  const cacheKey = new Request(`https://internal.systemfehler.local/${key}`);
+  const cached = await cache.match(cacheKey);
+  const currentCount = cached ? Number.parseInt(await cached.text(), 10) || 0 : 0;
+
+  if (currentCount >= limit) {
+    return {
+      allowed: false,
+      retryAfter: windowSeconds,
+      headers: {
+        'Retry-After': String(windowSeconds),
+      },
+    };
+  }
+
+  const nextCount = currentCount + 1;
+  await cache.put(
+    cacheKey,
+    new Response(String(nextCount), {
+      headers: {
+        'Cache-Control': `public, max-age=${windowSeconds}`,
+      },
+    })
+  );
+
+  return {
+    allowed: true,
+    remaining: Math.max(0, limit - nextCount),
+    headers: {
+      'X-RateLimit-Limit': String(limit),
+      'X-RateLimit-Remaining': String(Math.max(0, limit - nextCount)),
+      'X-RateLimit-Window': String(windowSeconds),
+    },
+  };
+}
+
+export async function getCachedJsonResponse(request, cacheKeyParts) {
+  const cache = caches.default;
+  const hashed = await sha256Hex(cacheKeyParts.join('::'));
+  const cacheKey = new Request(`https://internal.systemfehler.local/cache/${hashed}`);
+  const cached = await cache.match(cacheKey);
+  return { cache, cacheKey, cached };
+}
+
+export async function cacheJsonResponse(cache, cacheKey, payload, ttlSeconds) {
+  const response = new Response(JSON.stringify(payload), {
+    headers: {
+      'content-type': 'application/json',
+      'Cache-Control': `public, max-age=${ttlSeconds}`,
+    },
+  });
+  await cache.put(cacheKey, response.clone());
+  return response;
+}
+
+export function getCacheTtl(env, kind) {
+  if (kind === 'retrieve') {
+    return parsePositiveInt(env.AI_CACHE_TTL_RETRIEVE_SECONDS, DEFAULT_CACHE_TTL_RETRIEVE_SECONDS);
+  }
+  if (kind === 'rewrite') {
+    return parsePositiveInt(env.AI_CACHE_TTL_REWRITE_SECONDS, DEFAULT_CACHE_TTL_REWRITE_SECONDS);
+  }
+  return parsePositiveInt(env.AI_CACHE_TTL_SYNTHESIZE_SECONDS, DEFAULT_CACHE_TTL_SYNTHESIZE_SECONDS);
 }
 
 function scoreEntry(query, entry) {

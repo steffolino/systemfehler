@@ -90,6 +90,10 @@ public AI requests when `TURNSTILE_SECRET_KEY` is configured.
 The D1 schema/runtime path also depends on the `entry_json` column for full
 entry hydration inside Pages Functions and Workers AI retrieval.
 
+The Pages AI layer now also applies per-IP rate limiting and short edge-cache
+TTL responses for rewrite, retrieve, and synthesize to reduce repeated Workers
+AI cost on common prompts.
+
 legacy Pages-native GitHub auth function stubs remain in the repo but are not
 required for the active frontend.
 

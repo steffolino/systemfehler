@@ -80,6 +80,11 @@ These public frontend values are injected during the Pages build by
 ### Optional Cloudflare Pages variables
 
 - `CF_AI_MODEL` (defaults to `@cf/meta/llama-3.1-8b-instruct`)
+- `AI_RATE_LIMIT_WINDOW_SECONDS` (defaults to `60`)
+- `AI_RATE_LIMIT_MAX_REQUESTS` (defaults to `12`)
+- `AI_CACHE_TTL_RETRIEVE_SECONDS` (defaults to `180`)
+- `AI_CACHE_TTL_REWRITE_SECONDS` (defaults to `3600`)
+- `AI_CACHE_TTL_SYNTHESIZE_SECONDS` (defaults to `900`)
 
 ## 5. Verify
 
