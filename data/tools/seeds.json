@@ -1,0 +1,62 @@
+{
+  "version": "0.1.0",
+  "domain": "tools",
+  "note": "Curated high-value starting points for tool and e-service crawling. Expanded URL queues remain in urls.json.",
+  "seeds": [
+    {
+      "url": "https://www.arbeitsagentur.de/eservices",
+      "label": "Arbeitsagentur eServices overview",
+      "priority": 10,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "tool-overview",
+      "topics": ["digital_service", "employment"],
+      "tags": ["official_source", "portal"]
+    },
+    {
+      "url": "https://www.familienportal.de/familienportal/rechner-antraege/elterngeldrechner",
+      "label": "Elterngeldrechner",
+      "priority": 20,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "calculator",
+      "topics": ["digital_service", "families"],
+      "tags": ["calculator", "elterngeld"]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kiz-lotse",
+      "label": "KiZ-Lotse",
+      "priority": 30,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "checker",
+      "topics": ["digital_service", "families"],
+      "tags": ["checker", "kinderzuschlag"]
+    },
+    {
+      "url": "https://www.bafza.de/programme-und-foerderungen/familienpflegezeit/familienpflegezeit-rechner",
+      "label": "Familienpflegezeit-Rechner",
+      "priority": 40,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "calculator",
+      "topics": ["digital_service", "care"],
+      "tags": ["calculator", "pflege"]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/jobsuche/",
+      "label": "Jobsuche",
+      "priority": 50,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "job-search",
+      "topics": ["digital_service", "employment"],
+      "tags": ["job-search", "portal"]
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "version": "0.1.0",
+  "domain": "aid",
+  "note": "Curated high-value starting points for aid crawling. Expanded URL queues remain in urls.json.",
+  "seeds": [
+    {
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen",
+      "label": "Familienleistungen overview",
+      "priority": 10,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "benefit-overview",
+      "topics": ["financial_support", "families"],
+      "tags": ["official_source", "benefit-overview"],
+      "targetGroups": ["families", "single_parents"]
+    },
+    {
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kinderzuschlag-und-leistungen-fuer-bildung-und-teilhabe-73906",
+      "label": "Kinderzuschlag and Bildungspaket",
+      "priority": 20,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "benefit-detail",
+      "topics": ["financial_support", "children"],
+      "tags": ["application_required", "children"]
+    },
+    {
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/unterhaltsvorschuss/unterhaltsvorschuss-73558",
+      "label": "Unterhaltsvorschuss",
+      "priority": 30,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "benefit-detail",
+      "topics": ["financial_support", "single_parents"],
+      "tags": ["application_required", "underhaltsvorschuss"]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/familie-und-kinder/informationen-zum-bildungspaket",
+      "label": "Bildungspaket information",
+      "priority": 40,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "benefit-detail",
+      "topics": ["financial_support", "education"],
+      "tags": ["official_source", "education"]
+    },
+    {
+      "url": "https://www.bafza.de/rat-und-hilfe/pflegetelefon",
+      "label": "Pflegetelefon",
+      "priority": 50,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "advisory-service",
+      "topics": ["aid", "care"],
+      "tags": ["advisory", "contact"]
+    }
+  ]
+}

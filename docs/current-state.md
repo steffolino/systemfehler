@@ -39,6 +39,8 @@ Treat these as reference or planning documents, not runtime truth:
   are reference-only stubs and should not receive runtime crawling logic.
 - `data/<domain>/url_status.jsonl` is now part of the canonical crawl state and
   records redirects, canonical aliases, and skip-worthy failures.
+- Seeded domains now have a curated `data/<domain>/seeds.json` layer for
+  high-value starting points, separate from the expanded `urls.json` queue.
 - Crawler provenance now carries reusable source metadata such as
   `sourceTier`, `institutionType`, `jurisdiction`, `publishedAt`,
   `modifiedAt`, and `contentType` when detectable.

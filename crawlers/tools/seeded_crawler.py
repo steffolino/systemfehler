@@ -17,7 +17,7 @@ class SeededToolsCrawler(SeededDomainCrawler):
             user_agent=user_agent,
             rate_limit_delay=rate_limit_delay,
             data_dir=data_dir,
-            source_label='urls-seeded',
+            source_label='seed-manifest',
         )
 
     def default_topics(self) -> List[str]:
@@ -29,8 +29,14 @@ class SeededToolsCrawler(SeededDomainCrawler):
     def default_target_groups(self) -> List[str]:
         return ['general_public', 'families', 'job_seekers']
 
-    def build_domain_fields(self, url: str, soup: BeautifulSoup, entry: Dict[str, Any]) -> Dict[str, Any]:
-        text = f"{((entry.get('title') or {}).get('de', '')).lower()} {url.lower()}"
+    def build_domain_fields(
+        self,
+        url: str,
+        soup: BeautifulSoup,
+        entry: Dict[str, Any],
+        seed: Dict[str, Any] | None = None,
+    ) -> Dict[str, Any]:
+        text = f"{str(entry.get('title') or '').lower()} {url.lower()}"
 
         tool_type = 'portal'
         if any(token in text for token in ('rechner', 'calculator')):

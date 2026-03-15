@@ -27,6 +27,7 @@ an independent module with its own data and crawler:
 ```text
 crawlers/<domain>/
 data/<domain>/entries.json
+data/<domain>/seeds.json
 data/<domain>/urls.json
 ```
 
@@ -226,9 +227,10 @@ When resolving deployment-related ambiguity, this section is the canonical sourc
 
 ## 4. Data Flow Overview
 
-1. **URL registration**
+1. **Seed registration**
 
-   * Source URLs are stored in `data/<domain>/urls.json`.
+   * Curated high-value seeds are stored in `data/<domain>/seeds.json`.
+   * Expanded discovery queues remain in `data/<domain>/urls.json`.
 
 2. **Crawling and extraction**
 

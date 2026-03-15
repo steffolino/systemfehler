@@ -17,7 +17,7 @@ class SeededOrganizationsCrawler(SeededDomainCrawler):
             user_agent=user_agent,
             rate_limit_delay=rate_limit_delay,
             data_dir=data_dir,
-            source_label='urls-seeded',
+            source_label='seed-manifest',
         )
 
     def default_topics(self) -> List[str]:
@@ -29,8 +29,13 @@ class SeededOrganizationsCrawler(SeededDomainCrawler):
     def default_target_groups(self) -> List[str]:
         return ['general_public']
 
-    def build_domain_fields(self, url: str, soup: BeautifulSoup, entry: Dict[str, Any]) -> Dict[str, Any]:
-        title = (entry.get('title') or {}).get('de', '')
+    def build_domain_fields(
+        self,
+        url: str,
+        soup: BeautifulSoup,
+        entry: Dict[str, Any],
+        seed: Dict[str, Any] | None = None,
+    ) -> Dict[str, Any]:
         domain_host = url.split('/')[2] if '://' in url else url
 
         services = []

@@ -1,0 +1,62 @@
+{
+  "version": "0.1.0",
+  "domain": "contacts",
+  "note": "Curated high-value starting points for contact crawling. Expanded URL queues remain in urls.json.",
+  "seeds": [
+    {
+      "url": "https://www.arbeitsagentur.de/service-bereich/so-erreichen-sie-uns",
+      "label": "Arbeitsagentur contact overview",
+      "priority": 10,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "contact-overview",
+      "topics": ["contacts", "public_service"],
+      "tags": ["official_contact", "service_contact"]
+    },
+    {
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/service/kontakt",
+      "label": "BMBFSFJ contact page",
+      "priority": 20,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "contact-overview",
+      "topics": ["contacts", "public_service"],
+      "tags": ["official_contact", "ministry_contact"]
+    },
+    {
+      "url": "https://www.115.de/kontakt",
+      "label": "115 contact page",
+      "priority": 30,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "helpline",
+      "topics": ["contacts", "public_service"],
+      "tags": ["helpline", "115"]
+    },
+    {
+      "url": "https://www.gebaerdentelefon.de/115",
+      "label": "115 sign-language contact",
+      "priority": 40,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "accessibility-contact",
+      "topics": ["contacts", "accessibility"],
+      "tags": ["accessibility", "115"]
+    },
+    {
+      "url": "https://www.bafza.de/kontakt",
+      "label": "BAFzA contact page",
+      "priority": 50,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "contact-overview",
+      "topics": ["contacts", "public_service"],
+      "tags": ["official_contact", "federal_agency"]
+    }
+  ]
+}

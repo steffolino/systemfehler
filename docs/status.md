@@ -42,6 +42,7 @@ crawling logic to these files.
 | `crawlers/organizations/seeded_crawler.py` | ✅ Working | Crawls seeded organization URLs from `data/organizations/urls.json` |
 | `crawlers/contacts/seeded_crawler.py` | ✅ Working | Crawls seeded contact URLs from `data/contacts/urls.json` |
 | `crawlers/shared/link_expander.py` | ✅ Working | Python link discovery and URL queue expansion (CRAWL-03) |
+| `data/<domain>/seeds.json` | ✅ Working | Curated high-value seed manifests for seeded domains; `urls.json` remains the expanded queue |
 | `data/<domain>/url_status.jsonl` | ✅ Working | Persistent URL crawl state for redirects, canonical aliases, and skip-worthy failures |
 | Provenance source metadata | ✅ Working | Crawlers emit `sourceTier`, `institutionType`, `jurisdiction`, and publication timestamps in `provenance` when detectable |
 
