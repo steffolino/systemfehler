@@ -65,6 +65,7 @@ High-confidence implemented areas confirmed in code:
 - Express API in `backend/server.js`
 - Cloudflare Pages Functions API in `cloudflare-pages/functions/api`
 - React frontend and admin shell in `frontend/src`
+- Admin raw-entry review now includes structured metadata-enrichment suggestions (`topics`, `tags`, `target_groups`, `keywords`) from the AI sidecar for editor review
 - URL canonicalization helpers in `services/_shared/url_normalization.js`
 - URL canonicalization tests in `tests/url_canonicalization_test.js`
 

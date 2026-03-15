@@ -217,3 +217,4 @@ All seeded domain crawlers (aid, tools, organizations, contacts) are implemented
 | FastAPI gateway | ✅ Working | Runs via `npm run ai:api` |
 | Provider adapter layer | ✅ Working | Supports `AI_PROVIDER=none|ollama|openai` |
 | Query rewrite / synthesize / enrich endpoints | 🟡 Experimental | Real provider calls when configured; graceful fallback when disabled or unreachable |
+| Structured metadata enrichment suggestions | ✅ Working | `/enrich` returns deterministic-first suggestions for `topics`, `tags`, `target_groups`, and `keywords`, with quality flags and admin-facing rationale |

@@ -7,16 +7,19 @@ from __future__ import annotations
 import json
 import os
 import time
+from pathlib import Path
 
 from fastapi import APIRouter
 
 from .cache import (
+    CACHE_TTL_ENRICH,
     CACHE_TTL_RETRIEVE,
     CACHE_TTL_REWRITE,
     CACHE_TTL_SYNTHESIZE,
     ai_cache,
     cache_key,
     fingerprint_evidence,
+    fingerprint_payload,
     normalize_query,
 )
 from .provider import AIProviderError, get_provider
@@ -24,6 +27,8 @@ from .retrieval import retrieve_evidence
 from .routing import ModelRouter
 from .schemas import (
     AnswerResponse,
+    EnrichmentFacet,
+    EnrichmentPayload,
     EnrichmentRequest,
     EnrichmentSuggestion,
     QueryRequest,
@@ -59,6 +64,114 @@ ENRICH_SYSTEM_PROMPT = (
 
 LOCAL_SYNTHESIS_STRATEGY = os.getenv("AI_LOCAL_SYNTHESIS_STRATEGY", "extractive").strip().lower()
 LOCAL_REWRITE_STRATEGY = os.getenv("AI_LOCAL_REWRITE_STRATEGY", "deterministic").strip().lower()
+REPO_ROOT = Path(__file__).resolve().parents[2]
+
+
+def _load_taxonomy_ids(filename, key):
+    path = REPO_ROOT / "data" / "_taxonomy" / filename
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return set()
+    values = payload.get(key, []) if isinstance(payload, dict) else []
+    return {
+        item.get("id")
+        for item in values
+        if isinstance(item, dict) and isinstance(item.get("id"), str)
+    }
+
+
+KNOWN_TOPICS = _load_taxonomy_ids("topics.json", "topics")
+KNOWN_TAGS = _load_taxonomy_ids("tags.json", "tags")
+KNOWN_TARGET_GROUPS = _load_taxonomy_ids("target_groups.json", "targetGroups")
+STOPWORDS = {
+    "aber",
+    "alle",
+    "als",
+    "auch",
+    "bei",
+    "damit",
+    "dann",
+    "dass",
+    "de",
+    "den",
+    "der",
+    "des",
+    "die",
+    "ein",
+    "eine",
+    "einer",
+    "einen",
+    "eines",
+    "er",
+    "es",
+    "fuer",
+    "fur",
+    "hat",
+    "hilfe",
+    "ich",
+    "ihnen",
+    "ist",
+    "mit",
+    "nach",
+    "nicht",
+    "oder",
+    "sie",
+    "sich",
+    "sind",
+    "und",
+    "von",
+    "wenn",
+    "wie",
+    "wir",
+}
+METADATA_RULES = [
+    {
+        "patterns": ("arbeitslos", "arbeitsagentur", "jobcenter", "arbeitslosengeld", "buergergeld", "burgergeld"),
+        "topics": {"employment", "financial_support"},
+        "target_groups": {"unemployed"},
+        "keywords": {"arbeitslos", "jobcenter", "buergergeld", "arbeitsagentur"},
+        "rationale": "Employment and income-support terms are dominant in the entry.",
+    },
+    {
+        "patterns": ("elterngeld", "familie", "familien", "kinder", "alleinerzieh"),
+        "topics": {"family", "financial_support"},
+        "target_groups": {"families", "single_parents"},
+        "keywords": {"elterngeld", "familie", "kinder"},
+        "rationale": "Family-related support language appears in the entry.",
+    },
+    {
+        "patterns": ("wohnung", "wohngeld", "miete", "miet", "unterkunft"),
+        "topics": {"housing", "financial_support"},
+        "keywords": {"wohngeld", "miete", "wohnung"},
+        "rationale": "Housing support terms are present.",
+    },
+    {
+        "patterns": ("gesund", "pflege", "krank", "reha"),
+        "topics": {"healthcare"},
+        "keywords": {"gesundheit", "pflege"},
+        "rationale": "Health-related support language appears in the entry.",
+    },
+    {
+        "patterns": ("bildung", "ausbildung", "schule", "stud", "weiterbildung"),
+        "topics": {"education"},
+        "target_groups": {"students"},
+        "keywords": {"bildung", "ausbildung", "studium"},
+        "rationale": "Education-related terms are present.",
+    },
+    {
+        "patterns": ("gefluecht", "geflucht", "asyl", "ukraine"),
+        "target_groups": {"refugees"},
+        "keywords": {"gefluechtete", "asyl"},
+        "rationale": "Refugee-related language is present.",
+    },
+    {
+        "patterns": ("behinder", "barriere", "inklusion"),
+        "target_groups": {"disabled"},
+        "keywords": {"behinderung", "barrierefrei"},
+        "rationale": "Disability or accessibility language is present.",
+    },
+]
 
 
 def _usage_totals(payload):
@@ -181,6 +294,177 @@ def _compact_evidence_block(evidence):
             )
         )
     return "\n\n".join(compact_rows)
+
+
+def _clean_list(values):
+    cleaned = []
+    seen = set()
+    for value in values or []:
+        if not isinstance(value, str):
+            continue
+        normalized = value.strip()
+        if not normalized:
+            continue
+        key = normalized.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        cleaned.append(normalized)
+    return cleaned
+
+
+def _entry_text_blob(entry):
+    parts = []
+    title = entry.get("title")
+    if isinstance(title, str):
+        parts.append(title)
+    elif isinstance(title, dict):
+        parts.extend(str(value) for value in title.values() if isinstance(value, str))
+    for key in (
+        "title_de",
+        "title_en",
+        "summary_de",
+        "summary_en",
+        "content_de",
+        "content_en",
+        "url",
+        "domain",
+    ):
+        value = entry.get(key)
+        if isinstance(value, str):
+            parts.append(value)
+    for field in ("summary", "content"):
+        value = entry.get(field)
+        if isinstance(value, dict):
+            parts.extend(str(item) for item in value.values() if isinstance(item, str))
+    return " ".join(parts).lower()
+
+
+def _score_confidence(current, added, base):
+    if not added:
+        return 0.35 if current else 0.0
+    return min(0.95, base + (0.08 * len(added)))
+
+
+def _keyword_key(value):
+    return (
+        value.lower()
+        .replace("ä", "ae")
+        .replace("ö", "oe")
+        .replace("ü", "ue")
+        .replace("ß", "ss")
+    )
+
+
+def _build_facet(current, suggested, rationale, base_confidence):
+    current_list = _clean_list(current)
+    suggested_list = _clean_list(suggested)
+    current_keys = {value.lower() for value in current_list}
+    suggested_keys = {value.lower() for value in suggested_list}
+    added = [value for value in suggested_list if value.lower() not in current_keys]
+    removed = [value for value in current_list if value.lower() not in suggested_keys]
+    return EnrichmentFacet(
+        current=current_list,
+        suggested=suggested_list,
+        added=added,
+        removed=removed,
+        confidence=_score_confidence(current_list, added, base_confidence),
+        rationale=rationale,
+    )
+
+
+def _infer_keywords(entry, text_blob):
+    keywords = {}
+    for rule in METADATA_RULES:
+        if any(pattern in text_blob for pattern in rule["patterns"]):
+            for value in rule.get("keywords", set()):
+                keywords.setdefault(_keyword_key(value), value)
+
+    title = entry.get("title")
+    title_text = title if isinstance(title, str) else entry.get("title_de")
+    if isinstance(title_text, str):
+        for token in title_text.lower().replace("-", " ").split():
+            token = "".join(char for char in token if char.isalpha())
+            if len(token) < 4 or token in STOPWORDS:
+                continue
+            keywords.setdefault(_keyword_key(token), token)
+
+    return sorted(keywords.values())[:8]
+
+
+def _derive_metadata_suggestions(entry):
+    current_topics = _clean_list(entry.get("topics") or [])
+    current_tags = _clean_list(entry.get("tags") or [])
+    current_target_groups = _clean_list(entry.get("targetGroups") or entry.get("target_groups") or [])
+    text_blob = _entry_text_blob(entry)
+
+    suggested_topics = set(current_topics)
+    suggested_tags = set(current_tags)
+    suggested_target_groups = set(current_target_groups)
+    rationales = []
+
+    for rule in METADATA_RULES:
+        if any(pattern in text_blob for pattern in rule["patterns"]):
+            suggested_topics.update(rule.get("topics", set()))
+            suggested_target_groups.update(rule.get("target_groups", set()))
+            rationale = rule.get("rationale")
+            if isinstance(rationale, str):
+                rationales.append(rationale)
+
+    if any(pattern in text_blob for pattern in ("antrag", "beantrag", "formular", "online beantragen", "jobcenter")):
+        suggested_tags.add("application_required")
+        rationales.append("Application language suggests an explicit application step.")
+    if any(pattern in text_blob for pattern in ("einkommen", "lebensunterhalt", "anspruch", "hilfebeduerf", "hilfebedurf")):
+        suggested_tags.add("means_tested")
+        rationales.append("Eligibility appears tied to income or need.")
+    if any(pattern in text_blob for pattern in ("frist", "deadline", "spaetestens", "spätestens", "bis zum")):
+        suggested_tags.add("time_limited")
+        rationales.append("A deadline or time limit is mentioned.")
+    if any(pattern in text_blob for pattern in ("sofort", "notfall", "akut", "dringend")):
+        suggested_tags.add("urgent")
+        rationales.append("The text suggests urgency or emergency context.")
+    if any(pattern in text_blob for pattern in ("automatisch", "ohne antrag", "automatische")):
+        suggested_tags.add("automatic")
+        rationales.append("The text suggests an automatic process.")
+
+    suggested_topics = sorted(topic for topic in suggested_topics if topic in KNOWN_TOPICS)
+    suggested_tags = sorted(tag for tag in suggested_tags if tag in KNOWN_TAGS)
+    suggested_target_groups = sorted(group for group in suggested_target_groups if group in KNOWN_TARGET_GROUPS)
+    suggested_keywords = _infer_keywords(entry, text_blob)
+
+    summary_value = entry.get("summary")
+    content_value = entry.get("content")
+    summary_de = summary_value.get("de") if isinstance(summary_value, dict) else None
+    content_de = content_value.get("de") if isinstance(content_value, dict) else None
+
+    quality_flags = []
+    if not current_topics and suggested_topics:
+        quality_flags.append("missing_topics")
+    if not current_tags and suggested_tags:
+        quality_flags.append("missing_tags")
+    if not current_target_groups and suggested_target_groups:
+        quality_flags.append("missing_target_groups")
+    if not isinstance(entry.get("summary_de"), str) and not isinstance(summary_de, str):
+        quality_flags.append("missing_german_summary")
+    if not isinstance(entry.get("content_de"), str) and not isinstance(content_de, str):
+        quality_flags.append("missing_german_content")
+
+    summary = []
+    if suggested_topics:
+        summary.append(f"Suggested {len(suggested_topics)} topic labels for stronger thematic recall.")
+    if suggested_target_groups:
+        summary.append(f"Suggested {len(suggested_target_groups)} target groups for audience-aware search.")
+    if suggested_keywords:
+        summary.append("Suggested keywords can improve AI retrieval prompts and future autocomplete.")
+
+    rationale = " ".join(dict.fromkeys(rationales)) or "Suggestions are derived from deterministic taxonomy matching."
+    metadata = EnrichmentPayload(
+        topics=_build_facet(current_topics, suggested_topics, rationale, 0.62),
+        tags=_build_facet(current_tags, suggested_tags, rationale, 0.58),
+        target_groups=_build_facet(current_target_groups, suggested_target_groups, rationale, 0.64),
+        keywords=_build_facet([], suggested_keywords, "Keywords are extracted from title and content signals.", 0.55),
+    )
+    return metadata, summary, quality_flags
 
 
 @router.post("/retrieve", response_model=RetrieveResponse)
@@ -403,21 +687,63 @@ async def synthesize_answer(body: QueryRequest):
 async def suggest_enrichment(body: EnrichmentRequest):
     start = time.time()
     model = model_router.route("enrich", explicit_escalation=body.explicit_escalation)
+    entry_payload = body.entry if isinstance(body.entry, dict) else {}
+    entry_fingerprint = fingerprint_payload(
+        {
+            "entry_id": body.entry_id,
+            "entry": entry_payload,
+        }
+    )
+    enrich_cache_key = cache_key("enrich", model, body.entry_id, entry_fingerprint)
+    cached = ai_cache.get(enrich_cache_key)
+    if cached is not None:
+        return EnrichmentSuggestion(**cached)
+
+    metadata, summary, quality_flags = _derive_metadata_suggestions(entry_payload)
+    deterministic_response = EnrichmentSuggestion(
+        entry_id=body.entry_id,
+        summary=summary,
+        quality_flags=quality_flags,
+        metadata=metadata,
+        provenance={
+            "provider": provider.name,
+            "model": f"{model}:deterministic",
+            "strategy": "taxonomy_heuristics",
+        },
+    )
 
     if not provider.is_configured():
         latency = int((time.time() - start) * 1000)
         log_telemetry("enrich", model, latency, False, 0, 0.0)
-        return EnrichmentSuggestion(
-            entry_id=body.entry_id,
-            suggestions=[],
-            provenance={
-                "provider": provider.name,
-                "model": model,
-                "latency_ms": latency,
-                "fallback": True,
-                "message": "No AI provider configured.",
-            },
+        response = deterministic_response.model_copy(
+            update={
+                "provenance": {
+                    **deterministic_response.provenance,
+                    "latency_ms": latency,
+                    "fallback": True,
+                    "message": "No AI provider configured.",
+                }
+            }
         )
+        ai_cache.set(enrich_cache_key, _cacheable_response(response), CACHE_TTL_ENRICH)
+        return response
+
+    # Keep local enrichment deterministic-first for speed and reviewability.
+    if provider.name == "ollama":
+        latency = int((time.time() - start) * 1000)
+        response = deterministic_response.model_copy(
+            update={
+                "provenance": {
+                    **deterministic_response.provenance,
+                    "provider": provider.name,
+                    "latency_ms": latency,
+                    "fallback": False,
+                }
+            }
+        )
+        ai_cache.set(enrich_cache_key, _cacheable_response(response), CACHE_TTL_ENRICH)
+        log_telemetry("enrich", model, latency, True, 0, 0.0)
+        return response
 
     try:
         completion = provider.generate_text(
@@ -425,6 +751,7 @@ async def suggest_enrichment(body: EnrichmentRequest):
             system_prompt=ENRICH_SYSTEM_PROMPT,
             user_prompt=(
                 f"Entry ID: {body.entry_id}\n\n"
+                f"Entry excerpt:\n{json.dumps(entry_payload, ensure_ascii=False)[:2400]}\n\n"
                 "Suggest up to 5 short metadata or quality improvements as separate bullet points."
             ),
             temperature=0.2,
@@ -438,27 +765,36 @@ async def suggest_enrichment(body: EnrichmentRequest):
         ][:5]
         latency = int((time.time() - start) * 1000)
         log_telemetry("enrich", model, latency, True, total_tokens, 0.0)
-        return EnrichmentSuggestion(
-            entry_id=body.entry_id,
-            suggestions=suggestions,
-            provenance={
-                "provider": provider.name,
-                "model": model,
-                "latency_ms": latency,
-                "usage": usage,
-            },
+        response = deterministic_response.model_copy(
+            update={
+                "summary": deterministic_response.summary + suggestions,
+                "provenance": {
+                    **deterministic_response.provenance,
+                    "provider": provider.name,
+                    "model": model,
+                    "latency_ms": latency,
+                    "usage": usage,
+                    "fallback": False,
+                    "llm_notes": suggestions,
+                },
+            }
         )
+        ai_cache.set(enrich_cache_key, _cacheable_response(response), CACHE_TTL_ENRICH)
+        return response
     except AIProviderError as exc:
         latency = int((time.time() - start) * 1000)
         log_telemetry("enrich", model, latency, False, 0, 0.0)
-        return EnrichmentSuggestion(
-            entry_id=body.entry_id,
-            suggestions=[],
-            provenance={
-                "provider": provider.name,
-                "model": model,
-                "latency_ms": latency,
-                "fallback": True,
-                "message": str(exc),
-            },
+        response = deterministic_response.model_copy(
+            update={
+                "provenance": {
+                    **deterministic_response.provenance,
+                    "provider": provider.name,
+                    "model": model,
+                    "latency_ms": latency,
+                    "fallback": True,
+                    "message": str(exc),
+                }
+            }
         )
+        ai_cache.set(enrich_cache_key, _cacheable_response(response), CACHE_TTL_ENRICH)
+        return response

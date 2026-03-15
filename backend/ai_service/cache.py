@@ -47,6 +47,7 @@ class TTLCache:
 CACHE_TTL_RETRIEVE = _env_int("AI_CACHE_TTL_RETRIEVE_SECONDS", 600)
 CACHE_TTL_REWRITE = _env_int("AI_CACHE_TTL_REWRITE_SECONDS", 86400)
 CACHE_TTL_SYNTHESIZE = _env_int("AI_CACHE_TTL_SYNTHESIZE_SECONDS", 1800)
+CACHE_TTL_ENRICH = _env_int("AI_CACHE_TTL_ENRICH_SECONDS", 3600)
 ai_cache = TTLCache(max_entries=_env_int("AI_CACHE_MAX_ENTRIES", 512))
 
 
@@ -74,3 +75,8 @@ def fingerprint_evidence(evidence: list[Any]) -> str:
         )
     payload = json.dumps(compact, sort_keys=True, ensure_ascii=True)
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def fingerprint_payload(payload: Any) -> str:
+    serialized = json.dumps(payload, sort_keys=True, ensure_ascii=True, default=str)
+    return hashlib.sha256(serialized.encode("utf-8")).hexdigest()

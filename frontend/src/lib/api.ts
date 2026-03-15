@@ -230,6 +230,28 @@ interface AISynthesizeResponse {
   usage?: Record<string, unknown>;
 }
 
+interface AIEnrichmentFacet {
+  current: string[];
+  suggested: string[];
+  added: string[];
+  removed: string[];
+  confidence: number;
+  rationale: string;
+}
+
+interface AIEnrichmentResponse {
+  entry_id: string;
+  summary: string[];
+  quality_flags: string[];
+  metadata: {
+    topics: AIEnrichmentFacet;
+    tags: AIEnrichmentFacet;
+    target_groups: AIEnrichmentFacet;
+    keywords: AIEnrichmentFacet;
+  };
+  provenance: Record<string, unknown>;
+}
+
 interface AIResultBundle {
   rewrite: AIRewriteResponse;
   synthesis: AISynthesizeResponse;
@@ -459,6 +481,16 @@ async function getAISynthesis(query: string): Promise<AISynthesizeResponse> {
   return fetchAiApi<AISynthesizeResponse>('/synthesize', {
     method: 'POST',
     body: JSON.stringify({ query: trimmed }),
+  });
+}
+
+async function getAIEnrichment(entry: Entry): Promise<AIEnrichmentResponse> {
+  return fetchAiApi<AIEnrichmentResponse>('/enrich', {
+    method: 'POST',
+    body: JSON.stringify({
+      entry_id: entry.id,
+      entry,
+    }),
   });
 }
 
@@ -919,6 +951,8 @@ export const api = {
 
   getAISynthesis,
 
+  getAIEnrichment,
+
   getAIHealth: async (): Promise<AIHealthResponse> => {
     if (IS_GITHUB_PAGES) {
       return {
@@ -983,6 +1017,7 @@ export type {
   Provenance,
   AIRewriteResponse,
   AISynthesizeResponse,
+  AIEnrichmentResponse,
   AIResultBundle,
   AIHealthResponse,
 };
