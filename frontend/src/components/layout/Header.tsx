@@ -28,6 +28,7 @@ export function Header() {
 
   const isAdminRoute = location.pathname.startsWith("/admin");
   const isEntryRoute = location.pathname.startsWith("/entry/");
+  const isSourcesRoute = location.pathname.startsWith("/sources");
 
   const roles = useMemo(() => {
     const rawRoles = user?.[ROLES_CLAIM as keyof typeof user];
@@ -61,6 +62,8 @@ export function Header() {
 
   const subtitle = isAdminRoute
     ? "Admin workspace"
+    : isSourcesRoute
+      ? "Source transparency"
     : "Search and validate entries";
 
   return (
@@ -107,6 +110,13 @@ export function Header() {
           )}
 
           <div className="flex flex-wrap items-center gap-2">
+            <Button
+              variant={isSourcesRoute ? "default" : "outline"}
+              size="sm"
+              onClick={() => navigate("/sources")}
+            >
+              Sources
+            </Button>
 
             {/* Admin button only when logged in */}
             {isAuthenticated && (

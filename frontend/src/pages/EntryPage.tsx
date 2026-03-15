@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import { api } from '../lib/api';
+import { api, getEntrySourceMeta } from '../lib/api';
 import type { Entry, Provenance } from '../lib/api';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -45,6 +45,10 @@ function scoreValue(value: unknown): string {
     return Number.isInteger(value) ? String(value) : value.toFixed(2);
   }
   return String(value);
+}
+
+function badgeLabel(value: string) {
+  return value.replace(/_/g, ' ');
 }
 
 function InfoList({
@@ -176,6 +180,7 @@ export default function EntryPage() {
     const targetGroups = getArrayValue(entry.targetGroups, entry.target_groups);
 
     const provenance: Provenance | null = entry.provenance ?? null;
+    const sourceMeta = getEntrySourceMeta(entry);
     const qualityScores = entry.qualityScores || entry.quality_scores || {};
 
     const iqs = qualityScores.iqs ?? entry.iqs ?? null;
@@ -191,6 +196,7 @@ export default function EntryPage() {
       tags,
       targetGroups,
       provenance,
+      sourceMeta,
       iqs,
       ais,
     };
@@ -253,6 +259,7 @@ export default function EntryPage() {
     tags,
     targetGroups,
     provenance,
+    sourceMeta,
     iqs,
     ais,
   } = viewModel;
@@ -285,6 +292,14 @@ export default function EntryPage() {
           <span className="inline-flex rounded-full border px-3 py-1 text-xs font-medium">
             Status: {status}
           </span>
+          <span className="inline-flex rounded-full border px-3 py-1 text-xs font-medium">
+            Source: {sourceMeta.source}
+          </span>
+          {sourceMeta.sourceTier !== 'unknown' && (
+            <span className="inline-flex rounded-full border px-3 py-1 text-xs font-medium">
+              Tier: {badgeLabel(sourceMeta.sourceTier)}
+            </span>
+          )}
           {isAdmin && id && (
             <span className="inline-flex rounded-full border px-3 py-1 font-mono text-xs font-medium">
               ID: {id}
@@ -402,6 +417,22 @@ export default function EntryPage() {
               items={targetGroups}
               emptyLabel="Keine Zielgruppen vorhanden."
             />
+          </SectionCard>
+
+          <SectionCard title="Quelle und Datenqualitaet">
+            <InfoList
+              items={[
+                { label: 'Quelle', value: sourceMeta.source },
+                { label: 'Quellentyp', value: badgeLabel(sourceMeta.institutionType) },
+                { label: 'Source tier', value: badgeLabel(sourceMeta.sourceTier) },
+                { label: 'Jurisdiktion', value: sourceMeta.jurisdiction },
+                { label: 'IQS', value: scoreValue(iqs) },
+                { label: 'AIS', value: scoreValue(ais) },
+              ]}
+            />
+            <div className="mt-4 text-sm text-muted-foreground">
+              Transparenzhinweis: Diese Angaben stammen aus der erfassten Provenienz und den berechneten Qualitaetswerten des Eintrags.
+            </div>
           </SectionCard>
         </div>
       )}

@@ -6,6 +6,7 @@ import AdminLayout from "./components/admin/AdminLayout";
 
 import SearchPage from "./pages/SearchPage";
 import EntryPage from "./pages/EntryPage";
+import SourcesPage from "./pages/SourcesPage";
 
 import AdminApp from "./pages/AdminApp";
 import AdminModeration from "./pages/AdminModeration";
@@ -33,6 +34,7 @@ export default function App() {
 
       <Routes>
         <Route path="/" element={<SearchPage />} />
+        <Route path="/sources" element={<SourcesPage />} />
         <Route path="/entry/:id" element={<EntryPage />} />
 
         <Route

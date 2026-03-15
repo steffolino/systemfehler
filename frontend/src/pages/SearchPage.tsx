@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useMemo, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { Link } from 'react-router-dom';
 import { api, type Entry } from '../lib/api';
 import type { AIHealthResponse, AIResultBundle } from '../lib/api';
 import SearchInput from '../components/SearchInput';
@@ -285,6 +286,13 @@ export default function SearchPage() {
         <p className="mt-1 text-sm text-muted-foreground">
           Search the database and inspect standard or AI-generated results.
         </p>
+        <div className="mt-3 text-sm text-muted-foreground">
+          Want to see where entries come from? Browse the{' '}
+          <Link to="/sources" className="font-medium text-foreground underline underline-offset-4">
+            source directory
+          </Link>
+          .
+        </div>
       </div>
 
       <Card className="p-4 md:p-5">

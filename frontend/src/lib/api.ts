@@ -271,6 +271,21 @@ interface AIHealthResponse {
   port: number;
 }
 
+interface SourceCatalogItem {
+  id: string;
+  name: string;
+  host: string;
+  sourceTier: string;
+  institutionType: string;
+  jurisdiction: string;
+  entryCount: number;
+  domains: string[];
+  avgIqs: number | null;
+  avgAis: number | null;
+  lastSeen: string | null;
+  sampleUrl: string | null;
+}
+
 async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const normalizedBase = API_BASE_URL.replace(/\/+$/, '');
   const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
@@ -510,9 +525,50 @@ function getTranslationTitle(translations: TranslationsMap | null | undefined, k
   return record?.title ?? null;
 }
 
+function getEntryProvenanceRecord(entry: Entry): Record<string, unknown> | null {
+  return entry.provenance && typeof entry.provenance === 'object'
+    ? (entry.provenance as Record<string, unknown>)
+    : null;
+}
+
+function getEntrySourceMeta(entry: Entry) {
+  const provenance = getEntryProvenanceRecord(entry);
+  const source =
+    typeof provenance?.source === 'string' && provenance.source.trim()
+      ? provenance.source.trim()
+      : (() => {
+          try {
+            return new URL(entry.url).hostname.replace(/^www\./, '');
+          } catch {
+            return 'Unknown source';
+          }
+        })();
+  const sourceTier =
+    typeof provenance?.sourceTier === 'string' && provenance.sourceTier.trim()
+      ? provenance.sourceTier.trim()
+      : 'unknown';
+  const institutionType =
+    typeof provenance?.institutionType === 'string' && provenance.institutionType.trim()
+      ? provenance.institutionType.trim()
+      : 'unknown';
+  const jurisdiction =
+    typeof provenance?.jurisdiction === 'string' && provenance.jurisdiction.trim()
+      ? provenance.jurisdiction.trim()
+      : 'unknown';
+
+  return {
+    source,
+    sourceTier,
+    institutionType,
+    jurisdiction,
+  };
+}
+
 export function getEntryTitleText(entry: Pick<Entry, 'title' | 'title_de' | 'title_en'>, locale: keyof MultilingualText = 'de'): string {
   return getLocalizedTitle(entry.title, locale === 'en' ? entry.title_en ?? entry.title_de ?? '' : entry.title_de, locale);
 }
+
+export { getEntrySourceMeta };
 
 function normalizeEntriesPayload(payload: unknown, domainFallback?: string): Entry[] {
   const payloadRecord = isJsonRecord(payload) ? payload : null;
@@ -618,6 +674,87 @@ async function getEntriesFromSnapshots(params?: {
     page,
     pages,
   };
+}
+
+async function getAllEntriesForCatalog(): Promise<Entry[]> {
+  if (IS_GITHUB_PAGES) {
+    return loadSnapshotEntries();
+  }
+
+  const limit = 250;
+  let offset = 0;
+  let total = Infinity;
+  const entries: Entry[] = [];
+
+  while (offset < total) {
+    const response = await fetchApi<EntriesResponse>(`/api/data/entries?limit=${limit}&offset=${offset}&includeTranslations=true`);
+    entries.push(...response.entries);
+    total = response.total;
+    offset += response.entries.length;
+    if (response.entries.length === 0) break;
+  }
+
+  return entries;
+}
+
+function buildSourceCatalog(entries: Entry[]): SourceCatalogItem[] {
+  const groups = new Map<string, SourceCatalogItem>();
+
+  for (const entry of entries) {
+    const meta = getEntrySourceMeta(entry);
+    const host = (() => {
+      try {
+        return new URL(entry.url).hostname.replace(/^www\./, '');
+      } catch {
+        return 'unknown';
+      }
+    })();
+    const id = `${meta.source.toLowerCase()}::${host}`;
+    const current = groups.get(id);
+    const iqs = Number(entry.iqs ?? entry.qualityScores?.iqs ?? 0);
+    const ais = Number(entry.ais ?? entry.qualityScores?.ais ?? 0);
+    const lastSeen = entry.lastSeen || entry.last_seen || entry.updatedAt || entry.updated_at || null;
+
+    if (!current) {
+      groups.set(id, {
+        id,
+        name: meta.source,
+        host,
+        sourceTier: meta.sourceTier,
+        institutionType: meta.institutionType,
+        jurisdiction: meta.jurisdiction,
+        entryCount: 1,
+        domains: [entry.domain],
+        avgIqs: Number.isFinite(iqs) ? iqs : null,
+        avgAis: Number.isFinite(ais) ? ais : null,
+        lastSeen,
+        sampleUrl: entry.url,
+      });
+      continue;
+    }
+
+    current.entryCount += 1;
+    if (!current.domains.includes(entry.domain)) {
+      current.domains.push(entry.domain);
+    }
+    current.avgIqs =
+      current.avgIqs == null
+        ? (Number.isFinite(iqs) ? iqs : null)
+        : (current.avgIqs * (current.entryCount - 1) + (Number.isFinite(iqs) ? iqs : 0)) / current.entryCount;
+    current.avgAis =
+      current.avgAis == null
+        ? (Number.isFinite(ais) ? ais : null)
+        : (current.avgAis * (current.entryCount - 1) + (Number.isFinite(ais) ? ais : 0)) / current.entryCount;
+    if (lastSeen && (!current.lastSeen || new Date(lastSeen).getTime() > new Date(current.lastSeen).getTime())) {
+      current.lastSeen = lastSeen;
+    }
+  }
+
+  return Array.from(groups.values()).sort((a, b) => {
+    const tierSort = a.sourceTier.localeCompare(b.sourceTier);
+    if (tierSort !== 0) return tierSort;
+    return b.entryCount - a.entryCount;
+  });
 }
 
 async function getModerationQueueFromSnapshots(params?: {
@@ -984,6 +1121,11 @@ export const api = {
     }
   },
 
+  getSourceCatalog: async (): Promise<SourceCatalogItem[]> => {
+    const entries = await getAllEntriesForCatalog();
+    return buildSourceCatalog(entries);
+  },
+
   autocomplete: async ({ query, limit = 10 }: { query: string; limit?: number }) => {
     if (!query || query.length < 1) return [];
     const res = await api.getEntries({ search: query, limit });
@@ -1020,4 +1162,5 @@ export type {
   AIEnrichmentResponse,
   AIResultBundle,
   AIHealthResponse,
+  SourceCatalogItem,
 };

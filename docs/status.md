@@ -64,6 +64,7 @@ crawling logic to these files.
 | Component | Status |
 |-----------|--------|
 | Vite + React admin panel | ✅ Working |
+| Public source directory (`/sources`) | ✅ Working | Aggregates visible sources from entry provenance with tier, jurisdiction, domain coverage, and average quality signals |
 | Data preview, quality metrics, moderation queue views | ✅ Working |
 | AI search tab | 🟡 Experimental |
 
