@@ -11,7 +11,11 @@ data/snapshots/
 *.db
 # exclude generated crawler exports
 data/**/candidates.json
+data/**/crawl_metrics.json
+data/**/url_status.jsonl
 moderation/review_queue.json
+# local deploy/temp worktrees
+.deploy-main/
 # LLM runtime data
 data/_quality/llm_costs.jsonl
 # Python
