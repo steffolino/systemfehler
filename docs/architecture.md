@@ -63,27 +63,38 @@ This supports policy analysis, expiry detection, and historical reconstruction.
 
 ### 2.4 Multilingual Architecture
 
-Text fields use structured language containers, for example:
+The canonical entry title is now a plain string:
 
 ```json
-"title": {
-  "de": "Titel auf Deutsch",
-  "en": "Title in English",
-  "easy_de": "Einfaches Deutsch"
+"title": "Bürgergeld"
+```
+
+Longer text fields such as `summary` and `content` continue to use structured
+language containers:
+
+```json
+"summary": {
+  "de": "Kurze Beschreibung auf Deutsch",
+  "en": "Short English summary",
+  "easy_de": "Einfache Zusammenfassung"
 }
 ```
 
-Additional languages (e.g. `tr`, `ru`, `ar`) can be added as needed.
-
-Translations are preserved even if they are later removed from the source.
+Additional translations are preserved in the `translations` map even if they
+later disappear from the source.
 
 ### 2.5 Preservation-Oriented Crawling
 
 Crawlers are designed to:
 
 * Fetch and normalize pages from multiple sources.
+* Resolve redirects and canonical URLs before candidate generation.
+* Persist URL crawl state in `data/<domain>/url_status.jsonl` so obsolete,
+  invalid, or canonical-alias URLs can be skipped on future runs.
 * Detect and store outgoing links as potential new sources.
 * Extract structured data using configurable rules.
+* Attach provenance metadata such as source tier, institution type,
+  jurisdiction, and publication timestamps when detectable.
 * Detect missing translations or removed sections.
 * Compare new data with existing entries and generate diffs.
 * Never publish directly: all changes go through moderation first.

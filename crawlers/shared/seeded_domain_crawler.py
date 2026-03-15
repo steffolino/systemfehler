@@ -197,8 +197,16 @@ class SeededDomainCrawler(BaseCrawler):
         entry.update(self.build_domain_fields(canonical_url, soup, entry))
 
         content_checksum = self.calculate_checksum(json.dumps(entry, sort_keys=True, ensure_ascii=False))
-        entry['provenance'] = self.generate_provenance(url)
-        entry['provenance']['checksum'] = content_checksum
+        provenance = self.generate_provenance(canonical_url)
+        provenance.update(
+            {
+                key: value
+                for key, value in self._extract_publication_metadata(soup).items()
+                if value
+            }
+        )
+        provenance['checksum'] = content_checksum
+        entry['provenance'] = provenance
         entry['qualityScores'] = self.quality_scorer.calculate_scores(entry)
 
         validation = self.validator.validate_entry(entry, self.domain)

@@ -43,6 +43,20 @@ def query_entries(query: str, domain: str = None):
         if domain:
             sql += " AND domain = :domain"
             params["domain"] = domain
+        sql += """
+        ORDER BY
+            CASE COALESCE(provenance->>'sourceTier', 'tier_unknown')
+                WHEN 'tier_1_official' THEN 0
+                WHEN 'tier_2_ngo_watchdog' THEN 1
+                WHEN 'tier_4_academic' THEN 2
+                WHEN 'tier_3_press' THEN 3
+                ELSE 4
+            END,
+            COALESCE((quality_scores->>'ais')::numeric, 0) DESC,
+            COALESCE((quality_scores->>'iqs')::numeric, 0) DESC,
+            last_seen DESC NULLS LAST,
+            created_at DESC NULLS LAST
+        """
         results = session.execute(text(sql), params).mappings().all()
         print(f"DEBUG: Found {len(results)} entries for query '{query}' (raw SQL)")
         for r in results:

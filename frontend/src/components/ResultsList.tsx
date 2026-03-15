@@ -25,6 +25,19 @@ export default function ResultsList({ results }: ResultsListProps) {
           <div className="font-bold text-lg mb-2" dangerouslySetInnerHTML={{ __html: highlightMatch(typeof r.title === 'object' ? r.title?.de || r.title_de || '' : r.title || r.title_de || '', query) }} />
           <div className="text-xs text-gray-500 mb-1">{r.domain || 'Unbekannt'}</div>
           <div className="text-sm text-gray-700 line-clamp-2">{typeof r.summary === 'object' ? r.summary?.de || r.summary_de || '' : r.summary || r.summary_de || ''}</div>
+          {(r.provenance?.sourceTier || r.provenance?.institutionType || r.provenance?.jurisdiction) && (
+            <div className="mt-3 flex flex-wrap gap-2 text-[11px] text-gray-600">
+              {r.provenance?.sourceTier && (
+                <span className="rounded-full border px-2 py-1">{r.provenance.sourceTier}</span>
+              )}
+              {r.provenance?.institutionType && (
+                <span className="rounded-full border px-2 py-1">{r.provenance.institutionType}</span>
+              )}
+              {r.provenance?.jurisdiction && (
+                <span className="rounded-full border px-2 py-1">{r.provenance.jurisdiction}</span>
+              )}
+            </div>
+          )}
         </Link>
       ) : null)}
     </div>
