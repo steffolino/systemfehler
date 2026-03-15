@@ -4,6 +4,7 @@ REST endpoints for query rewrite, answer synthesis, and enrichment suggestion.
 
 from __future__ import annotations
 
+import json
 import time
 
 from fastapi import APIRouter
@@ -15,8 +16,8 @@ from .schemas import (
     AnswerResponse,
     EnrichmentRequest,
     EnrichmentSuggestion,
-    Evidence,
     QueryRequest,
+    RetrieveResponse,
     RewriteResponse,
 )
 from .telemetry import log_telemetry
@@ -24,6 +25,9 @@ from .telemetry import log_telemetry
 router = APIRouter()
 model_router = ModelRouter()
 provider = get_provider()
+MAX_REWRITE_TOKENS = 24
+MAX_SYNTHESIS_TOKENS = 160
+MAX_ENRICH_TOKENS = 96
 
 REWRITE_SYSTEM_PROMPT = (
     "You rewrite search queries for a German social-services retrieval system. "
@@ -47,6 +51,46 @@ def _usage_totals(payload):
     usage = payload.get("usage", {}) if isinstance(payload, dict) else {}
     total_tokens = int(usage.get("total_tokens", 0) or 0)
     return usage, total_tokens
+
+
+def _compact_evidence_block(evidence):
+    compact_rows = []
+    for index, ev in enumerate([item for item in evidence if item.confidence >= 0.7][:3], start=1):
+        try:
+            payload = json.loads(ev.content)
+        except Exception:
+            payload = {}
+        if not isinstance(payload, dict):
+            payload = {}
+        summary = payload.get("summary", {}) if isinstance(payload.get("summary"), dict) else {}
+        content = payload.get("content", {}) if isinstance(payload.get("content"), dict) else {}
+        compact_rows.append(
+            "\n".join(
+                [
+                    f"Evidence {index}",
+                    f"Title: {payload.get('title') or 'Unbekannt'}",
+                    f"Domain: {payload.get('domain') or 'unknown'}",
+                    f"URL: {payload.get('url') or 'unknown'}",
+                    f"Summary: {summary.get('de') or summary.get('en') or 'Keine Kurzbeschreibung'}",
+                    f"Content excerpt: {(content.get('de') or content.get('en') or '')[:220]}",
+                    f"Topics: {', '.join(payload.get('topics') or [])}",
+                ]
+            )
+        )
+    return "\n\n".join(compact_rows)
+
+
+@router.post("/retrieve", response_model=RetrieveResponse)
+async def retrieve_only(body: QueryRequest):
+    start = time.time()
+    evidence = retrieve_evidence(body.query)
+    sufficient = any(ev.confidence >= 0.7 for ev in evidence)
+    latency = int((time.time() - start) * 1000)
+    return RetrieveResponse(
+        evidence=evidence,
+        weak_evidence=not sufficient,
+        latency_ms=latency,
+    )
 
 
 @router.post("/rewrite", response_model=RewriteResponse)
@@ -76,6 +120,7 @@ async def rewrite_query(body: QueryRequest):
                 "Return only the rewritten query."
             ),
             temperature=0.1,
+            max_tokens=MAX_REWRITE_TOKENS,
         )
         usage, total_tokens = _usage_totals(completion)
         rewritten_query = completion["text"].strip()
@@ -138,11 +183,7 @@ async def synthesize_answer(body: QueryRequest):
             weak_evidence=False,
         )
 
-    evidence_block = "\n\n".join(
-        f"Source: {ev.source}\nConfidence: {ev.confidence}\nContent: {ev.content}"
-        for ev in evidence
-        if ev.confidence >= 0.7
-    )
+    evidence_block = _compact_evidence_block(evidence)
 
     try:
         completion = provider.generate_text(
@@ -151,9 +192,11 @@ async def synthesize_answer(body: QueryRequest):
             user_prompt=(
                 f"User question:\n{body.query}\n\n"
                 f"Retrieved evidence:\n{evidence_block}\n\n"
-                "Provide a short German answer grounded only in the evidence."
+                "Provide a short German answer grounded only in the evidence. "
+                "Use at most 4 bullet points or 4 short sentences."
             ),
             temperature=0.2,
+            max_tokens=MAX_SYNTHESIS_TOKENS,
         )
         usage, total_tokens = _usage_totals(completion)
         latency = int((time.time() - start) * 1000)
@@ -213,6 +256,7 @@ async def suggest_enrichment(body: EnrichmentRequest):
                 "Suggest up to 5 short metadata or quality improvements as separate bullet points."
             ),
             temperature=0.2,
+            max_tokens=MAX_ENRICH_TOKENS,
         )
         usage, total_tokens = _usage_totals(completion)
         suggestions = [

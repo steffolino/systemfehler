@@ -211,6 +211,12 @@ interface AIEvidence {
   confidence: number;
 }
 
+interface AIRetrieveResponse {
+  evidence: AIEvidence[];
+  weak_evidence?: boolean;
+  latency_ms: number;
+}
+
 interface AISynthesizeResponse {
   answer: string | null;
   explanation: string;
@@ -306,14 +312,27 @@ async function fetchAiApi<T>(endpoint: string, options?: RequestInit): Promise<T
   const normalizedBase = AI_API_BASE_URL.replace(/\/+$/, '');
   const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
   const url = `${normalizedBase}${normalizedEndpoint}`;
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 45000);
 
-  const response = await fetch(url, {
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options?.headers,
-    },
-  });
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+      headers: {
+        'Content-Type': 'application/json',
+        ...options?.headers,
+      },
+    });
+  } catch (error) {
+    window.clearTimeout(timeout);
+    if (error instanceof DOMException && error.name === 'AbortError') {
+      throw new Error('AI request timed out after 45 seconds');
+    }
+    throw error;
+  }
+  window.clearTimeout(timeout);
 
   if (!response.ok) {
     let errorMsg = `AI request failed (${response.status})`;
@@ -331,6 +350,52 @@ async function fetchAiApi<T>(endpoint: string, options?: RequestInit): Promise<T
   }
 
   return (await response.json()) as T;
+}
+
+function buildAiTimeoutRewrite(query: string, message: string): AIRewriteResponse {
+  return {
+    rewritten_query: query,
+    model: 'timeout',
+    provider: 'unknown',
+    latency_ms: 45000,
+    fallback: true,
+    explanation: message,
+  };
+}
+
+function buildAiTimeoutSynthesis(message: string): AISynthesizeResponse {
+  return {
+    answer: null,
+    explanation: message,
+    sources: [],
+    provider: 'unknown',
+    model: 'timeout',
+    latency_ms: 45000,
+    fallback: true,
+    evidence: [],
+    weak_evidence: true,
+  };
+}
+
+function parseEvidenceEntries(evidence: AIEvidence[]): Entry[] {
+  const relatedEntriesMap = new Map<string, Entry>();
+  for (const item of evidence || []) {
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(item.content);
+    } catch {
+      continue;
+    }
+
+    const normalized = normalizeEntriesPayload([parsed]);
+    for (const entry of normalized) {
+      if (!relatedEntriesMap.has(entry.id)) {
+        relatedEntriesMap.set(entry.id, entry);
+      }
+    }
+  }
+
+  return Array.from(relatedEntriesMap.values());
 }
 
 function getLocalizedTitle(value: EntryTitle | undefined, fallback?: string | null, locale: keyof MultilingualText = 'de'): string {
@@ -771,37 +836,50 @@ export const api = {
       };
     }
 
-    const rewrite = await fetchAiApi<AIRewriteResponse>('/rewrite', {
-      method: 'POST',
-      body: JSON.stringify({ query: trimmed }),
-    });
+    const [rewriteResult, retrieveResult, synthesisResult] = await Promise.allSettled([
+      fetchAiApi<AIRewriteResponse>('/rewrite', {
+        method: 'POST',
+        body: JSON.stringify({ query: trimmed }),
+      }),
+      fetchAiApi<AIRetrieveResponse>('/retrieve', {
+        method: 'POST',
+        body: JSON.stringify({ query: trimmed }),
+      }),
+      fetchAiApi<AISynthesizeResponse>('/synthesize', {
+        method: 'POST',
+        body: JSON.stringify({ query: trimmed }),
+      }),
+    ]);
 
-    const synthesis = await fetchAiApi<AISynthesizeResponse>('/synthesize', {
-      method: 'POST',
-      body: JSON.stringify({ query: rewrite.rewritten_query || trimmed }),
-    });
+    const rewrite =
+      rewriteResult.status === 'fulfilled'
+        ? rewriteResult.value
+        : buildAiTimeoutRewrite(trimmed, rewriteResult.reason instanceof Error ? rewriteResult.reason.message : 'AI rewrite failed');
 
-    const relatedEntriesMap = new Map<string, Entry>();
-    for (const evidence of synthesis.evidence || []) {
-      let parsed: unknown;
-      try {
-        parsed = JSON.parse(evidence.content);
-      } catch {
-        continue;
-      }
-
-      const normalized = normalizeEntriesPayload([parsed]);
-      for (const entry of normalized) {
-        if (!relatedEntriesMap.has(entry.id)) {
-          relatedEntriesMap.set(entry.id, entry);
-        }
-      }
-    }
+    const synthesis =
+      synthesisResult.status === 'fulfilled'
+        ? synthesisResult.value
+        : buildAiTimeoutSynthesis(
+            synthesisResult.reason instanceof Error ? synthesisResult.reason.message : 'AI synthesis failed'
+          );
+    const retrievalEvidence =
+      retrieveResult.status === 'fulfilled'
+        ? retrieveResult.value.evidence
+        : synthesis.evidence || [];
+    const relatedEntries = parseEvidenceEntries(retrievalEvidence);
+    const finalSynthesis =
+      retrieveResult.status === 'fulfilled'
+        ? {
+            ...synthesis,
+            evidence: retrievalEvidence,
+            weak_evidence: synthesis.weak_evidence ?? retrieveResult.value.weak_evidence,
+          }
+        : synthesis;
 
     return {
       rewrite,
-      synthesis,
-      relatedEntries: Array.from(relatedEntriesMap.values()),
+      synthesis: finalSynthesis,
+      relatedEntries,
     };
   },
 

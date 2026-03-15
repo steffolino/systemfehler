@@ -11,8 +11,10 @@ import { Card } from '@/components/ui/card';
 type TabKey = 'standard' | 'ai';
 
 export default function SearchPage() {
-  const [query, setQuery] = useState('');
-  const [debouncedQuery, setDebouncedQuery] = useState('');
+  const [standardQuery, setStandardQuery] = useState('');
+  const [debouncedStandardQuery, setDebouncedStandardQuery] = useState('');
+  const [aiDraftQuery, setAiDraftQuery] = useState('');
+  const [submittedAiQuery, setSubmittedAiQuery] = useState('');
   const [tab, setTab] = useState<TabKey>('standard');
 
   const [standardResults, setStandardResults] = useState<Entry[]>([]);
@@ -28,11 +30,11 @@ export default function SearchPage() {
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      setDebouncedQuery(query.trim());
+      setDebouncedStandardQuery(standardQuery.trim());
     }, 250);
 
     return () => window.clearTimeout(timer);
-  }, [query]);
+  }, [standardQuery]);
 
   useEffect(() => {
     let cancelled = false;
@@ -41,7 +43,7 @@ export default function SearchPage() {
     setStandardError(null);
 
     api
-      .getEntries(debouncedQuery ? { search: debouncedQuery } : {})
+      .getEntries(debouncedStandardQuery ? { search: debouncedStandardQuery } : {})
       .then((res) => {
         if (cancelled) return;
         setStandardResults(res.entries);
@@ -57,10 +59,16 @@ export default function SearchPage() {
     return () => {
       cancelled = true;
     };
-  }, [debouncedQuery]);
+  }, [debouncedStandardQuery]);
 
   useEffect(() => {
     if (!isAuthenticated || tab !== 'ai') return;
+    if (!submittedAiQuery) {
+      setAiLoading(false);
+      setAiError(null);
+      setAiResult(null);
+      return;
+    }
 
     let cancelled = false;
 
@@ -68,7 +76,7 @@ export default function SearchPage() {
     setAiError(null);
 
     api
-      .getAIResults(debouncedQuery)
+      .getAIResults(submittedAiQuery)
       .then((result) => {
         if (cancelled) return;
         setAiResult(result);
@@ -85,7 +93,7 @@ export default function SearchPage() {
     return () => {
       cancelled = true;
     };
-  }, [debouncedQuery, isAuthenticated, tab]);
+  }, [submittedAiQuery, isAuthenticated, tab]);
 
   useEffect(() => {
     if (!isAuthenticated || tab !== 'ai') return;
@@ -109,12 +117,29 @@ export default function SearchPage() {
     }
   }, [isAuthenticated, tab]);
 
+  function submitAiQuery() {
+    const trimmed = aiDraftQuery.trim();
+    setSubmittedAiQuery(trimmed);
+    if (!trimmed) {
+      setAiResult(null);
+      setAiError(null);
+    }
+  }
+
+  useEffect(() => {
+    if (tab !== 'ai') return;
+    if (aiDraftQuery.trim()) return;
+    if (!standardQuery.trim()) return;
+    setAiDraftQuery(standardQuery.trim());
+  }, [aiDraftQuery, standardQuery, tab]);
+
   const activeResults = tab === 'standard' ? standardResults : aiResult?.relatedEntries || [];
   const activeLoading = tab === 'standard' ? standardLoading : aiLoading;
   const activeError = tab === 'standard' ? standardError : aiError;
+  const activeQuery = tab === 'standard' ? debouncedStandardQuery : submittedAiQuery;
 
   const resultLabel = useMemo(() => {
-    if (activeLoading) return 'Loading results…';
+    if (activeLoading) return 'Loading results...';
     if (activeError) return 'Could not load results';
     if (tab === 'ai') {
       return `${activeResults.length} evidence entr${activeResults.length === 1 ? 'y' : 'ies'}`;
@@ -133,35 +158,73 @@ export default function SearchPage() {
 
       <Card className="p-4 md:p-5">
         <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <div className="flex-1">
-              <SearchInput value={query} onChange={setQuery} />
+          <div className="flex flex-col gap-3 border-b pb-4">
+            <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+              <div>
+                <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Search Mode
+                </div>
+                <div className="mt-1 text-sm text-muted-foreground">
+                  {tab === 'ai'
+                    ? 'AI mode uses deliberate submit-only prompts and retrieval-backed answers.'
+                    : 'Standard mode is optimized for fast browsing and autocomplete.'}
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 rounded-lg border p-1">
+                <Button
+                  variant={tab === 'standard' ? 'default' : 'ghost'}
+                  onClick={() => setTab('standard')}
+                >
+                  Standard
+                </Button>
+
+                {!authLoading && isAuthenticated && (
+                  <Button
+                    variant={tab === 'ai' ? 'default' : 'ghost'}
+                    onClick={() => setTab('ai')}
+                  >
+                    AI
+                  </Button>
+                )}
+              </div>
             </div>
 
-            <div className="flex items-center gap-2">
-              <Button
-                variant={tab === 'standard' ? 'default' : 'outline'}
-                onClick={() => setTab('standard')}
-              >
-                Standard
-              </Button>
+            <div className="flex flex-col gap-3 md:flex-row md:items-start">
+              <div className="flex-1">
+                <SearchInput
+                  value={tab === 'standard' ? standardQuery : aiDraftQuery}
+                  onChange={tab === 'standard' ? setStandardQuery : setAiDraftQuery}
+                  enableAutocomplete={tab === 'standard'}
+                  onSubmit={tab === 'ai' ? submitAiQuery : undefined}
+                  placeholder={tab === 'ai' ? 'Ask the AI assistant in full sentences...' : 'Search entries...'}
+                />
+                <div className="mt-2 text-xs text-muted-foreground">
+                  {tab === 'ai'
+                    ? 'Autocomplete is disabled here so the model only runs on your submitted question.'
+                    : 'Results update while you type and suggestions appear automatically.'}
+                </div>
+              </div>
 
-              {!authLoading && isAuthenticated && (
-                <Button
-                  variant={tab === 'ai' ? 'default' : 'outline'}
-                  onClick={() => setTab('ai')}
-                >
-                  AI
-                </Button>
+              {tab === 'ai' && (
+                <div className="md:w-44">
+                  <Button className="w-full" onClick={submitAiQuery} disabled={aiLoading || !aiDraftQuery.trim()}>
+                    {aiLoading ? 'Asking...' : 'Ask AI'}
+                  </Button>
+                </div>
               )}
             </div>
           </div>
 
-          <div className="flex flex-col gap-2 border-t pt-4 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
             <div className="text-sm text-muted-foreground">
-              {debouncedQuery
-                ? `Showing matches for “${debouncedQuery}”`
-                : 'Showing all available entries'}
+              {activeQuery
+                ? tab === 'ai'
+                  ? `Showing AI evidence for "${activeQuery}"`
+                  : `Showing matches for "${activeQuery}"`
+                : tab === 'ai'
+                  ? 'Enter a full question and submit it to the AI assistant'
+                  : 'Showing all available entries'}
             </div>
 
             <div className="text-sm text-muted-foreground">{resultLabel}</div>
@@ -170,7 +233,7 @@ export default function SearchPage() {
           <div className="min-h-80 rounded-xl border bg-background">
             {activeLoading ? (
               <div className="flex h-80 items-center justify-center text-sm text-muted-foreground">
-                Loading results…
+                Loading results...
               </div>
             ) : activeError ? (
               <div className="flex h-80 items-center justify-center p-6 text-center">
@@ -210,14 +273,20 @@ export default function SearchPage() {
                     AI Rewrite
                   </div>
                   <div className="mt-2 text-sm text-foreground">
-                    {aiResult?.rewrite.rewritten_query || 'No rewritten query available.'}
+                    {submittedAiQuery
+                      ? aiResult?.rewrite.rewritten_query || 'No rewritten query available.'
+                      : aiDraftQuery.trim()
+                        ? 'Draft query ready. Submit to generate a rewritten retrieval query.'
+                        : 'Enter a question to prepare an AI request.'}
                   </div>
-                  <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
-                    <span>Provider: {aiResult?.rewrite.provider || 'none'}</span>
-                    <span>Model: {aiResult?.rewrite.model || 'disabled'}</span>
-                    {aiResult?.rewrite.fallback && <span>Fallback active</span>}
-                  </div>
-                  {aiResult?.rewrite.explanation && (
+                  {submittedAiQuery && (
+                    <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
+                      <span>Provider: {aiResult?.rewrite.provider || 'unknown'}</span>
+                      <span>Model: {aiResult?.rewrite.model || 'unknown'}</span>
+                      {aiResult?.rewrite.fallback && <span>Fallback active</span>}
+                    </div>
+                  )}
+                  {submittedAiQuery && aiResult?.rewrite.explanation && (
                     <div className="mt-3 text-sm text-muted-foreground">
                       {aiResult.rewrite.explanation}
                     </div>
@@ -229,23 +298,31 @@ export default function SearchPage() {
                     AI Synthesis
                   </div>
                   <div className="mt-2 whitespace-pre-line text-sm leading-7 text-foreground">
-                    {aiResult?.synthesis.answer || aiResult?.synthesis.explanation || 'No AI answer available.'}
+                    {submittedAiQuery
+                      ? aiResult?.synthesis.answer || aiResult?.synthesis.explanation || 'No AI answer available.'
+                      : aiDraftQuery.trim()
+                        ? 'Ready to synthesize after you submit the current question.'
+                        : 'Enter a full question and submit it to the AI assistant.'}
                   </div>
-                  <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
-                    <span>Provider: {aiResult?.synthesis.provider || 'none'}</span>
-                    <span>Model: {aiResult?.synthesis.model || 'disabled'}</span>
-                    {aiResult?.synthesis.fallback && <span>Fallback active</span>}
-                    {aiResult?.synthesis.weak_evidence && <span>Weak evidence</span>}
-                  </div>
+                  {submittedAiQuery && (
+                    <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
+                      <span>Provider: {aiResult?.synthesis.provider || 'unknown'}</span>
+                      <span>Model: {aiResult?.synthesis.model || 'unknown'}</span>
+                      {aiResult?.synthesis.fallback && <span>Fallback active</span>}
+                      {aiResult?.synthesis.weak_evidence && <span>Weak evidence</span>}
+                    </div>
+                  )}
                 </Card>
 
                 {activeResults.length === 0 ? (
                   <div className="rounded-xl border p-6 text-center">
                     <div className="font-medium">
-                      {debouncedQuery ? 'No evidence entries found' : 'Enter a query to use the AI assistant'}
+                      {submittedAiQuery ? 'No evidence entries found' : 'Enter a query to use the AI assistant'}
                     </div>
                     <div className="mt-1 text-sm text-muted-foreground">
-                      The AI tab depends on retrieved entries from the database.
+                      {submittedAiQuery
+                        ? 'The AI tab depends on retrieved entries from the database.'
+                        : 'AI mode only runs after you explicitly submit a query.'}
                     </div>
                   </div>
                 ) : (
@@ -259,10 +336,10 @@ export default function SearchPage() {
               <div className="flex h-80 items-center justify-center p-6 text-center">
                 <div>
                   <div className="font-medium">
-                    {debouncedQuery ? 'No results found' : 'No entries available'}
+                    {debouncedStandardQuery ? 'No results found' : 'No entries available'}
                   </div>
                   <div className="mt-1 text-sm text-muted-foreground">
-                    {debouncedQuery
+                    {debouncedStandardQuery
                       ? 'Try a different keyword or a shorter query.'
                       : 'There is currently no data to display.'}
                   </div>

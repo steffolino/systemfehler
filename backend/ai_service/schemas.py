@@ -23,6 +23,12 @@ class RewriteResponse(BaseModel):
     explanation: Optional[str] = None
 
 
+class RetrieveResponse(BaseModel):
+    evidence: List[Evidence] = Field(default_factory=list)
+    weak_evidence: bool = False
+    latency_ms: int
+
+
 class AnswerResponse(BaseModel):
     answer: Optional[str]
     explanation: str
