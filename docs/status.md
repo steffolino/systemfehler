@@ -10,7 +10,7 @@ code, also see `docs/current-state.md`.
 Verification note:
 
 - Validation was re-run on 2026-03-15 after the seeded crawl scaling pass.
-- Current result: 294 entries, 0 schema/structural errors, 282 lint warnings.
+- Current result: 1006 entries, 0 schema/structural errors, 994 lint warnings.
 - The remaining warnings are currently dominated by missing Easy German
   translations on newly promoted seeded entries.
 
@@ -193,14 +193,14 @@ Validated canonical snapshot counts after the March 15 crawl/promotion pass:
 | Domain | Entries |
 |--------|---------|
 | `benefits` | 5 |
-| `aid` | 137 |
-| `tools` | 8 |
-| `organizations` | 35 |
-| `contacts` | 109 |
-| **Total** | **294** |
+| `aid` | 140 |
+| `tools` | 127 |
+| `organizations` | 379 |
+| `contacts` | 355 |
+| **Total** | **1006** |
 
 The local PostgreSQL refresh path (`npm run db:seed`) was re-run successfully
-against this 294-entry corpus.
+against this 1006-entry corpus.
 
 ## Next planned work
 

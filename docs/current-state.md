@@ -81,7 +81,7 @@ Important verification finding:
   canonical `title` string contract while preserving Easy German titles in
   `translations["de-LEICHT"]`.
 - Current validation result after the March 15 crawl/promotion pass:
-  294 entries, 0 schema/structural errors, 282 lint warnings.
+  1006 entries, 0 schema/structural errors, 994 lint warnings.
 - The remaining warnings are largely missing Easy German translations on newly
   promoted seeded entries, not schema failures.
 
@@ -198,11 +198,11 @@ The canonical snapshot corpus is no longer the original 25-entry bootstrap
 set. Current validated counts are:
 
 - `benefits`: 5
-- `aid`: 137
-- `tools`: 8
-- `organizations`: 35
-- `contacts`: 109
-- total: 294
+- `aid`: 140
+- `tools`: 127
+- `organizations`: 379
+- `contacts`: 355
+- total: 1006
 
 That corpus is now also loaded into the local PostgreSQL database via
 `npm run db:seed`.

@@ -18,6 +18,8 @@ sys.path.insert(0, str(ROOT))
 
 from crawlers.shared.source_registry import SourceRegistry  # noqa: E402
 DEFAULT_DOMAINS = ["benefits", "aid", "tools", "organizations", "contacts"]
+MAX_CONTENT_LENGTH = 500_000
+MAX_TITLE_LENGTH = 500
 LOW_SIGNAL_TITLE_TOKENS = (
     "datenschutz",
     "cookie",
@@ -208,6 +210,10 @@ def keep_candidate(
     iqs = score_value(entry, "iqs")
     ais = score_value(entry, "ais")
 
+    if len(title) > MAX_TITLE_LENGTH:
+        return False, "oversized_title"
+    if len(content.strip()) > MAX_CONTENT_LENGTH:
+        return False, "oversized_content"
     if not title or any(token in title for token in LOW_SIGNAL_TITLE_TOKENS):
         return False, "low_signal_title"
     if any(token in title for token in DOMAIN_LOW_SIGNAL_TITLE_TOKENS.get(domain, ())):
@@ -237,9 +243,17 @@ def merge_domain(domain: str, min_iqs: float, min_ais: float, min_content_length
     existing_entries = load_entries(entries_path)
     candidates = load_entries(candidates_path)
 
-    existing_by_url = {
-        normalize_url_key(str(entry.get("url"))): entry for entry in existing_entries if entry.get("url")
-    }
+    existing_by_url = {}
+    dropped_existing = 0
+    for entry in existing_entries:
+        if not entry.get("url"):
+            continue
+        title = best_text(entry, "title")
+        content = best_text(entry, "content")
+        if len(title) > MAX_TITLE_LENGTH or len(content.strip()) > MAX_CONTENT_LENGTH:
+            dropped_existing += 1
+            continue
+        existing_by_url[normalize_url_key(str(entry.get("url")))] = entry
     promoted = []
     rejected = {}
 
@@ -263,7 +277,7 @@ def merge_domain(domain: str, min_iqs: float, min_ais: float, min_content_length
     merged = list(existing_by_url.values())
     merged.sort(key=lambda item: (str(item.get("url") or ""), str(item.get("id") or "")))
 
-    if apply and promoted:
+    if apply and (promoted or dropped_existing):
         write_entries(entries_path, domain, merged)
 
     return {
@@ -272,6 +286,7 @@ def merge_domain(domain: str, min_iqs: float, min_ais: float, min_content_length
         "candidates": len(candidates),
         "promoted": len(promoted),
         "total_after_merge": len(merged),
+        "dropped_existing": dropped_existing,
         "rejected": rejected,
         "applied": apply,
     }
@@ -287,7 +302,8 @@ def main() -> int:
     for report in reports:
         print(
             f"{report['domain']}: existing={report['existing']} candidates={report['candidates']} "
-            f"promoted={report['promoted']} total={report['total_after_merge']} rejected={report['rejected']}"
+            f"promoted={report['promoted']} dropped_existing={report['dropped_existing']} "
+            f"total={report['total_after_merge']} rejected={report['rejected']}"
         )
 
     return 0
