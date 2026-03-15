@@ -8,11 +8,15 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 
 type TabKey = 'standard' | 'ai';
+type SourceTierFilter = '' | 'tier_1_official' | 'tier_2_ngo_watchdog' | 'tier_3_press' | 'tier_4_academic';
+type JurisdictionFilter = '' | 'DE' | 'EU' | 'INT';
 
 export default function SearchPage() {
   const [query, setQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
   const [tab, setTab] = useState<TabKey>('standard');
+  const [sourceTier, setSourceTier] = useState<SourceTierFilter>('');
+  const [jurisdiction, setJurisdiction] = useState<JurisdictionFilter>('');
 
   const [standardResults, setStandardResults] = useState<Entry[]>([]);
   const [aiResults, setAiResults] = useState<Entry[]>([]);
@@ -39,7 +43,11 @@ export default function SearchPage() {
     setStandardError(null);
 
     api
-      .getEntries(debouncedQuery ? { search: debouncedQuery } : {})
+      .getEntries({
+        ...(debouncedQuery ? { search: debouncedQuery } : {}),
+        ...(sourceTier ? { sourceTier } : {}),
+        ...(jurisdiction ? { jurisdiction } : {}),
+      })
       .then((res) => {
         if (cancelled) return;
         setStandardResults(res.entries);
@@ -55,7 +63,7 @@ export default function SearchPage() {
     return () => {
       cancelled = true;
     };
-  }, [debouncedQuery]);
+  }, [debouncedQuery, jurisdiction, sourceTier]);
 
   useEffect(() => {
     if (!isAuthenticated || tab !== 'ai') return;
@@ -133,6 +141,41 @@ export default function SearchPage() {
                 </Button>
               )}
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-3 border-t pt-4 md:grid-cols-[minmax(0,1fr)_180px_180px]">
+            <div className="text-sm text-muted-foreground">
+              Prioritised by source quality. Narrow to official, NGO, press, or academic material when needed.
+            </div>
+
+            <label className="flex flex-col gap-1 text-sm">
+              <span className="text-muted-foreground">Source tier</span>
+              <select
+                className="rounded-md border bg-background px-3 py-2"
+                value={sourceTier}
+                onChange={(event) => setSourceTier(event.target.value as SourceTierFilter)}
+              >
+                <option value="">All sources</option>
+                <option value="tier_1_official">Official</option>
+                <option value="tier_2_ngo_watchdog">NGO / watchdog</option>
+                <option value="tier_3_press">Press</option>
+                <option value="tier_4_academic">Academic</option>
+              </select>
+            </label>
+
+            <label className="flex flex-col gap-1 text-sm">
+              <span className="text-muted-foreground">Jurisdiction</span>
+              <select
+                className="rounded-md border bg-background px-3 py-2"
+                value={jurisdiction}
+                onChange={(event) => setJurisdiction(event.target.value as JurisdictionFilter)}
+              >
+                <option value="">All jurisdictions</option>
+                <option value="DE">Germany</option>
+                <option value="EU">EU</option>
+                <option value="INT">International</option>
+              </select>
+            </label>
           </div>
 
           <div className="flex flex-col gap-2 border-t pt-4 md:flex-row md:items-center md:justify-between">

@@ -70,6 +70,7 @@ High-confidence implemented areas confirmed in code:
 - Express API in `backend/server.js`
 - Cloudflare Pages Functions API in `cloudflare-pages/functions/api`
 - React frontend and admin shell in `frontend/src`
+- provenance-aware search filtering in the React frontend and local/API query paths
 - URL canonicalization helpers in `services/_shared/url_normalization.js`
 - URL canonicalization tests in `tests/url_canonicalization_test.js`
 
