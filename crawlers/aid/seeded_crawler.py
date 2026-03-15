@@ -17,7 +17,7 @@ class SeededAidCrawler(SeededDomainCrawler):
             user_agent=user_agent,
             rate_limit_delay=rate_limit_delay,
             data_dir=data_dir,
-            source_label='urls-seeded',
+            source_label='seed-manifest',
         )
 
     def default_topics(self) -> List[str]:
@@ -29,9 +29,15 @@ class SeededAidCrawler(SeededDomainCrawler):
     def default_target_groups(self) -> List[str]:
         return ['families', 'single_parents', 'general_public']
 
-    def build_domain_fields(self, url: str, soup: BeautifulSoup, entry: Dict[str, Any]) -> Dict[str, Any]:
-        title = (entry.get('title') or {}).get('de', '').lower()
-        summary = (entry.get('summary') or {}).get('de', '').lower()
+    def build_domain_fields(
+        self,
+        url: str,
+        soup: BeautifulSoup,
+        entry: Dict[str, Any],
+        seed: Dict[str, Any] | None = None,
+    ) -> Dict[str, Any]:
+        title = str(entry.get('title') or '').lower()
+        summary = str((entry.get('summary') or {}).get('de') or '').lower()
         text = f"{title} {summary} {url.lower()}"
 
         aid_type = 'advisory'

@@ -47,6 +47,15 @@ function scoreValue(value: unknown): string {
   return String(value);
 }
 
+function labelizeMetadata(value: string | undefined): string {
+  if (!value) return '–';
+  return value
+    .split('_')
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
 function InfoList({
   items,
 }: {
@@ -359,6 +368,18 @@ export default function EntryPage() {
                   { label: 'Status', value: status },
                   { label: 'Quelle', value: provenance?.source || '–' },
                   {
+                    label: 'Quelltyp',
+                    value: labelizeMetadata(provenance?.sourceTier),
+                  },
+                  {
+                    label: 'Institution',
+                    value: labelizeMetadata(provenance?.institutionType),
+                  },
+                  {
+                    label: 'Zuständigkeit',
+                    value: provenance?.jurisdiction || '–',
+                  },
+                  {
                     label: 'Crawler / Methode',
                     value: provenance?.generator || provenance?.method || '–',
                   },
@@ -376,6 +397,22 @@ export default function EntryPage() {
                     value: provenance?.crawledAt
                       ? new Date(provenance.crawledAt).toLocaleString()
                       : '–',
+                  },
+                  {
+                    label: 'Veröffentlicht',
+                    value: provenance?.publishedAt
+                      ? new Date(provenance.publishedAt).toLocaleString()
+                      : '–',
+                  },
+                  {
+                    label: 'Aktualisiert',
+                    value: provenance?.modifiedAt
+                      ? new Date(provenance.modifiedAt).toLocaleString()
+                      : '–',
+                  },
+                  {
+                    label: 'Inhaltstyp',
+                    value: provenance?.contentType || '–',
                   },
                 ]}
               />

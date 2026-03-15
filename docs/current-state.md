@@ -37,6 +37,13 @@ Treat these as reference or planning documents, not runtime truth:
   import, and link expansion.
 - Node files under `services/*/crawler/` and `services/_link_expander/`
   are reference-only stubs and should not receive runtime crawling logic.
+- `data/<domain>/url_status.jsonl` is now part of the canonical crawl state and
+  records redirects, canonical aliases, and skip-worthy failures.
+- Seeded domains now have a curated `data/<domain>/seeds.json` layer for
+  high-value starting points, separate from the expanded `urls.json` queue.
+- Crawler provenance now carries reusable source metadata such as
+  `sourceTier`, `institutionType`, `jurisdiction`, `publishedAt`,
+  `modifiedAt`, and `contentType` when detectable.
 
 ### Delivery stack
 
@@ -65,6 +72,7 @@ High-confidence implemented areas confirmed in code:
 - Express API in `backend/server.js`
 - Cloudflare Pages Functions API in `cloudflare-pages/functions/api`
 - React frontend and admin shell in `frontend/src`
+- provenance-aware search filtering in the React frontend and local/API query paths
 - URL canonicalization helpers in `services/_shared/url_normalization.js`
 - URL canonicalization tests in `tests/url_canonicalization_test.js`
 
@@ -88,7 +96,7 @@ Implemented but still mixed or incomplete:
 
 ## Open Issue Reconciliation
 
-As of 2026-03-15, the public GitHub repository has 68 open issues. They fall
+As of 2026-03-15, the public GitHub repository has 63 open issues. They fall
 into three main groups.
 
 ### 1. Foundation issues still referenced by the repo
@@ -122,21 +130,15 @@ validation workflows, dashboard support, and investigation topics.
 These open issues appear to have substantial code already in place and should
 be manually reviewed against acceptance criteria:
 
-- `#6` CRAWL-03
-  - Python link expander exists and is marked working in `docs/status.md`.
-- `#18` MOD-01
-  - canonical moderation queue structure and validation helpers exist.
-- `#28` DATA-05
-  - validation pipeline is implemented in `scripts/validate_entries.js`.
+- `#30` CRAWL-06
+  - URL canonicalization helpers and tests exist, but full seed-registry and
+    skip-state integration still needs broader domain verification.
 
 ### Likely partial, not fully done
 
 - `#17` LANG-03
   - Easy German generation modules exist, but the full end-to-end reporting and
     operational workflow is not cleanly finished.
-- `#30` CRAWL-06
-  - URL canonicalization helpers and tests exist, but repo docs still describe
-    this area as design work and integration is not clearly complete.
 - `#44-#60`
   - AI infrastructure exists in scaffold form, but several items remain
     placeholder-grade or undocumented as production-ready.
@@ -153,11 +155,9 @@ be manually reviewed against acceptance criteria:
 
 ### Duplicate or near-duplicate candidates
 
-- `#45` and `#46`
-  - both are "Implement task-based LLM model routing policy".
-- `#85` and `#86`
-  - both cover building reliable non-governmental source and expertise
-    networks, with very similar scope.
+- `#86`
+  - non-governmental source network work remains a better fit for a dedicated
+    investigation/source-validation track than the public benefits dataset.
 
 ## Documentation Drift Found
 
@@ -189,8 +189,8 @@ If a doc conflicts with code, use this order:
 
 Highest-value housekeeping work:
 
-1. Close or rewrite stale issues `#6`, `#18`, and `#28` after acceptance review.
-2. Merge duplicate issues `#45/#46` and `#85/#86`.
+1. Reconcile `#30` against the new URL registry and canonical-alias flow.
+2. Thread source-tier provenance into more of the AI/retrieval stack.
 3. Replace remaining legacy references to Node crawler runtime paths.
 4. Decide whether the AI stack is experimental or supported, then document that
    explicitly in `docs/status.md`.

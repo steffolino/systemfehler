@@ -42,7 +42,9 @@ crawling logic to these files.
 | `crawlers/organizations/seeded_crawler.py` | ✅ Working | Crawls seeded organization URLs from `data/organizations/urls.json` |
 | `crawlers/contacts/seeded_crawler.py` | ✅ Working | Crawls seeded contact URLs from `data/contacts/urls.json` |
 | `crawlers/shared/link_expander.py` | ✅ Working | Python link discovery and URL queue expansion (CRAWL-03) |
+| `data/<domain>/seeds.json` | ✅ Working | Curated high-value seed manifests for seeded domains; `urls.json` remains the expanded queue |
 | `data/<domain>/url_status.jsonl` | ✅ Working | Persistent URL crawl state for redirects, canonical aliases, and skip-worthy failures |
+| Provenance source metadata | ✅ Working | Crawlers emit `sourceTier`, `institutionType`, `jurisdiction`, and publication timestamps in `provenance` when detectable |
 
 ### Node.js API (`backend/`)
 
@@ -64,6 +66,7 @@ crawling logic to these files.
 |-----------|--------|
 | Vite + React admin panel | ✅ Working |
 | Data preview, quality metrics, moderation queue views | ✅ Working |
+| Search source filters | ✅ Working |
 
 ### Cloudflare Pages (`cloudflare-pages/`)
 
@@ -89,6 +92,7 @@ crawling logic to these files.
 - All IDs are UUID strings, not objects.
 - Datetime serialization allows `None` and uses ISO format.
 - Moderation queue format is canonical and validated.
+- Provenance accepts additional metadata such as `sourceTier`, `institutionType`, `jurisdiction`, `publishedAt`, `modifiedAt`, and `contentType`.
 
 **Infra/config:**
 - Backend and scripts now use the `PORT` environment variable for configuration (no more hardcoded ports).
@@ -183,6 +187,7 @@ in Python and available through the CLI and npm wrappers.
 - Expand test coverage for edge cases (e.g., missing/optional fields, invalid UUIDs, datetime `None`).
 - Begin implementing Phase 4 of the AI roadmap (AI-assisted metadata tagging, duplicate detection, etc.).
 - Add more detailed logging and cost tracking for all AI/model calls.
+- Thread structured source metadata into retrieval ranking and frontend filtering.
 - Regularly update `docs/status.md` and `docs/ai-roadmap.md` as new features are stabilized.
 
 See open issues and `IMPLEMENTATION_SUMMARY.md` for details.

@@ -318,6 +318,8 @@ async function loadSnapshotEntries(domain?: string): Promise<Entry[]> {
 function filterEntries(entries: Entry[], params?: {
   status?: string;
   search?: string;
+  sourceTier?: string;
+  jurisdiction?: string;
   includeTranslations?: boolean;
 }): Entry[] {
   let filtered = [...entries];
@@ -340,6 +342,50 @@ function filterEntries(entries: Entry[], params?: {
     });
   }
 
+  if (params?.sourceTier) {
+    filtered = filtered.filter(
+      (entry) => entry.provenance?.sourceTier === params.sourceTier
+    );
+  }
+
+  if (params?.jurisdiction) {
+    filtered = filtered.filter(
+      (entry) => entry.provenance?.jurisdiction === params.jurisdiction
+    );
+  }
+
+  filtered.sort((left, right) => {
+    const rank = (entry: Entry): number => {
+      switch (entry.provenance?.sourceTier) {
+        case 'tier_1_official':
+          return 0;
+        case 'tier_2_ngo_watchdog':
+          return 1;
+        case 'tier_4_academic':
+          return 2;
+        case 'tier_3_press':
+          return 3;
+        default:
+          return 4;
+      }
+    };
+
+    const tierDiff = rank(left) - rank(right);
+    if (tierDiff !== 0) return tierDiff;
+
+    const leftAis = Number(left.ais ?? left.qualityScores?.ais ?? 0);
+    const rightAis = Number(right.ais ?? right.qualityScores?.ais ?? 0);
+    if (rightAis !== leftAis) return rightAis - leftAis;
+
+    const leftIqs = Number(left.iqs ?? left.qualityScores?.iqs ?? 0);
+    const rightIqs = Number(right.iqs ?? right.qualityScores?.iqs ?? 0);
+    if (rightIqs !== leftIqs) return rightIqs - leftIqs;
+
+    const leftSeen = left.lastSeen ?? left.last_seen ?? left.createdAt ?? left.created_at ?? '';
+    const rightSeen = right.lastSeen ?? right.last_seen ?? right.createdAt ?? right.created_at ?? '';
+    return rightSeen.localeCompare(leftSeen);
+  });
+
   if (!params?.includeTranslations) {
     filtered = filtered.map((entry) => {
       const { translations, ...clone } = entry;
@@ -357,6 +403,8 @@ async function getEntriesFromSnapshots(params?: {
   limit?: number;
   offset?: number;
   search?: string;
+  sourceTier?: string;
+  jurisdiction?: string;
   includeTranslations?: boolean;
 }): Promise<EntriesResponse> {
   const limit = Math.min(params?.limit ?? 50, 100);
@@ -563,6 +611,8 @@ export const api = {
     limit?: number;
     offset?: number;
     search?: string;
+    sourceTier?: string;
+    jurisdiction?: string;
     includeTranslations?: boolean;
   }): Promise<EntriesResponse> => {
     const queryParams = new URLSearchParams();
@@ -571,6 +621,8 @@ export const api = {
     if (params?.limit) queryParams.append('limit', params.limit.toString());
     if (params?.offset) queryParams.append('offset', params.offset.toString());
     if (params?.search) queryParams.append('search', params.search);
+    if (params?.sourceTier) queryParams.append('sourceTier', params.sourceTier);
+    if (params?.jurisdiction) queryParams.append('jurisdiction', params.jurisdiction);
     if (params?.includeTranslations) queryParams.append('includeTranslations', 'true');
 
     if (IS_GITHUB_PAGES) {

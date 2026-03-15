@@ -17,7 +17,7 @@ class SeededContactsCrawler(SeededDomainCrawler):
             user_agent=user_agent,
             rate_limit_delay=rate_limit_delay,
             data_dir=data_dir,
-            source_label='urls-seeded',
+            source_label='seed-manifest',
         )
 
     def default_topics(self) -> List[str]:
@@ -29,8 +29,14 @@ class SeededContactsCrawler(SeededDomainCrawler):
     def default_target_groups(self) -> List[str]:
         return ['general_public', 'families', 'persons_with_disabilities']
 
-    def build_domain_fields(self, url: str, soup: BeautifulSoup, entry: Dict[str, Any]) -> Dict[str, Any]:
-        text = f"{((entry.get('title') or {}).get('de', '')).lower()} {url.lower()}"
+    def build_domain_fields(
+        self,
+        url: str,
+        soup: BeautifulSoup,
+        entry: Dict[str, Any],
+        seed: Dict[str, Any] | None = None,
+    ) -> Dict[str, Any]:
+        text = f"{str(entry.get('title') or '').lower()} {url.lower()}"
 
         contact_type = 'office'
         if '115' in text or 'telefon' in text or 'helpline' in text:

@@ -127,6 +127,8 @@ app.get('/api/data/entries', async (req, res) => {
     const {
       domain,
       status,
+      sourceTier,
+      jurisdiction,
       limit = 50,
       offset = 0,
       search,
@@ -136,6 +138,8 @@ app.get('/api/data/entries', async (req, res) => {
     const options = {
       domain,
       status,
+      sourceTier,
+      jurisdiction,
       limit: Math.min(parseInt(limit), 100),
       offset: parseInt(offset),
       includeTranslations: includeTranslations === 'true' || includeTranslations === '1'

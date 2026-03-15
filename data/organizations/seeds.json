@@ -1,0 +1,62 @@
+{
+  "version": "0.1.0",
+  "domain": "organizations",
+  "note": "Curated high-value starting points for organization crawling. Expanded URL queues remain in urls.json.",
+  "seeds": [
+    {
+      "url": "https://www.arbeitsagentur.de/ueber-uns",
+      "label": "Bundesagentur für Arbeit overview",
+      "priority": 10,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "organization-overview",
+      "topics": ["public_institutions", "employment"],
+      "tags": ["official_source", "institution"]
+    },
+    {
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium",
+      "label": "BMBFSFJ ministry overview",
+      "priority": 20,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "organization-overview",
+      "topics": ["public_institutions", "families"],
+      "tags": ["official_source", "ministry"]
+    },
+    {
+      "url": "https://www.bafza.de/ueber-das-bundesamt/organisation",
+      "label": "BAFzA organization overview",
+      "priority": 30,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "organization-overview",
+      "topics": ["public_institutions", "service_delivery"],
+      "tags": ["official_source", "federal_agency"]
+    },
+    {
+      "url": "https://www.fitko.de/produktmanagement/115",
+      "label": "115 product management",
+      "priority": 40,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "service-organization",
+      "topics": ["public_institutions", "service_delivery"],
+      "tags": ["115", "federal_service"]
+    },
+    {
+      "url": "https://www.bundesregierung.de/breg-de/bundesregierung/bundesministerien",
+      "label": "Federal ministries overview",
+      "priority": 50,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "government-overview",
+      "topics": ["public_institutions", "government"],
+      "tags": ["official_source", "overview"]
+    }
+  ]
+}

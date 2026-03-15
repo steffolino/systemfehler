@@ -27,6 +27,7 @@ an independent module with its own data and crawler:
 ```text
 crawlers/<domain>/
 data/<domain>/entries.json
+data/<domain>/seeds.json
 data/<domain>/urls.json
 ```
 
@@ -63,27 +64,38 @@ This supports policy analysis, expiry detection, and historical reconstruction.
 
 ### 2.4 Multilingual Architecture
 
-Text fields use structured language containers, for example:
+The canonical entry title is now a plain string:
 
 ```json
-"title": {
-  "de": "Titel auf Deutsch",
-  "en": "Title in English",
-  "easy_de": "Einfaches Deutsch"
+"title": "Bürgergeld"
+```
+
+Longer text fields such as `summary` and `content` continue to use structured
+language containers:
+
+```json
+"summary": {
+  "de": "Kurze Beschreibung auf Deutsch",
+  "en": "Short English summary",
+  "easy_de": "Einfache Zusammenfassung"
 }
 ```
 
-Additional languages (e.g. `tr`, `ru`, `ar`) can be added as needed.
-
-Translations are preserved even if they are later removed from the source.
+Additional translations are preserved in the `translations` map even if they
+later disappear from the source.
 
 ### 2.5 Preservation-Oriented Crawling
 
 Crawlers are designed to:
 
 * Fetch and normalize pages from multiple sources.
+* Resolve redirects and canonical URLs before candidate generation.
+* Persist URL crawl state in `data/<domain>/url_status.jsonl` so obsolete,
+  invalid, or canonical-alias URLs can be skipped on future runs.
 * Detect and store outgoing links as potential new sources.
 * Extract structured data using configurable rules.
+* Attach provenance metadata such as source tier, institution type,
+  jurisdiction, and publication timestamps when detectable.
 * Detect missing translations or removed sections.
 * Compare new data with existing entries and generate diffs.
 * Never publish directly: all changes go through moderation first.
@@ -215,9 +227,10 @@ When resolving deployment-related ambiguity, this section is the canonical sourc
 
 ## 4. Data Flow Overview
 
-1. **URL registration**
+1. **Seed registration**
 
-   * Source URLs are stored in `data/<domain>/urls.json`.
+   * Curated high-value seeds are stored in `data/<domain>/seeds.json`.
+   * Expanded discovery queues remain in `data/<domain>/urls.json`.
 
 2. **Crawling and extraction**
 

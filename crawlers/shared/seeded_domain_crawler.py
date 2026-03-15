@@ -45,12 +45,12 @@ class SeededDomainCrawler(BaseCrawler):
     # Public API
     # ------------------------------
     def crawl(self) -> List[Dict[str, Any]]:
-        urls = self._load_seed_urls()
+        seed_records = self._load_seed_records()
         entries: List[Dict[str, Any]] = []
 
         try:
-            for url in urls:
-                entry = self._crawl_single_url(url)
+            for seed_record in seed_records:
+                entry = self._crawl_single_url(seed_record)
                 if entry:
                     entries.append(entry)
         finally:
@@ -85,26 +85,84 @@ class SeededDomainCrawler(BaseCrawler):
     def default_target_groups(self) -> List[str]:
         return ['general_public']
 
-    def build_domain_fields(self, url: str, soup: BeautifulSoup, entry: Dict[str, Any]) -> Dict[str, Any]:
+    def build_domain_fields(
+        self,
+        url: str,
+        soup: BeautifulSoup,
+        entry: Dict[str, Any],
+        seed: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Any]:
         return {}
 
     # ------------------------------
     # Internals
     # ------------------------------
-    def _load_seed_urls(self) -> List[str]:
+    def _normalize_seed_record(self, raw_seed: Any) -> Optional[Dict[str, Any]]:
+        if isinstance(raw_seed, str):
+            return {'url': raw_seed.strip(), 'enabled': True}
+
+        if not isinstance(raw_seed, dict):
+            return None
+
+        url = raw_seed.get('url')
+        if not isinstance(url, str) or not url.strip():
+            return None
+
+        record: Dict[str, Any] = {
+            'url': url.strip(),
+            'enabled': raw_seed.get('enabled', True) is not False,
+        }
+
+        for key in (
+            'label',
+            'sourceTier',
+            'institutionType',
+            'jurisdiction',
+            'seedCategory',
+            'notes',
+            'source',
+        ):
+            value = raw_seed.get(key)
+            if isinstance(value, str) and value.strip():
+                record[key] = value.strip()
+
+        for key in ('topics', 'tags', 'targetGroups', 'allowedPaths'):
+            value = raw_seed.get(key)
+            if isinstance(value, list):
+                cleaned = [item.strip() for item in value if isinstance(item, str) and item.strip()]
+                if cleaned:
+                    record[key] = cleaned
+
+        priority = raw_seed.get('priority')
+        if isinstance(priority, int):
+            record['priority'] = priority
+
+        return record
+
+    def _load_seed_records(self) -> List[Dict[str, Any]]:
+        seed_file = self.data_dir / self.domain / 'seeds.json'
         url_file = self.data_dir / self.domain / 'urls.json'
-        if not url_file.exists():
-            self.logger.warning(f"Seed URL file missing: {url_file}")
+        payload: Any = None
+        source_file = seed_file if seed_file.exists() else url_file
+
+        if not source_file.exists():
+            self.logger.warning(f"Seed file missing: {source_file}")
             return []
 
         try:
-            payload = json.loads(url_file.read_text(encoding='utf-8'))
+            payload = json.loads(source_file.read_text(encoding='utf-8'))
         except Exception as exc:
-            self.logger.error(f"Failed to parse {url_file}: {exc}")
+            self.logger.error(f"Failed to parse {source_file}: {exc}")
             return []
 
-        urls = payload.get('urls', []) if isinstance(payload, dict) else []
-        if not isinstance(urls, list):
+        raw_seeds = []
+        if isinstance(payload, dict):
+            if isinstance(payload.get('seeds'), list):
+                raw_seeds = payload.get('seeds', [])
+            elif isinstance(payload.get('urls'), list):
+                raw_seeds = payload.get('urls', [])
+
+        if not isinstance(raw_seeds, list):
             return []
 
         max_urls = 0
@@ -116,12 +174,19 @@ class SeededDomainCrawler(BaseCrawler):
             except ValueError:
                 max_urls = 0
 
-        normalized = []
+        normalized: List[Dict[str, Any]] = []
         seen = set()
-        for raw_url in urls:
-            if not isinstance(raw_url, str) or not raw_url.strip():
+        seed_records = []
+        for raw_seed in raw_seeds:
+            seed_record = self._normalize_seed_record(raw_seed)
+            if not seed_record or not seed_record.get('enabled', True):
                 continue
-            cleaned = self.normalize_url(raw_url)
+            seed_records.append(seed_record)
+
+        seed_records.sort(key=lambda record: record.get('priority', 100))
+
+        for seed_record in seed_records:
+            cleaned = self.normalize_url(seed_record['url'])
             if self.url_registry.should_skip(cleaned):
                 continue
             preferred = self.url_registry.get_preferred_url(cleaned)
@@ -138,11 +203,27 @@ class SeededDomainCrawler(BaseCrawler):
             if cleaned in seen:
                 continue
             seen.add(cleaned)
-            normalized.append(cleaned)
+            normalized_record = dict(seed_record)
+            normalized_record['url'] = cleaned
+            normalized.append(normalized_record)
 
         return normalized[:max_urls] if max_urls > 0 else normalized
 
-    def _crawl_single_url(self, url: str) -> Optional[Dict[str, Any]]:
+    def _merge_string_lists(self, base: List[str], extra: List[str]) -> List[str]:
+        merged = []
+        seen = set()
+        for value in [*base, *extra]:
+            if not isinstance(value, str) or not value.strip():
+                continue
+            cleaned = value.strip()
+            if cleaned in seen:
+                continue
+            seen.add(cleaned)
+            merged.append(cleaned)
+        return merged
+
+    def _crawl_single_url(self, seed_record: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        url = seed_record['url']
         response = self.fetch_page_details(url)
         if not response:
             self.url_registry.record(
@@ -194,11 +275,37 @@ class SeededDomainCrawler(BaseCrawler):
         )
 
         entry = self._build_base_entry(canonical_url, soup)
-        entry.update(self.build_domain_fields(canonical_url, soup, entry))
+        if isinstance(seed_record.get('topics'), list):
+            entry['topics'] = self._merge_string_lists(entry.get('topics', []), seed_record['topics'])
+        if isinstance(seed_record.get('tags'), list):
+            entry['tags'] = self._merge_string_lists(entry.get('tags', []), seed_record['tags'])
+        if isinstance(seed_record.get('targetGroups'), list):
+            entry['targetGroups'] = self._merge_string_lists(
+                entry.get('targetGroups', []),
+                seed_record['targetGroups'],
+            )
+
+        entry.update(self.build_domain_fields(canonical_url, soup, entry, seed_record))
 
         content_checksum = self.calculate_checksum(json.dumps(entry, sort_keys=True, ensure_ascii=False))
-        entry['provenance'] = self.generate_provenance(url)
-        entry['provenance']['checksum'] = content_checksum
+        provenance = self.generate_provenance(canonical_url)
+        for key in ('sourceTier', 'institutionType', 'jurisdiction'):
+            value = seed_record.get(key)
+            if isinstance(value, str) and value:
+                provenance[key] = value
+        provenance.update(
+            {
+                key: value
+                for key, value in self._extract_publication_metadata(soup).items()
+                if value
+            }
+        )
+        if isinstance(seed_record.get('label'), str):
+            provenance['seedLabel'] = seed_record['label']
+        if isinstance(seed_record.get('seedCategory'), str):
+            provenance['seedCategory'] = seed_record['seedCategory']
+        provenance['checksum'] = content_checksum
+        entry['provenance'] = provenance
         entry['qualityScores'] = self.quality_scorer.calculate_scores(entry)
 
         validation = self.validator.validate_entry(entry, self.domain)
