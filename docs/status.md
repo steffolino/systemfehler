@@ -78,7 +78,7 @@ crawling logic to these files.
 
 | Component | Status | Notes |
 |-----------|--------|-------|
-| Pages deploy workflow (`.github/workflows/deploy-pages.yml`) | ✅ Working | Frontend build uses `VITE_API_URL=/api`; deploy runs with `wrangler@4.71.0` and `--cwd=cloudflare-pages` |
+| Pages deploy workflow (`.github/workflows/deploy-pages.yml`) | ✅ Working | Frontend build uses `VITE_API_URL=/api` and injects public frontend vars for Turnstile/Auth0; deploy runs with `wrangler@4.71.0` and `--cwd=cloudflare-pages` |
 | Pages Functions API | ✅ Working | Worker-safe handlers for `/api/health`, `/api/status`, `/api/data/entries`, `/api/data/entries/:id`, `/api/data/moderation-queue`, `/api/data/quality-report` |
 | D1 schema (`cloudflare-pages/d1/schema.sql`) | ✅ Working | Includes `entries` and `moderation_queue` tables |
 

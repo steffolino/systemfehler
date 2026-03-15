@@ -57,6 +57,25 @@ Also add the Pages base URL as a repository secret:
 - **Name**: `PAGES_INGEST_URL`
 - **Value**: e.g. `https://systemfehler.pages.dev`
 
+## 4b. Add Turnstile and frontend build variables
+
+For bot protection and Auth0-enabled frontend builds, configure:
+
+### Cloudflare Pages secrets
+
+- `TURNSTILE_SECRET_KEY`
+- `GITHUB_OAUTH_CLIENT_SECRET`
+- `ADMIN_SESSION_SECRET`
+
+### GitHub Actions variables
+
+- `VITE_TURNSTILE_SITE_KEY`
+- `VITE_AUTH0_DOMAIN`
+- `VITE_AUTH0_CLIENT_ID`
+
+These public frontend values are injected during the Pages build by
+`.github/workflows/deploy-pages.yml`.
+
 ## 5. Verify
 
 After deployment, check the health endpoint:

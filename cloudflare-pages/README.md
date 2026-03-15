@@ -33,11 +33,30 @@ For automated D1 ingest from `.github/workflows/crawl-and-ingest.yml`:
 - `PAGES_INGEST_URL` (e.g. `https://systemfehler.pages.dev`)
 - `INGEST_TOKEN` (must match the Cloudflare Pages secret `INGEST_TOKEN`)
 
+## Required GitHub Actions Variables
+
+Set these as repository or environment variables for the Pages frontend build:
+
+- `VITE_TURNSTILE_SITE_KEY`
+- `VITE_AUTH0_DOMAIN`
+- `VITE_AUTH0_CLIENT_ID`
+
+These are public frontend values and are injected at build time by
+`.github/workflows/deploy-pages.yml`.
+
 ## Cloudflare Project Setup
 
 1. Create a Cloudflare Pages project named `systemfehler`.
 2. You do not need to configure Cloudflare-side build commands if using the GitHub Actions deploy workflow.
 3. Ensure production branch is `main`.
+4. In **Pages -> Settings -> Environment variables / Secrets**, add server-side secrets:
+   - `TURNSTILE_SECRET_KEY`
+   - `INGEST_TOKEN`
+   - `GITHUB_OAUTH_CLIENT_SECRET`
+   - `ADMIN_SESSION_SECRET`
+5. In **Pages -> Settings -> Environment variables**, add non-secret values if they are consumed by Functions:
+   - `ADMIN_ALLOWLIST`
+   - `PAGES_BASE_URL` (for example `https://systemfehler.pages.dev`)
 
 ## Deployment Trigger
 

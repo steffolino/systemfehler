@@ -30,6 +30,9 @@ jobs:
         env:
           PUBLIC_PATH: /systemfehler/
           VITE_API_URL: /api
+          VITE_TURNSTILE_SITE_KEY: ${{ vars.VITE_TURNSTILE_SITE_KEY }}
+          VITE_AUTH0_DOMAIN: ${{ vars.VITE_AUTH0_DOMAIN }}
+          VITE_AUTH0_CLIENT_ID: ${{ vars.VITE_AUTH0_CLIENT_ID }}
 
       - name: Assemble combined deploy directory
         run: |
