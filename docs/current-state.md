@@ -37,13 +37,6 @@ Treat these as reference or planning documents, not runtime truth:
   import, and link expansion.
 - Node files under `services/*/crawler/` and `services/_link_expander/`
   are reference-only stubs and should not receive runtime crawling logic.
-- `data/<domain>/url_status.jsonl` is now part of the canonical crawl state and
-  records redirects, canonical aliases, and skip-worthy failures.
-- Seeded domains now have a curated `data/<domain>/seeds.json` layer for
-  high-value starting points, separate from the expanded `urls.json` queue.
-- Crawler provenance now carries reusable source metadata such as
-  `sourceTier`, `institutionType`, `jurisdiction`, `publishedAt`,
-  `modifiedAt`, and `contentType` when detectable.
 
 ### Delivery stack
 
@@ -102,7 +95,7 @@ Implemented but still mixed or incomplete:
 
 ## Open Issue Reconciliation
 
-As of 2026-03-15, the public GitHub repository has 63 open issues. They fall
+As of 2026-03-15, the public GitHub repository has 68 open issues. They fall
 into three main groups.
 
 ### 1. Foundation issues still referenced by the repo
@@ -136,15 +129,21 @@ validation workflows, dashboard support, and investigation topics.
 These open issues appear to have substantial code already in place and should
 be manually reviewed against acceptance criteria:
 
-- `#30` CRAWL-06
-  - URL canonicalization helpers and tests exist, but full seed-registry and
-    skip-state integration still needs broader domain verification.
+- `#6` CRAWL-03
+  - Python link expander exists and is marked working in `docs/status.md`.
+- `#18` MOD-01
+  - canonical moderation queue structure and validation helpers exist.
+- `#28` DATA-05
+  - validation pipeline is implemented in `scripts/validate_entries.js`.
 
 ### Likely partial, not fully done
 
 - `#17` LANG-03
   - Easy German generation modules exist, but the full end-to-end reporting and
     operational workflow is not cleanly finished.
+- `#30` CRAWL-06
+  - URL canonicalization helpers and tests exist, but repo docs still describe
+    this area as design work and integration is not clearly complete.
 - `#44-#60`
   - AI infrastructure exists in scaffold form, but several items remain
     placeholder-grade or undocumented as production-ready.
@@ -161,9 +160,11 @@ be manually reviewed against acceptance criteria:
 
 ### Duplicate or near-duplicate candidates
 
-- `#86`
-  - non-governmental source network work remains a better fit for a dedicated
-    investigation/source-validation track than the public benefits dataset.
+- `#45` and `#46`
+  - both are "Implement task-based LLM model routing policy".
+- `#85` and `#86`
+  - both cover building reliable non-governmental source and expertise
+    networks, with very similar scope.
 
 ## Documentation Drift Found
 
@@ -216,16 +217,28 @@ The key new workflow addition is deterministic seeded promotion:
 This is now the safest path for scaling entry volume without letting raw crawl
 noise overwrite the published dataset.
 
-Cloudflare Pages deployment was also corrected to package same-origin snapshot
-fallback assets (`data/*` and `moderation/review_queue.json`) into the Pages
-artifact, not just the compiled frontend bundle.
+Cloudflare Pages deployment now intentionally excludes the large `data/*`
+snapshot files. The active production Pages app uses Pages Functions + D1 for
+data access, while GitHub Pages remains the static snapshot fallback path.
+
+Production AI is now live on `systemfehler.pages.dev` through Pages Functions
+plus Cloudflare Workers AI. The active production stack is:
+
+- Cloudflare Pages frontend
+- Cloudflare Pages Functions API at `/api/*`
+- D1-backed entry storage
+- Workers AI at `/api/ai/*`
+- Turnstile for public AI requests
+
+The standalone `systemfehler-api-worker` remains a separate future deployment
+target and is not the active production API path today.
 
 ## Recommended Cleanup Next
 
 Highest-value housekeeping work:
 
-1. Reconcile `#30` against the new URL registry and canonical-alias flow.
-2. Thread source-tier provenance into more of the AI/retrieval stack.
+1. Close or rewrite stale issues `#6`, `#18`, and `#28` after acceptance review.
+2. Merge duplicate issues `#45/#46` and `#85/#86`.
 3. Replace remaining legacy references to Node crawler runtime paths.
 4. Decide whether the AI stack is experimental or supported, then document that
    explicitly in `docs/status.md`.
