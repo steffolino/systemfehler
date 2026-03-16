@@ -31,6 +31,11 @@ class RetrieveResponse(BaseModel):
     latency_ms: int
 
 
+class PlainLanguageAnswerVariants(BaseModel):
+    einfach: Optional[str] = None
+    leicht: Optional[str] = None
+
+
 class AnswerResponse(BaseModel):
     answer: Optional[str]
     explanation: str
@@ -42,6 +47,7 @@ class AnswerResponse(BaseModel):
     evidence: List[Evidence] = Field(default_factory=list)
     weak_evidence: Optional[bool] = False
     usage: Dict[str, Any] = Field(default_factory=dict)
+    plain_language: PlainLanguageAnswerVariants = Field(default_factory=PlainLanguageAnswerVariants)
 
 
 class EnrichmentFacet(BaseModel):

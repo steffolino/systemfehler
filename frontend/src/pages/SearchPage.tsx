@@ -302,6 +302,14 @@ export default function SearchPage() {
 
   const displayedAiAnswer = useMemo(() => {
     const base = aiResult?.synthesis.answer || aiResult?.synthesis.explanation || '';
+    const backendPlainLanguage =
+      aiLanguageMode === 'einfach'
+        ? aiResult?.synthesis.plain_language?.einfach
+        : aiLanguageMode === 'leicht'
+          ? aiResult?.synthesis.plain_language?.leicht
+          : '';
+
+    if (backendPlainLanguage) return backendPlainLanguage;
     const groundedAnswer =
       aiLanguageMode !== 'standard' && (aiResult?.relatedEntries?.length || 0) > 0
         ? buildGroundedReadableAnswer(aiResult?.relatedEntries || [], aiLanguageMode)
@@ -310,7 +318,15 @@ export default function SearchPage() {
     if (groundedAnswer) return groundedAnswer;
     if (!base) return '';
     return getReadableAnswerText(base, aiLanguageMode, t('search.ai_synthesis'));
-  }, [aiLanguageMode, aiResult?.relatedEntries, aiResult?.synthesis.answer, aiResult?.synthesis.explanation, t]);
+  }, [
+    aiLanguageMode,
+    aiResult?.relatedEntries,
+    aiResult?.synthesis.answer,
+    aiResult?.synthesis.explanation,
+    aiResult?.synthesis.plain_language?.einfach,
+    aiResult?.synthesis.plain_language?.leicht,
+    t,
+  ]);
 
   return (
     <div className="mx-auto w-full max-w-5xl p-4 md:p-6">

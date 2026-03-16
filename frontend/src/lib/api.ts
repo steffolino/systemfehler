@@ -282,6 +282,10 @@ interface AISynthesizeResponse {
   evidence: AIEvidence[];
   weak_evidence?: boolean;
   usage?: Record<string, unknown>;
+  plain_language?: {
+    einfach?: string | null;
+    leicht?: string | null;
+  };
 }
 
 interface AIEnrichmentFacet {

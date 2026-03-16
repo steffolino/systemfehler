@@ -161,6 +161,9 @@ class AIBackendUnitTests(unittest.TestCase):
         self.assertIn("extractive", payload["model"])
         self.assertTrue(payload["answer"].startswith("Wahrscheinlich zuerst relevant:"))
         self.assertGreaterEqual(len(payload["evidence"]), 1)
+        self.assertIn("einfach", payload["plain_language"])
+        self.assertIn("leicht", payload["plain_language"])
+        self.assertIn("Buergergeld", payload["plain_language"]["einfach"])
 
     def test_synthesize_endpoint_falls_back_when_provider_errors(self):
         fake_evidence = [

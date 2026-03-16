@@ -32,6 +32,7 @@ from .schemas import (
     EnrichmentPayload,
     EnrichmentRequest,
     EnrichmentSuggestion,
+    PlainLanguageAnswerVariants,
     QueryRequest,
     RetrieveResponse,
     RewriteResponse,
@@ -216,32 +217,85 @@ def _best_text(payload, field_name):
     return None
 
 
-def _extractive_answer(evidence):
+def _best_translation_text(payload, key, field_name="summary"):
+    translations = payload.get("translations") if isinstance(payload, dict) else None
+    if not isinstance(translations, dict):
+        return None
+    record = translations.get(key)
+    if not isinstance(record, dict):
+        return None
+    value = record.get(field_name)
+    if isinstance(value, str) and value.strip():
+        return value.strip()
+    if field_name != "body":
+        body = record.get("body")
+        if isinstance(body, str) and body.strip():
+            return body.strip()
+    return None
+
+
+def _evidence_cards(evidence):
     cards = []
     sources = []
-
     for ev in [item for item in evidence if item.confidence >= 0.7][:3]:
         payload = _parse_evidence_payload(ev.content)
         if not payload:
             continue
         title = payload.get("title") or "Unbekannter Eintrag"
-        summary = _best_text(payload, "summary")
-        domain = payload.get("domain")
         if not isinstance(title, str):
             title = str(title)
+        summary = _best_text(payload, "summary")
+        einfach = (
+            _best_translation_text(payload, "de-EINFACH", "summary")
+            or _best_translation_text(payload, "de-EINFACH-SUGGESTED", "summary")
+            or summary
+        )
+        leicht = (
+            _best_translation_text(payload, "de-LEICHT", "summary")
+            or _best_translation_text(payload, "de-LEICHT-SUGGESTED", "summary")
+            or _best_text(payload, "summary")
+        )
         cards.append(
             {
                 "title": title,
                 "summary": summary,
-                "domain": domain if isinstance(domain, str) else None,
+                "einfach": einfach,
+                "leicht": leicht,
+                "domain": payload.get("domain") if isinstance(payload.get("domain"), str) else None,
             }
         )
         source = payload.get("url") or ev.source
         if isinstance(source, str):
             sources.append(source)
+    return cards, sources
+
+
+def _build_plain_language_variants(cards):
+    if not cards:
+        return PlainLanguageAnswerVariants()
+
+    einfach_blocks = []
+    leicht_lines = []
+
+    for card in cards[:3]:
+        if card.get("einfach"):
+            einfach_blocks.append(f"{card['title']}\n{card['einfach']}")
+        if card.get("title"):
+            leicht_lines.append(card["title"])
+        if card.get("leicht"):
+            short_parts = [part.strip() for part in re.split(r"[.!?]\s+", str(card["leicht"])) if part.strip()]
+            leicht_lines.extend(short_parts[:2])
+
+    einfach = "\n\n".join(einfach_blocks[:3]) if einfach_blocks else None
+    leicht = "\n".join(leicht_lines[:12]) if leicht_lines else None
+    return PlainLanguageAnswerVariants(einfach=einfach, leicht=leicht)
+
+
+def _extractive_answer(evidence):
+    cards, sources = _evidence_cards(evidence)
 
     if not cards:
-        return None, []
+        return None, [], PlainLanguageAnswerVariants()
 
     lead = cards[0]
     lines = [
@@ -261,7 +315,7 @@ def _extractive_answer(evidence):
             else:
                 lines.append(f"- Danach {card['title']} pruefen.")
 
-    return "\n".join(lines), sources
+    return "\n".join(lines), sources, _build_plain_language_variants(cards)
 
 
 def _deterministic_local_rewrite(query):
@@ -688,6 +742,9 @@ async def synthesize_answer(body: QueryRequest):
     model = model_router.route("synthesize", explicit_escalation=body.explicit_escalation)
     evidence = retrieve_evidence(body.query)
     sufficient = any(ev.confidence >= 0.7 for ev in evidence)
+    plain_language_variants = PlainLanguageAnswerVariants()
+    if sufficient:
+        _, _, plain_language_variants = _extractive_answer(evidence)
     normalized_query = normalize_query(body.query)
     evidence_hash = fingerprint_evidence(evidence)
     synth_cache_key = cache_key("synthesize", model, normalized_query, evidence_hash)
@@ -708,13 +765,14 @@ async def synthesize_answer(body: QueryRequest):
             fallback=True,
             evidence=evidence,
             weak_evidence=True,
+            plain_language=plain_language_variants,
         )
         ai_cache.set(synth_cache_key, _cacheable_response(response), CACHE_TTL_SYNTHESIZE)
         return response
 
     use_extractive_local = provider.name == "ollama" and LOCAL_SYNTHESIS_STRATEGY == "extractive"
     if use_extractive_local:
-        answer, sources = _extractive_answer(evidence)
+        answer, sources, plain_language_variants = _extractive_answer(evidence)
         latency = int((time.time() - start) * 1000)
         response = AnswerResponse(
             answer=answer,
@@ -726,6 +784,7 @@ async def synthesize_answer(body: QueryRequest):
             fallback=False,
             evidence=evidence,
             weak_evidence=False,
+            plain_language=plain_language_variants,
         )
         ai_cache.set(synth_cache_key, _cacheable_response(response), CACHE_TTL_SYNTHESIZE)
         log_telemetry("synthesize", model, latency, True, 0, 0.0)
@@ -744,6 +803,7 @@ async def synthesize_answer(body: QueryRequest):
             fallback=True,
             evidence=evidence,
             weak_evidence=False,
+            plain_language=plain_language_variants,
         )
         ai_cache.set(synth_cache_key, _cacheable_response(response), CACHE_TTL_SYNTHESIZE)
         return response
@@ -777,6 +837,7 @@ async def synthesize_answer(body: QueryRequest):
             fallback=False,
             evidence=evidence,
             usage=usage,
+            plain_language=plain_language_variants,
         )
         ai_cache.set(synth_cache_key, _cacheable_response(response), CACHE_TTL_SYNTHESIZE)
         return response
@@ -792,6 +853,7 @@ async def synthesize_answer(body: QueryRequest):
             latency_ms=latency,
             fallback=True,
             evidence=evidence,
+            plain_language=plain_language_variants,
         )
         ai_cache.set(synth_cache_key, _cacheable_response(response), CACHE_TTL_SYNTHESIZE)
         return response
