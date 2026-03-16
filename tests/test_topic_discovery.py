@@ -150,6 +150,40 @@ class TopicDiscoveryTests(unittest.TestCase):
             self.assertEqual(matches[0].topic_id, 'kinderzuschlag')
             self.assertTrue(all(topic.topic_id != 'buergergeld' for topic in matches[1:]))
 
+    def test_topic_registry_prefers_specific_subtopic_match(self):
+        with TemporaryDirectory() as temp_dir:
+            data_dir = Path(temp_dir) / 'data'
+            (data_dir / '_topics').mkdir(parents=True, exist_ok=True)
+
+            (data_dir / '_topics' / 'trusted_topic_sources.json').write_text(
+                json.dumps(
+                    {
+                        'topics': [
+                            {
+                                'id': 'buergergeld',
+                                'name': 'Buergergeld',
+                                'domains': ['benefits'],
+                                'keywords': ['buergergeld', 'bedarf'],
+                                'sources': [],
+                            },
+                            {
+                                'id': 'mehrbedarf',
+                                'name': 'Mehrbedarf',
+                                'domains': ['benefits'],
+                                'keywords': ['mehrbedarf', 'sonderbedarf', 'zuschlag'],
+                                'sources': [],
+                            },
+                        ]
+                    }
+                ),
+                encoding='utf-8',
+            )
+
+            registry = TopicRegistry(data_dir)
+            matches = registry.match_query('Wann bekomme ich Mehrbedarf beim Buergergeld?')
+
+            self.assertEqual(matches[0].topic_id, 'mehrbedarf')
+
 
 if __name__ == '__main__':
     unittest.main()

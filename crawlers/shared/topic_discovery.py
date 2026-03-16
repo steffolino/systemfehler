@@ -107,18 +107,24 @@ class TopicRegistry:
     def match_query(self, query: str) -> List[TopicDefinition]:
         normalized = (query or "").lower()
         tokens = {token for token in normalized.replace("-", " ").split() if token}
-        matches: List[tuple[int, TopicDefinition]] = []
+        matches: List[tuple[int, int, int, TopicDefinition]] = []
 
         for topic in self.topics.values():
-            keyword_hits = 0
+            exact_hits = 0
+            loose_hits = 0
+            specificity = 0
             for keyword in topic.keywords:
-                if keyword in normalized or keyword in tokens:
-                    keyword_hits += 1
-            if keyword_hits > 0:
-                matches.append((keyword_hits, topic))
+                if keyword in tokens:
+                    exact_hits += 1
+                    specificity = max(specificity, len(keyword))
+                elif keyword in normalized:
+                    loose_hits += 1
+                    specificity = max(specificity, len(keyword))
+            if exact_hits > 0 or loose_hits > 0:
+                matches.append((exact_hits, loose_hits, specificity, topic))
 
-        matches.sort(key=lambda item: (-item[0], item[1].topic_id))
-        return [topic for _, topic in matches]
+        matches.sort(key=lambda item: (-item[0], -item[1], -item[2], item[3].topic_id))
+        return [topic for _, _, _, topic in matches]
 
 
 class TopicDiscovery:

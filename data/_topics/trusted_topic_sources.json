@@ -206,6 +206,105 @@
           ]
         }
       ]
+    },
+    {
+      "id": "regelbedarf",
+      "name": "Regelbedarf",
+      "domains": ["benefits", "aid"],
+      "keywords": [
+        "regelbedarf",
+        "regelsatz",
+        "existenzminimum",
+        "bedarf",
+        "buergergeld"
+      ],
+      "sources": [
+        {
+          "sourceId": "bmas",
+          "role": "official_background_source",
+          "priority": "critical",
+          "preferredPathPatterns": [
+            "/Publikationen/",
+            "/Broschueren/",
+            "/regelbedarf"
+          ],
+          "seedUrls": [
+            "https://www.bmas.de/DE/Service/Publikationen/Broschueren/a206-regelbedarf.html"
+          ]
+        },
+        {
+          "sourceId": "arbeitsagentur",
+          "role": "official_rule_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/",
+            "/zusammensetzung-bedarfe"
+          ],
+          "seedUrls": [
+            "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/zusammensetzung-bedarfe"
+          ]
+        },
+        {
+          "sourceId": "arbeitsagentur",
+          "role": "official_glossary_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/lexikon/"
+          ],
+          "seedUrls": [
+            "https://www.arbeitsagentur.de/lexikon/bedarfsgemeinschaft"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mehrbedarf",
+      "name": "Mehrbedarf",
+      "domains": ["benefits", "aid"],
+      "keywords": [
+        "mehrbedarf",
+        "zuschlag",
+        "sonderbedarf",
+        "bedarf",
+        "buergergeld"
+      ],
+      "sources": [
+        {
+          "sourceId": "arbeitsagentur",
+          "role": "official_rule_source",
+          "priority": "critical",
+          "preferredPathPatterns": [
+            "/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/",
+            "/zusammensetzung-bedarfe"
+          ],
+          "seedUrls": [
+            "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/zusammensetzung-bedarfe"
+          ]
+        },
+        {
+          "sourceId": "sanktionsfrei",
+          "role": "ngo_context_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/mehrbedarf"
+          ],
+          "seedUrls": [
+            "https://sanktionsfrei.de/mehrbedarf"
+          ]
+        },
+        {
+          "sourceId": "bmas",
+          "role": "official_light_language_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/Leichte-Sprache/",
+            "/Soziale-Sicherheit/"
+          ],
+          "seedUrls": [
+            "https://www.bmas.de/DE/Leichte-Sprache/Soziale-Sicherheit/soziale-sicherheit.html"
+          ]
+        }
+      ]
     }
   ]
 }
