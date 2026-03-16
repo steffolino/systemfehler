@@ -181,6 +181,12 @@ export default function AdminRawEntries() {
     ? Object.entries(selectedEntry).filter(([key]) => !priorityFields.includes(key))
     : [];
 
+  function handleEntryUpdated(updatedEntry: Entry) {
+    setEntries((current) =>
+      current.map((entry) => (entry.id === updatedEntry.id ? updatedEntry : entry))
+    );
+  }
+
   return (
     <div className="mx-auto w-full max-w-400 p-4 md:p-6">
       <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
@@ -382,7 +388,7 @@ export default function AdminRawEntries() {
                     </section>
 
                     <section>
-                      <PlainLanguageCard entry={selectedEntry} />
+                      <PlainLanguageCard entry={selectedEntry} onEntryUpdated={handleEntryUpdated} />
                     </section>
 
                     {showRawJson && (

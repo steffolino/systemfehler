@@ -14,6 +14,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { isTurnstileConfigured, verifyTurnstileToken } from './turnstile.js';
+import { applyPlainLanguageReview } from './plain_language_review.js';
 
 dotenv.config();
 
@@ -214,6 +215,42 @@ export function createApp({
   } catch (error) {
     logger.error('Get entry error:', error);
     res.status(500).json({ error: 'Failed to fetch entry' });
+  }
+  });
+
+  app.post('/api/data/entries/:id/plain-language-review', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { mode, action, reviewer } = req.body || {};
+
+    const current = await dbModule.query(
+      'SELECT id, translations FROM entries WHERE id = $1',
+      [id]
+    );
+
+    if (!current.rows || current.rows.length === 0) {
+      return res.status(404).json({ error: 'Entry not found' });
+    }
+
+    const updatedTranslations = applyPlainLanguageReview(current.rows[0].translations || {}, {
+      mode,
+      action,
+      reviewer: typeof reviewer === 'string' && reviewer.trim() ? reviewer.trim() : null,
+    });
+
+    await dbModule.query(
+      'UPDATE entries SET translations = $2::jsonb, updated_at = NOW() WHERE id = $1',
+      [id, JSON.stringify(updatedTranslations)]
+    );
+
+    const entry = await queriesModule.getEntryById(id);
+    return res.json({ entry, mode, action });
+  } catch (error) {
+    logger.error('Plain language review error:', error);
+    return res.status(400).json({
+      error: 'Failed to update plain-language review',
+      message: error && error.message ? error.message : undefined,
+    });
   }
   });
 

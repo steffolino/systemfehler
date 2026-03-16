@@ -96,9 +96,15 @@ The goal is to improve comprehension without overwriting the canonical source te
   - `reviewStatus`
   - `reviewedBy`
   - `reviewedAt`
+- admin review actions:
+  - approve `Einfach`
+  - reject `Einfach`
+  - approve `Leicht`
+  - reject `Leicht`
 
 ## Next Steps
 
 - add reviewed benchmark set across multiple domains
 - add AI answer mode switch using the same style rules
-- add approval workflow for `*_SUGGESTED` plain-language fields
+- persist reviewer identity from authenticated admin sessions
+- add moderation/history view for plain-language review decisions

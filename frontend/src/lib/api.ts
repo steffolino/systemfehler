@@ -342,6 +342,12 @@ interface SourceCatalogItem {
   sampleUrl: string | null;
 }
 
+interface PlainLanguageReviewResponse {
+  entry: Entry;
+  mode: 'einfach' | 'leicht';
+  action: 'approve' | 'reject';
+}
+
 async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const normalizedBase = API_BASE_URL.replace(/\/+$/, '');
   const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
@@ -574,6 +580,20 @@ async function getAIEnrichment(entry: Entry): Promise<AIEnrichmentResponse> {
       entry_id: entry.id,
       entry,
     }),
+  });
+}
+
+async function reviewPlainLanguageTranslation(
+  entryId: string,
+  payload: {
+    mode: 'einfach' | 'leicht';
+    action: 'approve' | 'reject';
+    reviewer?: string;
+  }
+): Promise<PlainLanguageReviewResponse> {
+  return fetchApi<PlainLanguageReviewResponse>(`/api/data/entries/${entryId}/plain-language-review`, {
+    method: 'POST',
+    body: JSON.stringify(payload),
   });
 }
 
@@ -1253,6 +1273,8 @@ export const api = {
     return buildSourceCatalog(entries);
   },
 
+  reviewPlainLanguageTranslation,
+
   autocomplete: async ({ query, limit = 10 }: { query: string; limit?: number }) => {
     if (!query || query.length < 1) return [];
     const res = await api.getEntries({ search: query, limit });
@@ -1290,4 +1312,5 @@ export type {
   AIResultBundle,
   AIHealthResponse,
   SourceCatalogItem,
+  PlainLanguageReviewResponse,
 };
