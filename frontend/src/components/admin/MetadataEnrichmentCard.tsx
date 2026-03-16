@@ -66,6 +66,10 @@ export function MetadataEnrichmentCard({
         ['keywords', result.metadata.keywords] as const,
       ]
     : [];
+  const matchedTopics = Array.isArray(result?.provenance?.matched_topics)
+    ? (result?.provenance?.matched_topics as Array<{ id?: string; name?: string }>)
+        .filter((topic) => topic && (typeof topic.id === 'string' || typeof topic.name === 'string'))
+    : [];
 
   return (
     <Card className="p-4">
@@ -116,6 +120,23 @@ export function MetadataEnrichmentCard({
                   <li key={item}>- {item}</li>
                 ))}
               </ul>
+            </div>
+          )}
+
+          {matchedTopics.length > 0 && (
+            <div className="space-y-2">
+              <div className="text-sm font-medium">Matched topic profiles</div>
+              <div className="flex flex-wrap gap-2">
+                {matchedTopics.map((topic) => {
+                  const label = topic.name || topic.id || 'unknown-topic';
+                  const key = `${topic.id || label}-${label}`;
+                  return (
+                    <Badge key={key} variant="secondary">
+                      {label}
+                    </Badge>
+                  );
+                })}
+              </div>
             </div>
           )}
 

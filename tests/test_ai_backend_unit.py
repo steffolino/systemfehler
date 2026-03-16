@@ -90,6 +90,7 @@ class AIBackendUnitTests(unittest.TestCase):
         payload = response.json()
         self.assertIn("Matched trusted topic profiles: Bedarfsgemeinschaft.", payload["summary"])
         self.assertIn("regelbedarf", payload["metadata"]["keywords"]["suggested"])
+        self.assertEqual(payload["provenance"]["matched_topics"][0]["id"], "bedarfsgemeinschaft")
 
     def test_rewrite_endpoint_uses_deterministic_local_strategy(self):
         with patch("backend.ai_service.endpoints.provider.name", "ollama"), patch(

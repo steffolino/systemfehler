@@ -550,7 +550,16 @@ def _derive_metadata_suggestions(entry):
         target_groups=_build_facet(current_target_groups, suggested_target_groups, rationale, 0.64),
         keywords=_build_facet([], suggested_keywords, "Keywords are extracted from title and content signals.", 0.55),
     )
-    return metadata, summary, quality_flags
+    matched_topic_refs = [
+        {
+            "id": str(topic.get("id") or ""),
+            "name": str(topic.get("name") or topic.get("id") or ""),
+        }
+        for topic in matched_topics[:3]
+        if isinstance(topic, dict) and (topic.get("id") or topic.get("name"))
+    ]
+
+    return metadata, summary, quality_flags, matched_topic_refs
 
 
 @router.post("/retrieve", response_model=RetrieveResponse)
@@ -785,7 +794,7 @@ async def suggest_enrichment(body: EnrichmentRequest):
     if cached is not None:
         return EnrichmentSuggestion(**cached)
 
-    metadata, summary, quality_flags = _derive_metadata_suggestions(entry_payload)
+    metadata, summary, quality_flags, matched_topics = _derive_metadata_suggestions(entry_payload)
     deterministic_response = EnrichmentSuggestion(
         entry_id=body.entry_id,
         summary=summary,
@@ -795,6 +804,7 @@ async def suggest_enrichment(body: EnrichmentRequest):
             "provider": provider.name,
             "model": f"{model}:deterministic",
             "strategy": "taxonomy_heuristics",
+            "matched_topics": matched_topics,
         },
     )
 
