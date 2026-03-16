@@ -9,6 +9,7 @@ import json
 import os
 import jsonschema
 import re
+from urllib.parse import urlparse
 
 
 # ORM database access layer
@@ -60,6 +61,143 @@ NEGATIVE_HINTS = {
         "kurzarbeit": 4.5,
     },
 }
+
+_TOPIC_REGISTRY_CACHE = None
+_REGISTERED_SOURCE_HOSTS_CACHE = None
+
+
+def _data_dir():
+    return os.path.abspath(os.path.join(os.path.dirname(__file__), "../../data"))
+
+
+def _load_registered_source_hosts():
+    global _REGISTERED_SOURCE_HOSTS_CACHE
+    if _REGISTERED_SOURCE_HOSTS_CACHE is not None:
+        return _REGISTERED_SOURCE_HOSTS_CACHE
+
+    path = os.path.join(_data_dir(), "_sources", "registered_sources.json")
+    hosts = {}
+    try:
+        with open(path, "r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+        for source in payload.get("sources", []):
+            if not isinstance(source, dict):
+                continue
+            source_id = str(source.get("id") or "").strip()
+            base_url = str(source.get("baseUrl") or "").strip()
+            if not source_id or not base_url:
+                continue
+            host = (urlparse(base_url).netloc or "").lower()
+            host = host[4:] if host.startswith("www.") else host
+            if host:
+                hosts[source_id] = host
+    except Exception:
+        hosts = {}
+
+    _REGISTERED_SOURCE_HOSTS_CACHE = hosts
+    return hosts
+
+
+def _load_topic_registry():
+    global _TOPIC_REGISTRY_CACHE
+    if _TOPIC_REGISTRY_CACHE is not None:
+        return _TOPIC_REGISTRY_CACHE
+
+    path = os.path.join(_data_dir(), "_topics", "trusted_topic_sources.json")
+    topics = []
+    try:
+        with open(path, "r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+        topics = payload.get("topics", []) if isinstance(payload, dict) else []
+    except Exception:
+        topics = []
+
+    _TOPIC_REGISTRY_CACHE = topics
+    return topics
+
+
+def _extract_host(value: str | None):
+    if not isinstance(value, str) or not value.strip():
+        return ""
+    host = (urlparse(value).netloc or "").lower()
+    host = host[4:] if host.startswith("www.") else host
+    return host
+
+
+def _detect_topic_profiles(query: str, terms: list[str]):
+    normalized = (query or "").lower()
+    token_set = set(terms)
+    matched = []
+    for topic in _load_topic_registry():
+        if not isinstance(topic, dict):
+            continue
+        keywords = {
+            str(keyword).lower()
+            for keyword in topic.get("keywords", [])
+            if isinstance(keyword, str)
+        }
+        if not keywords:
+            continue
+        if any(keyword in normalized for keyword in keywords) or token_set.intersection(keywords):
+            matched.append(topic)
+    return matched
+
+
+def _topic_role_boost(entry: dict, query: str, terms: list[str], intents: set[str]):
+    profiles = _detect_topic_profiles(query, terms)
+    if not profiles:
+        return 0.0
+
+    url = str(entry.get("url") or "")
+    provenance = entry.get("provenance") or {}
+    source_url = provenance.get("source") if isinstance(provenance, dict) else ""
+    host = _extract_host(url) or _extract_host(source_url)
+    lowered_url = f"{url} {source_url}".lower()
+    source_hosts = _load_registered_source_hosts()
+    boost = 0.0
+
+    role_weights = {
+        "official_rule_source": 4.0,
+        "official_glossary_source": 3.5,
+        "official_contact_source": 3.0,
+        "official_light_language_source": 2.5,
+        "official_background_source": 1.5,
+        "ngo_context_source": 1.5,
+        "journalism_source": 1.0,
+    }
+
+    for topic in profiles:
+        for source in topic.get("sources", []):
+            if not isinstance(source, dict):
+                continue
+            source_id = str(source.get("sourceId") or "").strip()
+            expected_host = source_hosts.get(source_id)
+            if not expected_host or not host:
+                continue
+            if host != expected_host and not host.endswith(f".{expected_host}"):
+                continue
+
+            role = str(source.get("role") or "discovered")
+            boost += role_weights.get(role, 0.5)
+
+            for pattern in source.get("preferredPathPatterns", []):
+                if isinstance(pattern, str) and pattern.lower() in lowered_url:
+                    boost += 1.2
+
+            if role == "official_contact_source" and "contact" in intents:
+                boost += 2.0
+            if role == "official_rule_source" and "application" in intents:
+                boost += 1.8
+            if role == "official_glossary_source" and any(
+                token in terms for token in {"bedarfsgemeinschaft", "aufstocker", "regelbedarf", "mehrbedarf"}
+            ):
+                boost += 1.5
+            if role == "official_light_language_source" and any(
+                token in query.lower() for token in {"leicht", "leichte sprache", "einfach"}
+            ):
+                boost += 2.0
+
+    return boost
 
 
 def _pick_text(*values):
@@ -212,6 +350,7 @@ def _rerank_entries(entries: list[dict], query: str, terms: list[str]):
             score += 1.5
         if title and any(term in title for term in terms):
             score += 1.5
+        score += _topic_role_boost(entry, query, terms, intents)
 
         reranked.append((score, entry))
 
