@@ -305,6 +305,121 @@
           ]
         }
       ]
+    },
+    {
+      "id": "aufstocker",
+      "name": "Aufstocker",
+      "domains": ["benefits", "aid"],
+      "keywords": [
+        "aufstocker",
+        "einkommen ergaenzen",
+        "einkommen ergänzen",
+        "ergaenzen",
+        "zusaetzliches einkommen",
+        "zusätzliches einkommen"
+      ],
+      "sources": [
+        {
+          "sourceId": "arbeitsagentur",
+          "role": "official_glossary_source",
+          "priority": "critical",
+          "preferredPathPatterns": [
+            "/lexikon/aufstocker"
+          ],
+          "seedUrls": [
+            "https://www.arbeitsagentur.de/lexikon/aufstocker"
+          ]
+        },
+        {
+          "sourceId": "arbeitsagentur",
+          "role": "official_rule_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/einkommen-ergaenzen",
+            "/einkommen-ergänzen"
+          ],
+          "seedUrls": [
+            "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "antrag_bescheid",
+      "name": "Antrag und Bescheid",
+      "domains": ["benefits", "tools", "contacts"],
+      "keywords": [
+        "antrag",
+        "bescheid",
+        "beantragen",
+        "formular",
+        "online",
+        "weiterbewilligung"
+      ],
+      "sources": [
+        {
+          "sourceId": "arbeitsagentur",
+          "role": "official_rule_source",
+          "priority": "critical",
+          "preferredPathPatterns": [
+            "/antrag-bescheid",
+            "/beantragen",
+            "/formular"
+          ],
+          "seedUrls": [
+            "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/antrag-bescheid"
+          ]
+        },
+        {
+          "sourceId": "arbeitsagentur",
+          "role": "official_contact_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/kontakt/",
+            "/telefon"
+          ],
+          "seedUrls": []
+        }
+      ]
+    },
+    {
+      "id": "pflichten",
+      "name": "Pflichten",
+      "domains": ["benefits", "aid"],
+      "keywords": [
+        "pflichten",
+        "mitwirkung",
+        "beachten",
+        "sanktion",
+        "jobcenter",
+        "termine"
+      ],
+      "sources": [
+        {
+          "sourceId": "arbeitsagentur",
+          "role": "official_rule_source",
+          "priority": "critical",
+          "preferredPathPatterns": [
+            "/pflichten-verstehen-und-beachten",
+            "/pflichten"
+          ],
+          "seedUrls": [
+            "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/pflichten-verstehen-und-beachten"
+          ]
+        },
+        {
+          "sourceId": "sanktionsfrei",
+          "role": "ngo_context_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/studie",
+            "/jobcenter"
+          ],
+          "seedUrls": [
+            "https://sanktionsfrei.de/studie25"
+          ]
+        }
+      ]
     }
   ]
 }

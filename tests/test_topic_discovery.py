@@ -184,6 +184,74 @@ class TopicDiscoveryTests(unittest.TestCase):
 
             self.assertEqual(matches[0].topic_id, 'mehrbedarf')
 
+    def test_topic_registry_matches_procedural_topic(self):
+        with TemporaryDirectory() as temp_dir:
+            data_dir = Path(temp_dir) / 'data'
+            (data_dir / '_topics').mkdir(parents=True, exist_ok=True)
+
+            (data_dir / '_topics' / 'trusted_topic_sources.json').write_text(
+                json.dumps(
+                    {
+                        'topics': [
+                            {
+                                'id': 'buergergeld',
+                                'name': 'Buergergeld',
+                                'domains': ['benefits'],
+                                'keywords': ['buergergeld'],
+                                'sources': [],
+                            },
+                            {
+                                'id': 'antrag_bescheid',
+                                'name': 'Antrag und Bescheid',
+                                'domains': ['benefits'],
+                                'keywords': ['antrag', 'bescheid', 'beantragen', 'formular'],
+                                'sources': [],
+                            },
+                        ]
+                    }
+                ),
+                encoding='utf-8',
+            )
+
+            registry = TopicRegistry(data_dir)
+            matches = registry.match_query('Wie funktioniert der Antrag und wann kommt der Bescheid?')
+
+            self.assertEqual(matches[0].topic_id, 'antrag_bescheid')
+
+    def test_topic_registry_matches_glossary_topic(self):
+        with TemporaryDirectory() as temp_dir:
+            data_dir = Path(temp_dir) / 'data'
+            (data_dir / '_topics').mkdir(parents=True, exist_ok=True)
+
+            (data_dir / '_topics' / 'trusted_topic_sources.json').write_text(
+                json.dumps(
+                    {
+                        'topics': [
+                            {
+                                'id': 'buergergeld',
+                                'name': 'Buergergeld',
+                                'domains': ['benefits'],
+                                'keywords': ['buergergeld'],
+                                'sources': [],
+                            },
+                            {
+                                'id': 'aufstocker',
+                                'name': 'Aufstocker',
+                                'domains': ['benefits'],
+                                'keywords': ['aufstocker', 'einkommen ergaenzen', 'zusaetzliches einkommen'],
+                                'sources': [],
+                            },
+                        ]
+                    }
+                ),
+                encoding='utf-8',
+            )
+
+            registry = TopicRegistry(data_dir)
+            matches = registry.match_query('Was bedeutet Aufstocker?')
+
+            self.assertEqual(matches[0].topic_id, 'aufstocker')
+
 
 if __name__ == '__main__':
     unittest.main()
