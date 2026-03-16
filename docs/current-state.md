@@ -72,7 +72,7 @@ High-confidence implemented areas confirmed in code:
 - Admin raw-entry review now includes structured metadata-enrichment suggestions (`topics`, `tags`, `target_groups`, `keywords`) from the AI sidecar for editor review
 - Topic-guided discovery now supports trusted topic profiles, listing available topic ids, and free-text topic matching for commands like `discover-topic --query "..."`
 - The AI sidecar now uses trusted topic profiles in three places: URL discovery, retrieval reranking, and deterministic rewrite/enrichment heuristics
-- Current trusted topic coverage now includes concrete subtopics like `kinderzuschlag`, `bedarfsgemeinschaft`, `regelbedarf`, `mehrbedarf`, `aufstocker`, `antrag_bescheid`, and `pflichten`, not just the umbrella `buergergeld`
+- Current trusted topic coverage now includes concrete subtopics like `kinderzuschlag`, `bedarfsgemeinschaft`, `regelbedarf`, `mehrbedarf`, `aufstocker`, `antrag_bescheid`, `pflichten`, `kontakt_arbeitsagentur`, and `leichte_sprache_soziale_sicherheit`, not just the umbrella `buergergeld`
 - URL canonicalization helpers in `services/_shared/url_normalization.js`
 - URL canonicalization tests in `tests/url_canonicalization_test.js`
 

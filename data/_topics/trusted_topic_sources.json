@@ -420,6 +420,99 @@
           ]
         }
       ]
+    },
+    {
+      "id": "kontakt_arbeitsagentur",
+      "name": "Kontakt zur Arbeitsagentur",
+      "domains": ["contacts", "aid", "tools"],
+      "keywords": [
+        "kontakt",
+        "telefon",
+        "anrufen",
+        "erreichen",
+        "sprechstunde",
+        "arbeitsagentur",
+        "jobcenter",
+        "buergertelefon"
+      ],
+      "sources": [
+        {
+          "sourceId": "arbeitsagentur",
+          "role": "official_contact_source",
+          "priority": "critical",
+          "preferredPathPatterns": [
+            "/kontakt/",
+            "/telefon",
+            "/beratung"
+          ],
+          "seedUrls": []
+        },
+        {
+          "sourceId": "service115",
+          "role": "official_contact_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/service",
+            "/kontakt",
+            "/behoerden"
+          ],
+          "seedUrls": []
+        },
+        {
+          "sourceId": "bmas",
+          "role": "official_contact_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/Service/Kontakt/",
+            "/kontaktformular",
+            "/buergertelefon"
+          ],
+          "seedUrls": [
+            "https://www.bmas.de/DE/Service/Kontakt/Buergertelefon/buergertelefon.html",
+            "https://www.bmas.de/DE/Service/Kontakt/Kontaktformular/kontaktformular.html"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "leichte_sprache_soziale_sicherheit",
+      "name": "Leichte Sprache Soziale Sicherheit",
+      "domains": ["aid", "benefits"],
+      "keywords": [
+        "leichte sprache",
+        "leicht",
+        "einfach",
+        "soziale sicherheit",
+        "barrierefrei",
+        "verstaendlich"
+      ],
+      "sources": [
+        {
+          "sourceId": "bmas",
+          "role": "official_light_language_source",
+          "priority": "critical",
+          "preferredPathPatterns": [
+            "/Leichte-Sprache/",
+            "/Soziale-Sicherheit/",
+            "/leichte-sprache/"
+          ],
+          "seedUrls": [
+            "https://www.bmas.de/DE/Leichte-Sprache/Soziale-Sicherheit/soziale-sicherheit.html"
+          ]
+        },
+        {
+          "sourceId": "arbeitsagentur",
+          "role": "official_glossary_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/lexikon/"
+          ],
+          "seedUrls": [
+            "https://www.arbeitsagentur.de/lexikon/bedarfsgemeinschaft",
+            "https://www.arbeitsagentur.de/lexikon/aufstocker"
+          ]
+        }
+      ]
     }
   ]
 }

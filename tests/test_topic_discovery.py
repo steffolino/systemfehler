@@ -252,6 +252,74 @@ class TopicDiscoveryTests(unittest.TestCase):
 
             self.assertEqual(matches[0].topic_id, 'aufstocker')
 
+    def test_topic_registry_matches_contact_topic(self):
+        with TemporaryDirectory() as temp_dir:
+            data_dir = Path(temp_dir) / 'data'
+            (data_dir / '_topics').mkdir(parents=True, exist_ok=True)
+
+            (data_dir / '_topics' / 'trusted_topic_sources.json').write_text(
+                json.dumps(
+                    {
+                        'topics': [
+                            {
+                                'id': 'buergergeld',
+                                'name': 'Buergergeld',
+                                'domains': ['benefits'],
+                                'keywords': ['buergergeld'],
+                                'sources': [],
+                            },
+                            {
+                                'id': 'kontakt_arbeitsagentur',
+                                'name': 'Kontakt zur Arbeitsagentur',
+                                'domains': ['contacts'],
+                                'keywords': ['kontakt', 'telefon', 'anrufen', 'erreichen', 'arbeitsagentur'],
+                                'sources': [],
+                            },
+                        ]
+                    }
+                ),
+                encoding='utf-8',
+            )
+
+            registry = TopicRegistry(data_dir)
+            matches = registry.match_query('Wie erreiche ich die Arbeitsagentur telefonisch?')
+
+            self.assertEqual(matches[0].topic_id, 'kontakt_arbeitsagentur')
+
+    def test_topic_registry_matches_light_language_topic(self):
+        with TemporaryDirectory() as temp_dir:
+            data_dir = Path(temp_dir) / 'data'
+            (data_dir / '_topics').mkdir(parents=True, exist_ok=True)
+
+            (data_dir / '_topics' / 'trusted_topic_sources.json').write_text(
+                json.dumps(
+                    {
+                        'topics': [
+                            {
+                                'id': 'buergergeld',
+                                'name': 'Buergergeld',
+                                'domains': ['benefits'],
+                                'keywords': ['buergergeld'],
+                                'sources': [],
+                            },
+                            {
+                                'id': 'leichte_sprache_soziale_sicherheit',
+                                'name': 'Leichte Sprache Soziale Sicherheit',
+                                'domains': ['aid'],
+                                'keywords': ['leichte sprache', 'leicht', 'einfach', 'soziale sicherheit'],
+                                'sources': [],
+                            },
+                        ]
+                    }
+                ),
+                encoding='utf-8',
+            )
+
+            registry = TopicRegistry(data_dir)
+            matches = registry.match_query('Gibt es das auch in Leichter Sprache?')
+
+            self.assertEqual(matches[0].topic_id, 'leichte_sprache_soziale_sicherheit')
+
 
 if __name__ == '__main__':
     unittest.main()
