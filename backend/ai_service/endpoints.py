@@ -245,22 +245,39 @@ def _evidence_cards(evidence):
         if not isinstance(title, str):
             title = str(title)
         summary = _best_text(payload, "summary")
-        einfach = (
-            _best_translation_text(payload, "de-EINFACH", "summary")
-            or _best_translation_text(payload, "de-EINFACH-SUGGESTED", "summary")
-            or summary
-        )
-        leicht = (
-            _best_translation_text(payload, "de-LEICHT", "summary")
-            or _best_translation_text(payload, "de-LEICHT-SUGGESTED", "summary")
-            or _best_text(payload, "summary")
-        )
+        einfach_source = "default"
+        reviewed_einfach = _best_translation_text(payload, "de-EINFACH", "summary")
+        suggested_einfach = _best_translation_text(payload, "de-EINFACH-SUGGESTED", "summary")
+        if reviewed_einfach:
+            einfach = reviewed_einfach
+            einfach_source = "reviewed"
+        elif suggested_einfach:
+            einfach = suggested_einfach
+            einfach_source = "suggested"
+        else:
+            einfach = summary
+            einfach_source = "fallback"
+
+        leicht_source = "default"
+        reviewed_leicht = _best_translation_text(payload, "de-LEICHT", "summary")
+        suggested_leicht = _best_translation_text(payload, "de-LEICHT-SUGGESTED", "summary")
+        if reviewed_leicht:
+            leicht = reviewed_leicht
+            leicht_source = "reviewed"
+        elif suggested_leicht:
+            leicht = suggested_leicht
+            leicht_source = "suggested"
+        else:
+            leicht = _best_text(payload, "summary")
+            leicht_source = "fallback"
         cards.append(
             {
                 "title": title,
                 "summary": summary,
                 "einfach": einfach,
+                "einfach_source": einfach_source,
                 "leicht": leicht,
+                "leicht_source": leicht_source,
                 "domain": payload.get("domain") if isinstance(payload.get("domain"), str) else None,
             }
         )
@@ -276,19 +293,22 @@ def _build_plain_language_variants(cards):
 
     einfach_blocks = []
     leicht_lines = []
+    source_meta = {}
 
     for card in cards[:3]:
         if card.get("einfach"):
             einfach_blocks.append(f"{card['title']}\n{card['einfach']}")
+            source_meta["einfach"] = card.get("einfach_source") or source_meta.get("einfach") or "fallback"
         if card.get("title"):
             leicht_lines.append(card["title"])
         if card.get("leicht"):
             short_parts = [part.strip() for part in re.split(r"[.!?]\s+", str(card["leicht"])) if part.strip()]
             leicht_lines.extend(short_parts[:2])
+            source_meta["leicht"] = card.get("leicht_source") or source_meta.get("leicht") or "fallback"
 
     einfach = "\n\n".join(einfach_blocks[:3]) if einfach_blocks else None
     leicht = "\n".join(leicht_lines[:12]) if leicht_lines else None
-    return PlainLanguageAnswerVariants(einfach=einfach, leicht=leicht)
+    return PlainLanguageAnswerVariants(einfach=einfach, leicht=leicht, sources=source_meta)
 
 
 def _extractive_answer(evidence):

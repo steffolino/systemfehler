@@ -285,6 +285,7 @@ interface AISynthesizeResponse {
   plain_language?: {
     einfach?: string | null;
     leicht?: string | null;
+    sources?: Record<string, string>;
   };
 }
 

@@ -34,6 +34,7 @@ class RetrieveResponse(BaseModel):
 class PlainLanguageAnswerVariants(BaseModel):
     einfach: Optional[str] = None
     leicht: Optional[str] = None
+    sources: Dict[str, str] = Field(default_factory=dict)
 
 
 class AnswerResponse(BaseModel):

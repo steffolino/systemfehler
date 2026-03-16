@@ -164,6 +164,8 @@ class AIBackendUnitTests(unittest.TestCase):
         self.assertIn("einfach", payload["plain_language"])
         self.assertIn("leicht", payload["plain_language"])
         self.assertIn("Buergergeld", payload["plain_language"]["einfach"])
+        self.assertIn("sources", payload["plain_language"])
+        self.assertIn(payload["plain_language"]["sources"]["einfach"], {"fallback", "suggested", "reviewed"})
 
     def test_synthesize_endpoint_falls_back_when_provider_errors(self):
         fake_evidence = [

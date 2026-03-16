@@ -328,6 +328,22 @@ export default function SearchPage() {
     t,
   ]);
 
+  const plainLanguageSource =
+    aiLanguageMode === 'einfach'
+      ? aiResult?.synthesis.plain_language?.sources?.einfach
+      : aiLanguageMode === 'leicht'
+        ? aiResult?.synthesis.plain_language?.sources?.leicht
+        : '';
+
+  const plainLanguageSourceLabel =
+    plainLanguageSource === 'reviewed'
+      ? t('search.answer_source_reviewed')
+      : plainLanguageSource === 'suggested'
+        ? t('search.answer_source_suggested')
+        : plainLanguageSource === 'fallback'
+          ? t('search.answer_source_fallback')
+          : '';
+
   return (
     <div className="mx-auto w-full max-w-5xl p-4 md:p-6">
       <div className="mb-6 rounded-3xl border bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.12),transparent_35%),linear-gradient(180deg,rgba(248,250,252,0.95),rgba(255,255,255,1))] p-5 shadow-sm md:p-6">
@@ -520,6 +536,11 @@ export default function SearchPage() {
                       {submittedAiQuery && aiLanguageMode !== 'standard' && (aiResult?.relatedEntries?.length || 0) > 0 && (
                         <div className="mt-2 text-xs text-muted-foreground">
                           {t('search.answer_grounded_note')}
+                        </div>
+                      )}
+                      {submittedAiQuery && aiLanguageMode !== 'standard' && plainLanguageSourceLabel && (
+                        <div className="mt-2 text-xs text-muted-foreground">
+                          {t('search.answer_source_note')}: {plainLanguageSourceLabel}
                         </div>
                       )}
                       <div className="mt-2 whitespace-pre-line text-sm leading-7 text-foreground">
