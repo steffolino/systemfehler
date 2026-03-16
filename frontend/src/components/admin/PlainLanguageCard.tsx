@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { api, type Entry } from '@/lib/api';
+import { useAppAuth } from '@/lib/auth';
 import {
   auditPlainLanguage,
   getReadableEntryText,
@@ -35,6 +36,46 @@ function AuditList({ audit }: { audit: PlainLanguageAudit }) {
   );
 }
 
+function getReviewer(user: ReturnType<typeof useAppAuth>['user']) {
+  if (!user) return null;
+  if (typeof user.email === 'string' && user.email.trim()) return user.email.trim();
+  if (typeof user.name === 'string' && user.name.trim()) return user.name.trim();
+  if (typeof user.nickname === 'string' && user.nickname.trim()) return user.nickname.trim();
+  return null;
+}
+
+function ReviewBadge({ value }: { value?: string }) {
+  if (value === 'approved') return <Badge variant="secondary">approved</Badge>;
+  if (value === 'rejected') return <Badge variant="destructive">rejected</Badge>;
+  if (value === 'suggested') return <Badge variant="outline">suggested</Badge>;
+  return <Badge variant="outline">unreviewed</Badge>;
+}
+
+function ReviewMeta({
+  label,
+  record,
+}: {
+  label: string;
+  record: {
+    reviewStatus?: string;
+    reviewedBy?: string;
+    reviewedAt?: string;
+  } | null | undefined;
+}) {
+  if (!record) return null;
+
+  return (
+    <div className="rounded-xl border bg-muted/20 p-3 text-xs text-muted-foreground">
+      <div className="mb-2 flex items-center justify-between gap-3">
+        <span className="font-medium text-foreground">{label}</span>
+        <ReviewBadge value={record.reviewStatus} />
+      </div>
+      {record.reviewedBy && <div>Reviewer: {record.reviewedBy}</div>}
+      {record.reviewedAt && <div>Reviewed at: {new Date(record.reviewedAt).toLocaleString()}</div>}
+    </div>
+  );
+}
+
 export function PlainLanguageCard({
   entry,
   onEntryUpdated,
@@ -42,20 +83,26 @@ export function PlainLanguageCard({
   entry: Entry;
   onEntryUpdated?: (entry: Entry) => void;
 }) {
+  const { user } = useAppAuth();
   const [savingMode, setSavingMode] = useState<'einfach' | 'leicht' | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const reviewer = getReviewer(user);
 
   const translations = getReadableEntryTranslations(entry);
   const einfach = getReadableEntryText(entry, 'einfach');
   const leicht = getReadableEntryText(entry, 'leicht');
   const einfachAudit = auditPlainLanguage(einfach, 'einfach');
   const leichtAudit = auditPlainLanguage(leicht, 'leicht');
+  const einfachReviewed = translations['de-EINFACH'];
+  const einfachSuggested = translations['de-EINFACH-SUGGESTED'];
+  const leichtReviewed = translations['de-LEICHT'];
+  const leichtSuggested = translations['de-LEICHT-SUGGESTED'];
 
   async function handleReview(mode: 'einfach' | 'leicht', action: 'approve' | 'reject') {
     setSavingMode(mode);
     setError(null);
     try {
-      const response = await api.reviewPlainLanguageTranslation(entry.id, { mode, action });
+      const response = await api.reviewPlainLanguageTranslation(entry.id, { mode, action, reviewer: reviewer || undefined });
       onEntryUpdated?.(response.entry);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Review update failed');
@@ -71,6 +118,7 @@ export function PlainLanguageCard({
         <p className="mt-1 text-sm text-muted-foreground">
           Automatic Einfach and Leicht drafts plus a rule-based checker and review actions.
         </p>
+        {reviewer && <p className="mt-2 text-xs text-muted-foreground">Decisions are recorded as: {reviewer}</p>}
       </div>
 
       {error && <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</div>}
@@ -90,6 +138,8 @@ export function PlainLanguageCard({
             <ScoreBadge audit={einfachAudit} />
           </div>
           <div className="whitespace-pre-line rounded-xl border bg-background p-3 text-sm leading-6">{einfach}</div>
+          <ReviewMeta label="Reviewed Einfach" record={einfachReviewed} />
+          <ReviewMeta label="Suggested Einfach" record={einfachSuggested} />
           <AuditList audit={einfachAudit} />
           <div className="flex gap-2">
             <Button
@@ -124,6 +174,8 @@ export function PlainLanguageCard({
             <ScoreBadge audit={leichtAudit} />
           </div>
           <div className="whitespace-pre-line rounded-xl border bg-background p-3 text-sm leading-6">{leicht}</div>
+          <ReviewMeta label="Reviewed Leicht" record={leichtReviewed} />
+          <ReviewMeta label="Suggested Leicht" record={leichtSuggested} />
           <AuditList audit={leichtAudit} />
           <div className="flex gap-2">
             <Button
