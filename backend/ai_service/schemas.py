@@ -22,6 +22,7 @@ class RewriteResponse(BaseModel):
     latency_ms: int
     fallback: bool = False
     explanation: Optional[str] = None
+    matched_topics: List[str] = Field(default_factory=list)
 
 
 class RetrieveResponse(BaseModel):

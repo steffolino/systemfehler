@@ -373,6 +373,24 @@ def _match_topic_profiles(text):
     return [topic for _, topic in matches]
 
 
+def _topic_refs(topics, limit=3):
+    refs = []
+    for topic in topics[:limit]:
+        if not isinstance(topic, dict):
+            continue
+        label = str(topic.get("name") or topic.get("id") or "").strip()
+        topic_id = str(topic.get("id") or "").strip()
+        if not label and not topic_id:
+            continue
+        refs.append(
+            {
+                "id": topic_id,
+                "name": label or topic_id,
+            }
+        )
+    return refs
+
+
 def _entry_text_blob(entry):
     parts = []
     title = entry.get("title")
@@ -550,14 +568,7 @@ def _derive_metadata_suggestions(entry):
         target_groups=_build_facet(current_target_groups, suggested_target_groups, rationale, 0.64),
         keywords=_build_facet([], suggested_keywords, "Keywords are extracted from title and content signals.", 0.55),
     )
-    matched_topic_refs = [
-        {
-            "id": str(topic.get("id") or ""),
-            "name": str(topic.get("name") or topic.get("id") or ""),
-        }
-        for topic in matched_topics[:3]
-        if isinstance(topic, dict) and (topic.get("id") or topic.get("name"))
-    ]
+    matched_topic_refs = _topic_refs(matched_topics)
 
     return metadata, summary, quality_flags, matched_topic_refs
 
@@ -603,12 +614,14 @@ async def rewrite_query(body: QueryRequest):
             latency_ms=latency,
             fallback=True,
             explanation="No AI provider configured; returning the original query.",
+            matched_topics=[item["name"] for item in _topic_refs(_match_topic_profiles(body.query))],
         )
         ai_cache.set(rewrite_cache_key, _cacheable_response(response), CACHE_TTL_REWRITE)
         return response
 
     use_deterministic_local = provider.name == "ollama" and LOCAL_REWRITE_STRATEGY == "deterministic"
     if use_deterministic_local:
+        matched_topics = [item["name"] for item in _topic_refs(_match_topic_profiles(body.query))]
         rewritten_query = _deterministic_local_rewrite(body.query)
         latency = int((time.time() - start) * 1000)
         response = RewriteResponse(
@@ -617,7 +630,11 @@ async def rewrite_query(body: QueryRequest):
             provider=provider.name,
             latency_ms=latency,
             fallback=False,
-            explanation="Local rewrite uses fast deterministic normalization for stable retrieval.",
+            explanation=(
+                "Local rewrite uses fast deterministic normalization for stable retrieval."
+                + (f" Matched topic profiles: {', '.join(matched_topics)}." if matched_topics else "")
+            ),
+            matched_topics=matched_topics,
         )
         ai_cache.set(rewrite_cache_key, _cacheable_response(response), CACHE_TTL_REWRITE)
         log_telemetry("rewrite", model, latency, True, 0, 0.0)
@@ -645,6 +662,7 @@ async def rewrite_query(body: QueryRequest):
             provider=provider.name,
             latency_ms=latency,
             fallback=False,
+            matched_topics=[item["name"] for item in _topic_refs(_match_topic_profiles(body.query))],
         )
         ai_cache.set(rewrite_cache_key, _cacheable_response(response), CACHE_TTL_REWRITE)
         return response
@@ -658,6 +676,7 @@ async def rewrite_query(body: QueryRequest):
             latency_ms=latency,
             fallback=True,
             explanation=str(exc),
+            matched_topics=[item["name"] for item in _topic_refs(_match_topic_profiles(body.query))],
         )
         ai_cache.set(rewrite_cache_key, _cacheable_response(response), CACHE_TTL_REWRITE)
         return response

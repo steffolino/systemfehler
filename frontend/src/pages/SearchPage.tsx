@@ -458,6 +458,23 @@ export default function SearchPage() {
                       {submittedAiQuery && aiResult?.rewrite.explanation && (
                         <div className="mt-3 text-sm text-muted-foreground">{aiResult.rewrite.explanation}</div>
                       )}
+                      {submittedAiQuery && (aiResult?.rewrite.matched_topics?.length || 0) > 0 && (
+                        <div className="mt-3">
+                          <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                            {t('search.matched_topics')}
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {aiResult?.rewrite.matched_topics?.map((topic) => (
+                              <span
+                                key={topic}
+                                className="inline-flex rounded-full border bg-muted px-2.5 py-1 text-xs font-medium text-foreground"
+                              >
+                                {topic}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </Card>
 
                     <Card className="p-5">

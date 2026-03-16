@@ -256,6 +256,7 @@ interface AIRewriteResponse {
   latency_ms: number;
   fallback: boolean;
   explanation?: string | null;
+  matched_topics?: string[];
 }
 
 interface AIEvidence {

@@ -104,6 +104,7 @@ class AIBackendUnitTests(unittest.TestCase):
         self.assertEqual(payload["provider"], "ollama")
         self.assertIn("deterministic", payload["model"])
         self.assertIn("jobcenter", payload["rewritten_query"])
+        self.assertIsInstance(payload["matched_topics"], list)
 
     def test_rewrite_endpoint_prefers_topic_keywords_when_profile_matches(self):
         topic_profiles = [
@@ -127,6 +128,7 @@ class AIBackendUnitTests(unittest.TestCase):
         payload = response.json()
         self.assertIn("kinderzuschlag", payload["rewritten_query"])
         self.assertIn("familie", payload["rewritten_query"])
+        self.assertIn("Kinderzuschlag", payload["matched_topics"])
 
     def test_synthesize_endpoint_uses_extractive_fast_path(self):
         fake_evidence = [
