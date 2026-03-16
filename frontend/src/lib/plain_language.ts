@@ -102,23 +102,14 @@ function shortenLines(lines: string[], maxLines: number) {
     .slice(0, maxLines);
 }
 
-function buildEinfachText(entry: Entry) {
-  const title = getPrimaryTitle(entry);
-  const text = getPrimaryText(entry);
+function buildEinfachFromText(title: string, text: string) {
   const sentences = splitSentences(text).slice(0, 6).map((sentence) => simplifySentence(sentence, 'einfach'));
   const definitions = buildDefinitionLines(text, 'einfach').slice(0, 3);
-  const lines = [
-    title ? `${title}` : '',
-    ...sentences,
-    ...definitions,
-  ];
-
+  const lines = [title ? `${title}` : '', ...sentences, ...definitions];
   return shortenLines(lines, 8).join('\n\n');
 }
 
-function buildLeichtText(entry: Entry) {
-  const title = getPrimaryTitle(entry);
-  const text = getPrimaryText(entry);
+function buildLeichtFromText(title: string, text: string) {
   const rawSentences = splitSentences(text).slice(0, 5);
   const simpleLines: string[] = [];
 
@@ -131,13 +122,20 @@ function buildLeichtText(entry: Entry) {
   }
 
   const definitions = buildDefinitionLines(text, 'leicht').slice(0, 6);
-  const lines = [
-    title ? `${title}` : '',
-    ...simpleLines,
-    ...definitions,
-  ];
-
+  const lines = [title ? `${title}` : '', ...simpleLines, ...definitions];
   return shortenLines(lines, 14).join('\n');
+}
+
+function buildEinfachText(entry: Entry) {
+  const title = getPrimaryTitle(entry);
+  const text = getPrimaryText(entry);
+  return buildEinfachFromText(title, text);
+}
+
+function buildLeichtText(entry: Entry) {
+  const title = getPrimaryTitle(entry);
+  const text = getPrimaryText(entry);
+  return buildLeichtFromText(title, text);
 }
 
 function makeTranslationRecord(entry: Entry, title: string, body: string, mode: 'einfach' | 'leicht'): TranslationRecord {
@@ -211,6 +209,15 @@ export function getReadableEntrySummary(entry: Entry, mode: LanguageMode) {
 
 export function getReadableEntryTranslations(entry: Entry) {
   return buildSuggestedPlainLanguageTranslations(entry);
+}
+
+export function getReadableAnswerText(text: string, mode: LanguageMode, title = '') {
+  const normalized = normalizeWhitespace(text);
+  if (!normalized || mode === 'standard') return normalized;
+  if (mode === 'einfach') {
+    return buildEinfachFromText(title, normalized);
+  }
+  return buildLeichtFromText(title, normalized);
 }
 
 function sentenceCount(text: string) {

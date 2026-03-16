@@ -10,6 +10,7 @@ import TurnstileWidget from '../components/TurnstileWidget';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useI18n } from '@/lib/i18n';
+import { getReadableAnswerText, type LanguageMode } from '@/lib/plain_language';
 
 type TabKey = 'article' | 'ai';
 
@@ -87,6 +88,7 @@ export default function SearchPage() {
   const [debouncedStandardQuery, setDebouncedStandardQuery] = useState('');
   const [aiDraftQuery, setAiDraftQuery] = useState('');
   const [submittedAiQuery, setSubmittedAiQuery] = useState('');
+  const [aiLanguageMode, setAiLanguageMode] = useState<LanguageMode>('einfach');
   const [tab, setTab] = useState<TabKey>('ai');
   const [lastAiSubmitAt, setLastAiSubmitAt] = useState(0);
 
@@ -298,6 +300,12 @@ export default function SearchPage() {
       : t('search.result_count', { count: activeResults.length });
   }, [activeError, activeLoading, activeResults.length, t, tab]);
 
+  const displayedAiAnswer = useMemo(() => {
+    const base = aiResult?.synthesis.answer || aiResult?.synthesis.explanation || '';
+    if (!base) return '';
+    return getReadableAnswerText(base, aiLanguageMode, t('search.ai_synthesis'));
+  }, [aiLanguageMode, aiResult?.synthesis.answer, aiResult?.synthesis.explanation, t]);
+
   return (
     <div className="mx-auto w-full max-w-5xl p-4 md:p-6">
       <div className="mb-6 rounded-3xl border bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.12),transparent_35%),linear-gradient(180deg,rgba(248,250,252,0.95),rgba(255,255,255,1))] p-5 shadow-sm md:p-6">
@@ -450,9 +458,29 @@ export default function SearchPage() {
                       <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                         {t('search.ai_synthesis')}
                       </div>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {(['standard', 'einfach', 'leicht'] as LanguageMode[]).map((mode) => (
+                          <button
+                            key={mode}
+                            type="button"
+                            onClick={() => setAiLanguageMode(mode)}
+                            className={[
+                              'inline-flex rounded-full border px-3 py-1.5 text-xs font-medium transition',
+                              aiLanguageMode === mode
+                                ? 'border-foreground bg-foreground text-background'
+                                : 'border-border bg-background text-foreground hover:bg-muted',
+                            ].join(' ')}
+                          >
+                            {t(`entry.mode_${mode}` as const)}
+                          </button>
+                        ))}
+                      </div>
+                      <div className="mt-2 text-xs text-muted-foreground">
+                        {t('search.answer_mode_note')}
+                      </div>
                       <div className="mt-2 whitespace-pre-line text-sm leading-7 text-foreground">
                         {submittedAiQuery
-                          ? aiResult?.synthesis.answer || aiResult?.synthesis.explanation || t('search.ready_answer')
+                          ? displayedAiAnswer || t('search.ready_answer')
                           : aiDraftQuery.trim()
                             ? t('search.ready_answer')
                             : t('search.prompt_ai')}
