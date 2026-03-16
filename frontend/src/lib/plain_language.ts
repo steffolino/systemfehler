@@ -224,6 +224,41 @@ export function getReadableAnswerText(text: string, mode: LanguageMode, title = 
   return buildLeichtFromText(title, normalized);
 }
 
+export function buildGroundedReadableAnswer(
+  entries: Entry[],
+  mode: Exclude<LanguageMode, 'standard'>
+) {
+  const selectedEntries = entries.slice(0, 3);
+  if (selectedEntries.length === 0) return '';
+
+  if (mode === 'einfach') {
+    const blocks = selectedEntries
+      .map((entry) => {
+        const title = getPrimaryTitle(entry);
+        const summary = getReadableEntrySummary(entry, 'einfach') || getReadableEntrySummary(entry, 'standard');
+        if (!summary) return '';
+        return title ? `${title}\n${summary}` : summary;
+      })
+      .filter(Boolean);
+
+    return blocks.join('\n\n');
+  }
+
+  const lines: string[] = [];
+  for (const entry of selectedEntries) {
+    const title = getPrimaryTitle(entry);
+    const summary = getReadableEntrySummary(entry, 'leicht') || getReadableEntrySummary(entry, 'standard');
+    if (title) {
+      lines.push(title);
+    }
+    if (summary) {
+      lines.push(...splitSentences(summary).slice(0, 2));
+    }
+  }
+
+  return shortenLines(lines, 12).join('\n');
+}
+
 function sentenceCount(text: string) {
   return splitSentences(text).length;
 }

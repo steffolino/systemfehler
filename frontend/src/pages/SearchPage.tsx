@@ -10,7 +10,7 @@ import TurnstileWidget from '../components/TurnstileWidget';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useI18n } from '@/lib/i18n';
-import { getReadableAnswerText, type LanguageMode } from '@/lib/plain_language';
+import { buildGroundedReadableAnswer, getReadableAnswerText, type LanguageMode } from '@/lib/plain_language';
 
 type TabKey = 'article' | 'ai';
 
@@ -302,9 +302,15 @@ export default function SearchPage() {
 
   const displayedAiAnswer = useMemo(() => {
     const base = aiResult?.synthesis.answer || aiResult?.synthesis.explanation || '';
+    const groundedAnswer =
+      aiLanguageMode !== 'standard' && (aiResult?.relatedEntries?.length || 0) > 0
+        ? buildGroundedReadableAnswer(aiResult?.relatedEntries || [], aiLanguageMode)
+        : '';
+
+    if (groundedAnswer) return groundedAnswer;
     if (!base) return '';
     return getReadableAnswerText(base, aiLanguageMode, t('search.ai_synthesis'));
-  }, [aiLanguageMode, aiResult?.synthesis.answer, aiResult?.synthesis.explanation, t]);
+  }, [aiLanguageMode, aiResult?.relatedEntries, aiResult?.synthesis.answer, aiResult?.synthesis.explanation, t]);
 
   return (
     <div className="mx-auto w-full max-w-5xl p-4 md:p-6">
@@ -478,6 +484,11 @@ export default function SearchPage() {
                       <div className="mt-2 text-xs text-muted-foreground">
                         {t('search.answer_mode_note')}
                       </div>
+                      {submittedAiQuery && aiLanguageMode !== 'standard' && (aiResult?.relatedEntries?.length || 0) > 0 && (
+                        <div className="mt-2 text-xs text-muted-foreground">
+                          {t('search.answer_grounded_note')}
+                        </div>
+                      )}
                       <div className="mt-2 whitespace-pre-line text-sm leading-7 text-foreground">
                         {submittedAiQuery
                           ? displayedAiAnswer || t('search.ready_answer')
