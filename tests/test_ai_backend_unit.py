@@ -24,6 +24,11 @@ class AIBackendUnitTests(unittest.TestCase):
     def setUp(self):
         with ai_cache._lock:
             ai_cache._store.clear()
+        self.turnstile_patch = patch("backend.ai_service.gateway.is_turnstile_configured", return_value=False)
+        self.turnstile_patch.start()
+
+    def tearDown(self):
+        self.turnstile_patch.stop()
 
     def test_normalize_query_collapses_whitespace_and_case(self):
         self.assertEqual(normalize_query("  Ich   BIN  arbeitslos  "), "ich bin arbeitslos")
@@ -60,6 +65,32 @@ class AIBackendUnitTests(unittest.TestCase):
         self.assertIn("confidence", payload["metadata"]["topics"])
         self.assertIsInstance(payload["summary"], list)
 
+    def test_enrich_endpoint_uses_topic_profile_keywords(self):
+        entry = {
+            "id": "entry-1",
+            "title": "Was bedeutet Bedarfsgemeinschaft?",
+            "summary_de": "Informationen zur Bedarfsgemeinschaft und zum Regelbedarf.",
+            "content_de": "Der Regelbedarf und Mehrbedarf werden fuer die Bedarfsgemeinschaft erklaert.",
+            "topics": [],
+            "tags": [],
+            "target_groups": [],
+        }
+        topic_profiles = [
+            {
+                "id": "bedarfsgemeinschaft",
+                "name": "Bedarfsgemeinschaft",
+                "keywords": ["bedarfsgemeinschaft", "regelbedarf", "mehrbedarf"],
+            }
+        ]
+
+        with patch("backend.ai_service.endpoints.TOPIC_PROFILES", topic_profiles):
+            response = client.post("/enrich", json={"entry_id": entry["id"], "entry": entry})
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertIn("Matched trusted topic profiles: Bedarfsgemeinschaft.", payload["summary"])
+        self.assertIn("regelbedarf", payload["metadata"]["keywords"]["suggested"])
+
     def test_rewrite_endpoint_uses_deterministic_local_strategy(self):
         with patch("backend.ai_service.endpoints.provider.name", "ollama"), patch(
             "backend.ai_service.endpoints.provider.is_configured",
@@ -72,6 +103,29 @@ class AIBackendUnitTests(unittest.TestCase):
         self.assertEqual(payload["provider"], "ollama")
         self.assertIn("deterministic", payload["model"])
         self.assertIn("jobcenter", payload["rewritten_query"])
+
+    def test_rewrite_endpoint_prefers_topic_keywords_when_profile_matches(self):
+        topic_profiles = [
+            {
+                "id": "kinderzuschlag",
+                "name": "Kinderzuschlag",
+                "keywords": ["kinderzuschlag", "familie", "anspruch", "hoehe"],
+            }
+        ]
+
+        with patch("backend.ai_service.endpoints.provider.name", "ollama"), patch(
+            "backend.ai_service.endpoints.provider.is_configured",
+            return_value=True,
+        ), patch("backend.ai_service.endpoints.LOCAL_REWRITE_STRATEGY", "deterministic"), patch(
+            "backend.ai_service.endpoints.TOPIC_PROFILES",
+            topic_profiles,
+        ):
+            response = client.post("/rewrite", json={"query": "Wie hoch ist der Kinderzuschlag fuer Familien?"})
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertIn("kinderzuschlag", payload["rewritten_query"])
+        self.assertIn("familie", payload["rewritten_query"])
 
     def test_synthesize_endpoint_uses_extractive_fast_path(self):
         fake_evidence = [

@@ -71,6 +71,7 @@ High-confidence implemented areas confirmed in code:
 - Basic backend test harnesses now exist for the Express API (`node:test`) and AI sidecar (`unittest`)
 - Admin raw-entry review now includes structured metadata-enrichment suggestions (`topics`, `tags`, `target_groups`, `keywords`) from the AI sidecar for editor review
 - Topic-guided discovery now supports trusted topic profiles, listing available topic ids, and free-text topic matching for commands like `discover-topic --query "..."`
+- The AI sidecar now uses trusted topic profiles in three places: URL discovery, retrieval reranking, and deterministic rewrite/enrichment heuristics
 - URL canonicalization helpers in `services/_shared/url_normalization.js`
 - URL canonicalization tests in `tests/url_canonicalization_test.js`
 

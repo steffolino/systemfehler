@@ -74,7 +74,7 @@ crawling logic to these files.
 | Frontend language toggle | 🟡 Experimental | Lightweight app-level `de` / `en` UI translation support exists for the public shell and search/source pages |
 | Plain-language clone | 🟡 Experimental | Public `Standard / Einfach / Leicht` modes exist on entries and AI answers; admin now has a dedicated `/admin/plain-language` review queue plus approve/reject actions for `Einfach` and `Leicht` drafts |
 | Data preview, quality metrics, moderation queue views | ✅ Working |
-| AI search tab | 🟡 Experimental |
+| AI search tab | 🟡 Experimental | Retrieval now uses trusted topic roles at ranking time; deterministic rewrite and enrichment also use trusted topic profiles for topic-aware keywords |
 
 ### Cloudflare Pages (`cloudflare-pages/`)
 

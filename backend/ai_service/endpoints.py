@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import time
 from pathlib import Path
 
@@ -81,9 +82,19 @@ def _load_taxonomy_ids(filename, key):
     }
 
 
+def _load_topic_profiles():
+    path = REPO_ROOT / "data" / "_topics" / "trusted_topic_sources.json"
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    return payload.get("topics", []) if isinstance(payload, dict) else []
+
+
 KNOWN_TOPICS = _load_taxonomy_ids("topics.json", "topics")
 KNOWN_TAGS = _load_taxonomy_ids("tags.json", "tags")
 KNOWN_TARGET_GROUPS = _load_taxonomy_ids("target_groups.json", "targetGroups")
+TOPIC_PROFILES = _load_topic_profiles()
 STOPWORDS = {
     "aber",
     "alle",
@@ -256,6 +267,20 @@ def _extractive_answer(evidence):
 def _deterministic_local_rewrite(query):
     normalized = " ".join((query or "").strip().split())
     lowered = normalized.lower()
+    matched_topics = _match_topic_profiles(normalized)
+
+    if matched_topics:
+        top_topic = matched_topics[0]
+        curated_keywords = []
+        for keyword in top_topic.get("keywords", []):
+            if not isinstance(keyword, str):
+                continue
+            normalized_keyword = _normalize_keyword(keyword)
+            if normalized_keyword in STOPWORDS or normalized_keyword in curated_keywords:
+                continue
+            curated_keywords.append(normalized_keyword)
+        if curated_keywords:
+            return " ".join(curated_keywords[:6])
 
     if any(term in lowered for term in ("arbeitslos", "job verloren", "job weg", "gekündigt", "gekuendigt")):
         return "arbeitslos jobcenter bürgergeld arbeitsagentur hilfe"
@@ -311,6 +336,41 @@ def _clean_list(values):
         seen.add(key)
         cleaned.append(normalized)
     return cleaned
+
+
+def _normalize_keyword(value):
+    return (
+        value.lower()
+        .replace("ä", "ae")
+        .replace("ö", "oe")
+        .replace("ü", "ue")
+        .replace("ß", "ss")
+        .replace("Ã¤", "ae")
+        .replace("Ã¶", "oe")
+        .replace("Ã¼", "ue")
+        .replace("ÃŸ", "ss")
+    )
+
+
+def _match_topic_profiles(text):
+    normalized = _normalize_keyword(text or "")
+    tokens = set(re.findall(r"[a-z0-9_-]{3,}", normalized))
+    matches = []
+
+    for topic in TOPIC_PROFILES:
+        if not isinstance(topic, dict):
+            continue
+        keywords = [
+            _normalize_keyword(keyword)
+            for keyword in topic.get("keywords", [])
+            if isinstance(keyword, str)
+        ]
+        hits = sum(1 for keyword in keywords if keyword in normalized or keyword in tokens)
+        if hits > 0:
+            matches.append((hits, topic))
+
+    matches.sort(key=lambda item: (-item[0], str(item[1].get("id") or "")))
+    return [topic for _, topic in matches]
 
 
 def _entry_text_blob(entry):
@@ -397,6 +457,7 @@ def _derive_metadata_suggestions(entry):
     current_tags = _clean_list(entry.get("tags") or [])
     current_target_groups = _clean_list(entry.get("targetGroups") or entry.get("target_groups") or [])
     text_blob = _entry_text_blob(entry)
+    matched_topics = _match_topic_profiles(text_blob)
 
     suggested_topics = set(current_topics)
     suggested_tags = set(current_tags)
@@ -410,6 +471,14 @@ def _derive_metadata_suggestions(entry):
             rationale = rule.get("rationale")
             if isinstance(rationale, str):
                 rationales.append(rationale)
+
+    for topic in matched_topics[:2]:
+        topic_id = topic.get("id")
+        topic_name = topic.get("name")
+        if isinstance(topic_id, str) and topic_id in KNOWN_TOPICS:
+            suggested_topics.add(topic_id)
+        if isinstance(topic_name, str):
+            rationales.append(f"Trusted topic profile matched: {topic_name}.")
 
     if any(pattern in text_blob for pattern in ("antrag", "beantrag", "formular", "online beantragen", "jobcenter")):
         suggested_tags.add("application_required")
@@ -431,6 +500,17 @@ def _derive_metadata_suggestions(entry):
     suggested_tags = sorted(tag for tag in suggested_tags if tag in KNOWN_TAGS)
     suggested_target_groups = sorted(group for group in suggested_target_groups if group in KNOWN_TARGET_GROUPS)
     suggested_keywords = _infer_keywords(entry, text_blob)
+    existing_keyword_keys = {_keyword_key(item) for item in suggested_keywords}
+    for topic in matched_topics[:2]:
+        for keyword in topic.get("keywords", []):
+            if not isinstance(keyword, str):
+                continue
+            normalized_keyword = _normalize_keyword(keyword)
+            if len(normalized_keyword) < 4 or normalized_keyword in existing_keyword_keys:
+                continue
+            suggested_keywords.append(normalized_keyword)
+            existing_keyword_keys.add(normalized_keyword)
+    suggested_keywords = suggested_keywords[:8]
 
     summary_value = entry.get("summary")
     content_value = entry.get("content")
@@ -456,6 +536,12 @@ def _derive_metadata_suggestions(entry):
         summary.append(f"Suggested {len(suggested_target_groups)} target groups for audience-aware search.")
     if suggested_keywords:
         summary.append("Suggested keywords can improve AI retrieval prompts and future autocomplete.")
+    if matched_topics:
+        summary.append(
+            "Matched trusted topic profiles: "
+            + ", ".join(str(topic.get("name") or topic.get("id")) for topic in matched_topics[:2])
+            + "."
+        )
 
     rationale = " ".join(dict.fromkeys(rationales)) or "Suggestions are derived from deterministic taxonomy matching."
     metadata = EnrichmentPayload(
