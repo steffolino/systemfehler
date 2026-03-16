@@ -8,6 +8,12 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/lib/i18n';
 import { useAppAuth } from '@/lib/auth';
+import {
+  getModeLabel,
+  getReadableEntryText,
+  getReadableEntryTranslations,
+  type LanguageMode,
+} from '@/lib/plain_language';
 
 const ROLES_CLAIM = 'https://systemfehler/roles';
 
@@ -97,6 +103,7 @@ export default function EntryPage() {
   const [entry, setEntry] = useState<Entry | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [languageMode, setLanguageMode] = useState<LanguageMode>('standard');
 
   useEffect(() => {
     if (!id) {
@@ -133,7 +140,7 @@ export default function EntryPage() {
     if (!entry) return null;
 
     const title = getLocalizedText(entry.title, entry.title_de, locale) || 'Kein Titel';
-    const content = getLocalizedText(entry.content, entry.content_de, locale) || t('entry.no_description');
+    const standardContent = getLocalizedText(entry.content, entry.content_de, locale) || t('entry.no_description');
     const url = entry.url || '';
     const domain = entry.domain || '-';
     const status = entry.status || '-';
@@ -145,9 +152,31 @@ export default function EntryPage() {
     const qualityScores = entry.qualityScores || entry.quality_scores || {};
     const iqs = qualityScores.iqs ?? entry.iqs ?? null;
     const ais = qualityScores.ais ?? entry.ais ?? null;
+    const readableTranslations = getReadableEntryTranslations(entry);
+    const generatedReadableContent = getReadableEntryText(entry, languageMode).trim();
+    const content =
+      languageMode === 'standard' ? standardContent : generatedReadableContent || standardContent;
+    const usingGeneratedMode =
+      languageMode !== 'standard' &&
+      Boolean(generatedReadableContent) &&
+      !readableTranslations['de-LEICHT']?.reviewed;
 
-    return { title, content, url, domain, status, topics, tags, targetGroups, provenance, sourceMeta, iqs, ais };
-  }, [entry, locale, t]);
+    return {
+      title,
+      content,
+      url,
+      domain,
+      status,
+      topics,
+      tags,
+      targetGroups,
+      provenance,
+      sourceMeta,
+      iqs,
+      ais,
+      usingGeneratedMode,
+    };
+  }, [entry, languageMode, locale, t]);
 
   if (loading) {
     return (
@@ -192,7 +221,21 @@ export default function EntryPage() {
     );
   }
 
-  const { title, content, url, domain, status, topics, tags, targetGroups, provenance, sourceMeta, iqs, ais } = viewModel;
+  const {
+    title,
+    content,
+    url,
+    domain,
+    status,
+    topics,
+    tags,
+    targetGroups,
+    provenance,
+    sourceMeta,
+    iqs,
+    ais,
+    usingGeneratedMode,
+  } = viewModel;
   const publicTopics = topics.filter((topic) => ['financial_support', 'employment'].includes(topic));
 
   return (
@@ -324,6 +367,33 @@ export default function EntryPage() {
         <div className="space-y-6">
           <SectionCard title={t('entry.public_summary')}>
             <p className="mb-4 text-sm text-muted-foreground">{t('entry.public_summary_body')}</p>
+            <div className="mb-4 flex flex-wrap gap-2">
+              {(['standard', 'einfach', 'leicht'] as LanguageMode[]).map((mode) => (
+                <button
+                  key={mode}
+                  type="button"
+                  onClick={() => setLanguageMode(mode)}
+                  className={[
+                    'inline-flex rounded-full border px-3 py-1.5 text-xs font-medium transition',
+                    languageMode === mode
+                      ? 'border-foreground bg-foreground text-background'
+                      : 'border-border bg-background text-foreground hover:bg-muted',
+                  ].join(' ')}
+                >
+                  {t(`entry.mode_${mode}` as const)}
+                </button>
+              ))}
+            </div>
+            {languageMode !== 'standard' && (
+              <div className="mb-4 rounded-xl border bg-muted/40 px-4 py-3 text-sm text-muted-foreground">
+                <div className="font-medium text-foreground">
+                  {t('entry.reading_mode_active', { mode: getModeLabel(languageMode) })}
+                </div>
+                <div className="mt-1">
+                  {usingGeneratedMode ? t('entry.generated_language_note') : t('entry.reviewed_language_note')}
+                </div>
+              </div>
+            )}
             <div className="whitespace-pre-line text-sm leading-7 text-foreground">{content}</div>
           </SectionCard>
 

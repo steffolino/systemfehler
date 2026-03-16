@@ -4,6 +4,7 @@ import { api, getEntryTitleText, type Entry } from '@/lib/api';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { MetadataEnrichmentCard } from '@/components/admin/MetadataEnrichmentCard';
+import { PlainLanguageCard } from '@/components/admin/PlainLanguageCard';
 
 function getEntryTitle(entry: Entry) {
   return getEntryTitleText(entry) || getEntryTitleText(entry, 'en') || 'Untitled entry';
@@ -378,6 +379,10 @@ export default function AdminRawEntries() {
 
                     <section>
                       <MetadataEnrichmentCard entry={selectedEntry} />
+                    </section>
+
+                    <section>
+                      <PlainLanguageCard entry={selectedEntry} />
                     </section>
 
                     {showRawJson && (
