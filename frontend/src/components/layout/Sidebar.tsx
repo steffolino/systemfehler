@@ -39,6 +39,13 @@ export default function Sidebar() {
           Raw Entries
         </NavLink>
 
+        <NavLink to="/admin/plain-language"
+          className={({ isActive }) =>
+            `${linkClass} ${isActive ? activeClass : ""}`
+          }>
+          Plain Language
+        </NavLink>
+
         <NavLink to="/admin/duplicates"
           className={({ isActive }) =>
             `${linkClass} ${isActive ? activeClass : ""}`

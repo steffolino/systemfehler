@@ -72,7 +72,7 @@ crawling logic to these files.
 | Backend unit-test harness | ✅ Working | `node:test` covers Express/query helpers and `unittest` covers AI sidecar cache/provider/endpoints without extra dependencies |
 | Public AI search mode | ✅ Working | AI search is now the default public search mode; classic search remains available as article-based search |
 | Frontend language toggle | 🟡 Experimental | Lightweight app-level `de` / `en` UI translation support exists for the public shell and search/source pages |
-| Plain-language clone | 🟡 Experimental | Public `Standard / Einfach / Leicht` modes exist on entries and AI answers; the admin raw-entry view can now approve or reject `Einfach` and `Leicht` drafts |
+| Plain-language clone | 🟡 Experimental | Public `Standard / Einfach / Leicht` modes exist on entries and AI answers; admin now has a dedicated `/admin/plain-language` review queue plus approve/reject actions for `Einfach` and `Leicht` drafts |
 | Data preview, quality metrics, moderation queue views | ✅ Working |
 | AI search tab | 🟡 Experimental |
 

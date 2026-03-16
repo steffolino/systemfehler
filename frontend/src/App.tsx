@@ -13,6 +13,7 @@ const AdminApp = lazy(() => import("./pages/AdminApp"));
 const AdminModeration = lazy(() => import("./pages/AdminModeration"));
 const AdminQuality = lazy(() => import("./pages/AdminQuality"));
 const AdminRawEntries = lazy(() => import("./pages/AdminRawEntries"));
+const AdminPlainLanguage = lazy(() => import("./pages/AdminPlainLanguage"));
 const AdminDuplicates = lazy(() => import("./pages/AdminDuplicates"));
 const AdminUserTrust = lazy(() => import("./pages/AdminUserTrust"));
 const AdminAuditLog = lazy(() => import("./pages/AdminAuditLog"));
@@ -57,6 +58,7 @@ export default function App() {
               <Route path="moderation" element={<AdminModeration />} />
               <Route path="quality" element={<AdminQuality />} />
               <Route path="raw" element={<AdminRawEntries />} />
+              <Route path="plain-language" element={<AdminPlainLanguage />} />
               <Route path="duplicates" element={<AdminDuplicates />} />
               <Route path="user-trust" element={<AdminUserTrust />} />
               <Route path="audit-log" element={<AdminAuditLog />} />

@@ -184,6 +184,18 @@ export default function AdminApp() {
         </Card>
 
         <Card className="p-5">
+          <div className="text-base font-semibold">Plain Language Review</div>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Approve or reject Einfach and Leicht drafts and inspect reviewer context.
+          </p>
+          <div className="mt-4">
+            <Button asChild variant="outline">
+              <Link to="/admin/plain-language">Open plain language</Link>
+            </Button>
+          </div>
+        </Card>
+
+        <Card className="p-5">
           <div className="text-base font-semibold">Duplicate Review</div>
           <p className="mt-2 text-sm text-muted-foreground">
             Compare likely duplicates and resolve merge or rejection decisions.

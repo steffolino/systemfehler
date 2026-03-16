@@ -101,10 +101,11 @@ The goal is to improve comprehension without overwriting the canonical source te
   - reject `Einfach`
   - approve `Leicht`
   - reject `Leicht`
+- dedicated admin review queue at `/admin/plain-language`
+- AI answers prefer reviewed or generated `Einfach` / `Leicht` evidence summaries before falling back to raw synthesis text
 
 ## Next Steps
 
 - add reviewed benchmark set across multiple domains
-- add AI answer mode switch using the same style rules
-- persist reviewer identity from authenticated admin sessions
-- add moderation/history view for plain-language review decisions
+- add plain-language review history beyond the current queue state
+- feed topic roles into live retrieval and plain-language generation
