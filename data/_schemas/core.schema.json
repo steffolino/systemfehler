@@ -154,6 +154,28 @@
               },
               "reviewed": {
                 "type": "boolean"
+              },
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "einfach",
+                  "leicht"
+                ]
+              },
+              "reviewStatus": {
+                "type": "string",
+                "enum": [
+                  "suggested",
+                  "approved",
+                  "rejected"
+                ]
+              },
+              "reviewedBy": {
+                "type": "string"
+              },
+              "reviewedAt": {
+                "type": "string",
+                "format": "date-time"
               }
             },
             "additionalProperties": false,
@@ -247,6 +269,28 @@
           },
           "reviewed": {
             "type": "boolean"
+          },
+          "variant": {
+            "type": "string",
+            "enum": [
+              "einfach",
+              "leicht"
+            ]
+          },
+          "reviewStatus": {
+            "type": "string",
+            "enum": [
+              "suggested",
+              "approved",
+              "rejected"
+            ]
+          },
+          "reviewedBy": {
+            "type": "string"
+          },
+          "reviewedAt": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false,

@@ -6,6 +6,23 @@ const { __private } = await import('../backend/database/queries.js');
 
 const now = new Date().toISOString();
 const translations = {
+  'de-EINFACH-SUGGESTED': {
+    title: 'Klarer Titel',
+    summary: 'Kurze klare Zusammenfassung',
+    body: 'Klarer Text',
+    provenance: {
+      source: 'example.org',
+      crawledAt: now,
+      method: 'rule',
+      generator: 'systemfehler-plain-language-v1'
+    },
+    method: 'rule',
+    generator: 'systemfehler-plain-language-v1',
+    timestamp: now,
+    reviewed: false,
+    variant: 'einfach',
+    reviewStatus: 'suggested'
+  },
   'de-LEICHT': {
     title: 'Einfacher Titel',
     summary: 'Kurze einfache Zusammenfassung',
@@ -19,7 +36,11 @@ const translations = {
     method: 'llm',
     generator: 'test-model',
     timestamp: now,
-    reviewed: false
+    reviewed: false,
+    variant: 'leicht',
+    reviewStatus: 'approved',
+    reviewedBy: 'admin@example.org',
+    reviewedAt: now
   }
 };
 
@@ -66,8 +87,10 @@ const row = {
 const mapped = __private.mapEntryRow(row, { includeTranslations: true });
 
 assert.deepStrictEqual(mapped.translations, translations, 'Expected translations to be exported from mapped row');
-assert.deepStrictEqual(mapped.translationLanguages, ['de-LEICHT'], 'Expected translation language list');
+assert.deepStrictEqual(mapped.translationLanguages, ['de-EINFACH-SUGGESTED', 'de-LEICHT'], 'Expected translation language list');
 assert.deepStrictEqual(mapped.provenance, row.provenance, 'Expected provenance to be exported from mapped row');
 assert.strictEqual(mapped.title.de, 'Titel', 'Expected title mapping to remain intact');
+assert.strictEqual(mapped.translations['de-EINFACH-SUGGESTED'].variant, 'einfach', 'Expected variant metadata');
+assert.strictEqual(mapped.translations['de-LEICHT'].reviewStatus, 'approved', 'Expected review status metadata');
 
 console.log('✓ DB ingestion/export mapping roundtrip test passed');

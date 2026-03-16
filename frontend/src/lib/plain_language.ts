@@ -12,7 +12,9 @@ export type PlainLanguageAudit = {
 };
 
 const GENERATOR_NAME = 'systemfehler-plain-language-v1';
+const EINFACH_REVIEWED_KEY = 'de-EINFACH';
 const EINFACH_KEY = 'de-EINFACH-SUGGESTED';
+const LEICHT_REVIEWED_KEY = 'de-LEICHT';
 const LEICHT_KEY = 'de-LEICHT-SUGGESTED';
 
 const GLOSSARY: Array<{ term: RegExp; replacement: string; explain?: string }> = [
@@ -155,6 +157,8 @@ function makeTranslationRecord(entry: Entry, title: string, body: string, mode: 
     generator: GENERATOR_NAME,
     timestamp: now,
     reviewed: false,
+    variant: mode,
+    reviewStatus: 'suggested',
   };
 }
 
@@ -187,11 +191,11 @@ export function getModeLabel(mode: LanguageMode) {
 export function getReadableEntryText(entry: Entry, mode: LanguageMode) {
   const translations = buildSuggestedPlainLanguageTranslations(entry);
   if (mode === 'leicht') {
-    const reviewed = translations['de-LEICHT']?.body;
+    const reviewed = translations[LEICHT_REVIEWED_KEY]?.body;
     return reviewed || translations[LEICHT_KEY]?.body || '';
   }
   if (mode === 'einfach') {
-    return translations[EINFACH_KEY]?.body || '';
+    return translations[EINFACH_REVIEWED_KEY]?.body || translations[EINFACH_KEY]?.body || '';
   }
   return getPrimaryText(entry);
 }
@@ -199,10 +203,10 @@ export function getReadableEntryText(entry: Entry, mode: LanguageMode) {
 export function getReadableEntrySummary(entry: Entry, mode: LanguageMode) {
   const translations = buildSuggestedPlainLanguageTranslations(entry);
   if (mode === 'leicht') {
-    return translations['de-LEICHT']?.summary || translations[LEICHT_KEY]?.summary || '';
+    return translations[LEICHT_REVIEWED_KEY]?.summary || translations[LEICHT_KEY]?.summary || '';
   }
   if (mode === 'einfach') {
-    return translations[EINFACH_KEY]?.summary || '';
+    return translations[EINFACH_REVIEWED_KEY]?.summary || translations[EINFACH_KEY]?.summary || '';
   }
   return typeof entry.summary?.de === 'string' ? entry.summary.de : entry.summary_de || '';
 }

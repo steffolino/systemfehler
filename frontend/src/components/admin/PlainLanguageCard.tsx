@@ -52,7 +52,10 @@ export function PlainLanguageCard({ entry }: { entry: Entry }) {
             <div>
               <div className="text-sm font-medium">Einfache Sprache</div>
               <div className="text-xs text-muted-foreground">
-                Quelle: {translations['de-EINFACH-SUGGESTED']?.generator || 'system'}
+                Quelle:{' '}
+                {translations['de-EINFACH']?.reviewed
+                  ? 'gepruefte Uebersetzung'
+                  : translations['de-EINFACH-SUGGESTED']?.generator || 'system'}
               </div>
             </div>
             <ScoreBadge audit={einfachAudit} />

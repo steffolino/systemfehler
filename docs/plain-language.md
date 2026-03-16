@@ -86,6 +86,16 @@ The goal is to improve comprehension without overwriting the canonical source te
 - generated `Einfach` and `Leicht` fallbacks on entry pages
 - admin audit card with rule-based findings
 - public reading-mode switch
+- persisted translation-model support for:
+  - `de-EINFACH`
+  - `de-EINFACH-SUGGESTED`
+  - `de-LEICHT`
+  - `de-LEICHT-SUGGESTED`
+- review metadata in translation records:
+  - `variant`
+  - `reviewStatus`
+  - `reviewedBy`
+  - `reviewedAt`
 
 ## Next Steps
 

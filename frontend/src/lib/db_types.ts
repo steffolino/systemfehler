@@ -33,6 +33,10 @@ export interface DbTranslationRecord {
   generator?: string;
   timestamp: string;
   reviewed?: boolean;
+  variant?: 'einfach' | 'leicht';
+  reviewStatus?: 'suggested' | 'approved' | 'rejected';
+  reviewedBy?: string;
+  reviewedAt?: string;
 }
 
 export type DbTranslationsMap = Record<string, DbTranslationRecord>;

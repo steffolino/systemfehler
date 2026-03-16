@@ -19,6 +19,32 @@ def make_sample_entry():
         "tags": ["pilot"],
         "qualityScores": {"iqs": 80, "ais": 70, "computedAt": now},
         "translations": {
+            "de-EINFACH": {
+                "title": "Beratung in einfacher Sprache",
+                "summary": "Kurze und klare Zusammenfassung.",
+                "body": "Das ist ein gepruefter Text in einfacher Sprache.",
+                "provenance": {"source": "example.org", "crawledAt": now},
+                "method": "human",
+                "generator": "editor",
+                "timestamp": now,
+                "reviewed": True,
+                "variant": "einfach",
+                "reviewStatus": "approved",
+                "reviewedBy": "admin@example.org",
+                "reviewedAt": now
+            },
+            "de-EINFACH-SUGGESTED": {
+                "title": "Beratung (einfach vorgeschlagen)",
+                "summary": "Kurze klare Zusammenfassung.",
+                "body": "Das ist ein Vorschlag in einfacher Sprache.",
+                "provenance": {"source": "example.org", "crawledAt": now},
+                "method": "rule",
+                "generator": "systemfehler-plain-language-v1",
+                "timestamp": now,
+                "reviewed": False,
+                "variant": "einfach",
+                "reviewStatus": "suggested"
+            },
             "de-LEICHT": {
                 "title": "Beratung (leicht)",
                 "summary": "Kurze, einfache Zusammenfassung.",
@@ -27,7 +53,9 @@ def make_sample_entry():
                 "method": "llm",
                 "generator": "test-model",
                 "timestamp": now,
-                "reviewed": False
+                "reviewed": False,
+                "variant": "leicht",
+                "reviewStatus": "suggested"
             },
             "en": {
                 "title": "Advice (simple)",
@@ -77,6 +105,17 @@ def test_rejects_invalid_translation_payload():
     assert result['valid'] is False
     assert any('translations.de-LEICHT: Unknown field' in err for err in result['errors'])
     assert any('translations.en.provenance: Missing required field' in err for err in result['errors'])
+
+
+def test_rejects_invalid_plain_language_review_status():
+    v = SchemaValidator()
+    entry = make_sample_entry()
+    entry['translations']['de-EINFACH-SUGGESTED']['reviewStatus'] = 'pending'
+
+    result = v.validate_entry(entry, domain='contacts')
+
+    assert result['valid'] is False
+    assert any('translations.de-EINFACH-SUGGESTED.reviewStatus' in err for err in result['errors'])
 
 
 def test_rejects_invalid_provenance_shape():
