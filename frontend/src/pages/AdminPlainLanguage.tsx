@@ -37,6 +37,38 @@ function getTranslationStatuses(entry: Entry) {
   };
 }
 
+function getReviewHistory(entry: Entry) {
+  const translations = entry.translations || {};
+  const records = [
+    ['Einfach', 'reviewed', translations['de-EINFACH']],
+    ['Einfach', 'suggested', translations['de-EINFACH-SUGGESTED']],
+    ['Leicht', 'reviewed', translations['de-LEICHT']],
+    ['Leicht', 'suggested', translations['de-LEICHT-SUGGESTED']],
+  ] as const;
+
+  return records
+    .map(([mode, variant, record]) => {
+      if (!record) return null;
+      const reviewStatus = record.reviewStatus || (variant === 'reviewed' ? 'approved' : 'suggested');
+      const reviewedAt = record.reviewedAt || record.timestamp || null;
+      return {
+        entryId: entry.id,
+        entryTitle: getEntryTitle(entry),
+        mode,
+        variant,
+        reviewStatus,
+        reviewedBy: record.reviewedBy || null,
+        reviewedAt,
+      };
+    })
+    .filter((item): item is NonNullable<typeof item> => Boolean(item))
+    .sort((left, right) => {
+      const leftTime = left.reviewedAt ? new Date(left.reviewedAt).getTime() : 0;
+      const rightTime = right.reviewedAt ? new Date(right.reviewedAt).getTime() : 0;
+      return rightTime - leftTime;
+    });
+}
+
 function getBucket(entry: Entry): Exclude<ReviewBucket, 'all'> {
   const state = getTranslationStatuses(entry);
   if (state.hasPendingSuggested) return 'pending';
@@ -117,6 +149,13 @@ export default function AdminPlainLanguage() {
     );
   }, [entries]);
 
+  const recentHistory = useMemo(() => {
+    return entries
+      .flatMap((entry) => getReviewHistory(entry))
+      .filter((item) => item.reviewStatus === 'approved' || item.reviewStatus === 'rejected')
+      .slice(0, 10);
+  }, [entries]);
+
   const filteredEntries = useMemo(() => {
     return entries.filter((entry) => {
       if (bucket !== 'all' && getBucket(entry) !== bucket) return false;
@@ -163,6 +202,39 @@ export default function AdminPlainLanguage() {
         <CountCard label="Reviewed" value={counts.reviewed} />
         <CountCard label="Rejected" value={counts.rejected} />
       </div>
+
+      <Card className="mb-6 p-4">
+        <div className="mb-3">
+          <div className="text-sm font-semibold">Recent Review History</div>
+          <div className="text-sm text-muted-foreground">
+            Latest recorded approvals and rejections across Einfach and Leicht.
+          </div>
+        </div>
+
+        {recentHistory.length === 0 ? (
+          <div className="text-sm text-muted-foreground">No review actions recorded yet.</div>
+        ) : (
+          <div className="space-y-2">
+            {recentHistory.map((item) => (
+              <div
+                key={`${item.entryId}-${item.mode}-${item.variant}-${item.reviewedAt || item.reviewStatus}`}
+                className="flex flex-col gap-1 rounded-xl border p-3 text-sm md:flex-row md:items-center md:justify-between"
+              >
+                <div className="min-w-0">
+                  <div className="truncate font-medium">{item.entryTitle}</div>
+                  <div className="text-xs text-muted-foreground">
+                    {item.mode} · {item.reviewStatus}
+                    {item.reviewedBy ? ` · ${item.reviewedBy}` : ''}
+                  </div>
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  {item.reviewedAt ? new Date(item.reviewedAt).toLocaleString() : 'No timestamp'}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </Card>
 
       <Card className="overflow-hidden">
         {loading ? (
