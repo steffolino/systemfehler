@@ -106,6 +106,106 @@
           ]
         }
       ]
+    },
+    {
+      "id": "kinderzuschlag",
+      "name": "Kinderzuschlag",
+      "domains": ["benefits", "aid", "tools", "contacts"],
+      "keywords": [
+        "kinderzuschlag",
+        "familie",
+        "kinder",
+        "einkommen",
+        "anspruch",
+        "hoehe",
+        "dauer"
+      ],
+      "sources": [
+        {
+          "sourceId": "arbeitsagentur",
+          "role": "official_rule_source",
+          "priority": "critical",
+          "preferredPathPatterns": [
+            "/familie-und-kinder/kinderzuschlag",
+            "/familie-und-kinder/kinderzuschlag-verstehen"
+          ],
+          "seedUrls": [
+            "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen",
+            "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kinderzuschlag-anspruch-hoehe-dauer"
+          ]
+        },
+        {
+          "sourceId": "familienportal",
+          "role": "official_rule_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/familienleistungen/",
+            "/familie/"
+          ],
+          "seedUrls": []
+        },
+        {
+          "sourceId": "arbeitsagentur",
+          "role": "official_contact_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/kontakt/",
+            "/familie-und-kinder/"
+          ],
+          "seedUrls": []
+        }
+      ]
+    },
+    {
+      "id": "bedarfsgemeinschaft",
+      "name": "Bedarfsgemeinschaft",
+      "domains": ["benefits", "aid"],
+      "keywords": [
+        "bedarfsgemeinschaft",
+        "aufstocker",
+        "regelbedarf",
+        "mehrbedarf",
+        "einkommen",
+        "vermoegen"
+      ],
+      "sources": [
+        {
+          "sourceId": "arbeitsagentur",
+          "role": "official_glossary_source",
+          "priority": "critical",
+          "preferredPathPatterns": [
+            "/lexikon/"
+          ],
+          "seedUrls": [
+            "https://www.arbeitsagentur.de/lexikon/bedarfsgemeinschaft",
+            "https://www.arbeitsagentur.de/lexikon/aufstocker"
+          ]
+        },
+        {
+          "sourceId": "arbeitsagentur",
+          "role": "official_rule_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/"
+          ],
+          "seedUrls": [
+            "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/zusammensetzung-bedarfe",
+            "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/voraussetzungen-einkommen-vermoegen"
+          ]
+        },
+        {
+          "sourceId": "bmas",
+          "role": "official_light_language_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/Leichte-Sprache/",
+            "/Soziale-Sicherheit/"
+          ],
+          "seedUrls": [
+            "https://www.bmas.de/DE/Leichte-Sprache/Soziale-Sicherheit/soziale-sicherheit.html"
+          ]
+        }
+      ]
     }
   ]
 }

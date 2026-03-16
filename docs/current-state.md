@@ -70,6 +70,7 @@ High-confidence implemented areas confirmed in code:
 - Lightweight `de` / `en` frontend i18n scaffolding exists via `frontend/src/lib/i18n.tsx`
 - Basic backend test harnesses now exist for the Express API (`node:test`) and AI sidecar (`unittest`)
 - Admin raw-entry review now includes structured metadata-enrichment suggestions (`topics`, `tags`, `target_groups`, `keywords`) from the AI sidecar for editor review
+- Topic-guided discovery now supports trusted topic profiles, listing available topic ids, and free-text topic matching for commands like `discover-topic --query "..."`
 - URL canonicalization helpers in `services/_shared/url_normalization.js`
 - URL canonicalization tests in `tests/url_canonicalization_test.js`
 

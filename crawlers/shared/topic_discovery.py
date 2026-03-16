@@ -101,6 +101,25 @@ class TopicRegistry:
     def get(self, topic_id: str) -> Optional[TopicDefinition]:
         return self.topics.get(topic_id)
 
+    def list_topics(self) -> List[TopicDefinition]:
+        return sorted(self.topics.values(), key=lambda topic: topic.topic_id)
+
+    def match_query(self, query: str) -> List[TopicDefinition]:
+        normalized = (query or "").lower()
+        tokens = {token for token in normalized.replace("-", " ").split() if token}
+        matches: List[tuple[int, TopicDefinition]] = []
+
+        for topic in self.topics.values():
+            keyword_hits = 0
+            for keyword in topic.keywords:
+                if keyword in normalized or keyword in tokens:
+                    keyword_hits += 1
+            if keyword_hits > 0:
+                matches.append((keyword_hits, topic))
+
+        matches.sort(key=lambda item: (-item[0], item[1].topic_id))
+        return [topic for _, topic in matches]
+
 
 class TopicDiscovery:
     def __init__(self, data_dir: str | Path) -> None:
@@ -154,6 +173,34 @@ class TopicDiscovery:
             report["outputPath"] = str(output_path)
 
         return report
+
+    def list_topics(self) -> List[Dict[str, Any]]:
+        topics = []
+        for topic in self.registry.list_topics():
+            topics.append(
+                {
+                    "id": topic.topic_id,
+                    "name": topic.name,
+                    "domains": list(topic.domains),
+                    "keywords": list(topic.keywords),
+                    "sourceCount": len(topic.sources),
+                }
+            )
+        return topics
+
+    def match_query(self, query: str) -> List[Dict[str, Any]]:
+        matches = []
+        for topic in self.registry.match_query(query):
+            matches.append(
+                {
+                    "id": topic.topic_id,
+                    "name": topic.name,
+                    "domains": list(topic.domains),
+                    "keywords": list(topic.keywords),
+                    "sourceCount": len(topic.sources),
+                }
+            )
+        return matches
 
     def _load_urls(self, domain: str) -> Iterable[str]:
         path = self.data_dir / domain / "urls.json"

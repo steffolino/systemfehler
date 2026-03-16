@@ -44,7 +44,7 @@ crawling logic to these files.
 | `crawlers/organizations/seeded_crawler.py` | ✅ Working | Crawls seeded organization URLs from `data/organizations/urls.json` |
 | `crawlers/contacts/seeded_crawler.py` | ✅ Working | Crawls seeded contact URLs from `data/contacts/urls.json` |
 | `crawlers/shared/link_expander.py` | ✅ Working | Python link discovery and URL queue expansion (CRAWL-03) |
-| `crawlers/shared/topic_discovery.py` | ✅ Working | Topic-guided high-quality URL discovery and ranking based on trusted source roles |
+| `crawlers/shared/topic_discovery.py` | ✅ Working | Topic-guided high-quality URL discovery and ranking based on trusted source roles, with list/query matching for topic profiles |
 | `data/<domain>/url_status.jsonl` | ✅ Working | Persistent URL crawl state for redirects, canonical aliases, and skip-worthy failures |
 | `data/<domain>/crawl_metrics.json` | ✅ Working | Per-run crawl metrics with quality averages, failure reasons, source-tier distribution, and improvement hints |
 | `scripts/promote_candidates_to_snapshots.py` | ✅ Working | Deterministic promotion filter that merges only high-quality crawler candidates into canonical snapshots |
@@ -161,6 +161,12 @@ npm run expand:links
 
 # Rank topic-specific high-quality URLs from existing queues
 python crawlers/cli.py discover-topic --topic buergergeld
+
+# List configured topic profiles
+python crawlers/cli.py discover-topic --list
+
+# Match a free-text query against configured topic profiles
+python crawlers/cli.py discover-topic --query "Wie beantrage ich Kinderzuschlag?"
 
 # Validate all entries
 npm run validate

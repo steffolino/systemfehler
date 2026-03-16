@@ -199,6 +199,43 @@ def crawl_seeded_domain(domain: str, source: str, output_dir: str):
         crawler.close()
 
 
+def list_topic_profiles(data_dir: str):
+    discovery = TopicDiscovery(data_dir)
+    topics = discovery.list_topics()
+    if not topics:
+      logger.warning("No topic profiles found")
+      return False
+
+    for topic in topics:
+        logger.info(
+            "topic=%s name=%s domains=%s sources=%s keywords=%s",
+            topic["id"],
+            topic["name"],
+            ",".join(topic["domains"]),
+            topic["sourceCount"],
+            ",".join(topic["keywords"][:6]),
+        )
+    return True
+
+
+def match_topic_query(query: str, data_dir: str):
+    discovery = TopicDiscovery(data_dir)
+    matches = discovery.match_query(query)
+    if not matches:
+        logger.warning("No topic profiles matched query: %s", query)
+        return False
+
+    logger.info("Matched topics for query: %s", query)
+    for topic in matches:
+        logger.info(
+            "- %s (%s) domains=%s",
+            topic["id"],
+            topic["name"],
+            ",".join(topic["domains"]),
+        )
+    return True
+
+
 def generate_diffs(new_entries, existing_path, output_dir, domain):
     """Generate diffs and add to moderation queue"""
     diff_generator = DiffGenerator()
@@ -694,7 +731,9 @@ def main():
         'discover-topic',
         help='Rank high-quality URLs for a concrete topic using trusted-source heuristics',
     )
-    discover_topic_parser.add_argument('--topic', required=True, help='Topic id from data/_topics/trusted_topic_sources.json')
+    discover_topic_parser.add_argument('--topic', help='Topic id from data/_topics/trusted_topic_sources.json')
+    discover_topic_parser.add_argument('--query', help='Free-text query to match against available topic profiles')
+    discover_topic_parser.add_argument('--list', action='store_true', help='List configured topic profiles')
     discover_topic_parser.add_argument('--data-dir', default='./data', help='Data directory')
     discover_topic_parser.add_argument('--limit', type=int, default=30, help='Max ranked candidates to keep in the report')
     
@@ -733,11 +772,18 @@ def main():
         )
 
     elif args.command == 'discover-topic':
-        success = run_topic_discovery(
-            topic=args.topic,
-            data_dir=args.data_dir,
-            limit=args.limit,
-        )
+        if args.list:
+            success = list_topic_profiles(args.data_dir)
+        elif args.query:
+            success = match_topic_query(args.query, args.data_dir)
+        elif args.topic:
+            success = run_topic_discovery(
+                topic=args.topic,
+                data_dir=args.data_dir,
+                limit=args.limit,
+            )
+        else:
+            logger.error("discover-topic requires one of: --topic, --query, or --list")
     
     sys.exit(0 if success else 1)
 
