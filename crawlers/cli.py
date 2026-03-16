@@ -31,6 +31,7 @@ from crawlers.shared.validator import SchemaValidator
 from crawlers.shared.quality_scorer import QualityScorer
 from crawlers.shared.diff_generator import DiffGenerator
 from crawlers.shared.link_expander import LinkExpander
+from crawlers.shared.topic_discovery import TopicDiscovery
 from crawlers.shared.moderation_queue import (
     canonicalize_queue_payload,
     canonicalize_queue_entry,
@@ -299,6 +300,32 @@ def run_link_expander(domain: str, data_dir: str, limit: int, verify: bool):
         return False
     finally:
         expander.close()
+
+
+def run_topic_discovery(topic: str, data_dir: str, limit: int):
+    """Discover and rank high-quality URLs for a concrete topic."""
+    discovery = TopicDiscovery(data_dir=data_dir)
+    try:
+        report = discovery.discover(topic_id=topic, limit=limit, persist=True)
+        logger.info(
+            "Topic discovery for %s: candidates=%s output=%s",
+            report["topic"],
+            report["candidateCount"],
+            report.get("outputPath"),
+        )
+        for item in report["topCandidates"][: min(10, len(report["topCandidates"]))]:
+            logger.info(
+                "  %s [%s/%s] score=%s reasons=%s",
+                item["url"],
+                item["domain"],
+                item["role"],
+                item["score"],
+                ", ".join(item["reasons"][:4]),
+            )
+        return True
+    except Exception as e:
+        logger.error(f"Topic discovery failed for {topic}: {e}", exc_info=True)
+        return False
 
 
 def validate_domain(domain: str, data_dir: str):
@@ -662,6 +689,14 @@ def main():
     expand_parser.add_argument('--data-dir', default='./data', help='Data directory')
     expand_parser.add_argument('--limit', type=int, default=25, help='Max seed URLs to scan')
     expand_parser.add_argument('--no-verify', action='store_true', help='Skip HTTP verification of discovered links')
+
+    discover_topic_parser = subparsers.add_parser(
+        'discover-topic',
+        help='Rank high-quality URLs for a concrete topic using trusted-source heuristics',
+    )
+    discover_topic_parser.add_argument('--topic', required=True, help='Topic id from data/_topics/trusted_topic_sources.json')
+    discover_topic_parser.add_argument('--data-dir', default='./data', help='Data directory')
+    discover_topic_parser.add_argument('--limit', type=int, default=30, help='Max ranked candidates to keep in the report')
     
     args = parser.parse_args()
     
@@ -695,6 +730,13 @@ def main():
             data_dir=args.data_dir,
             limit=args.limit,
             verify=not args.no_verify,
+        )
+
+    elif args.command == 'discover-topic':
+        success = run_topic_discovery(
+            topic=args.topic,
+            data_dir=args.data_dir,
+            limit=args.limit,
         )
     
     sys.exit(0 if success else 1)

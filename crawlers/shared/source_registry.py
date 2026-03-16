@@ -241,3 +241,9 @@ class SourceRegistry:
             provider_level=self._infer_provider_level(url),
             priority="normal",
         )
+
+    def get_profile_by_id(self, source_id: str) -> Optional[SourceProfile]:
+        for profile in self._profiles:
+            if profile.source_id == source_id:
+                return profile
+        return None

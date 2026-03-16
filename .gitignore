@@ -13,6 +13,7 @@ data/snapshots/
 data/**/candidates.json
 data/**/crawl_metrics.json
 data/**/url_status.jsonl
+data/_topics/discovery/*.json
 moderation/review_queue.json
 # local deploy/temp worktrees
 .deploy-main/

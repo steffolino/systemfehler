@@ -44,6 +44,7 @@ crawling logic to these files.
 | `crawlers/organizations/seeded_crawler.py` | ✅ Working | Crawls seeded organization URLs from `data/organizations/urls.json` |
 | `crawlers/contacts/seeded_crawler.py` | ✅ Working | Crawls seeded contact URLs from `data/contacts/urls.json` |
 | `crawlers/shared/link_expander.py` | ✅ Working | Python link discovery and URL queue expansion (CRAWL-03) |
+| `crawlers/shared/topic_discovery.py` | ✅ Working | Topic-guided high-quality URL discovery and ranking based on trusted source roles |
 | `data/<domain>/url_status.jsonl` | ✅ Working | Persistent URL crawl state for redirects, canonical aliases, and skip-worthy failures |
 | `data/<domain>/crawl_metrics.json` | ✅ Working | Per-run crawl metrics with quality averages, failure reasons, source-tier distribution, and improvement hints |
 | `scripts/promote_candidates_to_snapshots.py` | ✅ Working | Deterministic promotion filter that merges only high-quality crawler candidates into canonical snapshots |
@@ -157,6 +158,9 @@ npm run crawl:contacts
 # Expand URL queues from discovered links (CRAWL-03)
 npm run expand:links
 
+# Rank topic-specific high-quality URLs from existing queues
+python crawlers/cli.py discover-topic --topic buergergeld
+
 # Validate all entries
 npm run validate
 npm run validate:ci
@@ -251,6 +255,31 @@ Python link expander (`crawlers/shared/link_expander.py`) was run across all dom
 | contacts       | 5          | 581        |
 
 Expanded URL queues are now available for all domains, enabling broader crawling and candidate discovery.
+
+---
+
+## Topic-guided discovery
+
+Systemfehler now supports a topic-first discovery layer in addition to domain
+crawling:
+
+- trusted topic registry: `data/_topics/trusted_topic_sources.json`
+- runtime scorer: `crawlers/shared/topic_discovery.py`
+- CLI: `python crawlers/cli.py discover-topic --topic <topic-id>`
+
+This is meant to discover the best pages for concrete questions such as
+`buergergeld`, not just more pages from the same host.
+
+The current `buergergeld` topic profile prefers:
+
+- official rule pages from Arbeitsagentur
+- official glossary pages from the Arbeitsagentur Lexikon
+- official contact and Leichte-Sprache pages from BMAS
+- NGO context pages from Sanktionsfrei
+
+Discovery reports are written to:
+
+- `data/_topics/discovery/<topic>.json`
 
 ---
 

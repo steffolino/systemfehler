@@ -1,0 +1,111 @@
+{
+  "version": "0.1.0",
+  "description": "Trusted topic-specific discovery sources and URL patterns",
+  "topics": [
+    {
+      "id": "buergergeld",
+      "name": "Buergergeld",
+      "domains": ["benefits", "aid", "contacts", "tools"],
+      "keywords": [
+        "buergergeld",
+        "arbeitslosengeld-2",
+        "bedarfsgemeinschaft",
+        "regelbedarf",
+        "mehrbedarf",
+        "antrag",
+        "bescheid",
+        "pflichten",
+        "einkommen",
+        "vermoegen",
+        "aufstocker",
+        "kinderzuschlag"
+      ],
+      "sources": [
+        {
+          "sourceId": "arbeitsagentur",
+          "role": "official_rule_source",
+          "priority": "critical",
+          "preferredPathPatterns": [
+            "/arbeitslos-arbeit-finden/buergergeld/",
+            "/arbeitslosengeld-2",
+            "/familie-und-kinder/kinderzuschlag",
+            "/familie-und-kinder/kinderzuschlag-verstehen"
+          ],
+          "seedUrls": [
+            "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/voraussetzungen-einkommen-vermoegen",
+            "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/antrag-bescheid",
+            "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/zusammensetzung-bedarfe",
+            "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+            "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/pflichten-verstehen-und-beachten",
+            "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen",
+            "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kinderzuschlag-anspruch-hoehe-dauer"
+          ]
+        },
+        {
+          "sourceId": "arbeitsagentur",
+          "role": "official_glossary_source",
+          "priority": "critical",
+          "preferredPathPatterns": [
+            "/lexikon/"
+          ],
+          "seedUrls": [
+            "https://www.arbeitsagentur.de/lexikon/bedarfsgemeinschaft",
+            "https://www.arbeitsagentur.de/lexikon/aufstocker"
+          ]
+        },
+        {
+          "sourceId": "bmas",
+          "role": "official_contact_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/Service/Kontakt/",
+            "/kontakt/"
+          ],
+          "seedUrls": [
+            "https://www.bmas.de/DE/Service/Kontakt/Buergertelefon/buergertelefon.html",
+            "https://www.bmas.de/DE/Service/Kontakt/Kontaktformular/kontaktformular.html"
+          ]
+        },
+        {
+          "sourceId": "bmas",
+          "role": "official_light_language_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/Leichte-Sprache/",
+            "/leichte-sprache/"
+          ],
+          "seedUrls": [
+            "https://www.bmas.de/DE/Leichte-Sprache/Soziale-Sicherheit/soziale-sicherheit.html"
+          ]
+        },
+        {
+          "sourceId": "bmas",
+          "role": "official_background_source",
+          "priority": "medium",
+          "preferredPathPatterns": [
+            "/Publikationen/",
+            "/broschueren/"
+          ],
+          "seedUrls": [
+            "https://www.bmas.de/DE/Service/Publikationen/Broschueren/a206-regelbedarf.html"
+          ]
+        },
+        {
+          "sourceId": "sanktionsfrei",
+          "role": "ngo_context_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/studie",
+            "/schulbonus",
+            "/mehrbedarf"
+          ],
+          "seedUrls": [
+            "https://sanktionsfrei.de/studie25",
+            "https://sanktionsfrei.de/schulbonus",
+            "https://sanktionsfrei.de/mehrbedarf"
+          ]
+        }
+      ]
+    }
+  ]
+}
