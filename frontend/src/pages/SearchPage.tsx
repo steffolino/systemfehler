@@ -99,12 +99,12 @@ export default function SearchPage() {
   const [standardLoading, setStandardLoading] = useState(false);
   const [aiLoading, setAiLoading] = useState(false);
   const [aiEvidenceLoading, setAiEvidenceLoading] = useState(false);
-  const [aiSynthesisLoading, setAiSynthesisLoading] = useState(false);
 
   const [standardError, setStandardError] = useState<string | null>(null);
   const [aiError, setAiError] = useState<string | null>(null);
   const [aiSuggestionsWarmed, setAiSuggestionsWarmed] = useState(false);
   const [getTurnstileToken, setGetTurnstileToken] = useState<(() => Promise<string>) | null>(null);
+  const [showTechnicalDetails, setShowTechnicalDetails] = useState(false);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -141,7 +141,6 @@ export default function SearchPage() {
     if (!submittedAiQuery) {
       setAiLoading(false);
       setAiEvidenceLoading(false);
-      setAiSynthesisLoading(false);
       setAiError(null);
       setAiResult(null);
       return;
@@ -152,7 +151,6 @@ export default function SearchPage() {
 
     setAiLoading(true);
     setAiEvidenceLoading(true);
-    setAiSynthesisLoading(true);
     setAiError(null);
     setAiResult(pendingResult);
 
@@ -219,7 +217,6 @@ export default function SearchPage() {
           }));
         } finally {
           if (!cancelled) {
-            setAiSynthesisLoading(false);
             setAiLoading(false);
           }
         }
@@ -229,7 +226,6 @@ export default function SearchPage() {
         setAiError(err instanceof Error ? err.message : t('common.error_title'));
         setAiResult(null);
         setAiEvidenceLoading(false);
-        setAiSynthesisLoading(false);
         setAiLoading(false);
       });
 
@@ -351,6 +347,15 @@ export default function SearchPage() {
     }
     return Array.from(labels);
   }, [aiResult?.relatedEntries, locale]);
+
+  const aiStatusSummary = useMemo(() => {
+    if (!submittedAiQuery && !aiHealth) return '';
+    if (aiLoading) return t('search.status_generating_simple');
+    if (aiError) return t('search.status_problem');
+    if ((aiResult?.relatedEntries?.length || 0) > 0) return t('search.status_grounded');
+    if (submittedAiQuery) return t('search.status_searching');
+    return aiHealth?.provider.configured ? t('search.status_ready_simple') : '';
+  }, [aiError, aiHealth, aiLoading, aiResult?.relatedEntries?.length, submittedAiQuery, t]);
 
   return (
     <div className="mx-auto w-full max-w-5xl p-4 md:p-6">
@@ -478,7 +483,7 @@ export default function SearchPage() {
                   <div className="space-y-4">
                     <Card className="p-5">
                       <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                        {t('search.ai_rewrite')}
+                        {t('search.ai_focus')}
                       </div>
                       <div className="mt-2 text-sm text-foreground">
                         {submittedAiQuery
@@ -487,14 +492,6 @@ export default function SearchPage() {
                             ? t('search.ready_rewrite')
                             : t('search.enter_query')}
                       </div>
-                      {submittedAiQuery && (
-                        <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
-                          <span>{t('search.status_provider')}: {aiResult?.rewrite.provider || t('common.unknown')}</span>
-                          <span>{t('search.status_models')}: {aiResult?.rewrite.model || t('common.unknown')}</span>
-                          {aiResult?.rewrite.fallback && <span>{t('search.status_fallback')}</span>}
-                          {aiEvidenceLoading && <span>{t('search.status_loading')}</span>}
-                        </div>
-                      )}
                       {submittedAiQuery && aiResult?.rewrite.explanation && (
                         <div className="mt-3 text-sm text-muted-foreground">{aiResult.rewrite.explanation}</div>
                       )}
@@ -521,6 +518,9 @@ export default function SearchPage() {
                       <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                         {t('search.ai_synthesis')}
                       </div>
+                      {submittedAiQuery && aiStatusSummary && (
+                        <div className="mt-2 text-sm font-medium text-foreground">{aiStatusSummary}</div>
+                      )}
                       <div className="mt-3 flex flex-wrap gap-2">
                         {(['standard', 'einfach', 'leicht'] as LanguageMode[]).map((mode) => (
                           <button
@@ -558,14 +558,8 @@ export default function SearchPage() {
                             ? t('search.ready_answer')
                             : t('search.prompt_ai')}
                       </div>
-                      {submittedAiQuery && (
-                        <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
-                          <span>{t('search.status_provider')}: {aiResult?.synthesis.provider || t('common.unknown')}</span>
-                          <span>{t('search.status_models')}: {aiResult?.synthesis.model || t('common.unknown')}</span>
-                          {aiResult?.synthesis.fallback && <span>{t('search.status_fallback')}</span>}
-                          {aiResult?.synthesis.weak_evidence && <span>{t('search.status_weak_evidence')}</span>}
-                          {aiSynthesisLoading && <span>{t('search.status_generating')}</span>}
-                        </div>
+                      {submittedAiQuery && aiResult?.synthesis.weak_evidence && (
+                        <div className="mt-3 text-xs text-muted-foreground">{t('search.status_weak_evidence')}</div>
                       )}
                       {submittedAiQuery && evidenceRoleLabels.length > 0 && (
                         <div className="mt-3 flex flex-wrap gap-2">
@@ -598,22 +592,34 @@ export default function SearchPage() {
 
                   <div className="space-y-4">
                     <Card className="p-5">
-                      <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                        {t('search.ai_status')}
-                      </div>
-                      <div className="mt-3 space-y-2 text-sm">
-                        <div>{t('search.status_sidecar')}: {aiHealth?.status || t('common.unknown')}</div>
-                        <div>{t('search.status_provider')}: {aiHealth?.provider.provider || 'none'}</div>
-                        <div>{t('search.status_configured')}: {statusText(aiHealth?.provider.configured, translate)}</div>
-                        <div>{t('search.status_provider_state')}: {aiHealth?.provider.status || t('common.unknown')}</div>
-                        <div>{t('search.status_bot_protection')}: {statusText(turnstileEnabled, translate)}</div>
-                      </div>
-                      {aiHealth?.provider.models && aiHealth.provider.models.length > 0 && (
-                        <div className="mt-3 text-sm text-muted-foreground">
-                          {t('search.status_models')}: {aiHealth.provider.models.join(', ')}
+                      <div className="flex items-center justify-between gap-3">
+                        <div>
+                          <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                            {t('search.technical_details')}
+                          </div>
+                          <div className="mt-1 text-sm text-muted-foreground">{t('search.technical_details_desc')}</div>
                         </div>
+                        <Button variant="outline" size="sm" onClick={() => setShowTechnicalDetails((value) => !value)}>
+                          {showTechnicalDetails ? t('search.hide_details') : t('search.show_details')}
+                        </Button>
+                      </div>
+                      {showTechnicalDetails && (
+                        <>
+                          <div className="mt-4 space-y-2 text-sm">
+                            <div>{t('search.status_sidecar')}: {aiHealth?.status || t('common.unknown')}</div>
+                            <div>{t('search.status_provider')}: {aiHealth?.provider.provider || 'none'}</div>
+                            <div>{t('search.status_configured')}: {statusText(aiHealth?.provider.configured, translate)}</div>
+                            <div>{t('search.status_provider_state')}: {aiHealth?.provider.status || t('common.unknown')}</div>
+                            <div>{t('search.status_bot_protection')}: {statusText(turnstileEnabled, translate)}</div>
+                          </div>
+                          {aiHealth?.provider.models && aiHealth.provider.models.length > 0 && (
+                            <div className="mt-3 text-sm text-muted-foreground">
+                              {t('search.status_models')}: {aiHealth.provider.models.join(', ')}
+                            </div>
+                          )}
+                          {aiHealth?.provider.error && <div className="mt-3 text-sm text-red-600">{aiHealth.provider.error}</div>}
+                        </>
                       )}
-                      {aiHealth?.provider.error && <div className="mt-3 text-sm text-red-600">{aiHealth.provider.error}</div>}
                     </Card>
                   </div>
                 </div>
