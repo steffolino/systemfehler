@@ -1,0 +1,1 @@
+import{j as t}from"./index-CkGwBFCz.js";function e(){return t.jsxs("div",{className:"max-w-2xl mx-auto p-8",children:[t.jsx("h2",{className:"text-xl font-bold mb-4",children:"Audit Log"}),t.jsx("p",{children:"Audit log entries will be shown here."})]})}function s(){return t.jsx(e,{})}export{s as default};

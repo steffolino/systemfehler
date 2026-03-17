@@ -1,0 +1,1 @@
+import{j as a}from"./index-CkGwBFCz.js";import{C as s}from"./card-D2wvaeYQ.js";function t(){return a.jsx("div",{className:"max-w-2xl mx-auto p-8",children:a.jsxs(s,{className:"p-6 mb-4",children:[a.jsx("h2",{className:"text-xl font-bold mb-2",children:"Quality Assurance"}),a.jsx("p",{children:"Quality metrics and reports will appear here."})]})})}export{t as default};
