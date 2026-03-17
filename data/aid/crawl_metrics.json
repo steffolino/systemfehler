@@ -2,14 +2,14 @@
   "version": "0.1.0",
   "domain": "aid",
   "crawler": "aid-seeded",
-  "startedAt": "2026-03-15T17:44:01.367801+00:00",
-  "finishedAt": "2026-03-15T17:47:33.216777+00:00",
-  "durationSeconds": 211.849,
+  "startedAt": "2026-03-17T07:01:19.058908+00:00",
+  "finishedAt": "2026-03-17T07:01:47.784606+00:00",
+  "durationSeconds": 28.726,
   "counts": {
-    "seedUrls": 203,
-    "processedUrls": 203,
-    "entriesExtracted": 185,
-    "fetchFailures": 18,
+    "seedUrls": 18,
+    "processedUrls": 18,
+    "entriesExtracted": 15,
+    "fetchFailures": 3,
     "validationFailures": 0,
     "redirectAliases": 0,
     "canonicalAliases": 0,
@@ -18,153 +18,173 @@
   },
   "quality": {
     "avgIqs": 84.58,
-    "avgAis": 82.56,
+    "avgAis": 83.27,
     "lowQualityCount": 0,
     "lowQualitySamples": []
   },
   "distribution": {
     "hosts": [
       [
-        "bmbfsfj.bund.de",
-        110
-      ],
-      [
-        "bmas.de",
-        18
-      ],
-      [
-        "bafza.de",
-        16
-      ],
-      [
         "arbeitsagentur.de",
-        14
+        10
       ],
       [
-        "web.arbeitsagentur.de",
-        6
-      ],
-      [
-        "caritas.de",
-        4
-      ],
-      [
-        "hilfe-portal-missbrauch.de",
+        "sanktionsfrei.de",
         3
       ],
       [
-        "wiki.ubuntuusers.de",
+        "bmas.de",
         2
       ],
       [
-        "maennerberatungsnetz.de",
+        "bmbfsfj.bund.de",
         2
       ],
       [
-        "dajeb.de",
-        2
-      ],
-      [
-        "deutsche-depressionshilfe.de",
-        2
-      ],
-      [
-        "de.facebook.com",
-        1
-      ],
-      [
-        "facebook.de",
-        1
-      ],
-      [
-        "instagram.com",
-        1
-      ],
-      [
-        "x.com",
+        "bafza.de",
         1
       ]
     ],
     "sourceTier": [
       [
         "tier_1_official",
-        165
-      ],
-      [
-        "tier_2_ngo_watchdog",
-        16
-      ],
-      [
-        "tier_unknown",
-        4
+        15
       ]
     ],
     "institutionType": [
       [
         "government",
-        165
-      ],
-      [
-        "ngo",
-        16
-      ],
-      [
-        "unknown",
-        4
+        15
       ]
     ],
     "topics": [
       [
+        "buergergeld",
+        11
+      ],
+      [
+        "bedarfsgemeinschaft",
+        5
+      ],
+      [
+        "regelbedarf",
+        3
+      ],
+      [
         "financial_support",
-        185
+        3
+      ],
+      [
+        "leichte_sprache_soziale_sicherheit",
+        3
+      ],
+      [
+        "aufstocker",
+        2
+      ],
+      [
+        "mehrbedarf",
+        2
+      ],
+      [
+        "kinderzuschlag",
+        2
+      ],
+      [
+        "pflichten",
+        1
+      ],
+      [
+        "education",
+        1
       ],
       [
         "aid",
-        185
+        1
       ],
       [
-        "employment",
-        18
+        "care",
+        1
       ],
       [
-        "family",
-        16
+        "families",
+        1
       ],
       [
-        "contacts",
-        2
+        "children",
+        1
       ]
     ],
     "tags": [
       [
-        "aid",
-        185
+        "official_rule_source",
+        7
       ],
       [
-        "application_required",
-        34
+        "official_source",
+        2
+      ],
+      [
+        "official_glossary_source",
+        2
+      ],
+      [
+        "glossary",
+        2
+      ],
+      [
+        "education",
+        1
+      ],
+      [
+        "advisory",
+        1
       ],
       [
         "contact",
-        2
+        1
+      ],
+      [
+        "official_light_language_source",
+        1
+      ],
+      [
+        "light_language",
+        1
+      ],
+      [
+        "official_background_source",
+        1
+      ],
+      [
+        "benefit-overview",
+        1
+      ],
+      [
+        "application_required",
+        1
+      ],
+      [
+        "children",
+        1
       ]
     ],
     "targetGroups": [
       [
-        "families",
-        185
-      ],
-      [
-        "single_parents",
-        185
-      ],
-      [
         "general_public",
-        185
+        14
       ],
       [
         "unemployed",
-        18
+        11
+      ],
+      [
+        "families",
+        4
+      ],
+      [
+        "single_parents",
+        4
       ]
     ]
   },
@@ -172,15 +192,15 @@
     "statuses": [
       [
         "ok",
-        202
+        213
+      ],
+      [
+        "fetch_failed",
+        21
       ],
       [
         "redirect_alias",
         19
-      ],
-      [
-        "fetch_failed",
-        18
       ],
       [
         "canonical_alias",
@@ -190,7 +210,7 @@
     "failureReasons": [
       [
         "fetch_failed",
-        20
+        38
       ],
       [
         "http_redirect",

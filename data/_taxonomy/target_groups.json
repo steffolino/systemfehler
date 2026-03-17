@@ -41,6 +41,14 @@
     {
       "id": "persons_with_disabilities",
       "label": { "de": "Menschen mit Behinderung", "en": "People with Disabilities", "easy_de": "Menschen mit Behinderung" }
+    },
+    {
+      "id": "low_income_workers",
+      "label": { "de": "Menschen mit geringem Einkommen", "en": "Low-income Workers", "easy_de": "Menschen mit wenig Geld aus Arbeit" }
+    },
+    {
+      "id": "parents",
+      "label": { "de": "Eltern", "en": "Parents", "easy_de": "Eltern" }
     }
   ],
   "_todo": [

@@ -109,6 +109,123 @@
         "easy_de": "Ämter-Hilfe"
       },
       "children": []
+    },
+    {
+      "id": "benefits",
+      "label": {
+        "de": "Leistungen",
+        "en": "Benefits",
+        "easy_de": "Leistungen"
+      },
+      "children": []
+    },
+    {
+      "id": "buergergeld",
+      "label": {
+        "de": "Bürgergeld",
+        "en": "Citizens' Benefit",
+        "easy_de": "Bürger-Geld"
+      },
+      "children": []
+    },
+    {
+      "id": "kinderzuschlag",
+      "label": {
+        "de": "Kinderzuschlag",
+        "en": "Child Supplement",
+        "easy_de": "Kinder-Zuschlag"
+      },
+      "children": []
+    },
+    {
+      "id": "bedarfsgemeinschaft",
+      "label": {
+        "de": "Bedarfsgemeinschaft",
+        "en": "Household Need Unit",
+        "easy_de": "Gemeinsamer Bedarf"
+      },
+      "children": []
+    },
+    {
+      "id": "aufstocker",
+      "label": {
+        "de": "Aufstocker",
+        "en": "Income Top-up",
+        "easy_de": "Arbeit mit Geld-Hilfe"
+      },
+      "children": []
+    },
+    {
+      "id": "regelbedarf",
+      "label": {
+        "de": "Regelbedarf",
+        "en": "Standard Benefit Amount",
+        "easy_de": "Grund-Betrag"
+      },
+      "children": []
+    },
+    {
+      "id": "mehrbedarf",
+      "label": {
+        "de": "Mehrbedarf",
+        "en": "Additional Need",
+        "easy_de": "Mehr Geld wegen besonderem Bedarf"
+      },
+      "children": []
+    },
+    {
+      "id": "pflichten",
+      "label": {
+        "de": "Pflichten",
+        "en": "Obligations",
+        "easy_de": "Pflichten"
+      },
+      "children": []
+    },
+    {
+      "id": "eligibility",
+      "label": {
+        "de": "Anspruch und Voraussetzungen",
+        "en": "Eligibility",
+        "easy_de": "Wer es bekommen kann"
+      },
+      "children": []
+    },
+    {
+      "id": "application_process",
+      "label": {
+        "de": "Antrag und Bescheid",
+        "en": "Application Process",
+        "easy_de": "Antrag und Antwort"
+      },
+      "children": []
+    },
+    {
+      "id": "glossary",
+      "label": {
+        "de": "Begriffe und Erklärungen",
+        "en": "Glossary",
+        "easy_de": "Wort-Erklärungen"
+      },
+      "children": []
+    },
+    {
+      "id": "leichte_sprache_soziale_sicherheit",
+      "label": {
+        "de": "Leichte Sprache Soziale Sicherheit",
+        "en": "Easy Language Social Security",
+        "easy_de": "Leichte Sprache zu sozialer Sicherheit"
+      },
+      "children": []
+    },
+    {
+      "id": "buergergeld_rechner",
+      "label": {
+        "de": "Bürgergeld-Rechner",
+        "en": "Citizens' Benefit Calculator",
+        "easy_de": "Bürger-Geld-Rechner"
+      },
+      "children": []
     }
   ],
   "_todo": [

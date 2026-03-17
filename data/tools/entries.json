@@ -6691,6 +6691,59 @@
       }
     },
     {
+      "id": "a6e672b8-b7d4-4a9c-b483-e5b6056b0636",
+      "title": "DerBürgergeld-Rechnerder Caritas.",
+      "summary": {
+        "de": "Mit dem Bürgergeld-Rechner können Sie einen eventuellen Anspruch auf Bürgergeld direkt online berechnen."
+      },
+      "content": {
+        "de": "Dabei wird der aktuelle Basis-Regelsatz von 563 Euro ab dem 1. Januar 2024 berücksichtigt, der maßgeblich für die gesamte Berechnung der Leistungen ist. Der Bürgergeld-Rechner berechnet einen eventuellen Anspruch anhand der fortgeschriebenen Regelsätze und Mehrbedarfe. Mit dem Bürgergeldrechner können Leistungsansprüche berechnet werden, die vom Gesetzgeber (Bundestag und Bundesrat) festgelegt sind. „Das Bürgergeld ist ein Auffangnetz für Menschen, die keine Möglichkeit haben, ihren Lebensunterhalt aus eigener Kraft zu bestreiten. Es ist eine solidarische Leistung, die keine großen Sprünge zulässt: Von derzeit 563 Euro (ab Januar 2024) im Monat ist alles zu zahlen, was man zum Leben braucht: Lebensmittel, Kleidung, Haushaltswaren, Fahrkarten, Reparaturen, Handy und nicht zu vergessen: die Stromkosten. Wer hingegen sozialversicherungspflichtig beschäftigt ist, der der hat durch Freibeträge nicht nur mehr Geld zur Verfügung, sondern erwirbt auch Ansprüche: für das ALG I, eine Erwerbsminderungsrente, die Rente und vieles mehr. Arbeiten lohnt sich also immer!“ Michaela Hofmann Die Höhe des Bürgergeldanspruchs ist abhängig von Ihren Kosten für Kalt- und Warmmiete, Ihrem Alter und der Anzahl Ihrer Kinder sowie Ihrem Einkommen und das Ihrer Partnerin oder ihres Partners. Zudem werden Ihre jeweiligen Lebensumstände berücksichtigt, ob Sie zum Beispiel alleinerziehend sind. Einberechnet in die Bedarfsermittlung werden auch Faktoren wie: Schwangerschaft, Behinderungen oder Krankheit. Bitte beachten Sie die Hinweise zu der nachfolgenden Berechnung:"
+      },
+      "url": "https://www.das-steht-dir-zu.de/arbeit/buergergeld/der-buergergeld-rechner/index.html",
+      "topics": [
+        "buergergeld_rechner"
+      ],
+      "tags": [
+        "trusted_tool_source",
+        "calculator"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-17T07:01:24.084318+00:00",
+      "lastSeen": "2026-03-17T07:01:24.084318+00:00",
+      "sourceUnavailable": false,
+      "toolType": "calculator",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.das-steht-dir-zu.de/arbeit/buergergeld/der-buergergeld-rechner/index.html",
+        "crawledAt": "2026-03-17T07:01:24.084318Z",
+        "crawlId": "tools-seeded-1773730884",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_2_ngo_watchdog",
+        "institutionType": "advisory",
+        "jurisdiction": "DE",
+        "sourceId": "dasstehtdirzu",
+        "providerName": "Das steht dir zu",
+        "providerLevel": "civil_society",
+        "checksum": "862d4b26e1bb07ca16ba2fc2afc0bdd1239cca72ee43b7d2213378a2c3e6b3a7"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-17T07:01:24.084318+00:00"
+      }
+    },
+    {
       "id": "a4796f0e-5326-4da1-b6f3-5f30ef7af590",
       "title": "Elterngeldrechner",
       "translations": {

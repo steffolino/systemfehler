@@ -2,149 +2,169 @@
   "version": "0.1.0",
   "domain": "tools",
   "crawler": "tools-seeded",
-  "startedAt": "2026-03-15T17:23:16.704869+00:00",
-  "finishedAt": "2026-03-15T17:26:58.809685+00:00",
-  "durationSeconds": 222.105,
+  "startedAt": "2026-03-17T07:01:15.320592+00:00",
+  "finishedAt": "2026-03-17T07:01:37.589015+00:00",
+  "durationSeconds": 22.268,
   "counts": {
-    "seedUrls": 320,
-    "processedUrls": 344,
-    "entriesExtracted": 284,
-    "fetchFailures": 36,
+    "seedUrls": 12,
+    "processedUrls": 12,
+    "entriesExtracted": 12,
+    "fetchFailures": 0,
     "validationFailures": 0,
-    "redirectAliases": 21,
-    "canonicalAliases": 3,
+    "redirectAliases": 0,
+    "canonicalAliases": 0,
     "emptySummary": 0,
     "emptyContent": 0
   },
   "quality": {
     "avgIqs": 84.58,
-    "avgAis": 80.71,
+    "avgAis": 77.92,
     "lowQualityCount": 0,
     "lowQualitySamples": []
   },
   "distribution": {
     "hosts": [
       [
-        "bmbfsfj.bund.de",
-        145
-      ],
-      [
-        "bafza.de",
-        62
+        "arbeitsagentur.de",
+        6
       ],
       [
         "web.arbeitsagentur.de",
-        30
+        3
       ],
       [
-        "arbeitsagentur.de",
-        25
+        "bafza.de",
+        1
+      ],
+      [
+        "das-steht-dir-zu.de",
+        1
       ],
       [
         "familienportal.de",
-        20
-      ],
-      [
-        "de.facebook.com",
-        16
-      ],
-      [
-        "twitter.com",
-        16
-      ],
-      [
-        "facebook.de",
-        1
-      ],
-      [
-        "instagram.com",
-        1
-      ],
-      [
-        "x.com",
-        1
-      ],
-      [
-        "de.linkedin.com",
-        1
-      ],
-      [
-        "mein-now.de",
-        1
-      ],
-      [
-        "wege-zur-pflege.de",
         1
       ]
     ],
     "sourceTier": [
       [
         "tier_1_official",
-        283
+        11
       ],
       [
-        "tier_unknown",
+        "tier_2_ngo_watchdog",
         1
       ]
     ],
     "institutionType": [
       [
         "government",
-        283
+        11
       ],
       [
-        "unknown",
+        "advisory",
         1
       ]
     ],
     "topics": [
       [
         "digital_service",
-        284
+        11
       ],
       [
-        "tools",
-        284
-      ],
-      [
-        "family",
-        82
-      ],
-      [
-        "aid",
-        62
+        "employment",
+        8
       ],
       [
         "financial_support",
-        20
+        7
+      ],
+      [
+        "tools",
+        7
+      ],
+      [
+        "families",
+        1
+      ],
+      [
+        "care",
+        1
+      ],
+      [
+        "buergergeld_rechner",
+        1
+      ],
+      [
+        "family",
+        1
       ]
     ],
     "tags": [
       [
-        "tool",
-        284
+        "application_required",
+        7
       ],
       [
-        "application_required",
-        82
+        "tool",
+        7
+      ],
+      [
+        "public_service",
+        6
+      ],
+      [
+        "portal",
+        2
+      ],
+      [
+        "calculator",
+        2
+      ],
+      [
+        "official_source",
+        1
+      ],
+      [
+        "checker",
+        1
+      ],
+      [
+        "kinderzuschlag",
+        1
+      ],
+      [
+        "job-search",
+        1
+      ],
+      [
+        "pflege",
+        1
+      ],
+      [
+        "trusted_tool_source",
+        1
       ]
     ],
     "targetGroups": [
       [
         "general_public",
-        284
+        12
       ],
       [
         "families",
-        284
+        12
       ],
       [
         "job_seekers",
-        284
+        11
+      ],
+      [
+        "unemployed",
+        10
       ],
       [
         "single_parents",
-        20
+        1
       ]
     ]
   },
@@ -152,7 +172,7 @@
     "statuses": [
       [
         "ok",
-        285
+        286
       ],
       [
         "fetch_failed",
@@ -170,7 +190,7 @@
     "failureReasons": [
       [
         "fetch_failed",
-        36
+        48
       ],
       [
         "http_redirect",
@@ -183,7 +203,6 @@
     ]
   },
   "improvementHints": [
-    "Investigate network, robots, or host restrictions for failed seeds.",
     "Refresh urls.json from preferred canonical URLs to reduce alias churn.",
     "Use failure reasons to suppress noisy seeds or create manual-review candidates."
   ]
