@@ -325,6 +325,17 @@ class BaseCrawler:
         if not text:
             return ""
 
+        text = text.replace("\u00ad", "")
+        text = re.sub(r"(?<=[a-zäöüß])(?=[A-ZÄÖÜ])", " ", text)
+        text = re.sub(r"(?<=[:;,.!?])(?=[^\s])", " ", text)
+        text = re.sub(
+            r"([A-Za-zÄÖÜäöüß]+(?:-[A-Za-zÄÖÜäöüß]+)+)(der|die|das|dem|den|des|und|im|in|am|für|von)\b",
+            r"\1 \2",
+            text,
+            flags=re.IGNORECASE,
+        )
+        text = " ".join(text.split()).strip()
+
         for separator in (" | ", " \u2013 ", " \u2014 ", " - "):
             if separator not in text:
                 continue

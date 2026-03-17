@@ -53,6 +53,24 @@ def delete_existing_rows(database_url: str, domains: list[str]) -> None:
         conn.close()
 
 
+def backfill_legacy_title_column(database_url: str, domains: list[str]) -> None:
+    conn = psycopg2.connect(database_url)
+    try:
+        with conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    UPDATE entries
+                    SET title = COALESCE(NULLIF(title, ''), title_de)
+                    WHERE domain::text = ANY(%s)
+                      AND COALESCE(title_de, '') <> ''
+                    """,
+                    (domains,),
+                )
+    finally:
+        conn.close()
+
+
 def main() -> int:
     args = parse_args()
     database_url = os.getenv("DATABASE_URL")
@@ -72,6 +90,9 @@ def main() -> int:
     for domain in args.domains:
         imported = import_to_db(domain, str(data_dir))
         ok = ok and imported
+
+    if ok:
+        backfill_legacy_title_column(database_url, args.domains)
 
     return 0 if ok else 1
 

@@ -60,6 +60,16 @@ def _get_localized_value(entry: dict, field: str, lang: str) -> str | None:
     return None
 
 
+def _get_legacy_title(entry: dict) -> str | None:
+    title_de = _get_localized_value(entry, 'title', 'de')
+    if title_de:
+        return title_de
+    title = entry.get('title')
+    if isinstance(title, str) and title.strip():
+        return title.strip()
+    return None
+
+
 def _get_easy_title(entry: dict) -> str | None:
     direct = _get_localized_value(entry, 'title', 'easy_de')
     if direct:
@@ -472,6 +482,7 @@ def import_to_db(domain: str, data_dir: str):
                 title_de = _get_localized_value(entry, 'title', 'de')
                 title_en = _get_localized_value(entry, 'title', 'en')
                 title_easy_de = _get_easy_title(entry)
+                title_legacy = _get_legacy_title(entry)
                 summary_de = _get_localized_value(entry, 'summary', 'de')
                 summary_en = _get_localized_value(entry, 'summary', 'en')
                 summary_easy_de = _get_localized_value(entry, 'summary', 'easy_de')
@@ -482,7 +493,7 @@ def import_to_db(domain: str, data_dir: str):
                 # Insert into entries table
                 cur.execute("""
                     INSERT INTO entries (
-                        id, domain, title_de, title_en, title_easy_de,
+                        id, domain, title, title_de, title_en, title_easy_de,
                         summary_de, summary_en, summary_easy_de,
                         content_de, content_en, content_easy_de,
                         url, topics, tags, target_groups,
@@ -490,10 +501,11 @@ def import_to_db(domain: str, data_dir: str):
                         first_seen, last_seen, source_unavailable,
                         provenance, translations, quality_scores
                     ) VALUES (
-                        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+                        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
                         %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
                     )
                     ON CONFLICT (id) DO UPDATE SET
+                        title = EXCLUDED.title,
                         title_de = EXCLUDED.title_de,
                         title_en = EXCLUDED.title_en,
                         title_easy_de = EXCLUDED.title_easy_de,
@@ -519,6 +531,7 @@ def import_to_db(domain: str, data_dir: str):
                         updated_at = NOW()
                 """, (
                     entry['id'], domain,
+                    title_legacy,
                     title_de, title_en, title_easy_de,
                     summary_de, summary_en, summary_easy_de,
                     content_de, content_en, content_easy_de,
