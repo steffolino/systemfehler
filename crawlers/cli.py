@@ -23,6 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from dotenv import load_dotenv
 
 from crawlers.benefits.arbeitsagentur_crawler import ArbeitsagenturCrawler
+from crawlers.benefits.seeded_crawler import SeededBenefitsCrawler
 from crawlers.aid.seeded_crawler import SeededAidCrawler
 from crawlers.tools.seeded_crawler import SeededToolsCrawler
 from crawlers.organizations.seeded_crawler import SeededOrganizationsCrawler
@@ -93,6 +94,8 @@ def crawl_benefits(source: str, output_dir: str):
     
     if source == 'arbeitsagentur':
         crawler = ArbeitsagenturCrawler(user_agent, rate_limit)
+    elif source in ('seeded', 'urls', 'auto'):
+        crawler = SeededBenefitsCrawler(user_agent, rate_limit, data_dir=output_dir)
     else:
         logger.error(f"Unknown source: {source}")
         return False

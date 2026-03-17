@@ -3,6 +3,102 @@
   "domain": "benefits",
   "entries": [
     {
+      "id": "2a5bb785-01ca-47fc-8e54-c27d4dfea77d",
+      "title": "Familienportal",
+      "summary": {
+        "de": "Das Familienportal bündelt alle relevanten Informationen zu staatlichen Familienleistungen, gesetzlichen Regelungen und Beratungsangeboten für Familien."
+      },
+      "content": {
+        "de": "Beratung vor Ort Finden Sie zuständige Behörden und Beratungsstellen. Hier finden Sie Informationen rund um die Familie. Informationen für Pflegefamilien Sie möchten Pflegeeltern werden? Wir informieren Sie über Voraussetzungen und Unterstützungsangebote für Pflegeeltern. Sie möchten Pflegeeltern werden? Wir informieren Sie über Voraussetzungen und Unterstützungsangebote für Pflegeeltern. Checklisten rund um die Geburt Bevor und nachdem ein Baby auf die Welt kommt, gibt es viel zu organisieren. Damit Sie nichts vergessen, gibt es unsere praktischen Checklisten: Digital oder zum Ausdrucken. Bevor und nachdem ein Baby auf die Welt kommt, gibt es viel zu organisieren. Damit Sie nichts vergessen, gibt es unsere praktischen Checklisten: Digital oder zum Ausdrucken."
+      },
+      "url": "https://familienportal.de/",
+      "topics": [
+        "family",
+        "financial_support",
+        "benefits"
+      ],
+      "tags": [
+        "application_required",
+        "benefit"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents",
+        "general_public",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T15:07:40.627738+00:00",
+      "lastSeen": "2026-03-16T15:07:40.627738+00:00",
+      "sourceUnavailable": false,
+      "eligibilityCriteria": {
+        "de": "Das Familienportal bündelt alle relevanten Informationen zu staatlichen Familienleistungen, gesetzlichen Regelungen und Beratungsangeboten für Familien."
+      },
+      "provenance": {
+        "source": "http://www.familienportal.de/",
+        "crawledAt": "2026-03-16T15:07:40.637384Z",
+        "crawlId": "benefits-seeded-1773673660",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "familienportal",
+        "providerName": "Familienportal",
+        "providerLevel": "federal",
+        "checksum": "6a6745dbd9d49d0a379719d0fa6925e57984db5b2053fbfc6ff83ebdedab3b48"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T15:07:40.637384+00:00"
+      }
+    },
+    {
+      "id": "e959e414-8a5d-4c8b-9816-b7fdb757f41a",
+      "title": "Kinderzuschlag",
+      "summary": {
+        "de": "Der Kinderzuschlag ist eine staatliche Familienleistung in Deutschland. Hier erfahren Sie, was Sie zum Kinderzuschlag wissen müssen."
+      },
+      "content": {
+        "de": "Beratung vor Ort Finden Sie zuständige Behörden und Beratungsstellen. Den Kinderzuschlag (kurz: KiZ) können Sie bekommen, wenn Ihr Einkommen für den eigenen Lebensunterhalt reicht, aber es nicht oder nur knapp ausreicht, um auch für den gesamten Bedarf Ihrer Familie aufzukommen. Der Kinderzuschlag beträgt ab 1. Januar 2025 pro Kind bis zu 297 Euro im Monat, abhängig von der Situation Ihrer Familie. Darin ist der Sofortzuschlag von monatlich 25 Euro je Kind enthalten. Wenn Ihr Einkommen höher ist als Ihr eigener Bedarf, verringert sich der Kinderzuschlag. Auch das Einkommen Ihrer Kinder wird berücksichtigt, zum Beispiel, wenn Ihre Kinder Unterhalt, Unterhaltsvorschuss oder Waisenrente bekommen. Das Einkommen Ihrer Kinder wird jedoch nicht in vollem Umfang auf den Kinderzuschlag angerechnet, sondern nur zu 45 Prozent. Wenn Sie Kinderzuschlag und/oder Wohngeld bekommen, dann können Sie zusätzlich für ihre Kinder Leistungen für Bildung und Teilhabe erhalten. Das ist zum Beispiel ein kostenloses Mittagessen in Schule und Kita oder ein Schulbedarfspaket in Höhe von 195 Euro. Bezieherinnen und Bezieher des Kinderzuschlags können sich außerdem von den Kita-Gebühren befreien lassen. Der Kinderzuschlag wird zusammen mit dem Kindergeld ausgezahlt. Hier finden Sie eine Übersicht der Auszahlungstermine."
+      },
+      "url": "https://familienportal.de/familienportal/familienleistungen/kinderzuschlag",
+      "topics": [
+        "financial_support",
+        "kinderzuschlag"
+      ],
+      "tags": [
+        "official_rule_source",
+        "family_benefits"
+      ],
+      "targetGroups": [
+        "families",
+        "parents"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T13:43:19.707303+00:00",
+      "lastSeen": "2026-03-16T13:43:19.707303+00:00",
+      "sourceUnavailable": false,
+      "benefitAmount": {
+        "de": "Die verlinkte Quelle enthaelt die aktuellen Hinweise zur Hoehe oder Zusammensetzung der Leistung."
+      },
+      "provenance": {
+        "source": "https://familienportal.de/familienportal/familienleistungen/kinderzuschlag",
+        "crawledAt": "2026-03-16T13:43:19.708307Z",
+        "crawlId": "benefits-seeded-1773668599",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_unknown",
+        "institutionType": "unknown",
+        "jurisdiction": "DE",
+        "checksum": "3e24d1423b20b68cfd76be7d2b12053d1199454617ccd9da9180a75b502a39a0"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T13:43:19.708307+00:00"
+      }
+    },
+    {
       "title": "Bürgergeld (Arbeitslosengeld II)",
       "translations": {
         "de-LEICHT": {
@@ -63,6 +159,943 @@
       }
     },
     {
+      "id": "83b1d3da-801a-4156-a66b-938aa72a433b",
+      "title": "Arbeit finden mit Hilfe des Jobcenters",
+      "summary": {
+        "de": "Das Jobcenter hilft Ihnen zurück ins Arbeitsleben: Informieren Sie sich über finanziellen Förderungen und Beratungsangebote."
+      },
+      "content": {
+        "de": "So unterstützt Sie die Arbeitsvermittlung Mithilfe unserer Beratung finden Sie Ihren Weg zu einem neuen Arbeitsplatz – Schritt für Schritt. Mithilfe unserer Beratung finden Sie Ihren Weg zu einem neuen Arbeitsplatz – Schritt für Schritt. Betreuung in schwierigen Lebenssituationen Wenn Sie aufgrund persönlicher Probleme nur schwer ins Arbeitsleben finden, kann Ihnen eine Fallmanagerin oder ein Fallmanager zur Seite stehen. Wenn Sie aufgrund persönlicher Probleme nur schwer ins Arbeitsleben finden, kann Ihnen eine Fallmanagerin oder ein Fallmanager zur Seite stehen. Ganzheitliche Betreuung Persönliche Schwierigkeiten verhindern, dass Sie eine Arbeit oder Ausbildung aufnehmen. Finden Sie mit Unterstützung zu neuen Lösungen. Persönliche Schwierigkeiten verhindern, dass Sie eine Arbeit oder Ausbildung aufnehmen. Finden Sie mit Unterstützung zu neuen Lösungen."
+      },
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/arbeit-finden",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T15:07:22.978004+00:00",
+      "lastSeen": "2026-03-16T15:07:22.978004+00:00",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/arbeit-finden",
+        "crawledAt": "2026-03-16T15:07:22.979564Z",
+        "crawlId": "benefits-seeded-1773673642",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "5753c5ba57f5c1ec4b32de7b98334d3e065d2f5be33c71f05f71efc243bf051e"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T15:07:22.979564+00:00"
+      }
+    },
+    {
+      "id": "71df207c-ef03-4426-b185-f6f7441f26bb",
+      "title": "Bürgergeld online beantragen",
+      "summary": {
+        "de": "Bürgergeld (ehemals: Arbeitslosengeld II) einfach online beantragen. Alle Infos und den Link zum digitalen Antrag gibt es hier."
+      },
+      "content": {
+        "de": "Wenn Sie mehr über das Bürgergeld wissen möchten, finden Sie auf folgenden Seiten weitere Informationen: Wenn Sie Fragen zum Bürgergeld oder zum Antrag haben, berät Sie Ihr zuständiges Jobcenter. Die Kontaktdaten ermitteln Sie über die Dienststellensuche: Jobcenter finden Tipp: Tipp: Die Jobcenter-App erleichtert Ihnen die Kommunikation mit Ihrem Jobcenter. Sie können direkt Nachrichten an Ihr Jobcenter senden und Dokumente hochladen. Erfahren Sie im Überblick, wie Sie Bürgergeld beim Jobcenter beantragen. Um Bürgergeld online zu beantragen, melden Sie sich bei Ihrem Benutzerkonto bei der Bundesagentur für Arbeit an. Falls Sie noch kein solches Benutzerkonto haben, müssen Sie sich zunächst registrieren. Anschließend können Sie direkt mit dem Antrag beginnen."
+      },
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/buergergeld-beantragen",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T15:07:12.991674+00:00",
+      "lastSeen": "2026-03-16T15:07:12.991674+00:00",
+      "sourceUnavailable": false,
+      "applicationSteps": [
+        {
+          "de": "Pruefen Sie die Hinweise auf der verlinkten Seite und stellen Sie den Antrag ueber die genannte Stelle oder den Onlinedienst."
+        }
+      ],
+      "requiredDocuments": [
+        {
+          "de": "Pruefen Sie auf der Quellseite, welche Unterlagen und Nachweise fuer Ihren Fall verlangt werden."
+        }
+      ],
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/buergergeld-beantragen",
+        "crawledAt": "2026-03-16T15:07:12.994672Z",
+        "crawlId": "benefits-seeded-1773673632",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "d6e26f2279adfd2d3d74bfe3b451be90baaf8aae98b2068c8138d2875dd24f89"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T15:07:12.994672+00:00"
+      }
+    },
+    {
+      "id": "34f48c10-23f5-45fd-a2f1-71357830cfd5",
+      "title": "Finanziell absichern mit Bürgergeld",
+      "summary": {
+        "de": "Wann Sie Anspruch auf Bürgergeld haben, wie Sie es beantragen und welche Leistungen Sie erhalten, erfahren Sie hier."
+      },
+      "content": {
+        "de": "Wie Sie Bürgergeld beantragen und was Sie zu Ihrem Bescheid wissen sollten. Wann Sie Anspruch auf Bürgergeld haben und was Sie bei Einkommen und Vermögen beachten müssen. Wie lange Sie Bürgergeld erhalten und wann es ausgezahlt wird. Informieren Sie sich, aus welchen Teilen das Bürgergeld besteht. Wichtiges zur finanziellen Unterstützung rund um Medikamente, Krankenversicherung und Co. Wenn Ihr Anspruch auf Arbeitslosengeld endet und Sie Bürgergeld brauchen."
+      },
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T15:07:14.970213+00:00",
+      "lastSeen": "2026-03-16T15:07:14.970213+00:00",
+      "sourceUnavailable": false,
+      "eligibilityCriteria": {
+        "de": "Wann Sie Anspruch auf Bürgergeld haben, wie Sie es beantragen und welche Leistungen Sie erhalten, erfahren Sie hier."
+      },
+      "applicationSteps": [
+        {
+          "de": "Pruefen Sie die Hinweise auf der verlinkten Seite und stellen Sie den Antrag ueber die genannte Stelle oder den Onlinedienst."
+        }
+      ],
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern",
+        "crawledAt": "2026-03-16T15:07:14.970810Z",
+        "crawlId": "benefits-seeded-1773673634",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "fd2b155a52611fd7d82d33970689151717cbd903f300b0d9147444b12c71a163"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T15:07:14.970810+00:00"
+      }
+    },
+    {
+      "id": "f5814251-8e87-421d-bb89-3a8d4eb078a4",
+      "title": "Bürgergeld: Antrag und Bescheid",
+      "summary": {
+        "de": "Bürgergeld beantragen: Was Sie bei Antrag und Anlagen beachten und Sie bei Ihrem Bescheid prüfen müssen. Jetzt informieren!"
+      },
+      "content": {
+        "de": "Wenn Sie Bürgergeld beantragen, benötigt Ihr Jobcenter Informationen von Ihnen. Anhand Ihrer Angaben prüft Ihr Jobcenter, ob Sie die Voraussetzungen für Bürgergeld erfüllen und damit einen rechtlichen Anspruch darauf haben. Ist das der Fall, ermittelt das Jobcenter zudem, wie viel Bürgergeld Sie grundsätzlich erhalten können. Wichtig: Wichtig: Leben Sie mit anderen Personen in einer Bedarfsgemeinschaft, stellen Sie den Antrag für alle diese Personen. Entsprechend müssen Sie in diesem Fall Informationen zu allen Mitgliedern Ihrer Bedarfsgemeinschaft liefern. Sie sind in diesem Fall die Vertreterin oder der Vertreter Ihrer Bedarfsgemeinschaft. Grundsätzlich ist der Antrag auf Bürgergeld an keine Form gebunden. Sie können ihn online, persönlich, telefonisch oder schriftlich stellen. Am besten stellen Sie den Bürgergeld-Antrag online. Sie haben dadurch folgende Vorteile: positiv: Sie können den Antrag jederzeit und von überall an Ihr Jobcenter schicken – schnell und sicher. positiv: Sie werden Schritt für Schritt durch den Antrag geführt und erhalten zusätzliche Hilfetexte."
+      },
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/antrag-bescheid",
+      "topics": [
+        "financial_support",
+        "buergergeld",
+        "application_process"
+      ],
+      "tags": [
+        "official_rule_source",
+        "application_required"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T13:42:55.012960+00:00",
+      "lastSeen": "2026-03-16T13:42:55.012960+00:00",
+      "sourceUnavailable": false,
+      "eligibilityCriteria": {
+        "de": "Bürgergeld beantragen: Was Sie bei Antrag und Anlagen beachten und Sie bei Ihrem Bescheid prüfen müssen. Jetzt informieren!"
+      },
+      "applicationSteps": [
+        {
+          "de": "Pruefen Sie die Hinweise auf der verlinkten Seite und stellen Sie den Antrag ueber die genannte Stelle oder den Onlinedienst."
+        }
+      ],
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/antrag-bescheid",
+        "crawledAt": "2026-03-16T13:42:55.012960Z",
+        "crawlId": "benefits-seeded-1773668575",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "f6a811844cd5c25a70206e825966b796b8df3c439b43bdd55566eb1210c82733"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T13:42:55.012960+00:00"
+      }
+    },
+    {
+      "id": "6dbce676-e79b-4b7c-b860-24f70839dcab",
+      "title": "Einkommen mit Bürgergeld ergänzen",
+      "summary": {
+        "de": "Reicht Ihr Lohn nicht für den Lebensunterhalt, können Sie ihn mit Bürgergeld aufstocken. Jetzt informieren!"
+      },
+      "content": {
+        "de": "Wenn Ihr Einkommen nicht für Ihren Lebensunterhalt beziehungsweise den Ihrer Bedarfsgemeinschaft reicht, können Sie es mit Bürgergeld ergänzen (umgangssprachlich: aufstocken ). Dabei spielt es keine Rolle, ob Sie angestellt oder selbstständig sind. Sie können diese Leistung beim zuständigen Jobcenter beantragen. Wenn Sie Bürgergeld beziehen, müssen Sie sogenannte vorrangige Leistungen beantragen, wenn Sie darauf Anspruch haben. Damit sind finanzielle Hilfen von anderen Trägern gemeint, die Ihnen oder Mitgliedern Ihrer Bedarfsgemeinschaft zustehen. Wichtig: Wichtig: Wenn Sie trotz Einkommens und vorrangiger Leistungen hilfebedürftig sind, können Sie Ihr Einkommen zusätzlich mit Bürgergeld ergänzen. Wie hoch der Ergänzungsbetrag ist, auf den Sie Anspruch haben, hängt von Ihrem Einkommen und Vermögen sowie Ihrem Bedarf ab. Mit Bedarf ist der Betrag gemeint, der Ihnen und Ihrer Familie für den Lebensunterhalt zusteht. Dieser setzt sich vor allem aus einem festen Regelbedarf und den Kosten für Unterkunft und Heizung zusammen. Von Ihrem Bedarf zieht das Jobcenter Ihr Einkommen ab. Es gibt dabei aber einen bestimmten Teil des Einkommens, der nicht berücksichtigt wird, den sogenannten Frei- oder Absetzungsbetrag. Wie hoch Ihr persönlicher Freibetrag ist, hängt unter anderem von Ihrem Bruttoverdienst und Ihren Beiträgen zur Sozialversicherung ab."
+      },
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+      "topics": [
+        "financial_support",
+        "buergergeld",
+        "aufstocker"
+      ],
+      "tags": [
+        "official_rule_source",
+        "income_support"
+      ],
+      "targetGroups": [
+        "low_income_workers",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T13:43:03.030078+00:00",
+      "lastSeen": "2026-03-16T13:43:03.030078+00:00",
+      "sourceUnavailable": false,
+      "eligibilityCriteria": {
+        "de": "Reicht Ihr Lohn nicht für den Lebensunterhalt, können Sie ihn mit Bürgergeld aufstocken. Jetzt informieren!"
+      },
+      "applicationSteps": [
+        {
+          "de": "Pruefen Sie die Hinweise auf der verlinkten Seite und stellen Sie den Antrag ueber die genannte Stelle oder den Onlinedienst."
+        }
+      ],
+      "benefitAmount": {
+        "de": "Die verlinkte Quelle enthaelt die aktuellen Hinweise zur Hoehe oder Zusammensetzung der Leistung."
+      },
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+        "crawledAt": "2026-03-16T13:43:03.030078Z",
+        "crawlId": "benefits-seeded-1773668583",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "bc1a3f833705d47e2c14ad13cdcbf0f001dd9effd206e220e4f3ace6585773fa"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T13:43:03.030078+00:00"
+      }
+    },
+    {
+      "id": "afdca595-4615-4493-bafc-5a92b806e965",
+      "title": "Bürgergeld: Voraussetzungen, Einkommen und Vermögen",
+      "summary": {
+        "de": "Wer Anspruch auf Bürgergeld hat, welche Voraussetzungen es gibt und was Sie bei Einkommen und Vermögen beachten müssen."
+      },
+      "content": {
+        "de": "Sie können Bürgergeld erhalten, wenn Sie erwerbsfähig und leistungsberechtigt sind und damit mindestens folgende Bedingungen erfüllen: Sie sind mindestens 15 Jahre alt und Sie haben die Altersgrenze für Ihre Rente noch nicht erreicht. Sie wohnen in Deutschland und haben hier Ihren Lebensmittelpunkt. Sie oder Mitglieder Ihrer Bedarfsgemeinschaft sind hilfebedürftig. Hilfebedürftig bedeutet, dass das Einkommen Ihrer Bedarfsgemeinschaft unter dem Existenzminimum liegt und Sie den Lebensunterhalt nicht ausreichend aus eigenen Mitteln bestreiten können. Erwerbsfähig bedeutet, dass keine Krankheit oder Behinderung Sie hindert, eine Arbeit aufzunehmen."
+      },
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/voraussetzungen-einkommen-vermoegen",
+      "topics": [
+        "financial_support",
+        "buergergeld",
+        "eligibility"
+      ],
+      "tags": [
+        "official_rule_source",
+        "eligibility"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T13:42:53.026421+00:00",
+      "lastSeen": "2026-03-16T13:42:53.026421+00:00",
+      "sourceUnavailable": false,
+      "eligibilityCriteria": {
+        "de": "Wer Anspruch auf Bürgergeld hat, welche Voraussetzungen es gibt und was Sie bei Einkommen und Vermögen beachten müssen."
+      },
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/voraussetzungen-einkommen-vermoegen",
+        "crawledAt": "2026-03-16T13:42:53.027420Z",
+        "crawlId": "benefits-seeded-1773668573",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "40fb46740262f9f2cfa710d52c84c1d7f546cb8244c75fed8f3bacfb6104b4fe"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T13:42:53.027420+00:00"
+      }
+    },
+    {
+      "id": "41aabbf4-4d7c-4e7b-af58-0f5815b31aa8",
+      "title": "Bedarfe: So setzt sich Bürgergeld zusammen",
+      "summary": {
+        "de": "Erfahren Sie, wie sich Ihr Bürgergeld berechnet und bei welchen weiteren Kosten das Jobcenter hilft. Jetzt informieren!"
+      },
+      "content": {
+        "de": "Bürgergeld bekommen Menschen, die hilfebedürftig sind. Das bedeutet, dass Sie Ihren Lebensunterhalt und den Ihrer Bedarfsgemeinschaft nicht selbst bestreiten können. Bürgergeld besteht aus verschiedenen Bausteinen. Diese heißen Bedarfe und bestimmen die Höhe des Bürgergeld. Welche Bedarfe in Ihrem Fall bewilligt wurden, teilt Ihnen das Jobcenter schriftlich mit. Dazu erhalten Sie einen sogenannten Bewilligungsbescheid. Damit sind die Kosten gemeint, die Ihren Lebensunterhalt sichern sollen. Dazu gehören vor allem … Für den Regelbedarf erhalten Sie einen monatlichen Pauschalbetrag. Die genauen Beträge finden Sie auf der Seite des Bundesministeriums für Arbeit und Soziales: Leistungen und Bedarfe im Bürgergeld Tipp: Tipp: Wie Sie den Regelbedarf verwenden, entscheiden Sie selbst. Sie sollten monatlich einen Betrag anzusparen – für den Fall, dass Sie zum Beispiel ein Haushaltsgerät ersetzen müssen. Angemessene Kosten für Miete, Heizung und Betriebskosten werden vom Jobcenter übernommen. Welche Kosten angemessen sind, kann örtlich unterschiedlich sein. Bitte fragen Sie bei Ihrem Jobcenter nach, welche Kosten in Ihrer Region als angemessen gelten."
+      },
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/zusammensetzung-bedarfe",
+      "topics": [
+        "financial_support",
+        "buergergeld",
+        "regelbedarf",
+        "mehrbedarf"
+      ],
+      "tags": [
+        "official_rule_source",
+        "benefit_amount"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T13:42:57.038197+00:00",
+      "lastSeen": "2026-03-16T13:42:57.038197+00:00",
+      "sourceUnavailable": false,
+      "eligibilityCriteria": {
+        "de": "Erfahren Sie, wie sich Ihr Bürgergeld berechnet und bei welchen weiteren Kosten das Jobcenter hilft. Jetzt informieren!"
+      },
+      "applicationSteps": [
+        {
+          "de": "Pruefen Sie die Hinweise auf der verlinkten Seite und stellen Sie den Antrag ueber die genannte Stelle oder den Onlinedienst."
+        }
+      ],
+      "benefitAmount": {
+        "de": "Die verlinkte Quelle enthaelt die aktuellen Hinweise zur Hoehe oder Zusammensetzung der Leistung."
+      },
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/zusammensetzung-bedarfe",
+        "crawledAt": "2026-03-16T13:42:57.038197Z",
+        "crawlId": "benefits-seeded-1773668577",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "2ec9210fa70761abb141a3f49a1aaf647c28fbb9ff99108f3c0dc9a961127c1f"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T13:42:57.038197+00:00"
+      }
+    },
+    {
+      "id": "785fb3e2-3f9b-43b1-9864-f8d3aaafe1b1",
+      "title": "Jobcenter: Unterstützung bei gesundheitlichen Problemen",
+      "summary": {
+        "de": "Bei körperlichen oder psychischen Erkrankungen oder einer Behinderung unterstützt Sie das Jobcenter durch zusätzliche Hilfe. Mehr erfahren!"
+      },
+      "content": {
+        "de": "Arbeitslosigkeit ist für die meisten Menschen eine belastende Erfahrung. Wenn sie lange andauert, kann sie die körperliche und seelische Gesundheit beeinflussen. Gesundheitliche Probleme wiederum können Auswirkungen darauf haben, ob es gelingt, sich erfolgreich auf eine Stelle zu bewerben oder eine Arbeit langfristig zu halten. In solchen Fällen begleiten wir Sie – durch professionelle Beratung und zusätzliche Unterstützung. Das gilt auch, wenn gesundheitliche Probleme oder Einschränkungen der Auslöser für Ihre Arbeitslosigkeit sind. Es spielt dabei keine Rolle, ob Sie eine körperliche Erkrankung, psychische Probleme oder Einschränkung oder eine Behinderung haben. Unser Ziel ist es, dass Sie trotz Erkrankung oder Behinderung neue Chancen im Berufsleben finden. Wir suchen für Sie nach Stellen, die zu Ihren Fähigkeiten und Möglichkeiten passen. Darüber hinaus vermitteln wir Ihnen zum Beispiel … Angebote, mit denen Sie eine Ausbildung, Umschulungen oder Anpassungsqualifizierungen absolvieren können, Coachings, mit denen Sie Ihre Chancen auf eine neue Stelle verbessern und sich persönlich weiterentwickeln oder Programme, mit denen Sie eine neue Tätigkeit ausprobieren können."
+      },
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/gesundheit",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T15:07:26.980024+00:00",
+      "lastSeen": "2026-03-16T15:07:26.980024+00:00",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/gesundheit",
+        "crawledAt": "2026-03-16T15:07:26.981026Z",
+        "crawlId": "benefits-seeded-1773673646",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "a5158bdcaf76dd58012aa86999cb51c59ab0906ad6ad6429b8cfea1a81936e92"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T15:07:26.981026+00:00"
+      }
+    },
+    {
+      "id": "fa4eb194-899c-4bb3-8e1c-c9f40864d6c5",
+      "title": "Jobcenter: Infos für Menschen aus dem Ausland",
+      "summary": {
+        "de": "Auch ausländische Arbeitslose und Geflüchtete können die Beratung und finanzielle Hilfe des Jobcenters nutzen. Hier finden Sie die wichtigsten Informationen."
+      },
+      "content": {
+        "de": "Bürgergeld ist eine staatliche Leistung für Menschen, die kein oder wenig Geld für ihren Lebensunterhalt zur Verfügung haben. Sie können in dieser Situation sein, wenn Sie keine Arbeit haben oder nur sehr wenig verdienen. Wir als Jobcenter sind für das Bürgergeld zuständig. Bürgergeld können Sie auch erhalten, wenn Sie nicht aus Deutschland kommen. Dafür müssen Sie aber bestimmte Voraussetzungen erfüllen. Welche das sind, erfahren Sie auf der Seite Finanzielle Unterstützung in Deutschland. Die wichtigsten Informationen zum Bürgergeld finden Sie gesammelt in der Kurzinformation zur Grundsicherung für Arbeitslose. Das Dokument können Sie am Ende der Seite auch in weiteren Sprachen herunterladen. Wenn Sie aus der Ukraine kommen, finden Sie weitere Informationen auf der Seite Hilfe für Geflüchtete aus der Ukraine. Wir unterstützen Sie nicht nur finanziell, sondern helfen Ihnen auch zum Beispiel in folgenden Situationen: Sie brauchen Hilfe, um in Deutschland eine passende Arbeit zu finden."
+      },
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/infos-fuer-menschen-aus-dem-ausland",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T15:07:28.968606+00:00",
+      "lastSeen": "2026-03-16T15:07:28.968606+00:00",
+      "sourceUnavailable": false,
+      "eligibilityCriteria": {
+        "de": "Auch ausländische Arbeitslose und Geflüchtete können die Beratung und finanzielle Hilfe des Jobcenters nutzen. Hier finden Sie die wichtigsten Informationen."
+      },
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/infos-fuer-menschen-aus-dem-ausland",
+        "crawledAt": "2026-03-16T15:07:28.969606Z",
+        "crawlId": "benefits-seeded-1773673648",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "fcba5e074d3831edf653ae070f99717fce6595a814c1b9632337008f0e5f9f36"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T15:07:28.969606+00:00"
+      }
+    },
+    {
+      "id": "82d61e23-e525-4328-81fe-5dbd65a25005",
+      "title": "Kooperationsplan mit dem Jobcenter",
+      "summary": {
+        "de": "Wenn Sie Bürgergeld erhalten, schließen Sie mit Jobcenter einen Kooperationsplan ab. Erfahren Sie, worum es dabei geht. Jetzt informieren!"
+      },
+      "content": {
+        "de": "Erhalten Sie Bürgergeld, erstellen Sie gemeinsam mit Ihrer Ansprechpartnerin beziehungsweise Ihrem Ansprechpartner einen Kooperationsplan. In diesem legen wir gemeinsam ein Ziel fest und beschreiben den Weg, wie wir dieses erreichen. Der Kooperationsplan ist dabei auf das Wesentliche reduziert und verständlich formuliert. Sie haben alles Notwendige kompakt zusammengefasst und können auf einen Blick sehen, welche Schritte gemeinsam unternommen werden. Er ist rechtlich unverbindlich und stellt eine vertrauensvolle und partnerschaftliche Zusammenarbeit in den Mittelpunkt. Es gibt möglicherweise Situationen, in denen Sie und Ihre Ansprechpartnerin beziehungsweise Ihr Ansprechpartner bei der Erstellung oder Verlängerung des Kooperationsplans unterschiedliche Vorstellungen haben. Kommt es dabei zu keiner gemeinsamen Lösung, besteht die Möglichkeit, ein Schlichtungsverfahren einzuleiten. Wenden Sie sich hierzu bitte an Ihre Ansprechpartnerin beziehungsweise Ihren Ansprechpartner im Jobcenter. Weitere Informationen zum Kooperationsplan und dem Schlichtungsverfahren finden Sie im Flyer (Download-Bereich). Wir sind für Sie da. Kommen Sie persönlich vorbei oder kontaktieren Sie uns."
+      },
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/kooperationsplan",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T15:07:21.382452+00:00",
+      "lastSeen": "2026-03-16T15:07:21.382452+00:00",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/kooperationsplan",
+        "crawledAt": "2026-03-16T15:07:21.383453Z",
+        "crawlId": "benefits-seeded-1773673641",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "7b42528395fa481d12727295e5a0e70632bbb25c003ae2e079986098d668c4a1"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T15:07:21.383453+00:00"
+      }
+    },
+    {
+      "id": "8db7919b-63db-4c73-a0b9-b4c14bb8c104",
+      "title": "Bürgergeld: Pflichten verstehen und beachten",
+      "summary": {
+        "de": "Änderungen mitteilen, Erreichbarkeit absprechen und Co.: Welche Pflichten Sie haben, wenn Sie Bürgergeld erhalten."
+      },
+      "content": {
+        "de": "Welche Änderungen wichtig sind und was Sie bei Nachweisen beachten müssen. Informieren Sie sich darüber, was Sie tun müssen, wenn Sie vorübergehend nicht erreichbar sind, weil Sie zum Beispiel verreisen wollen. Wie Sie das Jobcenter unterstützt, welche Pflichten Sie haben und was Minderungen bedeuten. Erfahren Sie, wie wir Ihre persönlichen Daten schützen. Wir sind für Sie da. Kommen Sie persönlich vorbei oder kontaktieren Sie uns. Bundesministerium für Arbeit und Soziales: Grundsicherung für Arbeitsuchende"
+      },
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/pflichten-verstehen-und-beachten",
+      "topics": [
+        "financial_support",
+        "buergergeld",
+        "pflichten"
+      ],
+      "tags": [
+        "official_rule_source",
+        "obligations"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T13:43:01.025928+00:00",
+      "lastSeen": "2026-03-16T13:43:01.025928+00:00",
+      "sourceUnavailable": false,
+      "requiredDocuments": [
+        {
+          "de": "Pruefen Sie auf der Quellseite, welche Unterlagen und Nachweise fuer Ihren Fall verlangt werden."
+        }
+      ],
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/pflichten-verstehen-und-beachten",
+        "crawledAt": "2026-03-16T13:43:01.025928Z",
+        "crawlId": "benefits-seeded-1773668581",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "214106ce267e5df24b17c8b2a0e7ecd111f56aa2303da3bfce529ecb670c0eac"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T13:43:01.025928+00:00"
+      }
+    },
+    {
+      "id": "083273b2-cb31-4c26-9d80-b9edbb53f2d7",
+      "title": "Den Hauptschulabschluss nachholen: Ihre Möglichkeiten",
+      "summary": {
+        "de": "Von Abendschule bis Externenprüfung: Viele Wege führen zum Hauptschulabschluss – Ihr Jobcenter unterstützt Sie dabei."
+      },
+      "content": {
+        "de": "Ein Hauptschulabschluss (auch Berufsbildungsreife genannt) ist in den meisten Betrieben eine Grundvoraussetzung für eine Ausbildung. Das heißt: Holen Sie den Abschluss nach, erhöhen Sie Ihre Chancen auf eine Ausbildung um ein Vielfaches. Wichtig ist, dass Sie einen Weg zum Abschluss wählen, der zu Ihrer Lebenssituation passt. Lassen Sie sich dazu von Ihrem Jobcenter beraten. Wir zeigen Ihnen auch finanzielle Unterstützungen auf, die währenddessen für Sie infrage kommen können. Im Folgenden finden Sie eine Übersicht über die unterschiedlichen Wege, wie Sie einen Hauptschulabschluss nachholen können. Sie können sich im Selbststudium auf den Hauptschulabschluss vorbereiten und dann die staatliche Externenprüfung (auch: Nichtschülerprüfung) an einer Bildungseinrichtung für Erwachsene ablegen. Informieren Sie sich über die Externenprüfung bei Ihrem Schulamt vor Ort. Dort erfahren Sie auch, welche Anmeldefristen Sie einhalten müssen, wenn Sie die Prüfung ablegen wollen. Nutzen Sie das Kursangebot zum Nachholen des Hauptschulabschlusses an einer Einrichtung der Erwachsenenbildung, wie zum Beispiel einer Volkshochschule (VHS). Diese Kurse müssen Sie selbst finanzieren. Tipp: Tipp: Empfehlenswert ist der Besuch einer Abendschule. Nur so stellen Sie sicher, dass Sie auch an dem Kurs teilnehmen können, wenn Sie tagsüber arbeiten. In einigen Bundesländern vermitteln Berufsfachschulen fachbezogenes Wissen in einem oder mehreren anerkannten Ausbildungsberufen. Bei einigen Berufsfachschulen können Sie gleichzeitig den Hauptschulabschluss erwerben."
+      },
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/schulabschluss-nachholen",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T15:07:30.977372+00:00",
+      "lastSeen": "2026-03-16T15:07:30.977372+00:00",
+      "sourceUnavailable": false,
+      "eligibilityCriteria": {
+        "de": "Von Abendschule bis Externenprüfung: Viele Wege führen zum Hauptschulabschluss – Ihr Jobcenter unterstützt Sie dabei."
+      },
+      "benefitAmount": {
+        "de": "Die verlinkte Quelle enthaelt die aktuellen Hinweise zur Hoehe oder Zusammensetzung der Leistung."
+      },
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/schulabschluss-nachholen",
+        "crawledAt": "2026-03-16T15:07:30.978369Z",
+        "crawlId": "benefits-seeded-1773673650",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "fefb79bc828edc06c44d40d33ae8e0422a35ccc73298d669b26ce5d54dba1dfe"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T15:07:30.978369+00:00"
+      }
+    },
+    {
+      "id": "95d0bc66-64b4-4e76-985f-09f49b8a832e",
+      "title": "Termin beim Jobcenter",
+      "summary": {
+        "de": "Erfahren Sie, um was es bei den Terminen im Jobcenter geht, wie Sie ablaufen und was Sie tun müssen, wenn Sie nicht kommen können. Jetzt informieren!"
+      },
+      "content": {
+        "de": "Termine beim Jobcenter haben eine sogenannte Meldepflicht. Das bedeutet: Sie müssen zu diesen Terminen erscheinen. Das gehört zu Ihren Pflichten, wenn Sie Bürgergeld erhalten. ob Sie die Voraussetzungen für Bürgergeld oder andere finanzielle Unterstützung erfüllen, dass es noch Fragen zu einem Antrag gibt oder Nachweise fehlen, wie Sie sich Ihre berufliche Zukunft vorstellen und wie wir gemeinsam Ihre Jobchancen verbessern, welche Voraussetzungen Sie für das Einstiegsgeld für eine Beschäftigung oder das Einstiegsgeld für eine Selbstständigkeit erfüllen müssen oder wie Sie eine anstehende Weiterbildung oder Umschulung vorbereiten."
+      },
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/termin-jobcenter",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T15:07:18.978796+00:00",
+      "lastSeen": "2026-03-16T15:07:18.978796+00:00",
+      "sourceUnavailable": false,
+      "eligibilityCriteria": {
+        "de": "Erfahren Sie, um was es bei den Terminen im Jobcenter geht, wie Sie ablaufen und was Sie tun müssen, wenn Sie nicht kommen können. Jetzt informieren!"
+      },
+      "applicationSteps": [
+        {
+          "de": "Pruefen Sie die Hinweise auf der verlinkten Seite und stellen Sie den Antrag ueber die genannte Stelle oder den Onlinedienst."
+        }
+      ],
+      "requiredDocuments": [
+        {
+          "de": "Pruefen Sie auf der Quellseite, welche Unterlagen und Nachweise fuer Ihren Fall verlangt werden."
+        }
+      ],
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/termin-jobcenter",
+        "crawledAt": "2026-03-16T15:07:18.981063Z",
+        "crawlId": "benefits-seeded-1773673638",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "f5c3c3431ff9b4d1062eb8d0ee7f8bcc61b4ee461a744f42802afb85c9a1ca5f"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T15:07:18.981063+00:00"
+      }
+    },
+    {
+      "id": "0d1484d8-90f9-4af4-8ca0-d11b81252d28",
+      "title": "Jobcenter: Unterstützung für Familien",
+      "summary": {
+        "de": "Sie und Ihre Familie benötigen Unterstützung – wir sind für Sie da: mit Beratung und konkreten Hilfsangeboten."
+      },
+      "content": {
+        "de": "Als Kundin oder Kunde des Jobcenters können Sie auf eine umfassende Beratung und Unterstützung bauen. Dabei haben wir auch Ihre familiären Bedürfnisse im Blick. Wir unterstützen Sie nicht nur finanziell, sondern beraten Sie und bringen Sie mit Netzwerkpartnerinnen und -partnern zusammen, die Ihnen bei Problemen und Fragen rund um Ihre Familie weiterhelfen. Sprechen Sie mit Ihrer Integrationsfachkraft zum Beispiel über … Jobangebote, die flexible Arbeitszeiten ermöglichen, eine Ausbildung, Qualifizierung oder Umschulung in Teilzeit oder Coaching-Angebote, die sich speziell an Alleinerziehende richten. Vereinbaren Sie einen persönlichen oder telefonischen Termin mit uns. Welches Jobcenter für Sie zuständig ist, finden Sie mit der Dienststellen-Suche am Ende dieser Seite heraus."
+      },
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/unterstuetzung-fuer-familien",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T15:07:24.978597+00:00",
+      "lastSeen": "2026-03-16T15:07:24.978597+00:00",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/unterstuetzung-fuer-familien",
+        "crawledAt": "2026-03-16T15:07:24.979597Z",
+        "crawlId": "benefits-seeded-1773673644",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "2e1c4e8590955c726174480cdb38b9763d5b14b903e5d8b6207f0a060a3d6fdb"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T15:07:24.979597+00:00"
+      }
+    },
+    {
+      "id": "0454c2e9-e29f-433a-b5a4-e345b4434b68",
+      "title": "Bürgergeld: Wohnen und Miete",
+      "summary": {
+        "de": "Erfahren sie hier, welche Kosten das Jobcenter für Miete, Heizung und Co. übernimmt und was Sie beachten müssen."
+      },
+      "content": {
+        "de": "Wenn Sie Bürgergeld beziehen, übernimmt Ihr Jobcenter die Kosten für Unterkunft und Heizung in angemessener Höhe. Welche Kosten angemessen sind, erfahren Sie bei Ihrem Jobcenter. Ihr Jobcenter achtet darauf, dass die Mietkosten und die Größe Ihrer Unterkunft bestimmte Richtwerte nicht überschreiten. Ist Ihre Wohnung nicht angemessen, müssen Sie die Kosten möglichst senken. Das kann zum Beispiel bedeuten, dass Sie in eine günstigere Wohnung umziehen oder ein Zimmer untervermieten. Wichtig: Wichtig: Unterschreiben Sie den Mietvertrag für Ihre neue Unterkunft erst, nachdem Sie sich mit Ihrem (neu) zuständigen Jobcenter abgestimmt haben. Es muss Ihnen zusichern, dass es die Kosten anerkennt. Lassen Sie sich von der Leistungsabteilung Ihres Jobcenters rechtzeitig beraten. Im ersten Jahr des Bezuges von Bürgergeld wird die Angemessenheit der Kosten der Unterkunft nicht geprüft (Karenzzeit). Monate ohne Leistungsbezug in diesem Zeitraum verlängern die Karenzzeit. Wurden in der Vergangenheit nur die angemessenen Kosten übernommen, gilt jedoch Folgendes: Es werden weiterhin ausschließlich die angemessenen Unterkunftskosten berücksichtigt."
+      },
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/wohnen",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T15:07:16.960566+00:00",
+      "lastSeen": "2026-03-16T15:07:16.960566+00:00",
+      "sourceUnavailable": false,
+      "benefitAmount": {
+        "de": "Die verlinkte Quelle enthaelt die aktuellen Hinweise zur Hoehe oder Zusammensetzung der Leistung."
+      },
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/wohnen",
+        "crawledAt": "2026-03-16T15:07:16.961573Z",
+        "crawlId": "benefits-seeded-1773673636",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "a57045c68eeac0314e4b52384e2c86fae5d2e53a9e9d19a68b85a8a095957bd0"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T15:07:16.961573+00:00"
+      }
+    },
+    {
+      "id": "d1e12a82-3d83-4f38-8f2d-c1fc11aba996",
+      "title": "Familie und Kinder",
+      "summary": {
+        "de": "Mit Kindergeld, Kinderzuschlag und weiteren finanziellen Hilfen unterstützt Sie die Familienkasse der Bundesagentur für Arbeit. Jetzt online beantragen!"
+      },
+      "content": {
+        "de": "Ihr Profil im Online-Konto der Bundesagentur für Arbeit ist Ihr digitaler Zugang zur Familienkasse. Mit Ihrem Profil können Sie vieles direkt online erledigen – schnell, rund um die Uhr und von überall. Beantragen Sie Kindergeld für Ihr neugeborenes Kind. Beantragen Sie Kindergeld für Ihr volljähriges Kind. Ändern Sie Ihre persönlichen Daten (zum Beispiel Anschrift, Bankverbindung) oder laden Sie Unterlagen hoch. Beantragen Sie online Kinderzuschlag für Ihr Kind. Kindergeld erhalten Sie für Kinder unter 18 Jahren, unter bestimmten Voraussetzungen auch länger. Informieren Sie sich, wie Sie Kindergeld beantragen und in welcher Höhe es ausgezahlt wird."
+      },
+      "url": "https://www.arbeitsagentur.de/familie-und-kinder",
+      "topics": [
+        "employment",
+        "financial_support",
+        "benefits"
+      ],
+      "tags": [
+        "application_required",
+        "public_service",
+        "benefit"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T15:07:36.962872+00:00",
+      "lastSeen": "2026-03-16T15:07:36.962872+00:00",
+      "sourceUnavailable": false,
+      "eligibilityCriteria": {
+        "de": "Mit Kindergeld, Kinderzuschlag und weiteren finanziellen Hilfen unterstützt Sie die Familienkasse der Bundesagentur für Arbeit. Jetzt online beantragen!"
+      },
+      "applicationSteps": [
+        {
+          "de": "Pruefen Sie die Hinweise auf der verlinkten Seite und stellen Sie den Antrag ueber die genannte Stelle oder den Onlinedienst."
+        }
+      ],
+      "benefitAmount": {
+        "de": "Die verlinkte Quelle enthaelt die aktuellen Hinweise zur Hoehe oder Zusammensetzung der Leistung."
+      },
+      "requiredDocuments": [
+        {
+          "de": "Pruefen Sie auf der Quellseite, welche Unterlagen und Nachweise fuer Ihren Fall verlangt werden."
+        }
+      ],
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/familie-und-kinder",
+        "crawledAt": "2026-03-16T15:07:36.963872Z",
+        "crawlId": "benefits-seeded-1773673656",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "7239bdc10388d38dbb6c2f165b45a1381f56ca7194aef321ffd55ad51ded3b5e"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T15:07:36.963872+00:00"
+      }
+    },
+    {
+      "id": "f20b9ffa-c79e-49ef-9e63-d260b865af25",
+      "title": "Kinderzuschlag verstehen",
+      "summary": {
+        "de": "Kinderzuschlag (auch: Kindergeldzuschlag): Voraussetzungen erfahren, Anspruch berechnen und Antrag stellen. Jetzt informieren!"
+      },
+      "content": {
+        "de": "Der KiZ-Lotse: Anspruch auf Kinderzuschlag ermitteln Zu viel erhaltenes Kindergeld oder Kinderzuschlag zurückzahlen Wir sind für Sie da. Kommen Sie persönlich vorbei oder kontaktieren Sie uns. Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend: Informationen zu Familienleistungen Die wichtigsten Merkblätter, Formulare und Anträge der Familienkasse stehen Ihnen zum Download zur Verfügung. Hinweis zur Verwendung von Bildern: Weitere Informationen zu Copyright und Markenschutz finden Sie in unserem Impressum."
+      },
+      "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen",
+      "topics": [
+        "financial_support",
+        "kinderzuschlag"
+      ],
+      "tags": [
+        "official_rule_source",
+        "application_required"
+      ],
+      "targetGroups": [
+        "families",
+        "parents"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T13:43:07.013051+00:00",
+      "lastSeen": "2026-03-16T13:43:07.013051+00:00",
+      "sourceUnavailable": false,
+      "eligibilityCriteria": {
+        "de": "Kinderzuschlag (auch: Kindergeldzuschlag): Voraussetzungen erfahren, Anspruch berechnen und Antrag stellen. Jetzt informieren!"
+      },
+      "applicationSteps": [
+        {
+          "de": "Pruefen Sie die Hinweise auf der verlinkten Seite und stellen Sie den Antrag ueber die genannte Stelle oder den Onlinedienst."
+        }
+      ],
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen",
+        "crawledAt": "2026-03-16T13:43:07.013051Z",
+        "crawlId": "benefits-seeded-1773668587",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "069f156297aed47a84ce0c9177fff8d4426a39b1fa7e1ea5d976074dc9c0c39e"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T13:43:07.013051+00:00"
+      }
+    },
+    {
+      "id": "a89c337d-f370-4eb1-9ca7-11ca27aea334",
+      "title": "Kinderzuschlag: Anspruch, Höhe, Dauer",
+      "summary": {
+        "de": "Kinderzuschlag (auch: Kindergeldzuschlag): Wer Kinderzuschlag bekommt, wie Sie den Antrag stellen und wie lange Sie Kinderzuschlag erhalten. Mehr erfahren!"
+      },
+      "content": {
+        "de": "Wenn das Einkommen nicht für die ganze Familie reicht, können Eltern zusätzlich zum Kindergeld den Kinderzuschlag erhalten. Der Antrag auf Kinderzuschlag muss jedoch gesondert bei der Familienkasse gestellt werden. Sie erhalten Kinderzuschlag für 6 Monate. Ist der Bewilligungszeitraum abgelaufen, müssen Sie Kinderzuschlag neu beantragen. Sie haben Anspruch auf Kinderzuschlag, wenn Sie bestimmte Voraussetzungen erfüllen. Ob Sie Kinderzuschlag erhalten, hängt davon ab, wie viel Einkommen und erhebliches Vermögen Sie, Ihr Partner beziehungsweise Ihre Partnerin und Ihr Kind haben. Erhalten Sie Kinderzuschlag, müssen Sie die Familienkasse über Änderungen Ihrer persönlichen Verhältnisse und die Ihrer Familie informieren. positiv: Ihr Kind lebt in Ihrem Haushalt, ist unter 25 Jahre alt und nicht verheiratet beziehungsweise nicht in einer eingetragenen Lebenspartnerschaft. positiv: Sie erhalten Kindergeld (oder eine vergleichbare Leistung) für Ihr Kind."
+      },
+      "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kinderzuschlag-anspruch-hoehe-dauer",
+      "topics": [
+        "financial_support",
+        "kinderzuschlag",
+        "eligibility"
+      ],
+      "tags": [
+        "official_rule_source",
+        "benefit_amount"
+      ],
+      "targetGroups": [
+        "families",
+        "parents"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T13:43:09.015887+00:00",
+      "lastSeen": "2026-03-16T13:43:09.015887+00:00",
+      "sourceUnavailable": false,
+      "eligibilityCriteria": {
+        "de": "Kinderzuschlag (auch: Kindergeldzuschlag): Wer Kinderzuschlag bekommt, wie Sie den Antrag stellen und wie lange Sie Kinderzuschlag erhalten. Mehr erfahren!"
+      },
+      "applicationSteps": [
+        {
+          "de": "Pruefen Sie die Hinweise auf der verlinkten Seite und stellen Sie den Antrag ueber die genannte Stelle oder den Onlinedienst."
+        }
+      ],
+      "benefitAmount": {
+        "de": "Die verlinkte Quelle enthaelt die aktuellen Hinweise zur Hoehe oder Zusammensetzung der Leistung."
+      },
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kinderzuschlag-anspruch-hoehe-dauer",
+        "crawledAt": "2026-03-16T13:43:09.015887Z",
+        "crawlId": "benefits-seeded-1773668589",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "61ac3b8b2978b104f485cbcf515e321cdd7751abaa70ea106a32f9eaa15e16a8"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T13:43:09.015887+00:00"
+      }
+    },
+    {
       "id": "ab6ecb16-b9df-4654-bde8-94a02f0d3302",
       "title": "Kurzarbeitergeld",
       "translations": {
@@ -113,53 +1146,291 @@
       }
     },
     {
-      "id": "a6f576ba-c5f0-4ff2-8f63-aa56abbb56fd",
-      "title": "Familie und Kinder (Leistungsüberblick)",
-      "translations": {
-        "de-LEICHT": {
-          "title": "Hilfe für Familien",
-          "timestamp": "2026-03-01T20:10:00Z",
-          "provenance": {
-            "source": "https://www.arbeitsagentur.de/familie-und-kinder",
-            "crawledAt": "2026-03-01T20:10:00Z"
-          },
-          "method": "human",
-          "reviewed": true
-        }
-      },
+      "id": "eb5b494f-8c92-4023-8e2c-5f7586523a47",
+      "title": "Begriffserklärung: Aufstocker",
       "summary": {
-        "de": "Die Seite bietet einen zentralen Einstieg zu Kindergeld, Kinderzuschlag und weiteren Unterstützungsangeboten für Familien."
+        "de": "Aufstocken und Ergänzen: Was es bedeutet und was der Unterschied ist. Mehr erfahren!"
       },
       "content": {
-        "de": "Sie enthält Schnellzugriffe auf eServices, Leistungsinformationen und weiterführende Hilfen für Eltern. Zusätzlich verweist sie auf regionale Familienkassen und ergänzende staatliche Unterstützungsangebote."
+        "de": "In manchen Fällen reicht Arbeitslosengeld nicht aus, um den Lebensunterhalt zu bestreiten. In solchen Fällen können Arbeitslose zusätzlich Bürgergeld beziehen. Die Bundesagentur für Arbeit (BA) bezeichnet arbeitslose Erwerbsfähige, die zur Existenzsicherung beide Leistungen beziehen, als Aufstocker. Die alltagssprachliche Verwendung dieses Begriffs weicht davon ab: Vielfach werden Erwerbstätige „Aufstocker“ genannt, wenn ihr Lohn nicht für den Lebensunterhalt reicht und sie darum zusätzlich Bürgergeld erhalten. Informieren Sie sich, unter welchen Voraussetzungen Sie Ihr zu geringes Einkommen mit Bürgergeld ergänzen können. Die BA bezeichnet diese Leistungsempfänger als Ergänzer oder erwerbstätige erwerbsfähige Leistungsberechtigte. Hinweis zur Verwendung von Bildern: Weitere Informationen zu Copyright und Markenschutz finden Sie in unserem Impressum."
       },
-      "url": "https://www.arbeitsagentur.de/familie-und-kinder",
+      "url": "https://www.arbeitsagentur.de/lexikon/aufstocker",
       "topics": [
         "financial_support",
-        "family"
+        "aufstocker",
+        "glossary"
       ],
       "tags": [
-        "application_required",
-        "means_tested"
+        "official_glossary_source",
+        "glossary"
       ],
       "targetGroups": [
-        "families",
-        "single_parents"
+        "low_income_workers",
+        "families"
       ],
       "status": "active",
-      "firstSeen": "2026-03-01T20:10:00Z",
-      "lastSeen": "2026-03-01T20:10:00Z",
+      "firstSeen": "2026-03-16T13:43:04.987965+00:00",
+      "lastSeen": "2026-03-16T13:43:04.987965+00:00",
       "sourceUnavailable": false,
+      "eligibilityCriteria": {
+        "de": "Aufstocken und Ergänzen: Was es bedeutet und was der Unterschied ist. Mehr erfahren!"
+      },
       "provenance": {
-        "source": "https://www.arbeitsagentur.de/familie-und-kinder",
-        "crawlId": "manual-curation-20260301-realdata-v1",
-        "checksum": "8af7ad26c31cda2283dc396969745688f58f74e826de8822d7405ea3d5f92931",
-        "crawledAt": "2026-03-01T20:10:00Z"
+        "source": "https://www.arbeitsagentur.de/lexikon/aufstocker",
+        "crawledAt": "2026-03-16T13:43:04.989012Z",
+        "crawlId": "benefits-seeded-1773668584",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "2ca967687a62b5b6c1885e1343c3cba2eabc7c927ae6ea9b89671461f9c782e8"
       },
       "qualityScores": {
-        "iqs": 79.8,
-        "ais": 51.2,
-        "computedAt": "2026-03-01T20:10:00Z"
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T13:43:04.989012+00:00"
+      }
+    },
+    {
+      "id": "0d93f2a5-e468-432c-8b1b-78aa56f675f9",
+      "title": "Begriffserklärung: Bedarfsgemeinschaft",
+      "summary": {
+        "de": "Der Begriff „Bedarfsgemeinschaft“ spielt eine wichtige Rolle in der Grundsicherung und hat Einfluss auf die Höhe der Leistungen. Mehr erfahren!"
+      },
+      "content": {
+        "de": "Der Rechtsbegriff „Bedarfsgemeinschaft“ spielt beim Bezug von Bürgergeld eine wichtige Rolle. Obwohl er das Wort „Gemeinschaft“ enthält, gilt: Die Antragsstellerin oder der Antragssteller allein wird schon als Bedarfsgemeinschaft bezeichnet. Lebt sie oder er mit anderen Menschen zusammen und übernehmen alle eine wechselseitige Verantwortung füreinander, bilden sie gemeinsam die Bedarfsgemeinschaft. Der Rechtsbegriff wird darum in der Regel angewandt auf... eingetragene gleichgeschlechtliche Lebenspartnerinnen oder Lebenspartner, die nicht dauerhaft getrennt leben, oder Personen in einer Verantwortungs- und Einstehensgemeinschaft („eheähnliche Gemeinschaft“). Zur Bedarfsgemeinschaft gehören auch die Kinder, die im Haushalt leben und jünger als 25 Jahre sind. Voraussetzung: Sie sind unverheiratet, erwerbsfähig und können ihren Lebensunterhalt nicht aus eigenem Einkommen bestreiten. Zum Einkommen von Kindern zählen zum Beispiel Kindergeld oder Unterhaltszahlungen. Umgekehrt gilt: Beantragt ein unverheiratetes erwerbsfähiges Kind, das mindestens 15, aber noch keine 25 Jahre alt ist, Leistungen nach dem SGB II, gehören auch die im Haushalt lebenden Eltern oder Elternteile zur Bedarfsgemeinschaft."
+      },
+      "url": "https://www.arbeitsagentur.de/lexikon/bedarfsgemeinschaft",
+      "topics": [
+        "financial_support",
+        "bedarfsgemeinschaft",
+        "glossary"
+      ],
+      "tags": [
+        "official_glossary_source",
+        "glossary"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T13:42:59.019881+00:00",
+      "lastSeen": "2026-03-16T13:42:59.019881+00:00",
+      "sourceUnavailable": false,
+      "eligibilityCriteria": {
+        "de": "Der Begriff „Bedarfsgemeinschaft“ spielt eine wichtige Rolle in der Grundsicherung und hat Einfluss auf die Höhe der Leistungen. Mehr erfahren!"
+      },
+      "applicationSteps": [
+        {
+          "de": "Pruefen Sie die Hinweise auf der verlinkten Seite und stellen Sie den Antrag ueber die genannte Stelle oder den Onlinedienst."
+        }
+      ],
+      "benefitAmount": {
+        "de": "Die verlinkte Quelle enthaelt die aktuellen Hinweise zur Hoehe oder Zusammensetzung der Leistung."
+      },
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/lexikon/bedarfsgemeinschaft",
+        "crawledAt": "2026-03-16T13:42:59.019881Z",
+        "crawlId": "benefits-seeded-1773668579",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "990c9e581ac66166717138e5c63f014352137be9dab632ba768a1f5d4dc620dc"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T13:42:59.019881+00:00"
+      }
+    },
+    {
+      "id": "3a80a294-54fd-40fe-9fff-aef900e79301",
+      "title": "Anspruchsvoraussetzungen",
+      "summary": {
+        "de": "Das Bürgergeld wird von der neuen Grundsicherung abgelöst. Die neuen Regelungen treten nahezu vollständig zum 1. Juli in Kraft. Infos zum neuen Grundsicherungsgeld erhalten Sie hier. Ansonsten finden Sie Informationen zum bestehenden Bürgergeld."
+      },
+      "content": {
+        "de": "die trotz intensiver Bemühungen keinen Arbeitsplatz finden können oder mit ihrer Erwerbstätigkeit ein nicht bedarfsdeckendes Einkommen erzielen, haben bei Hilfebedürftigkeit Anspruch auf Leistungen zur Sicherung des Lebensunterhalts als Bürgergeld. Dieses ist auch als ergänzende (aufstockende) Leistung zum Einkommen zu gewähren."
+      },
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Anspruchsvoraussetzungen/anspruchsvoraussetzungen.html",
+      "topics": [
+        "financial_support",
+        "buergergeld",
+        "eligibility"
+      ],
+      "tags": [
+        "official_rule_source",
+        "eligibility"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T13:43:13.628668+00:00",
+      "lastSeen": "2026-03-16T13:43:13.628668+00:00",
+      "sourceUnavailable": false,
+      "eligibilityCriteria": {
+        "de": "Das Bürgergeld wird von der neuen Grundsicherung abgelöst. Die neuen Regelungen treten nahezu vollständig zum 1. Juli in Kraft. Infos zum neuen Grundsicherungsgeld erhalten Sie hier. Ansonsten finden Sie Informationen zum bestehenden Bürgergeld."
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Anspruchsvoraussetzungen/anspruchsvoraussetzungen.html",
+        "crawledAt": "2026-03-16T13:43:13.628668Z",
+        "crawlId": "benefits-seeded-1773668593",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "6af7944693ee300fcc5c6d006f8dc1363e274714bef2bfaddac3fb88c2664020"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T13:43:13.628668+00:00"
+      }
+    },
+    {
+      "id": "57087be1-4454-4912-a64b-18e600fd6260",
+      "title": "Leistungen und Bedarfe im Bürgergeld",
+      "summary": {
+        "de": "Das Bürgergeld ist Teil der Leistungen zur Sicherung des Lebensunterhalts und damit Teil der Leistungen zur Sicherung eines menschenwürdigen Existenzminimums."
+      },
+      "content": {
+        "de": "Das Bürgergeld wird von der neuen Grundsicherung abgelöst. Die neuen Regelungen treten nahezu vollständig zum 1. Juli in Kraft. Infos zum neuen Grundsicherungsgeld erhalten Sie hier. Ansonsten finden Sie Informationen zum bestehenden Bürgergeld. Bürgergeld: Das Bürgergeld sichert den Lebensunterhalt von Menschen, die nicht selbst für sich sorgen können. Regelbedarf: Die Höhe des Bürgergeldes basiert auf Regelsätzen. Zusätzlich werden Mehrbedarfe und Wohnkosten berücksichtigt. Ziel: Das Bürgergeld soll die berufliche Eingliederung und Weiterbildung fördern, um die Teilhabe am Arbeitsmarkt zu verbessern. Das Bürgergeld ist Teil der Leistungen zur Sicherung des Lebensunterhalts und damit Teil der Leistungen zur Sicherung eines menschenwürdigen Existenzminimums. Das Bürgergeld umfasst neben dem Regelbedarf, der in Höhe der so genannten regelbedarfsrelevanten Bedarfe berücksichtigt wird, auch die angemessenen Bedarfe für Unterkunft und Heizung, soweit diese Bedarfe nicht durch Einkommen oder Vermögen unter Beachtung von Absetzbeträgen und Schonvermögen gedeckt sind. Hinzu kommen gegebenenfalls Mehrbedarfe, die für besondere Lebenslagen wie Alleinerziehung, Schwangerschaft oder bei aus medizinischen Gründen erforderlicher kostenaufwändiger Ernährung berücksichtigt werden. Der Regelbedarf zur Sicherung des Lebensunterhalts umfasst insbesondere Bedarfe für Ernährung, Kleidung, Körperpflege, Hausrat, Haushaltsenergie ohne die auf die Heizung und Erzeugung von Warmwasser entfallenen Anteile sowie Bedarfe zur Teilnahme am sozialen und kulturellen Leben in der Gemeinschaft (das sog. sozio-kulturelle Existenzminimum). Der Regelbedarf wird als monatlicher Pauschalbetrag berücksichtigt. Über die Verwendung der zur Deckung des Regelbedarfs erbrachten Leistungen (Teil des Bürgergeldes) entscheidet der Bürgergeldberechtigte eigenverantwortlich. Neben regelmäßig anfallenden Bedarfen u.a. für Lebensmittel sind auch unregelmäßig anfallende Bedarfe wie z.B. für Bekleidung aus den entsprechenden Leistungen zu decken. Die Höhe der maßgebenden Regelbedarfe ist der nachstehenden Tabelle zu entnehmen."
+      },
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Leistungen-und-Bedarfe-im-Buergergeld/leistungen-und-bedarfe-im-buergergeld.html",
+      "topics": [
+        "financial_support",
+        "buergergeld",
+        "regelbedarf",
+        "mehrbedarf"
+      ],
+      "tags": [
+        "official_background_source",
+        "benefit_amount"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T13:43:15.462736+00:00",
+      "lastSeen": "2026-03-16T13:43:15.462736+00:00",
+      "sourceUnavailable": false,
+      "eligibilityCriteria": {
+        "de": "Das Bürgergeld ist Teil der Leistungen zur Sicherung des Lebensunterhalts und damit Teil der Leistungen zur Sicherung eines menschenwürdigen Existenzminimums."
+      },
+      "benefitAmount": {
+        "de": "Die verlinkte Quelle enthaelt die aktuellen Hinweise zur Hoehe oder Zusammensetzung der Leistung."
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Leistungen-und-Bedarfe-im-Buergergeld/leistungen-und-bedarfe-im-buergergeld.html",
+        "crawledAt": "2026-03-16T13:43:15.462736Z",
+        "crawlId": "benefits-seeded-1773668595",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "503ccc8ee49910dc8fdb2cf7a4f4e305601c23519782666abd547bf4365ea13e"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T13:43:15.464240+00:00"
+      }
+    },
+    {
+      "id": "9eeec337-a70e-49e2-8db7-c715061a830b",
+      "title": "Grundsicherung / Bürgergeld",
+      "summary": {
+        "de": "Das Bürgergeld soll Menschen, die erwerbsfähig und leistungsberechtigt sind, in Beschäftigung bringen und ihnen den Lebensunterhalt sichern. Hier finden Sie aktuelle Neuigkeiten und Infos zu diesem Thema."
+      },
+      "content": {
+        "de": "Das Bürgergeld wird von der neuen Grundsicherung abgelöst. Die neuen Regelungen treten nahezu vollständig zum 1. Juli in Kraft. Infos zum neuen Grundsicherungsgeld erhalten Sie hier. Ansonsten finden Sie Informationen zum bestehenden Bürgergeld. Am 5. März 2026 hat d er Deutsche Bundestag mehrheitlich dem Gesetz zur Umgestaltung der Grundsicherung für Arbeitsuchende zugestimmt – dem 13. Gesetz zur Änderung des Zweiten Buches Sozialgesetzbuch und anderer Gesetze. Rede von Bundesministerin Bärbel Bas zur 1. Lesung Grundsicherung im Plenum am 15. Januar 2026. Das Bundeskabinett hat 17. Dezember 2025 den Gesetzentwurf zur Umgestaltung der Grundsicherung für Arbeitsuchende beschlossen. Die Bundesregierung setzt mit dem 13. SGB II-Änderungsgesetz den entsprechenden Auftrag aus dem Koalitionsvertrag um. Bundesagentur für Arbeit: Unterstützung durch Bürgergeld"
+      },
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/grundsicherung-buergergeld.html",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "official_background_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T13:43:12.083819+00:00",
+      "lastSeen": "2026-03-16T13:43:12.083819+00:00",
+      "sourceUnavailable": false,
+      "eligibilityCriteria": {
+        "de": "Das Bürgergeld soll Menschen, die erwerbsfähig und leistungsberechtigt sind, in Beschäftigung bringen und ihnen den Lebensunterhalt sichern. Hier finden Sie aktuelle Neuigkeiten und Infos zu diesem Thema."
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/grundsicherung-buergergeld.html",
+        "crawledAt": "2026-03-16T13:43:12.083819Z",
+        "crawlId": "benefits-seeded-1773668592",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "c6e3ea4d0247e668f4992c03695d0712c174ffea85d869a08481c70d30a9d94e"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T13:43:12.083819+00:00"
+      }
+    },
+    {
+      "id": "3796a0aa-6057-4072-8c9a-cf40d666342d",
+      "title": "Soziale Sicherheit",
+      "summary": {
+        "de": "Allen Menschen in Deutschland soll es gut gehen. Und alle sollen sich sicher fühlen. Der Staat hilft deswegen allen Menschen. Der Staat hilft Ihnen mit Geld. Und mit vielen anderen Hilfen."
+      },
+      "content": {
+        "de": "Sie sind auf der Internet-Seite vom Bundes-Ministerium für Arbeit und Soziales. Hier finden Sie Infos in Leichter Sprache. Allen Menschen in Deutschland soll es gut gehen. Und alle sollen sich sicher fühlen. Egal, was in ihrem Leben gerade passiert. Auch Sie persönlich bekommen im Notfall Unterstützung. Sie bekommen in diesen Situationen Geld. Aber auch viele andere Hilfen. Damit Sie keine Sorgen haben müssen. Unten sehen Sie Fragen zur sozialen Sicherheit. Die Antworten sieht man nicht. Sie wollen die Antwort lesen? Klicken Sie auf die Frage. Dann kommt die Antwort. Manche Menschen haben zu wenig Geld für ihr Leben. Sie haben auch keine Ersparnisse. Lebenshilfe für Menschen mit geistiger Behinderung Bremen e.V., Illustrator Stefan Albers Dafür gibt es viele Gründe. Zum Beispiel:"
+      },
+      "url": "https://www.bmas.de/DE/Leichte-Sprache/Soziale-Sicherheit/soziale-sicherheit.html",
+      "topics": [
+        "financial_support",
+        "leichte_sprache_soziale_sicherheit"
+      ],
+      "tags": [
+        "official_light_language_source",
+        "light_language"
+      ],
+      "targetGroups": [
+        "general_public",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-03-16T13:43:17.537112+00:00",
+      "lastSeen": "2026-03-16T13:43:17.537112+00:00",
+      "sourceUnavailable": false,
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Leichte-Sprache/Soziale-Sicherheit/soziale-sicherheit.html",
+        "crawledAt": "2026-03-16T13:43:17.537112Z",
+        "crawlId": "benefits-seeded-1773668597",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "16fb18be6aa7c1e25d82c64d69c707e1f40ca9d8b69d6426bfa052c614e1ecfb"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-03-16T13:43:17.538673+00:00"
       }
     },
     {
@@ -262,8 +1533,5 @@
         "computedAt": "2026-03-01T20:10:00Z"
       }
     }
-  ],
-  "_todo": [
-    "TODO: Validate against benefits schema before import"
   ]
 }

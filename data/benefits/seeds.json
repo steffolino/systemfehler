@@ -1,0 +1,131 @@
+{
+  "version": "0.1.0",
+  "domain": "benefits",
+  "_meta": {
+    "note": "Curated high-signal benefit seeds for topic-driven crawling",
+    "maintainedBy": "codex",
+    "updatedAt": "2026-03-16"
+  },
+  "seeds": [
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld",
+      "label": "Arbeitsagentur Buergergeld Ueberblick",
+      "source": "arbeitsagentur",
+      "topics": ["financial_support", "buergergeld"],
+      "tags": ["application_required", "official_rule_source"],
+      "targetGroups": ["unemployed", "families"]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/voraussetzungen-einkommen-vermoegen",
+      "label": "Buergergeld Voraussetzungen",
+      "source": "arbeitsagentur",
+      "topics": ["financial_support", "buergergeld", "eligibility"],
+      "tags": ["official_rule_source", "eligibility"],
+      "targetGroups": ["unemployed", "families"]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/antrag-bescheid",
+      "label": "Buergergeld Antrag und Bescheid",
+      "source": "arbeitsagentur",
+      "topics": ["financial_support", "buergergeld", "application_process"],
+      "tags": ["official_rule_source", "application_required"],
+      "targetGroups": ["unemployed", "families"]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/zusammensetzung-bedarfe",
+      "label": "Buergergeld Leistungen und Bedarfe",
+      "source": "arbeitsagentur",
+      "topics": ["financial_support", "buergergeld", "regelbedarf", "mehrbedarf"],
+      "tags": ["official_rule_source", "benefit_amount"],
+      "targetGroups": ["unemployed", "families"]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/lexikon/bedarfsgemeinschaft",
+      "label": "Lexikon Bedarfsgemeinschaft",
+      "source": "arbeitsagentur",
+      "topics": ["financial_support", "bedarfsgemeinschaft", "glossary"],
+      "tags": ["official_glossary_source", "glossary"],
+      "targetGroups": ["unemployed", "families"]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/pflichten-verstehen-und-beachten",
+      "label": "Buergergeld Pflichten",
+      "source": "arbeitsagentur",
+      "topics": ["financial_support", "buergergeld", "pflichten"],
+      "tags": ["official_rule_source", "obligations"],
+      "targetGroups": ["unemployed", "families"]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+      "label": "Einkommen ergaenzen",
+      "source": "arbeitsagentur",
+      "topics": ["financial_support", "buergergeld", "aufstocker"],
+      "tags": ["official_rule_source", "income_support"],
+      "targetGroups": ["low_income_workers", "families"]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/lexikon/aufstocker",
+      "label": "Lexikon Aufstocker",
+      "source": "arbeitsagentur",
+      "topics": ["financial_support", "aufstocker", "glossary"],
+      "tags": ["official_glossary_source", "glossary"],
+      "targetGroups": ["low_income_workers", "families"]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen",
+      "label": "Kinderzuschlag Ueberblick",
+      "source": "arbeitsagentur",
+      "topics": ["financial_support", "kinderzuschlag"],
+      "tags": ["official_rule_source", "application_required"],
+      "targetGroups": ["families", "parents"]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kinderzuschlag-anspruch-hoehe-dauer",
+      "label": "Kinderzuschlag Anspruch Hoehe Dauer",
+      "source": "arbeitsagentur",
+      "topics": ["financial_support", "kinderzuschlag", "eligibility"],
+      "tags": ["official_rule_source", "benefit_amount"],
+      "targetGroups": ["families", "parents"]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/grundsicherung-buergergeld.html",
+      "label": "BMAS Grundsicherung Buergergeld",
+      "source": "bmas",
+      "topics": ["financial_support", "buergergeld"],
+      "tags": ["official_background_source"],
+      "targetGroups": ["unemployed", "families"]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Anspruchsvoraussetzungen/anspruchsvoraussetzungen.html",
+      "label": "BMAS Anspruchsvoraussetzungen",
+      "source": "bmas",
+      "topics": ["financial_support", "buergergeld", "eligibility"],
+      "tags": ["official_rule_source", "eligibility"],
+      "targetGroups": ["unemployed", "families"]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Leistungen-und-Bedarfe-im-Buergergeld/leistungen-und-bedarfe-im-buergergeld.html",
+      "label": "BMAS Leistungen und Bedarfe",
+      "source": "bmas",
+      "topics": ["financial_support", "buergergeld", "regelbedarf", "mehrbedarf"],
+      "tags": ["official_background_source", "benefit_amount"],
+      "targetGroups": ["unemployed", "families"]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Leichte-Sprache/Soziale-Sicherheit/soziale-sicherheit.html",
+      "label": "BMAS Leichte Sprache Soziale Sicherheit",
+      "source": "bmas",
+      "topics": ["financial_support", "leichte_sprache_soziale_sicherheit"],
+      "tags": ["official_light_language_source", "light_language"],
+      "targetGroups": ["general_public", "persons_with_disabilities"]
+    },
+    {
+      "url": "https://familienportal.de/familienportal/familienleistungen/kinderzuschlag",
+      "label": "Familienportal Kinderzuschlag",
+      "source": "familienportal",
+      "topics": ["financial_support", "kinderzuschlag"],
+      "tags": ["official_rule_source", "family_benefits"],
+      "targetGroups": ["families", "parents"]
+    }
+  ]
+}

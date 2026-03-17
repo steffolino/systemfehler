@@ -71,6 +71,7 @@
       "name": "Bundesministerium für Arbeit und Soziales",
       "baseUrl": "https://www.bmas.de",
       "domains": [
+        "benefits",
         "aid",
         "contacts",
         "organizations"
@@ -134,6 +135,7 @@
       "name": "Familienportal",
       "baseUrl": "https://familienportal.de",
       "domains": [
+        "benefits",
         "aid",
         "contacts",
         "tools"

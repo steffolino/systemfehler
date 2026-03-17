@@ -12,6 +12,7 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup
 
@@ -44,13 +45,14 @@ class SeededDomainCrawler(BaseCrawler):
         self.url_registry = URLRegistry(str(self.data_dir), domain, self.normalize_url)
         self.source_registry = SourceRegistry(self.data_dir)
         self.metrics = CrawlMetrics(domain, crawler_name)
+        self.discovered_seed_records: List[Dict[str, Any]] = []
 
     # ------------------------------
     # Public API
     # ------------------------------
     def crawl(self) -> List[Dict[str, Any]]:
-        urls = self._load_seed_urls()
-        self.metrics.note_seed_urls(urls)
+        seed_records = self._load_seed_records()
+        self.metrics.note_seed_urls([record['url'] for record in seed_records])
         entries: List[Dict[str, Any]] = []
 
         try:
@@ -59,6 +61,7 @@ class SeededDomainCrawler(BaseCrawler):
                 if entry:
                     entries.append(entry)
         finally:
+            self._persist_discovered_seed_records()
             self.url_registry.persist()
 
         return entries
@@ -109,6 +112,15 @@ class SeededDomainCrawler(BaseCrawler):
         source_profile: Optional[SourceProfile] = None,
     ) -> Dict[str, Any]:
         return {}
+
+    def discover_related_seed_records(
+        self,
+        url: str,
+        soup: BeautifulSoup,
+        seed_record: Dict[str, Any],
+        source_profile: Optional[SourceProfile] = None,
+    ) -> List[Dict[str, Any]]:
+        return []
 
     def _default_topics_for_url(self, source_profile: Optional[SourceProfile]) -> List[str]:
         if source_profile and source_profile.default_topics:
@@ -172,28 +184,29 @@ class SeededDomainCrawler(BaseCrawler):
 
     def _load_seed_records(self) -> List[Dict[str, Any]]:
         seed_file = self.data_dir / self.domain / 'seeds.json'
+        discovered_file = self.data_dir / self.domain / 'auto_discovered.json'
         url_file = self.data_dir / self.domain / 'urls.json'
-        payload: Any = None
-        source_file = seed_file if seed_file.exists() else url_file
+        source_files = [path for path in (seed_file, discovered_file, url_file) if path.exists()]
 
-        if not source_file.exists():
-            self.logger.warning(f"Seed file missing: {source_file}")
+        if not source_files:
+            self.logger.warning(f"Seed file missing for domain: {self.domain}")
             return []
 
-        try:
-            payload = json.loads(source_file.read_text(encoding='utf-8'))
-        except Exception as exc:
-            self.logger.error(f"Failed to parse {source_file}: {exc}")
-            return []
+        raw_seeds: List[Any] = []
+        for source_file in source_files:
+            try:
+                payload: Any = json.loads(source_file.read_text(encoding='utf-8'))
+            except Exception as exc:
+                self.logger.error(f"Failed to parse {source_file}: {exc}")
+                continue
 
-        raw_seeds = []
-        if isinstance(payload, dict):
-            if isinstance(payload.get('seeds'), list):
-                raw_seeds = payload.get('seeds', [])
-            elif isinstance(payload.get('urls'), list):
-                raw_seeds = payload.get('urls', [])
+            if isinstance(payload, dict):
+                if isinstance(payload.get('seeds'), list):
+                    raw_seeds.extend(payload.get('seeds', []))
+                elif isinstance(payload.get('urls'), list):
+                    raw_seeds.extend(payload.get('urls', []))
 
-        if not isinstance(raw_seeds, list):
+        if not raw_seeds:
             return []
 
         max_urls = 0
@@ -212,10 +225,11 @@ class SeededDomainCrawler(BaseCrawler):
             for host in os.getenv('CRAWLER_INCLUDE_HOSTS', '').split(',')
             if host.strip()
         }
-        for raw_url in urls:
-            if not isinstance(raw_url, str) or not raw_url.strip():
+        for raw_seed in raw_seeds:
+            seed_record = self._normalize_seed_record(raw_seed)
+            if not seed_record or not seed_record.get('enabled', True):
                 continue
-            cleaned = self.normalize_url(raw_url)
+            cleaned = self.normalize_url(seed_record['url'])
             if include_hosts:
                 parsed = self._extract_domain(cleaned)
                 if not parsed:
@@ -251,7 +265,8 @@ class SeededDomainCrawler(BaseCrawler):
         except Exception:
             return ''
 
-    def _crawl_single_url(self, url: str) -> Optional[Dict[str, Any]]:
+    def _crawl_single_url(self, seed_record: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        url = seed_record['url']
         response = self.fetch_page_details(url)
         if not response:
             self.metrics.note_url_status('fetch_failed', reason='fetch_failed')
@@ -307,7 +322,14 @@ class SeededDomainCrawler(BaseCrawler):
 
         source_profile = self.source_registry.resolve(canonical_url, self.domain, self.source_profiles())
         entry = self._build_base_entry(canonical_url, soup, source_profile)
+        if seed_record.get('topics'):
+            entry['topics'] = list(dict.fromkeys(seed_record['topics']))
+        if seed_record.get('tags'):
+            entry['tags'] = list(dict.fromkeys(seed_record['tags']))
+        if seed_record.get('targetGroups'):
+            entry['targetGroups'] = list(dict.fromkeys(seed_record['targetGroups']))
         entry.update(self.build_domain_fields(canonical_url, soup, entry, source_profile))
+        self._capture_related_seed_records(canonical_url, soup, seed_record, source_profile)
 
         content_checksum = self.calculate_checksum(json.dumps(entry, sort_keys=True, ensure_ascii=False))
         source_metadata = None
@@ -393,3 +415,64 @@ class SeededDomainCrawler(BaseCrawler):
     def _extract_content(self, soup: BeautifulSoup) -> str:
         summary = self._extract_summary(soup)
         return self._extract_best_content(soup, summary=summary, max_parts=6)
+
+    def _capture_related_seed_records(
+        self,
+        url: str,
+        soup: BeautifulSoup,
+        seed_record: Dict[str, Any],
+        source_profile: Optional[SourceProfile],
+    ) -> None:
+        if os.getenv('CRAWLER_AUTO_DISCOVER_RELATED', '1').lower() in {'0', 'false', 'no'}:
+            return
+        for record in self.discover_related_seed_records(url, soup, seed_record, source_profile):
+            normalized = self._normalize_seed_record(record)
+            if normalized:
+                self.discovered_seed_records.append(normalized)
+
+    def _persist_discovered_seed_records(self) -> None:
+        if not self.discovered_seed_records:
+            return
+
+        output_file = self.data_dir / self.domain / 'auto_discovered.json'
+        existing: List[Any] = []
+        if output_file.exists():
+            try:
+                payload = json.loads(output_file.read_text(encoding='utf-8'))
+                if isinstance(payload, dict) and isinstance(payload.get('seeds'), list):
+                    existing = payload['seeds']
+            except Exception:
+                existing = []
+
+        merged: Dict[str, Dict[str, Any]] = {}
+        for raw in [*existing, *self.discovered_seed_records]:
+            record = self._normalize_seed_record(raw)
+            if not record:
+                continue
+            merged[self.normalize_url(record['url'])] = record
+
+        payload = {
+            'version': '0.1.0',
+            'domain': self.domain,
+            '_meta': {
+                'generatedBy': self.source_label,
+                'generatedAt': datetime.now(timezone.utc).isoformat(),
+                'note': 'Automatically discovered high-signal related URLs from crawled pages',
+            },
+            'seeds': list(merged.values()),
+        }
+        output_file.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding='utf-8')
+
+    def _extract_related_links(self, soup: BeautifulSoup, base_url: str) -> List[str]:
+        links: List[str] = []
+        seen = set()
+        for anchor in soup.find_all('a', href=True):
+            href = (anchor.get('href') or '').strip()
+            if not href or href.startswith('#'):
+                continue
+            candidate = self.normalize_url(urljoin(base_url, href))
+            if candidate in seen or not candidate.startswith(('http://', 'https://')):
+                continue
+            seen.add(candidate)
+            links.append(candidate)
+        return links
