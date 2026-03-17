@@ -73,6 +73,7 @@ High-confidence implemented areas confirmed in code:
 - Topic-guided discovery now supports trusted topic profiles, listing available topic ids, and free-text topic matching for commands like `discover-topic --query "..."`
 - The AI sidecar now uses trusted topic profiles in three places: URL discovery, retrieval reranking, and deterministic rewrite/enrichment heuristics
 - Current trusted topic coverage now includes concrete subtopics like `kinderzuschlag`, `bedarfsgemeinschaft`, `regelbedarf`, `mehrbedarf`, `aufstocker`, `antrag_bescheid`, `pflichten`, `kontakt_arbeitsagentur`, and `leichte_sprache_soziale_sicherheit`, not just the umbrella `buergergeld`
+- Trusted topic profiles can now also sync curated domain seeds via `python crawlers/cli.py sync-topic-seeds --domain <domain>`, which keeps `benefits` and `contacts` manifests aligned with the topic registry
 - Seeded benefits crawling now supports curated `seeds.json` inputs plus `auto_discovered.json`, so official pages can contribute follow-up discovery candidates such as `.../buergergeld-beantragen` from their own related-link sections
 - Seeded contacts crawling now supports filtered related-link discovery for official contact follow-ups such as BMAS contact routes, `115` accessibility pages, and Familienportal contact pages
 - URL canonicalization helpers in `services/_shared/url_normalization.js`

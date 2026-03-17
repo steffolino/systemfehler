@@ -208,6 +208,97 @@ class TopicDiscovery:
             )
         return matches
 
+    def sync_seed_manifest(
+        self,
+        domain: str,
+        topic_ids: Optional[List[str]] = None,
+        persist: bool = True,
+    ) -> Dict[str, Any]:
+        requested_topics = [
+            topic
+            for topic in self.registry.list_topics()
+            if domain in topic.domains and (not topic_ids or topic.topic_id in topic_ids)
+        ]
+
+        seed_path = self.data_dir / domain / "seeds.json"
+        existing_payload: Dict[str, Any] = {}
+        existing_seeds: List[Dict[str, Any]] = []
+        if seed_path.exists():
+            existing_payload = json.loads(seed_path.read_text(encoding="utf-8"))
+            if isinstance(existing_payload, dict):
+                existing_seeds = [
+                    item for item in existing_payload.get("seeds", []) if isinstance(item, dict)
+                ]
+
+        merged: Dict[str, Dict[str, Any]] = {}
+        for seed in existing_seeds:
+            url = str(seed.get("url") or "").strip()
+            if not url:
+                continue
+            merged[url] = dict(seed)
+
+        added = 0
+        updated = 0
+        for topic in requested_topics:
+            for pref in topic.sources:
+                if not self._role_allowed_for_domain(domain, pref.role):
+                    continue
+                for url in pref.seed_urls:
+                    if not isinstance(url, str) or not url.strip():
+                        continue
+                    normalized_url = url.strip()
+                    profile = self.source_registry.get_profile_by_id(pref.source_id)
+                    seed = merged.get(normalized_url, {"url": normalized_url, "enabled": True})
+                    if normalized_url in merged:
+                        updated += 1
+                    else:
+                        added += 1
+
+                    seed["source"] = pref.source_id
+                    seed["label"] = seed.get("label") or self._build_seed_label(normalized_url, topic.name)
+                    topics = list(seed.get("topics") or [])
+                    topics.append(topic.topic_id)
+                    if domain == "benefits":
+                        topics.append("financial_support")
+                    elif domain == "contacts":
+                        topics.append("contacts")
+                    seed["topics"] = list(dict.fromkeys(topics))
+
+                    tags = list(seed.get("tags") or [])
+                    tags.extend(self._tags_for_role(pref.role))
+                    seed["tags"] = list(dict.fromkeys(tags))
+
+                    targets = list(seed.get("targetGroups") or [])
+                    if profile is not None:
+                        targets.extend(profile.default_target_groups)
+                    seed["targetGroups"] = list(dict.fromkeys(targets))
+
+                    merged[normalized_url] = seed
+
+        payload = {
+            "version": "0.1.0",
+            "domain": domain,
+            "_meta": {
+                "note": f"Curated high-signal {domain} seeds enriched from trusted topic profiles",
+                "maintainedBy": "codex",
+                "syncedFromTrustedTopics": True,
+                "topicIds": [topic.topic_id for topic in requested_topics],
+            },
+            "seeds": list(sorted(merged.values(), key=lambda item: str(item.get("url") or ""))),
+        }
+
+        if persist:
+            seed_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+        return {
+            "domain": domain,
+            "topicIds": [topic.topic_id for topic in requested_topics],
+            "seedCount": len(payload["seeds"]),
+            "added": added,
+            "updated": updated,
+            "outputPath": str(seed_path),
+        }
+
     def _load_urls(self, domain: str) -> Iterable[str]:
         path = self.data_dir / domain / "urls.json"
         if not path.exists():
@@ -313,3 +404,40 @@ class TopicDiscovery:
         if profile is None:
             return False
         return host == profile.host or host.endswith(f".{profile.host}")
+
+    def _build_seed_label(self, url: str, topic_name: str) -> str:
+        parsed = urlparse(url)
+        path = (parsed.path or "/").rstrip("/")
+        segment = path.split("/")[-1] if path and path != "/" else parsed.netloc
+        segment = segment.replace("-", " ").replace("_", " ").strip()
+        segment = segment or parsed.netloc
+        label = " ".join(word.capitalize() for word in segment.split())
+        return f"{topic_name} {label}".strip()
+
+    def _tags_for_role(self, role: str) -> List[str]:
+        mapping = {
+            "official_rule_source": ["official_rule_source"],
+            "official_glossary_source": ["official_glossary_source", "glossary"],
+            "official_contact_source": ["official_contact_source", "contact"],
+            "official_light_language_source": ["official_light_language_source", "light_language"],
+            "official_background_source": ["official_background_source"],
+            "ngo_context_source": ["ngo_context_source"],
+            "journalism_source": ["journalism_source"],
+        }
+        return mapping.get(role, [role])
+
+    def _role_allowed_for_domain(self, domain: str, role: str) -> bool:
+        allowed_roles = {
+            "benefits": {
+                "official_rule_source",
+                "official_glossary_source",
+                "official_light_language_source",
+                "official_background_source",
+                "ngo_context_source",
+                "journalism_source",
+            },
+            "contacts": {
+                "official_contact_source",
+            },
+        }
+        return role in allowed_roles.get(domain, {role})

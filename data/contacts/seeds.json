@@ -2,82 +2,180 @@
   "version": "0.1.0",
   "domain": "contacts",
   "_meta": {
-    "note": "Curated high-signal contact seeds for official federal service discovery",
+    "note": "Curated high-signal contacts seeds enriched from trusted topic profiles",
     "maintainedBy": "codex",
-    "updatedAt": "2026-03-17"
+    "syncedFromTrustedTopics": true,
+    "topicIds": [
+      "antrag_bescheid",
+      "buergergeld",
+      "kinderzuschlag",
+      "kontakt_arbeitsagentur"
+    ]
   },
   "seeds": [
     {
-      "url": "https://www.arbeitsagentur.de/service-bereich/so-erreichen-sie-uns",
-      "label": "Bundesagentur fuer Arbeit Kontakt",
-      "source": "arbeitsagentur",
-      "topics": ["contacts", "kontakt_arbeitsagentur"],
-      "tags": ["official_contact_source", "contact"],
-      "targetGroups": ["general_public", "job_seekers", "families"]
-    },
-    {
-      "url": "https://web.arbeitsagentur.de/portal/metasuche/suche/information",
-      "label": "BA Dienststellen und Kontaktinformation",
-      "source": "arbeitsagentur",
-      "topics": ["contacts", "kontakt_arbeitsagentur"],
-      "tags": ["official_contact_source", "contact"],
-      "targetGroups": ["general_public", "job_seekers", "families"]
+      "url": "https://familienportal.de/familienportal/meta/kontakt",
+      "label": "Familienportal Kontakt",
+      "source": "familienportal",
+      "topics": [
+        "contacts",
+        "kinderzuschlag"
+      ],
+      "tags": [
+        "official_contact_source",
+        "contact"
+      ],
+      "targetGroups": [
+        "families",
+        "parents"
+      ]
     },
     {
       "url": "https://web.arbeitsagentur.de/portal/metasuche/suche/dienststellen?in=familienkassen",
       "label": "Familienkassen Suche",
       "source": "arbeitsagentur",
-      "topics": ["contacts", "kinderzuschlag"],
-      "tags": ["official_contact_source", "contact"],
-      "targetGroups": ["families", "parents"]
+      "topics": [
+        "contacts",
+        "kinderzuschlag"
+      ],
+      "tags": [
+        "official_contact_source",
+        "contact"
+      ],
+      "targetGroups": [
+        "families",
+        "parents"
+      ]
     },
     {
-      "url": "https://www.bmas.de/DE/Service/Kontakt/Buergertelefon/buergertelefon.html",
-      "label": "BMAS Buergertelefon",
-      "source": "bmas",
-      "topics": ["contacts", "financial_support"],
-      "tags": ["official_contact_source", "helpline"],
-      "targetGroups": ["general_public", "unemployed", "families"]
-    },
-    {
-      "url": "https://www.bmas.de/DE/Service/Kontakt/Kontaktformular/kontaktformular.html",
-      "label": "BMAS Kontaktformular",
-      "source": "bmas",
-      "topics": ["contacts", "financial_support"],
-      "tags": ["official_contact_source", "contact_form"],
-      "targetGroups": ["general_public", "unemployed", "families"]
+      "url": "https://web.arbeitsagentur.de/portal/metasuche/suche/information",
+      "label": "BA Dienststellen und Kontaktinformation",
+      "source": "arbeitsagentur",
+      "topics": [
+        "contacts",
+        "kontakt_arbeitsagentur"
+      ],
+      "tags": [
+        "official_contact_source",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "job_seekers",
+        "families"
+      ]
     },
     {
       "url": "https://www.115.de/",
       "label": "Behoerdennummer 115",
       "source": "115",
-      "topics": ["contacts", "public_service"],
-      "tags": ["official_contact_source", "helpline"],
-      "targetGroups": ["general_public", "families", "persons_with_disabilities"]
+      "topics": [
+        "contacts",
+        "public_service"
+      ],
+      "tags": [
+        "official_contact_source",
+        "helpline"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ]
     },
     {
       "url": "https://www.115.de/gebaerdensprache",
       "label": "115 in Gebaerdensprache",
       "source": "115",
-      "topics": ["contacts", "public_service"],
-      "tags": ["official_contact_source", "accessibility"],
-      "targetGroups": ["general_public", "persons_with_disabilities"]
+      "topics": [
+        "contacts",
+        "public_service"
+      ],
+      "tags": [
+        "official_contact_source",
+        "accessibility"
+      ],
+      "targetGroups": [
+        "general_public",
+        "persons_with_disabilities"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/service-bereich/so-erreichen-sie-uns",
+      "label": "Bundesagentur fuer Arbeit Kontakt",
+      "source": "arbeitsagentur",
+      "topics": [
+        "contacts",
+        "kontakt_arbeitsagentur"
+      ],
+      "tags": [
+        "official_contact_source",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "job_seekers",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Service/Kontakt/Buergertelefon/buergertelefon.html",
+      "label": "BMAS Buergertelefon",
+      "source": "bmas",
+      "topics": [
+        "contacts",
+        "financial_support",
+        "buergergeld",
+        "kontakt_arbeitsagentur"
+      ],
+      "tags": [
+        "official_contact_source",
+        "helpline",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Service/Kontakt/Kontaktformular/kontaktformular.html",
+      "label": "BMAS Kontaktformular",
+      "source": "bmas",
+      "topics": [
+        "contacts",
+        "financial_support",
+        "buergergeld",
+        "kontakt_arbeitsagentur"
+      ],
+      "tags": [
+        "official_contact_source",
+        "contact_form",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "unemployed",
+        "families"
+      ]
     },
     {
       "url": "https://www.gebaerdentelefon.de/115",
       "label": "Gebaerdentelefon 115",
       "source": "gebaerdentelefon",
-      "topics": ["contacts", "public_service"],
-      "tags": ["official_contact_source", "accessibility"],
-      "targetGroups": ["general_public", "persons_with_disabilities"]
-    },
-    {
-      "url": "https://familienportal.de/familienportal/meta/kontakt",
-      "label": "Familienportal Kontakt",
-      "source": "familienportal",
-      "topics": ["contacts", "kinderzuschlag"],
-      "tags": ["official_contact_source", "contact"],
-      "targetGroups": ["families", "parents"]
+      "topics": [
+        "contacts",
+        "public_service"
+      ],
+      "tags": [
+        "official_contact_source",
+        "accessibility"
+      ],
+      "targetGroups": [
+        "general_public",
+        "persons_with_disabilities"
+      ]
     }
   ]
 }

@@ -168,6 +168,10 @@ python crawlers/cli.py discover-topic --list
 # Match a free-text query against configured topic profiles
 python crawlers/cli.py discover-topic --query "Wie beantrage ich Kinderzuschlag?"
 
+# Sync curated seed manifests from trusted topic profiles
+python crawlers/cli.py sync-topic-seeds --domain benefits
+python crawlers/cli.py sync-topic-seeds --domain contacts
+
 # Validate all entries
 npm run validate
 npm run validate:ci

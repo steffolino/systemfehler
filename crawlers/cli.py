@@ -239,6 +239,21 @@ def match_topic_query(query: str, data_dir: str):
     return True
 
 
+def sync_topic_seeds(domain: str, data_dir: str, topics: list[str] | None = None):
+    discovery = TopicDiscovery(data_dir)
+    report = discovery.sync_seed_manifest(domain=domain, topic_ids=topics or None, persist=True)
+    logger.info(
+        "Synced topic seeds for domain=%s topics=%s seed_count=%s added=%s updated=%s output=%s",
+        domain,
+        ",".join(report["topicIds"]),
+        report["seedCount"],
+        report["added"],
+        report["updated"],
+        report["outputPath"],
+    )
+    return True
+
+
 def generate_diffs(new_entries, existing_path, output_dir, domain):
     """Generate diffs and add to moderation queue"""
     diff_generator = DiffGenerator()
@@ -739,6 +754,24 @@ def main():
     discover_topic_parser.add_argument('--list', action='store_true', help='List configured topic profiles')
     discover_topic_parser.add_argument('--data-dir', default='./data', help='Data directory')
     discover_topic_parser.add_argument('--limit', type=int, default=30, help='Max ranked candidates to keep in the report')
+
+    sync_topic_seeds_parser = subparsers.add_parser(
+        'sync-topic-seeds',
+        help='Merge trusted-topic seed URLs into a domain seeds.json manifest',
+    )
+    sync_topic_seeds_parser.add_argument(
+        '--domain',
+        required=True,
+        choices=['benefits', 'contacts', 'aid', 'tools', 'organizations'],
+        help='Domain seed manifest to update',
+    )
+    sync_topic_seeds_parser.add_argument('--data-dir', default='./data', help='Data directory')
+    sync_topic_seeds_parser.add_argument(
+        '--topic',
+        action='append',
+        dest='topics',
+        help='Optional topic id filter; repeatable',
+    )
     
     args = parser.parse_args()
     
@@ -787,6 +820,13 @@ def main():
             )
         else:
             logger.error("discover-topic requires one of: --topic, --query, or --list")
+
+    elif args.command == 'sync-topic-seeds':
+        success = sync_topic_seeds(
+            domain=args.domain,
+            data_dir=args.data_dir,
+            topics=args.topics,
+        )
     
     sys.exit(0 if success else 1)
 
