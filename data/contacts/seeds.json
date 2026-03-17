@@ -1,62 +1,83 @@
 {
   "version": "0.1.0",
   "domain": "contacts",
-  "note": "Curated high-value starting points for contact crawling. Expanded URL queues remain in urls.json.",
+  "_meta": {
+    "note": "Curated high-signal contact seeds for official federal service discovery",
+    "maintainedBy": "codex",
+    "updatedAt": "2026-03-17"
+  },
   "seeds": [
     {
       "url": "https://www.arbeitsagentur.de/service-bereich/so-erreichen-sie-uns",
-      "label": "Arbeitsagentur contact overview",
-      "priority": 10,
-      "sourceTier": "tier_1_official",
-      "institutionType": "government",
-      "jurisdiction": "DE",
-      "seedCategory": "contact-overview",
-      "topics": ["contacts", "public_service"],
-      "tags": ["official_contact", "service_contact"]
+      "label": "Bundesagentur fuer Arbeit Kontakt",
+      "source": "arbeitsagentur",
+      "topics": ["contacts", "kontakt_arbeitsagentur"],
+      "tags": ["official_contact_source", "contact"],
+      "targetGroups": ["general_public", "job_seekers", "families"]
     },
     {
-      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/service/kontakt",
-      "label": "BMBFSFJ contact page",
-      "priority": 20,
-      "sourceTier": "tier_1_official",
-      "institutionType": "government",
-      "jurisdiction": "DE",
-      "seedCategory": "contact-overview",
-      "topics": ["contacts", "public_service"],
-      "tags": ["official_contact", "ministry_contact"]
+      "url": "https://web.arbeitsagentur.de/portal/metasuche/suche/information",
+      "label": "BA Dienststellen und Kontaktinformation",
+      "source": "arbeitsagentur",
+      "topics": ["contacts", "kontakt_arbeitsagentur"],
+      "tags": ["official_contact_source", "contact"],
+      "targetGroups": ["general_public", "job_seekers", "families"]
     },
     {
-      "url": "https://www.115.de/kontakt",
-      "label": "115 contact page",
-      "priority": 30,
-      "sourceTier": "tier_1_official",
-      "institutionType": "government",
-      "jurisdiction": "DE",
-      "seedCategory": "helpline",
+      "url": "https://web.arbeitsagentur.de/portal/metasuche/suche/dienststellen?in=familienkassen",
+      "label": "Familienkassen Suche",
+      "source": "arbeitsagentur",
+      "topics": ["contacts", "kinderzuschlag"],
+      "tags": ["official_contact_source", "contact"],
+      "targetGroups": ["families", "parents"]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Service/Kontakt/Buergertelefon/buergertelefon.html",
+      "label": "BMAS Buergertelefon",
+      "source": "bmas",
+      "topics": ["contacts", "financial_support"],
+      "tags": ["official_contact_source", "helpline"],
+      "targetGroups": ["general_public", "unemployed", "families"]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Service/Kontakt/Kontaktformular/kontaktformular.html",
+      "label": "BMAS Kontaktformular",
+      "source": "bmas",
+      "topics": ["contacts", "financial_support"],
+      "tags": ["official_contact_source", "contact_form"],
+      "targetGroups": ["general_public", "unemployed", "families"]
+    },
+    {
+      "url": "https://www.115.de/",
+      "label": "Behoerdennummer 115",
+      "source": "115",
       "topics": ["contacts", "public_service"],
-      "tags": ["helpline", "115"]
+      "tags": ["official_contact_source", "helpline"],
+      "targetGroups": ["general_public", "families", "persons_with_disabilities"]
+    },
+    {
+      "url": "https://www.115.de/gebaerdensprache",
+      "label": "115 in Gebaerdensprache",
+      "source": "115",
+      "topics": ["contacts", "public_service"],
+      "tags": ["official_contact_source", "accessibility"],
+      "targetGroups": ["general_public", "persons_with_disabilities"]
     },
     {
       "url": "https://www.gebaerdentelefon.de/115",
-      "label": "115 sign-language contact",
-      "priority": 40,
-      "sourceTier": "tier_1_official",
-      "institutionType": "government",
-      "jurisdiction": "DE",
-      "seedCategory": "accessibility-contact",
-      "topics": ["contacts", "accessibility"],
-      "tags": ["accessibility", "115"]
+      "label": "Gebaerdentelefon 115",
+      "source": "gebaerdentelefon",
+      "topics": ["contacts", "public_service"],
+      "tags": ["official_contact_source", "accessibility"],
+      "targetGroups": ["general_public", "persons_with_disabilities"]
     },
     {
-      "url": "https://www.bafza.de/kontakt",
-      "label": "BAFzA contact page",
-      "priority": 50,
-      "sourceTier": "tier_1_official",
-      "institutionType": "government",
-      "jurisdiction": "DE",
-      "seedCategory": "contact-overview",
-      "topics": ["contacts", "public_service"],
-      "tags": ["official_contact", "federal_agency"]
+      "url": "https://familienportal.de/familienportal/meta/kontakt",
+      "label": "Familienportal Kontakt",
+      "source": "familienportal",
+      "topics": ["contacts", "kinderzuschlag"],
+      "tags": ["official_contact_source", "contact"],
+      "targetGroups": ["families", "parents"]
     }
   ]
 }
