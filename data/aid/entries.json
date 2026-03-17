@@ -2292,57 +2292,6 @@
       }
     },
     {
-      "id": "e228fbf2-d78b-487a-888d-6b115f053152",
-      "title": "BMBFSFJ",
-      "summary": {
-        "de": "Hier finden Sie aktuelle Informationen des Bundesministeriums für Bildung, Familie, Senioren, Frauen und Jugend (BMBFSFJ)."
-      },
-      "content": {
-        "de": "Gleichstellungspolitik gelingt nur, wenn auch Jungen und Männer adressiert werden. Das Frauentags-Vernetzungstreffen anlässlich des Internationalen Frauentags rückte daher die Rolle von Männlichkeitsbildern für die Gleichstellung in den Fokus. Am 8. März ist Bundesfrauenministern Karin Prien nach New York gereist, um an der 70. Frauenrechtskommission der Vereinten Nationen (UN) teilzunehmen. Im Fokus der Konferenz: der Zugang zu Recht und Justiz für Frauen und Mädchen weltweit. Mit der Braunschweiger Zeitung hat Bundesfrauenministerin Karin Prien darüber gesprochen, wie es um die Gleichstellung von Frauen steht und welche Rolle Künstliche Intelligenz (KI) dabei spielt. Am 10. März hat die Parlamentarische Staatssekretärin im Bundesbildungsministerium, Mareike Wulf, in Köln die didacta miteröffnet. Das Motto \"Alles im Wandel. Bildung im Fokus\" stellt Innovationen und mentale Gesundheit ins Zentrum. Das Bundesfamilienministerium bietet einen umfassenden Überblick über finanzielle Unterstützung für Familien in 2026. Informieren Sie sich über Kindergeld, Elterngeld, Kinderzuschlag und mehr. Flyer Das Pflegetelefon - Schnelle Hilfe für Angehörige"
-      },
-      "url": "https://www.bmbfsfj.bund.de/bmbfsfj",
-      "topics": [
-        "financial_support",
-        "aid"
-      ],
-      "tags": [
-        "aid"
-      ],
-      "targetGroups": [
-        "families",
-        "single_parents",
-        "general_public"
-      ],
-      "status": "active",
-      "firstSeen": "2026-03-15T16:15:37.082187+00:00",
-      "lastSeen": "2026-03-15T16:15:37.082187+00:00",
-      "sourceUnavailable": false,
-      "aidType": "advisory",
-      "modality": "information",
-      "eligibilityCriteria": {
-        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
-      },
-      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
-      "provenance": {
-        "source": "https://www.bmbfsfj.bund.de/bmbfsfj",
-        "crawledAt": "2026-03-15T16:15:37.082187Z",
-        "crawlId": "aid-seeded-1773591337",
-        "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_1_official",
-        "institutionType": "government",
-        "jurisdiction": "DE",
-        "sourceId": "bmfsfj",
-        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
-        "providerLevel": "federal",
-        "checksum": "0062e2a3af699d59e2d0a866a8a592df6f20b5e742034a668bbcf03a76d8b913"
-      },
-      "qualityScores": {
-        "iqs": 84.58,
-        "ais": 84.0,
-        "computedAt": "2026-03-15T16:15:37.082187+00:00"
-      }
-    },
-    {
       "id": "e55e6c90-9b4d-4003-a262-408cc110c384",
       "title": "Bauprogramm des Bundes in der Kinder- und Jugendhilfe",
       "summary": {
@@ -2748,57 +2697,6 @@
         "iqs": 84.58,
         "ais": 84.0,
         "computedAt": "2026-03-15T16:15:46.859164+00:00"
-      }
-    },
-    {
-      "id": "dcf7036f-a467-4d8c-ae6f-19758e0e05f5",
-      "title": "Politik für ältere Menschen",
-      "summary": {
-        "de": "Selbstbestimmung und Teilhabe an der Gesellschaft auch im Alter - das ist zentrales Ziel der Seniorenpolitik des Bundesseniorenministeriums."
-      },
-      "content": {
-        "de": "Eine neue Studie zeigt: Die große Mehrheit der über 65-Jährigen nutzt das Internet und wünscht sich mehr Tempo bei der Digitalisierung. Karin Prien und Bitkom-Präsident Ralf Wintergerst stellten die Ergebnisse am 15. Januar vor. Michael Brand hat sich in Köln mit dem Direktor des Zentrums für Palliativmedizin Prof. Dr. Raymond Voltz und Ärztin Dr. Birgit Weihrauch über neue Ansätze zur Betreuung und Begleitung schwerstkranker und sterbender Menschen ausgetauscht. Der Parlamentarische Staatssekretär Michael Brand spricht zum Bundeshaushalt 2026 im Bundestag und betont, wie wichtig gezielte und strukturelle Reformen für bessere Bildung, starke Familien und eine resiliente Demokratie sind."
-      },
-      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen",
-      "topics": [
-        "financial_support",
-        "aid"
-      ],
-      "tags": [
-        "aid"
-      ],
-      "targetGroups": [
-        "families",
-        "single_parents",
-        "general_public"
-      ],
-      "status": "active",
-      "firstSeen": "2026-03-15T16:15:47.356246+00:00",
-      "lastSeen": "2026-03-15T16:15:47.356246+00:00",
-      "sourceUnavailable": false,
-      "aidType": "advisory",
-      "modality": "information",
-      "eligibilityCriteria": {
-        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
-      },
-      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
-      "provenance": {
-        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen",
-        "crawledAt": "2026-03-15T16:15:47.356246Z",
-        "crawlId": "aid-seeded-1773591347",
-        "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_1_official",
-        "institutionType": "government",
-        "jurisdiction": "DE",
-        "sourceId": "bmfsfj",
-        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
-        "providerLevel": "federal",
-        "checksum": "a262e4b468e21436f9051a21bb9f10e55ece47e023eaaba865b5e6d37f981a3a"
-      },
-      "qualityScores": {
-        "iqs": 84.58,
-        "ais": 84.0,
-        "computedAt": "2026-03-15T16:15:47.356246+00:00"
       }
     },
     {
@@ -3669,57 +3567,6 @@
       }
     },
     {
-      "id": "bbf59b2e-d640-41be-bce5-e86c5e23b03c",
-      "title": "Bildung",
-      "summary": {
-        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
-      },
-      "content": {
-        "de": "Bundesbildungsministerin Karin Prien hat die Qualifizierungsoffensive Berufliche Bildung gestartet. Die Initiative soll dem Fachkräftemangel begegnen und die Ausbildung entlang der gesamten Bildungskette stärken. Für einen besseren Jugendmedienschutz ist die Kooperation der Online-Plattformen wichtig. Das betonte Dr. Petra Bahr, Staatssekretärin im Bundesjugendministerium, bei einem Austausch mit Vertretern der Unternehmen und Verbände. Mit dem KiTa-Qualitätsgesetz wollen Bund und Länder die frühkindliche Bildung verbessern. Der fünfte Monitoringbericht zum Gesetz zeigt Fortschritte. Um bundesweit gleiche Bedingungen für alle Kinder zu schaffen, bleibt aber noch einiges zu tun."
-      },
-      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung",
-      "topics": [
-        "financial_support",
-        "aid"
-      ],
-      "tags": [
-        "aid"
-      ],
-      "targetGroups": [
-        "families",
-        "single_parents",
-        "general_public"
-      ],
-      "status": "active",
-      "firstSeen": "2026-03-15T16:15:56.406211+00:00",
-      "lastSeen": "2026-03-15T16:15:56.406211+00:00",
-      "sourceUnavailable": false,
-      "aidType": "advisory",
-      "modality": "information",
-      "eligibilityCriteria": {
-        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
-      },
-      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
-      "provenance": {
-        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung",
-        "crawledAt": "2026-03-15T16:15:56.406211Z",
-        "crawlId": "aid-seeded-1773591356",
-        "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_1_official",
-        "institutionType": "government",
-        "jurisdiction": "DE",
-        "sourceId": "bmfsfj",
-        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
-        "providerLevel": "federal",
-        "checksum": "1d9f6a1739876f85daa678f061b7f3f35a6dc811c9ac709fcb402029b575aad2"
-      },
-      "qualityScores": {
-        "iqs": 84.58,
-        "ais": 84.0,
-        "computedAt": "2026-03-15T16:15:56.406211+00:00"
-      }
-    },
-    {
       "id": "b073c294-fb81-4ac0-a1ff-0ed3dc8a6a89",
       "title": "Ausbildung",
       "summary": {
@@ -4179,57 +4026,6 @@
       }
     },
     {
-      "id": "6e078b13-95c0-4b0f-b239-7cda432c07b2",
-      "title": "Engagement und Gesellschaft",
-      "summary": {
-        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
-      },
-      "content": {
-        "de": "Am 10. März hat die Parlamentarische Staatssekretärin im Bundesbildungsministerium, Mareike Wulf, in Köln die didacta miteröffnet. Das Motto \"Alles im Wandel. Bildung im Fokus\" stellt Innovationen und mentale Gesundheit ins Zentrum. Am 26. Februar hat die Staatssekretärin im Bundesbildungsministerium, Dr. Petra Bahr, an der Veranstaltung \"Wem gehört die Kindheit?\" teilgenommen und insbesondere darüber diskutiert, wie die Interessen von Kindern angemessen berücksichtigt werden. Am 3. Februar empfing Karin Prien die japanische Botschafterin Mitsuko Shino. Die Politikerinnen tauschten sich zu gesellschafts- und bildungspolitischen Initiativen aus, die aufgrund ähnlicher Entwicklungen für beide Länder von Interesse sind."
-      },
-      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft",
-      "topics": [
-        "financial_support",
-        "aid"
-      ],
-      "tags": [
-        "aid"
-      ],
-      "targetGroups": [
-        "families",
-        "single_parents",
-        "general_public"
-      ],
-      "status": "active",
-      "firstSeen": "2026-03-15T16:16:01.376888+00:00",
-      "lastSeen": "2026-03-15T16:16:01.376888+00:00",
-      "sourceUnavailable": false,
-      "aidType": "advisory",
-      "modality": "information",
-      "eligibilityCriteria": {
-        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
-      },
-      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
-      "provenance": {
-        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft",
-        "crawledAt": "2026-03-15T16:16:01.376888Z",
-        "crawlId": "aid-seeded-1773591361",
-        "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_1_official",
-        "institutionType": "government",
-        "jurisdiction": "DE",
-        "sourceId": "bmfsfj",
-        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
-        "providerLevel": "federal",
-        "checksum": "9fecdb12eed90e43ac70d0eceb9174f616a1881397ae9dac6b199eb3489f0f5e"
-      },
-      "qualityScores": {
-        "iqs": 84.58,
-        "ais": 84.0,
-        "computedAt": "2026-03-15T16:16:01.376888+00:00"
-      }
-    },
-    {
       "id": "8eaa51da-372e-41c3-b005-b09d72a7a799",
       "title": "Allianz gegen Einsamkeit",
       "summary": {
@@ -4686,57 +4482,6 @@
         "iqs": 84.58,
         "ais": 84.0,
         "computedAt": "2026-03-15T16:16:05.942112+00:00"
-      }
-    },
-    {
-      "id": "0a710787-d73d-40ea-9e72-e3edc09e4e38",
-      "title": "Familienpolitik",
-      "summary": {
-        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
-      },
-      "content": {
-        "de": "Elterngeldrechner Mit dem Elterngeldrechner kann ein möglicher Elterngeldanspruch in wenigen Minuten ermittelt werden. (Externer Link) Mit dem Elterngeldrechner kann ein möglicher Elterngeldanspruch in wenigen Minuten ermittelt werden. (Externer Link) Nationaler Aktionsplan für chancengerechtes Aufwachsen Bundesfamilienministerin Karin Prien hat den Wettbewerb \"Kleine Lösungen - große Wirkung\" gestartet. Gesucht werden kleine und mittlere Unternehmen mit kreativen Ideen für die Vereinbarkeit von Familie und Beruf. Mit dem KiTa-Qualitätsgesetz wollen Bund und Länder die frühkindliche Bildung verbessern. Der fünfte Monitoringbericht zum Gesetz zeigt Fortschritte. Um bundesweit gleiche Bedingungen für alle Kinder zu schaffen, bleibt aber noch einiges zu tun. Die ehemalige Bundesfrauenministerin und Bundestagspräsidentin Prof. Dr. Rita Süssmuth ist verstorben. Karin Prien und Nina Warken würdigten sie als großes Vorbild und Vorkämpferin für Frauenrechte und sozialen Zusammenhalt."
-      },
-      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie",
-      "topics": [
-        "financial_support",
-        "aid"
-      ],
-      "tags": [
-        "aid"
-      ],
-      "targetGroups": [
-        "families",
-        "single_parents",
-        "general_public"
-      ],
-      "status": "active",
-      "firstSeen": "2026-03-15T16:16:06.414313+00:00",
-      "lastSeen": "2026-03-15T16:16:06.414313+00:00",
-      "sourceUnavailable": false,
-      "aidType": "advisory",
-      "modality": "information",
-      "eligibilityCriteria": {
-        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
-      },
-      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
-      "provenance": {
-        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie",
-        "crawledAt": "2026-03-15T16:16:06.414313Z",
-        "crawlId": "aid-seeded-1773591366",
-        "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_1_official",
-        "institutionType": "government",
-        "jurisdiction": "DE",
-        "sourceId": "bmfsfj",
-        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
-        "providerLevel": "federal",
-        "checksum": "19ac073d12f606c8a3b1ee89d6307c768200b211c9eb98131f8962714daf72a4"
-      },
-      "qualityScores": {
-        "iqs": 84.58,
-        "ais": 84.0,
-        "computedAt": "2026-03-15T16:16:06.414313+00:00"
       }
     },
     {
@@ -5456,57 +5201,6 @@
       }
     },
     {
-      "id": "4a800f79-e8ba-460e-b60b-46da80803998",
-      "title": "Gleichstellungspolitik: Politik für Frauen und Männer",
-      "summary": {
-        "de": "Frauen und Männer müssen die gleichen Chancen erhalten – persönlich, beruflich und familiär. Hier finden Sie Informationen zur Gleichstellungspolitik."
-      },
-      "content": {
-        "de": "Digitaler Gleichstellungsatlas Der digitale Gleichstellungsatlas liefert einen umfassenden Überblick über die regionalen Unterschiede bei der Gleichstellung von Männern und Frauen in Deutschland. (Nicht barrierefrei) Der digitale Gleichstellungsatlas liefert einen umfassenden Überblick über die regionalen Unterschiede bei der Gleichstellung von Männern und Frauen in Deutschland. (Nicht barrierefrei) Am 10. März hat die Parlamentarische Staatssekretärin im Bundesbildungsministerium, Mareike Wulf, in Köln die didacta miteröffnet. Das Motto \"Alles im Wandel. Bildung im Fokus\" stellt Innovationen und mentale Gesundheit ins Zentrum. Gleichstellungspolitik gelingt nur, wenn auch Jungen und Männer adressiert werden. Das Frauentags-Vernetzungstreffen anlässlich des Internationalen Frauentags rückte daher die Rolle von Männlichkeitsbildern für die Gleichstellung in den Fokus. Das Bundesfrauenministerium hat Dr. Petra Volke als deutsche Kandidatin für die Expertengruppe GREVIO des Europarats vorgestellt - ein bedeutender Beitrag Deutschlands zur Bekämpfung von geschlechtsspezifischer und häuslicher Gewalt."
-      },
-      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung",
-      "topics": [
-        "financial_support",
-        "aid"
-      ],
-      "tags": [
-        "aid"
-      ],
-      "targetGroups": [
-        "families",
-        "single_parents",
-        "general_public"
-      ],
-      "status": "active",
-      "firstSeen": "2026-03-15T16:16:11.504621+00:00",
-      "lastSeen": "2026-03-15T16:16:11.504621+00:00",
-      "sourceUnavailable": false,
-      "aidType": "advisory",
-      "modality": "information",
-      "eligibilityCriteria": {
-        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
-      },
-      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
-      "provenance": {
-        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung",
-        "crawledAt": "2026-03-15T16:16:11.504621Z",
-        "crawlId": "aid-seeded-1773591371",
-        "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_1_official",
-        "institutionType": "government",
-        "jurisdiction": "DE",
-        "sourceId": "bmfsfj",
-        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
-        "providerLevel": "federal",
-        "checksum": "e7c2e6137e0402180e5d9aaeca3117b3682c02698f25cd54804825828f8f7ca1"
-      },
-      "qualityScores": {
-        "iqs": 84.58,
-        "ais": 84.0,
-        "computedAt": "2026-03-15T16:16:11.504621+00:00"
-      }
-    },
-    {
       "id": "91de6036-75f0-4eb4-96ee-30f64233bf03",
       "title": "Politik für die Aufwertung sozialer Berufe",
       "summary": {
@@ -6068,57 +5762,6 @@
       }
     },
     {
-      "id": "b0215fd0-9828-42e3-9a7a-ca59797927cc",
-      "title": "Internationales und Europa",
-      "summary": {
-        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
-      },
-      "content": {
-        "de": "Internationale Tätigkeitsfelder des Bundesfamilienministeriums Internationale Politik für Demokratie und Engagement"
-      },
-      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/internationales",
-      "topics": [
-        "financial_support",
-        "aid"
-      ],
-      "tags": [
-        "aid"
-      ],
-      "targetGroups": [
-        "families",
-        "single_parents",
-        "general_public"
-      ],
-      "status": "active",
-      "firstSeen": "2026-03-15T17:44:58.437291+00:00",
-      "lastSeen": "2026-03-15T17:44:58.437291+00:00",
-      "sourceUnavailable": false,
-      "aidType": "advisory",
-      "modality": "information",
-      "eligibilityCriteria": {
-        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
-      },
-      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
-      "provenance": {
-        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/internationales",
-        "crawledAt": "2026-03-15T17:44:58.438292Z",
-        "crawlId": "aid-seeded-1773596698",
-        "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_1_official",
-        "institutionType": "government",
-        "jurisdiction": "DE",
-        "sourceId": "bmfsfj",
-        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
-        "providerLevel": "federal",
-        "checksum": "93de609eadc7c3f4f6dacb4bdde8c371b1e6bb3a952f4ffd01c995de471c36a8"
-      },
-      "qualityScores": {
-        "iqs": 84.58,
-        "ais": 80.0,
-        "computedAt": "2026-03-15T17:44:58.438292+00:00"
-      }
-    },
-    {
       "id": "ea5a7e26-bc10-4314-b20b-3f7d8bcaa2d8",
       "title": "Erasmus+",
       "summary": {
@@ -6422,57 +6065,6 @@
         "iqs": 84.58,
         "ais": 84.0,
         "computedAt": "2026-03-15T16:24:59.687583+00:00"
-      }
-    },
-    {
-      "id": "e0370026-45f4-423c-a405-1d1a2a6128fc",
-      "title": "Politik für Kinder und Jugendliche",
-      "summary": {
-        "de": "Alle Kinder und Jugendlichen haben ein Recht auf gutes Aufwachsen und gleiche Chancen - unabhängig von Herkunft, Geschlecht, Religion oder sozialem..."
-      },
-      "content": {
-        "de": "Bundesbildungsministerin Karin Prien hat die Qualifizierungsoffensive Berufliche Bildung gestartet. Die Initiative soll dem Fachkräftemangel begegnen und die Ausbildung entlang der gesamten Bildungskette stärken. Für einen besseren Jugendmedienschutz ist die Kooperation der Online-Plattformen wichtig. Das betonte Dr. Petra Bahr, Staatssekretärin im Bundesjugendministerium, bei einem Austausch mit Vertretern der Unternehmen und Verbände. Mit dem KiTa-Qualitätsgesetz wollen Bund und Länder die frühkindliche Bildung verbessern. Der fünfte Monitoringbericht zum Gesetz zeigt Fortschritte. Um bundesweit gleiche Bedingungen für alle Kinder zu schaffen, bleibt aber noch einiges zu tun."
-      },
-      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend",
-      "topics": [
-        "financial_support",
-        "aid"
-      ],
-      "tags": [
-        "aid"
-      ],
-      "targetGroups": [
-        "families",
-        "single_parents",
-        "general_public"
-      ],
-      "status": "active",
-      "firstSeen": "2026-03-15T16:25:00.230987+00:00",
-      "lastSeen": "2026-03-15T16:25:00.230987+00:00",
-      "sourceUnavailable": false,
-      "aidType": "advisory",
-      "modality": "information",
-      "eligibilityCriteria": {
-        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
-      },
-      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
-      "provenance": {
-        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend",
-        "crawledAt": "2026-03-15T16:25:00.230987Z",
-        "crawlId": "aid-seeded-1773591900",
-        "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_1_official",
-        "institutionType": "government",
-        "jurisdiction": "DE",
-        "sourceId": "bmfsfj",
-        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
-        "providerLevel": "federal",
-        "checksum": "1e621a8d30656b8f7c879ea2de532d58de055c13446349b5d81b0987702e761e"
-      },
-      "qualityScores": {
-        "iqs": 84.58,
-        "ais": 84.0,
-        "computedAt": "2026-03-15T16:25:00.230987+00:00"
       }
     },
     {

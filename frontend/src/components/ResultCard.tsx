@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { getEntrySourceMeta, getEntryTitleText, type Entry } from '@/lib/api';
+import { getEntrySourceMeta, getEntryTitleText, getSourceRoleLabel, type Entry } from '@/lib/api';
 import { useI18n } from '@/lib/i18n';
 
 function getSummary(entry: Entry) {
@@ -63,6 +63,7 @@ export default function ResultCard({ result }: { result: Entry }) {
         <CardContent className="space-y-4 p-4">
           <div className="flex flex-wrap items-center gap-2">
             <Badge variant="secondary">{result.domain || 'unknown'}</Badge>
+            <Badge variant="outline">{getSourceRoleLabel(meta.sourceRole, locale)}</Badge>
             {isKnownBadgeValue(meta.sourceTier) && <Badge variant="outline">{tierLabel(meta.sourceTier)}</Badge>}
             {isKnownBadgeValue(meta.jurisdiction) && <Badge variant="outline">{meta.jurisdiction}</Badge>}
           </div>

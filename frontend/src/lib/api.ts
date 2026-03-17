@@ -63,11 +63,13 @@ type EntryTitle = string | MultilingualText;
 type JsonRecord = Record<string, unknown>;
 
 type RegisteredSourceRecord = {
+  id?: string;
   name?: string;
   baseUrl?: string;
   sourceTier?: string;
   institutionType?: string;
   jurisdiction?: string;
+  defaultTags?: string[];
 };
 
 function isJsonRecord(value: unknown): value is JsonRecord {
@@ -98,10 +100,12 @@ function inferSourceMetaFromUrl(url: string) {
     if (!source) return null;
 
     return {
+      sourceId: source.id?.trim() || host,
       source: source.name?.trim() || host,
       sourceTier: source.sourceTier?.trim() || 'unknown',
       institutionType: source.institutionType?.trim() || 'unknown',
       jurisdiction: source.jurisdiction?.trim() || 'unknown',
+      defaultTags: Array.isArray(source.defaultTags) ? source.defaultTags : [],
     };
   } catch {
     return null;
@@ -340,6 +344,7 @@ interface SourceCatalogItem {
   sourceTier: string;
   institutionType: string;
   jurisdiction: string;
+  sourceRole: SourceRole;
   entryCount: number;
   domains: string[];
   avgIqs: number | null;
@@ -347,6 +352,8 @@ interface SourceCatalogItem {
   lastSeen: string | null;
   sampleUrl: string | null;
 }
+
+type SourceRole = 'official_info' | 'trusted_tool' | 'context_info';
 
 interface PlainLanguageReviewResponse {
   entry: Entry;
@@ -656,20 +663,63 @@ function getEntrySourceMeta(entry: Entry) {
     typeof provenance?.jurisdiction === 'string' && provenance.jurisdiction.trim()
       ? provenance.jurisdiction.trim()
       : inferred?.jurisdiction || 'unknown';
+  const lowerUrl = (entry.url || '').toLowerCase();
+  const sourceId =
+    typeof provenance?.sourceId === 'string' && provenance.sourceId.trim()
+      ? provenance.sourceId.trim()
+      : inferred?.sourceId || '';
+  const defaultTags =
+    Array.isArray(inferred?.defaultTags) ? inferred.defaultTags : [];
+
+  let sourceRole: SourceRole = 'context_info';
+  if (
+    sourceTier === 'tier_1_official' ||
+    sourceId === 'service115' ||
+    sourceId === 'gebaerdentelefon'
+  ) {
+    sourceRole = 'official_info';
+  } else if (
+    entry.domain === 'tools' ||
+    sourceId === 'dasstehtdirzu' ||
+    sourceId === 'familienportal' && lowerUrl.includes('lotse') ||
+    lowerUrl.includes('/rechner') ||
+    lowerUrl.includes('kiz-lotse') ||
+    defaultTags.includes('calculator') ||
+    institutionType === 'advisory'
+  ) {
+    sourceRole = 'trusted_tool';
+  }
 
   return {
     source,
     sourceTier,
     institutionType,
     jurisdiction,
+    sourceRole,
   };
+}
+
+function getSourceRoleLabel(role: SourceRole, locale: keyof MultilingualText = 'de'): string {
+  const labels =
+    locale === 'en'
+      ? {
+          official_info: 'Official info',
+          trusted_tool: 'Trusted tool',
+          context_info: 'Context',
+        }
+      : {
+          official_info: 'Amtliche Info',
+          trusted_tool: 'Vertrauenswuerdiges Werkzeug',
+          context_info: 'Kontext',
+        };
+  return labels[role];
 }
 
 export function getEntryTitleText(entry: Pick<Entry, 'title' | 'title_de' | 'title_en'>, locale: keyof MultilingualText = 'de'): string {
   return getLocalizedTitle(entry.title, locale === 'en' ? entry.title_en ?? entry.title_de ?? '' : entry.title_de, locale);
 }
 
-export { getEntrySourceMeta };
+export { getEntrySourceMeta, getSourceRoleLabel };
 
 function normalizeEntriesPayload(payload: unknown, domainFallback?: string): Entry[] {
   const payloadRecord = isJsonRecord(payload) ? payload : null;
@@ -872,6 +922,7 @@ function buildSourceCatalog(entries: Entry[]): SourceCatalogItem[] {
         sourceTier: meta.sourceTier,
         institutionType: meta.institutionType,
         jurisdiction: meta.jurisdiction,
+        sourceRole: meta.sourceRole,
         entryCount: 1,
         domains: [entry.domain],
         avgIqs: Number.isFinite(iqs) ? iqs : null,

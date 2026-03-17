@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import { api, getEntrySourceMeta } from '../lib/api';
+import { api, getEntrySourceMeta, getSourceRoleLabel } from '../lib/api';
 import type { Entry, Provenance } from '../lib/api';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -266,6 +266,9 @@ export default function EntryPage() {
             <span className="inline-flex rounded-full border px-3 py-1 text-xs font-medium">
               {t('entry.field_source')}: {sourceMeta.source}
             </span>
+            <span className="inline-flex rounded-full border px-3 py-1 text-xs font-medium">
+              {t('entry.field_source_role')}: {getSourceRoleLabel(sourceMeta.sourceRole, locale)}
+            </span>
             {!isAdmin && isKnownBadgeValue(sourceMeta.jurisdiction) && (
               <span className="inline-flex rounded-full border px-3 py-1 text-xs font-medium">
                 {t('entry.field_jurisdiction')}: {sourceMeta.jurisdiction}
@@ -410,6 +413,7 @@ export default function EntryPage() {
             <InfoList
               items={[
                 { label: t('entry.field_source'), value: sourceMeta.source },
+                { label: t('entry.field_source_role'), value: getSourceRoleLabel(sourceMeta.sourceRole, locale) },
                 ...(isKnownBadgeValue(sourceMeta.institutionType)
                   ? [{ label: t('entry.field_source_type'), value: badgeLabel(sourceMeta.institutionType) }]
                   : []),

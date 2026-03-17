@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { api, type Entry } from '../lib/api';
+import { api, getEntrySourceMeta, getSourceRoleLabel, type Entry } from '../lib/api';
 import type { AIHealthResponse, AIResultBundle } from '../lib/api';
 import SearchInput from '../components/SearchInput';
 import ResultsList from '../components/ResultsList';
@@ -80,7 +80,7 @@ function statusText(value: boolean | undefined, t: (key: string) => string) {
 }
 
 export default function SearchPage() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const translate = t as unknown as (key: string, vars?: Record<string, string | number>) => string;
   const turnstileSiteKey = (import.meta.env.VITE_TURNSTILE_SITE_KEY || '').trim();
   const turnstileEnabled = Boolean(turnstileSiteKey);
@@ -344,6 +344,14 @@ export default function SearchPage() {
           ? t('search.answer_source_fallback')
           : '';
 
+  const evidenceRoleLabels = useMemo(() => {
+    const labels = new Set<string>();
+    for (const entry of aiResult?.relatedEntries || []) {
+      labels.add(getSourceRoleLabel(getEntrySourceMeta(entry).sourceRole, locale));
+    }
+    return Array.from(labels);
+  }, [aiResult?.relatedEntries, locale]);
+
   return (
     <div className="mx-auto w-full max-w-5xl p-4 md:p-6">
       <div className="mb-6 rounded-3xl border bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.12),transparent_35%),linear-gradient(180deg,rgba(248,250,252,0.95),rgba(255,255,255,1))] p-5 shadow-sm md:p-6">
@@ -557,6 +565,18 @@ export default function SearchPage() {
                           {aiResult?.synthesis.fallback && <span>{t('search.status_fallback')}</span>}
                           {aiResult?.synthesis.weak_evidence && <span>{t('search.status_weak_evidence')}</span>}
                           {aiSynthesisLoading && <span>{t('search.status_generating')}</span>}
+                        </div>
+                      )}
+                      {submittedAiQuery && evidenceRoleLabels.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {evidenceRoleLabels.map((label) => (
+                            <span
+                              key={label}
+                              className="inline-flex rounded-full border bg-muted px-2.5 py-1 text-xs font-medium text-foreground"
+                            >
+                              {label}
+                            </span>
+                          ))}
                         </div>
                       )}
                     </Card>

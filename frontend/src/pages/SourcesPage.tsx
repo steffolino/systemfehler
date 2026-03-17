@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { api, type SourceCatalogItem } from '@/lib/api';
+import { api, getSourceRoleLabel, type SourceCatalogItem } from '@/lib/api';
 import { useI18n } from '@/lib/i18n';
 
 function prettyLabel(value: string) {
@@ -116,13 +116,19 @@ export default function SourcesPage() {
           <div className="rounded-xl border p-4">
             <div className="text-xs uppercase tracking-wide text-muted-foreground">{t('sources.stats_official')}</div>
             <div className="mt-2 text-2xl font-semibold">
-              {sources.filter((source) => source.sourceTier === 'tier_1_official').length}
+              {sources.filter((source) => source.sourceRole === 'official_info').length}
             </div>
           </div>
           <div className="rounded-xl border p-4">
-            <div className="text-xs uppercase tracking-wide text-muted-foreground">{t('sources.stats_ngo')}</div>
+            <div className="text-xs uppercase tracking-wide text-muted-foreground">{t('sources.stats_tools')}</div>
             <div className="mt-2 text-2xl font-semibold">
-              {sources.filter((source) => source.sourceTier === 'tier_2_ngo_watchdog').length}
+              {sources.filter((source) => source.sourceRole === 'trusted_tool').length}
+            </div>
+          </div>
+          <div className="rounded-xl border p-4 md:col-span-2">
+            <div className="text-xs uppercase tracking-wide text-muted-foreground">{t('sources.stats_context')}</div>
+            <div className="mt-2 text-2xl font-semibold">
+              {sources.filter((source) => source.sourceRole === 'context_info').length}
             </div>
           </div>
         </div>
@@ -175,6 +181,9 @@ export default function SourcesPage() {
                           <div className="mt-1 text-sm text-muted-foreground">{source.host}</div>
 
                           <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                            <span className="rounded-full border px-3 py-1">
+                              {getSourceRoleLabel(source.sourceRole, locale)}
+                            </span>
                             {isKnownBadgeValue(source.sourceTier) && (
                               <span className="rounded-full border px-3 py-1">{prettyLabel(source.sourceTier)}</span>
                             )}
