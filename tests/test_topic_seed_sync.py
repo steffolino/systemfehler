@@ -150,6 +150,69 @@ class TopicSeedSyncTests(unittest.TestCase):
             self.assertEqual(len(payload["seeds"]), 1)
             self.assertTrue(payload["seeds"][0]["url"].endswith("buergertelefon.html"))
 
+    def test_sync_topic_seeds_allows_trusted_tool_sources_for_tools(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            data_dir = Path(tmp) / "data"
+            (data_dir / "_topics").mkdir(parents=True)
+            (data_dir / "tools").mkdir(parents=True)
+            (data_dir / "_sources").mkdir(parents=True)
+
+            (data_dir / "_sources" / "registered_sources.json").write_text(
+                json.dumps(
+                    {
+                        "sources": [
+                            {
+                                "id": "dasstehtdirzu",
+                                "name": "Das steht dir zu",
+                                "baseUrl": "https://www.das-steht-dir-zu.de",
+                                "domains": ["tools"],
+                                "sourceTier": "tier_2_ngo_watchdog",
+                                "institutionType": "advisory",
+                                "jurisdiction": "DE",
+                                "defaultTargetGroups": ["unemployed", "general_public"],
+                            }
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (data_dir / "_topics" / "trusted_topic_sources.json").write_text(
+                json.dumps(
+                    {
+                        "topics": [
+                            {
+                                "id": "buergergeld_rechner",
+                                "name": "Buergergeld Rechner",
+                                "domains": ["tools"],
+                                "keywords": ["rechner"],
+                                "sources": [
+                                    {
+                                        "sourceId": "dasstehtdirzu",
+                                        "role": "trusted_tool_source",
+                                        "priority": "critical",
+                                        "seedUrls": [
+                                            "https://www.das-steht-dir-zu.de/arbeit/buergergeld/der-buergergeld-rechner/index.html"
+                                        ],
+                                    }
+                                ],
+                            }
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (data_dir / "tools" / "seeds.json").write_text(
+                json.dumps({"version": "0.1.0", "domain": "tools", "seeds": []}),
+                encoding="utf-8",
+            )
+
+            report = TopicDiscovery(data_dir).sync_seed_manifest("tools")
+            payload = json.loads((data_dir / "tools" / "seeds.json").read_text(encoding="utf-8"))
+
+            self.assertEqual(report["seedCount"], 1)
+            self.assertEqual(payload["seeds"][0]["source"], "dasstehtdirzu")
+            self.assertIn("trusted_tool_source", payload["seeds"][0]["tags"])
+
 
 if __name__ == "__main__":
     unittest.main()

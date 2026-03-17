@@ -513,6 +513,72 @@
           ]
         }
       ]
+    },
+    {
+      "id": "buergergeld_rechner",
+      "name": "Buergergeld Rechner",
+      "domains": ["tools", "aid"],
+      "keywords": [
+        "buergergeld rechner",
+        "rechner",
+        "anspruch pruefen",
+        "anspruch prüfen",
+        "das steht dir zu"
+      ],
+      "sources": [
+        {
+          "sourceId": "dasstehtdirzu",
+          "role": "trusted_tool_source",
+          "priority": "critical",
+          "preferredPathPatterns": [
+            "/arbeit/buergergeld/der-buergergeld-rechner"
+          ],
+          "seedUrls": [
+            "https://www.das-steht-dir-zu.de/arbeit/buergergeld/der-buergergeld-rechner/index.html"
+          ]
+        },
+        {
+          "sourceId": "dielinke",
+          "role": "discovery_context_source",
+          "priority": "medium",
+          "preferredPathPatterns": [
+            "/mitmachen/linksaktiv/",
+            "/mehr-geld-in-der-krise/"
+          ],
+          "seedUrls": [
+            "https://www.die-linke.de/mitmachen/linksaktiv/preise-deckeln/mehr-geld-in-der-krise/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sozialrecht_glossar",
+      "name": "Sozialrecht Glossar",
+      "domains": ["aid"],
+      "keywords": [
+        "glossar",
+        "bewilligungszeitraum",
+        "freibetraege",
+        "freibeträge",
+        "zuverdienst",
+        "buergergeld"
+      ],
+      "sources": [
+        {
+          "sourceId": "caritas",
+          "role": "trusted_glossary_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/glossare/"
+          ],
+          "seedUrls": [
+            "https://www.caritas.de/glossare/buergergeld",
+            "https://www.caritas.de/glossare/bewilligungszeitraum",
+            "https://www.caritas.de/glossare/freibetraege",
+            "https://www.caritas.de/glossare/zuverdienst"
+          ]
+        }
+      ]
     }
   ]
 }

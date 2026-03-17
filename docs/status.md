@@ -171,6 +171,8 @@ python crawlers/cli.py discover-topic --query "Wie beantrage ich Kinderzuschlag?
 # Sync curated seed manifests from trusted topic profiles
 python crawlers/cli.py sync-topic-seeds --domain benefits
 python crawlers/cli.py sync-topic-seeds --domain contacts
+python crawlers/cli.py sync-topic-seeds --domain aid
+python crawlers/cli.py sync-topic-seeds --domain tools
 
 # Validate all entries
 npm run validate

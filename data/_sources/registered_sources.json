@@ -268,6 +268,137 @@
       "status": "active"
     },
     {
+      "id": "caritas",
+      "name": "Deutscher Caritasverband",
+      "baseUrl": "https://www.caritas.de",
+      "domains": [
+        "aid",
+        "tools"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_2_ngo_watchdog",
+      "institutionType": "ngo",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "financial_support",
+        "rights"
+      ],
+      "defaultTags": [
+        "advisory",
+        "glossary"
+      ],
+      "defaultTargetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ],
+      "services": [
+        "Sozialrechtsinformation",
+        "Glossar",
+        "Beratung"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "dasstehtdirzu",
+      "name": "Das steht dir zu",
+      "baseUrl": "https://www.das-steht-dir-zu.de",
+      "domains": [
+        "tools",
+        "aid"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_2_ngo_watchdog",
+      "institutionType": "advisory",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "financial_support",
+        "digital_service"
+      ],
+      "defaultTags": [
+        "calculator",
+        "advisory"
+      ],
+      "defaultTargetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ],
+      "services": [
+        "Leistungsrechner",
+        "Anspruchscheck"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "dielinke",
+      "name": "Die Linke",
+      "baseUrl": "https://www.die-linke.de",
+      "domains": [
+        "aid"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "medium",
+      "sourceTier": "tier_3_contextual",
+      "institutionType": "political",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "financial_support",
+        "context"
+      ],
+      "defaultTags": [
+        "context",
+        "discovery_hub"
+      ],
+      "defaultTargetGroups": [
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "correctiv",
+      "name": "Correctiv",
+      "baseUrl": "https://correctiv.org",
+      "domains": [
+        "aid"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "medium",
+      "sourceTier": "tier_3_contextual",
+      "institutionType": "journalism",
+      "providerLevel": "media",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "context",
+        "rights"
+      ],
+      "defaultTags": [
+        "journalism",
+        "context"
+      ],
+      "defaultTargetGroups": [
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
       "id": "hilfetelefon",
       "name": "Hilfetelefon",
       "baseUrl": "https://www.hilfetelefon.de",

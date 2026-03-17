@@ -1,7 +1,18 @@
 {
   "version": "0.1.0",
   "domain": "tools",
-  "note": "Curated high-value starting points for tool and e-service crawling. Expanded URL queues remain in urls.json.",
+  "_meta": {
+    "note": "Curated high-signal tools seeds enriched from trusted topic profiles",
+    "maintainedBy": "codex",
+    "syncedFromTrustedTopics": true,
+    "topicIds": [
+      "antrag_bescheid",
+      "buergergeld",
+      "buergergeld_rechner",
+      "kinderzuschlag",
+      "kontakt_arbeitsagentur"
+    ]
+  },
   "seeds": [
     {
       "url": "https://www.arbeitsagentur.de/eservices",
@@ -11,19 +22,14 @@
       "institutionType": "government",
       "jurisdiction": "DE",
       "seedCategory": "tool-overview",
-      "topics": ["digital_service", "employment"],
-      "tags": ["official_source", "portal"]
-    },
-    {
-      "url": "https://www.familienportal.de/familienportal/rechner-antraege/elterngeldrechner",
-      "label": "Elterngeldrechner",
-      "priority": 20,
-      "sourceTier": "tier_1_official",
-      "institutionType": "government",
-      "jurisdiction": "DE",
-      "seedCategory": "calculator",
-      "topics": ["digital_service", "families"],
-      "tags": ["calculator", "elterngeld"]
+      "topics": [
+        "digital_service",
+        "employment"
+      ],
+      "tags": [
+        "official_source",
+        "portal"
+      ]
     },
     {
       "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kiz-lotse",
@@ -33,19 +39,14 @@
       "institutionType": "government",
       "jurisdiction": "DE",
       "seedCategory": "checker",
-      "topics": ["digital_service", "families"],
-      "tags": ["checker", "kinderzuschlag"]
-    },
-    {
-      "url": "https://www.bafza.de/programme-und-foerderungen/familienpflegezeit/familienpflegezeit-rechner",
-      "label": "Familienpflegezeit-Rechner",
-      "priority": 40,
-      "sourceTier": "tier_1_official",
-      "institutionType": "government",
-      "jurisdiction": "DE",
-      "seedCategory": "calculator",
-      "topics": ["digital_service", "care"],
-      "tags": ["calculator", "pflege"]
+      "topics": [
+        "digital_service",
+        "families"
+      ],
+      "tags": [
+        "checker",
+        "kinderzuschlag"
+      ]
     },
     {
       "url": "https://www.arbeitsagentur.de/jobsuche/",
@@ -55,8 +56,66 @@
       "institutionType": "government",
       "jurisdiction": "DE",
       "seedCategory": "job-search",
-      "topics": ["digital_service", "employment"],
-      "tags": ["job-search", "portal"]
+      "topics": [
+        "digital_service",
+        "employment"
+      ],
+      "tags": [
+        "job-search",
+        "portal"
+      ]
+    },
+    {
+      "url": "https://www.bafza.de/programme-und-foerderungen/familienpflegezeit/familienpflegezeit-rechner",
+      "label": "Familienpflegezeit-Rechner",
+      "priority": 40,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "calculator",
+      "topics": [
+        "digital_service",
+        "care"
+      ],
+      "tags": [
+        "calculator",
+        "pflege"
+      ]
+    },
+    {
+      "url": "https://www.das-steht-dir-zu.de/arbeit/buergergeld/der-buergergeld-rechner/index.html",
+      "enabled": true,
+      "source": "dasstehtdirzu",
+      "label": "Buergergeld Rechner Index.html",
+      "topics": [
+        "buergergeld_rechner"
+      ],
+      "tags": [
+        "trusted_tool_source",
+        "calculator"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.familienportal.de/familienportal/rechner-antraege/elterngeldrechner",
+      "label": "Elterngeldrechner",
+      "priority": 20,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "calculator",
+      "topics": [
+        "digital_service",
+        "families"
+      ],
+      "tags": [
+        "calculator",
+        "elterngeld"
+      ]
     }
   ]
 }

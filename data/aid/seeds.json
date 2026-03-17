@@ -1,41 +1,160 @@
 {
   "version": "0.1.0",
   "domain": "aid",
-  "note": "Curated high-value starting points for aid crawling. Expanded URL queues remain in urls.json.",
+  "_meta": {
+    "note": "Curated high-signal aid seeds enriched from trusted topic profiles",
+    "maintainedBy": "codex",
+    "syncedFromTrustedTopics": true,
+    "topicIds": [
+      "aufstocker",
+      "bedarfsgemeinschaft",
+      "buergergeld",
+      "buergergeld_rechner",
+      "kinderzuschlag",
+      "kontakt_arbeitsagentur",
+      "leichte_sprache_soziale_sicherheit",
+      "mehrbedarf",
+      "pflichten",
+      "regelbedarf",
+      "sozialrecht_glossar"
+    ]
+  },
   "seeds": [
     {
-      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen",
-      "label": "Familienleistungen overview",
-      "priority": 10,
-      "sourceTier": "tier_1_official",
-      "institutionType": "government",
-      "jurisdiction": "DE",
-      "seedCategory": "benefit-overview",
-      "topics": ["financial_support", "families"],
-      "tags": ["official_source", "benefit-overview"],
-      "targetGroups": ["families", "single_parents"]
+      "url": "https://sanktionsfrei.de/mehrbedarf",
+      "enabled": true,
+      "source": "sanktionsfrei",
+      "label": "Buergergeld Mehrbedarf",
+      "topics": [
+        "buergergeld",
+        "mehrbedarf"
+      ],
+      "tags": [
+        "ngo_context_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
     },
     {
-      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kinderzuschlag-und-leistungen-fuer-bildung-und-teilhabe-73906",
-      "label": "Kinderzuschlag and Bildungspaket",
-      "priority": 20,
-      "sourceTier": "tier_1_official",
-      "institutionType": "government",
-      "jurisdiction": "DE",
-      "seedCategory": "benefit-detail",
-      "topics": ["financial_support", "children"],
-      "tags": ["application_required", "children"]
+      "url": "https://sanktionsfrei.de/schulbonus",
+      "enabled": true,
+      "source": "sanktionsfrei",
+      "label": "Buergergeld Schulbonus",
+      "topics": [
+        "buergergeld"
+      ],
+      "tags": [
+        "ngo_context_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
     },
     {
-      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/unterhaltsvorschuss/unterhaltsvorschuss-73558",
-      "label": "Unterhaltsvorschuss",
-      "priority": 30,
-      "sourceTier": "tier_1_official",
-      "institutionType": "government",
-      "jurisdiction": "DE",
-      "seedCategory": "benefit-detail",
-      "topics": ["financial_support", "single_parents"],
-      "tags": ["application_required", "underhaltsvorschuss"]
+      "url": "https://sanktionsfrei.de/studie25",
+      "enabled": true,
+      "source": "sanktionsfrei",
+      "label": "Buergergeld Studie25",
+      "topics": [
+        "buergergeld",
+        "pflichten"
+      ],
+      "tags": [
+        "ngo_context_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/antrag-bescheid",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "label": "Buergergeld Antrag Bescheid",
+      "topics": [
+        "buergergeld"
+      ],
+      "tags": [
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "label": "Aufstocker Einkommen Ergaenzen",
+      "topics": [
+        "aufstocker",
+        "buergergeld"
+      ],
+      "tags": [
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/voraussetzungen-einkommen-vermoegen",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "label": "Bedarfsgemeinschaft Voraussetzungen Einkommen Vermoegen",
+      "topics": [
+        "bedarfsgemeinschaft",
+        "buergergeld"
+      ],
+      "tags": [
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/zusammensetzung-bedarfe",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "label": "Bedarfsgemeinschaft Zusammensetzung Bedarfe",
+      "topics": [
+        "bedarfsgemeinschaft",
+        "buergergeld",
+        "mehrbedarf",
+        "regelbedarf"
+      ],
+      "tags": [
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/pflichten-verstehen-und-beachten",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "label": "Buergergeld Pflichten Verstehen Und Beachten",
+      "topics": [
+        "buergergeld",
+        "pflichten"
+      ],
+      "tags": [
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
     },
     {
       "url": "https://www.arbeitsagentur.de/familie-und-kinder/informationen-zum-bildungspaket",
@@ -45,8 +164,88 @@
       "institutionType": "government",
       "jurisdiction": "DE",
       "seedCategory": "benefit-detail",
-      "topics": ["financial_support", "education"],
-      "tags": ["official_source", "education"]
+      "topics": [
+        "financial_support",
+        "education"
+      ],
+      "tags": [
+        "official_source",
+        "education"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "label": "Buergergeld Kinderzuschlag Verstehen",
+      "topics": [
+        "buergergeld",
+        "kinderzuschlag"
+      ],
+      "tags": [
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kinderzuschlag-anspruch-hoehe-dauer",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "label": "Buergergeld Kinderzuschlag Anspruch Hoehe Dauer",
+      "topics": [
+        "buergergeld",
+        "kinderzuschlag"
+      ],
+      "tags": [
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/lexikon/aufstocker",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "label": "Aufstocker Aufstocker",
+      "topics": [
+        "aufstocker",
+        "bedarfsgemeinschaft",
+        "buergergeld",
+        "leichte_sprache_soziale_sicherheit"
+      ],
+      "tags": [
+        "official_glossary_source",
+        "glossary"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/lexikon/bedarfsgemeinschaft",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "label": "Bedarfsgemeinschaft Bedarfsgemeinschaft",
+      "topics": [
+        "bedarfsgemeinschaft",
+        "buergergeld",
+        "leichte_sprache_soziale_sicherheit",
+        "regelbedarf"
+      ],
+      "tags": [
+        "official_glossary_source",
+        "glossary"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
     },
     {
       "url": "https://www.bafza.de/rat-und-hilfe/pflegetelefon",
@@ -56,8 +255,194 @@
       "institutionType": "government",
       "jurisdiction": "DE",
       "seedCategory": "advisory-service",
-      "topics": ["aid", "care"],
-      "tags": ["advisory", "contact"]
+      "topics": [
+        "aid",
+        "care"
+      ],
+      "tags": [
+        "advisory",
+        "contact"
+      ]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Leichte-Sprache/Soziale-Sicherheit/soziale-sicherheit.html",
+      "enabled": true,
+      "source": "bmas",
+      "label": "Bedarfsgemeinschaft Soziale Sicherheit.html",
+      "topics": [
+        "bedarfsgemeinschaft",
+        "buergergeld",
+        "leichte_sprache_soziale_sicherheit",
+        "mehrbedarf"
+      ],
+      "tags": [
+        "official_light_language_source",
+        "light_language"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Service/Publikationen/Broschueren/a206-regelbedarf.html",
+      "enabled": true,
+      "source": "bmas",
+      "label": "Buergergeld A206 Regelbedarf.html",
+      "topics": [
+        "buergergeld",
+        "regelbedarf"
+      ],
+      "tags": [
+        "official_background_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen",
+      "label": "Familienleistungen overview",
+      "priority": 10,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "benefit-overview",
+      "topics": [
+        "financial_support",
+        "families"
+      ],
+      "tags": [
+        "official_source",
+        "benefit-overview"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents"
+      ]
+    },
+    {
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kinderzuschlag-und-leistungen-fuer-bildung-und-teilhabe-73906",
+      "label": "Kinderzuschlag and Bildungspaket",
+      "priority": 20,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "benefit-detail",
+      "topics": [
+        "financial_support",
+        "children"
+      ],
+      "tags": [
+        "application_required",
+        "children"
+      ]
+    },
+    {
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/unterhaltsvorschuss/unterhaltsvorschuss-73558",
+      "label": "Unterhaltsvorschuss",
+      "priority": 30,
+      "sourceTier": "tier_1_official",
+      "institutionType": "government",
+      "jurisdiction": "DE",
+      "seedCategory": "benefit-detail",
+      "topics": [
+        "financial_support",
+        "single_parents"
+      ],
+      "tags": [
+        "application_required",
+        "underhaltsvorschuss"
+      ]
+    },
+    {
+      "url": "https://www.caritas.de/glossare/bewilligungszeitraum",
+      "enabled": true,
+      "source": "caritas",
+      "label": "Sozialrecht Glossar Bewilligungszeitraum",
+      "topics": [
+        "sozialrecht_glossar"
+      ],
+      "tags": [
+        "trusted_glossary_source",
+        "glossary"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.caritas.de/glossare/buergergeld",
+      "enabled": true,
+      "source": "caritas",
+      "label": "Sozialrecht Glossar Buergergeld",
+      "topics": [
+        "sozialrecht_glossar"
+      ],
+      "tags": [
+        "trusted_glossary_source",
+        "glossary"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.caritas.de/glossare/freibetraege",
+      "enabled": true,
+      "source": "caritas",
+      "label": "Sozialrecht Glossar Freibetraege",
+      "topics": [
+        "sozialrecht_glossar"
+      ],
+      "tags": [
+        "trusted_glossary_source",
+        "glossary"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.caritas.de/glossare/zuverdienst",
+      "enabled": true,
+      "source": "caritas",
+      "label": "Sozialrecht Glossar Zuverdienst",
+      "topics": [
+        "sozialrecht_glossar"
+      ],
+      "tags": [
+        "trusted_glossary_source",
+        "glossary"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.die-linke.de/mitmachen/linksaktiv/preise-deckeln/mehr-geld-in-der-krise/",
+      "enabled": true,
+      "source": "dielinke",
+      "label": "Buergergeld Rechner Mehr Geld In Der Krise",
+      "topics": [
+        "buergergeld_rechner"
+      ],
+      "tags": [
+        "discovery_context_source",
+        "context"
+      ],
+      "targetGroups": [
+        "general_public"
+      ]
     }
   ]
 }
