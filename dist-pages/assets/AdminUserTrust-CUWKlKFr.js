@@ -1,1 +1,0 @@
-import{j as r}from"./index-CkGwBFCz.js";function e(){return r.jsxs("div",{className:"max-w-2xl mx-auto p-8",children:[r.jsx("h2",{className:"text-xl font-bold mb-4",children:"User Trust Profile"}),r.jsx("p",{children:"Approval/rejection rates and moderation history will be shown here."})]})}function t(){return r.jsx(e,{})}export{t as default};

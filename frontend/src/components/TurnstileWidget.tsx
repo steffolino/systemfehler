@@ -1,3 +1,4 @@
+// TurnstileWidget.tsx
 import { useEffect, useRef } from 'react';
 
 declare global {
@@ -50,69 +51,125 @@ export default function TurnstileWidget({
   const widgetIdRef = useRef<string | null>(null);
   const resolveRef = useRef<((token: string) => void) | null>(null);
   const rejectRef = useRef<((error: Error) => void) | null>(null);
+  const pendingRef = useRef(false);
+  const onReadyRef = useRef(onReady);
+
+  useEffect(() => {
+    onReadyRef.current = onReady;
+  }, [onReady]);
 
   useEffect(() => {
     let active = true;
 
     async function setup() {
-      if (!containerRef.current || !siteKey) {
-        onReady(null);
-        return;
-      }
+      try {
+        if (!containerRef.current || !siteKey) {
+          onReadyRef.current(null);
+          return;
+        }
 
-      await loadTurnstileScript();
-      if (!active || !window.turnstile || !containerRef.current) return;
+        await loadTurnstileScript();
 
-      widgetIdRef.current = window.turnstile.render(containerRef.current, {
-        sitekey: siteKey,
-        size: 'invisible',
-        callback: (token: string) => {
-          resolveRef.current?.(token);
-          resolveRef.current = null;
-          rejectRef.current = null;
-        },
-        'error-callback': () => {
-          rejectRef.current?.(new Error('Bot protection challenge failed.'));
-          resolveRef.current = null;
-          rejectRef.current = null;
-        },
-        'expired-callback': () => {
-          rejectRef.current?.(new Error('Bot protection challenge expired.'));
-          resolveRef.current = null;
-          rejectRef.current = null;
-        },
-      });
+        if (!active || !window.turnstile || !containerRef.current) return;
 
-      onReady(() => {
-        return new Promise<string>((resolve, reject) => {
-          if (!window.turnstile || !widgetIdRef.current) {
-            reject(new Error('Turnstile is not ready.'));
-            return;
-          }
+        if (widgetIdRef.current) {
+          window.turnstile.remove?.(widgetIdRef.current);
+          widgetIdRef.current = null;
+        }
 
-          resolveRef.current = resolve;
-          rejectRef.current = reject;
-          window.turnstile.reset(widgetIdRef.current);
-          window.turnstile.execute(widgetIdRef.current);
+        widgetIdRef.current = window.turnstile.render(containerRef.current, {
+          sitekey: siteKey,
+          callback: (token: string) => {
+            pendingRef.current = false;
+            resolveRef.current?.(token);
+            resolveRef.current = null;
+            rejectRef.current = null;
+          },
+          'error-callback': () => {
+            pendingRef.current = false;
+            rejectRef.current?.(new Error('Bot protection challenge failed.'));
+            resolveRef.current = null;
+            rejectRef.current = null;
+          },
+          'expired-callback': () => {
+            pendingRef.current = false;
+            rejectRef.current?.(new Error('Bot protection challenge expired.'));
+            resolveRef.current = null;
+            rejectRef.current = null;
+          },
         });
-      });
+
+        const getToken = () =>
+          new Promise<string>((resolve, reject) => {
+            if (!window.turnstile || !widgetIdRef.current) {
+              reject(new Error('Turnstile is not ready.'));
+              return;
+            }
+
+            if (pendingRef.current) {
+              reject(new Error('Turnstile request already in progress.'));
+              return;
+            }
+
+            pendingRef.current = true;
+
+            const timeoutId = window.setTimeout(() => {
+              if (pendingRef.current) {
+                pendingRef.current = false;
+                rejectRef.current?.(new Error('Turnstile timed out.'));
+                resolveRef.current = null;
+                rejectRef.current = null;
+              }
+            }, 30000);
+
+            resolveRef.current = (token: string) => {
+              window.clearTimeout(timeoutId);
+              resolve(token);
+            };
+
+            rejectRef.current = (error: Error) => {
+              window.clearTimeout(timeoutId);
+              reject(error);
+            };
+
+            window.turnstile.reset(widgetIdRef.current);
+            window.turnstile.execute(widgetIdRef.current);
+          });
+
+        onReadyRef.current(getToken);
+      } catch (error) {
+        console.error('Turnstile setup failed:', error);
+        pendingRef.current = false;
+        if (active) onReadyRef.current(null);
+      }
     }
 
-    void setup().catch(() => {
-      if (active) onReady(null);
-    });
+    void setup();
 
     return () => {
       active = false;
-      onReady(null);
+      pendingRef.current = false;
+
+      if (rejectRef.current) {
+        rejectRef.current(new Error('Turnstile widget was unmounted.'));
+      }
+
       resolveRef.current = null;
       rejectRef.current = null;
+
       if (window.turnstile && widgetIdRef.current) {
         window.turnstile.remove?.(widgetIdRef.current);
       }
+
       widgetIdRef.current = null;
     };
-  }, [onReady, siteKey]);
+  }, [siteKey]);
 
-  return <div ref={containerRef} className="hidden" aria-hidden="true" />;
+  return (
+    <div
+      ref={containerRef}
+      className="pointer-events-none absolute -left-[9999px] top-0 h-px w-px overflow-hidden opacity-0"
+      aria-hidden="true"
+    />
+  );
 }

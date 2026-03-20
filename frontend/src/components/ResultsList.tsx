@@ -13,7 +13,7 @@ export default function ResultsList({ results }: ResultsListProps) {
     return <div className="p-4 text-sm text-muted-foreground">{t('common.no_results_simple')}</div>;
   }
   return (
-    <div className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 xl:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2">
       {results.map((result) => (result && result.id ? <ResultCard key={result.id} result={result} /> : null))}
     </div>
   );

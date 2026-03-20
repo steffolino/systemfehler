@@ -1,1 +1,0 @@
-import{j as e}from"./index-CkGwBFCz.js";import{C as a}from"./card-D2wvaeYQ.js";function s(){return e.jsx("div",{className:"max-w-2xl mx-auto p-8",children:e.jsxs(a,{className:"p-6 mb-4",children:[e.jsx("h2",{className:"text-xl font-bold mb-2",children:"Moderation Queue"}),e.jsx("p",{children:"Moderation queue and review tools will appear here."})]})})}export{s as default};

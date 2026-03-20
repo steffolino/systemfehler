@@ -231,32 +231,19 @@ export function buildGroundedReadableAnswer(
   const selectedEntries = entries.slice(0, 3);
   if (selectedEntries.length === 0) return '';
 
-  if (mode === 'einfach') {
-    const blocks = selectedEntries
-      .map((entry) => {
-        const title = getPrimaryTitle(entry);
-        const summary = getReadableEntrySummary(entry, 'einfach') || getReadableEntrySummary(entry, 'standard');
-        if (!summary) return '';
-        return title ? `${title}\n${summary}` : summary;
-      })
-      .filter(Boolean);
-
-    return blocks.join('\n\n');
-  }
-
-  const lines: string[] = [];
+  // Build a more narrative grounded answer by extracting readable entry text
+  // for the requested mode and concatenating into coherent paragraphs.
+  const paragraphs: string[] = [];
   for (const entry of selectedEntries) {
+    const readable = getReadableEntryText(entry, mode);
+    if (!readable) continue;
     const title = getPrimaryTitle(entry);
-    const summary = getReadableEntrySummary(entry, 'leicht') || getReadableEntrySummary(entry, 'standard');
-    if (title) {
-      lines.push(title);
-    }
-    if (summary) {
-      lines.push(...splitSentences(summary).slice(0, 2));
-    }
+    // If title is present, prepend it as a short heading, then the readable text.
+    paragraphs.push(title ? `${title}\n\n${readable}` : readable);
   }
 
-  return shortenLines(lines, 12).join('\n');
+  // Join paragraphs with spacing to produce a readable answer rather than bullet lists.
+  return paragraphs.slice(0, 3).join('\n\n');
 }
 
 function sentenceCount(text: string) {
