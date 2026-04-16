@@ -3,7 +3,7 @@
   "domain": "benefits",
   "_meta": {
     "generatedBy": "seed-manifest",
-    "generatedAt": "2026-03-16T15:07:40.988624+00:00",
+    "generatedAt": "2026-03-20T22:04:47.545141+00:00",
     "note": "Automatically discovered high-signal related URLs from crawled pages"
   },
   "seeds": [
@@ -13,15 +13,15 @@
       "source": "arbeitsagentur",
       "topics": [
         "financial_support",
-        "leichte_sprache_soziale_sicherheit"
+        "buergergeld"
       ],
       "tags": [
-        "official_light_language_source",
-        "light_language"
+        "application_required",
+        "official_rule_source"
       ],
       "targetGroups": [
-        "general_public",
-        "persons_with_disabilities"
+        "unemployed",
+        "families"
       ]
     },
     {
@@ -63,20 +63,7 @@
     {
       "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/wohnen",
       "enabled": true,
-      "source": "arbeitsagentur",
-      "topics": [
-        "financial_support",
-        "buergergeld",
-        "aufstocker"
-      ],
-      "tags": [
-        "official_rule_source",
-        "income_support"
-      ],
-      "targetGroups": [
-        "low_income_workers",
-        "families"
-      ]
+      "source": "arbeitsagentur"
     },
     {
       "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/termin-jobcenter",
@@ -132,19 +119,7 @@
     {
       "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/unterstuetzung-fuer-familien",
       "enabled": true,
-      "source": "arbeitsagentur",
-      "topics": [
-        "financial_support",
-        "buergergeld"
-      ],
-      "tags": [
-        "application_required",
-        "official_rule_source"
-      ],
-      "targetGroups": [
-        "unemployed",
-        "families"
-      ]
+      "source": "arbeitsagentur"
     },
     {
       "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/gesundheit",
@@ -235,19 +210,7 @@
     {
       "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/informationen-zum-unterhalt",
       "enabled": true,
-      "source": "arbeitsagentur",
-      "topics": [
-        "financial_support",
-        "buergergeld"
-      ],
-      "tags": [
-        "application_required",
-        "official_rule_source"
-      ],
-      "targetGroups": [
-        "unemployed",
-        "families"
-      ]
+      "source": "arbeitsagentur"
     },
     {
       "url": "https://www.arbeitsagentur.de/lexikon/bedarfsgemeinschaft",
@@ -309,19 +272,7 @@
     {
       "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/grundsicherung-buergergeld.html",
       "enabled": true,
-      "source": "bmas",
-      "topics": [
-        "financial_support",
-        "buergergeld"
-      ],
-      "tags": [
-        "application_required",
-        "official_rule_source"
-      ],
-      "targetGroups": [
-        "unemployed",
-        "families"
-      ]
+      "source": "bmas"
     },
     {
       "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Leistungen-und-Bedarfe-im-Buergergeld/bescheid-und-widerspruch.html",
@@ -330,12 +281,11 @@
       "topics": [
         "financial_support",
         "buergergeld",
-        "regelbedarf",
-        "mehrbedarf"
+        "eligibility"
       ],
       "tags": [
-        "official_background_source",
-        "benefit_amount"
+        "official_rule_source",
+        "eligibility"
       ],
       "targetGroups": [
         "unemployed",
@@ -345,19 +295,7 @@
     {
       "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Leistungen-und-Bedarfe-im-Buergergeld/leistungen-und-bedarfe-im-buergergeld.html",
       "enabled": true,
-      "source": "bmas",
-      "topics": [
-        "financial_support",
-        "buergergeld"
-      ],
-      "tags": [
-        "application_required",
-        "official_rule_source"
-      ],
-      "targetGroups": [
-        "unemployed",
-        "families"
-      ]
+      "source": "bmas"
     },
     {
       "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einmalige-leistungen",
@@ -382,25 +320,6 @@
       "source": "arbeitsagentur",
       "topics": [
         "financial_support",
-        "buergergeld",
-        "regelbedarf",
-        "mehrbedarf"
-      ],
-      "tags": [
-        "official_rule_source",
-        "benefit_amount"
-      ],
-      "targetGroups": [
-        "unemployed",
-        "families"
-      ]
-    },
-    {
-      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/bildungspaket.html",
-      "enabled": true,
-      "source": "bmas",
-      "topics": [
-        "financial_support",
         "buergergeld"
       ],
       "tags": [
@@ -413,6 +332,11 @@
       ]
     },
     {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/bildungspaket.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
       "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/pflichten-verstehen-und-beachten/abwesenheit-erreichbarkeit",
       "enabled": true,
       "source": "arbeitsagentur",
@@ -422,6 +346,7 @@
         "pflichten"
       ],
       "tags": [
+        "application_required",
         "official_rule_source",
         "obligations"
       ],
@@ -435,18 +360,10 @@
       "enabled": true,
       "source": "arbeitsagentur",
       "topics": [
-        "financial_support",
-        "buergergeld",
         "pflichten"
       ],
       "tags": [
-        "application_required",
-        "official_rule_source",
         "obligations"
-      ],
-      "targetGroups": [
-        "unemployed",
-        "families"
       ]
     },
     {
@@ -459,6 +376,7 @@
         "pflichten"
       ],
       "tags": [
+        "application_required",
         "official_rule_source",
         "obligations"
       ],
@@ -485,7 +403,9 @@
       ],
       "targetGroups": [
         "low_income_workers",
-        "families"
+        "families",
+        "unemployed",
+        "general_public"
       ]
     },
     {
@@ -512,19 +432,11 @@
       "enabled": true,
       "source": "arbeitsagentur",
       "topics": [
-        "financial_support",
-        "buergergeld",
         "regelbedarf",
         "mehrbedarf"
       ],
       "tags": [
-        "application_required",
-        "official_rule_source",
         "benefit_amount"
-      ],
-      "targetGroups": [
-        "unemployed",
-        "families"
       ]
     },
     {
@@ -549,17 +461,10 @@
       "enabled": true,
       "source": "arbeitsagentur",
       "topics": [
-        "financial_support",
         "kinderzuschlag"
       ],
       "tags": [
-        "official_rule_source",
-        "application_required",
         "family_benefits"
-      ],
-      "targetGroups": [
-        "families",
-        "parents"
       ]
     },
     {
@@ -578,18 +483,10 @@
       "enabled": true,
       "source": "arbeitsagentur",
       "topics": [
-        "financial_support",
-        "kinderzuschlag",
-        "eligibility"
+        "kinderzuschlag"
       ],
       "tags": [
-        "official_rule_source",
-        "benefit_amount",
         "family_benefits"
-      ],
-      "targetGroups": [
-        "families",
-        "parents"
       ]
     },
     {
@@ -606,106 +503,38 @@
     {
       "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/anlaufstellen.html",
       "enabled": true,
-      "source": "bmas",
-      "topics": [
-        "financial_support",
-        "buergergeld"
-      ],
-      "tags": [
-        "application_required",
-        "official_rule_source"
-      ],
-      "targetGroups": [
-        "unemployed",
-        "families"
-      ]
+      "source": "bmas"
     },
     {
       "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Anspruchsvoraussetzungen/anspruchsvoraussetzungen.html",
       "enabled": true,
       "source": "bmas",
       "topics": [
-        "financial_support",
-        "buergergeld",
         "eligibility"
       ],
       "tags": [
-        "application_required",
-        "official_rule_source",
         "eligibility"
-      ],
-      "targetGroups": [
-        "unemployed",
-        "families"
       ]
     },
     {
       "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Leistungen/leistungen-bildungspaket.html",
       "enabled": true,
-      "source": "bmas",
-      "topics": [
-        "financial_support",
-        "buergergeld"
-      ],
-      "tags": [
-        "application_required",
-        "official_rule_source"
-      ],
-      "targetGroups": [
-        "unemployed",
-        "families"
-      ]
+      "source": "bmas"
     },
     {
       "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Beratung-und-Vermittlung/beratung-und-vermittlung.html",
       "enabled": true,
-      "source": "bmas",
-      "topics": [
-        "financial_support",
-        "buergergeld"
-      ],
-      "tags": [
-        "application_required",
-        "official_rule_source"
-      ],
-      "targetGroups": [
-        "unemployed",
-        "families"
-      ]
+      "source": "bmas"
     },
     {
       "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Beschaeftigungschanchen-im-SGB-II/beschaeftigungschanchen-im-sgb-2.html",
       "enabled": true,
-      "source": "bmas",
-      "topics": [
-        "financial_support",
-        "buergergeld"
-      ],
-      "tags": [
-        "application_required",
-        "official_rule_source"
-      ],
-      "targetGroups": [
-        "unemployed",
-        "families"
-      ]
+      "source": "bmas"
     },
     {
       "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Organisation-der-Jobcenter/organisation-der-jobcenter.html",
       "enabled": true,
-      "source": "bmas",
-      "topics": [
-        "financial_support",
-        "buergergeld"
-      ],
-      "tags": [
-        "application_required",
-        "official_rule_source"
-      ],
-      "targetGroups": [
-        "unemployed",
-        "families"
-      ]
+      "source": "bmas"
     },
     {
       "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Leistungen-und-Bedarfe-im-Buergergeld/artikelseite-leistungen-und-bedarfe-im-buergergeld.html",
@@ -732,12 +561,11 @@
       "topics": [
         "financial_support",
         "buergergeld",
-        "regelbedarf",
-        "mehrbedarf"
+        "eligibility"
       ],
       "tags": [
-        "official_background_source",
-        "benefit_amount"
+        "official_rule_source",
+        "eligibility"
       ],
       "targetGroups": [
         "unemployed",
@@ -751,14 +579,13 @@
       "topics": [
         "financial_support",
         "buergergeld",
-        "regelbedarf",
-        "mehrbedarf",
+        "eligibility",
         "bedarfsgemeinschaft",
         "glossary"
       ],
       "tags": [
-        "official_background_source",
-        "benefit_amount",
+        "official_rule_source",
+        "eligibility",
         "official_glossary_source",
         "glossary"
       ],
@@ -774,12 +601,11 @@
       "topics": [
         "financial_support",
         "buergergeld",
-        "regelbedarf",
-        "mehrbedarf"
+        "eligibility"
       ],
       "tags": [
-        "official_background_source",
-        "benefit_amount"
+        "official_rule_source",
+        "eligibility"
       ],
       "targetGroups": [
         "unemployed",
@@ -872,16 +698,10 @@
       "enabled": true,
       "source": "familienportal",
       "topics": [
-        "financial_support",
         "kinderzuschlag"
       ],
       "tags": [
-        "official_rule_source",
         "family_benefits"
-      ],
-      "targetGroups": [
-        "families",
-        "parents"
       ]
     },
     {
@@ -889,16 +709,10 @@
       "enabled": true,
       "source": "arbeitsagentur",
       "topics": [
-        "financial_support",
         "kinderzuschlag"
       ],
       "tags": [
-        "official_rule_source",
         "family_benefits"
-      ],
-      "targetGroups": [
-        "families",
-        "parents"
       ]
     },
     {
@@ -906,16 +720,10 @@
       "enabled": true,
       "source": "familienportal",
       "topics": [
-        "financial_support",
         "kinderzuschlag"
       ],
       "tags": [
-        "official_rule_source",
         "family_benefits"
-      ],
-      "targetGroups": [
-        "families",
-        "parents"
       ]
     },
     {
@@ -992,19 +800,7 @@
     {
       "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/gesundheit-versicherung",
       "enabled": true,
-      "source": "arbeitsagentur",
-      "topics": [
-        "financial_support",
-        "buergergeld"
-      ],
-      "tags": [
-        "application_required",
-        "official_rule_source"
-      ],
-      "targetGroups": [
-        "unemployed",
-        "families"
-      ]
+      "source": "arbeitsagentur"
     },
     {
       "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/uebergang-buergergeld",
@@ -1026,19 +822,7 @@
     {
       "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/buergergeld-bildung-teilhabe",
       "enabled": true,
-      "source": "arbeitsagentur",
-      "topics": [
-        "financial_support",
-        "buergergeld"
-      ],
-      "tags": [
-        "application_required",
-        "official_rule_source"
-      ],
-      "targetGroups": [
-        "unemployed",
-        "families"
-      ]
+      "source": "arbeitsagentur"
     },
     {
       "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/arbeit-finden/fallmanagement",
@@ -1114,11 +898,13 @@
       "source": "arbeitsagentur",
       "topics": [
         "financial_support",
-        "buergergeld"
+        "buergergeld",
+        "pflichten"
       ],
       "tags": [
         "application_required",
-        "official_rule_source"
+        "official_rule_source",
+        "obligations"
       ],
       "targetGroups": [
         "unemployed",
@@ -1337,6 +1123,546 @@
       "url": "https://familienportal.de/familienportal/meta/aktuelles/aktuelle-meldungen/digitales-lernangebot-staerkt-kinderschutz-bei-genitalverstuemmelung-280686",
       "enabled": true,
       "source": "familienportal"
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/erklaer-videos-buergergeld",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/leistungen-auzubildende",
+      "enabled": true,
+      "source": "arbeitsagentur"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Leistungen/leistungen-bildungspaket_art.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/Baden-Wuerttemberg/baden-wuerttemberg.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/Bayern/bayern.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/Berlin/berlin.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/Brandenburg/brandenburg.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/Bremen/bremen.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/Hamburg/hamburg.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/Hessen/hessen.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/Mecklenburg-Vorpommern/mecklenburg-vorpommern.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/Niedersachsen/niedersachsen.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/Nordrhein-Westfalen/nordrhein-westfalen.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/Rheinland-Pfalz/rheinland-pfalz.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/Saarland/saarland.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/Sachsen/sachsen.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/Sachsen-Anhalt/sachsen-anhalt.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/Schleswig-Holstein/schleswig-holstein.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/Thueringen/thueringen.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://familienportal.de/familienportal/meta/datenschutz-126160",
+      "enabled": true,
+      "source": "familienportal"
+    },
+    {
+      "url": "https://familienportal.de/familienportal/meta/aktuelles/aktuelle-meldungen/neuer-katalog-urlaub-mit-der-familie-erschienen-279288",
+      "enabled": true,
+      "source": "familienportal"
+    },
+    {
+      "url": "https://familienportal.de/familienportal/meta/aktuelles/aktuelle-meldungen/bundesweite-kampagne-zur-pflegeelternschaft-gestartet-278288",
+      "enabled": true,
+      "source": "familienportal"
+    },
+    {
+      "url": "https://familienportal.de/familienportal/meta/aktuelles/aktuelle-meldungen/dritter-bericht-zum-ganztagsausbau-an-grundschulen-beschlossen-277008",
+      "enabled": true,
+      "source": "familienportal"
+    },
+    {
+      "url": "https://familienportal.de/familienportal/meta/aktuelles/aktuelle-meldungen/bundesweite-kampagne-gegen-einsamkeit-gestartet-277046",
+      "enabled": true,
+      "source": "familienportal"
+    },
+    {
+      "url": "https://familienportal.de/familienportal/meta/aktuelles/aktuelle-meldungen/digitales-angebot-unterstuetzt-familien-bei-streit-und-trennung-276658",
+      "enabled": true,
+      "source": "familienportal"
+    },
+    {
+      "url": "https://familienportal.de/familienportal/meta/aktuelles/aktuelle-meldungen/forschung-staerkt-kinderschutz-in-deutschland-275306",
+      "enabled": true,
+      "source": "familienportal"
+    },
+    {
+      "url": "https://familienportal.de/familienportal/meta/aktuelles/aktuelle-meldungen/karin-prien-ernennt-mareike-wulf-zur-kinderbeauftragten--275170",
+      "enabled": true,
+      "source": "familienportal"
+    },
+    {
+      "url": "https://familienportal.de/familienportal/meta/aktuelles/aktuelle-meldungen/rss-feed-der-aktuellen-meldungen-184694",
+      "enabled": true,
+      "source": "familienportal"
+    },
+    {
+      "url": "https://familienportal.de/familienportal/meta/eltern-geld-und-eltern-geld-plus-in-leichter-sprache-127292",
+      "enabled": true,
+      "source": "familienportal"
+    },
+    {
+      "url": "https://familienportal.de/familienportal/meta/eltern-zeit-in-leichter-sprache-129736",
+      "enabled": true,
+      "source": "familienportal",
+      "topics": [
+        "leichte_sprache_soziale_sicherheit"
+      ],
+      "tags": [
+        "light_language"
+      ]
+    },
+    {
+      "url": "https://familienportal.de/familienportal/meta/kinder-geld-in-leichter-sprache-129752",
+      "enabled": true,
+      "source": "familienportal",
+      "topics": [
+        "leichte_sprache_soziale_sicherheit"
+      ],
+      "tags": [
+        "light_language"
+      ]
+    },
+    {
+      "url": "https://familienportal.de/familienportal/meta/unterhalts-vorschuss-in-leichter-sprache-129766",
+      "enabled": true,
+      "source": "familienportal"
+    },
+    {
+      "url": "https://familienportal.de/familienportal/meta/kinder-und-jugend-schutz-in-leichter-sprache-129764",
+      "enabled": true,
+      "source": "familienportal",
+      "topics": [
+        "leichte_sprache_soziale_sicherheit"
+      ],
+      "tags": [
+        "light_language"
+      ]
+    },
+    {
+      "url": "https://familienportal.de/familienportal/meta/languages",
+      "enabled": true,
+      "source": "familienportal"
+    },
+    {
+      "url": "https://familienportal.de/familienportal/meta/egr",
+      "enabled": true,
+      "source": "familienportal"
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "topics": [
+        "kinderzuschlag"
+      ],
+      "tags": [
+        "family_benefits"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/arbeit-finden/jobchancen-verbessern/freie-foerderung",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Beratung-und-Vermittlung/eingliederungsleistungen.html",
+      "enabled": true,
+      "source": "bmas"
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Beratung-und-Vermittlung/kooperationsplan.html",
+      "enabled": true,
+      "source": "bmas",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Leistungen-und-Bedarfe-im-Buergergeld/Informationen-nach-Zielgruppen/zielgruppe-sgb-2-junge-menschen.html",
+      "enabled": true,
+      "source": "bmas",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Buergergeld/Buergergeld-Glossar/L/leistungsminderungen.html",
+      "enabled": true,
+      "source": "bmas",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Beschaeftigungschanchen-im-SGB-II/Teilhabechancengesetz/Fragen-und-Antworten-Teilhabechancen-Langzeitarbeitslose/faq-teilhabechancen-langzeitarbeitslose.html",
+      "enabled": true,
+      "source": "bmas",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/arbeit-finden/existenzgruendung/leistungen-zur-eingliederung-von-selbstaendigen",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://familienportal.de/familienportal/familienleistungen/kinderzuschlag/was-ist-kinderzuschlag--124590",
+      "enabled": true,
+      "source": "familienportal",
+      "topics": [
+        "kinderzuschlag"
+      ],
+      "tags": [
+        "family_benefits"
+      ]
+    },
+    {
+      "url": "https://familienportal.de/dynamic/action/familienportal/meta/languages/142486/suche",
+      "enabled": true,
+      "source": "familienportal"
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/erklaer-videos-buergergeld/erklaer-video-buergergeld",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/erklaer-videos-buergergeld/erklaer-video-bedarfsgemeinschaft",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "topics": [
+        "financial_support",
+        "buergergeld",
+        "bedarfsgemeinschaft",
+        "glossary"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source",
+        "official_glossary_source",
+        "glossary"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/erklaer-videos-buergergeld/erklaer-video-bedarfe",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/erklaer-videos-buergergeld/erklaer-video-einkommen",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/erklaer-videos-buergergeld/erklaer-video-vermoegen",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/erklaer-videos-buergergeld/erklaer-video-vermittlungsbudget",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/erklaer-videos-buergergeld/erklaer-video-einstiegsgeld",
+      "enabled": true,
+      "source": "arbeitsagentur",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Bildungspaket/Anlaufstellen/Niedersachsen/-https:/www.landkreis-holzminden.de/buergerservice/dienstleistungen/leistungen-fuer-bildung-und-teilhabe-bei-kindern-jugendlichen-und-jungen-erwachsenen-erbringung-900000027-0.html",
+      "enabled": true,
+      "source": "bmas",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Leistungen-und-Bedarfe-im-Buergergeld/Informationen-nach-Zielgruppen/zielgruppe-sgb-2-menschen-mit-behinderung.html",
+      "enabled": true,
+      "source": "bmas",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Leistungen-und-Bedarfe-im-Buergergeld/Informationen-nach-Zielgruppen/zielgruppe-sgb-2-migranten.html",
+      "enabled": true,
+      "source": "bmas",
+      "topics": [
+        "financial_support",
+        "buergergeld"
+      ],
+      "tags": [
+        "application_required",
+        "official_rule_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families"
+      ]
+    },
+    {
+      "url": "https://familienportal.de/familienportal/familienleistungen/kinderzuschlag/wer-kann-kinderzuschlag-bekommen--136754",
+      "enabled": true,
+      "source": "familienportal",
+      "topics": [
+        "kinderzuschlag"
+      ],
+      "tags": [
+        "family_benefits"
+      ]
+    },
+    {
+      "url": "https://familienportal.de/familienportal/familienleistungen/kinderzuschlag/wie-und-wo-beantrage-ich-kinderzuschlag--136762",
+      "enabled": true,
+      "source": "familienportal",
+      "topics": [
+        "kinderzuschlag"
+      ],
+      "tags": [
+        "family_benefits"
+      ]
+    },
+    {
+      "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Beschaeftigungschanchen-im-SGB-II/Teilhabechancengesetz/teilhabechancengesetz.html",
+      "enabled": true,
+      "source": "bmas"
     }
   ]
 }

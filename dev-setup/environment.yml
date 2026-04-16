@@ -1,0 +1,11 @@
+name: systemfehler-dev
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - lxml=5.1
+  - psycopg2
+  - pip:
+    - -r ./crawlers/requirements.txt

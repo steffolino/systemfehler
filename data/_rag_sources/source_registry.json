@@ -1,0 +1,765 @@
+{
+    "_schema": "rag_source_registry_v1",
+    "_comment": "Curated source registry for the systemfehler RAG pipeline. Only real, verified sources.",
+    "_knowledge_layers": [
+        "law",
+        "case_law",
+        "official_guidance",
+        "administrative_practice",
+        "ngo_guidance"
+    ],
+    "_trust_levels": [
+        "tier_1_law",
+        "tier_2_official",
+        "tier_3_ngo",
+        "tier_4_other"
+    ],
+    "sources": [
+        {
+            "id": "sgb1",
+            "title": "SGB I – Allgemeiner Teil",
+            "url": "data/_rag_sources/local/sgb1_ba034190.pdf",
+            "source_name": "Bundesagentur für Arbeit (BA-Textausgabe)",
+            "source_type": "local_file",
+            "source_trust_level": "tier_1_law",
+            "document_type": "statute",
+            "knowledge_layer": "law",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "employment",
+                "healthcare"
+            ],
+            "target_groups": [
+                "general_public"
+            ],
+            "license_or_rights": "Datenlizenz Deutschland v2.0"
+        },
+        {
+            "id": "sgb2",
+            "title": "SGB II – Bürgergeld, Grundsicherung für Arbeitsuchende",
+            "url": "data/_rag_sources/local/sgb2_ba037135.pdf",
+            "source_name": "Bundesagentur für Arbeit (BA-Textausgabe)",
+            "source_type": "local_file",
+            "source_trust_level": "tier_1_law",
+            "document_type": "statute",
+            "knowledge_layer": "law",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "employment",
+                "housing",
+                "sanctions"
+            ],
+            "target_groups": [
+                "unemployed",
+                "general_public"
+            ],
+            "license_or_rights": "Datenlizenz Deutschland v2.0"
+        },
+        {
+            "id": "sgb3",
+            "title": "SGB III – Arbeitsförderung",
+            "url": "data/_rag_sources/local/sgb3_ba037300.pdf",
+            "source_name": "Bundesagentur für Arbeit (BA-Textausgabe)",
+            "source_type": "local_file",
+            "source_trust_level": "tier_1_law",
+            "document_type": "statute",
+            "knowledge_layer": "law",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "employment",
+                "financial_support"
+            ],
+            "target_groups": [
+                "unemployed",
+                "employed"
+            ],
+            "license_or_rights": "Datenlizenz Deutschland v2.0"
+        },
+        {
+            "id": "sgb10",
+            "title": "SGB X – Sozialverwaltungsverfahren und Sozialdatenschutz",
+            "url": "data/_rag_sources/local/sgb10_ba034735.pdf",
+            "source_name": "Bundesagentur für Arbeit (BA-Textausgabe)",
+            "source_type": "local_file",
+            "source_trust_level": "tier_1_law",
+            "document_type": "statute",
+            "knowledge_layer": "law",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "employment",
+                "legal_remedies"
+            ],
+            "target_groups": [
+                "general_public"
+            ],
+            "license_or_rights": "Datenlizenz Deutschland v2.0",
+            "notes": "Governs Widerspruch, Rücknahme, Erstattung, Datenschutz in social admin."
+        },
+        {
+            "id": "sgb12",
+            "title": "SGB XII – Sozialhilfe",
+            "url": "data/_rag_sources/local/sgb12_ba037100.pdf",
+            "source_name": "Bundesagentur für Arbeit (BA-Textausgabe)",
+            "source_type": "local_file",
+            "source_trust_level": "tier_1_law",
+            "document_type": "statute",
+            "knowledge_layer": "law",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "healthcare"
+            ],
+            "target_groups": [
+                "general_public"
+            ],
+            "license_or_rights": "Datenlizenz Deutschland v2.0"
+        },
+        {
+            "id": "fw_sgb2_p6",
+            "title": "FW SGB II § 6 – Träger der Grundsicherung",
+            "url": "data/_rag_sources/local/fw_sgb2_p6_ba029350.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "weisung",
+            "knowledge_layer": "administrative_practice",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "employment"
+            ],
+            "target_groups": [
+                "unemployed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "fw_sgb2_p7",
+            "title": "FW SGB II § 7 – Leistungsberechtigte",
+            "url": "data/_rag_sources/local/fw_sgb2_p7_ba035645.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "weisung",
+            "knowledge_layer": "administrative_practice",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "employment"
+            ],
+            "target_groups": [
+                "unemployed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)",
+            "notes": "Covers eligibility criteria, Bedarfsgemeinschaft, EU citizens."
+        },
+        {
+            "id": "fw_sgb2_p7b",
+            "title": "FW SGB II § 7b – Erreichbarkeit",
+            "url": "data/_rag_sources/local/fw_sgb2_p7b_ba045689.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "weisung",
+            "knowledge_layer": "administrative_practice",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "employment"
+            ],
+            "target_groups": [
+                "unemployed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "fw_sgb2_p8",
+            "title": "FW SGB II § 8 – Erwerbsfähigkeit",
+            "url": "data/_rag_sources/local/fw_sgb2_p8_ba035535.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "weisung",
+            "knowledge_layer": "administrative_practice",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "employment",
+                "health"
+            ],
+            "target_groups": [
+                "unemployed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "fw_sgb2_p9",
+            "title": "FW SGB II § 9 – Hilfebedürftigkeit",
+            "url": "data/_rag_sources/local/fw_sgb2_p9_ba033590.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "weisung",
+            "knowledge_layer": "administrative_practice",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "employment"
+            ],
+            "target_groups": [
+                "unemployed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)",
+            "notes": "Covers means-testing, Bedürftigkeitsprüfung."
+        },
+        {
+            "id": "fw_sgb2_p11",
+            "title": "FW SGB II §§ 11/11b – Einkommen und Freibeträge",
+            "url": "data/_rag_sources/local/fw_sgb2_p11_ba044381.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "weisung",
+            "knowledge_layer": "administrative_practice",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "employment"
+            ],
+            "target_groups": [
+                "unemployed",
+                "employed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)",
+            "notes": "Key for income calculation, Freibeträge, Hinzuverdienst."
+        },
+        {
+            "id": "fw_kvpv",
+            "title": "FW Kranken- und Pflegeversicherung der Leistungsberechtigten",
+            "url": "data/_rag_sources/local/fw_kvpv_ba031475.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "weisung",
+            "knowledge_layer": "administrative_practice",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "healthcare",
+                "financial_support"
+            ],
+            "target_groups": [
+                "unemployed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "fw_rv",
+            "title": "FW Rentenversicherung der Leistungsberechtigten",
+            "url": "data/_rag_sources/local/fw_rv_ba029340.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "weisung",
+            "knowledge_layer": "administrative_practice",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support"
+            ],
+            "target_groups": [
+                "unemployed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "fw_aufenthg",
+            "title": "FW Aufenthaltsgesetz und Beschäftigungsverordnung",
+            "url": "data/_rag_sources/local/fw_aufenthg_ba033210.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "weisung",
+            "knowledge_layer": "administrative_practice",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "employment",
+                "financial_support"
+            ],
+            "target_groups": [
+                "unemployed",
+                "migrants"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "ba_merkblatt_alg1",
+            "title": "Merkblatt 1 – Arbeitslosengeld",
+            "url": "data/_rag_sources/local/merkblatt-fuer-arbeitslose_ba036520.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "merkblatt",
+            "knowledge_layer": "official_guidance",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "employment",
+                "financial_support"
+            ],
+            "target_groups": [
+                "unemployed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "ba_merkblatt_buergergeld",
+            "title": "Merkblatt Bürgergeld",
+            "url": "data/_rag_sources/local/merkblatt-buergergeld_ba043375.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "merkblatt",
+            "knowledge_layer": "official_guidance",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "employment",
+                "sanctions",
+                "housing"
+            ],
+            "target_groups": [
+                "unemployed",
+                "general_public"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "ba_merkblatt_weiterbildung",
+            "title": "Merkblatt 6 – Weiterbildung",
+            "url": "data/_rag_sources/local/merkblatt-6-weiterbildung_ba035860.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "merkblatt",
+            "knowledge_layer": "official_guidance",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "employment"
+            ],
+            "target_groups": [
+                "unemployed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "ba_merkblatt_rechte_pflichten",
+            "title": "Merkblatt Ihre Rechte und Pflichten bei der Arbeitsuche",
+            "url": "data/_rag_sources/local/merkblatt-arbeitssuche_ba035940.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "merkblatt",
+            "knowledge_layer": "official_guidance",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "employment",
+                "sanctions"
+            ],
+            "target_groups": [
+                "unemployed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "merkblatt_nebeneinkommen",
+            "title": "Informationsblatt Nebeneinkommen bei Arbeitslosengeld",
+            "url": "data/_rag_sources/local/merkblatt_nebeneinkommen_ba035670.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "merkblatt",
+            "knowledge_layer": "official_guidance",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "employment"
+            ],
+            "target_groups": [
+                "unemployed",
+                "employed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "merkblatt_umzug_reisen",
+            "title": "Informationsblatt Umzug und Reisen bei Arbeitslosengeld",
+            "url": "data/_rag_sources/local/merkblatt_umzug_reisen_ba035665.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "merkblatt",
+            "knowledge_layer": "official_guidance",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "employment",
+                "financial_support"
+            ],
+            "target_groups": [
+                "unemployed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "merkblatt_entlassungsentschaedigung",
+            "title": "Merkblatt Berücksichtigung von Entlassungsentschädigungen",
+            "url": "data/_rag_sources/local/merkblatt_entlassungsentschaedigung_ba035855.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "merkblatt",
+            "knowledge_layer": "official_guidance",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "employment",
+                "financial_support"
+            ],
+            "target_groups": [
+                "unemployed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "merkblatt_kv_rv_alg",
+            "title": "Merkblatt Übernahme von KV/PV/RV-Beiträgen bei Befreiung",
+            "url": "data/_rag_sources/local/merkblatt_kv_pv_rv_alg_ba035025.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "merkblatt",
+            "knowledge_layer": "official_guidance",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "healthcare",
+                "financial_support"
+            ],
+            "target_groups": [
+                "unemployed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "merkblatt_teilarbeitslosigkeit",
+            "title": "Merkblatt 1a – Teilarbeitslosigkeit",
+            "url": "data/_rag_sources/local/merkblatt-1a-teilarbeitslos_ba029685.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "merkblatt",
+            "knowledge_layer": "official_guidance",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "employment",
+                "financial_support"
+            ],
+            "target_groups": [
+                "employed",
+                "unemployed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "merkblatt_kurzarbeitergeld",
+            "title": "Merkblatt 8b – Kurzarbeitergeld",
+            "url": "data/_rag_sources/local/merkblatt-8b-kurzarbeitergeld_ba034285.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "merkblatt",
+            "knowledge_layer": "official_guidance",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "employment",
+                "financial_support"
+            ],
+            "target_groups": [
+                "employed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "merkblatt_insolvenzgeld",
+            "title": "Merkblatt 10 – Insolvenzgeld",
+            "url": "data/_rag_sources/local/merkblatt-10-insolvenzgeld_ba032060.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "merkblatt",
+            "knowledge_layer": "official_guidance",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "employment",
+                "financial_support"
+            ],
+            "target_groups": [
+                "employed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "ba_broschuere_buergergeld",
+            "title": "Bürgergeld – Das Wichtigste auf einen Blick",
+            "url": "data/_rag_sources/local/grundsicherung-deutsch_ba036290.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "broschuere",
+            "knowledge_layer": "official_guidance",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "employment"
+            ],
+            "target_groups": [
+                "unemployed",
+                "general_public"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "ba_form_buergergeld_ha",
+            "title": "Bürgergeld Hauptantrag (HA)",
+            "url": "data/_rag_sources/local/antrag-sgb2_ba042689.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "formular",
+            "knowledge_layer": "administrative_practice",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "employment"
+            ],
+            "target_groups": [
+                "unemployed",
+                "general_public"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "hinweise_antrag_sgb2",
+            "title": "Hinweise zum Bürgergeld-Hauptantrag",
+            "url": "data/_rag_sources/local/hinweise-antrag-sgb2_ba042694.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "merkblatt",
+            "knowledge_layer": "official_guidance",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "employment"
+            ],
+            "target_groups": [
+                "unemployed",
+                "general_public"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "weiterbewilligung_sgb2",
+            "title": "Weiterbewilligungsantrag Bürgergeld",
+            "url": "data/_rag_sources/local/weiterbewilligung-sgb2_ba042699.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "formular",
+            "knowledge_layer": "administrative_practice",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "employment"
+            ],
+            "target_groups": [
+                "unemployed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "ba_form_kdu",
+            "title": "Anlage Kosten der Unterkunft (KdU)",
+            "url": "data/_rag_sources/local/anlagekdu_ba032980.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "formular",
+            "knowledge_layer": "administrative_practice",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "housing",
+                "financial_support"
+            ],
+            "target_groups": [
+                "unemployed",
+                "general_public"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "ba_form_ek",
+            "title": "Anlage Einkommenserklärung (EK)",
+            "url": "data/_rag_sources/local/anlageek_ba032960.pdf",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "local_file",
+            "source_trust_level": "tier_2_official",
+            "document_type": "formular",
+            "knowledge_layer": "administrative_practice",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support"
+            ],
+            "target_groups": [
+                "unemployed",
+                "employed",
+                "general_public"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "ba_form_alg1",
+            "title": "Antrag Arbeitslosengeld I – Downloads",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/downloads-arbeitslos-arbeit-finden",
+            "source_name": "Bundesagentur für Arbeit",
+            "source_type": "html",
+            "source_trust_level": "tier_2_official",
+            "document_type": "formular",
+            "knowledge_layer": "administrative_practice",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "employment"
+            ],
+            "target_groups": [
+                "unemployed"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)"
+        },
+        {
+            "id": "bverfg_sanktionen_2019",
+            "title": "BVerfG – Urteil zu Sanktionen im SGB II (1 BvL 7/16, 2019)",
+            "url": "https://www.bundesverfassungsgericht.de/SharedDocs/Entscheidungen/DE/2019/11/ls20191105_1bvl000716.html",
+            "source_name": "Bundesverfassungsgericht",
+            "source_type": "html",
+            "source_trust_level": "tier_1_law",
+            "document_type": "other",
+            "knowledge_layer": "case_law",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "sanctions",
+                "financial_support",
+                "legal_remedies"
+            ],
+            "target_groups": [
+                "unemployed",
+                "general_public"
+            ],
+            "license_or_rights": "public domain (Bundesbehörde)",
+            "notes": "Landmark 2019 ruling: 100% sanctions unconstitutional. Binding for all courts."
+        },
+        {
+            "id": "sanktionsfrei_buergergeld",
+            "title": "Sanktionsfrei – Bürgergeld und Jobcenter: Deine Rechte",
+            "url": "https://www.sanktionsfrei.de/buergergeld",
+            "source_name": "Sanktionsfrei e.V.",
+            "source_type": "html",
+            "source_trust_level": "tier_3_ngo",
+            "document_type": "guide",
+            "knowledge_layer": "ngo_guidance",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "employment",
+                "sanctions"
+            ],
+            "target_groups": [
+                "unemployed",
+                "general_public"
+            ]
+        },
+        {
+            "id": "sanktionsfrei_studie_2025",
+            "title": "Sanktionsfrei – Studie: Wie geht es Menschen im Bürgergeldbezug? (2025)",
+            "url": "data/_rag_sources/local/sanktionsfrei_studie_2025.pdf",
+            "source_name": "Sanktionsfrei e.V.",
+            "source_type": "local_file",
+            "source_trust_level": "tier_3_ngo",
+            "document_type": "guide",
+            "knowledge_layer": "ngo_guidance",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "employment",
+                "sanctions"
+            ],
+            "target_groups": [
+                "unemployed",
+                "general_public"
+            ],
+            "license_or_rights": "CC BY-NC",
+            "notes": "Survey of 1014 Bürgergeld recipients, June 2025. WZB / Kantar methodology."
+        },
+        {
+            "id": "policy_paper_sanktionen",
+            "title": "Policy Paper: Auswirkungen von Hartz-IV-Sanktionen",
+            "url": "data/_rag_sources/local/policy_paper_sanktionen_hartzplus.pdf",
+            "source_name": "Sanktionsfrei e.V. / Institut",
+            "source_type": "local_file",
+            "source_trust_level": "tier_3_ngo",
+            "document_type": "guide",
+            "knowledge_layer": "ngo_guidance",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "sanctions",
+                "financial_support"
+            ],
+            "target_groups": [
+                "general_public"
+            ]
+        }
+    ]
+}

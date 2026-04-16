@@ -43,7 +43,7 @@ router = APIRouter()
 model_router = ModelRouter()
 provider = get_provider()
 MAX_REWRITE_TOKENS = 24
-MAX_SYNTHESIS_TOKENS = 160
+MAX_SYNTHESIS_TOKENS = 400
 MAX_ENRICH_TOKENS = 96
 
 REWRITE_SYSTEM_PROMPT = (
@@ -53,9 +53,13 @@ REWRITE_SYSTEM_PROMPT = (
 
 SYNTHESIZE_SYSTEM_PROMPT = (
     "You are a retrieval-first assistant for German social-service information. "
-    "Use only the provided evidence. If the evidence is weak, say so and do not guess. "
-    "Answer in German, concise and factual. Ignore evidence that is only loosely related "
-    "to the user question, especially family-only tools when the question is about unemployment."
+    "Answer only from the numbered evidence blocks provided. "
+    "If a block is a legal text (Gesetz) or official guide (Merkblatt), treat it as ground truth. "
+    "If the evidence is insufficient or contradictory, say so clearly in German – do not guess. "
+    "Structure your answer: 1-2 short paragraphs followed by a bullet list of the most important "
+    "concrete steps or facts (max 4 bullets). Cite evidence blocks as [1], [2], etc. "
+    "Answer in plain German. Avoid jargon unless you explain it immediately. "
+    "Ignore evidence that is only loosely related to the user question."
 )
 
 ENRICH_SYSTEM_PROMPT = (
@@ -369,29 +373,50 @@ def _deterministic_local_rewrite(query):
 
 
 def _compact_evidence_block(evidence):
+    """
+    Render up to 5 evidence items as numbered context blocks for the LLM.
+
+    Items sourced from the RAG corpus (source == "rag") include knowledge_layer
+    and source_trust_level from provenance so the model can weigh authority.
+    Items with confidence < 0.5 are excluded.
+    """
+    MAX_ITEMS = 5
+    CONTENT_EXCERPT_LEN = 320
+
+    eligible = [item for item in evidence if item.confidence >= 0.5][:MAX_ITEMS]
     compact_rows = []
-    for index, ev in enumerate([item for item in evidence if item.confidence >= 0.7][:3], start=1):
+
+    for index, ev in enumerate(eligible, start=1):
         try:
             payload = json.loads(ev.content)
         except Exception:
             payload = {}
         if not isinstance(payload, dict):
             payload = {}
+
         summary = payload.get("summary", {}) if isinstance(payload.get("summary"), dict) else {}
         content = payload.get("content", {}) if isinstance(payload.get("content"), dict) else {}
-        compact_rows.append(
-            "\n".join(
-                [
-                    f"Evidence {index}",
-                    f"Title: {payload.get('title') or 'Unbekannt'}",
-                    f"Domain: {payload.get('domain') or 'unknown'}",
-                    f"URL: {payload.get('url') or 'unknown'}",
-                    f"Summary: {summary.get('de') or summary.get('en') or 'Keine Kurzbeschreibung'}",
-                    f"Content excerpt: {(content.get('de') or content.get('en') or '')[:220]}",
-                    f"Topics: {', '.join(payload.get('topics') or [])}",
-                ]
-            )
-        )
+        provenance = payload.get("provenance", {}) if isinstance(payload.get("provenance"), dict) else {}
+
+        excerpt = (content.get("de") or content.get("en") or summary.get("de") or "")[:CONTENT_EXCERPT_LEN]
+
+        lines = [
+            f"[{index}] {payload.get('title') or 'Unbekannt'}",
+            f"URL: {payload.get('url') or provenance.get('source') or 'unbekannt'}",
+        ]
+
+        # Trust metadata only available for RAG chunks
+        trust = provenance.get("source_trust_level") or ""
+        layer = provenance.get("knowledge_layer") or ""
+        section = provenance.get("section_title") or ""
+        if trust or layer:
+            lines.append(f"Quelle: {trust} / {layer}" + (f" – {section}" if section else ""))
+
+        if excerpt:
+            lines.append(f"Text: {excerpt}")
+
+        compact_rows.append("\n".join(lines))
+
     return "\n\n".join(compact_rows)
 
 

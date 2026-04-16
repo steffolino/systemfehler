@@ -444,11 +444,20 @@ def validate_entry(entry):
         return False
 
 def retrieve_evidence(query: str, domain: str = None) -> list:
-    results = query_entries(query, domain)
-    evidence = []
-    for entry in results:
-        if validate_entry(entry):
+    keyword_results = query_entries(query, domain)
+    validated: list[dict] = [entry for entry in keyword_results if validate_entry(entry)]
+
+    # Hybrid retrieval: fuse keyword results with semantic vector search over RAG corpus.
+    # Falls back silently to keyword-only if Qdrant / Ollama are not available.
+    try:
+        from .vector_retrieval import hybrid_retrieve
+        evidence = hybrid_retrieve(query=query, keyword_entries=validated, domain=domain)
+    except Exception as exc:
+        print(f"[retrieve_evidence] hybrid_retrieve failed, using keyword fallback: {exc}")
+        evidence = []
+        for entry in validated:
             evidence.append(Evidence(source="db", content=json.dumps(entry), confidence=0.95))
+
     if not evidence:
         evidence.append(Evidence(source="db", content="No evidence found", confidence=0.0))
     return evidence

@@ -267,7 +267,14 @@ class BaseCrawler:
         Returns:
             BeautifulSoup object
         """
-        return BeautifulSoup(html, 'lxml')
+        # Prefer 'lxml' when available for speed, but gracefully fall back
+        # to the Python built-in parser to avoid hard crashes on systems
+        # where the 'lxml' dependency is not installed.
+        try:
+            return BeautifulSoup(html, 'lxml')
+        except Exception as e:
+            self.logger.warning(f"lxml parser unavailable, falling back to 'html.parser': {e}")
+            return BeautifulSoup(html, 'html.parser')
 
     # ------------------------------
     # Title / Head helpers

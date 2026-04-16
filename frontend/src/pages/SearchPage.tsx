@@ -21,8 +21,8 @@ type TabKey = 'article' | 'ai';
 const AI_SUGGESTED_QUESTIONS = [
   'Ich bin arbeitslos geworden. Was nun?',
   'Wie beantrage ich Buergergeld beim Jobcenter?',
-  'Welche Online-Dienste der Arbeitsagentur sollte ich zuerst nutzen?',
-  'Wie erreiche ich schnell die richtige Stelle bei der Bundesagentur fuer Arbeit?',
+  'Welche Unterstüzungen bekomme ich für meine Kinder?',
+  'Wie kann ich mich weiterbilden?'
 ];
 
 function parseEvidenceEntriesForPage(evidence: Array<{ content: string }>): Entry[] {
@@ -40,7 +40,7 @@ function parseEvidenceEntriesForPage(evidence: Array<{ content: string }>): Entr
 
   const relatedEntriesMap = new Map<string, Entry>();
   let count = 0;
-  const MAX_EVIDENCE = 20;
+  const MAX_EVIDENCE = 30;
 
   for (const item of evidence) {
     if (count >= MAX_EVIDENCE) break;
@@ -209,7 +209,7 @@ export default function SearchPage() {
 
     void (async () => {
       let rewrite = pendingResult.rewrite;
-      let evidence: Array<{ content: string }> = [];
+      let evidence: Array<{ content: string, source: string, confidence: number }> = [];
       let weakEvidence = true;
 
       try {
@@ -352,7 +352,7 @@ export default function SearchPage() {
     setAiDraftQuery(standardQuery.trim());
   }, [aiDraftQuery, standardQuery, tab]);
 
-  const MAX_AI_RESULTS = 20;
+  const MAX_AI_RESULTS = 30;
   const activeResults =
     tab === 'article' ? standardResults : (aiResult?.relatedEntries?.slice(0, MAX_AI_RESULTS) || []);
   const activeLoading = tab === 'article' ? standardLoading : aiEvidenceLoading;

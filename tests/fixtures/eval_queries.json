@@ -1,0 +1,150 @@
+[
+    {
+        "query_id": "eval-001",
+        "query": "Wie beantrage ich Bürgergeld?",
+        "language": "de",
+        "expected_source_ids": [
+            "ba_merkblatt_buergergeld",
+            "ba_broschuere_buergergeld",
+            "sgb2"
+        ],
+        "expected_knowledge_layers": [
+            "official_guidance",
+            "law"
+        ],
+        "notes": "Basic entitlement query – Merkblatt and SGB II must appear in top results"
+    },
+    {
+        "query_id": "eval-002",
+        "query": "Wer hat Anspruch auf Arbeitslosengeld I?",
+        "language": "de",
+        "expected_source_ids": [
+            "ba_merkblatt_alg1",
+            "sgb3"
+        ],
+        "expected_knowledge_layers": [
+            "official_guidance",
+            "law"
+        ],
+        "notes": "ALG I eligibility – Merkblatt 1 is ground truth"
+    },
+    {
+        "query_id": "eval-003",
+        "query": "Welche Unterlagen brauche ich für den Antrag auf Bürgergeld?",
+        "language": "de",
+        "expected_source_ids": [
+            "ba_merkblatt_buergergeld",
+            "ba_broschuere_buergergeld"
+        ],
+        "expected_knowledge_layers": [
+            "official_guidance"
+        ],
+        "notes": "Application documents – practical admin question; Merkblatt should have the list"
+    },
+    {
+        "query_id": "eval-004",
+        "query": "Kann ich mich gegen eine Kürzung des Bürgergeldes wehren?",
+        "language": "de",
+        "expected_source_ids": [
+            "sanktionsfrei_guide_buergergeld",
+            "sgb2",
+            "sovd_guide_buergergeld"
+        ],
+        "expected_knowledge_layers": [
+            "ngo_guidance",
+            "law"
+        ],
+        "notes": "Rights query – NGO sources (Sanktionsfrei, SoVD) most accessible; SGB II for legal basis"
+    },
+    {
+        "query_id": "eval-005",
+        "query": "Wie hoch ist das Bürgergeld 2024?",
+        "language": "de",
+        "expected_source_ids": [
+            "ba_merkblatt_buergergeld",
+            "ba_broschuere_buergergeld",
+            "sgb2"
+        ],
+        "expected_knowledge_layers": [
+            "official_guidance",
+            "law"
+        ],
+        "notes": "Amount query – Merkblatt has current rates; SGB II has statutory basis"
+    },
+    {
+        "query_id": "eval-006",
+        "query": "Was ist der Unterschied zwischen Bürgergeld und Arbeitslosengeld?",
+        "language": "de",
+        "expected_source_ids": [
+            "ba_merkblatt_alg1",
+            "ba_merkblatt_buergergeld",
+            "sgb2",
+            "sgb3"
+        ],
+        "expected_knowledge_layers": [
+            "official_guidance",
+            "law"
+        ],
+        "notes": "Comparative query requiring retrieval from both SGB II and SGB III sources"
+    },
+    {
+        "query_id": "eval-007",
+        "query": "Förderung für Weiterbildung während Arbeitslosigkeit",
+        "language": "de",
+        "expected_source_ids": [
+            "ba_merkblatt_weiterbildung",
+            "sgb3"
+        ],
+        "expected_knowledge_layers": [
+            "official_guidance",
+            "law"
+        ],
+        "notes": "Training support – Merkblatt FbW is the primary source"
+    },
+    {
+        "query_id": "eval-008",
+        "query": "Muss ich jeden Job annehmen der mir angeboten wird?",
+        "language": "de",
+        "expected_source_ids": [
+            "ba_merkblatt_buergergeld",
+            "sgb2",
+            "sanktionsfrei_guide_buergergeld"
+        ],
+        "expected_knowledge_layers": [
+            "official_guidance",
+            "law",
+            "ngo_guidance"
+        ],
+        "notes": "Zumutbarkeitsregeln – sensitive topic, needs balanced answer from official + NGO"
+    },
+    {
+        "query_id": "eval-009",
+        "query": "Wie lange bekomme ich Arbeitslosengeld I?",
+        "language": "de",
+        "expected_source_ids": [
+            "ba_merkblatt_alg1",
+            "sgb3"
+        ],
+        "expected_knowledge_layers": [
+            "official_guidance",
+            "law"
+        ],
+        "notes": "Duration of ALG I – Merkblatt 1 and § 147 SGB III"
+    },
+    {
+        "query_id": "eval-010",
+        "query": "Was passiert wenn ich eine Meldepflicht verletze?",
+        "language": "de",
+        "expected_source_ids": [
+            "ba_merkblatt_buergergeld",
+            "ba_merkblatt_alg1",
+            "sgb2",
+            "sgb3"
+        ],
+        "expected_knowledge_layers": [
+            "official_guidance",
+            "law"
+        ],
+        "notes": "Sanctions for non-compliance – legal basis important"
+    }
+]
