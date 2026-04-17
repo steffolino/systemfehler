@@ -676,6 +676,28 @@
             "license_or_rights": "public domain (Bundesbehörde)"
         },
         {
+            "id": "ba_form_kindergeld",
+            "title": "Kindergeld-Antrag starten (Familienkasse)",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/kindergeld-anspruch-hoehe-dauer/kindergeld-antrag-starten",
+            "source_name": "Bundesagentur f\u00fcr Arbeit",
+            "source_type": "html",
+            "source_trust_level": "tier_2_official",
+            "document_type": "formular",
+            "knowledge_layer": "administrative_practice",
+            "language": "de",
+            "jurisdiction": "DE",
+            "topics": [
+                "financial_support",
+                "family",
+                "child_benefit"
+            ],
+            "target_groups": [
+                "families",
+                "general_public"
+            ],
+            "license_or_rights": "public domain (Bundesbeh\u00f6rde)"
+        },
+        {
             "id": "bverfg_sanktionen_2019",
             "title": "BVerfG – Urteil zu Sanktionen im SGB II (1 BvL 7/16, 2019)",
             "url": "https://www.bundesverfassungsgericht.de/SharedDocs/Entscheidungen/DE/2019/11/ls20191105_1bvl000716.html",
