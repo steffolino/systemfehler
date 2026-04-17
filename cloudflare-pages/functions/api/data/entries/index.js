@@ -1,11 +1,13 @@
+import { clampPositiveInt, jsonResponse } from '../../_lib/http.js';
+
 export async function onRequest(context) {
   const { request, env } = context;
   const url = new URL(request.url);
   const domain = url.searchParams.get('domain');
   const status = url.searchParams.get('status');
   const search = url.searchParams.get('search');
-  const limit = Math.min(parseInt(url.searchParams.get('limit') || '50', 10), 100);
-  const offset = parseInt(url.searchParams.get('offset') || '0', 10);
+  const limit = clampPositiveInt(url.searchParams.get('limit') || '50', 50, 100);
+  const offset = clampPositiveInt(url.searchParams.get('offset') || '0', 0);
   const includeTranslations = url.searchParams.get('includeTranslations') === 'true' || url.searchParams.get('includeTranslations') === '1';
 
   try {
@@ -57,10 +59,8 @@ export async function onRequest(context) {
     const page = Math.floor(offset / Math.max(limit, 1)) + 1;
     const pages = total > 0 ? Math.ceil(total / Math.max(limit, 1)) : 1;
 
-    return new Response(JSON.stringify({ entries, total, limit, offset, page, pages }), {
-      headers: { 'content-type': 'application/json' }
-    });
+    return jsonResponse({ entries, total, limit, offset, page, pages }, { request, env });
   } catch (err) {
-    return new Response(JSON.stringify({ error: 'Failed to read entries', message: err && err.message }), { status: 500, headers: { 'content-type': 'application/json' } });
+    return jsonResponse({ error: 'Failed to read entries', message: err && err.message }, { status: 500, request, env });
   }
 }

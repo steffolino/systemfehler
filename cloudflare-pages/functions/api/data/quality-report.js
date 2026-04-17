@@ -1,3 +1,5 @@
+import { jsonResponse } from '../_lib/http.js';
+
 function parseEntry(row) {
   const parsed = row.entry_json ? JSON.parse(row.entry_json) : {};
   parsed.id = row.id;
@@ -20,15 +22,12 @@ function hasTranslation(entry, language) {
 }
 
 export async function onRequest(context) {
-  const { env } = context;
+  const { env, request } = context;
 
   try {
     const db = env.DB;
     if (!db) {
-      return new Response(
-        JSON.stringify({ byDomain: {}, lowQualityEntries: [], missingTranslations: [] }),
-        { headers: { 'content-type': 'application/json' } }
-      );
+      return jsonResponse({ byDomain: {}, lowQualityEntries: [], missingTranslations: [] }, { request, env });
     }
 
     const rowsResult = await db
@@ -97,13 +96,8 @@ export async function onRequest(context) {
       })
       .filter((entry) => entry.missingEn || entry.missingEasyDe);
 
-    return new Response(JSON.stringify({ byDomain, lowQualityEntries, missingTranslations }), {
-      headers: { 'content-type': 'application/json' }
-    });
+    return jsonResponse({ byDomain, lowQualityEntries, missingTranslations }, { request, env });
   } catch (err) {
-    return new Response(JSON.stringify({ error: 'Failed to fetch quality report', message: err && err.message }), {
-      status: 500,
-      headers: { 'content-type': 'application/json' }
-    });
+    return jsonResponse({ error: 'Failed to fetch quality report', message: err && err.message }, { status: 500, request, env });
   }
 }

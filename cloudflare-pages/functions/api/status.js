@@ -1,3 +1,5 @@
+import { jsonResponse } from './_lib/http.js';
+
 function parseEntry(row) {
   const parsed = row.entry_json ? JSON.parse(row.entry_json) : {};
   parsed.id = row.id;
@@ -20,8 +22,8 @@ export async function onRequest(context) {
   try {
     const db = env.DB;
     if (!db) {
-      return new Response(
-        JSON.stringify({
+      return jsonResponse(
+        {
           database: {
             totalEntries: 0,
             byDomain: {}
@@ -34,8 +36,8 @@ export async function onRequest(context) {
             avgAis: '0.00'
           },
           timestamp: new Date().toISOString()
-        }),
-        { headers: { 'content-type': 'application/json' } }
+        },
+        { request: context.request, env }
       );
     }
 
@@ -73,8 +75,8 @@ export async function onRequest(context) {
           ).toFixed(2)
         : '0.00';
 
-    return new Response(
-      JSON.stringify({
+    return jsonResponse(
+      {
         database: {
           totalEntries,
           byDomain
@@ -87,13 +89,14 @@ export async function onRequest(context) {
           avgAis
         },
         timestamp: new Date().toISOString()
-      }),
-      { headers: { 'content-type': 'application/json' } }
+      },
+      { request: context.request, env }
     );
   } catch (err) {
-    return new Response(JSON.stringify({ error: 'Failed to fetch status', message: err && err.message }), {
+    return jsonResponse({ error: 'Failed to fetch status', message: err && err.message }, {
       status: 500,
-      headers: { 'content-type': 'application/json' }
+      request: context.request,
+      env
     });
   }
 }

@@ -97,6 +97,11 @@ The Pages AI layer now also applies per-IP rate limiting and short edge-cache
 TTL responses for rewrite, retrieve, and synthesize to reduce repeated Workers
 AI cost on common prompts.
 
+Pages Functions now also enforce baseline API hardening:
+- security headers on JSON responses (`nosniff`, frame deny, strict referrer policy)
+- JSON content-type and body-size checks on AI/admin ingest endpoints
+- optional CORS allowlist via `CORS_ALLOWED_ORIGINS` (same-origin remains allowed)
+
 legacy Pages-native GitHub auth function stubs remain in the repo but are not
 required for the active frontend.
 

@@ -40,7 +40,9 @@ jobs:
           mkdir -p dist-pages
           cp -r frontend/dist/. dist-pages/
           mkdir -p dist-pages/moderation
-          if [ -f moderation/review_queue.json ]; then
+          # Keep Pages artifact small: ship only a tiny fallback moderation queue file.
+          # Production moderation data is served from Pages Functions + D1.
+          if [ -f moderation/review_queue.json ] && [ "$(wc -c < moderation/review_queue.json)" -le 5242880 ]; then
             cp moderation/review_queue.json dist-pages/moderation/review_queue.json
           else
             echo '{"queue":[]}' > dist-pages/moderation/review_queue.json

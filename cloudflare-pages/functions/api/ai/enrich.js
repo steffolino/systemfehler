@@ -1,28 +1,25 @@
+import { jsonResponse, optionsResponse, readJsonBody } from '../_lib/http.js';
+
 export async function onRequest({ request, env }) {
   if (request.method === 'OPTIONS') {
-    return new Response(null, {
-      status: 204,
-      headers: {
-        'Access-Control-Allow-Origin': request.headers.get('Origin') || '*',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, x-turnstile-token',
-        'Access-Control-Max-Age': '86400',
-      },
-    });
+    return optionsResponse(request, env, { methods: 'POST, OPTIONS', headers: 'Content-Type, x-turnstile-token' });
   }
 
   if (request.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
-      status: 405,
-      headers: { 'content-type': 'application/json' },
-    });
+    return jsonResponse({ error: 'Method not allowed' }, { status: 405, request, env, cors: true });
   }
 
-  const body = await request.json().catch(() => ({}));
+  const bodyResult = await readJsonBody(request, {
+    maxBytes: Number.parseInt(String(env.AI_MAX_BODY_BYTES || '100000'), 10) || 100000,
+  });
+  if (!bodyResult.ok) {
+    return jsonResponse({ error: bodyResult.error }, { status: bodyResult.status, request, env, cors: true });
+  }
+  const body = bodyResult.body;
   const entryId = typeof body?.entry_id === 'string' ? body.entry_id : '';
 
-  return new Response(
-    JSON.stringify({
+  return jsonResponse(
+    {
       entry_id: entryId,
       summary: ['Metadata enrichment is currently optimized for the local AI sidecar.'],
       quality_flags: [],
@@ -37,7 +34,7 @@ export async function onRequest({ request, env }) {
         model: env.CF_AI_MODEL || '@cf/meta/llama-3.1-8b-instruct',
         fallback: true,
       },
-    }),
-    { headers: { 'content-type': 'application/json' } }
+    },
+    { request, env, cors: true }
   );
 }

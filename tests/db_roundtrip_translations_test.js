@@ -89,7 +89,7 @@ const mapped = __private.mapEntryRow(row, { includeTranslations: true });
 assert.deepStrictEqual(mapped.translations, translations, 'Expected translations to be exported from mapped row');
 assert.deepStrictEqual(mapped.translationLanguages, ['de-EINFACH-SUGGESTED', 'de-LEICHT'], 'Expected translation language list');
 assert.deepStrictEqual(mapped.provenance, row.provenance, 'Expected provenance to be exported from mapped row');
-assert.strictEqual(mapped.title.de, 'Titel', 'Expected title mapping to remain intact');
+assert.strictEqual(mapped.title, 'Titel', 'Expected title mapping to remain intact');
 assert.strictEqual(mapped.translations['de-EINFACH-SUGGESTED'].variant, 'einfach', 'Expected variant metadata');
 assert.strictEqual(mapped.translations['de-LEICHT'].reviewStatus, 'approved', 'Expected review status metadata');
 

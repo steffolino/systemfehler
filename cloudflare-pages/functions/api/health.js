@@ -1,3 +1,8 @@
-export async function onRequest() {
-  return new Response(JSON.stringify({ status: 'ok', timestamp: new Date().toISOString() }), { headers: { 'content-type': 'application/json' } });
+import { jsonResponse } from './_lib/http.js';
+
+export async function onRequest(context) {
+  return jsonResponse(
+    { status: 'ok', timestamp: new Date().toISOString() },
+    { request: context.request, env: context.env }
+  );
 }

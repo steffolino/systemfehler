@@ -71,12 +71,31 @@ to same-origin Cloudflare Pages Functions instead of the local Python sidecar.
    - `AI_CACHE_TTL_RETRIEVE_SECONDS` (defaults to `180`)
    - `AI_CACHE_TTL_REWRITE_SECONDS` (defaults to `3600`)
    - `AI_CACHE_TTL_SYNTHESIZE_SECONDS` (defaults to `900`)
+   - `AI_MAX_BODY_BYTES` (defaults to `100000`)
+   - `CORS_ALLOWED_ORIGINS` (comma-separated extra origins allowed for CORS; same-origin is always allowed)
+   - `INGEST_MAX_BODY_BYTES` (defaults to `8000000`)
+   - `INGEST_MAX_ENTRIES` (defaults to `1500`)
 
 ## Deployment Trigger
 
 Deployment runs from `.github/workflows/deploy-pages.yml` on:
 - pushes to `main`
 - manual workflow dispatch
+
+## Manual deployment (local)
+
+Use the same sequence as CI:
+
+1. Build frontend artifact:
+   - `cd frontend && npm ci && npm run build`
+2. Assemble deploy directory:
+   - copy `frontend/dist/*` into `dist-pages/`
+3. Deploy Cloudflare Pages project:
+   - `npx wrangler pages deploy ../dist-pages --project-name=systemfehler --branch=main --cwd=cloudflare-pages`
+4. Apply D1 schema when needed:
+   - `npx wrangler d1 execute systemfehler-db --remote --file=cloudflare-pages/d1/schema.sql`
+5. Optional separate worker deploy (non-primary path):
+   - `npx wrangler deploy --config wrangler.worker.toml`
 
 ## Notes
 

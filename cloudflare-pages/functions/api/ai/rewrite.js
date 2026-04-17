@@ -7,33 +7,25 @@ import {
   normalizeQuery,
   verifyTurnstile,
 } from '../_lib/ai.js';
+import { applySecurityHeaders, jsonResponse, optionsResponse, readJsonBody } from '../_lib/http.js';
 
 export async function onRequest({ request, env }) {
   if (request.method === 'OPTIONS') {
-    return new Response(null, {
-      status: 204,
-      headers: {
-        'Access-Control-Allow-Origin': request.headers.get('Origin') || '*',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, x-turnstile-token',
-        'Access-Control-Max-Age': '86400',
-      },
-    });
+    return optionsResponse(request, env, { methods: 'POST, OPTIONS', headers: 'Content-Type, x-turnstile-token' });
   }
 
   if (request.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
-      status: 405,
-      headers: { 'content-type': 'application/json' },
-    });
+    return jsonResponse({ error: 'Method not allowed' }, { status: 405, request, env, cors: true });
   }
 
   const rateLimit = await enforceRateLimit(request, env, 'rewrite');
   if (!rateLimit.allowed) {
-    return new Response(JSON.stringify({ error: 'Too many AI requests. Please wait a moment.' }), {
+    return jsonResponse({ error: 'Too many AI requests. Please wait a moment.' }, {
       status: 429,
+      request,
+      env,
+      cors: true,
       headers: {
-        'content-type': 'application/json',
         ...rateLimit.headers,
       },
     });
@@ -41,20 +33,28 @@ export async function onRequest({ request, env }) {
 
   const turnstile = await verifyTurnstile(request, env);
   if (!turnstile.success) {
-    return new Response(JSON.stringify({ error: turnstile.error || 'Turnstile verification failed.' }), {
-      status: 403,
-      headers: { 'content-type': 'application/json' },
-    });
+    return jsonResponse(
+      { error: turnstile.error || 'Turnstile verification failed.' },
+      { status: 403, request, env, cors: true }
+    );
   }
 
-  const body = await request.json().catch(() => ({}));
+  const bodyResult = await readJsonBody(request, {
+    maxBytes: Number.parseInt(String(env.AI_MAX_BODY_BYTES || '100000'), 10) || 100000,
+  });
+  if (!bodyResult.ok) {
+    return jsonResponse({ error: bodyResult.error }, { status: bodyResult.status, request, env, cors: true });
+  }
+  const body = bodyResult.body;
   const query = normalizeQuery(typeof body?.query === 'string' ? body.query : '');
   const startedAt = Date.now();
   const { cache, cacheKey, cached } = await getCachedJsonResponse(request, ['rewrite', env.CF_AI_MODEL || '', query]);
   if (cached) {
-    return new Response(await cached.text(), {
+    return jsonResponse(JSON.parse(await cached.text()), {
+      request,
+      env,
+      cors: true,
       headers: {
-        'content-type': 'application/json',
         ...rateLimit.headers,
         'X-Cache': 'HIT',
       },
@@ -67,5 +67,10 @@ export async function onRequest({ request, env }) {
   for (const [key, value] of Object.entries(rateLimit.headers)) {
     cachedResponse.headers.set(key, value);
   }
-  return cachedResponse;
+  return applySecurityHeaders(
+    cachedResponse,
+    request,
+    env,
+    { methods: 'POST, OPTIONS', headers: 'Content-Type, x-turnstile-token' }
+  );
 }

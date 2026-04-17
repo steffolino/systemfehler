@@ -1,3 +1,5 @@
+import { clampPositiveInt, jsonResponse } from '../_lib/http.js';
+
 function parseJsonSafely(value) {
   if (!value) return null;
   try {
@@ -12,15 +14,13 @@ export async function onRequest(context) {
   const url = new URL(request.url);
   const status = url.searchParams.get('status') || 'pending';
   const domain = url.searchParams.get('domain');
-  const limit = Math.min(parseInt(url.searchParams.get('limit') || '100', 10), 100);
-  const offset = parseInt(url.searchParams.get('offset') || '0', 10);
+  const limit = clampPositiveInt(url.searchParams.get('limit') || '100', 100, 100);
+  const offset = clampPositiveInt(url.searchParams.get('offset') || '0', 0);
 
   try {
     const db = env.DB;
     if (!db) {
-      return new Response(JSON.stringify({ queue: [], total: 0, status, domain: domain || undefined }), {
-        headers: { 'content-type': 'application/json' }
-      });
+      return jsonResponse({ queue: [], total: 0, status, domain: domain || undefined }, { request, env });
     }
 
     let rowsQuery;
@@ -80,13 +80,11 @@ export async function onRequest(context) {
 
     const total = Number(countRow?.count || 0);
 
-    return new Response(JSON.stringify({ queue, total, status, domain: domain || undefined }), {
-      headers: { 'content-type': 'application/json' }
-    });
+    return jsonResponse({ queue, total, status, domain: domain || undefined }, { request, env });
   } catch (err) {
-    return new Response(JSON.stringify({ error: 'Failed to read moderation queue', message: err && err.message }), {
-      status: 500,
-      headers: { 'content-type': 'application/json' }
-    });
+    return jsonResponse(
+      { error: 'Failed to read moderation queue', message: err && err.message },
+      { status: 500, request, env }
+    );
   }
 }

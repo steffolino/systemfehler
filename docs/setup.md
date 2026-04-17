@@ -393,7 +393,30 @@ This starts:
 
 ---
 
-## Cloudflare Worker API Deployment
+## Cloudflare Pages Deployment (Primary)
+
+The production app path is Cloudflare Pages + Pages Functions (`/api/*`), not
+the standalone API worker.
+
+### Pages Deploy Steps
+
+1. Build frontend:
+  - `cd frontend && npm ci && npm run build`
+2. Assemble `dist-pages` artifact from `frontend/dist`
+3. Deploy Pages:
+  - `npx wrangler pages deploy ../dist-pages --project-name=systemfehler --branch=main --cwd=cloudflare-pages`
+4. Apply D1 schema when needed:
+  - `npx wrangler d1 execute systemfehler-db --remote --file=cloudflare-pages/d1/schema.sql`
+
+### Pages Security-Relevant Environment Variables
+
+- `TURNSTILE_SECRET_KEY`
+- `INGEST_TOKEN`
+- `CORS_ALLOWED_ORIGINS` (comma-separated extra origins; same-origin allowed by default)
+- `AI_MAX_BODY_BYTES` (request body limit for `/api/ai/*`)
+- `INGEST_MAX_BODY_BYTES` and `INGEST_MAX_ENTRIES` (ingest abuse protection)
+
+## Cloudflare Worker API Deployment (Optional / Separate)
 
 ### Worker Deployment (API)
 
