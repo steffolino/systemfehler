@@ -55,6 +55,12 @@ _DOCTYPE_WEIGHTS: dict[str, float] = {
 
 TOPIC_BOOST_RULES: list[dict] = [
     {
+        "keywords": ["kindergeld", "familienkasse", "beantragen", "antrag"],
+        "document_types": ["formular"],
+        "topics": ["family", "child_benefit"],
+        "boost": 1.6,
+    },
+    {
         "keywords": ["sanktion", "leistungsminderung", "meldeversäumnis", "pflichtverletzung"],
         "document_types": ["weisung"],
         "topics": ["sanctions"],

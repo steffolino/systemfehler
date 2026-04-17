@@ -28,6 +28,21 @@ except ImportError:
     pass
 
 
+def _print_safe(line: str = "") -> None:
+    """Print defensively for terminals that cannot encode all Unicode chars."""
+    try:
+        print(line)
+    except UnicodeEncodeError:
+        enc = getattr(sys.stdout, "encoding", None) or "utf-8"
+        data = (line + "\n").encode(enc, errors="replace")
+        buf = getattr(sys.stdout, "buffer", None)
+        if buf is not None:
+            buf.write(data)
+            buf.flush()
+        else:
+            sys.stdout.write(data.decode(enc, errors="replace"))
+
+
 def cmd_download_page(args: argparse.Namespace) -> None:
     """Scrape one or more pages for PDF links and download them all."""
     import requests
@@ -198,11 +213,11 @@ def cmd_search(args: argparse.Namespace) -> None:
         section = (r.get("section_title") or "")[:40]
         text = (r.get("text") or "")[:200]
         boost_str = f"  [raw={raw:.3f} × sw={sw:.2f} × tb={tb:.2f}]" if (sw != 1.0 or tb != 1.0) else ""
-        print(f"[{i}] score={score:.3f}{boost_str}  trust={trust}  layer={layer}")
-        print(f"     {title}")
+        _print_safe(f"[{i}] score={score:.3f}{boost_str}  trust={trust}  layer={layer}")
+        _print_safe(f"     {title}")
         if section:
-            print(f"     § {section}")
-        print(f"     {text}\n")
+            _print_safe(f"     § {section}")
+        _print_safe(f"     {text}\n")
 
 
 def main() -> None:
