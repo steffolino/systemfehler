@@ -1,0 +1,64 @@
+{
+  "version": "0.1.0",
+  "topicId": "hilfe_beratung_unterstuetzung",
+  "generatedAt": "2026-04-17T07:20:00Z",
+  "method": "sitemap_first_plus_manual_curation",
+  "note": "Top 20 NGO/meta deep links for concrete support discovery (beratung, kontaktstellen, schuldnerhilfe, musterschreiben-adjacent help flows).",
+  "sources": [
+    {
+      "sourceId": "sanktionsfrei",
+      "urls": [
+        "https://sanktionsfrei.de/studie25",
+        "https://sanktionsfrei.de/mehrbedarf",
+        "https://sanktionsfrei.de/schulbonus"
+      ]
+    },
+    {
+      "sourceId": "tacheles",
+      "urls": [
+        "https://tacheles-sozialhilfe.de/beratung/unterstuetzung-durch-tacheles.html",
+        "https://tacheles-sozialhilfe.de/beratung/beratungsangebot-bundesweit.html",
+        "https://tacheles-sozialhilfe.de/beratung/beratung-wuppertal.html",
+        "https://tacheles-sozialhilfe.de/kontakt.html"
+      ]
+    },
+    {
+      "sourceId": "caritas",
+      "urls": [
+        "https://www.caritas.de/hilfeundberatung/hilfeundberatung",
+        "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/start",
+        "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/adressen",
+        "https://www.caritas.de/hilfeundberatung/onlineberatung/schuldnerberatung/start",
+        "https://www.caritas.de/hilfeundberatung/onlineberatung/schuldnerberatung/adressen"
+      ]
+    },
+    {
+      "sourceId": "drk",
+      "urls": [
+        "https://www.drk.de/hilfe-in-deutschland/",
+        "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/",
+        "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung/"
+      ]
+    },
+    {
+      "sourceId": "sozialplattform",
+      "urls": [
+        "https://sozialplattform.de/beratungsstellenfinder",
+        "https://sozialplattform.de/sozialleistungsfinder",
+        "https://sozialplattform.de/schuldnerberatung"
+      ]
+    },
+    {
+      "sourceId": "diakonie",
+      "urls": [
+        "https://beratung.diakonie.de"
+      ]
+    },
+    {
+      "sourceId": "paritaetischer",
+      "urls": [
+        "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen/"
+      ]
+    }
+  ]
+}

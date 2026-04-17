@@ -6,14 +6,30 @@
     "maintainedBy": "codex",
     "syncedFromTrustedTopics": true,
     "topicIds": [
-      "antrag_bescheid",
-      "buergergeld",
-      "hilfe_beratung_unterstuetzung",
-      "kinderzuschlag",
-      "kontakt_arbeitsagentur"
+      "hilfe_beratung_unterstuetzung"
     ]
   },
   "seeds": [
+    {
+      "url": "https://beratung.diakonie.de",
+      "enabled": true,
+      "source": "diakonie",
+      "label": "Hilfe Beratung Unterstuetzung Beratung.diakonie.de",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "unemployed"
+      ]
+    },
     {
       "url": "https://familienportal.de/familienportal/meta/kontakt",
       "label": "Familienportal Kontakt",
@@ -47,6 +63,117 @@
       ],
       "targetGroups": [
         "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://sanktionsfrei.de/mehrbedarf",
+      "enabled": true,
+      "source": "sanktionsfrei",
+      "label": "Hilfe Beratung Unterstuetzung Mehrbedarf",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://sanktionsfrei.de/schulbonus",
+      "enabled": true,
+      "source": "sanktionsfrei",
+      "label": "Hilfe Beratung Unterstuetzung Schulbonus",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://sanktionsfrei.de/studie25",
+      "enabled": true,
+      "source": "sanktionsfrei",
+      "label": "Hilfe Beratung Unterstuetzung Studie25",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://sozialplattform.de/beratungsstellenfinder",
+      "enabled": true,
+      "source": "sozialplattform",
+      "label": "Hilfe Beratung Unterstuetzung Beratungsstellenfinder",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "meta_support_portal_source",
+        "directory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://sozialplattform.de/schuldnerberatung",
+      "enabled": true,
+      "source": "sozialplattform",
+      "label": "Hilfe Beratung Unterstuetzung Schuldnerberatung",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "meta_support_portal_source",
+        "directory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://sozialplattform.de/sozialleistungsfinder",
+      "enabled": true,
+      "source": "sozialplattform",
+      "label": "Hilfe Beratung Unterstuetzung Sozialleistungsfinder",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "meta_support_portal_source",
+        "directory",
+        "contact"
+      ],
+      "targetGroups": [
         "general_public"
       ]
     },
@@ -201,6 +328,106 @@
       ]
     },
     {
+      "url": "https://www.caritas.de/hilfeundberatung/hilfeundberatung",
+      "enabled": true,
+      "source": "caritas",
+      "label": "Hilfe Beratung Unterstuetzung Hilfeundberatung",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/adressen",
+      "enabled": true,
+      "source": "caritas",
+      "label": "Hilfe Beratung Unterstuetzung Adressen",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/start",
+      "enabled": true,
+      "source": "caritas",
+      "label": "Hilfe Beratung Unterstuetzung Start",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/schuldnerberatung/adressen",
+      "enabled": true,
+      "source": "caritas",
+      "label": "Hilfe Beratung Unterstuetzung Adressen",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/schuldnerberatung/start",
+      "enabled": true,
+      "source": "caritas",
+      "label": "Hilfe Beratung Unterstuetzung Start",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ]
+    },
+    {
       "url": "https://www.diakonie.de",
       "enabled": true,
       "source": "diakonie",
@@ -225,6 +452,63 @@
       "enabled": true,
       "source": "drk",
       "label": "Hilfe Beratung Unterstuetzung Hilfe In Deutschland",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.drk.de/hilfe-in-deutschland/",
+      "enabled": true,
+      "source": "drk",
+      "label": "Hilfe Beratung Unterstuetzung Hilfe In Deutschland",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/",
+      "enabled": true,
+      "source": "drk",
+      "label": "Hilfe Beratung Unterstuetzung Existenzsichernde Hilfe",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung/",
+      "enabled": true,
+      "source": "drk",
+      "label": "Hilfe Beratung Unterstuetzung Schuldnerberatung",
       "topics": [
         "hilfe_beratung_unterstuetzung",
         "contacts"

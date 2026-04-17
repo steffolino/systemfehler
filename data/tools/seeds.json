@@ -6,15 +6,61 @@
     "maintainedBy": "codex",
     "syncedFromTrustedTopics": true,
     "topicIds": [
-      "antrag_bescheid",
-      "buergergeld",
-      "buergergeld_rechner",
-      "hilfe_beratung_unterstuetzung",
-      "kinderzuschlag",
-      "kontakt_arbeitsagentur"
+      "hilfe_beratung_unterstuetzung"
     ]
   },
   "seeds": [
+    {
+      "url": "https://sozialplattform.de/beratungsstellenfinder",
+      "enabled": true,
+      "source": "sozialplattform",
+      "label": "Hilfe Beratung Unterstuetzung Beratungsstellenfinder",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "meta_support_portal_source",
+        "directory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://sozialplattform.de/schuldnerberatung",
+      "enabled": true,
+      "source": "sozialplattform",
+      "label": "Hilfe Beratung Unterstuetzung Schuldnerberatung",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "meta_support_portal_source",
+        "directory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://sozialplattform.de/sozialleistungsfinder",
+      "enabled": true,
+      "source": "sozialplattform",
+      "label": "Hilfe Beratung Unterstuetzung Sozialleistungsfinder",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "meta_support_portal_source",
+        "directory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public"
+      ]
+    },
     {
       "url": "https://www.arbeitsagentur.de/eservices",
       "label": "Arbeitsagentur eServices overview",

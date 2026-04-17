@@ -6,21 +6,29 @@
     "maintainedBy": "codex",
     "syncedFromTrustedTopics": true,
     "topicIds": [
-      "aufstocker",
-      "bedarfsgemeinschaft",
-      "buergergeld",
-      "buergergeld_rechner",
-      "hilfe_beratung_unterstuetzung",
-      "kinderzuschlag",
-      "kontakt_arbeitsagentur",
-      "leichte_sprache_soziale_sicherheit",
-      "mehrbedarf",
-      "pflichten",
-      "regelbedarf",
-      "sozialrecht_glossar"
+      "hilfe_beratung_unterstuetzung"
     ]
   },
   "seeds": [
+    {
+      "url": "https://beratung.diakonie.de",
+      "enabled": true,
+      "source": "diakonie",
+      "label": "Hilfe Beratung Unterstuetzung Beratung.diakonie.de",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "unemployed"
+      ]
+    },
     {
       "url": "https://sanktionsfrei.de",
       "enabled": true,
@@ -46,10 +54,14 @@
       "label": "Buergergeld Mehrbedarf",
       "topics": [
         "buergergeld",
-        "mehrbedarf"
+        "mehrbedarf",
+        "hilfe_beratung_unterstuetzung"
       ],
       "tags": [
-        "ngo_context_source"
+        "ngo_context_source",
+        "ngo_support_source",
+        "advisory",
+        "contact"
       ],
       "targetGroups": [
         "unemployed",
@@ -62,10 +74,14 @@
       "source": "sanktionsfrei",
       "label": "Buergergeld Schulbonus",
       "topics": [
-        "buergergeld"
+        "buergergeld",
+        "hilfe_beratung_unterstuetzung"
       ],
       "tags": [
-        "ngo_context_source"
+        "ngo_context_source",
+        "ngo_support_source",
+        "advisory",
+        "contact"
       ],
       "targetGroups": [
         "unemployed",
@@ -79,7 +95,78 @@
       "label": "Buergergeld Studie25",
       "topics": [
         "buergergeld",
-        "pflichten"
+        "pflichten",
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_context_source",
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://sozialplattform.de/beratungsstellenfinder",
+      "enabled": true,
+      "source": "sozialplattform",
+      "label": "Hilfe Beratung Unterstuetzung Beratungsstellenfinder",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "meta_support_portal_source",
+        "directory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://sozialplattform.de/schuldnerberatung",
+      "enabled": true,
+      "source": "sozialplattform",
+      "label": "Hilfe Beratung Unterstuetzung Schuldnerberatung",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "meta_support_portal_source",
+        "directory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://sozialplattform.de/sozialleistungsfinder",
+      "enabled": true,
+      "source": "sozialplattform",
+      "label": "Hilfe Beratung Unterstuetzung Sozialleistungsfinder",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "meta_support_portal_source",
+        "directory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://tacheles-sozialhilfe.de",
+      "enabled": true,
+      "source": "tacheles",
+      "label": "Hilfe Beratung Unterstuetzung Tacheles Sozialhilfe.de",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
       ],
       "tags": [
         "ngo_context_source"
@@ -90,10 +177,58 @@
       ]
     },
     {
-      "url": "https://tacheles-sozialhilfe.de",
+      "url": "https://tacheles-sozialhilfe.de/beratung/beratung-wuppertal.html",
       "enabled": true,
       "source": "tacheles",
-      "label": "Hilfe Beratung Unterstuetzung Tacheles Sozialhilfe.de",
+      "label": "Hilfe Beratung Unterstuetzung Beratung Wuppertal.html",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_context_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://tacheles-sozialhilfe.de/beratung/beratungsangebot-bundesweit.html",
+      "enabled": true,
+      "source": "tacheles",
+      "label": "Hilfe Beratung Unterstuetzung Beratungsangebot Bundesweit.html",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_context_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://tacheles-sozialhilfe.de/beratung/unterstuetzung-durch-tacheles.html",
+      "enabled": true,
+      "source": "tacheles",
+      "label": "Hilfe Beratung Unterstuetzung Unterstuetzung Durch Tacheles.html",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_context_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://tacheles-sozialhilfe.de/kontakt.html",
+      "enabled": true,
+      "source": "tacheles",
+      "label": "Hilfe Beratung Unterstuetzung Kontakt.html",
       "topics": [
         "hilfe_beratung_unterstuetzung"
       ],
@@ -483,10 +618,120 @@
       ]
     },
     {
+      "url": "https://www.caritas.de/hilfeundberatung/hilfeundberatung",
+      "enabled": true,
+      "source": "caritas",
+      "label": "Hilfe Beratung Unterstuetzung Hilfeundberatung",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/adressen",
+      "enabled": true,
+      "source": "caritas",
+      "label": "Hilfe Beratung Unterstuetzung Adressen",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/start",
+      "enabled": true,
+      "source": "caritas",
+      "label": "Hilfe Beratung Unterstuetzung Start",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/schuldnerberatung/adressen",
+      "enabled": true,
+      "source": "caritas",
+      "label": "Hilfe Beratung Unterstuetzung Adressen",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/schuldnerberatung/start",
+      "enabled": true,
+      "source": "caritas",
+      "label": "Hilfe Beratung Unterstuetzung Start",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ]
+    },
+    {
       "url": "https://www.der-paritaetische.de",
       "enabled": true,
       "source": "paritaetischer",
       "label": "Hilfe Beratung Unterstuetzung Www.der Paritaetische.de",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_context_source"
+      ],
+      "targetGroups": [
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen/",
+      "enabled": true,
+      "source": "paritaetischer",
+      "label": "Hilfe Beratung Unterstuetzung Finanzierung Sozialer Projekte Dienste Und Einrichtungen",
       "topics": [
         "hilfe_beratung_unterstuetzung"
       ],
@@ -537,6 +782,60 @@
       "enabled": true,
       "source": "drk",
       "label": "Hilfe Beratung Unterstuetzung Hilfe In Deutschland",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.drk.de/hilfe-in-deutschland/",
+      "enabled": true,
+      "source": "drk",
+      "label": "Hilfe Beratung Unterstuetzung Hilfe In Deutschland",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/",
+      "enabled": true,
+      "source": "drk",
+      "label": "Hilfe Beratung Unterstuetzung Existenzsichernde Hilfe",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung/",
+      "enabled": true,
+      "source": "drk",
+      "label": "Hilfe Beratung Unterstuetzung Schuldnerberatung",
       "topics": [
         "hilfe_beratung_unterstuetzung"
       ],

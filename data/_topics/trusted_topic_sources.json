@@ -578,7 +578,9 @@
             "/beratung"
           ],
           "seedUrls": [
-            "https://www.sozialplattform.de"
+            "https://sozialplattform.de/beratungsstellenfinder",
+            "https://sozialplattform.de/sozialleistungsfinder",
+            "https://sozialplattform.de/schuldnerberatung"
           ]
         },
         {
@@ -590,7 +592,11 @@
             "/hilfe-und-beratung"
           ],
           "seedUrls": [
-            "https://www.caritas.de/hilfeundberatung"
+            "https://www.caritas.de/hilfeundberatung/hilfeundberatung",
+            "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/start",
+            "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/adressen",
+            "https://www.caritas.de/hilfeundberatung/onlineberatung/schuldnerberatung/start",
+            "https://www.caritas.de/hilfeundberatung/onlineberatung/schuldnerberatung/adressen"
           ]
         },
         {
@@ -601,7 +607,7 @@
             "/"
           ],
           "seedUrls": [
-            "https://www.diakonie.de"
+            "https://beratung.diakonie.de"
           ]
         },
         {
@@ -612,7 +618,9 @@
             "/hilfe-in-deutschland"
           ],
           "seedUrls": [
-            "https://www.drk.de/hilfe-in-deutschland"
+            "https://www.drk.de/hilfe-in-deutschland/",
+            "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/",
+            "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung/"
           ]
         },
         {
@@ -623,7 +631,10 @@
             "/"
           ],
           "seedUrls": [
-            "https://tacheles-sozialhilfe.de"
+            "https://tacheles-sozialhilfe.de/beratung/unterstuetzung-durch-tacheles.html",
+            "https://tacheles-sozialhilfe.de/beratung/beratungsangebot-bundesweit.html",
+            "https://tacheles-sozialhilfe.de/beratung/beratung-wuppertal.html",
+            "https://tacheles-sozialhilfe.de/kontakt.html"
           ]
         },
         {
@@ -634,7 +645,7 @@
             "/"
           ],
           "seedUrls": [
-            "https://www.der-paritaetische.de"
+            "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen/"
           ]
         },
         {
@@ -647,8 +658,9 @@
             "/studie"
           ],
           "seedUrls": [
-            "https://sanktionsfrei.de",
-            "https://www.sanktionsfrei.de/buergergeld"
+            "https://sanktionsfrei.de/studie25",
+            "https://sanktionsfrei.de/mehrbedarf",
+            "https://sanktionsfrei.de/schulbonus"
           ]
         },
         {
