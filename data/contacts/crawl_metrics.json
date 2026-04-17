@@ -2,23 +2,23 @@
   "version": "0.1.0",
   "domain": "contacts",
   "crawler": "contacts-seeded",
-  "startedAt": "2026-03-17T06:26:26.706621+00:00",
-  "finishedAt": "2026-03-17T06:26:45.628482+00:00",
-  "durationSeconds": 18.922,
+  "startedAt": "2026-04-17T09:27:25.735267+00:00",
+  "finishedAt": "2026-04-17T09:44:21.720441+00:00",
+  "durationSeconds": 1015.985,
   "counts": {
-    "seedUrls": 12,
-    "processedUrls": 12,
-    "entriesExtracted": 10,
-    "fetchFailures": 2,
+    "seedUrls": 515,
+    "processedUrls": 518,
+    "entriesExtracted": 443,
+    "fetchFailures": 72,
     "validationFailures": 0,
     "redirectAliases": 0,
-    "canonicalAliases": 0,
+    "canonicalAliases": 3,
     "emptySummary": 0,
     "emptyContent": 0
   },
   "quality": {
     "avgIqs": 84.58,
-    "avgAis": 78.8,
+    "avgAis": 81.79,
     "lowQualityCount": 0,
     "lowQualitySamples": []
   },
@@ -26,120 +26,216 @@
     "hosts": [
       [
         "bmas.de",
+        195
+      ],
+      [
+        "bmbfsfj.bund.de",
+        99
+      ],
+      [
+        "bafza.de",
+        63
+      ],
+      [
+        "fitko.de",
+        45
+      ],
+      [
+        "115.de",
+        34
+      ],
+      [
+        "arbeitsagentur.de",
+        33
+      ],
+      [
+        "sanktionsfrei.de",
+        6
+      ],
+      [
+        "caritas.de",
+        6
+      ],
+      [
+        "sozialplattform.de",
         3
       ],
       [
         "web.arbeitsagentur.de",
-        2
+        3
       ],
       [
-        "115.de",
-        2
+        "drk.de",
+        3
+      ],
+      [
+        "pausentaste.de",
+        3
       ],
       [
         "gebaerdentelefon.de",
         2
       ],
       [
-        "arbeitsagentur.de",
-        1
+        "iab.de",
+        2
       ],
       [
         "familienportal.de",
-        1
-      ],
-      [
-        "ak.arbeitsagentur.de",
         1
       ]
     ],
     "sourceTier": [
       [
         "tier_1_official",
-        10
+        422
+      ],
+      [
+        "tier_unknown",
+        16
+      ],
+      [
+        "tier_2_ngo_watchdog",
+        5
       ]
     ],
     "institutionType": [
       [
         "government",
-        10
+        419
+      ],
+      [
+        "unknown",
+        16
+      ],
+      [
+        "ngo",
+        5
+      ],
+      [
+        "public_service",
+        3
       ]
     ],
     "topics": [
       [
         "contacts",
-        10
+        443
       ],
       [
         "public_service",
-        4
+        406
       ],
       [
         "financial_support",
-        3
+        139
+      ],
+      [
+        "employment",
+        137
+      ],
+      [
+        "aid",
+        65
+      ],
+      [
+        "family",
+        63
+      ],
+      [
+        "leichte_sprache_soziale_sicherheit",
+        23
+      ],
+      [
+        "hilfe_beratung_unterstuetzung",
+        6
       ],
       [
         "kontakt_arbeitsagentur",
-        2
+        4
       ],
       [
         "kinderzuschlag",
         2
       ],
       [
-        "employment",
+        "buergergeld",
+        2
+      ],
+      [
+        "rights",
         1
       ]
     ],
     "tags": [
       [
-        "official_contact_source",
-        8
-      ],
-      [
         "contact",
-        6
-      ],
-      [
-        "helpline",
-        2
-      ],
-      [
-        "contact_form",
-        1
-      ],
-      [
-        "accessibility",
-        1
+        408
       ],
       [
         "application_required",
+        200
+      ],
+      [
+        "official_contact_source",
+        44
+      ],
+      [
+        "light_language",
+        23
+      ],
+      [
+        "accessibility",
+        11
+      ],
+      [
+        "advisory",
+        5
+      ],
+      [
+        "meta_support_portal_source",
+        3
+      ],
+      [
+        "directory",
+        3
+      ],
+      [
+        "helpline",
+        3
+      ],
+      [
+        "ngo_support_source",
+        3
+      ],
+      [
+        "contact_form",
         1
       ]
     ],
     "targetGroups": [
       [
-        "families",
-        9
+        "general_public",
+        441
       ],
       [
-        "general_public",
-        8
+        "families",
+        439
       ],
       [
         "persons_with_disabilities",
-        4
+        431
       ],
       [
         "unemployed",
-        3
-      ],
-      [
-        "job_seekers",
-        2
+        141
       ],
       [
         "parents",
+        2
+      ],
+      [
+        "job_seekers",
         2
       ]
     ]
@@ -148,33 +244,41 @@
     "statuses": [
       [
         "ok",
-        493
+        514
       ],
       [
         "redirect_alias",
-        93
+        106
       ],
       [
         "fetch_failed",
-        15
+        72
+      ],
+      [
+        "invalid_url",
+        13
       ],
       [
         "canonical_alias",
-        3
+        7
       ]
     ],
     "failureReasons": [
       [
         "http_redirect",
-        93
+        106
       ],
       [
         "fetch_failed",
-        15
+        73
+      ],
+      [
+        "guardrail_blocked_host",
+        13
       ],
       [
         "head_canonical",
-        3
+        7
       ]
     ]
   },

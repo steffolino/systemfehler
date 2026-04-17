@@ -3194,6 +3194,63 @@
       }
     },
     {
+      "id": "26862c06-0b4a-4c73-adf0-7cf178aede09",
+      "title": "Schuldnerberatung",
+      "summary": {
+        "de": "Sie haben Schulden oder sind in einer finanziellen Notlage? Dann gibt es kostenlose Hilfsangebote. Hier finden Sie Infos und Beratungsstellen in Ihrer Nähe."
+      },
+      "content": {
+        "de": "Sie haben Schulden oder sind in einer finanziellen Notlage? Dann gibt es kostenlose Hilfsangebote. Hier finden Sie Infos und Beratungsstellen in Ihrer Nähe."
+      },
+      "url": "https://sozialplattform.de/schuldnerberatung",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "meta_support_portal_source",
+        "directory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:27:33.076486+00:00",
+      "lastSeen": "2026-04-17T09:27:33.076486+00:00",
+      "sourceUnavailable": false,
+      "contactType": "advisor",
+      "specialization": [
+        "Hilfsangebotsuche",
+        "Beratungsstellensuche"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Sozialplattform",
+      "provenance": {
+        "source": "https://sozialplattform.de/schuldnerberatung",
+        "crawledAt": "2026-04-17T09:27:33.078486Z",
+        "crawlId": "contacts-seeded-1776418053",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "public_service",
+        "jurisdiction": "DE",
+        "sourceId": "sozialplattform",
+        "providerName": "Sozialplattform",
+        "providerLevel": "federal",
+        "checksum": "884ab29919138c0efdfee175588a218494eed3dd996f70e58689f763aeb4c173"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 80.0,
+        "computedAt": "2026-04-17T09:27:33.078486+00:00"
+      }
+    },
+    {
       "id": "cd2aee2f-ef92-4411-8907-1bf211761c77",
       "title": "Alle Behörden. Ihre Fragen. 115 wählen!",
       "summary": {
@@ -3353,6 +3410,241 @@
         "iqs": 84.58,
         "ais": 84.0,
         "computedAt": "2026-03-15T16:07:00.539247+00:00"
+      }
+    },
+    {
+      "id": "fe9c7fbe-07ec-4bc7-b018-db425fbbdb9b",
+      "title": "Bernau startet Vollbeauskunftung",
+      "summary": {
+        "de": "Ab dem 1. Dezember 2025 erweitert die Stadt Bernau bei Berlin ihren Bürgerservice. Die bundesweit einheitliche Behördennummer 115 wird künftig in der Vollbeauskunftung angeboten."
+      },
+      "content": {
+        "de": "Seit dem 1. Dezember 2025 hat die Stadt Bernau bei Berlin ihren Bürgerservice erweitert. Die bundesweit einheitliche Behördennummer 115 wird in der Vollbeauskunftung angeboten. Damit erhalten Bürgerinnen und Bürger, Unternehmen sowie weitere Anrufende einen direkten Zugang zu Verwaltungsinformationen und Dienstleistungen — schnell, zuverlässig und ohne komplizierte Wege durch die Zuständigkeiten der Verwaltung. Montags bis freitags von 8 bis 18 Uhr stehen die Mitarbeitenden telefonisch im Servicecenter zur Verfügung. Dort beantworten speziell für das Flächenland Brandenburg ausgebildete Agentinnen und Agenten die Anfragen im sogenannten „First Level Support\" direkt. Sollte ein Anliegen spezieller sein oder über die Möglichkeiten des Servicecenters hinausgehen, wird es über ein Ticketsystem oder durch Weiterleitung an die zuständige Fachabteilung bearbeitet. „Für die Bürgerinnen und Bürger bedeutet die Einführung der Vollbeauskunftung über die 115, dass sie künftig nicht nur allgemeine Informationen erhalten, sondern bei Bedarf direkt an die richtige Stelle weitergeleitet werden. Damit wird der Zugang zu Verwaltungsleistungen einfacher, schneller und bürgerfreundlicher. Bernau setzt mit diesem Schritt ein klares Zeichen für eine moderne und serviceorientierte Verwaltung\", verdeutlichte Yvonne Priefer, E-Government-Beauftragte der Stadt vor Start der Vollbeauskunftung. Die Behördennummer 115 ist ein Service, der deutschlandweit eingeführt wurde, um den Zugang zur Verwaltung zu vereinfachen. Sie wird von der Föderalen IT-Kooperation (FITKO) im Rahmen des IT-Planungsrats gesteuert. Der IT-Planungsrat ist das zentrale politische Gremium für die Zusammenarbeit von Bund, Ländern und Kommunen im Bereich der Informationstechnik und Digitalisierung. Ziel ist es, Verwaltungsleistungen serviceorientiert, effizient und sicher zu gestalten. Bernau bei Berlin ist seit Oktober 2023 Pilotkommune für die Einführung der Behördennummer 115 in Brandenburg und arbeitet eng mit dem zuständigen Ministerium an der Umsetzung. Seit dem 1. Januar 2025 befindet sich die Stadt bereits in der Basis-Beauskunftung, bei der allgemeine Informationen zu Zuständigkeiten gegeben werden konnten. Mit dem Schritt in die Vollbeauskunftung wird der Service nun deutlich erweitert und bietet einen echten Mehrwert für alle Anrufenden. Veröffentlicht: 22.01.2026 Letzte Aktualisierung: 02.02.2026"
+      },
+      "url": "https://www.115.de/de-leicht/aktuelles/detail",
+      "topics": [
+        "contacts",
+        "leichte_sprache_soziale_sicherheit"
+      ],
+      "tags": [
+        "official_contact_source",
+        "light_language"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:28:31.589560+00:00",
+      "lastSeen": "2026-04-17T09:28:31.589560+00:00",
+      "sourceUnavailable": false,
+      "contactType": "helpline",
+      "specialization": [
+        "Behoerdenauskunft",
+        "Telefonservice",
+        "Barrierefreie Kontaktwege"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Behördennummer 115",
+      "provenance": {
+        "source": "https://www.115.de/de-leicht/aktuelles/detail?cHash=e87ef00ee8c0637e74a469609784c63a&tx_news_pi1%5Baction%5D=detail&tx_news_pi1%5Bcontroller%5D=News&tx_news_pi1%5Bnews%5D=77",
+        "crawledAt": "2026-04-17T09:28:31.597074Z",
+        "crawlId": "contacts-seeded-1776418111",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "service115",
+        "providerName": "Behördennummer 115",
+        "providerLevel": "federal",
+        "checksum": "debc16896d49cc2b8fe787bf2e344aa03dec33af1c56db5dfb4d65a66603fc46"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:28:31.597074+00:00"
+      }
+    },
+    {
+      "id": "a7b1c811-6441-42e9-b709-e94e059ffb97",
+      "title": "Erklärung zur Barrierefreiheit",
+      "summary": {
+        "de": "Diesen Text gibt es nicht in leichter Sprache. Das ist wegen rechtlichen Gründen."
+      },
+      "content": {
+        "de": "Wir (FITKO (Föderale IT-Kooperation)) als Websitebetreiber sind bemüht, die Website in Einklang mit den einschlägigen Vorschriften zur Barrierefreiheit zu gestalten. Für uns gelten folgende Rechtsvorschriften: Hessisches Gesetz zur Gleichstellung von Menschen mit Behinderungen (Hessisches Behinderten-Gleichstellungsgesetz - HessBGG) und Hessische Verordnung über barrierefreie Informationstechnik (BITV HE 2019) Diese Erklärung zur Barrierefreiheit gilt für die Website https://www.115.de. Diese Website wurde zuletzt am 20.12.2023 in wesentlichen Punkten inhaltlich überarbeitet. Sind Ihnen Mängel beim barrierefreien Zugang zu Inhalten auf unserer Website aufgefallen oder haben Sie Anmerkungen sowie Fragen zum barrierefreien Zugang? Melden Sie sich gerne bei uns unter: FITKO (Föderale IT-Kooperation) Zum Gottschalkhof 3 60594 Frankfurt am Main E-Mail: poststelle noSpam @fitko.de"
+      },
+      "url": "https://www.115.de/de-leicht/barrierefreiheitserklaerung",
+      "topics": [
+        "contacts",
+        "leichte_sprache_soziale_sicherheit"
+      ],
+      "tags": [
+        "official_contact_source",
+        "light_language"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:28:07.340864+00:00",
+      "lastSeen": "2026-04-17T09:28:07.340864+00:00",
+      "sourceUnavailable": false,
+      "contactType": "helpline",
+      "specialization": [
+        "Behoerdenauskunft",
+        "Telefonservice",
+        "Barrierefreie Kontaktwege"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Behördennummer 115",
+      "provenance": {
+        "source": "https://www.115.de/de-leicht/barrierefreiheitserklaerung",
+        "crawledAt": "2026-04-17T09:28:07.344498Z",
+        "crawlId": "contacts-seeded-1776418087",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "service115",
+        "providerName": "Behördennummer 115",
+        "providerLevel": "federal",
+        "checksum": "ae13a05abf79cb274bd8d2f2df47115d3d9cd1ce12c5ae45f6740adf41bf96a7"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:28:07.344498+00:00"
+      }
+    },
+    {
+      "id": "88fd92b0-7c52-424e-883e-0c4d7455c9e2",
+      "title": "Gebärdensprache",
+      "summary": {
+        "de": "Alle Behördeninfos der 115 in deutscher Gebärdensprache. Nutzen Sie das Gebärdentelefon online – einfach via Smartphone oder PC/Mac mit Webcam!"
+      },
+      "content": {
+        "de": "Unser Telefon mit Gebärden-Sprache erreichen Sie im Internet. Ein Handy mit Kamera vorne und Internet reicht. Für PC oder Mac brauchen Sie Internet und eine Kamera. Über das Gebärden-Telefon beantworten ausgebildete Mitarbeitende Ihre Fragen in Gebärden-Sprache. Sie helfen Ihnen mit den gleichen Infos wie am Telefon. Sie brauchen ein Gerät mit Kamera vorne und Internet. Es geht Tablet, Handy, PC oder Mac. Eine schnelle Internet-Verbindung ist am besten. Das Gebärden-Telefon ist kostenlos. Es ist an keinen Anbieter gebunden. Sie zahlen vielleicht für Ihre Internet-Verbindung. Nur ohne Flatrate oder freies Daten-Volumen."
+      },
+      "url": "https://www.115.de/de-leicht/gebaerdensprache",
+      "topics": [
+        "contacts",
+        "public_service"
+      ],
+      "tags": [
+        "official_contact_source",
+        "accessibility"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:27:59.335005+00:00",
+      "lastSeen": "2026-04-17T09:27:59.335005+00:00",
+      "sourceUnavailable": false,
+      "contactType": "accessibility",
+      "specialization": [
+        "Behoerdenauskunft",
+        "Telefonservice",
+        "Barrierefreie Kontaktwege"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Behördennummer 115",
+      "provenance": {
+        "source": "https://www.115.de/de-leicht/gebaerdensprache",
+        "crawledAt": "2026-04-17T09:27:59.340491Z",
+        "crawlId": "contacts-seeded-1776418079",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "service115",
+        "providerName": "Behördennummer 115",
+        "providerLevel": "federal",
+        "checksum": "6e12f3f6e1da36edfca2e2346dc24d572ed656b45713ecfc0c63caa8946d99f6"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:27:59.341499+00:00"
+      }
+    },
+    {
+      "id": "98d5cba5-d8c7-4412-8fef-6e9f46baead3",
+      "title": "Kontakt",
+      "summary": {
+        "de": "Sie möchten Teil des 115-Verbundes werden, haben Presseanfragen oder Fragen zu anderen Themen? Kontaktieren Sie gerne unser Produktmanagement!"
+      },
+      "content": {
+        "de": "Sie können anrufen. Montags bis Freitags von 8 Uhr morgens bis 6 Uhr Abends. Für alle Fragen an Ämter. Die Behördennummer 115 wird von der FITKO (Föderale IT-Kooperation) im Auftrags des IT-Planungsrats gesteuert. Sie möchten Teil des 115-Verbundes werden, haben Presseanfragen oder Fragen zu anderen Themen? Unser Produktmanagement ist für Sie da! Bei konkreten Fragen zu Verwaltungsleistungen wählen Sie bitte die 115."
+      },
+      "url": "https://www.115.de/de-leicht/kontakt",
+      "topics": [
+        "contacts"
+      ],
+      "tags": [
+        "official_contact_source",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:28:11.352737+00:00",
+      "lastSeen": "2026-04-17T09:28:11.352737+00:00",
+      "sourceUnavailable": false,
+      "contactType": "helpline",
+      "specialization": [
+        "Behoerdenauskunft",
+        "Telefonservice",
+        "Barrierefreie Kontaktwege"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Behördennummer 115",
+      "provenance": {
+        "source": "https://www.115.de/de-leicht/kontakt",
+        "crawledAt": "2026-04-17T09:28:11.355741Z",
+        "crawlId": "contacts-seeded-1776418091",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "service115",
+        "providerName": "Behördennummer 115",
+        "providerLevel": "federal",
+        "checksum": "89ec6e709e460e8f38593800b7d31594e3707dd45eeafce0050b756e3876555f"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:28:11.355741+00:00"
       }
     },
     {
@@ -3626,6 +3918,180 @@
       }
     },
     {
+      "id": "a1e33c2c-1bbd-4911-bb13-7a4b246de906",
+      "title": "Video in Gebärdensprache: Bürgergeld",
+      "summary": {
+        "de": "Wenn Sie Fragen zu Anträgen, Unterstützungs-Leistungen oder Services der BA haben: Kontaktieren Sie uns über das BA-Servicetelefon für Menschen mit Hörbeeinträchtigungen. Es ermöglicht Ihnen Gebärdentelefonie oder Schrifttelefonie."
+      },
+      "content": {
+        "de": "Servicetelefon für Menschen mit Hörbeeinträchtigungen Hinweis zur Verwendung von Bildern: Weitere Informationen zu Copyright und Markenschutz finden Sie in unserem Impressum."
+      },
+      "url": "https://www.arbeitsagentur.de/gebaerdensprache/gebaerdesprache-buergergeld",
+      "topics": [
+        "contacts",
+        "public_service"
+      ],
+      "tags": [
+        "official_contact_source",
+        "accessibility"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:28:43.678749+00:00",
+      "lastSeen": "2026-04-17T09:28:43.678749+00:00",
+      "sourceUnavailable": false,
+      "contactType": "accessibility",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Bundesagentur fuer Arbeit",
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/gebaerdensprache/gebaerdesprache-buergergeld",
+        "crawledAt": "2026-04-17T09:28:43.680827Z",
+        "crawlId": "contacts-seeded-1776418123",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur_de",
+        "providerName": "arbeitsagentur.de",
+        "providerLevel": "federal",
+        "checksum": "524d7062a80ce5e251589b57c2d1bc87a28288796521dcad64e6bf8358a8177f"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 80.0,
+        "computedAt": "2026-04-17T09:28:43.680827+00:00"
+      }
+    },
+    {
+      "id": "bddbb11c-a5f5-4518-a0ee-95642c29a196",
+      "title": "Video in Gebärdensprache: Kurzarbeitergeld – Informationen für Arbeitnehmer",
+      "summary": {
+        "de": "Wenn Sie Fragen zu Anträgen, Unterstützungs-Leistungen oder Services der BA haben: Kontaktieren Sie uns über das BA-Servicetelefon für Menschen mit Hörbeeinträchtigungen. Es ermöglicht Ihnen Gebärdentelefonie oder Schrifttelefonie."
+      },
+      "content": {
+        "de": "Servicetelefon für Menschen mit Hörbeeinträchtigungen Hinweis zur Verwendung von Bildern: Weitere Informationen zu Copyright und Markenschutz finden Sie in unserem Impressum."
+      },
+      "url": "https://www.arbeitsagentur.de/gebaerdensprache/video-kurzarbeitergeld-arbeitnehmer",
+      "topics": [
+        "contacts",
+        "public_service"
+      ],
+      "tags": [
+        "official_contact_source",
+        "accessibility"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:28:45.647520+00:00",
+      "lastSeen": "2026-04-17T09:28:45.647520+00:00",
+      "sourceUnavailable": false,
+      "contactType": "accessibility",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Bundesagentur fuer Arbeit",
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/gebaerdensprache/video-kurzarbeitergeld-arbeitnehmer",
+        "crawledAt": "2026-04-17T09:28:45.650883Z",
+        "crawlId": "contacts-seeded-1776418125",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur_de",
+        "providerName": "arbeitsagentur.de",
+        "providerLevel": "federal",
+        "checksum": "1fbcd130a7518433b3813de868faec5bb7d562b03f350638c010605b5eea9005"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 80.0,
+        "computedAt": "2026-04-17T09:28:45.650883+00:00"
+      }
+    },
+    {
+      "id": "34e6ca76-3fff-4e9a-b2c4-e798e1d2f9f8",
+      "title": "Kurzarbeitergeld Teil 1: Voraussetzungen",
+      "summary": {
+        "de": "Wenn Sie Fragen zu Anträgen, Unterstützungs-Leistungen oder Services der BA haben: Kontaktieren Sie uns über das BA-Servicetelefon für Menschen mit Hörbeeinträchtigungen. Es ermöglicht Ihnen Gebärdentelefonie oder Schrifttelefonie."
+      },
+      "content": {
+        "de": "Servicetelefon für Menschen mit Hörbeeinträchtigungen Hinweis zur Verwendung von Bildern: Weitere Informationen zu Copyright und Markenschutz finden Sie in unserem Impressum."
+      },
+      "url": "https://www.arbeitsagentur.de/gebaerdensprache/video-kurzarbeitergeld-voraussetzungen",
+      "topics": [
+        "contacts",
+        "public_service"
+      ],
+      "tags": [
+        "official_contact_source",
+        "accessibility"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:28:49.640285+00:00",
+      "lastSeen": "2026-04-17T09:28:49.640285+00:00",
+      "sourceUnavailable": false,
+      "contactType": "accessibility",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Bundesagentur fuer Arbeit",
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/gebaerdensprache/video-kurzarbeitergeld-voraussetzungen",
+        "crawledAt": "2026-04-17T09:28:49.642285Z",
+        "crawlId": "contacts-seeded-1776418129",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur_de",
+        "providerName": "arbeitsagentur.de",
+        "providerLevel": "federal",
+        "checksum": "708aebaeae6f7b6967101de31dc7b54cebdf426a654a9920a1734e8b20cad69a"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 80.0,
+        "computedAt": "2026-04-17T09:28:49.642285+00:00"
+      }
+    },
+    {
       "id": "8d957452-19b6-4b8c-a47a-701672a27fb8",
       "title": "Herzlich willkommen auf der Internet-Seite von der Bundesagentur für Arbeit!",
       "summary": {
@@ -3677,6 +4143,296 @@
         "iqs": 84.58,
         "ais": 84.0,
         "computedAt": "2026-03-15T16:30:38.152416+00:00"
+      }
+    },
+    {
+      "id": "6208c8c4-698a-4613-ab1d-cb2785fa8fde",
+      "title": "So erreichen Sie die Arbeits-Agenturen, die Job-Center und die Familien-Kassen",
+      "summary": {
+        "de": "Corona-Pandemie: Erreichbarkeit der Dienststellen - Bundesagentur für Arbeit"
+      },
+      "content": {
+        "de": "Sie können zu Gesprächen in unsere Büros kommen. Machen Sie am besten vorher einen Termin für Ihren Besuch. Sie können uns auch anrufen und E-Mails schreiben. Sie können die Adressen und Telefon-Nummern im Internet finden. Sie finden die Informationen mit der Dienst-Stellen-Suche. So funktioniert die Dienst-Stellen-Suche. Sie können im Internet die Adresse für Ihr Job-Center finden. Sie gehen auf die Seite: Dienst-Stellen-Suche In dem Feld steht in hell-grauer Schrift: z. B. Nürnberg 90411 Sie geben den Namen von Ihrer Stadt ein in das Feld. Oder Sie geben Ihre Post-Leit-Zahl ein. Sie klicken dann auf das rote Feld mit dem Wort Suchen. Sie sehen dann eine Liste mit den Dienst-Stellen in Ihrer Nähe. Sie sehen die Adresse. Und Sie sehen die Telefon-Nummern neben dem Bild von dem kleinen Hörer. Hinweis zur Verwendung von Bildern: Weitere Informationen zu Copyright und Markenschutz finden Sie in unserem Impressum."
+      },
+      "url": "https://www.arbeitsagentur.de/leichte-sprache/corona-erreichbarkeit-dienststellen",
+      "topics": [
+        "contacts",
+        "leichte_sprache_soziale_sicherheit"
+      ],
+      "tags": [
+        "official_contact_source",
+        "light_language"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:29:05.629904+00:00",
+      "lastSeen": "2026-04-17T09:29:05.629904+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Bundesagentur fuer Arbeit",
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/leichte-sprache/corona-erreichbarkeit-dienststellen",
+        "crawledAt": "2026-04-17T09:29:05.631411Z",
+        "crawlId": "contacts-seeded-1776418145",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur_de",
+        "providerName": "arbeitsagentur.de",
+        "providerLevel": "federal",
+        "checksum": "e066a3060eafbc919cae882b2b97248df2f179370986488bd052fb358ac2e1d5"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:29:05.631411+00:00"
+      }
+    },
+    {
+      "id": "dbaf3618-efba-4cd4-a804-daac43124fc0",
+      "title": "Erklärung zur Barriere-Freiheit in Leichter Sprache",
+      "summary": {
+        "de": "Wir erklären in Leichter Sprache: Das ist Kurzarbeitergeld."
+      },
+      "content": {
+        "de": "Die Abkürzung für Bundes-Agentur für Arbeit ist: BA Die Internet-Adresse der BA ist: www.arbeitsagentur.de Die BA ist für Barriere-Freiheit im Internet. Das bedeutet: Alle Menschen bekommen alle wichtigen Infos. Blinde Menschen können Vorlese-Programme gut benutzen Die BA macht ihre Internet-Seiten barriere-frei. Die BA beachtet die Vorschriften für Barriere-Freiheit. Das sind die Vorschriften: • B arrierefreie I nformations- T echnik- V erordnung: BITV 2.0 Es gibt einen Test für Barriere-Freiheit im Internet. Mit dem Test prüft die BA"
+      },
+      "url": "https://www.arbeitsagentur.de/leichte-sprache/erklaerung-zur-barriere-freiheit-in-leichter-sprache",
+      "topics": [
+        "contacts",
+        "leichte_sprache_soziale_sicherheit"
+      ],
+      "tags": [
+        "official_contact_source",
+        "light_language"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:28:37.245374+00:00",
+      "lastSeen": "2026-04-17T09:28:37.245374+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Bundesagentur fuer Arbeit",
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/leichte-sprache/erklaerung-zur-barriere-freiheit-in-leichter-sprache",
+        "crawledAt": "2026-04-17T09:28:37.250957Z",
+        "crawlId": "contacts-seeded-1776418117",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur_de",
+        "providerName": "arbeitsagentur.de",
+        "providerLevel": "federal",
+        "checksum": "ff1ffedfb8b4630756cdfdd5ddd3b8a94c0d4a6f6a1ef0ad16bdcdecf63aeae5"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:28:37.251545+00:00"
+      }
+    },
+    {
+      "id": "e35f5030-16ed-429b-8f25-bc64f6644e60",
+      "title": "Infos zur Grundsicherung für Arbeitsuchende und zum Bürgergeld",
+      "summary": {
+        "de": "Die Texte sind in Leichter Sprache geschrieben. Das heißt:"
+      },
+      "content": {
+        "de": "Wir haben Fälle nicht erklärt, die selten vorkommen. Darum sind die Erklärungen in Leichter Sprache nicht rechtsverbindlich. Das heißt: Die Erklärungen sind vor Gericht nicht gültig. Fragen Sie bei Ihrem Jobcenter nach, wenn Sie mehr dazu wissen wollen. Sie bekommen Unterstützung, wenn Sie eine Arbeit suchen. Die Unterstützung heißt Eingliederungsleistungen. Sie bekommen auch Unterstützung, wenn Sie zu wenig Geld zum Leben haben. Die Unterstützung heißt Sicherung von Lebensunterhalt oder Bürgergeld. Die Unterstützungen zusammen heißen Grundsicherung für Arbeitsuchende. Das Ziel bei der Unterstützung ist: Sie sollen eine Arbeit haben. Sie sollen mit der Arbeit genug Geld für sich und Ihre Familie verdienen. Die Grundsicherung soll Sie nur für eine kurze Zeit unterstützen. Das Geld für das Bürgergeld kommt aus Steuern. Steuern zahlen alle Menschen an den Staat. Zum Beispiel: Man zahlt einen Teil vom Lohn als Lohn-Steuer. Das Jobcenter kümmert sich um die Aufgaben, die mit der Grundsicherung für Arbeitsuchende zusammenhängen. Zum Beispiel: Sie müssen erwerbsfähig sein. Erwerbsfähig heißt: Sie müssen mindestens 3 Stunden am Tag arbeiten können."
+      },
+      "url": "https://www.arbeitsagentur.de/leichte-sprache/grundsicherung-und-buergergeld",
+      "topics": [
+        "contacts",
+        "leichte_sprache_soziale_sicherheit"
+      ],
+      "tags": [
+        "official_contact_source",
+        "light_language"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:28:59.700521+00:00",
+      "lastSeen": "2026-04-17T09:28:59.700521+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Bundesagentur fuer Arbeit",
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/leichte-sprache/grundsicherung-und-buergergeld",
+        "crawledAt": "2026-04-17T09:28:59.702522Z",
+        "crawlId": "contacts-seeded-1776418139",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur_de",
+        "providerName": "arbeitsagentur.de",
+        "providerLevel": "federal",
+        "checksum": "51526474be0abfbef88cd70bc3ac9946f3c1d7a7fb979e1f525aa1e0293f1a7b"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:28:59.703224+00:00"
+      }
+    },
+    {
+      "id": "1065b040-872c-4604-9d3f-d67cae4eab39",
+      "title": "Infos zum Kurz-Arbeiter-Geld",
+      "summary": {
+        "de": "Wir erklären in Leichter Sprache: Das ist Kurzarbeitergeld."
+      },
+      "content": {
+        "de": "Die Bundes-Agentur für Arbeit hilft: Wenn es den Unternehmen schlecht geht. Oder der Wirtschaft. Die Unternehmen haben dann wenige Aufträge. Ihr Arbeit-Geber hat dann vielleicht nicht genug Arbeit für alle Mitarbeiter. Ihr Arbeit-Geber kürzt Ihre Arbeits-Zeit. Sie arbeiten dann weniger. Und Sie verdienen deshalb weniger Geld. Man sagt auch: Sie haben einen Verdienst-Ausfall. Oder Ihr Arbeit-Geber muss Ihnen kündigen. Sie sind dann arbeitslos. Die Bundes-Agentur für Arbeit hilft: Damit das nicht passiert. Die Bundes-Agentur für Arbeit hilft mit Kurz-Arbeiter-Geld. Der Arbeit-Geber muss das Kurz-Arbeiter-Geld beantragen. Das Kurz-Arbeiter-Geld hilft den Arbeit-Nehmern: Wenn die Arbeit-Nehmer weniger arbeiten. Die Arbeit-Nehmer bekommen dann Geld für nicht gearbeitete Stunden. Man sagt auch: Der Verdienst-Ausfa ll wird zum Teil ausgeglichen."
+      },
+      "url": "https://www.arbeitsagentur.de/leichte-sprache/kurzarbeitergeld",
+      "topics": [
+        "contacts",
+        "leichte_sprache_soziale_sicherheit"
+      ],
+      "tags": [
+        "official_contact_source",
+        "light_language"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:29:03.648943+00:00",
+      "lastSeen": "2026-04-17T09:29:03.648943+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Bundesagentur fuer Arbeit",
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/leichte-sprache/kurzarbeitergeld",
+        "crawledAt": "2026-04-17T09:29:03.651943Z",
+        "crawlId": "contacts-seeded-1776418143",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur_de",
+        "providerName": "arbeitsagentur.de",
+        "providerLevel": "federal",
+        "checksum": "6e6221eb2561fe50c023dd2daf5fd1ef1f4f17cea5dae218ea9425aea170d56e"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:29:03.651943+00:00"
+      }
+    },
+    {
+      "id": "2494c063-3231-4ffd-be61-72e9d98bffdd",
+      "title": "Hilfe für Geflüchtete aus der Ukraine",
+      "summary": {
+        "de": "Hilfe für Geflüchtete aus der Ukraine | Bundesagentur für Arbeit"
+      },
+      "content": {
+        "de": "Sind Sie aus der Ukraine geflüchtet? Dann brauchen Sie jetzt vielleicht Geld als Hilfe. Oder Sie suchen Arbeit. Die Jobcenter und Agenturen für Arbeit helfen Ihnen dabei. Unsere Mitarbeiter sind für Sie da. Haben Sie Fragen zum Leben und Arbeiten in Deutschland? Wir helfen Ihnen bei diesen Themen: Geld für Ihr Leben und den Alltag: Sie können jeden Monat Geld als Hilfe bekommen. Das nennt man auch: Bürgergeld oder Grundsicherung. Geld für Ihre Kinder: Wenn Sie Kinder haben, können Sie jeden Monat Kindergeld bekommen. In Deutschland arbeiten: Wir berate Sie über Arbeit in Deutschland. Zum Beispiel Wir suchen mit Ihnen die richtige Arbeit und die richtigen Angebote."
+      },
+      "url": "https://www.arbeitsagentur.de/leichte-sprache/leichte-sprache-hilfe-fuer-gefluechtete-aus-der-ukraine",
+      "topics": [
+        "contacts",
+        "leichte_sprache_soziale_sicherheit"
+      ],
+      "tags": [
+        "official_contact_source",
+        "light_language"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:29:01.664691+00:00",
+      "lastSeen": "2026-04-17T09:29:01.664691+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Bundesagentur fuer Arbeit",
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/leichte-sprache/leichte-sprache-hilfe-fuer-gefluechtete-aus-der-ukraine",
+        "crawledAt": "2026-04-17T09:29:01.667671Z",
+        "crawlId": "contacts-seeded-1776418141",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur_de",
+        "providerName": "arbeitsagentur.de",
+        "providerLevel": "federal",
+        "checksum": "f1fd0b91733462e8fb8a5fcc550f6cf6d515b4e64d7b3dbb86c4b2e87fca8f02"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:29:01.667671+00:00"
       }
     },
     {
@@ -10693,6 +11449,67 @@
         "iqs": 84.58,
         "ais": 84.0,
         "computedAt": "2026-03-15T17:47:57.433612+00:00"
+      }
+    },
+    {
+      "id": "e1c2365e-1d77-47b9-83f5-c699a144aa2b",
+      "title": "Europa",
+      "summary": {
+        "de": "Europäische Politik wird für die Bürgerinnen und Bürger in Europa gemacht. Nahezu jeder Bereich der deutschen Arbeits- und Sozialpolitik ist von europapolitischen und europarechtlichen Aspekten berührt. Hier finden Sie aktuelle Infos und Neuigkeiten."
+      },
+      "content": {
+        "de": "Europäische Politik wird für die Bürgerinnen und Bürger in Europa gemacht. Nahezu jeder Bereich der deutschen Arbeits- und Sozialpolitik ist von europapolitischen und europarechtlichen Aspekten berührt. Bundesarbeitsministerin Bärbel Bas hat ihren ukrainischen Amtskollegen Denys Uliutin getroffen und nahm an den Deutsch-Ukrainischen Regierungskonsultationen in Berlin teil. Staatssekretärin Tschan betonte, dass es wichtig sei, dass sich die vertiefte Zusammenarbeit nicht nur auf die Regierungsebene beschränkt. Die Ministerinnen haben ein gemeinsames Arbeitsprogramm zur vertieften Zusammenarbeit unterzeichnet. Unter dem Motto \"Mobilität ist Ihre Entscheidung, Schutz ist Ihr Recht\" informiert die Europäische Arbeitsbehörde (ELA), wie man bei einem Umzug zum Arbeiten oder bei der Entsendung von Arbeitnehmern ins Ausland sozialversichert bleibt, Leistungen beantragt und Verpflichtungen erfüllt."
+      },
+      "url": "https://www.bmas.de/DE/Europa-und-die-Welt/Europa/europa.html",
+      "topics": [
+        "employment",
+        "financial_support",
+        "contacts",
+        "public_service"
+      ],
+      "tags": [
+        "application_required",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:37:41.336283+00:00",
+      "lastSeen": "2026-04-17T09:37:41.336283+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Bundesministerium fuer Arbeit und Soziales",
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Europa-und-die-Welt/Europa/europa.html",
+        "crawledAt": "2026-04-17T09:37:41.373763Z",
+        "crawlId": "contacts-seeded-1776418661",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "checksum": "2ee5c409cf05a510903e1087f449516dac9122a7b8641d92944fb12de257eb28"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:37:41.373763+00:00"
       }
     },
     {
@@ -19880,6 +20697,122 @@
       }
     },
     {
+      "id": "ed519796-f0a8-41cc-bcf5-28eddc8bd295",
+      "title": "Leistungen Deutschland",
+      "summary": {
+        "de": "In Deutschland sind viele Menschen auf Unterstützung angewiesen oder nehmen Angebote zur persönlichen und sozialen Weiterentwicklung wahr. Ob Kinder, Familien, Senioren, Menschen mit Behinderungen, obdachlose Menschen oder Menschen am Rande der Existenzsicherung: die Nöte, Interessen und Bedarfe der Menschen sind dabei stets verschieden."
+      },
+      "content": {
+        "de": "Lebenssituation verändern sich im Alter. Wir unterstützen Sie und machen uns gemeinsam mit Ihnen auf die Suche nach individuellen Lösung – von Ambulanter Pflege bis zum Hausnotruf. So bunt Ihr Familienleben sein kann, so vielfältig sind unsere Angebote in der Kinder-, Jugend- und Familienhilfe. Von der Kita an der Ecke bis zum virtuellen Elterncampus. Die Lebensqualität für Menschen mit Behinderungen steigern und Angehörige oder Freunde bei Ihrer Hilfe unterstützen. Wir stehen für Fragen der Betreuung, der Gesundheit, der Arbeit und Bildung oder der Freizeitaktivitäten immer zur Seite. Geflüchtete und andere Migrantengruppen schützen, ihre Rechte und Würde wahren und bei der gesellschaftlichen Teilhabe (Inklusion) unterstützen. Dabei stellen wir die Wünsche und Bedürfnisse der Menschen in den Mittelpunkt. Zur Wohlfahrtspflege zählen alle Organisationen, die satzungsgemäß Wohlfahrtsleistungen erbringen. Als Mitglied der Bundesarbeitsgemeinschaft der Freien Wohlfahrtspflege (BAGFW) ist das DRK Spitzenverband der Freien Wohlfahrtspflege. Dafür müssen wir deutschlandweit tätig sein sowie eine stetige, umfassende und fachlich qualifizierte Arbeit gewähren."
+      },
+      "url": "https://www.drk.de/hilfe-in-deutschland",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:27:50.651033+00:00",
+      "lastSeen": "2026-04-17T09:27:50.651033+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Notfallhilfe",
+        "Soziale Unterstuetzung"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Deutsches Rotes Kreuz",
+      "provenance": {
+        "source": "https://www.drk.de/hilfe-in-deutschland",
+        "crawledAt": "2026-04-17T09:27:50.665341Z",
+        "crawlId": "contacts-seeded-1776418070",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_2_ngo_watchdog",
+        "institutionType": "ngo",
+        "jurisdiction": "DE",
+        "sourceId": "drk",
+        "providerName": "Deutsches Rotes Kreuz",
+        "providerLevel": "civil_society",
+        "checksum": "7e910fcbcd1ca5d2bd4d0f0d74cf323b0ba7487f8b67100de62654fa44453311"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:27:50.666422+00:00"
+      }
+    },
+    {
+      "id": "86cb5d81-86cc-4224-a574-675b1700098d",
+      "title": "Schuldnerberatung",
+      "summary": {
+        "de": "Das DRK hilft Ihnen einen Weg aus den Schulden zu finden. Wir vermitteln zwischen Gläubigern und Schuldnern. Hier Beratungsstelle in Ihrer Nähe finden!"
+      },
+      "content": {
+        "de": "Die DRK-Schuldner- und Insolvenzberatungsstellen beraten Schuldner und helfen ihnen, einen Weg aus den Schulden zu erarbeiten. In unseren zahlreichen Kreisverbänden bieten wir eine persönliche Schuldnerberatung an. Die Schuldnerberater in unseren Kreisverbänden helfen Ihnen vor Ort gerne auf dem Weg aus der Überschuldung. Zu unseren Unterstützungen zählen u. a.: besprechen mögliche Einsparmöglichkeiten und Verhaltensänderungen. stellen einen Haushaltsplan zur sinnvollen Einteilung des zur Verfügung stehenden Haushaltsgeldes auf. besprechen einen möglichen Schutz bei Lohn- und Kontopfändungen oder vor drohenden Zwangsvollstreckungen. Unsere Beratungsstellen unterstützen Schuldner ganzheitlich in allen Situationen von Überschuldungen. Zu den Hilfeleistungen gehören u. a.:"
+      },
+      "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:27:53.474504+00:00",
+      "lastSeen": "2026-04-17T09:27:53.474504+00:00",
+      "sourceUnavailable": false,
+      "contactType": "advisor",
+      "specialization": [
+        "Notfallhilfe",
+        "Soziale Unterstuetzung"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "Deutsches Rotes Kreuz",
+      "provenance": {
+        "source": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung",
+        "crawledAt": "2026-04-17T09:27:53.488808Z",
+        "crawlId": "contacts-seeded-1776418073",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_2_ngo_watchdog",
+        "institutionType": "ngo",
+        "jurisdiction": "DE",
+        "sourceId": "drk",
+        "providerName": "Deutsches Rotes Kreuz",
+        "providerLevel": "civil_society",
+        "checksum": "fcab2b916a7196d759874781efe8ec4dbd8fb8d1aab97249b593fac0b62377ca"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:27:53.488808+00:00"
+      }
+    },
+    {
       "id": "80882013-8371-4673-8c66-c1bcaf3a7215",
       "title": "Willkommen bei der FITKO!",
       "summary": {
@@ -20393,6 +21326,234 @@
       }
     },
     {
+      "id": "c9477a32-64fd-45d1-a162-0cca6c6e3a33",
+      "title": "Föderales IT-Standardisierungsboard",
+      "summary": {
+        "de": "Die Seite Föderales IT-Standardisierungsboard der FITKO."
+      },
+      "content": {
+        "de": "Das föderale IT-Standardisierungsboard unterstützt den IT-Planungsrat bei allen Aktivitäten zum Einsatz föderaler IT-Standards im Rahmen der Standardisierungsagenda. Zu den Aufgaben des Standardisierungsboards zählen u. a. die proaktive Identifikation von Standardisierungsbedarfen, die Sicherstellung von Transparenz, Verbindlichkeit und Offenheit bei Standardisierungsvorhaben sowie die Entscheidung über die Umsetzung von föderalen IT-Standards. Der IT-Planungsrat trifft Beschlüsse über den verbindlichen Einsatz föderaler IT-Standards nach vorheriger Empfehlung durch das föderale IT-Standardisierungsboard. Geschäftsordnung des Föderalen IT-Standardisierungsboard herunterladen Als geschäftsführende Stelle führt die FITKO koordinierende und operative Aufgaben aus. Dazu gehören neben der Koordination des Standardisierungsboards u. a. Aktivitäten in den verschiedenen Lebensphasen eines föderalen IT-Standards, die Bereitstellung von ungehindertem Zugang zu Informationen und Ergebnissen der IT-Standardisierung sowie das Zusammenwirken mit dem föderalen IT-Architekturboard. Das föderale IT-Standardisierungsboard fasst seine Beschlüsse mit einfacher Mehrheit. Für die Erarbeitung konkreter Themen kann das Board temporäre oder dauerhafte Arbeitsgruppen einrichten. Steter Überblick über die vielfältigen Fragestellungen zur IT-Standardisierung auf föderaler Ebene."
+      },
+      "url": "https://www.fitko.de/foederale-koordination/gremienarbeit/foederales-it-standardisierungsboard",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:42:33.710555+00:00",
+      "lastSeen": "2026-04-17T09:42:33.710555+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/foederale-koordination/gremienarbeit/foederales-it-standardisierungsboard",
+        "crawledAt": "2026-04-17T09:42:33.716233Z",
+        "crawlId": "contacts-seeded-1776418953",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "775f010af8109722f39fd54a9674cfc15415c75fe5ebe3235d6ad1a24f549830"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:42:33.716233+00:00"
+      }
+    },
+    {
+      "id": "843b262d-d891-49b1-b7ac-b85874d49bbd",
+      "title": "Koordination IT-Planungsrat",
+      "summary": {
+        "de": "Die Seite Koordination IT-Planungsrat der FITKO."
+      },
+      "content": {
+        "de": "Wir sind der operative Unterbau des IT-Planungsrats. Als solcher nehmen wir nicht nur fachliche Aufgaben wahr, sondern koordinieren auch die Arbeit des IT-Planungsrats sowie seiner vorbereitenden und weiteren Gremien. Das umfasst neben dem Sitzungsmanagement und der Sicherstellung des Informationsaustausches zwischen allen Beteiligten auch die allgemeine Steuerung des IT-Planungsrats und seiner Themen, insbesondere die enge Vernetzung und Zusammenarbeit mit dem jeweiligen Vorsitz. Das Arbeitsfeld \"Koordination IT-Planungsrat\" der FITKO befasst sich mit der Steuerung und Weiterentwicklung der inhaltlichen und organisatorischen Prozesse des IT-Planungsrats. Dazu gehört das klassische Sitzungsmanagement, d. h. die Planung, Durchführung und Nachbereitung von Sitzungen des IT-Planungsrats sowie die umfassende Dokumentation und Distribution von Arbeitsergebnissen. Darüber hinaus unterstützt das Koordinationsteam den IT-Planungsrat auch bei der inhaltlichen Erarbeitung von Themen. In diesem Zusammenhang kommt uns nicht nur eine beratende Rolle bei fachlichen Fragestellungen zu; unsere Aufgabe ist es auch, die Vernetzung von Arbeitsgruppen und Expert:innen auf allen Ebenen der föderalen Landschaft zu fördern. Um die Verfolgung gemeinsamer Ziele zu unterstützen und neue Synergiepotentiale zu identifizieren, nutzen wir stets unsere institutionalisierte Querschnittsfunktion. Veronika Weprich Koordination IT-Planungsrat Telefon +49 (69) 401270 127 E-Mail Kontakt aufnehmen"
+      },
+      "url": "https://www.fitko.de/foederale-koordination/koordination-it-planungsrat",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:42:34.594116+00:00",
+      "lastSeen": "2026-04-17T09:42:34.594116+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/foederale-koordination/koordination-it-planungsrat",
+        "crawledAt": "2026-04-17T09:42:34.597885Z",
+        "crawlId": "contacts-seeded-1776418954",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "ee0b072e033293ee707fe4b0d7f95088ae3f43215a759e7df1c2a36427fc4205"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 79.0,
+        "computedAt": "2026-04-17T09:42:34.597885+00:00"
+      }
+    },
+    {
+      "id": "5078ecfb-4222-403a-8a78-4f54388cbfd2",
+      "title": "Nationales Once-Only-Technical-System (NOOTS)",
+      "summary": {
+        "de": "Das Nationales Once-Only-Technical-System (NOOTS) bildet die technische Grundlage für den sicheren und standardisierten Austausch von Registerdaten."
+      },
+      "content": {
+        "de": "Das Nationale Once-Only-Technical-System (NOOTS) ist das Herzstück der technischen Umsetzung der Registermodernisierung. Es stellt die zentrale technische Infrastruktur für den Austausch von Nachweisdaten dar und bildet die Grundlage dafür, dass Daten zwischen Behörden rechtssicher, nachvollziehbar und effizient geteilt werden können – unter strikter Beachtung des Datenschutzes. Das NOOTS selbst speichert keine Registerdaten dauerhaft, sondern agiert als intelligenter Vermittler. Durch die Anbindung an das europäische Once-Only-Technical-System (EU-OOTS) wird darüber hinaus der grenzüberschreitende Austausch von Nachweisen gemäß der Single Digital Gateway -Verordnung (SDG-VO) sichergestellt. Die Registermodernisierung ist ein zentrales Vorhaben der Verwaltungsdigitalisierung in Deutschland. Ziel ist es, die bestehenden Register von Bund, Ländern und Kommunen interoperabel, aktuell und datenschutzkonform nutzbar zu machen. Um das Once-Only-Prinzip umzusetzen, also die mehrfache Angabe gleicher Daten durch Bürger:innen und Unternehmen zu vermeiden, entsteht eine moderne technische Infrastruktur, die aus zentralen Komponenten besteht: Der Identitätsabruf (IDA) ermöglicht die einheitliche und medienbruchfreie Abfrage von Identitätsdaten – etwa zur Feststellung der eindeutigen Person im Rahmen eines Verwaltungsverfahrens. Das Datenschutzcockpit (DSC) ermöglicht es Bürger:innen, jederzeit nachvollziehen zu können, welche Behörde wann und zu welchem Zweck auf ihre Daten zugegriffen hat – ein zentraler Beitrag zur Transparenz und Vertrauensbildung. Die Registerlandkarte dokumentiert, welche Daten in welchen Registern gespeichert sind, wer darauf zugreifen darf und unter welchen rechtlichen Voraussetzungen – sie schafft Übersicht und Nachvollziehbarkeit im föderalen Datenraum. Mit dem im Mai 2021 in Kraft getretenen Registermodernisierungsgesetz wurde die gesetzliche Grundlage geschaffen und das Programm „Gesamtsteuerung Registermodernisierung“ ins Leben gerufen. Die Entwicklung und der Betrieb des NOOTS basieren auf dem im Jahr 2024 beschlossenen Staatsvertrag über das Nationale Once-Only-Technical-System (NOOTS-Staatsvertrag), der sich derzeit in der Ratifizierung bei Bund und Ländern befindet."
+      },
+      "url": "https://www.fitko.de/foederale-koordination/noots",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:42:36.603369+00:00",
+      "lastSeen": "2026-04-17T09:42:36.603369+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/foederale-koordination/noots",
+        "crawledAt": "2026-04-17T09:42:36.608595Z",
+        "crawlId": "contacts-seeded-1776418956",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "f114af0a3077f22feb823a5a16e462e81ea701222da5f776c09eac45e39ca04a"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:42:36.608595+00:00"
+      }
+    },
+    {
+      "id": "ef8f9ae7-9a30-42e3-94b6-0c5066f0551f",
+      "title": "Die Umsetzung des Onlinezugangsgesetzes (OZG)",
+      "summary": {
+        "de": "Die Seite OZG-Umsetzung des IT-Planungsrats."
+      },
+      "content": {
+        "de": "Die Interaktion von Bürger:innen und Unternehmen mit der Verwaltung soll deutlich schneller, effizienter und nutzerfreundlicher werden. Ziel ist, dass Bund, Länder und Kommunen alle Verwaltungsleistungen online anbieten und über einen gemeinsamen Portalverbund zugänglich machen. So sieht es das Gesetz zur Verbesserung des Onlinezugangs zu Verwaltungsleistungen (Onlinezugangsgesetz, kurz: OZG) vor, das am 18. August 2017 in Kraft getreten ist. Mit Inkrafttreten des OZG-Änderungsgesetzes (OZGÄndG) am 24.07.2024 wird dieses Ziel sogar noch erweitert. So steht neben der Ende zu Ende Digitalisierung die Einführung einer zentralen DeutschlandID mit integriertem digitalen Postfach im Fokus der Umsetzung. Weitere Informationen: Direkt zu den Informationsangeboten zur OZG-Umsetzung Die Umsetzung des OZG ist eine föderale Aufgabe, die eine gute und strukturierte Zusammenarbeit von Bund, Ländern und Kommunen voraussetzt. Denn insgesamt müssen über 6.000 Verwaltungsleistungen digitalisiert werden. Grundlage für die initiale Umsetzung ist der OZG-Umsetzungskatalog, in dem hunderte Leistungsbündel, sogenannte OZG-Leistungen, in Lebens- und Geschäftslagen in Themenfeldern kategorisiert wurden. Das schafft die Basis für eine sinnvolle Aufgaben- und Arbeitsteilung der vielen Beteiligten auf allen föderalen Ebenen. Die Digitalisierung der Einzelleistungen erfolgt immer themenfeldbezogen durch je ein Bundesministerium gemeinsam mit einem oder mehreren Bundesländern sowie unterstützenden Kommunen. Dafür arbeiten die Beteiligten auf ganz neue Art zusammen – über Ressortgrenzen und Verwaltungsebenen hinweg. Zur Umsetzung des OZG sind dabei 2 Programme aufgesetzt worden:"
+      },
+      "url": "https://www.fitko.de/foederale-koordination/ozg-umsetzung",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:42:38.600140+00:00",
+      "lastSeen": "2026-04-17T09:42:38.600140+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/foederale-koordination/ozg-umsetzung",
+        "crawledAt": "2026-04-17T09:42:38.609155Z",
+        "crawlId": "contacts-seeded-1776418958",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "334d813beafed425df11f10120411407cf8b7241980318e8c1628484b2814f88"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 79.0,
+        "computedAt": "2026-04-17T09:42:38.609155+00:00"
+      }
+    },
+    {
       "id": "c2c5e33c-12ad-4110-8ec1-5a1cddd1186c",
       "title": "Kontakt",
       "summary": {
@@ -20447,6 +21608,120 @@
       }
     },
     {
+      "id": "070b4dd7-8ae8-4b0b-ad37-922e1e0db71b",
+      "title": "Kooperationen",
+      "summary": {
+        "de": "Die Seite Kooperationen des IT-Planungsrats."
+      },
+      "content": {
+        "de": "Auf dem Weg zur digitalen Verwaltung braucht es die verbindliche Zusammenarbeit von Bund und Ländern. Diese fördert der IT-Planungsrat durch Kooperationen, bei denen sich die beteiligten Akteur:innen einem gemeinsamen Ziel verschreiben und Regeln für die gemeinsame Arbeit geben. Als FITKO leisten wir einen wichtigen Beitrag dazu, dass Kooperationen zustandekommen, die Partner:innen gut zusammenarbeiten können und die Ergebnisse sichtbar werden. Hierfür versorgen wir die Akteur:innen mit den notwendigen Informationen, zeigen Trends auf, geben Sicherheit für die gemeinsame Arbeit durch Governance-Regeln und bündeln und teilen das in den Kooperationen erarbeitete Fachwissen. Die govdigital eG ist eine bundesweite Genossenschaft zur Integration innovativer IT-Lösungen der digitalen Daseinsvorsorge im öffentlichen Sektor. Die FITKO ist seit Februar 2022 Mitglied der govdigital eG. Die govdigital eG ist mit dem Betrieb des EfA-Marktplatzes beauftragt. Er ist seit 2024 ein Produkt des IT-Planungsrats und wird im Produktmanagement der FITKO gesteuert. In diesem anbieteroffenen Marktplatz für digitale Verwaltungsleistungen ist auch der FIT-Store als Anbieter vertreten. Zudem wird basierend auf dem Beschluss des IT-Planungsrats 2023/19 das Umsetzungsprojekt DVC gemeinsam mit govdigital durchgeführt. Die Gesamtprojektleitung für dieses Vorhaben liegt bei der FITKO. Die FITKO kooperiert mit dem NExT-Netzwerk von NExT e. V. Die gemeinnützige Plattform aus der Verwaltung für die Verwaltung vernetzt Beschäftigte im öffentlichen Dienst und fördert die digitale Transformation der Verwaltung. GovTech Deutschland ist die gemeinsame Initiative von Bund, Ländern und Technologieszene zur Modernisierung von Staat und Verwaltung. Durch die Identifikation, Bewertung und gemeinsame Entwicklung moderner Technologien schafft GovTech Deutschland skalierbare digitale Lösungen und stärkt so die digitale Souveränität des Staates. Die FITKO ist seit Juni 2024 Mitglied von GovTech Deutschland und kooperiert für die Initiierung gemeinsamer Projekte, Innovationsentwicklung und Vernetzung mit diesem."
+      },
+      "url": "https://www.fitko.de/kooperationen",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:42:43.811272+00:00",
+      "lastSeen": "2026-04-17T09:42:43.811272+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/kooperationen",
+        "crawledAt": "2026-04-17T09:42:43.815270Z",
+        "crawlId": "contacts-seeded-1776418963",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "ad1753a0191e45dc91d67312e3fd57a9bef2155b4adcbfa07fa0a48677cd9c6d"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 79.0,
+        "computedAt": "2026-04-17T09:42:43.815270+00:00"
+      }
+    },
+    {
+      "id": "d5afdb2a-8e51-4da1-a8aa-6a6247cdc4b0",
+      "title": "Produktmanagement",
+      "summary": {
+        "de": "Alle Produkte des IT-Planungsrates werden zukünftig von der FITKO gebündelt koordiniert. Dabei steht eine bedarfsorientierte Betreuung der Produkte im Vordergrund, die ihre nachhaltige Weiterentwicklung sicherstellt. Ermöglicht wird dies durch eine interdisziplinäre Vernetzung mit den FITKO-Arbeitsfeldern IT-Architekturmanagement, Standardisierung und Steuerung Einzelprojekte."
+      },
+      "content": {
+        "de": "Wirksam & effizient. Wir steuern das Produktportfolio des IT-Planungsrats. Die FITKO ist für die Steuerung der Produkte des IT-Planungsrats verantwortlich. Aktuell besteht das Produktportfolio aus 15 Produkten - mit steigender Tendenz. Die Produkte werden nach einem einheitlichen Produktmanagement-Modell gesteuert. Im Mittelpunkt steht die nutzendenorientierte und wirtschaftliche Weiterentwicklung der Produkte. Gemäß § 1 Abs. 1 Nr. 4 des Staatsvertrages zur Ausführung von Art. 91c des Grundgesetzes steuert der IT-Planungsrat „Projekte und Produkte des informations- und kommunikationstechnisch unterstützten Regierens und Verwaltens“. Diese Merkmale zeichnen Produkte des IT Planungsrats aus: Ein Produkt ist als eine dauerhafte Lösung für ein Problem aus dem Zuständigkeitsbereich des IT-Planungsrats definiert, das für bestimmte Zielgruppen wie Bürger:innen, Verwaltungsmitarbeitende sowie Unternehmen und staatliche Institutionen nützlich ist. Die Produkte besitzen typischerweise Querschnittscharakter und richten sich nach den strategischen Schwerpunktthemen des IT-Planungsrats. Ein Produkt besteht nicht allein aus Softwarekomponenten, sondern umfasst alle Bereiche der Produktarbeit: den technischen und fachlichen Betrieb, die für das Erreichen des Produktzwecks notwendigen Daten und Content sowie Dienstleistungen und Support."
+      },
+      "url": "https://www.fitko.de/produktmanagement",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:42:46.594563+00:00",
+      "lastSeen": "2026-04-17T09:42:46.594563+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/produktmanagement",
+        "crawledAt": "2026-04-17T09:42:46.598544Z",
+        "crawlId": "contacts-seeded-1776418966",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "03e3a50dfd056a1ef9e11027a615dd1de121c75568b13bb45c8bc9e73f3eefc3"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:42:46.598544+00:00"
+      }
+    },
+    {
       "id": "340a9572-a6b0-4c3b-85e8-07793f40fdc5",
       "title": "115",
       "summary": {
@@ -20498,6 +21773,1260 @@
         "iqs": 84.58,
         "ais": 84.0,
         "computedAt": "2026-03-15T16:06:57.378244+00:00"
+      }
+    },
+    {
+      "id": "7c79a099-110e-47f2-bb6e-199acf94b899",
+      "title": "Deutsche Verwaltungscloud (DVC)",
+      "summary": {
+        "de": "Die Seite Deutsche Verwaltungscloud (DVC) der FITKO."
+      },
+      "content": {
+        "de": "Der Schlüssel für eine moderne und souveräne Verwaltung Die Deutsche Verwaltungscloud (DVC) bildet das souveräne Cloud-Fundament der öffentlichen Verwaltung in Deutschland. Bund, Länder und Kommunen können Cloud-Services nach einheitlichen DVC-Standards über den Marktplatz Deutschland Digital beziehen. Mit den DVC-Betriebsplattformen sowie Basisdiensten entsteht eine gemeinsame Grundlage für eine einfache und schnelle Entwicklung und den sicheren Betrieb souveräner Cloud-Services. Zur Deutschen Verwaltungscloud Die Deutsche Verwaltungscloud (DVC) bildet das souveräne Cloud-Fundament der öffentlichen Verwaltung in Deutschland. Bund, Länder und Kommunen können Cloud-Services nach einheitlichen DVC-Standards über den Marktplatz Deutschland Digital beziehen. Mit den DVC-Betriebsplattformen sowie Basisdiensten entsteht eine gemeinsame Grundlage für eine einfache und schnelle Entwicklung und den sicheren Betrieb souveräner Cloud-Services. Frank Beutell Produktmanagement Deutsche Verwaltungscloud Telefon +49 (69) 401270 205 E-Mail Kontakt aufnehmen Kai-Uwe Fechner Produktmanagement Deutsche Verwaltungscloud Telefon +49 (69) 401270 184 E-Mail Kontakt aufnehmen"
+      },
+      "url": "https://www.fitko.de/produktmanagement/deutsche-verwaltungscloud-dvc",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:42:48.592531+00:00",
+      "lastSeen": "2026-04-17T09:42:48.592531+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/produktmanagement/deutsche-verwaltungscloud-dvc",
+        "crawledAt": "2026-04-17T09:42:48.594531Z",
+        "crawlId": "contacts-seeded-1776418968",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "0d95b75c56714f074bf3bd7f91feed5a08b475fe718f1e2529d51c98a54092c9"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:42:48.594531+00:00"
+      }
+    },
+    {
+      "id": "e0c287f1-a6a7-4f79-95ad-63984d3bbfb5",
+      "title": "DVDV",
+      "summary": {
+        "de": "Das Diensteverzeichnis der öffentlichen Verwaltung Über das Deutsche Verwaltungsdiensteverzeichnis (DVDV) werden Verbindungsparameter bereitgestellt, um eine rechtssichere elektronische Kommunikation von und mit Behörden sicherzustellen. Damit ermöglicht das DVDV Maschine-zu-Maschine-Kommunikation, die Authentifizierung der beteiligten Organisationen sowie die Überprüfung von Berechtigungen. Zum DVDV auf der Website des ITZ-Bund"
+      },
+      "content": {
+        "de": "Über das Deutsche Verwaltungsdiensteverzeichnis (DVDV) werden Verbindungsparameter bereitgestellt, um eine rechtssichere elektronische Kommunikation von und mit Behörden sicherzustellen. Damit ermöglicht das DVDV Maschine-zu-Maschine-Kommunikation, die Authentifizierung der beteiligten Organisationen sowie die Überprüfung von Berechtigungen. Stephan Bartholmei Produktmanagement DVDV (in Vertretung) E-Mail Kontakt aufnehmen Dr. Clemens Fell Produktmanagement Marktplätze Telefon +49 (69) 401270 196 E-Mail Kontakt aufnehmen Informationstechnikzentrum Bund (ITZBund) Suthusan Sivananthan | Koordinierende Stelle DVDV E-Mail Kontakt aufnehmen Informationstechnikzentrum Bund (ITZBund) Johannes Rohts | Koordinierende Stelle DVDV E-Mail Kontakt aufnehmen"
+      },
+      "url": "https://www.fitko.de/produktmanagement/dvdv",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:42:51.730361+00:00",
+      "lastSeen": "2026-04-17T09:42:51.730361+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/produktmanagement/dvdv",
+        "crawledAt": "2026-04-17T09:42:51.736940Z",
+        "crawlId": "contacts-seeded-1776418971",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "32789e3431cac90c74f3384986f8ceb2bf726b57ef7b744115925786fc1d9532"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:42:51.736940+00:00"
+      }
+    },
+    {
+      "id": "0dd7b4a7-d95c-45db-9612-9f389423b702",
+      "title": "e Gov-Campus",
+      "summary": {
+        "de": "Die Seite eGov-Campus des IT-Planungsrats."
+      },
+      "content": {
+        "de": "Online-Lernmodule für die Verwaltungsdigitalisierung Der eGov-Campus ist eine Plattform für digitale Lernangebote und bietet als einzige deutschlandweite Lernplattform Inhalte auf dem Gebiet E-Government und Verwaltungsdigitalisierung - auf Hochschulniveau. Alle Online-Lernmodule wurden von führenden Expert:innen erarbeitet und stehen zur freien Nutzung zur Verfügung, entweder zum individuellen Lernen oder zur Verwendung in Bildungsangeboten. Zur Website des eGov-Campus Der eGov-Campus ist eine Plattform für digitale Lernangebote und bietet als einzige deutschlandweite Lernplattform Inhalte auf dem Gebiet E-Government und Verwaltungsdigitalisierung - auf Hochschulniveau. Alle Online-Lernmodule wurden von führenden Expert:innen erarbeitet und stehen zur freien Nutzung zur Verfügung, entweder zum individuellen Lernen oder zur Verwendung in Bildungsangeboten. Luca Mollenhauer Produktmanagement eGov-Campus Telefon +49 (69) 401270 173 E-Mail Kontakt aufnehmen Der eGov-Campus bietet deutschlandweit die qualitativ hochwertigsten Bildungsinhalte zum Thema E-Government und Digitalisierung des öffentlichen Sektors. Alle angebotenen Lernmodule wurden von namhaften Hochschulprofessor:innen speziell für den eGov-Campus entwickelt und in enger Abstimmung durch die Hochschulinstitute und ihre wissenschaftlichen Teams erstellt und gepflegt. Die Angebote des eGov-Campus machen Blended Learning – die Verbindung aus Präsenz- und Online-Lernen – noch einfacher und bieten gleichzeitig eine hohe Qualität. Zudem ermöglichen sie interessierten Mitarbeiter:innen der öffentlichen Verwaltung eine zeitgemäße Weiterbildung auch neben dem Beruf und geben Personalverantwortlichen in Verwaltungen als auch Anbieter:innen von Weiterbildungen hochwertige Lernmodule an die Hand."
+      },
+      "url": "https://www.fitko.de/produktmanagement/egov-campus",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:42:52.597534+00:00",
+      "lastSeen": "2026-04-17T09:42:52.597534+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/produktmanagement/egov-campus",
+        "crawledAt": "2026-04-17T09:42:52.600527Z",
+        "crawlId": "contacts-seeded-1776418972",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "11e3460af9a8f6542bb532838d3fcb709d5dc5554680291998e2bf3acfff7180"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 79.0,
+        "computedAt": "2026-04-17T09:42:52.600527+00:00"
+      }
+    },
+    {
+      "id": "b886730e-0f67-40e4-b7e7-db7add4e5830",
+      "title": "FIM – Föderales Informationsmanagement",
+      "summary": {
+        "de": "Standardisierte Informationen zu Verwaltungsleistungen Das Föderale Informationsmanagement (FIM) sorgt für die standardisierte Übersetzung der Rechtssprache in eine bürger:innen- und unternehmensfreundliche Sprache. FIM reduziert den redaktionellen Aufwand in Ländern und Kommunen durch Nachnutzungsmöglichkeiten bereits erstellter, qualitätsgesicherter Beschreibungen von Verwaltungsleistungen sowie durch standardisierte Beschreibungen von Datenfeldern für die digitale Antragsbearbeitung. Zur Website des FIM-Portals"
+      },
+      "content": {
+        "de": "Das Föderale Informationsmanagement (FIM) sorgt für die standardisierte Übersetzung der Rechtssprache in eine bürger:innen- und unternehmensfreundliche Sprache. FIM reduziert den redaktionellen Aufwand in Ländern und Kommunen durch Nachnutzungsmöglichkeiten bereits erstellter, qualitätsgesicherter Beschreibungen von Verwaltungsleistungen sowie durch standardisierte Beschreibungen von Datenfeldern für die digitale Antragsbearbeitung. Dr. Christiane Stürmer Produktmanagement FIM | Gesamtkoordination des Produktes FIM Telefon +49 (69) 401270 240 E-Mail Kontakt aufnehmen Produktmanagement FIM | Gesamtkoordination des Produktes FIM Ulrike Raab Produktmanagement FIM | Querschnitt Telefon +49 (69) 401270 110 E-Mail Kontakt aufnehmen Anne Ott Produktmanagement FIM | Prozess- und Communitymanagement Telefon +49 (69) 401270 175 E-Mail Kontakt aufnehmen"
+      },
+      "url": "https://www.fitko.de/produktmanagement/fim",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:42:55.613833+00:00",
+      "lastSeen": "2026-04-17T09:42:55.613833+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/produktmanagement/fim",
+        "crawledAt": "2026-04-17T09:42:55.617200Z",
+        "crawlId": "contacts-seeded-1776418975",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "65267955e0f3dbfdc092b92de47aff448f721c25f6b1583ee76eab006bee12b3"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:42:55.617200+00:00"
+      }
+    },
+    {
+      "id": "2e428cca-f1ea-4935-b378-5269e39638c8",
+      "title": "FINK – Föderiertes Identitätsmanagement interoperabler Nutzerkonten",
+      "summary": {
+        "de": "Ein Nutzer:innenkonto für alle Online-Verwaltungsleistungen Das „Föderierte Identitätsmanagement interoperabler Nutzerkonten in Deutschland“ (FINK) ermöglicht Bürger:innen die einfache und sichere Nutzung elektronischer Verwaltungsleistungen des Bundes und der Länder mit nur einem persönlichen Nutzer:innenkonto. Durch die Zusammenarbeit von Bund und Ländern wird sichergestellt, dass die Nutzer:innenkonten des Bundes und der Länder die jeweiligen gesetzlichen Vorgaben sowie alle spezifischen Anforderungen zur Sicherheit für ein bundesweites E-Government erfüllen."
+      },
+      "content": {
+        "de": "Das „Föderierte Identitätsmanagement interoperabler Nutzerkonten in Deutschland“ (FINK) ermöglicht Bürger:innen die einfache und sichere Nutzung elektronischer Verwaltungsleistungen des Bundes und der Länder mit nur einem persönlichen Nutzer:innenkonto. Durch die Zusammenarbeit von Bund und Ländern wird sichergestellt, dass die Nutzer:innenkonten des Bundes und der Länder die jeweiligen gesetzlichen Vorgaben sowie alle spezifischen Anforderungen zur Sicherheit für ein bundesweites E-Government erfüllen. Nikolai Hombach Management Produktübernahme FINK Telefon +49 (0) 171 72 387 99 E-Mail Kontakt aufnehmen Bayerisches Staatsministerium für Digitales | Referat B5 – Onlinezugangsgesetz Martin Kirschenbauer Telefon +49 (89) 453549 535 E-Mail Kontakt aufnehmen Ob Bankservices oder Behördenleistungen im Internet: Bürger*innen müssen sich bei der Verwendung solcher Dienste eindeutig und sicher identifizieren. Zahlreiche Bundesländer und der Bund haben hier bereits entsprechende IT-Lösungen, sogenannte Nutzer:innenkonten, etabliert. Das „Föderierte Identitätsmanagement interoperabler Nutzerkonten“ (FINK) sorgt dafür, dass Bürger:innen mit ihrem bereits bestehendem Nutzer:innenkonto und den dazugehörigen persönlichen Zugangsdaten auch Online-Dienste anderer Bundesländer oder des Bundes nutzen können – ohne sich erneut authentifizieren oder gar einen Zugangsantrag stellen zu müssen."
+      },
+      "url": "https://www.fitko.de/produktmanagement/fink",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:42:57.418921+00:00",
+      "lastSeen": "2026-04-17T09:42:57.418921+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/produktmanagement/fink",
+        "crawledAt": "2026-04-17T09:42:57.419923Z",
+        "crawlId": "contacts-seeded-1776418977",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "12b58e2a960a0b2d0a7cd6d49bc97c7defd6aab28697aa3c59d37969616691aa"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:42:57.419923+00:00"
+      }
+    },
+    {
+      "id": "63180a78-c944-4ba2-acee-2e60183c5cff",
+      "title": "FIT-Connect",
+      "summary": {
+        "de": "Die Seite FIT-Connect des IT-Planungsrats."
+      },
+      "content": {
+        "de": "Einfache Kommunikation bei der Beantragung von Verwaltungsleistungen FIT-Connect unterstützt Hersteller:innen von Online-Antragsdiensten bei der Umsetzung einer einfachen, maschinenlesbaren und verschlüsselten Kommunikation zwischen Antragsteller:innen und den zuständigen Fachbehörden. Dazu verknüpft FIT-Connect Online-Verwaltungsdienste mit den Systemen zur Antragsbearbeitung in Bund, Ländern und Kommunen. FIT-Connect fördert insbesondere den Flächen-Rollout von zentral bereitgestellten Online-Verwaltungsdiensten und trägt so zu einer beschleunigten Umsetzung des Onlinezugangsgesetzes bei. Mehr Infos zu FIT-Connect FIT-Connect unterstützt Hersteller:innen von Online-Antragsdiensten bei der Umsetzung einer einfachen, maschinenlesbaren und verschlüsselten Kommunikation zwischen Antragsteller:innen und den zuständigen Fachbehörden. Dazu verknüpft FIT-Connect Online-Verwaltungsdienste mit den Systemen zur Antragsbearbeitung in Bund, Ländern und Kommunen. FIT-Connect fördert insbesondere den Flächen-Rollout von zentral bereitgestellten Online-Verwaltungsdiensten und trägt so zu einer beschleunigten Umsetzung des Onlinezugangsgesetzes bei. Dr. Hauke Traulsen Produktmanagement FIT-Connect Telefon +49 (69) 401270 136 E-Mail Kontakt aufnehmen FIT-Connect vereinfacht die Beantragung von Verwaltungsleistungen, indem es die antragsbezogene Kommunikation zwischen Antragsteller:innen und bearbeitenden Behörden ermöglicht. Insbesondere erleichtert FIT-Connect die technische und organisatorische Anbindung von IT-Systemen zur Antragsbearbeitung an zentral bereitgestellte Online-Verwaltungsdienste auf Basis einheitlicher Schnittstellen und Standards. So trägt FIT-Connect entscheidend zur Steigerung der Interoperabilität von IT-Systemen der öffentlichen Verwaltung bei und unterstützt die Umsetzung des Onlinezugangsgesetzes."
+      },
+      "url": "https://www.fitko.de/produktmanagement/fit-connect",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:42:58.563643+00:00",
+      "lastSeen": "2026-04-17T09:42:58.563643+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/produktmanagement/fit-connect",
+        "crawledAt": "2026-04-17T09:42:58.564639Z",
+        "crawlId": "contacts-seeded-1776418978",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "8d2e5ceaef790fc9095ebe92f9b3cd966f50e4a939955b435f7b26f8f2674a11"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 79.0,
+        "computedAt": "2026-04-17T09:42:58.564639+00:00"
+      }
+    },
+    {
+      "id": "c0b194fa-9a57-4ef0-a381-ab77a48d5106",
+      "title": "Allgemeine Informationen zum FIT-Store",
+      "summary": {
+        "de": "Die Seite FIT-Store des IT-Planungsrats."
+      },
+      "content": {
+        "de": "Nachnutzen statt neu entwickeln Der FIT-Store ermöglicht, standardisierte und vergaberechtskonforme EfA-Leistungen gegen Entgelt im Rahmen eines sogenannten Inhouse-Leistungstausch zu beziehen. Das Produkt realisiert vertragsrechtlich die Umsetzung des EfA-Prinzips („Einer für Alle“). Bund und Länder können dank des FIT-Store ihre betriebsfertigen digitalisierten Verwaltungsleistungen zur Nachnutzung anbieten oder selbst Verwaltungsleistungen als Nachnutzer beziehen. Der Vertragsschluss erfolgt über den Marktplatz für EfA- Leistungen als zentrale Online-Plattform für den Leistungsaustausch. Zum FIT-Store Der FIT-Store ermöglicht, standardisierte und vergaberechtskonforme EfA-Leistungen gegen Entgelt im Rahmen eines sogenannten Inhouse-Leistungstausch zu beziehen. Das Produkt realisiert vertragsrechtlich die Umsetzung des EfA-Prinzips („Einer für Alle“). Bund und Länder können dank des FIT-Store ihre betriebsfertigen digitalisierten Verwaltungsleistungen zur Nachnutzung anbieten oder selbst Verwaltungsleistungen als Nachnutzer beziehen. Der Vertragsschluss erfolgt über den Marktplatz für EfA- Leistungen als zentrale Online-Plattform für den Leistungsaustausch. Mareike Banaszak Recht und Compliance Telefon +49 (69) 401270 148 E-Mail Kontakt aufnehmen Die Verwaltungsdigitalisierung folgt dem Prinzip „Einer für Alle“ (EfA). Demnach müssen Bund und Länder nicht jede Verwaltungsleistung selbst digitalisieren. Stattdessen können sie einen bereits entwickelten Online-Dienst (z. B. eines anderen Bundeslandes) nachnutzen oder einen von ihnen entwickelten Dienst zur Nachnutzung anbieten."
+      },
+      "url": "https://www.fitko.de/produktmanagement/fit-store",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:43:00.583676+00:00",
+      "lastSeen": "2026-04-17T09:43:00.583676+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/produktmanagement/fit-store",
+        "crawledAt": "2026-04-17T09:43:00.587178Z",
+        "crawlId": "contacts-seeded-1776418980",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "8f16536d4b920fc259f983204efcbdfd6c5dc1179d165bca1e79a99869e64993"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 79.0,
+        "computedAt": "2026-04-17T09:43:00.587178+00:00"
+      }
+    },
+    {
+      "id": "3e750d65-ebf0-4311-bc5c-25f921eca2fd",
+      "title": "Föderales Entwicklungsportal",
+      "summary": {
+        "de": "Die Seite Föderales Entwicklungsportal der FITKO."
+      },
+      "content": {
+        "de": "Schnell digitale Anwendungen für die öffentlichen Verwaltung bauen Das Föderale Entwicklungsportal ist die zentrale Anlaufstelle für Softwareentwickler:innen, die Anwendungen für die öffentliche Verwaltung entwickeln wollen. Das Portal bietet technische Dokumentation, Entwicklungsressourcen und Implementierungsbeispiele für eine wachsende Anzahl von Standards und Schnittstellen der föderalen IT-Architektur in Deutschland. Zum Föderalen Entwicklungsportal Das Föderale Entwicklungsportal ist die zentrale Anlaufstelle für Softwareentwickler:innen, die Anwendungen für die öffentliche Verwaltung entwickeln wollen. Das Portal bietet technische Dokumentation, Entwicklungsressourcen und Implementierungsbeispiele für eine wachsende Anzahl von Standards und Schnittstellen der föderalen IT-Architektur in Deutschland. Martin Fräulin Produktmanagement Föderales Entwicklungsportal & Produktübernahmen Telefon +49 (69) 401270 187 E-Mail Kontakt aufnehmen Produktmanagement Föderales Entwicklungsportal & Produktübernahmen Bei der Umsetzung von digitalen Anwendungen für die öffentliche Verwaltung von Bund und Ländern spielen Softwareentwickler:innen eine zentrale Rolle. Sie müssen in die Lage versetzt werden, schnell und effizient nachnutzbare Lösungen zu schaffen. Hier unterstützt das Föderale Entwicklungsportal. Es richtet sich an Entwickler:innen und bietet ihnen technische Dokumentation, Entwicklungsressourcen sowie Implementierungsbeispiele zu Standards und Schnittstellen der föderalen IT-Infrastruktur."
+      },
+      "url": "https://www.fitko.de/produktmanagement/foederales-entwicklungsportal",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:43:03.566311+00:00",
+      "lastSeen": "2026-04-17T09:43:03.566311+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/produktmanagement/foederales-entwicklungsportal",
+        "crawledAt": "2026-04-17T09:43:03.568304Z",
+        "crawlId": "contacts-seeded-1776418983",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "5a71df293ac3dd65a5855a3e599c6d6f91257e546df34512d5b15a5b86153401"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 79.0,
+        "computedAt": "2026-04-17T09:43:03.568304+00:00"
+      }
+    },
+    {
+      "id": "f5b3cbc5-5dad-4a21-950f-e4f3fe0e62ca",
+      "title": "Gov Data",
+      "summary": {
+        "de": "Alle frei zugänglichen Verwaltungsdaten an einem Ort GovData ist das zentrale Datenportal für Deutschland. Es versammelt alle frei verfügbaren Daten der öffentlichen Verwaltungen in Bund, Ländern und Kommunen und macht diese über eine Suchfunktion zugänglich. Das Portal leistet damit einen wesentlichen Beitrag zu Transparenz, Open Government und Bürger:innenbeteiligung und eröffnet Interessierten neue Geschäftsmodelle Zur Website von GovData"
+      },
+      "content": {
+        "de": "GovData ist das zentrale Datenportal für Deutschland. Es versammelt alle frei verfügbaren Daten der öffentlichen Verwaltungen in Bund, Ländern und Kommunen und macht diese über eine Suchfunktion zugänglich. Das Portal leistet damit einen wesentlichen Beitrag zu Transparenz, Open Government und Bürger:innenbeteiligung und eröffnet Interessierten neue Geschäftsmodelle Thomas Tursics Teamleitung | Produktmanagement FIM, PVOG und GovData Telefon +49 (69) 401270 154 E-Mail Kontakt aufnehmen Teamleitung | Produktmanagement FIM, PVOG und GovData GovData ist das nationale Metadatenportal, über das Bund, Länder und Kommunen ihre Verwaltungsdaten auffindbar und zugänglich machen. Zentraler Bestandteil von GovData ist ein Katalog, der mit Metadaten befüllt wird, die in einem standardisierten Austauschformat bereitgestellt werden. Die durch die Metadaten beschriebenen Verwaltungsdaten selbst werden weiterhin von den Bereitstellenden dezentral vorgehalten und gepflegt. Nachnutzbarkeit und offene Lizenzen Der Metadatenkatalog von GovData ist über verschiedene Schnittstellen (APIs) nachnutzbar. Im Sinne von Open Data setzt sich GovData dafür ein, die Verwendung offener Lizenzen zu fördern und das Angebot maschinenlesbarer Verwaltungsdaten auszubauen."
+      },
+      "url": "https://www.fitko.de/produktmanagement/govdata",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:43:05.544868+00:00",
+      "lastSeen": "2026-04-17T09:43:05.544868+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/produktmanagement/govdata",
+        "crawledAt": "2026-04-17T09:43:05.545855Z",
+        "crawlId": "contacts-seeded-1776418985",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "599d1065c358a976d89c1ca79abe62157f13b08b66e6b5080210e35a36fdc5a7"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:43:05.545855+00:00"
+      }
+    },
+    {
+      "id": "4cce1aaf-06d4-44b1-a7d6-c0928b939f52",
+      "title": "Governikus",
+      "summary": {
+        "de": "Die Seite Governikus des IT-Planungsrats."
+      },
+      "content": {
+        "de": "Sicherer Datenaustausch für die öffentliche Verwaltung Governikus ist eine Software zum gesetzeskonformen, rechtsverbindlichen und vertraulichen Datenaustausch zwischen Bund, Ländern und Kommunen. Die Anwendung liefert wichtige Bausteine und Basiskomponenten für Digitalisierungsvorhaben in diesem Bereich. Dies umfasst die elektronische Identifikation (eID), die sichere Datenübermittlung, die Ver- und Entschlüsselung sowie die Erzeugung und Prüfung elektronischer Signaturen gemäß der europäischen eIDAS-Verordnung. Zur Website von Governikus Governikus ist eine Software zum gesetzeskonformen, rechtsverbindlichen und vertraulichen Datenaustausch zwischen Bund, Ländern und Kommunen. Die Anwendung liefert wichtige Bausteine und Basiskomponenten für Digitalisierungsvorhaben in diesem Bereich. Dies umfasst die elektronische Identifikation (eID), die sichere Datenübermittlung, die Ver- und Entschlüsselung sowie die Erzeugung und Prüfung elektronischer Signaturen gemäß der europäischen eIDAS-Verordnung. Dr. Jan Pascal Wittmann Produktmanagement Governikus, GMM und Unternehmenskonto Telefon +49 (69) 401270 197 E-Mail Kontakt aufnehmen Produktmanagement Governikus, GMM und Unternehmenskonto Governikus GmbH & Co. KG Stefan Rauner | Produktportfoliomanagement | Prokurist E-Mail Kontakt aufnehmen"
+      },
+      "url": "https://www.fitko.de/produktmanagement/governikus",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:43:07.526113+00:00",
+      "lastSeen": "2026-04-17T09:43:07.526113+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/produktmanagement/governikus",
+        "crawledAt": "2026-04-17T09:43:07.531468Z",
+        "crawlId": "contacts-seeded-1776418987",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "1d81310836b33685610045fe26b1d077cfd7ac67c6a522ef439643771c6a0e0d"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 79.0,
+        "computedAt": "2026-04-17T09:43:07.531974+00:00"
+      }
+    },
+    {
+      "id": "85a74c45-d7c5-47e4-abca-dc3460b3879c",
+      "title": "Governikus Multi Messenger",
+      "summary": {
+        "de": "Die Seite Governikus MultiMessenger der FITKO."
+      },
+      "content": {
+        "de": "Zukunftssichere Multikanalkommunikation für die Verwaltung Der Governikus MultiMessenger ist die zentrale Multikommunikationsplattform für die öffentliche Verwaltung auf allen föderalen Ebenen. Der Messenger bietet virtuelle Postfächer, Ver- und Entschlüsselung von Nachrichten, Zustellung in ein gewünschtes Zielsystem (z. B. eAkte/Fachverfahren oder E-Mail), Gewährleistung von Vertraulichkeit und Authentisierung sowie technisch-juristische Prüfungen. Mehr über den Governikus MultiMessenger Der Governikus MultiMessenger ist die zentrale Multikommunikationsplattform für die öffentliche Verwaltung auf allen föderalen Ebenen. Der Messenger bietet virtuelle Postfächer, Ver- und Entschlüsselung von Nachrichten, Zustellung in ein gewünschtes Zielsystem (z. B. eAkte/Fachverfahren oder E-Mail), Gewährleistung von Vertraulichkeit und Authentisierung sowie technisch-juristische Prüfungen. Dr. Jan Pascal Wittmann Produktmanagement Governikus, GMM und Unternehmenskonto Telefon +49 (69) 401270 197 E-Mail Kontakt aufnehmen Produktmanagement Governikus, GMM und Unternehmenskonto Governikus GmbH & Co. KG Florian Scheld | Director Products E-Mail Kontakt aufnehmen"
+      },
+      "url": "https://www.fitko.de/produktmanagement/governikus-multimessenger",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:43:09.501677+00:00",
+      "lastSeen": "2026-04-17T09:43:09.501677+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/produktmanagement/governikus-multimessenger",
+        "crawledAt": "2026-04-17T09:43:09.505256Z",
+        "crawlId": "contacts-seeded-1776418989",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "cb36418d790553ab84a2fe1fd336e09005184edc29be7f5daf9cbd402985e955"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 79.0,
+        "computedAt": "2026-04-17T09:43:09.505256+00:00"
+      }
+    },
+    {
+      "id": "d7a3d1a0-d9fd-435e-a4dc-4be010b9df56",
+      "title": "Online-Sicherheitsprüfung (OSi P)",
+      "summary": {
+        "de": "Medienbruchfreier Workflow für personenbezogene Sicherheitsüberprüfungen In vielen Bereichen verlangt der Gesetzgeber aus Sicherheitsgründen von den Behörden personenbezogene Zuverlässigkeits- und Sicherheitsüberprüfungen, z. B. bei Einbürgerung oder Waffenerwerb. Dank der Online-Sicherheitsprüfung (OSiP) können diese Überprüfungen weitestgehend medienbruchfrei durchgeführt und dabei die betroffenen Stakeholder (Genehmigungsbehörden, Bürger:innen, Unternehmen, Sicherheitsbehörden, Register) in einen gemeinsamen Workflow integriert werden."
+      },
+      "content": {
+        "de": "In vielen Bereichen verlangt der Gesetzgeber aus Sicherheitsgründen von den Behörden personenbezogene Zuverlässigkeits- und Sicherheitsüberprüfungen, z. B. bei Einbürgerung oder Waffenerwerb. Dank der Online-Sicherheitsprüfung (OSiP) können diese Überprüfungen weitestgehend medienbruchfrei durchgeführt und dabei die betroffenen Stakeholder (Genehmigungsbehörden, Bürger:innen, Unternehmen, Sicherheitsbehörden, Register) in einen gemeinsamen Workflow integriert werden. David Brodesser Produktmanagement OSiP Telefon +49 (69) 401270 146 E-Mail Kontakt aufnehmen In einer Reihe von Gesetzen sind personenbezogene Zuverlässigkeits- und Sicherheitsüberprüfungen (ZSÜ) vorgeschrieben, um Personen den Zugang zu sicherheitsrelevanten oder nicht allgemein zugänglichen Bereichen zu gewähren. Dazu zählen z. B. der Zutritt zu Flughäfen, Häfen oder Atomanlagen, die Einbürgerung, der Erwerb einer Waffe, aber auch die Akkreditierung für besondere Veranstaltungen. An der ZSÜ sind mehrere Stellen beteiligt. So muss die Genehmigungsbehörde – also die Stelle, die die Zuverlässigkeit feststellt und bescheinigt – verschiedene Behörden, sogenannte Erkenntnisstellen, um Informationen über die zu überprüfende Person bitten. Die Rückmeldungen fließen anschließend in die Entscheidung über die Zuverlässigkeit ein. Die Beteiligung der Erkenntnisstellen (Landeskriminalämter, Verfassungsschutz sowie verschiedene zentrale Bundesregister in Deutschland) erfolgt über OSiP und weitestgehend medienbruchfrei. Die Ausprägung des Automatisierungsgrades – von nur verwaltungsinternen Workflows bis zu einem vollständigen Workflow – ist abhängig vom jeweiligen Anwendungsbereich. Mehrfach ausgezeichnet Nationale und internationale Anerkennung erhielt OSiP mit der Auszeichnung “Certificate of Excellence” in der Kategorie „National“ beim „Sharing and Reuse Awards Contest“ der Europäischen Kommission 2017 in Lissabon sowie beim eGovernment-Wettbewerb 2018 in der Kategorie „Bestes Kooperationsprojekt“."
+      },
+      "url": "https://www.fitko.de/produktmanagement/osip",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:43:11.506663+00:00",
+      "lastSeen": "2026-04-17T09:43:11.506663+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/produktmanagement/osip",
+        "crawledAt": "2026-04-17T09:43:11.509662Z",
+        "crawlId": "contacts-seeded-1776418991",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "7ec6453965d52aaa881350e09faf2f9e817f80775ebde3a3a7d692f2675c9294"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:43:11.509662+00:00"
+      }
+    },
+    {
+      "id": "773cba26-828c-4342-8fd6-3980098cd5a8",
+      "title": "Produktmanagement-Modell",
+      "summary": {
+        "de": "Die Seite Produktmanagement-Modell der FITKO."
+      },
+      "content": {
+        "de": "Alle Produkte des IT-Planungsrats werden von der FITKO nach einem zeitgemäßen Produktmanagement Modell gesteuert ( Beschluss 2024/51 ). Für das Produktportfolio ergibt sich damit ein einheitlicher rechtlicher, organisatorischer und inhaltlicher Handlungsrahmen. Klare Vorgaben und Prozesse gewährleisten eine standardisierte und effiziente Handhabung der Produkte und vereinfachen die Zusammenarbeit von Bund, Ländern und Kommunen. Zentrale Leitprinzipien wie eindeutige Rollenprofile und Zuständigkeiten, das Entwickeln von Produkten in schnellen Iterationen und die Ausrichtung an Wertschöpfungsketten bilden den Ausgangspunkt für eine erfolgreiche Produktarbeit. Ein werkzeuggestütztes strategisches und operatives Anforderungsmanagement stellt produktübergreifend sicher, dass relevante Stakeholder:innen strukturiert eingebunden werden und eine transparente Dokumentation und Priorisierung von Vorhaben mit Blick auf die Gesamtstrategie des IT-Planungsrates erfolgt. Es befähigt föderale Stakeholder, strategische Ziele für Produkte transparent zu definieren und deren Erreichung über das Produktteam toolbasiert zu verfolgen und zu steuern. Eine einheitliche Gremienstruktur ermöglicht produktübergreifend effiziente Governancestrukturen: Ein Produktboard für jedes IT-Planungsrat Produkt, besetzt mit Vertreter:innen aus Bund, Ländern, der FITKO und gegebenenfalls Kommunen agiert als zentrales Entscheidungsgremium auf der strategischen Ebene. Weitere Gremien wie Beiräte oder Arbeitsgruppen sollen vor dem Hintergrund schlanker und transparenter Gremienstrukturen nur dann vom Produktboard gegründet werden, wenn diese für den Produkterfolg notwendig sind. Die Anzahl solcher Gremien ist grundsätzlich beschränkt."
+      },
+      "url": "https://www.fitko.de/produktmanagement/produktmanagement-modell",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:43:12.590062+00:00",
+      "lastSeen": "2026-04-17T09:43:12.590062+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/produktmanagement/produktmanagement-modell",
+        "crawledAt": "2026-04-17T09:43:12.593061Z",
+        "crawlId": "contacts-seeded-1776418992",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "71493a869828a0a5a68cf7a132f70fc1a314853e28ccfe6719633f7e9eecce2f"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 79.0,
+        "computedAt": "2026-04-17T09:43:12.593061+00:00"
+      }
+    },
+    {
+      "id": "b0249438-5996-4285-9156-4d799776d071",
+      "title": "PVOG – Portalverbund Online-Gateway",
+      "summary": {
+        "de": "Einfacher Online-Zugang zu allen Verwaltungsleistungen Das Portalverbund Online-Gateway (PVOG) verknüpft die Verwaltungsportale des Bundes und der Länder. Über das PVOG sind in den verknüpften Portalen die Daten aller teilnehmenden Portale verfügbar, so dass Bürger:innen bundesweit alle Online-Verwaltungsleistungen erreichen können. Das PVOG bietet diese Daten über verschiedene für Mensch oder Maschine ausgelegte Schnittstellen an. Zum PVOG im Föderalen Entwicklungsportal"
+      },
+      "content": {
+        "de": "Das Portalverbund Online-Gateway (PVOG) verknüpft die Verwaltungsportale des Bundes und der Länder. Über das PVOG sind in den verknüpften Portalen die Daten aller teilnehmenden Portale verfügbar, so dass Bürger:innen bundesweit alle Online-Verwaltungsleistungen erreichen können. Das PVOG bietet diese Daten über verschiedene für Mensch oder Maschine ausgelegte Schnittstellen an. Hendrik Stier Produktmanagement PVOG Telefon +49 (69) 401270 119 E-Mail Kontakt aufnehmen Das PVOG aggregiert aus den angeschlossenen Redaktionssystemen Beschreibungen und Metadaten der Verwaltungsleistungen und verteilt die gesammelten Datenbestände über verschiedene Schnittstellen an die im Portalverbund zusammengeschlossenen Verwaltungsportale des Bundes. In der Regel alle 24 Stunden werden die kompletten Daten aller angeschlossenen Redaktionssysteme abgerufen, validiert und in das PVOG eingespielt. Die eingespielten Daten werden auf 3 verschiedenen Wegen zur Nachnutzung angeboten: über die API des Suchdienstes, die die Suchmaschinen der Verbundportale direkt als Backend nutzen können"
+      },
+      "url": "https://www.fitko.de/produktmanagement/pvog",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:43:15.518911+00:00",
+      "lastSeen": "2026-04-17T09:43:15.518911+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/produktmanagement/pvog",
+        "crawledAt": "2026-04-17T09:43:15.521426Z",
+        "crawlId": "contacts-seeded-1776418995",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "e1bb0a620e923ef12fe4a5287cf647a78a9661fe3d3b831822e0824ef425cea0"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:43:15.521426+00:00"
+      }
+    },
+    {
+      "id": "a56b81aa-325d-47c2-86d8-617e052d0212",
+      "title": "Projektmanagement",
+      "summary": {
+        "de": "Wir begleiten und unterstützen den IT-Planungsrat bei der Umsetzung seiner Projekte. Wir liefern dem IT-Planungsrat Controlling-Daten, so dass er stets über den aktuellen Stand seiner Projekte informiert ist und bei Bedarf geeignete Steuerungsmaßnahmen einleiten kann."
+      },
+      "content": {
+        "de": "Innovativ & transparent. Wir bieten offene Wege der Zusammenarbeit. Eine Aufgabe des IT-Planungsrats besteht laut IT-Staatsvertrag darin, „Projekte und Produkte des informations- und kommunikationstechnisch unterstützten Regierens und Verwaltens“ zu steuern (§ 1 Absatz 1 IT-Staatsvertrag). Projekte sind dabei zeitlich befristete Vorhaben, die dem im Staatsvertrag genannten Zweck dienen müssen. Aufgrund dieser allgemein gehaltenen Definition können Projekte des IT-Planungsrats sehr unterschiedliche Vorhaben umsetzen: Sie reichen vom Aufbau technischer Systeme über Lernplattformen bis hin zu Standardisierungsvorhaben. Wir begleiten und unterstützen den IT-Planungsrat bei der Umsetzung seiner Projekte. Wir liefern dem IT-Planungsrat Controlling-Daten, so dass er stets über den aktuellen Stand seiner Projekte informiert ist und bei Bedarf geeignete Steuerungsmaßnahmen einleiten kann. Hierfür haben wir das FITKO-Projektmanagement-Vorgehensmodell (FIT-Project) entwickelt, das einen definierten Rahmen für die Projektarbeit liefert und stetig von uns weiterentwickelt wird. Ferner übernehmen wir für ausgewählte Projekte die Projektleitung und steuern die operative Umsetzung (z. B. FIT-Connect ). Auch die gemeinsame Projektumsetzung mit Partner:innen ist möglich. Föderale Digitalisierungsprojekte Bund und Ländern stellen gemeinsam Finanzmittel zur Förderung von Projekten zur Digitalisierung der Verwaltung. Wir sind damit beauftragt, die laufenden Digitalisierungsprojekte zu begleiten. Zu den föderalen Digitalisierungsprojekten"
+      },
+      "url": "https://www.fitko.de/projektmanagement",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:43:17.461582+00:00",
+      "lastSeen": "2026-04-17T09:43:17.461582+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/projektmanagement",
+        "crawledAt": "2026-04-17T09:43:17.465131Z",
+        "crawlId": "contacts-seeded-1776418997",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "e808f572d9553f1370d675b230a9618a2b2a13d68c0a04579d2a945b70d5a63d"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:43:17.465131+00:00"
+      }
+    },
+    {
+      "id": "8801ca18-9c14-4dbe-84e9-09ed0fdb21a1",
+      "title": "Föderale Digitalisierungsprojekte",
+      "summary": {
+        "de": "Die Seite Föderale Digitalisierungsprojekte der FITKO."
+      },
+      "content": {
+        "de": "Im ersten IT-Änderungsstaatsvertrag von 2019 haben sich Bund und Länder verpflichtet, für die Jahre 2020 bis 2022 ein Digitalisierungsbudget im Umfang von 180 Millionen Euro zur Verfügung zu stellen. Um weiterhin Digitalisierungsprojekte finanzieren zu können, sind auch für die Jahre 2023 und 2024 Finanzmittel vorgesehen. Bei den Digitalisierungsprojekten handelt es sich um Vorhaben, mit denen die Wirkung der erreichten Digitalisierung verbessert und die konkreten Anwendungen auf eine breitere Grundlage gestellt werden. Es werden grundsätzlich Projekte und Aktivitäten unterstützt, die der Digitalisierung von Verwaltungsleistungen auf allen föderalen Ebenen zugutekommen. Die geförderten Projekte dienen der Entwicklung von Basis- und Querschnittskomponenten und der Bereitstellung onlinefähiger Angebote. Finanziert wird auch die Vorbereitung der Übergabe in den Betrieb. Der sich anschließende Regelbetrieb benötigt dann allerdings eine gesonderte Finanzierung. Ziel ist eine Effizienz- und Nutzensteigerung sowohl bei der Verwaltung, als auch bei Bürger:innen und Unternehmen. Linda Meier Portfoliomanagement Telefon +49 (69) 401270 156 E-Mail Kontakt aufnehmen Michaela Eid Kapazitätsmanagement Telefon +49 (69) 401270 189 E-Mail Kontakt aufnehmen Die FITKO ist damit beauftragt, die laufenden Digitalisierungsprojekte zu begleiten. Wir prüfen die Mittelverwendung für die einzelnen Projekte und Aktivitäten und berichten der Abteilungsleiter-Runde (AL-Runde) und dem IT-Planungsrat über Projektfortschritte (kontinuierliches Projektcontrolling) und Steuerungsmaßnahmen. Damit soll sichergestellt werden, dass die jeweiligen Projektziele nachhaltig und qualitativ hochwertig verfolgt und planmäßig umgesetzt werden."
+      },
+      "url": "https://www.fitko.de/projektmanagement/foederale-digitalisierungsprojekte",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:43:18.618150+00:00",
+      "lastSeen": "2026-04-17T09:43:18.618150+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/projektmanagement/foederale-digitalisierungsprojekte",
+        "crawledAt": "2026-04-17T09:43:18.620150Z",
+        "crawlId": "contacts-seeded-1776418998",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "f0105e286ec55973284e2212b29005319d05c2d43e37e100ec7500dd521e3805"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:43:18.620150+00:00"
+      }
+    },
+    {
+      "id": "37b02977-b746-41bc-863e-09060bb2de74",
+      "title": "Publikationen",
+      "summary": {
+        "de": "Die Seite Publikationen des IT-Planungsrats."
+      },
+      "content": {
+        "de": "Jahresbericht 2025/2026 Im Jahresbericht informieren der IT-Planungsrat und die FITKO über ihre Arbeit im Jahr 2025 und die Vorhaben im Jahr 2026. Zur Publikation Im Jahresbericht informieren der IT-Planungsrat und die FITKO über ihre Arbeit im Jahr 2025 und die Vorhaben im Jahr 2026. Projektabschlussbericht Deutsche Verwaltungscloud Seit April ist die Deutsche Verwaltungscloud (DVC) als Produkt des IT-Planungsrats fester Bestandteil der föderalen IT-Landschaft und löst damit die bisherige Projektphase ab. Der Abschlussbericht zum Projekt liegt jetzt vor. Zur Publikation Seit April ist die Deutsche Verwaltungscloud (DVC) als Produkt des IT-Planungsrats fester Bestandteil der föderalen IT-Landschaft und löst damit die bisherige Projektphase ab. Der Abschlussbericht zum Projekt liegt jetzt vor. Jahresbericht 2024/2025 Im Jahresbericht informieren der IT-Planungsrat und die FITKO über ihre Arbeit im Jahr 2024 und die Vorhaben im Jahr 2025. Zur Publikation Im Jahresbericht informieren der IT-Planungsrat und die FITKO über ihre Arbeit im Jahr 2024 und die Vorhaben im Jahr 2025."
+      },
+      "url": "https://www.fitko.de/publikationen",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:43:33.016124+00:00",
+      "lastSeen": "2026-04-17T09:43:33.016124+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/publikationen",
+        "crawledAt": "2026-04-17T09:43:33.018173Z",
+        "crawlId": "contacts-seeded-1776419013",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "402103ea799f741e4f49121b75146aa7a1f8aa1c5aa4a899b8a834df3f0977e1"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 79.0,
+        "computedAt": "2026-04-17T09:43:33.018173+00:00"
+      }
+    },
+    {
+      "id": "9debedb3-dbbf-449a-bfa0-3eac7c9c8964",
+      "title": "Die FITKO (Föderale IT-Kooperation)",
+      "summary": {
+        "de": "Wir sind die agile und flexible Umsetzungsorganisation für den IT-Planungsrat und bringen als zentrale Koordinierungs- und Vernetzungsstelle die Digitalisierung der Verwaltung in Deutschland voran."
+      },
+      "content": {
+        "de": "Agil & Verlässlich. Für die Digitalisierung der Verwaltung. Was wir tun Wir unterstützen den IT-Planungsrat und sowie seine Gremien, steuern die Umsetzung seiner Beschlüsse und organisieren den notwendigen föderalen Austausch. Zu den Aufgaben Wir unterstützen den IT-Planungsrat und sowie seine Gremien, steuern die Umsetzung seiner Beschlüsse und organisieren den notwendigen föderalen Austausch. Wer wir sind Wir sind eine Organisation im gemeinsamen Auftrag von Bund und Ländern mit dem Ziel, eine moderne digitale Verwaltung zu schaffen. Mehr über die FITKO Wir sind eine Organisation im gemeinsamen Auftrag von Bund und Ländern mit dem Ziel, eine moderne digitale Verwaltung zu schaffen. Wen wir suchen Wir wachsen und suchen deshalb regelmäßig Macher:innen, die Lust auf innovatives Arbeiten im Umfeld der öffentlichen Verwaltung haben. Zu den Stellenausschreibungen"
+      },
+      "url": "https://www.fitko.de/ueber-uns",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:43:34.989156+00:00",
+      "lastSeen": "2026-04-17T09:43:34.989156+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/ueber-uns",
+        "crawledAt": "2026-04-17T09:43:34.991161Z",
+        "crawlId": "contacts-seeded-1776419014",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "b27a53d04208a91d9b1a535ec23339a5be54bd88c1ac8f093107bf446e7da2b9"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:43:34.991161+00:00"
+      }
+    },
+    {
+      "id": "a572f4ec-a884-4168-a0a9-1c0686625229",
+      "title": "Was wir tun",
+      "summary": {
+        "de": "Die Seite Was wir tun des IT-Planungsrats."
+      },
+      "content": {
+        "de": "Als FITKO (Föderale IT-Kooperation) unterstützen wir den IT-Planungsrat und sorgen dafür, dass seine Beschlüsse zur Digitalisierung der Verwaltung konsequent umgesetzt werden. Hierfür koordinieren wir die Zusammenarbeit von Bund, Ländern und Kommunen in Fragen der Verwaltungsdigitalisierung. Zudem schaffen wir die notwendigen technischen, rechtlichen, organisatorischen und finanziellen Rahmenbedingungen, um innovative und wirksame digitale Lösungen zu entwickeln. Das umfasst unter anderem Produkte, Projekte, Architekturen, Standards und Dialogformate. Zur Erfüllung unseres Auftrags gehen wir agil und flexibel vor. Denn die Verwaltung der Zukunft baut auf innovative Ideen und gemeinsame Lösungen – nicht auf starre Strukturen und strenge Hierarchien. Dieser Wandel erfordert Flexibilität in unserem Denken und Handeln. Gleichzeitig braucht es Beständigkeit und einen verlässlichen Rahmen für die langfristige Kooperation aller Beteiligten. Wir verbinden beides miteinander. Neben der Etablierung eines übergreifenden Informations- und Wissenstransfers setzen wir auf eine neue Form der Zusammenarbeit, bei der Kommunikation, Transparenz und Vertrauen im Fokus stehen. Werte wie Offenheit und Austausch bilden nicht nur die Basis unserer internen Arbeit, sondern prägen auch unsere Arbeitsweise nach außen. Wir bündeln die föderalen Aktivitäten zur Digitalisierung der Verwaltung. Zu den uns übertragenen Aufgaben gehören: Koordination Wir unterstützen den IT-Planungsrat und seine Gremien organisatorisch und strategisch. Zur Föderalen Koordination"
+      },
+      "url": "https://www.fitko.de/ueber-uns/was-wir-tun",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:43:36.979794+00:00",
+      "lastSeen": "2026-04-17T09:43:36.979794+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/ueber-uns/was-wir-tun",
+        "crawledAt": "2026-04-17T09:43:36.983374Z",
+        "crawlId": "contacts-seeded-1776419016",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "05d893818183e3ebbf9b794c87d3ad8601120264752a82a48955069e61bf6d97"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 79.0,
+        "computedAt": "2026-04-17T09:43:36.983374+00:00"
+      }
+    },
+    {
+      "id": "005c4027-88fc-487f-a633-09c7894d621f",
+      "title": "Wen wir suchen",
+      "summary": {
+        "de": "Möglichkeit, die Arbeitskultur der Zukunft für den öffentlichen Dienst mitzugestalten"
+      },
+      "content": {
+        "de": "Seit unserer Gründung als Anstalt des öffentlichen Rechts 2020 wachsen wir stetig weiter – inhaltlich, fachlich und personell. Wir sind die agile Organisation, die die Arbeit des IT-Planungsrats unterstützt und die Umsetzung seiner Beschlüsse koordiniert und vorantreibt. Hierfür suchen wir regelmäßig motivierte Macher:innen, die Lust auf öffentliche Verwaltung, innovatives Arbeiten und gute Arbeitsbedingungen haben. Mobiles flexibles Arbeiten: unbürokratisches Home-Office Büros mit ergonomischem Arbeitsplatz (höhenverstellbare Schreibtische) Individuelle Weiterbildungsmöglichkeiten für die berufliche und persönliche Entwicklung Gelegenheiten zur Vernetzung, z. B. die Teilnahme an branchenspezifischen Veranstaltungen Engagiertes, motiviertes und vielfältiges Team – bei uns arbeiten u. a. Theaterwissenschaftler:innen, Biolog:innen, Mathematiker:innen"
+      },
+      "url": "https://www.fitko.de/ueber-uns/wen-wir-suchen",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:43:38.970479+00:00",
+      "lastSeen": "2026-04-17T09:43:38.970479+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/ueber-uns/wen-wir-suchen",
+        "crawledAt": "2026-04-17T09:43:38.973136Z",
+        "crawlId": "contacts-seeded-1776419018",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "bfe4819cc19d0a2fcb683f5361df3ae7bdc4b7231a4ff9a240ef196a9304d5b4"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:43:38.973136+00:00"
+      }
+    },
+    {
+      "id": "027e3759-09f5-4c14-aebd-f58faa66c78b",
+      "title": "Wer wir sind",
+      "summary": {
+        "de": "Die Seite Wer wir sind des IT-Planungsrats."
+      },
+      "content": {
+        "de": "Mit der FITKO – der Föderalen IT-Kooperation – hat der IT-Planungsrat eine agile Organisation geschaffen, um die Digitalisierung der öffentlichen Verwaltung zielgerichtet zu koordinieren und gemeinsam mit Bund, Ländern und Kommunen effektiv voranzutreiben. Das Ziel: die Schaffung innovativer digitaler Lösungen für eine moderne, wirksame und resiliente Verwaltung in Deutschland. Dafür braucht es die Zusammenarbeit aller föderalen Ebenen und neue Umsetzungsstrategien – damit IT-Lösungen entstehen, die Nutzen bringen und gleichermaßen den Nutzer:innen dienen. Notwendig sind vor allem flexible und dennoch konstante Kooperationen zwischen Bund, Ländern und Kommunen, die mit dem Tempo der Digitalisierung Schritt halten und ein gemeinsames Ziel verfolgen. Als FITKO vereinen wir die hierfür notwendigen Kompetenzen und Ressourcen: Wir gehen proaktiv voran, bringen unsere umfassende IT-Expertise ein und fördern gegenseitiges Vertrauen aller Akteur:innen als Schlüssel zum Erfolg. So sorgen wir dafür, die Entscheidungen des IT-Planungsrats konsequent und wirksam umzusetzen. Nach einer 2-jährigen Aufbauphase wurde die FITKO im Januar 2020 als eigenständige Anstalt des öffentlichen Rechts in Trägerschaft aller Länder und des Bundes mit Sitz in Frankfurt am Main gegründet. Rechtliche Grundlage hierfür ist der erste IT-Änderungsstaatsvertrag von 2019. Die wesentlichen Funktionen und Organe der FITKO sind in einem Gründungsbeschluss des IT-Planungsrats festgelegt. Seit ihrer Gründung übernimmt die FITKO unter anderem die Koordination des IT-Planungsrats, d. h. die Vorbereitung von Sitzungen und die Steuerung des Informationsaustausches. Diese Aufgabe erfüllte bis zum 1. Juli 2020 der Geschäftsstelle des IT-Planungsrats, die beim Bundesministerium des Innern, für Bau und Heimat (BMI) eingerichtet war. Geschäftsordnung des Verwaltungsrats herunterladen (145 KB, pdf)"
+      },
+      "url": "https://www.fitko.de/ueber-uns/wer-wir-sind",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:43:41.349805+00:00",
+      "lastSeen": "2026-04-17T09:43:41.349805+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/ueber-uns/wer-wir-sind",
+        "crawledAt": "2026-04-17T09:43:41.384658Z",
+        "crawlId": "contacts-seeded-1776419021",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "0e11561abe6cbcbf9fc174a0658cb8a006cb9db69ef5c6789be778fc7dddc955"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 79.0,
+        "computedAt": "2026-04-17T09:43:41.384658+00:00"
+      }
+    },
+    {
+      "id": "1de757f2-e48d-4b5f-bd3c-edad9ddbdb82",
+      "title": "Kommende Veranstaltungen auf einen Blick",
+      "summary": {
+        "de": "Die Seite Veranstaltungen des IT-Planungsrats."
+      },
+      "content": {
+        "de": "Auf dieser Seite veröffentlichen wir die Veranstaltungen, an denen die FITKO beteiligt ist. Die FITKO veranstaltet regelmäßige Infoveranstaltungen zu Themen im OZG-Umfeld. Diesmal: So profitieren Sie von Deutscher Verwaltungscloud und neuem Marktplatz Deutschland Digital. Die FITKO veranstaltet regelmäßige Infoveranstaltungen zu Themen im Community-Umfeld. Diesmal: Marktplatz der KI-Möglichkeiten Der Karrieretag Frankfurt ist eine Jobmesse, auf der Interessierte mit Personalverantwortlichen in Kontakt treten können. Die FITKO ist mit einem Stand vertreten. Die FITKO veranstaltet regelmäßige Infoveranstaltungen zu Themen im OZG-Umfeld. Diesmal: SPARK – Schnellere Planung und Genehmigung durch KI. Der Zukunftskongress Staat & Verwaltung ist die Leitveranstaltung für das moderne und digitale Deutschland. Der IT-Planungsrat und die FITKO beteiligen sich am Programm und sind mit einem Stand in der Ausstellung vertreten."
+      },
+      "url": "https://www.fitko.de/veranstaltungen",
+      "topics": [
+        "public_service",
+        "contacts"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:43:43.575360+00:00",
+      "lastSeen": "2026-04-17T09:43:43.575360+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "FITKO",
+      "provenance": {
+        "source": "https://www.fitko.de/veranstaltungen",
+        "crawledAt": "2026-04-17T09:43:43.588465Z",
+        "crawlId": "contacts-seeded-1776419023",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "fitko",
+        "providerName": "FITKO",
+        "providerLevel": "federal",
+        "checksum": "da0c6aa37077e3134e0bd0125f8f995e05201685f1397741cd885c33c1fb47c3"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 79.0,
+        "computedAt": "2026-04-17T09:43:43.588465+00:00"
       }
     },
     {
@@ -20614,6 +23143,63 @@
         "iqs": 84.58,
         "ais": 84.0,
         "computedAt": "2026-03-15T16:07:09.855881+00:00"
+      }
+    },
+    {
+      "id": "54ba640f-2b77-42e0-a87c-7952f635dbee",
+      "title": "Wege zur Pflege",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Hier finden Sie Menschen, die Ihnen rund um das Thema Pflege mit Rat und Tat zur Seite stehen. Sie pflegen und betreuen Angehörige. Diese Situation kann herausfordernd sein. Insbesondere, wenn Sie zudem noch arbeiten. Deswegen finden Sie auf den nachfolgenden Seiten Angebote, die Sie unterstützen und entlasten können. Pflegende Beschäftigte sind verschiedenen Belastungen ausgesetzt. Sie zu unterstützen, wird für Arbeitgeber immer wichtiger. Erfahren Sie mehr zur Pflegezeit, Familienpflegezeit und betrieblichen Möglichkeiten. Sie werden zu Hause von Ihren Angehörigen oder anderen nahestehenden Menschen versorgt. Hier erhalten Sie einen kleinen Einblick, wie Sie ihre gemeinsame Pflegesituation gut gestalten können. Das Pflegetelefon des Bundesseniorenministeriums berät Sie zu den Regelungen des Pflegezeit- und Familienpflegezeitgesetzes. Dazu gehören beispielsweise eine kurzzeitige Arbeitsverhinderung, Pflegezeit und Familienpflegezeit. Das Pflegetelefon ist eine erste Anlaufstelle für Fragen zur Organisation der Pflege, für Fragen zur Finanzierung der Pflege und bei starker Belastung durch die Pflegesituation. Das Team des Pflegetelefons vermittelt Sie auch an eine für Ihre Situation geeignete Beratungsstelle weiter. Das Beratungsteam des Pflegetelefons erreichen Sie bundesweit telefonisch unter 030 20 17 91 31. Beirat Der Unabhängige Beirat für Pflege und Beruf berät das Bundesfamilienministerium in Fragen rund um die Vereinbarkeit von Pflege und Beruf."
+      },
+      "url": "https://www.wege-zur-pflege.de/",
+      "topics": [
+        "contacts",
+        "public_service"
+      ],
+      "tags": [
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "persons_with_disabilities"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:44:21.356627+00:00",
+      "lastSeen": "2026-04-17T09:44:21.356627+00:00",
+      "sourceUnavailable": false,
+      "contactType": "office",
+      "specialization": [
+        "Buergeranfragen",
+        "Leistungsinformationen"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Quelle",
+        "languages": [
+          "de"
+        ]
+      },
+      "linkedOrganization": "wege-zur-pflege.de",
+      "provenance": {
+        "source": "https://www.wege-zur-pflege.de/",
+        "crawledAt": "2026-04-17T09:44:21.359642Z",
+        "crawlId": "contacts-seeded-1776419061",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "wege-zur-pflege_de",
+        "providerName": "wege-zur-pflege.de",
+        "providerLevel": "federal",
+        "checksum": "0f72518e3be76faa06c54c760d281bcaf34ff1b96f901d7b963d86c5f609b915"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:44:21.359642+00:00"
       }
     }
   ]

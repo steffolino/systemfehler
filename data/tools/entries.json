@@ -174,6 +174,63 @@
       }
     },
     {
+      "id": "a567df98-8944-45c4-8837-abc6a98f3ef6",
+      "title": "Suche | Familienportal des Bundes",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "url": "https://familienportal.de/familienportal/125008!zip-search?service=20041101&state=H4sIAAAAAAAAADWMMQ7CMBAEv4K2dgGtWxB1Cj5wcjYQyfjE3blAUf4eC4luZrTaDbME76Zv5NZrTT9_6N8WKQxH3vaE1xo-0SZ5EvlyTvh02hcZSHC1GORFjaeZXkbrzts4u2rzMFnbGCxSnfsBtDKGA3UAAAA%3D",
+      "topics": [
+        "family",
+        "financial_support",
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "application_required",
+        "tool"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents",
+        "general_public",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:58:33.765720+00:00",
+      "lastSeen": "2026-04-17T09:58:33.765720+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://familienportal.de/familienportal/125008!zip-search?service=20041101&state=H4sIAAAAAAAAADWMMQ7CMBAEv4K2dgGtWxB1Cj5wcjYQyfjE3blAUf4eC4luZrTaDbME76Zv5NZrTT9_6N8WKQxH3vaE1xo-0SZ5EvlyTvh02hcZSHC1GORFjaeZXkbrzts4u2rzMFnbGCxSnfsBtDKGA3UAAAA%3D",
+        "crawledAt": "2026-04-17T09:58:33.766867Z",
+        "crawlId": "tools-seeded-1776419913",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "familienportal",
+        "providerName": "Familienportal",
+        "providerLevel": "federal",
+        "checksum": "78b0ed4276b1a86f4e1c3b29466aa47cc880213501bc6748a266c4a75b112b9f"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:58:33.766867+00:00"
+      }
+    },
+    {
       "id": "d1d1f018-1fa1-4687-95ec-ae4c66d76f91",
       "title": "Ausbildung & Studium mit Kind",
       "summary": {
@@ -791,6 +848,58 @@
         "iqs": 84.58,
         "ais": 84.0,
         "computedAt": "2026-03-15T16:05:40.587335+00:00"
+      }
+    },
+    {
+      "id": "af31909a-5c7a-4591-96e2-0d656540a1be",
+      "title": "Schuldnerberatung",
+      "summary": {
+        "de": "Sie haben Schulden oder sind in einer finanziellen Notlage? Dann gibt es kostenlose Hilfsangebote. Hier finden Sie Infos und Beratungsstellen in Ihrer Nähe."
+      },
+      "content": {
+        "de": "Sie haben Schulden oder sind in einer finanziellen Notlage? Dann gibt es kostenlose Hilfsangebote. Hier finden Sie Infos und Beratungsstellen in Ihrer Nähe."
+      },
+      "url": "https://sozialplattform.de/schuldnerberatung",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "meta_support_portal_source",
+        "directory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:45:26.565583+00:00",
+      "lastSeen": "2026-04-17T09:45:26.565583+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://sozialplattform.de/schuldnerberatung",
+        "crawledAt": "2026-04-17T09:45:26.565583Z",
+        "crawlId": "tools-seeded-1776419126",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "public_service",
+        "jurisdiction": "DE",
+        "sourceId": "sozialplattform",
+        "providerName": "Sozialplattform",
+        "providerLevel": "federal",
+        "checksum": "c26935b9f29bae050496b8f5141ad52163a8dc6e261c19e1c5fdebf43a5d2b64"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 80.0,
+        "computedAt": "2026-04-17T09:45:26.565583+00:00"
       }
     },
     {
@@ -2024,6 +2133,64 @@
       }
     },
     {
+      "id": "bfa54724-73b0-4696-8a4a-67bdabd0353e",
+      "title": "So erreichen Sie uns",
+      "summary": {
+        "de": "Wir helfen Ihnen gerne persönlich weiter! So erreichen Sie uns."
+      },
+      "content": {
+        "de": "Gerne helfen wir Ihnen persönlich weiter! Unseren Service für Bürgerinnen und Bürger erreichen Sie zu folgenden Zeiten: Montag bis Donnerstag von 08:00 bis 18:00 Uhr Freitag von 08:00 bis 14:00 Uhr Servicetelefon für Menschen mit Hörbeeinträchtigungen Technischer Support für Online-Angebote 0800 4 555501 (gebührenfrei) Aus dem Ausland: +49 911 178 1780 Familienkasse: Allgemeine Auskünfte 0800 4 555530 (gebührenfrei) Arbeitgeberservice 0800 4 555520 (gebührenfrei) Montag bis Freitag von 08:00 bis 18:00 Uhr Sie möchten bestimmte Geschäftsbereiche oder Dienststellen erreichen? In unserer Übersicht finden Sie Informationen zu den betreffenden Ansprechpartnerinnen und Ansprechpartnern. Falls Sie sich über ein spezielles Thema informieren möchten, schicken Sie uns am besten eine E-Mail."
+      },
+      "url": "https://www.arbeitsagentur.de/service-bereich/so-erreichen-sie-uns",
+      "topics": [
+        "employment",
+        "financial_support",
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "application_required",
+        "public_service",
+        "tool"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:55:35.994611+00:00",
+      "lastSeen": "2026-04-17T09:55:35.994611+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.arbeitsagentur.de/service-bereich/so-erreichen-sie-uns",
+        "crawledAt": "2026-04-17T09:55:35.994611Z",
+        "crawlId": "tools-seeded-1776419735",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "checksum": "36b46c9f7e52b740cfd808d92e7e3689950563d54c9ecb4f27fc3404a141899b"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:55:35.994611+00:00"
+      }
+    },
+    {
       "id": "ccd97f55-248e-4f76-885b-6f932a547d80",
       "title": "Klartext",
       "summary": {
@@ -2189,6 +2356,1456 @@
         "iqs": 84.58,
         "ais": 84.0,
         "computedAt": "2026-03-15T17:24:45.429017+00:00"
+      }
+    },
+    {
+      "id": "eb62eb9f-1521-42f1-8e33-7644eae9ddbc",
+      "title": "Mindestlohn-Rechner",
+      "summary": {
+        "de": "Wie wirkt sich der Mindestlohn auf Ihr Gehalt aus? Wie hoch ist Ihr Stundenlohn? Finden Sie es mit dem Mindestlohn-Rechner heraus."
+      },
+      "content": {
+        "de": "Bitte beachten Sie auch die untenstehenden Hinweise zur Berechnung und Bedienung des Mindestlohn-Rechners. Mit dem Mindestlohn-Rechner können Sie Ihr Monatsgehalt berechnen. Dazu müssen Sie Stundenlohn und Arbeitszeit pro Woche angeben. Alternativ können Sie Ihren Stundenlohn berechnen. Dazu müssen Sie Monatsgehalt und Arbeitszeit pro Woche angeben. Sie können die Werte in den Feldern über die Pfeile nach oben und unten steuern. Durch Klick in das Feld können Sie auch direkt Zahlen eintragen. Geben Sie zunächst Ihre Werte ein. Dann berechnen Sie die neuen Werte mit der Enter-Taste. Bitte tragen Sie (insbesondere beim derzeitigen Monatsgehalt) keine Tausendertrennzeichen ein. Der Rechner rechnet sonst mit einer Nachkommastelle."
+      },
+      "url": "https://www.bmas.de/DE/Arbeit/Arbeitsrecht/Mindestlohn/Mindestlohnrechner/mindestlohnrechner.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:55:42.429556+00:00",
+      "lastSeen": "2026-04-17T09:55:42.429556+00:00",
+      "sourceUnavailable": false,
+      "toolType": "calculator",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Arbeit/Arbeitsrecht/Mindestlohn/Mindestlohnrechner/mindestlohnrechner.html",
+        "crawledAt": "2026-04-17T09:55:42.429556Z",
+        "crawlId": "tools-seeded-1776419742",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "789e6a48e434bab6f5ccebb0e509527302ec80c29d2cc639242705b3e513aa02"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:55:42.429556+00:00"
+      }
+    },
+    {
+      "id": "6433d593-252e-4c5c-a5e2-5d92a26c1269",
+      "title": "Weiterbildungslotse",
+      "summary": {
+        "de": "Ihr Weg zur Förderung von beruflicher Weiterbildung"
+      },
+      "content": {
+        "de": "Unser digitaler Weiterbildungslotse zeigt Ihnen mit wenigen Klicks, ob und wie Ihre Weiterbildung von der Bundesagentur für Arbeit im Rahmen der Beschäftigtenförderung finanziell unterstützt werden kann. Über den Weiterbildungslotsen wird keine Förderung mit Aufstiegs- BAföG abgebildet. Wenn Sie sich auf einen Fortbildungsabschluss zum Beispiel zum/zur Handwerks- und Industriemeister/in, Erzieher/in, Techniker/in, Fachkaufmann/frau, Betriebswirt/in oder auf eine von mehr als 700 vergleichbaren Qualifikationen vorbereiten, können Sie weitere Informationen zu Fördermöglichkeiten über folgenden Link erhalten: www.aufstiegs-bafoeg.de Das Nationale Onlineportal für berufliche Weiterbildung | mein NOW bietet Ihnen darüber hinaus weitere Informationen zu beispielsweise Weiterbildungsangeboten, Förder- und Beratungsmöglichkeiten im Bereich der beruflichen Weiterbildung sowie verschiedene Tests zur beruflichen Orientierung. Beschäftigten steht zudem die Berufsberatung im Erwerbsleben | Bundesagentur für Arbeit für Informationen und Hilfestellungen zu beruflicher Neu- und Umorientierung und bei Informationsbedarf zu Qualifizierung zur Verfügung. Für Betriebe bietet der Arbeitgeber-Service | Bundesagentur für Arbeit ein umfassendes Beratungsangebot. Bürgertelefon des BMAS zum Thema Arbeitsmarktpolitik und -förderung: 030 221 911 003 Servicetelefon der Bundesagentur für Arbeit für Arbeitnehmer*innen: 0800 4 5555 00"
+      },
+      "url": "https://www.bmas.de/DE/Arbeit/Aus-und-Weiterbildung/Berufliche-Weiterbildung/Weiterbildungslotse/weiterbildungslotse.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:55:45.278515+00:00",
+      "lastSeen": "2026-04-17T09:55:45.278515+00:00",
+      "sourceUnavailable": false,
+      "toolType": "checker",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Arbeit/Aus-und-Weiterbildung/Berufliche-Weiterbildung/Weiterbildungslotse/weiterbildungslotse.html",
+        "crawledAt": "2026-04-17T09:55:45.278515Z",
+        "crawlId": "tools-seeded-1776419745",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "77188fd5fc5a6e4105db794d2010a712c316e1adb3729e45fc9cc2628ad79fe1"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:55:45.278515+00:00"
+      }
+    },
+    {
+      "id": "5b54596b-7a41-4ed8-a3de-cc9b76df3e82",
+      "title": "Digitale Verwaltung",
+      "summary": {
+        "de": "Auf dieser Seite finden Sie Informationen zum Onlinezugangsgesetz (OZG)."
+      },
+      "content": {
+        "de": "Oberstes Ziel der digitalen Verwaltung ist es, möglichst viele Behördengänge für möglichst viele Menschen digital zugänglich zu machen. Von einer digitalen Verwaltung profitieren alle Beteiligten – Antragsprozesse können online effizienter und weniger fehleranfällig gestaltet sein, die Auffindbarkeit benötigter Formulare und Ansprechpersonen über Behördengrenzen hinweg kann über Suchfunktionen einfach gelingen. Das spart letztendlich Zeit und Ressourcen auf allen Seiten. Das \"Gesetz zur Verbesserung des Onlinezugangs zu Verwaltungsleistungen\" (OZG) verpflichtet Bund und Länder, ihre Verwaltungsleistungen bis Ende 2022 auch elektronisch anzubieten. Hierfür müssen 575 Verwaltungsleistungen auf Bundes-, Länder- und kommunaler Ebene digitalisiert und zugleich eine IT -Infrastruktur geschaffen werden, die jeder Nutzerin und jedem Nutzer den Zugriff auf die Verwaltungsleistungen mit nur wenigen Klicks ermöglicht. Die Nutzerorientierung hat bei der OZG-Umsetzung oberste Priorität, das heißt: Alle Digitalisierungsprozesse sind darauf ausgerichtet, möglichst anwenderfreundlich zu sein - einfach, klar und verständlich. Das Bundesministerium für Arbeit und Soziales (BMAS) und seine nachgeordneten Behörden sind im Rahmen des OZG für die Digitalisierung von rund 250 Verwaltungsleistungen des Bundes zuständig, wie zum Beispiel: Anfrageverfahren zur Statusfeststellung in der Sozialversicherung Auf Bundesebene sind wir im Geschäftsbereich des BMAS mit der Digitalisierung schon sehr weitvorangekommen. Aber noch sind nicht alle Verwaltungsleistungen vollständig online angeboten - dies betrifft insbesondere Verwaltungsleistungen, deren Vollzug auf Länder- bzw. kommunaler Ebene liegen. Gründe sind unter anderem komplexe föderale Strukturen, unterschiedlicher Digitalisierungsstände und eine heterogene IT-Landschaft. Die Umsetzung der Ziele des OZG läuft auch über 2022 hinaus unverändert weiter. Auch das Anliegen des BMAS bleibt bestehen: Sozialleistungen zeitgemäß, rechtssicher und unbürokratisch anzubieten und Menschen mit gesetzlichen Ansprüchen zu erreichen. Im Fokus der Digitalisierungsprojekte stehen die Nutzer*innen, sowie die bestehenden Angebote, Strukturen und Abläufe zu bündeln und zu vereinfachen.n. Darüber hinaus begleitet das BMAS im Themenfeld Arbeit und Ruhestand die Umsetzung des OZG gemeinsam mit dem Bundesland Nordrhein-Westfalen auf föderaler Ebene. Seit dem 14. März 2022 können diverse föderale Sozialleistungen, wie Grundsicherung im Alter und bei Erwerbsminderung, Hilfe zum Lebensunterhalt oder Leistungen zur Bildung und Teilhabe, über die Sozialplattform unter beantragt werden. Neben einer Vielzahl von digitalen Anträgen, die sicher und medienbruchfrei an die zuständigen Stellen übermittelt werden können, ergänzen auch digitale Zugänge zu den Leistungen der lokalen Schuldner- und Suchtberatung sowie der Wohnungslosenhilfe (beispielsweise über Terminvereinbarungsfunktion und eine Chat- und Videoberatung) das Angebot. Ein Beratungsstellen- und Sozialleistungsfinder ist ebenfalls auf der Sozialplattform verfügbar. Dies ermöglicht neben dem Finden der für die Bürgerinnen und Bürger passenden Beratungsstelle auch das Finden von potenziellen Ansprüchen von Sozialleistungen."
+      },
+      "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Das-Onlinezugangsgesetz/onlinezugangsgesetz.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:55:47.334270+00:00",
+      "lastSeen": "2026-04-17T09:55:47.334270+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Das-Onlinezugangsgesetz/onlinezugangsgesetz.html",
+        "crawledAt": "2026-04-17T09:55:47.334270Z",
+        "crawlId": "tools-seeded-1776419747",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "0cd5858afb63ecd56456e17263472bac3635f70f3afa4dffa9f092f7cc06a714"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:55:47.334270+00:00"
+      }
+    },
+    {
+      "id": "cd015e8e-8bd4-40f7-aa9c-fba434edd969",
+      "title": "Digitale Angebote der Sozialversicherung",
+      "summary": {
+        "de": "Auf dieser Seite finden Sie Informationen zu digitalen Angeboten der Sozialversicherung."
+      },
+      "content": {
+        "de": "Leistungen bei Arbeitsunfällen und Berufskrankheiten Die Deutsche Rentenversicherung ermöglicht Bürgerinnen und Bürgern, online Leistungen zu beantragen und Informationen zu ihrer Rente zu erhalten. Dazu gehört beispielsweise der digitale Rentenantrag, die Rentenauskunft, oder die Beantragung von Reha-Leistungen. Für die Nutzung mancher Online-Funktionen wie das digitale Postfach ist eine einmalige Registrierung oder auch eine digitale Identifizierung erforderlich. Die gesetzliche Unfallversicherung sichert Menschen ab, die einen Unfall während oder auf dem Weg zur Arbeit hatten oder an einer Berufskrankheit leiden. Bereits heute bieten Berufsgenossenschaften und Unfallkassen in einem gemeinsamen Service-Portal einige Leistungen digital an. So können Arbeits- und Wegeunfälle online gemeldet werden, Kostenbelege im Versicherungsfall digital eingereicht oder neue Unternehmen online angemeldet werden. Die Digitalisierung von weiteren Leistungen wie beispielsweise dem Verletztengeld ist derzeit in Umsetzung. Schon vor Umsetzung des Onlinezugangsgesetzes konnten Unternehmen Arbeitnehmerinnen und Arbeitnehmer ausschließlich auf elektronischem Weg zur Sozialversicherung anmelden und die Beitragszahlung abwickeln. Bei den meisten Arbeitgebern geschieht dies über die eigenen Entgeltabrechnungsprogramme. Diejenigen Arbeitgeber, die über kein solches Programm verfügen, können die Meldungen zur Sozialversicherung über eine digitale Anwendung der gesetzlichen Krankenkassen erledigen. Auch die Anmeldung von gewerblichen Minijobs erfolgt auf diesem Weg. Minijobs im Privathaushalt können ebenfalls digital angemeldet werden. Serviceportal der Deutschen Gesetzlichen Unfallversicherung"
+      },
+      "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Digitale-Angebote-der-Sozialversicherung/digitale-angebote-der-sozialversicherung.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:55:49.164939+00:00",
+      "lastSeen": "2026-04-17T09:55:49.164939+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Digitale-Angebote-der-Sozialversicherung/digitale-angebote-der-sozialversicherung.html",
+        "crawledAt": "2026-04-17T09:55:49.165942Z",
+        "crawlId": "tools-seeded-1776419749",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "7019ac0a5851e719a1599bbc50862d9be31ac17dfda92bd7cdc5448190e31cf1"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:55:49.165942+00:00"
+      }
+    },
+    {
+      "id": "1635be62-e616-4403-b3db-8d107dae9c7f",
+      "title": "Digitale Angebote für Arbeit und Berufsleben",
+      "summary": {
+        "de": "Auf dieser Seite finden Sie Informationen zu digitalen Angeboten für Arbeit und Berufsleben."
+      },
+      "content": {
+        "de": "Arbeitsuchende und Arbeitslose finden bei der Bundesagentur für Arbeit Informationen und Services rund um die Jobsuche und die beiden Geldleistungen Arbeitslosengeld oder Bürgergeld. Falls Sie arbeitslos oder von Arbeitslosigkeit bedroht sind, kann Ihre Agentur für Arbeit Sie mit Maßnahmen zur beruflichen Eingliederung unterstützen. Das können zum Beispiel Lehrgänge oder Coachings sein. Des Weiteren besteht die Möglichkeit, anfallende Reisekosten für ein Vorstellungsgespräch als Förderung aus dem Vermittlungsbudget online bei der Agentur für Arbeit zu beantragen. Auch der Weiterbewilligungsantrag für Bürgergeld kann digital gestellt werden. Die Agentur für Arbeit stellt ihre Leistungen für Unternehmen vor, wie die Unterstützung zur Ausbildung von Fachkräften sowie finanzielle Hilfen. Unternehmen können eine Vielzahl von Leistungen online bei der Bundesagentur für Arbeit in Anspruch nehmen. Dazu gehören beispielsweise der Antrag auf Kurzarbeitergeld, Insolvenzgeld oder der Antrag auf die Zuteilung einer Betriebsnummer. Auch der Kontakt zum Arbeitgeber-Service und die Übermittlung von Stellenangeboten sind digital möglich. Für junge Menschen gibt es bei der Bundesagentur für Arbeit bereits viele digitale Angebote rund um den Einstieg ins Berufsleben. So ist beispielsweise die Beantragung von Berufsausbildungsbeihilfe digital möglich. Aber auch Angebote wie die Berufsberatung oder die Berufsvorbereitende Bildungsmaßnahme sind online zugänglich. Die Bundesagentur für Arbeit begleitet Menschen mit Behinderungen vor und während des Berufslebens. Nutzen Sie hierzu die digitalen Angebote und die Beratung der Bundesagentur für Arbeit und informieren Sie sich über mögliche finanzielle Unterstützungs- und Fördermöglichkeiten. Ob Weiterbildung, Umschulung oder Wiedereinstieg: Die Bundesagentur für Arbeit begleitet Sie bei Ihrem nächsten Karriereschritt, mit Beratungsangeboten und finanziellen Förderungen."
+      },
+      "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Digitale-Angebote-fuer-Arbeit-und-Berufsleben/digitale-angebote-fuer-arbeit-und-berufsleben.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:55:51.292814+00:00",
+      "lastSeen": "2026-04-17T09:55:51.292814+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Digitale-Angebote-fuer-Arbeit-und-Berufsleben/digitale-angebote-fuer-arbeit-und-berufsleben.html",
+        "crawledAt": "2026-04-17T09:55:51.292814Z",
+        "crawlId": "tools-seeded-1776419751",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "ad90e882e57ba06cc0696edc19525ea9e21e90acd7cb07a57e1e77daf9192680"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:55:51.292814+00:00"
+      }
+    },
+    {
+      "id": "822a6882-74d6-40e8-b56f-87795d83ce4b",
+      "title": "Digitaler Zugang zu Förderinstrumenten der Arbeits- und Sozialpolitik",
+      "summary": {
+        "de": "Auf dieser Seite finden Sie Informationen zu digitalen Angeboten für Fördermittel."
+      },
+      "content": {
+        "de": "Förderung des Europäischen Sozialfonds Plus (ESF Plus) Finanzierung von Beratungsangeboten der Ergänzenden Unabhängigen Teilhabeberatung (EUTB®) Der Europäische Sozialfonds (ESF) ist Europas wichtigstes Instrument zur Förderung von Beschäftigung und sozialer Integration. Für die Projektverwaltung der ESF Plus-Förderprogramme des Bundes in der Förderperiode 2021-2027 hat das Bundesministerium für Arbeit und Soziales (BMAS) das Webportal \" Förderportal Z-EU-S \" entwickelt. In Z-EU-S werden Antragsverfahren sowie Nachweise der Mittelverwendung für ESF Plus-Förderprogramme des Bundes durchgehend und medienbruchfrei digitalisiert: Interessensbekundungen oder Anträge können mit der Veröffentlichung der jeweiligen ESF Plus-Förderrichtlinien über das Förderportal elektronisch gestellt werden. Die \"elektronische Unterschrift\" kann über die Online-Ausweisfunktion (eID-Funktion) oder mittels qualifizierter elektronischer Signatur (qeS) erfolgen. Für die Registrierung und Arbeit mit dem Portal gibt es eine Service-Hotline und eine Online-Hilfe."
+      },
+      "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Digitale-Angebote-fuer-Foerdermittel/digitale-angebote-fuer-foerdermittel.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:55:53.200496+00:00",
+      "lastSeen": "2026-04-17T09:55:53.200496+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Digitale-Angebote-fuer-Foerdermittel/digitale-angebote-fuer-foerdermittel.html",
+        "crawledAt": "2026-04-17T09:55:53.201498Z",
+        "crawlId": "tools-seeded-1776419753",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "0725149b4911718d43cee37084aac41eed191bc60f109533d9adf00d4115ddd9"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:55:53.201498+00:00"
+      }
+    },
+    {
+      "id": "9a9a5cff-9d73-4887-954f-e8822581989f",
+      "title": "Digitale Verwaltung– bürgernah und leicht zugänglich",
+      "summary": {
+        "de": "Staatliche Leistungen und Leistungen der Sozialversicherung mit wenigen Klicks online beantragen – mit dem Onlinezugangsgesetz (OZG) gehen wir einen großen Schritt in Richtung digitale Verwaltung."
+      },
+      "content": {
+        "de": "Ab dem 22. Juli 2024 können Bürgerinnen und Bürger die digitalen Dienstleistungen (eServices) der Bundesagentur für Arbeit einfach und sicher auch mit der BundID nutzen. Seit 14. März 2022 ist die Beta-Version der Sozialplattform online. Damit ist der Grundstein für einen zentralen digitalen Zugang zu Sozialleistungen für Bürgerinnen und Bürger in ganz Deutschland gelegt. Zum 1. Januar 2022 ist die Neuregelung zur elektronischen Arbeitslosmeldung in Kraft getreten. Das BMAS unterstützt damit einen weiteren Schritt hin zur bürgernahen, digitalen Verwaltung. Digitale Verwaltung – Ressort BMAS (www.digitale-verwaltung.de) Digitaler Service der Deutschen Rentenversicherung"
+      },
+      "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/digitale-verwaltung.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:55:55.513102+00:00",
+      "lastSeen": "2026-04-17T09:55:55.513102+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/digitale-verwaltung.html",
+        "crawledAt": "2026-04-17T09:55:55.513102Z",
+        "crawlId": "tools-seeded-1776419755",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "9007fcca5cd39d08d816b8afa9fee90e7363e522d918c452677c3ab895825814"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:55:55.513655+00:00"
+      }
+    },
+    {
+      "id": "9d0de831-5c6b-48eb-9fcd-55d18ac2b409",
+      "title": "Gesetz über die unternehmerischen Sorgfaltspflichten zur Vermeidung von Menschenrechtsverletzungen in Lieferketten",
+      "summary": {
+        "de": "Das Lieferkettengesetz trat am 1. Januar 2023 in Kraft. Das Gesetz regelt die unternehmerische Verantwortung für die Einhaltung von Menschenrechten in den globalen Lieferketten und den Schutz der Umwelt."
+      },
+      "content": {
+        "de": "Das Lieferkettensorgfaltspflichtengesetz (LkSG), Kurzform: Lieferkettengesetz, gilt seit 2023 und regelt die unternehmerische Verantwortung für die Einhaltung von Menschenrechten in globalen Lieferketten. Hierzu gehören beispielsweise der Schutz vor Kinderarbeit, das Recht auf faire Löhne und der Schutz der Umwelt. Von einer fairen Globalisierung profitieren Menschen in den Lieferketten, Unternehmen und auch Verbraucher*innen. Das Lieferkettengesetz gilt für Unternehmen mit mindestens 1.000 Arbeitnehmer*innen. Die Website bietet mehr Informationen zum Lieferkettengesetz sowie Umsetzungshilfen für Unternehmen. Unternehmen erhalten einen klaren, verhältnismäßigen und zumutbaren gesetzlichen Rahmen zur Erfüllung ihrer menschenrechtlichen Sorgfaltspflichten. Die Umsetzung des Gesetzes wird durch das Bundesamt für Wirtschaft und Ausfuhrkontrolle (BAFA) überwacht. Das BAFA ist mit Eingriffsbefugnissen ausgestattet und kann Zwangs- und Bußgelder verhängen. Die Anforderungen an Unternehmen sind international anschlussfähig und orientieren sich am Sorgfaltsstandard der VN-Leitprinzipien. Klar definierte Sorgfaltspflichten entlang der Lieferketten"
+      },
+      "url": "https://www.bmas.de/DE/Service/Gesetze-und-Gesetzesvorhaben/Gesetz-Unternehmerische-Sorgfaltspflichten-Lieferketten/gesetz-unternehmerische-sorgfaltspflichten-lieferketten.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:55:57.252265+00:00",
+      "lastSeen": "2026-04-17T09:55:57.252265+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Gesetze-und-Gesetzesvorhaben/Gesetz-Unternehmerische-Sorgfaltspflichten-Lieferketten/gesetz-unternehmerische-sorgfaltspflichten-lieferketten.html",
+        "crawledAt": "2026-04-17T09:55:57.253265Z",
+        "crawlId": "tools-seeded-1776419757",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "721a01b4d66ef2129aec890235aea3f98f176834be659adf7c6ed6503e7b9fcd"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:55:57.253265+00:00"
+      }
+    },
+    {
+      "id": "af54accc-a3d4-4f51-8279-9bb57522823b",
+      "title": "Gesetze und Verordnungen",
+      "summary": {
+        "de": "Hinweis: Die PDF-Dokumente sind teilweise nicht barrierefrei."
+      },
+      "content": {
+        "de": "Bitte geben Sie hier einen oder mehrere Suchbegriff(e) ein. Es werden alle Gesetze und Verordnungen auf www.bmas.de durchsucht. In unseren Benutzerhinweisen finden Sie detaillierte Informationen zur Benutzung der Suche. Mit der Rentenwertbestimmungsverordnung 2026 werden der aktuelle Rentenwert in der gesetzlichen Rentenversicherung, der allgemeine Rentenwert in der Alterssicherung der Landwirte sowie die Geldleistungen der gesetzlichen Unfallversicherung zum 1. Juli 2026 angepasst. Durch die Rechtsverordnung wird die Möglichkeit geschaffen, dass die Träger nach dem Zweiten Buch Sozialgesetzbuch (SGB II) und nach dem Dritten Buch Sozialgesetzbuch (SGB III) der Familienkasse der Bundesagentur für Arbeit in einem automatisierten Abrufverfahren die zur Überprüfung eines Anspruchs auf Kindergeld erforderlichen Daten zur Verfügung stellen dürfen. Mit dem Gesetzentwurf soll die Grundsicherung für Arbeitsuchende umgestaltet werden. Mit dem Tariftreuegesetz soll die Funktionsfähigkeit der Tarifautonomie gesichert werden, indem originäre Tarifbindung geschützt und gefördert wird und zugleich durch eine breite Einbindung der Beschäftigten auf betriebspartnerschaftlicher Ebene wesentliche Voraussetzungen für eine starke Sozialpartnerschaft verankert werden. Mit der Verordnung wird eine Krankheit in die Anlage zur Berufskrankheiten-Verordnung (BKV) neu aufgenommen: Parkinson-Syndrom durch langjährig, häufig und selbst angewendete Pestizide."
+      },
+      "url": "https://www.bmas.de/DE/Service/Gesetze-und-Gesetzesvorhaben/gesetze-und-gesetzesvorhaben.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:55:59.396779+00:00",
+      "lastSeen": "2026-04-17T09:55:59.396779+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Gesetze-und-Gesetzesvorhaben/gesetze-und-gesetzesvorhaben.html",
+        "crawledAt": "2026-04-17T09:55:59.397794Z",
+        "crawlId": "tools-seeded-1776419759",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "d517115a102fd2735038513c35cbc4448ecbc65ea9ae4ff2ed579d762efc3ded"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:55:59.397794+00:00"
+      }
+    },
+    {
+      "id": "8abc0e05-e5b0-487d-8c6d-6c922cb7f6f8",
+      "title": "Planspiele",
+      "summary": {
+        "de": "Raus aus dem Klassenzimmer, rein ins politische Geschehen: mit Planspielen Politik näherbringen"
+      },
+      "content": {
+        "de": "Wir freuen uns sehr, wenn uns Schulklassen und Gruppen mit Auszubildenden besuchen. Was beschäftigt junge Menschen, wie ist ihre Sicht auf die Welt, und wie können wir ihnen das politische Geschehen nahebringen? Zugegeben: Politik ist nicht immer einfach zu verstehen. Wir erklären Arbeitsmarkt- und Sozialpolitik so, dass alle mitreden können und bieten ein passendes Planspiel an: In unserem Planspiel simulieren wir eine Verbändeanhörung. Die Teilnehmenden schlüpfen in die Rollen der Verbände und diskutieren unterschiedliche Meinungen. Bei der anschließenden Auswertung ist ein Satz nahezu immer zu hören: Ich hätte nicht gedacht, dass es so schwer ist, einen Kompromiss zu finden. Alternativ besprechen wir ein ganz anderes Thema im Aufgabenfeld des BMAS. Zusammen mit den Lehrkräften planen w ir ein individuelles Programm. W ir ordnen das, was junge Menschen zu unseren Themen hören und sehen, gemeinsam ein. Denn das ist der erste Schritt, um nicht nachzureden, sondern mitzureden. Einfach eine E-Mail senden und schon planen wir Ihren Besuch. besucherdienst@bmas.bund.de Zu den weiteren Inhalten für Kinder und Jugendliche."
+      },
+      "url": "https://www.bmas.de/DE/Service/Kinder-und-Jugend/Interaktive-Angebote-vor-Ort/interaktive-angebote-vor-ort.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:56:01.510190+00:00",
+      "lastSeen": "2026-04-17T09:56:01.510190+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Kinder-und-Jugend/Interaktive-Angebote-vor-Ort/interaktive-angebote-vor-ort.html",
+        "crawledAt": "2026-04-17T09:56:01.510190Z",
+        "crawlId": "tools-seeded-1776419761",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "60ddf7049420a3ea555331c237442227a32cbd95b3c3340d73f8d9c8be99b5c5"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:56:01.510190+00:00"
+      }
+    },
+    {
+      "id": "4a3299bc-7bfe-4e11-9c15-c11a2d7f968b",
+      "title": "Ausmalen und Ausschneiden",
+      "summary": {
+        "de": "Kreativangebote für Kinder zu den Themen des Bundesministeriums für Arbeit und Soziales."
+      },
+      "content": {
+        "de": "Weitere Malbilder und Bastelanleitungen rund um die Kinderbücher Die Welt ist bunt, also ran an die Stifte! Das Super-kreative Mitmachheft ist schon ausgemalt? Dann gibt es hier noch mehr für junge Künstler! Egal ob Geckoloni grün angemalt wird oder rot-lila gepunktet durch den Tag spaziert – der Fantasie sind keine Grenzen gesetzt. Hier geht es zu den Kinderbüchern und zu den anderen Inhalten."
+      },
+      "url": "https://www.bmas.de/DE/Service/Kinder-und-Jugend/Kinderbuecher/Malen-und-basteln/malen-und-basteln.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:56:03.789777+00:00",
+      "lastSeen": "2026-04-17T09:56:03.789777+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Kinder-und-Jugend/Kinderbuecher/Malen-und-basteln/malen-und-basteln.html",
+        "crawledAt": "2026-04-17T09:56:03.789777Z",
+        "crawlId": "tools-seeded-1776419763",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "7cbb6c5fff1830d645746c97c1f0d5e8999e085f22fb958b86aac9c0df0c3972"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:56:03.789777+00:00"
+      }
+    },
+    {
+      "id": "7dfa5e6f-6255-4d1b-8bf9-8d7228d005fd",
+      "title": "Auflösen und aufatmen",
+      "summary": {
+        "de": "Lösungen zu den Rätseln auf den Rätselseiten der BMAS-Kinderbücher."
+      },
+      "content": {
+        "de": "Für aufmerksame Leserinnen und Leser waren die Rätsel bestimmt ein Kinderspiel. Wer nachschauen möchte, ob richtig getippt wurde, findet hier die Auflösungen. Hier geht es zu den Kinderbüchern und zu den anderen Inhalten."
+      },
+      "url": "https://www.bmas.de/DE/Service/Kinder-und-Jugend/Kinderbuecher/Raetsel/raetsel.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:56:07.255080+00:00",
+      "lastSeen": "2026-04-17T09:56:07.255080+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Kinder-und-Jugend/Kinderbuecher/Raetsel/raetsel.html",
+        "crawledAt": "2026-04-17T09:56:07.255080Z",
+        "crawlId": "tools-seeded-1776419767",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "3fcd4f1e0721a4ba45ae60e60a96d7f70540abb214efe219ec53a1f4e368a6fa"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:56:07.255080+00:00"
+      }
+    },
+    {
+      "id": "407606df-cf86-4b95-8255-7275415da641",
+      "title": "Kinderbücher",
+      "summary": {
+        "de": "Drei Kinderbücher zu den Themen Fachkräfte, Rente und Inklusion, Rezepte für Kinder und Rätselauflösungen zu den Geckoloni-Kinderbüchern."
+      },
+      "content": {
+        "de": "Mit Geckoloni die Aufgaben des BMAS kennenlernen – spannende und leicht zu lesende Geschichten für alle Spannende Abenteuer erleben Kinder im Kita-, Vorschul- und Erstlesealter (3-8 Jahre) mit dem frechen Geckoloni und den Kindern Till, Mia und Kim. Ganz nebenbei wird vermittelt, dass alle in unserer Gesellschaft wichtig sind, egal ob klein oder groß, jung oder alt – wir brauchen einander, damit alles funktioniert. Das Bundesministerium für Arbeit und Soziales erklärt anhand der Kinderbuchreihe die Schwerpunkte des Hauses – kinderleicht und schön illustriert. Für Institutionen, Schulen oder Fans von Geckoloni und seinen Freunden: Bestellen Sie sich unsere Poster im DIN-A2-Format kostenlos! Es gibt verschiedene Motive zur Auswahl. Am Ende jedes Kinderbuches gibt es Rätselseiten. Wer überprüfen möchte, ob der richtige Weg und alle Unterschiede gefunden wurden, findet hier die Auflösungen der Rätsel. Alles noch ohne Farbe: Vorlagen zum Ausmalen von Geckoloni und seinen Freunden gibt es hier. Und wer sich einen eigenen Geckoloni basteln möchte, erhält dafür eine Anleitung."
+      },
+      "url": "https://www.bmas.de/DE/Service/Kinder-und-Jugend/Kinderbuecher/kinderbuecher.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:56:11.060727+00:00",
+      "lastSeen": "2026-04-17T09:56:11.060727+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Kinder-und-Jugend/Kinderbuecher/kinderbuecher.html",
+        "crawledAt": "2026-04-17T09:56:11.061728Z",
+        "crawlId": "tools-seeded-1776419771",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "9ddce14cffca2c2a1d9ac7056bb37829620dda92f097bd81efe5b02bf8bdb1dc"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:56:11.061728+00:00"
+      }
+    },
+    {
+      "id": "db195e39-6f1b-4269-b4b1-83339a538539",
+      "title": "Das Medienpaket zur Sozialpolitik",
+      "summary": {
+        "de": "Informationen und Materialien zur Sozialpolitik für den Unterricht für Schüler*innen und Lehrkräfte."
+      },
+      "content": {
+        "de": "Auf sozialpolitik.com haben wir für Lehrkräfte und Klassen ein Medienpaket geschnürt \"Sozialpolitik\" ist ein Medienpaket zu den Themen soziale Sicherheit und Gerechtigkeit, Arbeitswelt von morgen, Ausbildung und Studium sowie Leben und Arbeiten mit Behinderungen. Es richtet sich an Schülerinnen und Schüler ab der 9. Klasse. Die Print- und Online-Materialien sollen Lehrende dabei unterstützen, den Unterricht zum Thema Sozialpolitik vorzubereiten. Die Materialien orientieren sich an der Lebenswelt junger Menschen und machen deutlich, wie Sozialpolitik und die aktuellen und zukünftigen Herausforderungen des Sozialstaats jeden Einzelnen betreffen. Das Projekt ist eine Zusammenarbeit des Bundesministeriums für Arbeit und Soziales und der KlettMEX GmbH. Auf der Webseite bündeln wir alle Angebote. Inhalte, die wir in den Magazinen abgedruckt haben, finden Sie hier auch noch mal als Artikelseiten. Die Seite ist übersichtlich aufgebaut, und wir haben darauf geachtet, für die Themen eine leicht verständliche Sprache zu verwenden. Zu den weiteren Inhalten für Kinder und Jugendliche."
+      },
+      "url": "https://www.bmas.de/DE/Service/Kinder-und-Jugend/Medienpaket-zur-Sozialpolitik/medienpaket-zur-sozialpolitik.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:56:12.321554+00:00",
+      "lastSeen": "2026-04-17T09:56:12.321554+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Kinder-und-Jugend/Medienpaket-zur-Sozialpolitik/medienpaket-zur-sozialpolitik.html",
+        "crawledAt": "2026-04-17T09:56:12.321554Z",
+        "crawlId": "tools-seeded-1776419772",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "fc4239cbb1cc440a45fc87005314de16b866687a4487159d16f20e5470a9c8c4"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:56:12.321554+00:00"
+      }
+    },
+    {
+      "id": "9d519047-2b0f-456b-ac5d-d6ca0c281592",
+      "title": "Publikationen für Jugendliche",
+      "summary": {
+        "de": "Publikationen mit Infos zu Themen wie berufliche Orientierung und Ausbildung, Studium, staatlichen Hilfen sowie zu Unterstützungsangeboten für junge Menschen mit Behinderung."
+      },
+      "content": {
+        "de": "Broschüren, Flyer, Magazine - zum Herunterladen oder kostenlos Bestellen Ausbildung oder Studium? Welche Rechte und Pflichten gibt es in der Ausbildung? Welche staatlichen Hilfen kann man in Anspruch nehmen? Gibt es besondere Unterstützung für Menschen mit einer Behinderung? Informationen und Hilfestellungen zu diesen und vielen weiteren wichtigen Fragen, insbesondere zur beruflichen Orientierung, geben die nachfolgenden Publikationen. Welche Arbeitszeiten gelten bei der Arbeit von Kindern und Jugendlichen? Welche Arbeiten sind für Kinder und Jugendliche erlaubt, welche nicht? Das Magazin für Schülerinnen und Schüler, das Begleitheft für Lehrkräfte mit Unterrichtsideen sowie das Magazin für Schülerinnen und Schüler in Leichter Sprache bieten Sozialpolitik kompakt & aktuell für den Unterricht mit Jugendlichen an. Die Ausbildungsgarantie bietet die bestmögliche Unterstützung für den Zugang zu einer betrieblichen Ausbildung. Der Flyer informiert in Kurzform unter anderem über verschiedene Beratungs- und Unterstützungsangebote. Die Broschüre informiert über den Versicherungsschutz von Schülerinnen und Schüler allgemeinbildender und berufsbildender Schulen."
+      },
+      "url": "https://www.bmas.de/DE/Service/Kinder-und-Jugend/Publikationen-fuer-Jugendliche/publikationen-fuer-jugendliche.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:56:14.788563+00:00",
+      "lastSeen": "2026-04-17T09:56:14.788563+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Kinder-und-Jugend/Publikationen-fuer-Jugendliche/publikationen-fuer-jugendliche.html",
+        "crawledAt": "2026-04-17T09:56:14.788563Z",
+        "crawlId": "tools-seeded-1776419774",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "5491056894438b16f7637a0a63373666a7ced8422f24a5a4241e3ed204b9b4d8"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:56:14.788563+00:00"
+      }
+    },
+    {
+      "id": "d678fa88-3169-4c07-9390-1e5fe7a3c1b1",
+      "title": "Bildergalerien",
+      "summary": {
+        "de": "Von Bürger*innendialogen bis zu Auslandsreisen – hier finden Sie Fotos zu Aktivitäten des Ministers und der Staatssekretär*innen."
+      },
+      "content": {
+        "de": "Bundesarbeitsministerin Bärbel Bas hat ihren ukrainischen Amtskollegen Denys Uliutin getroffen und nahm an den Deutsch-Ukrainischen Regierungskonsultationen in Berlin teil. Mit den Regionalen Fachkräftewerkstätten vertieft das Bundesministerium für Arbeit und Soziales den Austausch mit der betrieblichen Praxis und den regionalen Arbeitsmarktakteuren. Das Dialogformat nimmt Herausforderungen, Bedarfe und Lösungen hinsichtlich der Fachkräftesicherung und Transformation der Arbeitswelt in den Blick. Mit der Nationalen Weiterbildungskonferenz in Berlin setzen das Bundesministerium für Arbeit und Soziales (BMAS) und das Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend (BMBFSFJ) zusammen mit den Partnern der Nationalen Weiterbildungsstrategie den Auftakt für eine gemeinsame Weiterbildungsoffensive. Ziel ist es, lebensbegleitendes Lernen als selbstverständlichen Bestandteil der Arbeits- und Lebenswelt in Deutschland zu verankern. Nach einigen Jahren auf dem Zietenplatz fand der diesjährige Tag der offenen Tür in den Gebäuden des Bundesministeriums für Arbeit und Soziales an der Berliner Wilhelmstraße statt. Für die Besucherinnen und Besucher gab es ausführlich Gelegenheit, sich zu den Themen des Hauses zu informieren und auszutauschen – und manches an interaktiven Ausstellungsstücken auch selber zu erkunden. Auf einer Konferenz des Bundesministeriums für Arbeit und Soziales (BMAS) mit den südosteuropäischen Partnerländern Bulgarien, Moldau und Rumänien sowie der Europäischen Arbeitsbehörde (ELA) ging es um faire Arbeitsbedingungen und faire Arbeitskräftemobilität. Ihre erste Auslandsreise führte Bundesarbeitsministerin Bärbel Bas am 11. Juni 2025 nach Genf. Auf der jährlich stattfindenden Internationalen Arbeitskonferenz wurden wichtige Zukunftsfragen der Arbeitswelt diskutiert."
+      },
+      "url": "https://www.bmas.de/DE/Service/Mediathek/Bildergalerien/bildergalerien.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:56:25.096690+00:00",
+      "lastSeen": "2026-04-17T09:56:25.096690+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Mediathek/Bildergalerien/bildergalerien.html",
+        "crawledAt": "2026-04-17T09:56:25.096690Z",
+        "crawlId": "tools-seeded-1776419785",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "197137a6d0f4d9c61d515a9ff7e0a69313660f3a1582be4e5ef87d78482eee7e"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:56:25.096690+00:00"
+      }
+    },
+    {
+      "id": "88a397b1-9364-4dfa-bd45-7013c952dd4d",
+      "title": "Hörbücher für Kinder",
+      "summary": {
+        "de": "Hörbücher für Kinder zu den Themenbereichen des Ministeriums für Arbeit und Soziales."
+      },
+      "content": {
+        "de": "Die Kinderbücher rund um Geckoloni und seine Freunde zum Hören Kinderbücher für alle, deswegen haben wir sie vorlesen lassen. Die Transkripte der Audiodateien entsprechen den Kinderbüchern, welche auf dieser Seite auch als barrierefreie PDF heruntergeladen werden können. Die Kinder und Geckoloni erleben, welche Probleme entstehen können, wenn Fachkräfte fehlen und dass alle mithelfen können, um Herausforderungen zu meistern. Download Hörbuch: Super-Handwerker gesucht [MPEG, 12MB] Download Kinderbuch: Super-Handwerker gesucht [PDF, 10MB] Geckoloni und die Freunde Mia, Till und Kim wissen: Oma ist in Rente. Aber was heißt das genau? Geckoloni sieht, dass Oma ganz viel Zeit zum Keksebacken hat, aber es steckt noch mehr dahinter."
+      },
+      "url": "https://www.bmas.de/DE/Service/Mediathek/Podcasts/Hoerbuecher/hoerbuecher-fuer-kinder.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:56:27.689017+00:00",
+      "lastSeen": "2026-04-17T09:56:27.689017+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Mediathek/Podcasts/Hoerbuecher/hoerbuecher-fuer-kinder.html",
+        "crawledAt": "2026-04-17T09:56:27.689017Z",
+        "crawlId": "tools-seeded-1776419787",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "1a1c6bd3c32f3735afcbeb1fcc2e9cb1565b0dc868ab3362a19b49d1627b472b"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:56:27.689017+00:00"
+      }
+    },
+    {
+      "id": "0d6b5bdf-7a79-482a-b069-567b776d4efb",
+      "title": "Podcast \"Das Arbeitsgespräch\"",
+      "summary": {
+        "de": "Jetzt reinhören: Bundesarbeitsminister Hubertus Heil lädt zum Gespräch"
+      },
+      "content": {
+        "de": "Auf diesen Plattformen finden Sie unseren Podcast: #10 Wert und Wandel der Arbeit – Gast: Natalia Wörner #7 Gleichstellung in der Arbeitswelt – Gast: Collien Ulmen-Fernandes #6 Soziale Gerechtigkeit – Gast: Sarah-Lee Heinrich #4 Psychische Gesundheit am Arbeitsplatz – Gast: Victoria Müller #2 Arbeitsschutz in der Pandemie – Gast: Prof. Isabella Eckerle"
+      },
+      "url": "https://www.bmas.de/DE/Service/Mediathek/Podcasts/Podcast-das-Arbeitsgespraech-Podcast-mit-Hubertus-Heil/podcast-das-arbeitsgespraech-podcast-mit-hubertus-heil.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:56:29.220304+00:00",
+      "lastSeen": "2026-04-17T09:56:29.220304+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Mediathek/Podcasts/Podcast-das-Arbeitsgespraech-Podcast-mit-Hubertus-Heil/podcast-das-arbeitsgespraech-podcast-mit-hubertus-heil.html",
+        "crawledAt": "2026-04-17T09:56:29.220304Z",
+        "crawlId": "tools-seeded-1776419789",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "afde2eb4b012ff183028231cec4e3b6ac7b914a1a2df4b823328c71c4606e404"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:56:29.221319+00:00"
+      }
+    },
+    {
+      "id": "24b5ff41-a335-472b-9eb4-58765b5ec554",
+      "title": "Hin. Gehört.",
+      "summary": {
+        "de": "Bundesminister Hubertus Heil im Gespräch mit den Held*innen des Alltags"
+      },
+      "content": {
+        "de": "Bundesminister Hubertus Heil und Entertainer Thomas Gottschalk fragen nach und hören hin: Gemeinsam mit der Köchin in Ausbildung, Aydan Bademsoy, und der Hotelmanagerin Jennifer Vogel sprechen sie über Handwerk, Kochkünste und Koriander. Die Auszubildenden von heute sind die Fachkräfte von morgen. Während der Corona-Pandemie haben einige Unternehmen gezögert junge Menschen für eine Ausbildung einzustellen. Für andere war es schwer bestehende Ausbildungsplätze zu erhalten. Hier setzt das Bundesprogramm \"Ausbildungsplätze sichern\" an, das ausbildende Unternehmen unterstützt. Wie kann der Stellenwert der Ausbildung generell gestärkt und attraktiver gemacht werden? Welche Instrumente sichern in Pandemie-Zeiten Auszubildende und Unternehmen? Und wie können mehr junge Menschen für eine Ausbildung gewonnen werden? Bundesminister Hubertus Heil und Entertainer Thomas Gottschalk machen sich vor Ort ein Bild. Im Hotel & Restaurant Orania.Berlin sprechen sie mit der Köchin in Ausbildung Aydan Bademsoy und der Hotelmanagerin Jennifer Vogel über Handwerk, Kochkünste und Koriander. Überblick zur Ausbildungsförderung, Berufsberatung und -orientierung: BMAS - Ausbildungsförderung Alles rund um den Ausbildungsstart: #ausbildungklarmachen - Informationen der Bundesagentur für Arbeit"
+      },
+      "url": "https://www.bmas.de/DE/Service/Mediathek/Podcasts/Video-Podcast-Hingehoert-Spezial/video-podcast-hingehoert-spezial.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:56:31.189004+00:00",
+      "lastSeen": "2026-04-17T09:56:31.189004+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Mediathek/Podcasts/Video-Podcast-Hingehoert-Spezial/video-podcast-hingehoert-spezial.html",
+        "crawledAt": "2026-04-17T09:56:31.189530Z",
+        "crawlId": "tools-seeded-1776419791",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "ab08e75f32f97468ee0ba1fd0b0b0447b0deb22fc168b41c9f795860654931b4"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:56:31.189530+00:00"
+      }
+    },
+    {
+      "id": "b2310505-78ff-4029-9c70-219dc264e1e1",
+      "title": "Podcasts",
+      "summary": {
+        "de": "Hier finden Sie alle Podcasts des Bundesministeriums für Arbeit und Soziales zum Nachhören."
+      },
+      "content": {
+        "de": "Die Themen des BMAS für Kinder erklärt - Hier gibt es die Kinderbücher über Geckoloni und seine Freunde zum Hören! Ob in der Pflege, bei Kunst und Kultur, in der Gastronomie oder der Ausbildung junger Menschen: Die Corona-Pandemie verlangt Menschen in fast allen Bereichen viel ab. Deshalb ist es wichtiger denn je, in einen offenen Austausch zu treten. In „Hin.Gehört. – Die Spezial-Ausgabe“ treffen Bundesminister Hubertus Heil und prominente Unterstützung auf Held*innen des Alltags. In \"Das Arbeitsgespräch - der Podcast mit Bundesminister Hubertus Heil\" spricht Bundesminister Hubertus Heil über Themen wie Arbeit und Soziales, politische Antworten und persönliche Perspektiven. Hubertus Heil, Bundesminister für Arbeit und Soziales, spricht mit verschiedenen Protagonisten über Qualifizierung und Chancen im Zuge der Digitalisierung."
+      },
+      "url": "https://www.bmas.de/DE/Service/Mediathek/Podcasts/podcasts.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:56:32.583269+00:00",
+      "lastSeen": "2026-04-17T09:56:32.583269+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Mediathek/Podcasts/podcasts.html",
+        "crawledAt": "2026-04-17T09:56:32.583824Z",
+        "crawlId": "tools-seeded-1776419792",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "d18570b2d1f2abe2a6dda6084eeb573134eea99038f9e7e85457691b85beaed3"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:56:32.583824+00:00"
+      }
+    },
+    {
+      "id": "8813a9d6-24e0-4c5c-842d-bdcc967a7571",
+      "title": "Videos",
+      "summary": {
+        "de": "Mitschnitte von Veranstaltungen und Pressekonferenzen, Informationen zur Nutzung des Bürgertelefons und Videos in Gebärdensprache finden Sie hier."
+      },
+      "content": {
+        "de": "In insgesamt 26 Empfehlungen skizziert die Kommission zur Sozialstaatsreform, wie steuerfinanzierte Sozialleistungen moderner, digitaler und weniger bürokratisch werden können. Zu den Highlights, dem ausführlichen Bericht und den Hintergrundinformationen. Das Ausbildungszentrum des Elektrifizierungs- und Automationsspezialisten ABB in Berlin-Pankow ist mit rund 650 Auszubildenden das größte in Berlin und Brandenburg. Hier beginnen jedes Jahr 230 neue Azubis ihre Ausbildung, etwa als Anlagenmechaniker, Elektroniker oder Mechatroniker.Sehen Sie hier unseren Filmbericht. Lernen Sie die Staatssekretär*innen des Bundesministeriums für Arbeit und Soziales und deren Aufgabenbereiche sowie die Integrationsbeauftragte der Bundesregierung kennen. Bundesministerin Bärbel Bas stellt sich und das Ministerium für Arbeit und Soziales vor."
+      },
+      "url": "https://www.bmas.de/DE/Service/Mediathek/Videos/videos.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:56:35.123877+00:00",
+      "lastSeen": "2026-04-17T09:56:35.123877+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Mediathek/Videos/videos.html",
+        "crawledAt": "2026-04-17T09:56:35.124386Z",
+        "crawlId": "tools-seeded-1776419795",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "457a6c5ef6f73b5cb306fbee237bef90026bd703bbc0652ddb00af6972235904"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:56:35.124386+00:00"
+      }
+    },
+    {
+      "id": "b2781ad8-e391-4080-9f20-2ebae6f32ccc",
+      "title": "Webdokus",
+      "summary": {
+        "de": "Erfahren Sie mehr über das großangelegte Forschungsprojekt des Bundesministeriums für Arbeit und Soziales und einer unabhängigen Historikerkommission. Die Inhalte sind für einige Nutzer*innengruppen nicht barrierefrei."
+      },
+      "content": {
+        "de": "Entdecken Sie die verschiedenen Stationen unseres Dialogs zum Thema Arbeiten 4.0: Die Expertengespräche, die Bürgerbeteiligungen und unsere Publikationen. Die Inhalte sind für einige Nutzer*innengruppen nicht barrierefrei."
+      },
+      "url": "https://www.bmas.de/DE/Service/Mediathek/Webdokus/webdokus.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:56:36.595683+00:00",
+      "lastSeen": "2026-04-17T09:56:36.595683+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Mediathek/Webdokus/webdokus.html",
+        "crawledAt": "2026-04-17T09:56:36.595683Z",
+        "crawlId": "tools-seeded-1776419796",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "b29ad6472ce1b43009fdfed04a6e0f7a95aa4350899a3c8e16f657354a8b114b"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:56:36.595683+00:00"
+      }
+    },
+    {
+      "id": "913020ce-9a1c-4d35-96ee-464fb16f65f3",
+      "title": "Interviews",
+      "summary": {
+        "de": "Hier finden Sie alle Interviews (nach Datum sortiert):"
+      },
+      "content": {
+        "de": "Bärbel Bas, Bundesministerin für Arbeit und Soziales, zu den Reformvorschlägen der Sozialstaatskommission Interview von Bärbel Bas, Bundesministerin für Arbeit und Soziales, mit Frauen100. Interview von Bärbel Bas, Bundesministerin für Arbeit und Soziales, mit der Rheinischen Post. Interview von Bärbel Bas, Bundesministerin für Arbeit und Soziales, mit dem Tagesspiegel Bärbel Bas, Bundesministerin für Arbeit und Soziales, im ARD-Morgenmagazin zur Bürgergeld-Reform. Bärbel Bas, Bundesministerin für Arbeit und Soziales, im ARD-Sommerinterview"
+      },
+      "url": "https://www.bmas.de/DE/Service/Presse/Interviews/interviews.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:56:46.754187+00:00",
+      "lastSeen": "2026-04-17T09:56:46.754187+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Presse/Interviews/interviews.html",
+        "crawledAt": "2026-04-17T09:56:46.755176Z",
+        "crawlId": "tools-seeded-1776419806",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "06069889e905ec08cc0bde87b448182720594a864870bfcc129a0aa5240c57d7"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:56:46.755176+00:00"
+      }
+    },
+    {
+      "id": "9bfdf773-eb73-4155-a5bb-01102aa6f6f3",
+      "title": "Leitungstermine des BMAS",
+      "summary": {
+        "de": "Diese Termine richten sich an Medienvertreter*innen. Eine Anmeldung ist erforderlich und nur in Verbindung mit einem Presseausweis gültig."
+      },
+      "content": {
+        "de": "Werden Sie informiert, sobald es neue Leitungstermine gibt, für die Sie sich als Presse-Vertreter*innen anmelden können. Siemens AG, Mosaik Halle, Berlin Siemensstadt, Rohrdamm 85, 13629 Berlin"
+      },
+      "url": "https://www.bmas.de/DE/Service/Presse/Leitungstermine/leitungstermine.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:56:48.491545+00:00",
+      "lastSeen": "2026-04-17T09:56:48.491545+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Presse/Leitungstermine/leitungstermine.html",
+        "crawledAt": "2026-04-17T09:56:48.491545Z",
+        "crawlId": "tools-seeded-1776419808",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "59a0125989119b7fadf47816cf80aef72082b2df823ec7637c3d1b3ba005192a"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 80.0,
+        "computedAt": "2026-04-17T09:56:48.491545+00:00"
+      }
+    },
+    {
+      "id": "6abf9361-acb1-4a52-a3de-f1c7d8677578",
+      "title": "Meldungen",
+      "summary": {
+        "de": "Bundesarbeitsministerin Bärbel Bas hat ihren ukrainischen Amtskollegen Denys Uliutin getroffen und nahm an den Deutsch-Ukrainischen Regierungskonsultationen in Berlin teil."
+      },
+      "content": {
+        "de": "Auf dieser Seite finden Sie Neuigkeiten aus den Fachreferaten des BMAS. Diese können Sie auch direkt über unseren \"Sofort informiert\" Newsletter abonnieren. Erhalten Sie Meldungen und Pressemitteilungen des BMAS direkt nach deren Veröffentlichung als Newsletter in Ihr E-Mail-Postfach. Staatssekretärin Tschan betonte, dass es wichtig sei, dass sich die vertiefte Zusammenarbeit nicht nur auf die Regierungsebene beschränkt. Die Auszeichnung wird in vier Kategorien vergeben. Prämiert werden vorbildliche strategische, betriebliche, kulturelle und persönliche Lösungen rund um Sicherheit und Gesundheitsschutz bei der Arbeit. Der Bundesrat hat am 27. März 2026 dem Bundestariftreugesetz zugestimmt. Vom Gesetz profitieren Wirtschaft, Arbeitnehmer*innen und Gesellschaft. Das Bundesministerium für Arbeit und Soziales im Rahmen des Fördernetzwerkes Interdisziplinäre Sozialpolitikforschung (FIS) eine neue Förderbekanntmachung zur Förderung von Nachwuchsgruppen und zeitgeschichtlichen Forschungsprojekten veröffentlicht."
+      },
+      "url": "https://www.bmas.de/DE/Service/Presse/Meldungen/meldungen.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:56:50.720514+00:00",
+      "lastSeen": "2026-04-17T09:56:50.720514+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Presse/Meldungen/meldungen.html",
+        "crawledAt": "2026-04-17T09:56:50.720514Z",
+        "crawlId": "tools-seeded-1776419810",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "3852bb0c588d5abf933cbbb19a6a69cb664a6ef162c3e388d6addaf8ec130bab"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:56:50.720514+00:00"
+      }
+    },
+    {
+      "id": "a4140fbc-bbbc-4aae-9a3a-07c587e690c1",
+      "title": "Reden",
+      "summary": {
+        "de": "Hier finden Sie alle veröffentlichten Reden und Texte der Ministerin und der Staatssekretär*innen (nach Datum sortiert):"
+      },
+      "content": {
+        "de": "Rede von Bundesministerin Bärbel Bas am 19. März 2026 im Plenum des Deutschen Bundestages anlässlich der Debatte zum Frauentag, 65. Sitzung Rede von Bundesministerin Bärbel Bas zur 1. Lesung Grundsicherung im Plenum am 15. Januar 2026. Rede von Bundesministerin Bärbel Bas am 28. November 2025 im Plenum des Deutschen Bundestages, 2./3. Lesung Haushalt 2026 Rede von Bundesministerin Bärbel Bas am 16. Oktober 2025 im Plenum des Deutschen Bundestages, 1. Lesung des Rentenpakets Rede von Bundesministerin Bärbel Bas am 10. Oktober 2025 im Plenum des Deutschen Bundestages, 1. Lesung des Tariftreuegesetzes Rede von Bundesministerin Bärbel Bas am 26.09.2025 im Plenum zur 1. Lesung Haushalt 2026."
+      },
+      "url": "https://www.bmas.de/DE/Service/Presse/Reden/reden.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:56:58.559583+00:00",
+      "lastSeen": "2026-04-17T09:56:58.559583+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Presse/Reden/reden.html",
+        "crawledAt": "2026-04-17T09:56:58.560582Z",
+        "crawlId": "tools-seeded-1776419818",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "c09b430caa76e46698e846e0e8c0bba94e590b956460c7d40ef53070c3f7567c"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:56:58.560582+00:00"
+      }
+    },
+    {
+      "id": "ec3f2af8-4799-4788-81b8-86c6c812b6f5",
+      "title": "Zitate für Ihre Berichterstattung",
+      "summary": {
+        "de": "Hier finden Sie aktuelle Zitate, die sie für Ihre Berichterstattung verwenden können."
+      },
+      "content": {
+        "de": "Aktuelle Zitate für Ihre Berichterstattung in unserem Presse-Newsletter: Zitate. \"Unser Sozialstaat muss gerechter, einfacher und digitaler werden.\" \"Für Deutschland bedeutet das Urteil eine Bestätigung und weiteren Rückenwind beim Einsatz für angemessene Mindestlöhne und Maßnahmen zur Steigerung der Tarifbindung, wie etwa dem Bundestariftreuegesetz.\" \"Mit starker Beratung und passender Qualifizierung sorgt die Bundesagentur für Arbeit dafür, dass die Beschäftigten gut für die Arbeitswelt von morgen gerüstet sind.\" \"Entscheidend ist die im Koalitionsvertrag getroffene feste Vereinbarung, dass Standards aus dem Bereich Menschenrechte nicht abgesenkt werden.\" \"Es braucht Sicherheit und starke Impulse für Investitionen und Beschäftigung, um wieder Wirtschaftswachstum zu generieren und Schwung in den Arbeitsmarkt zu bringen.\""
+      },
+      "url": "https://www.bmas.de/DE/Service/Presse/Zitate/zitate.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:57:00.525108+00:00",
+      "lastSeen": "2026-04-17T09:57:00.525108+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Presse/Zitate/zitate.html",
+        "crawledAt": "2026-04-17T09:57:00.525108Z",
+        "crawlId": "tools-seeded-1776419820",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "f67b488e432f1f0bacf6361edef914f2949cb08e294d77df3025bd01c4f0aa43"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:57:00.525108+00:00"
+      }
+    },
+    {
+      "id": "4994a4c6-fedf-4f56-8d2b-13d15c4f66c4",
+      "title": "Newsroom",
+      "summary": {
+        "de": "Alle aktuellen Inhalte und Informationen für Medienvertreter*innen."
+      },
+      "content": {
+        "de": "Erhalten Sie Meldungen und Pressemitteilungen des BMAS direkt nach deren Veröffentlichung als Newsletter in Ihr E-Mail-Postfach. Werden Sie informiert, sobald es neue Leitungstermine gibt, für die Sie sich als Presse-Vertreter*innen anmelden können. Aktuelle Zitate für Ihre Berichterstattung in unserem Presse-Newsletter: Zitate. Sie finden hier Inhalte von den Social-Media-Kanälen des BMAS (Facebook, Instagram und X). Mit Aktivierung bestätigen Sie, dass Sie mit der Anzeige der externen Inhalte einverstanden sind. Damit werden möglicherweise personenbezogene Daten an Dritte übermittelt. Details dazu finden Sie in der Datenschutzerklärung."
+      },
+      "url": "https://www.bmas.de/DE/Service/Presse/presse.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:57:02.700963+00:00",
+      "lastSeen": "2026-04-17T09:57:02.700963+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Service/Presse/presse.html",
+        "crawledAt": "2026-04-17T09:57:02.700963Z",
+        "crawlId": "tools-seeded-1776419822",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "f3de05ed7b223a17d4cdb434f096c705a252e3b9e6a19e01adc83bad904678dd"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:57:02.700963+00:00"
+      }
+    },
+    {
+      "id": "73ad0760-40e9-4d20-b9dd-88e981c98f82",
+      "title": "Antragstellung",
+      "summary": {
+        "de": "Die Soziale Entschädigung nach dem SGB XIV wird nur auf Antrag gewährt. Der Antrag ist bei den jeweiligen zuständigen Versorgungsbehörden vor Ort zu stellen. Diese halten dafür besondere Vordrucke bereit."
+      },
+      "content": {
+        "de": "Wie läuft die Antragstellung für Leistungen der Sozialen Entschädigung ab? In diesem Film erfahren Sie, welche Schritte für den Antrag nötig sind. An­trag auf Leis­tun­gen für Ge­wal­top­fer nach dem SGB XIV ab dem 1. Ja­nu­ar 2024 [PDF, 563KB] In­for­ma­tio­nen zum An­trag auf Leis­tun­gen für Ge­wal­top­fer nach dem SGB XIV ab dem 1. Ja­nu­ar 2024 [PDF, 79KB] Ap­p­li­ca­ti­on for cri­me vic­tim’s com­pen­sa­ti­on from Ja­nu­a­ry 1st 2024 [PDF, 605KB] In­for­ma­ti­on on the ap­p­li­ca­ti­on for cri­me vic­tims’ com­pen­sa­ti­on from 1.1.2024 [PDF, 89KB] Adres­sen und In­ter­netsei­ten der Lan­des­ver­sor­gungs­be­hör­den [PDF, 255KB]"
+      },
+      "url": "https://www.bmas.de/DE/Soziales/Soziale-Entschaedigung/Antragstellung/antragstellung.html",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:57:08.543746+00:00",
+      "lastSeen": "2026-04-17T09:57:08.543746+00:00",
+      "sourceUnavailable": false,
+      "toolType": "application",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bmas.de/DE/Soziales/Soziale-Entschaedigung/Antragstellung/antragstellung.html",
+        "crawledAt": "2026-04-17T09:57:08.543746Z",
+        "crawlId": "tools-seeded-1776419828",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "checksum": "894aea5ff50df5e0ea74a0651223278f7d79624577bdba09b09a7adaeb3e76c7"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:57:08.543746+00:00"
       }
     },
     {
@@ -6688,6 +8305,271 @@
         "iqs": 84.58,
         "ais": 84.0,
         "computedAt": "2026-03-15T17:26:39.902790+00:00"
+      }
+    },
+    {
+      "id": "609e8e9d-0011-4fbe-83d5-d9bf37fcf072",
+      "title": "Archiv der Webseite bundesregierung. de",
+      "summary": {
+        "de": "Berichte, Reden, Pressestatements und -mitteilungen - lesen Sie hier die Beiträge aus der 20. Legislaturperiode - von Dezember 2021 bis Mai 2025."
+      },
+      "content": {
+        "de": "Das Archiv der Bundesregierung enthält Beiträge der 20. Legislaturperiode für den Zeitraum Dezember 2021 bis Mai 2025. Multimediale Inhalte für diesen Zeitraum können Sie über die Mediathek innerhalb des Archivs abrufen."
+      },
+      "url": "https://www.bundesregierung.de/breg-de/service/archiv-bundesregierung",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:58:06.157563+00:00",
+      "lastSeen": "2026-04-17T09:58:06.157563+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bundesregierung.de/breg-de/service/archiv-bundesregierung",
+        "crawledAt": "2026-04-17T09:58:06.158097Z",
+        "crawlId": "tools-seeded-1776419886",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "bundesregierung_de",
+        "providerName": "bundesregierung.de",
+        "providerLevel": "federal",
+        "checksum": "997764c5b2a9795859a938f660f6367ed1bd5298fc59c0c6c956ab4e20bc0b90"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:58:06.158097+00:00"
+      }
+    },
+    {
+      "id": "0f2de335-2432-492f-8105-53aef8356e51",
+      "title": "Bundeskanzler in den Sozialen Medien",
+      "summary": {
+        "de": "Die Bundesregierung informiert die Bürgerinnen und Bürger auch auf Social-Media-Plattformen über ihre Arbeit. Hier finden Sie alle Posts der Bundeskanzler-Accounts auf X und Instagram."
+      },
+      "content": {
+        "de": "Die Bundesregierung informiert die Bürgerinnen und Bürger auch auf Social-Media-Plattformen über ihre Arbeit. Hier finden Sie alle Posts der Bundeskanzler-Accounts auf X und Instagram. Die Beiträge der Bundesregierung auf den verschiedenen Plattformen finden Sie hier."
+      },
+      "url": "https://www.bundesregierung.de/breg-de/service/bundeskanzler-in-den-sozialen-medien",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:58:10.151727+00:00",
+      "lastSeen": "2026-04-17T09:58:10.151727+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bundesregierung.de/breg-de/service/bundeskanzler-in-den-sozialen-medien",
+        "crawledAt": "2026-04-17T09:58:10.151727Z",
+        "crawlId": "tools-seeded-1776419890",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "bundesregierung_de",
+        "providerName": "bundesregierung.de",
+        "providerLevel": "federal",
+        "checksum": "df896e264e18a8577c513f76eecafdaf8702e3c0a459da5c46cc19a8e34ab6f4"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:58:10.151727+00:00"
+      }
+    },
+    {
+      "id": "0c1bde89-b199-4223-a64e-f2efc9a8c532",
+      "title": "Bundesregierung in den Sozialen Medien",
+      "summary": {
+        "de": "Die Bundesregierung informiert die Bürgerinnen und Bürger auch auf Social-Media-Plattformen über ihre Arbeit. Hier finden Sie alle Posts der Bundesregierung-Accounts auf Instagram, Facebook sowie des Regierungssprechers auf X."
+      },
+      "content": {
+        "de": "Die Bundesregierung informiert die Bürgerinnen und Bürger auch auf Social-Media-Plattformen über ihre Arbeit. Hier finden Sie alle Posts der Bundesregierung auf den Kanälen Instagram, Facebook sowie des Regierungssprechers auf X. Die Beiträge der Bundeskanzler-Accounts finden Sie hier."
+      },
+      "url": "https://www.bundesregierung.de/breg-de/service/bundesregierung-in-den-sozialen-medien",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:58:12.178672+00:00",
+      "lastSeen": "2026-04-17T09:58:12.178672+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bundesregierung.de/breg-de/service/bundesregierung-in-den-sozialen-medien",
+        "crawledAt": "2026-04-17T09:58:12.179683Z",
+        "crawlId": "tools-seeded-1776419892",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "bundesregierung_de",
+        "providerName": "bundesregierung.de",
+        "providerLevel": "federal",
+        "checksum": "4ecc06d2504c003263ed7039fe58d39551c5155ba556a1530e7cd6715a2ea047"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:58:12.179683+00:00"
+      }
+    },
+    {
+      "id": "0303e508-4d8f-4ea4-a850-5bd351b069fd",
+      "title": "Fragen und Antworten",
+      "summary": {
+        "de": "Hier finden Sie Fragen und Antworten zu aktuellen Themen der Bundesregierung – unter anderem zum Deutschlandticket und zum Führerscheinumtausch."
+      },
+      "content": {
+        "de": "Hier finden Sie Fragen und Antworten zu aktuellen Themen der Bundesregierung – unter anderem zum Bürgergeld, zum Mindestlohn und zum Führerscheinumtausch. Internationaler Handel Zolleinigung mit den Vereinigten Staaten Fragen und Antworten zum Deutschlandticket Ein Ticket für ganz Deutschland Fragen und Antworten Diese Führerscheine müssen umgetauscht werden Digitales Organspende-Register Fragen und Antworten zur Organspende FAQ zum Elterngeld Die neuen Regelungen beim Elterngeld"
+      },
+      "url": "https://www.bundesregierung.de/breg-de/service/fragen-und-anworten",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:58:18.022897+00:00",
+      "lastSeen": "2026-04-17T09:58:18.022897+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bundesregierung.de/breg-de/service/fragen-und-anworten",
+        "crawledAt": "2026-04-17T09:58:18.022897Z",
+        "crawlId": "tools-seeded-1776419898",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "bundesregierung_de",
+        "providerName": "bundesregierung.de",
+        "providerLevel": "federal",
+        "checksum": "06e43685480294f395bb3aa63c86ccbc6adae5abe28d6f1a0607b94c705b50d4"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:58:18.022897+00:00"
+      }
+    },
+    {
+      "id": "73f0c402-18e0-449b-929b-b4021452e226",
+      "title": "Autogrammkarten und Porträtbilder vom Kanzler",
+      "summary": {
+        "de": "Autogramme und offizielle Porträtbilder des Bundeskanzlers können Sie hier bestellen oder diese als Dateien herunterladen und selbst Drucke anfertigen."
+      },
+      "content": {
+        "de": "Autogramme und offizielle Porträtbilder des Bundeskanzlers können Sie hier bestellen oder diese als Dateien herunterladen und selbst Drucke anfertigen."
+      },
+      "url": "https://www.bundesregierung.de/breg-de/service/portraetbilder-autogrammkarten-bestellen",
+      "topics": [
+        "digital_service",
+        "tools"
+      ],
+      "tags": [
+        "tool"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "job_seekers"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:58:28.143536+00:00",
+      "lastSeen": "2026-04-17T09:58:28.143536+00:00",
+      "sourceUnavailable": false,
+      "toolType": "portal",
+      "relatedBenefits": [],
+      "accessibility": {
+        "languages": [
+          "de"
+        ],
+        "screenReaderCompatible": true
+      },
+      "provenance": {
+        "source": "https://www.bundesregierung.de/breg-de/service/portraetbilder-autogrammkarten-bestellen",
+        "crawledAt": "2026-04-17T09:58:28.143536Z",
+        "crawlId": "tools-seeded-1776419908",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "bundesregierung_de",
+        "providerName": "bundesregierung.de",
+        "providerLevel": "federal",
+        "checksum": "fc46e1f6900870f033afc81c326b352122f2e6b2c8e5e83e8dd7e3820ac72269"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 80.0,
+        "computedAt": "2026-04-17T09:58:28.143536+00:00"
       }
     },
     {

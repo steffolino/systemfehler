@@ -2,23 +2,23 @@
   "version": "0.1.0",
   "domain": "organizations",
   "crawler": "organizations-seeded",
-  "startedAt": "2026-03-15T17:24:51.842675+00:00",
-  "finishedAt": "2026-03-15T17:30:30.229667+00:00",
-  "durationSeconds": 338.387,
+  "startedAt": "2026-04-17T09:59:42.386495+00:00",
+  "finishedAt": "2026-04-17T10:22:24.525010+00:00",
+  "durationSeconds": 1362.139,
   "counts": {
-    "seedUrls": 500,
-    "processedUrls": 501,
-    "entriesExtracted": 451,
-    "fetchFailures": 49,
+    "seedUrls": 614,
+    "processedUrls": 637,
+    "entriesExtracted": 591,
+    "fetchFailures": 23,
     "validationFailures": 0,
-    "redirectAliases": 1,
-    "canonicalAliases": 0,
+    "redirectAliases": 18,
+    "canonicalAliases": 5,
     "emptySummary": 0,
     "emptyContent": 0
   },
   "quality": {
     "avgIqs": 84.58,
-    "avgAis": 83.14,
+    "avgAis": 82.77,
     "lowQualityCount": 0,
     "lowQualitySamples": []
   },
@@ -26,23 +26,23 @@
     "hosts": [
       [
         "bmas.de",
-        232
+        234
       ],
       [
         "bmbfsfj.bund.de",
-        157
+        183
+      ],
+      [
+        "bundesregierung.de",
+        47
+      ],
+      [
+        "fitko.de",
+        44
       ],
       [
         "arbeitsagentur.de",
         39
-      ],
-      [
-        "de.facebook.com",
-        21
-      ],
-      [
-        "twitter.com",
-        21
       ],
       [
         "bafza.de",
@@ -53,110 +53,158 @@
         3
       ],
       [
+        "tiktok.com",
+        2
+      ],
+      [
         "social.bund.de",
         2
       ],
       [
-        "bundesregierung.de",
-        1
+        "dji.de",
+        2
       ],
       [
-        "fitko.de",
-        1
+        "jugend-staerken.de",
+        2
       ],
       [
-        "tiktok.com",
-        1
+        "un.org",
+        2
       ],
       [
         "deutsche-rechtsgeschichte.uni-goettingen.de",
         1
       ],
       [
-        "facebook.de",
+        "beauftragte-missbrauch.de",
         1
       ],
       [
-        "instagram.com",
-        1
-      ],
-      [
-        "x.com",
+        "bundesjugendkuratorium.de",
         1
       ]
     ],
     "sourceTier": [
       [
         "tier_1_official",
-        443
+        547
       ],
       [
         "tier_unknown",
-        8
+        44
       ]
     ],
     "institutionType": [
       [
         "government",
-        443
+        547
       ],
       [
         "unknown",
-        8
+        44
       ]
     ],
     "topics": [
       [
         "organizations",
-        451
+        586
       ],
       [
         "employment",
-        232
+        223
       ],
       [
         "financial_support",
-        232
-      ],
-      [
-        "family",
-        9
-      ],
-      [
-        "aid",
-        9
+        222
       ],
       [
         "public_service",
-        1
+        87
       ],
       [
         "contacts",
+        41
+      ],
+      [
+        "family",
+        8
+      ],
+      [
+        "aid",
+        8
+      ],
+      [
+        "public_institutions",
+        5
+      ],
+      [
+        "service_delivery",
+        2
+      ],
+      [
+        "families",
+        1
+      ],
+      [
+        "government",
         1
       ]
     ],
     "tags": [
       [
         "organization",
-        451
+        586
       ],
       [
         "application_required",
-        241
+        230
+      ],
+      [
+        "public_service",
+        46
       ],
       [
         "contact",
+        41
+      ],
+      [
+        "official_source",
+        4
+      ],
+      [
+        "institution",
+        1
+      ],
+      [
+        "ministry",
+        1
+      ],
+      [
+        "federal_agency",
+        1
+      ],
+      [
+        "115",
+        1
+      ],
+      [
+        "federal_service",
+        1
+      ],
+      [
+        "overview",
         1
       ]
     ],
     "targetGroups": [
       [
         "general_public",
-        451
+        591
       ],
       [
         "unemployed",
-        232
+        222
       ],
       [
         "families",
@@ -168,23 +216,27 @@
     "statuses": [
       [
         "ok",
-        455
-      ],
-      [
-        "fetch_failed",
-        50
+        588
       ],
       [
         "redirect_alias",
-        40
+        58
+      ],
+      [
+        "invalid_url",
+        46
       ],
       [
         "validation_failed",
-        33
+        32
+      ],
+      [
+        "fetch_failed",
+        23
       ],
       [
         "canonical_alias",
-        1
+        6
       ]
     ],
     "failureReasons": [
@@ -193,16 +245,20 @@
         94
       ],
       [
-        "fetch_failed",
-        50
+        "http_redirect",
+        58
       ],
       [
-        "http_redirect",
-        40
+        "guardrail_blocked_host",
+        46
+      ],
+      [
+        "fetch_failed",
+        23
       ],
       [
         "head_canonical",
-        1
+        6
       ]
     ]
   },

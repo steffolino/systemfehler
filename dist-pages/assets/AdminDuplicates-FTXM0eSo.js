@@ -1,1 +1,0 @@
-import{j as e}from"./index-DMEVT4XZ.js";function t(){return e.jsxs("div",{className:"max-w-2xl mx-auto p-8",children:[e.jsx("h2",{className:"text-xl font-bold mb-4",children:"Duplicate Detection"}),e.jsx("p",{children:"Similar submissions will be shown here."})]})}function s(){return e.jsx(t,{})}export{s as default};

@@ -2,14 +2,14 @@
   "version": "0.1.0",
   "domain": "tools",
   "crawler": "tools-seeded",
-  "startedAt": "2026-03-17T07:01:15.320592+00:00",
-  "finishedAt": "2026-03-17T07:01:37.589015+00:00",
-  "durationSeconds": 22.268,
+  "startedAt": "2026-04-17T09:45:20.770895+00:00",
+  "finishedAt": "2026-04-17T09:58:49.685683+00:00",
+  "durationSeconds": 808.915,
   "counts": {
-    "seedUrls": 12,
-    "processedUrls": 12,
-    "entriesExtracted": 12,
-    "fetchFailures": 0,
+    "seedUrls": 358,
+    "processedUrls": 358,
+    "entriesExtracted": 356,
+    "fetchFailures": 2,
     "validationFailures": 0,
     "redirectAliases": 0,
     "canonicalAliases": 0,
@@ -18,69 +18,121 @@
   },
   "quality": {
     "avgIqs": 84.58,
-    "avgAis": 77.92,
+    "avgAis": 80.98,
     "lowQualityCount": 0,
     "lowQualitySamples": []
   },
   "distribution": {
     "hosts": [
       [
-        "arbeitsagentur.de",
-        6
-      ],
-      [
-        "web.arbeitsagentur.de",
-        3
+        "bmbfsfj.bund.de",
+        172
       ],
       [
         "bafza.de",
-        1
+        62
+      ],
+      [
+        "bmas.de",
+        44
+      ],
+      [
+        "web.arbeitsagentur.de",
+        30
+      ],
+      [
+        "arbeitsagentur.de",
+        28
+      ],
+      [
+        "bundesregierung.de",
+        13
+      ],
+      [
+        "sozialplattform.de",
+        3
+      ],
+      [
+        "familienportal.de",
+        2
       ],
       [
         "das-steht-dir-zu.de",
         1
       ],
       [
-        "familienportal.de",
+        "mein-now.de",
+        1
+      ],
+      [
+        "115.de",
+        1
+      ],
+      [
+        "sanktionsfrei.de",
         1
       ]
     ],
     "sourceTier": [
       [
         "tier_1_official",
-        11
+        354
       ],
       [
         "tier_2_ngo_watchdog",
+        1
+      ],
+      [
+        "tier_unknown",
         1
       ]
     ],
     "institutionType": [
       [
         "government",
-        11
+        351
+      ],
+      [
+        "public_service",
+        3
       ],
       [
         "advisory",
+        1
+      ],
+      [
+        "unknown",
         1
       ]
     ],
     "topics": [
       [
         "digital_service",
-        11
-      ],
-      [
-        "employment",
-        8
-      ],
-      [
-        "financial_support",
-        7
+        352
       ],
       [
         "tools",
-        7
+        348
+      ],
+      [
+        "family",
+        63
+      ],
+      [
+        "aid",
+        61
+      ],
+      [
+        "employment",
+        57
+      ],
+      [
+        "financial_support",
+        57
+      ],
+      [
+        "hilfe_beratung_unterstuetzung",
+        3
       ],
       [
         "families",
@@ -93,24 +145,32 @@
       [
         "buergergeld_rechner",
         1
-      ],
-      [
-        "family",
-        1
       ]
     ],
     "tags": [
       [
-        "application_required",
-        7
+        "tool",
+        348
       ],
       [
-        "tool",
-        7
+        "application_required",
+        118
       ],
       [
         "public_service",
-        6
+        55
+      ],
+      [
+        "meta_support_portal_source",
+        3
+      ],
+      [
+        "directory",
+        3
+      ],
+      [
+        "contact",
+        3
       ],
       [
         "portal",
@@ -148,23 +208,23 @@
     "targetGroups": [
       [
         "general_public",
-        12
+        356
       ],
       [
         "families",
-        12
+        353
       ],
       [
         "job_seekers",
-        11
+        352
       ],
       [
         "unemployed",
-        10
+        59
       ],
       [
         "single_parents",
-        1
+        2
       ]
     ]
   },
@@ -172,37 +232,50 @@
     "statuses": [
       [
         "ok",
-        286
-      ],
-      [
-        "fetch_failed",
-        36
+        434
       ],
       [
         "redirect_alias",
-        26
+        85
+      ],
+      [
+        "invalid_url",
+        39
       ],
       [
         "canonical_alias",
+        5
+      ],
+      [
+        "fetch_failed",
         2
       ]
     ],
     "failureReasons": [
       [
-        "fetch_failed",
-        48
+        "http_redirect",
+        85
       ],
       [
-        "http_redirect",
-        26
+        "guardrail_blocked_host",
+        38
+      ],
+      [
+        "fetch_failed",
+        14
       ],
       [
         "head_canonical",
-        2
+        5
+      ],
+      [
+        "guardrail_blocked_url_token",
+        1
       ]
     ]
   },
   "improvementHints": [
+    "Investigate network, robots, or host restrictions for failed seeds.",
     "Refresh urls.json from preferred canonical URLs to reduce alias churn.",
     "Use failure reasons to suppress noisy seeds or create manual-review candidates."
   ]

@@ -483,6 +483,56 @@
       }
     },
     {
+      "id": "790760a8-ecba-4ae5-90fa-0ed3ca94290f",
+      "title": "Schuldnerberatung",
+      "summary": {
+        "de": "Sie haben Schulden oder sind in einer finanziellen Notlage? Dann gibt es kostenlose Hilfsangebote. Hier finden Sie Infos und Beratungsstellen in Ihrer Nähe."
+      },
+      "content": {
+        "de": "Sie haben Schulden oder sind in einer finanziellen Notlage? Dann gibt es kostenlose Hilfsangebote. Hier finden Sie Infos und Beratungsstellen in Ihrer Nähe."
+      },
+      "url": "https://sozialplattform.de/schuldnerberatung",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "meta_support_portal_source",
+        "directory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:18:42.257823+00:00",
+      "lastSeen": "2026-04-17T09:18:42.257823+00:00",
+      "sourceUnavailable": false,
+      "aidType": "financial",
+      "modality": "application",
+      "eligibilityCriteria": {
+        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
+      },
+      "providingOrganization": "Sozialplattform",
+      "provenance": {
+        "source": "https://sozialplattform.de/schuldnerberatung",
+        "crawledAt": "2026-04-17T09:18:42.258837Z",
+        "crawlId": "aid-seeded-1776417522",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "public_service",
+        "jurisdiction": "DE",
+        "sourceId": "sozialplattform",
+        "providerName": "Sozialplattform",
+        "providerLevel": "federal",
+        "checksum": "f7b2b9fa60cdb0537fe831dd053c6f757652189531acfd9a7e9ac2c86181e5e5"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 80.0,
+        "computedAt": "2026-04-17T09:18:42.258837+00:00"
+      }
+    },
+    {
       "id": "9d2e2743-9fda-4aa8-aa11-85fea8fa969b",
       "title": "Opfer-Telefon",
       "summary": {
@@ -2292,6 +2342,60 @@
       }
     },
     {
+      "id": "e2b6df7f-9575-470e-8659-1dc17097cb88",
+      "title": "BMBFSFJ",
+      "summary": {
+        "de": "Hier finden Sie aktuelle Informationen des Bundesministeriums für Bildung, Familie, Senioren, Frauen und Jugend (BMBFSFJ)."
+      },
+      "content": {
+        "de": "Der Deutsche Alterssurvey ist die die zentrale Studie zum Älterwerden in Deutschland. Seit 30 Jahren bietet er einen umfassenden Überblick über die Leben der 40 bis 85 Jahre alten Menschen. Beim \"Wichern-Empfang\" der Diakonie Deutschland sprach Bundesbildungsministerin Karin Prien über die zukünftige Gestaltung des Sozialstaats, die Rolle der Freien Wohlfahrtspflege und notwendige Reformprozesse. Am 13. April hat Karin Prien den ukrainischen Sozialminister Denys Uliutin getroffen. Im Fokus des Gesprächs, das im Kontext der deutsch-ukrainischen Regierungskonsultationen stattfand, standen Ausbildung und Integration ukrainischer Geflüchteter. Vom 13. bis 17. April besucht die Expertengruppe GREVIO des Europarates Deutschland, um die Umsetzung der Istanbul-Konvention zu prüfen. Zum Auftakt des Länderbesuchs empfing Bundesfrauenministerin Karin Prien die Delegation. Kinder und Jugendliche brauchen besonderen Schutz - das gilt auch für die digitale Welt. Eine unabhängige Expertenkommission erarbeitet Handlungsempfehlungen für einen effektiveren Kinder- und Jugendmedienschutz. Flyer Das Pflegetelefon - Schnelle Hilfe für Angehörige"
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj",
+      "topics": [
+        "family",
+        "financial_support",
+        "aid"
+      ],
+      "tags": [
+        "application_required",
+        "public_service",
+        "aid"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents",
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:20:19.254133+00:00",
+      "lastSeen": "2026-04-17T09:20:19.254133+00:00",
+      "sourceUnavailable": false,
+      "aidType": "advisory",
+      "modality": "information",
+      "eligibilityCriteria": {
+        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
+      },
+      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj",
+        "crawledAt": "2026-04-17T09:20:19.254133Z",
+        "crawlId": "aid-seeded-1776417619",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "bmfsfj",
+        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "providerLevel": "federal",
+        "checksum": "1c5f3a3c9cda1633994f9efd492e16ce6cecb5e7fadbf65d4225e8c6df09f530"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:20:19.254133+00:00"
+      }
+    },
+    {
       "id": "e55e6c90-9b4d-4003-a262-408cc110c384",
       "title": "Bauprogramm des Bundes in der Kinder- und Jugendhilfe",
       "summary": {
@@ -2697,6 +2801,60 @@
         "iqs": 84.58,
         "ais": 84.0,
         "computedAt": "2026-03-15T16:15:46.859164+00:00"
+      }
+    },
+    {
+      "id": "e95e7b4e-6b07-4a31-b356-d176cc546df7",
+      "title": "Politik für ältere Menschen",
+      "summary": {
+        "de": "Selbstbestimmung und Teilhabe an der Gesellschaft auch im Alter - das ist zentrales Ziel der Seniorenpolitik des Bundesseniorenministeriums."
+      },
+      "content": {
+        "de": "Michael Brand diskutierte mit dem Vorstand der Fachgesellschaft für Palliative Geriatrie über die Situation multimorbider, hochbetagter Menschen am Lebensende sowie ihrer Angehörigen. Laut dem Statistischen Bundesamt ist die Zahl der Auszubildenden nach dem Pflegeberufegesetz erneut gestiegen. Im Jahr 2025 wurden 8 Prozent mehr neue Ausbildungsverträge abgeschlossen. Davon entfallen 29 Prozent auf männliche Auszubildende. Am 16. März traf sich Bundesseniorenministerin Karin Prien mit bundeszentralen Organisationen der Senioren- und Pflegepolitik, um sich über die Pflege im häuslichen Umfeld auszutauschen."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen",
+      "topics": [
+        "family",
+        "financial_support",
+        "aid"
+      ],
+      "tags": [
+        "application_required",
+        "public_service",
+        "aid"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents",
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:21:00.581423+00:00",
+      "lastSeen": "2026-04-17T09:21:00.581423+00:00",
+      "sourceUnavailable": false,
+      "aidType": "advisory",
+      "modality": "information",
+      "eligibilityCriteria": {
+        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
+      },
+      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen",
+        "crawledAt": "2026-04-17T09:21:00.581423Z",
+        "crawlId": "aid-seeded-1776417660",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "bmfsfj",
+        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "providerLevel": "federal",
+        "checksum": "4a3b79d2f9b6ec96222fc3cecd9296a287bd32d9904ef07aaaa0c6306fb05355"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:21:00.581423+00:00"
       }
     },
     {
@@ -3567,6 +3725,60 @@
       }
     },
     {
+      "id": "cf95acf9-3935-4a9d-8a3e-9541f7c2a6c8",
+      "title": "Bildung",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Der Deutsche Alterssurvey ist die die zentrale Studie zum Älterwerden in Deutschland. Seit 30 Jahren bietet er einen umfassenden Überblick über die Leben der 40 bis 85 Jahre alten Menschen. Beim \"Wichern-Empfang\" der Diakonie Deutschland sprach Bundesbildungsministerin Karin Prien über die zukünftige Gestaltung des Sozialstaats, die Rolle der Freien Wohlfahrtspflege und notwendige Reformprozesse. Der zweite Evaluationsbericht zur Cannabis-Teillegalisierung zeigt deutliche Defizite beim Jugendschutz. Das Bundesfamilienministerium und weitere Ressorts sehen daher dringenden Handlungsbedarf bei der Suchtprävention."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung",
+      "topics": [
+        "family",
+        "financial_support",
+        "aid"
+      ],
+      "tags": [
+        "application_required",
+        "public_service",
+        "aid"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents",
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:21:32.637406+00:00",
+      "lastSeen": "2026-04-17T09:21:32.637406+00:00",
+      "sourceUnavailable": false,
+      "aidType": "advisory",
+      "modality": "information",
+      "eligibilityCriteria": {
+        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
+      },
+      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung",
+        "crawledAt": "2026-04-17T09:21:32.637406Z",
+        "crawlId": "aid-seeded-1776417692",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "bmfsfj",
+        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "providerLevel": "federal",
+        "checksum": "5863572e224d2f2c0886b46452a8ba06815ae41a64a5d02e7c50be4fd4603d69"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:21:32.637406+00:00"
+      }
+    },
+    {
       "id": "b073c294-fb81-4ac0-a1ff-0ed3dc8a6a89",
       "title": "Ausbildung",
       "summary": {
@@ -4026,6 +4238,60 @@
       }
     },
     {
+      "id": "b48f353e-5d71-413b-b1e7-bc966774a7b2",
+      "title": "Engagement und Gesellschaft",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Beim \"Wichern-Empfang\" der Diakonie Deutschland sprach Bundesbildungsministerin Karin Prien über die zukünftige Gestaltung des Sozialstaats, die Rolle der Freien Wohlfahrtspflege und notwendige Reformprozesse. Der 8. April ist der Internationale Tag der Roma. Er erinnert an den ersten Welt-Roma-Kongress im April 1971 in London. Der Kongress markiert den Beginn der internationalen Bürgerrechtsbewegung von Sinti und Roma. Der zweite Evaluationsbericht zur Cannabis-Teillegalisierung zeigt deutliche Defizite beim Jugendschutz. Das Bundesfamilienministerium und weitere Ressorts sehen daher dringenden Handlungsbedarf bei der Suchtprävention."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft",
+      "topics": [
+        "family",
+        "financial_support",
+        "aid"
+      ],
+      "tags": [
+        "application_required",
+        "public_service",
+        "aid"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents",
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:21:52.724397+00:00",
+      "lastSeen": "2026-04-17T09:21:52.724397+00:00",
+      "sourceUnavailable": false,
+      "aidType": "advisory",
+      "modality": "information",
+      "eligibilityCriteria": {
+        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
+      },
+      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft",
+        "crawledAt": "2026-04-17T09:21:52.724397Z",
+        "crawlId": "aid-seeded-1776417712",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "bmfsfj",
+        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "providerLevel": "federal",
+        "checksum": "1f575dfe38dd6ef0b8ef59969ecb4905f9ed94c88152ef91cc4af766ad3adc78"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:21:52.724397+00:00"
+      }
+    },
+    {
       "id": "8eaa51da-372e-41c3-b005-b09d72a7a799",
       "title": "Allianz gegen Einsamkeit",
       "summary": {
@@ -4482,6 +4748,60 @@
         "iqs": 84.58,
         "ais": 84.0,
         "computedAt": "2026-03-15T16:16:05.942112+00:00"
+      }
+    },
+    {
+      "id": "f3d398db-1479-434f-92e8-69a64a0b1826",
+      "title": "Familienpolitik",
+      "summary": {
+        "de": "Mit der Einwilligung von Nutzenden dieser Webseite verwendet das BMBFSFJ (Verantwortlicher) ein Webverhalten- Analysetool (Matomo), um das Angebot auf dieser Webseite kontinuierlich zu verbessern. Dieses Skript ermöglicht die Speicherung bzw. den Zugriff auf die Endeinrichtung. Die verarbeiteten Daten werden nach 90 Tagen gelöscht. Nach Erteilung der Einwilligung oder Ablehnung wird das Banner für 365 Tage deaktiviert. Ein Widerruf der Einwilligung ist jederzeit möglich, die Rechtmäßigkeit der Verarbeitung bleibt bis zum Zeitpunkt des Widerrufs unberührt. Einwilligen Ablehnen"
+      },
+      "content": {
+        "de": "Elterngeldrechner Mit dem Elterngeldrechner kann ein möglicher Elterngeldanspruch in wenigen Minuten ermittelt werden. (Externer Link) Mit dem Elterngeldrechner kann ein möglicher Elterngeldanspruch in wenigen Minuten ermittelt werden. (Externer Link) Nationaler Aktionsplan für chancengerechtes Aufwachsen Der zweite Evaluationsbericht zur Cannabis-Teillegalisierung zeigt deutliche Defizite beim Jugendschutz. Das Bundesfamilienministerium und weitere Ressorts sehen daher dringenden Handlungsbedarf bei der Suchtprävention. Bundesfamilienministerin Karin Prien hat den Wettbewerb \"Kleine Lösungen - große Wirkung\" gestartet. Gesucht werden kleine und mittlere Unternehmen mit kreativen Ideen für die Vereinbarkeit von Familie und Beruf. Mit dem KiTa-Qualitätsgesetz wollen Bund und Länder die frühkindliche Bildung verbessern. Der fünfte Monitoringbericht zum Gesetz zeigt Fortschritte. Um bundesweit gleiche Bedingungen für alle Kinder zu schaffen, bleibt aber noch einiges zu tun."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie",
+      "topics": [
+        "family",
+        "financial_support",
+        "aid"
+      ],
+      "tags": [
+        "application_required",
+        "public_service",
+        "aid"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents",
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:22:12.632219+00:00",
+      "lastSeen": "2026-04-17T09:22:12.632219+00:00",
+      "sourceUnavailable": false,
+      "aidType": "advisory",
+      "modality": "information",
+      "eligibilityCriteria": {
+        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
+      },
+      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie",
+        "crawledAt": "2026-04-17T09:22:12.632746Z",
+        "crawlId": "aid-seeded-1776417732",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "bmfsfj",
+        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "providerLevel": "federal",
+        "checksum": "6bfbe68bf8097784085dc8a260aebaef9fcbe239638b4b5e5262d6dd8b37dee2"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:22:12.632746+00:00"
       }
     },
     {
@@ -5198,6 +5518,60 @@
         "iqs": 84.58,
         "ais": 84.0,
         "computedAt": "2026-03-15T16:16:10.997404+00:00"
+      }
+    },
+    {
+      "id": "f2718922-c1fe-471b-b35b-f9e047de5ad6",
+      "title": "Gleichstellungspolitik: Politik für Frauen und Männer",
+      "summary": {
+        "de": "Frauen und Männer müssen die gleichen Chancen erhalten – persönlich, beruflich und familiär. Hier finden Sie Informationen zur Gleichstellungspolitik."
+      },
+      "content": {
+        "de": "Digitaler Gleichstellungsatlas Der digitale Gleichstellungsatlas liefert einen umfassenden Überblick über die regionalen Unterschiede bei der Gleichstellung von Männern und Frauen in Deutschland. (Nicht barrierefrei) Der digitale Gleichstellungsatlas liefert einen umfassenden Überblick über die regionalen Unterschiede bei der Gleichstellung von Männern und Frauen in Deutschland. (Nicht barrierefrei) Vom 13. bis 17. April besucht die Expertengruppe GREVIO des Europarates Deutschland, um die Umsetzung der Istanbul-Konvention zu prüfen. Zum Auftakt des Länderbesuchs empfing Bundesfrauenministerin Karin Prien die Delegation. Das Bundesfrauenministerium ruft mit einem Interessenbekundungsverfahren zu neuen Modellprojekten zur Prävention von geschlechtsspezifischer und häuslicher Gewalt auf. Träger können sich bis zum 15. Mai mit innovativen Konzepten bewerben. Der zweite Evaluationsbericht zur Cannabis-Teillegalisierung zeigt deutliche Defizite beim Jugendschutz. Das Bundesfamilienministerium und weitere Ressorts sehen daher dringenden Handlungsbedarf bei der Suchtprävention."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung",
+      "topics": [
+        "family",
+        "financial_support",
+        "aid"
+      ],
+      "tags": [
+        "application_required",
+        "public_service",
+        "aid"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents",
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:22:32.657619+00:00",
+      "lastSeen": "2026-04-17T09:22:32.657619+00:00",
+      "sourceUnavailable": false,
+      "aidType": "advisory",
+      "modality": "information",
+      "eligibilityCriteria": {
+        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
+      },
+      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung",
+        "crawledAt": "2026-04-17T09:22:32.657619Z",
+        "crawlId": "aid-seeded-1776417752",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "bmfsfj",
+        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "providerLevel": "federal",
+        "checksum": "b59cc82741f85a9987ea0858e3187140ca40368af3a823501449ade94c7cf0b2"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:22:32.657619+00:00"
       }
     },
     {
@@ -6068,6 +6442,60 @@
       }
     },
     {
+      "id": "d5f9f705-2ae0-4d9a-b563-7994f6942dee",
+      "title": "Politik für Kinder und Jugendliche",
+      "summary": {
+        "de": "Alle Kinder und Jugendlichen haben ein Recht auf gutes Aufwachsen und gleiche Chancen - unabhängig von Herkunft, Geschlecht, Religion oder sozialem..."
+      },
+      "content": {
+        "de": "Unabhängige Expertenkommission \"Kinder- und Jugendschutz in der digitalen Welt\" Der zweite Evaluationsbericht zur Cannabis-Teillegalisierung zeigt deutliche Defizite beim Jugendschutz. Das Bundesfamilienministerium und weitere Ressorts sehen daher dringenden Handlungsbedarf bei der Suchtprävention. Was kann die junge Generation zur Stärkung der Demokratie beitragen? Über diese und weitere Fragen diskutierten 70 Jugendliche aus Deutschland und dem Vereinigten Königreich vier Tage lang beim Deutsch-Britischen Jugendgipfel in Berlin. Der Parlamentarische Staatssekretär im Bundesjugendministerium, Michael Brand, hat das Caritas-Projekt \"[U25]-Suizidpräventionsberatung\" besucht, in dem junge Ehrenamtliche per Mail und anonym Gleichaltrige in suizidalen Krisen unterstützen."
+      },
+      "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend",
+      "topics": [
+        "family",
+        "financial_support",
+        "aid"
+      ],
+      "tags": [
+        "application_required",
+        "public_service",
+        "aid"
+      ],
+      "targetGroups": [
+        "families",
+        "single_parents",
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:23:10.690663+00:00",
+      "lastSeen": "2026-04-17T09:23:10.690663+00:00",
+      "sourceUnavailable": false,
+      "aidType": "advisory",
+      "modality": "information",
+      "eligibilityCriteria": {
+        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
+      },
+      "providingOrganization": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+      "provenance": {
+        "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend",
+        "crawledAt": "2026-04-17T09:23:10.690663Z",
+        "crawlId": "aid-seeded-1776417790",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
+        "jurisdiction": "DE",
+        "sourceId": "bmfsfj",
+        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "providerLevel": "federal",
+        "checksum": "1cff13f63aabdd919fcb3ba5c0e61e2a465be8aa3b4754103436b3d234ae9ab9"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:23:10.690663+00:00"
+      }
+    },
+    {
       "id": "77cea727-07d7-4dd3-bd4d-f893e639e966",
       "title": "Integration und Chancen für junge Menschen",
       "summary": {
@@ -6524,6 +6952,54 @@
       }
     },
     {
+      "id": "caea9b6d-bbd0-4c71-9b0e-2f15908637f8",
+      "title": "Finanzierung sozialer Projekte, Dienste und Einrichtungen",
+      "summary": {
+        "de": "Die Aktion Mensch fördert mit den Erlösen aus ihrer Lotterie monatlich bis zu 1.000 Einrichtungen, Projekte und Initiativen. Inzwischen fließen jährlich über 200 Mio. Euro der Aktion Mensch in unterschiedliche Projekte der Behinderten-, Kinder- und Jugendhilfe sowie in Aufklärungsmaßnahmen, hiervon profitieren auch die Paritätischen Mitgliedsorganisationen."
+      },
+      "content": {
+        "de": "Die Lotterie GlücksSpirale feierte im April 2020 ihr 50-jähriges Bestehen. Gewinner der GlücksSpirale über die fünf Jahrzehnte hinweg war und ist immer auch die Gesellschaft – also jeder von uns, denn die Lotterie GlücksSpirale fördert jährlich hunderte gemeinnütziger Vorhaben. Die Aktion Mensch Stiftung wurde 1991 von den sechs Spitzenverbänden der Freien Wohlfahrtspflege und dem ZDF gegründet und fördert mit ihren Erträgen aus dem Stiftungskapital seit dem 01.04.2024 mit dem Förderprogramm “ Inklusion durch Digitalisierung \" insbesondere Projekte, in denen Konzepte zur digitalen Teilhabe erarbeitet, erprobt und mit Kooperationspartnern ausgerollt oder skaliert werden. Mit dem Programm „Kultur macht stark. Bündnisse für Bildung“ fördert das Bundesministerium für Bildung und Forschung seit 2013 außerschulische Projekte der kulturellen Bildung für Kinder und Jugendliche, die wenig Zugang dazu haben. 27 Programmpartner aus Bildung, Kultur und Sozialwesen setzen das Programm um und fördern lokale Projekte, die von Bündnissen für Bildung beantragt werden, oder führen diese gemeinsam mit lokalen Partnern durch. Aktion Deutschland Hilft ist ein Bündnis von 23 deutschen Hilfsorganisationen, die im Bereich der Katastrophenhilfe und –vorsorge tätig sind. Das Bündnis wurde 2001 mit dem Ziel gegründet, bei großen Katastrophen und Notsituationen im Ausland – wie Naturkatastrophen, Hungersnöten oder gewaltsamen Konflikten – gemeinsam schnelle und effektive Hilfe leisten zu können. Der Paritätische Gesamtverband vermittelt zinslose Darlehen an Mitgliedsorganisationen aus dem Revolvingfonds des Bundes. Welche Voraussetzungen hierfür erfüllt sein sollten, wie hoch Ihr Darlehensbetrag sein kann und wo ein Antrag gestellt werden kann, erfahren Sie bei den Paritätischen Landesverbänden. Im Rahmen des Revolvingfonds stellt das Bundesministerium für Familie, Senioren, Frauen und Jugend Finanzmittel als zinsloses Darlehen für Fördermöglichkeiten für Paritätische Mitgliedsorganisationen zur Verfügung, die von der Bank für Sozialwirtschaft treuhänderisch verwaltet und ausgeschüttet werden."
+      },
+      "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_context_source"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:19:23.651774+00:00",
+      "lastSeen": "2026-04-17T09:19:23.651774+00:00",
+      "sourceUnavailable": false,
+      "aidType": "financial",
+      "modality": "application",
+      "eligibilityCriteria": {
+        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
+      },
+      "providingOrganization": "Der Paritaetische Gesamtverband",
+      "provenance": {
+        "source": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
+        "crawledAt": "2026-04-17T09:19:23.651774Z",
+        "crawlId": "aid-seeded-1776417563",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_2_ngo_watchdog",
+        "institutionType": "ngo",
+        "jurisdiction": "DE",
+        "sourceId": "paritaetischer",
+        "providerName": "Der Paritaetische Gesamtverband",
+        "providerLevel": "civil_society",
+        "checksum": "ce5afba223530d2e7c65a0d5290827fac7f34e47ceca00365de7524637f2909b"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:19:23.651774+00:00"
+      }
+    },
+    {
       "id": "bf8fc753-5f87-4757-9df4-ae1b1a6514d9",
       "title": "Suchthilfeverzeichnis*",
       "summary": {
@@ -6569,6 +7045,157 @@
         "iqs": 84.58,
         "ais": 84.0,
         "computedAt": "2026-03-15T16:26:26.812760+00:00"
+      }
+    },
+    {
+      "id": "d9818ce6-f998-41c5-bafe-ac85f30b49dc",
+      "title": "Mehr Geld in der Krise",
+      "summary": {
+        "de": "Explodierenden Preise bringen existenzielle Sorgen. Viele Menschen haben Rechtsansprüche auf staatliche Gelder, beantragen diese jedoch oft nicht. Wir haben die aus unserer Sicht wichtigsten Leistungen zusammengetragen."
+      },
+      "content": {
+        "de": "Anspruch prüfen! Wenn ihr relativ wenig verdient, prüft unbedingt, ob ihr Anspruch auf ergänzendes Bürgergeld habt. Aus einem Anspruch folgen viele weitere Vergünstigungen (ÖPNV, Rundfunkbeitrag etc.). Nebenkostennachzahlung beantragen! Wenn ihr eine Nebenkostennachzahlung bekommt, müsst ihr die Übernahme schnell, also bis zum Monat der Fälligkeit, beim Jobcenter beantragen. Einmalzahlung beantragen! Auch ohne regulär Bürgergeld zu beziehen, können Einmalzahlungen für die Erstausstattung der Wohnung, bei Schwangerschaft und bei orthopädischem/therapeutischem Bedarf beantragt werden. Das können bis zu 2.600 Euro sein. Wenn ihr schon Bürgergeld bezieht, erfolgt der Antrag formlos, wenn nicht, müsst ihr evtl. für den aktuellen Monat einen normalen Antrag stellen. In Notsituationen Darlehen beantragen! Wer Bürgergeld bezieht, kann zusätzlich Darlehen vom Jobcenter beantragen, um Notlagen zu überbrücken, z.B. wenn die Waschmaschine kaputt ist. Das Darlehen muss zurückgezahlt werden. Auch hier reicht ein formloser Antrag. Eltern, die ein geringes Einkommen haben (mindestens 900€ brutto bei zwei Eltern), können den Kinderzuschlag beantragen, der maximal 250 € pro Kind beträgt. Ihr beantragt das Kindergeld bei der Arbeitsagentur, auch online."
+      },
+      "url": "https://www.die-linke.de/mitmachen/linksaktiv/preise-deckeln/mehr-geld-in-der-krise",
+      "topics": [
+        "buergergeld_rechner"
+      ],
+      "tags": [
+        "discovery_context_source",
+        "context"
+      ],
+      "targetGroups": [
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:19:26.071050+00:00",
+      "lastSeen": "2026-04-17T09:19:26.071050+00:00",
+      "sourceUnavailable": false,
+      "aidType": "financial",
+      "modality": "application",
+      "eligibilityCriteria": {
+        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
+      },
+      "providingOrganization": "Die Linke",
+      "provenance": {
+        "source": "https://www.die-linke.de/mitmachen/linksaktiv/preise-deckeln/mehr-geld-in-der-krise",
+        "crawledAt": "2026-04-17T09:19:26.071050Z",
+        "crawlId": "aid-seeded-1776417566",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_3_contextual",
+        "institutionType": "political",
+        "jurisdiction": "DE",
+        "sourceId": "dielinke",
+        "providerName": "Die Linke",
+        "providerLevel": "civil_society",
+        "checksum": "e32ba5565f6143aa359fa02da3af6346c7b391466e8fbc89e43f1769cfd84f22"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:19:26.071050+00:00"
+      }
+    },
+    {
+      "id": "388dfa5d-083b-4bb6-a0c7-7d7c020795e0",
+      "title": "Leistungen Deutschland",
+      "summary": {
+        "de": "In Deutschland sind viele Menschen auf Unterstützung angewiesen oder nehmen Angebote zur persönlichen und sozialen Weiterentwicklung wahr. Ob Kinder, Familien, Senioren, Menschen mit Behinderungen, obdachlose Menschen oder Menschen am Rande der Existenzsicherung: die Nöte, Interessen und Bedarfe der Menschen sind dabei stets verschieden."
+      },
+      "content": {
+        "de": "Lebenssituation verändern sich im Alter. Wir unterstützen Sie und machen uns gemeinsam mit Ihnen auf die Suche nach individuellen Lösung – von Ambulanter Pflege bis zum Hausnotruf. So bunt Ihr Familienleben sein kann, so vielfältig sind unsere Angebote in der Kinder-, Jugend- und Familienhilfe. Von der Kita an der Ecke bis zum virtuellen Elterncampus. Die Lebensqualität für Menschen mit Behinderungen steigern und Angehörige oder Freunde bei Ihrer Hilfe unterstützen. Wir stehen für Fragen der Betreuung, der Gesundheit, der Arbeit und Bildung oder der Freizeitaktivitäten immer zur Seite. Geflüchtete und andere Migrantengruppen schützen, ihre Rechte und Würde wahren und bei der gesellschaftlichen Teilhabe (Inklusion) unterstützen. Dabei stellen wir die Wünsche und Bedürfnisse der Menschen in den Mittelpunkt. Zur Wohlfahrtspflege zählen alle Organisationen, die satzungsgemäß Wohlfahrtsleistungen erbringen. Als Mitglied der Bundesarbeitsgemeinschaft der Freien Wohlfahrtspflege (BAGFW) ist das DRK Spitzenverband der Freien Wohlfahrtspflege. Dafür müssen wir deutschlandweit tätig sein sowie eine stetige, umfassende und fachlich qualifizierte Arbeit gewähren."
+      },
+      "url": "https://www.drk.de/hilfe-in-deutschland",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:19:27.521188+00:00",
+      "lastSeen": "2026-04-17T09:19:27.521188+00:00",
+      "sourceUnavailable": false,
+      "aidType": "financial",
+      "modality": "application",
+      "eligibilityCriteria": {
+        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
+      },
+      "providingOrganization": "Deutsches Rotes Kreuz",
+      "provenance": {
+        "source": "https://www.drk.de/hilfe-in-deutschland",
+        "crawledAt": "2026-04-17T09:19:27.521188Z",
+        "crawlId": "aid-seeded-1776417567",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_2_ngo_watchdog",
+        "institutionType": "ngo",
+        "jurisdiction": "DE",
+        "sourceId": "drk",
+        "providerName": "Deutsches Rotes Kreuz",
+        "providerLevel": "civil_society",
+        "checksum": "9cb316a8bfacf19d57c065aeb1f2bc09ffe9ba83dfebd4a59e571770c7b8b77b"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:19:27.521188+00:00"
+      }
+    },
+    {
+      "id": "c792eacb-bedc-444f-bdfa-02f800aba91d",
+      "title": "Schuldnerberatung",
+      "summary": {
+        "de": "Das DRK hilft Ihnen einen Weg aus den Schulden zu finden. Wir vermitteln zwischen Gläubigern und Schuldnern. Hier Beratungsstelle in Ihrer Nähe finden!"
+      },
+      "content": {
+        "de": "Die DRK-Schuldner- und Insolvenzberatungsstellen beraten Schuldner und helfen ihnen, einen Weg aus den Schulden zu erarbeiten. In unseren zahlreichen Kreisverbänden bieten wir eine persönliche Schuldnerberatung an. Die Schuldnerberater in unseren Kreisverbänden helfen Ihnen vor Ort gerne auf dem Weg aus der Überschuldung. Zu unseren Unterstützungen zählen u. a.: besprechen mögliche Einsparmöglichkeiten und Verhaltensänderungen. stellen einen Haushaltsplan zur sinnvollen Einteilung des zur Verfügung stehenden Haushaltsgeldes auf. besprechen einen möglichen Schutz bei Lohn- und Kontopfändungen oder vor drohenden Zwangsvollstreckungen. Unsere Beratungsstellen unterstützen Schuldner ganzheitlich in allen Situationen von Überschuldungen. Zu den Hilfeleistungen gehören u. a.:"
+      },
+      "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families"
+      ],
+      "status": "active",
+      "firstSeen": "2026-04-17T09:19:30.810413+00:00",
+      "lastSeen": "2026-04-17T09:19:30.810413+00:00",
+      "sourceUnavailable": false,
+      "aidType": "advisory",
+      "modality": "information",
+      "eligibilityCriteria": {
+        "de": "Anspruch und Voraussetzungen sind in der jeweiligen Leistungsbeschreibung der Quelle dokumentiert."
+      },
+      "providingOrganization": "Deutsches Rotes Kreuz",
+      "provenance": {
+        "source": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung",
+        "crawledAt": "2026-04-17T09:19:30.810936Z",
+        "crawlId": "aid-seeded-1776417570",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_2_ngo_watchdog",
+        "institutionType": "ngo",
+        "jurisdiction": "DE",
+        "sourceId": "drk",
+        "providerName": "Deutsches Rotes Kreuz",
+        "providerLevel": "civil_society",
+        "checksum": "770377fa6d5329c0078efae804184b87a1d1a643d6c3005cf288a8a44a34ebf5"
+      },
+      "qualityScores": {
+        "iqs": 84.58,
+        "ais": 84.0,
+        "computedAt": "2026-04-17T09:19:30.810936+00:00"
       }
     },
     {

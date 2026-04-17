@@ -2,14 +2,14 @@
   "version": "0.1.0",
   "domain": "aid",
   "crawler": "aid-seeded",
-  "startedAt": "2026-03-17T07:01:19.058908+00:00",
-  "finishedAt": "2026-03-17T07:01:47.784606+00:00",
-  "durationSeconds": 28.726,
+  "startedAt": "2026-04-17T09:18:35.820962+00:00",
+  "finishedAt": "2026-04-17T09:26:38.166282+00:00",
+  "durationSeconds": 482.345,
   "counts": {
-    "seedUrls": 18,
-    "processedUrls": 18,
-    "entriesExtracted": 15,
-    "fetchFailures": 3,
+    "seedUrls": 233,
+    "processedUrls": 233,
+    "entriesExtracted": 207,
+    "fetchFailures": 26,
     "validationFailures": 0,
     "redirectAliases": 0,
     "canonicalAliases": 0,
@@ -18,46 +18,134 @@
   },
   "quality": {
     "avgIqs": 84.58,
-    "avgAis": 83.27,
+    "avgAis": 82.22,
     "lowQualityCount": 0,
     "lowQualitySamples": []
   },
   "distribution": {
     "hosts": [
       [
-        "arbeitsagentur.de",
-        10
+        "bmbfsfj.bund.de",
+        110
       ],
       [
-        "sanktionsfrei.de",
-        3
+        "arbeitsagentur.de",
+        23
       ],
       [
         "bmas.de",
-        2
-      ],
-      [
-        "bmbfsfj.bund.de",
-        2
+        20
       ],
       [
         "bafza.de",
-        1
+        16
+      ],
+      [
+        "caritas.de",
+        12
+      ],
+      [
+        "web.arbeitsagentur.de",
+        6
+      ],
+      [
+        "sanktionsfrei.de",
+        5
+      ],
+      [
+        "tacheles-sozialhilfe.de",
+        4
+      ],
+      [
+        "drk.de",
+        4
+      ],
+      [
+        "sozialplattform.de",
+        3
+      ],
+      [
+        "hilfe-portal-missbrauch.de",
+        3
+      ],
+      [
+        "wiki.ubuntuusers.de",
+        2
+      ],
+      [
+        "maennerberatungsnetz.de",
+        2
+      ],
+      [
+        "dajeb.de",
+        2
+      ],
+      [
+        "deutsche-depressionshilfe.de",
+        2
       ]
     ],
     "sourceTier": [
       [
         "tier_1_official",
-        15
+        178
+      ],
+      [
+        "tier_2_ngo_watchdog",
+        24
+      ],
+      [
+        "tier_unknown",
+        4
+      ],
+      [
+        "tier_3_contextual",
+        1
       ]
     ],
     "institutionType": [
       [
         "government",
-        15
+        175
+      ],
+      [
+        "ngo",
+        24
+      ],
+      [
+        "unknown",
+        4
+      ],
+      [
+        "public_service",
+        3
+      ],
+      [
+        "political",
+        1
       ]
     ],
     "topics": [
+      [
+        "financial_support",
+        183
+      ],
+      [
+        "aid",
+        181
+      ],
+      [
+        "family",
+        122
+      ],
+      [
+        "employment",
+        18
+      ],
+      [
+        "hilfe_beratung_unterstuetzung",
+        11
+      ],
       [
         "buergergeld",
         11
@@ -67,11 +155,15 @@
         5
       ],
       [
-        "regelbedarf",
-        3
+        "rights",
+        5
       ],
       [
-        "financial_support",
+        "contacts",
+        5
+      ],
+      [
+        "regelbedarf",
         3
       ],
       [
@@ -93,32 +185,52 @@
       [
         "pflichten",
         1
-      ],
-      [
-        "education",
-        1
-      ],
-      [
-        "aid",
-        1
-      ],
-      [
-        "care",
-        1
-      ],
-      [
-        "families",
-        1
-      ],
-      [
-        "children",
-        1
       ]
     ],
     "tags": [
       [
+        "aid",
+        180
+      ],
+      [
+        "application_required",
+        140
+      ],
+      [
+        "public_service",
+        109
+      ],
+      [
+        "contact",
+        17
+      ],
+      [
+        "advisory",
+        12
+      ],
+      [
         "official_rule_source",
         7
+      ],
+      [
+        "ngo_context_source",
+        5
+      ],
+      [
+        "meta_support_portal_source",
+        3
+      ],
+      [
+        "directory",
+        3
+      ],
+      [
+        "glossary",
+        3
+      ],
+      [
+        "ngo_support_source",
+        3
       ],
       [
         "official_source",
@@ -129,62 +241,30 @@
         2
       ],
       [
-        "glossary",
-        2
-      ],
-      [
         "education",
         1
       ],
       [
-        "advisory",
-        1
-      ],
-      [
-        "contact",
-        1
-      ],
-      [
         "official_light_language_source",
-        1
-      ],
-      [
-        "light_language",
-        1
-      ],
-      [
-        "official_background_source",
-        1
-      ],
-      [
-        "benefit-overview",
-        1
-      ],
-      [
-        "application_required",
-        1
-      ],
-      [
-        "children",
         1
       ]
     ],
     "targetGroups": [
       [
         "general_public",
-        14
-      ],
-      [
-        "unemployed",
-        11
+        206
       ],
       [
         "families",
-        4
+        187
       ],
       [
         "single_parents",
-        4
+        184
+      ],
+      [
+        "unemployed",
+        34
       ]
     ]
   },
@@ -192,32 +272,40 @@
     "statuses": [
       [
         "ok",
-        213
+        230
       ],
       [
         "fetch_failed",
-        21
+        26
       ],
       [
         "redirect_alias",
-        19
+        25
       ],
       [
         "canonical_alias",
+        7
+      ],
+      [
+        "invalid_url",
         6
       ]
     ],
     "failureReasons": [
       [
         "fetch_failed",
-        38
+        44
       ],
       [
         "http_redirect",
-        19
+        25
       ],
       [
         "head_canonical",
+        7
+      ],
+      [
+        "guardrail_blocked_host",
         6
       ]
     ]

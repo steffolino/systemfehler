@@ -211,5 +211,6 @@ python -m crawlers.rag download-page \
 
 - [rag-deep-dive.md](rag-deep-dive.md) — full technical reference: schemas,
   scoring formulas, adding sources, environment variables
+- [source-placement-policy.md](source-placement-policy.md) — hybrid placement rules for official, NGO-support, and contextual sources
 - [`data/_rag_sources/source_registry.json`](../data/_rag_sources/source_registry.json) — live source list
 - [`crawlers/rag/`](../crawlers/rag/) — all implementation code
