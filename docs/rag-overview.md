@@ -31,7 +31,7 @@ Current coverage (~37 sources, ~10 000 chunks after indexing):
 | **SGB statutes** (full text) | SGB I, II, III, X, XII |
 | **Fachliche Weisungen** | §§ 6–11 SGB II, KV/PV, RV, AufenthG |
 | **BA Merkblätter** | ALG I, Bürgergeld, KV-Beiträge, Nebeneinkommen, Kurzarbeitergeld |
-| **BA Forms** | Hauptantrag, Weiterbewilligung, KdU-Anlage, KG1 |
+| **BA Forms** | Hauptantrag, Weiterbewilligung, KdU-Anlage, Anlage EK |
 | **Case law** | BVerfG sanction ruling 2019 (1 BvL 7/16) |
 | **NGO / research** | Sanktionsfrei.de, Sanktionsfrei study 2025, policy paper |
 

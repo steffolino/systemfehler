@@ -390,6 +390,7 @@ python -m crawlers.rag download-page URL [URL ...] [--out DIR] [--force]
 | No BM25 / sparse retrieval | Planned | True hybrid (dense + sparse) would improve recall on exact legal citations like `§ 22 Abs. 1 Satz 4 SGB II`. Could add Qdrant sparse vectors. |
 | No query expansion | Planned | German legal abbreviations (`KdU`, `FW`, `ALG`) could be expanded before embedding. |
 | Encrypted PDFs skipped | Known | `fw-sgb-i-sgb-x_ba022125.pdf` requires `cryptography>=3.1`. Not in registry. |
+| `pypdf` "Ignoring wrong pointing object" warnings | Benign | Seen on malformed but readable PDFs. Extraction can still succeed; e.g. `sanktionsfrei_studie_2025` (36 chunks) and `policy_paper_sanktionen` (12 chunks) indexed correctly. |
 | JS-rendered HTML sources | Avoided by design | BA law text pages use JS rendering. Replaced with local PDFs. |
 | No freshness tracking | Future | `publication_date` field exists; no automated staleness check yet. |
 | Multilingual queries | Untested | Model is German-trained; cross-lingual retrieval for non-German queries is untested. |
