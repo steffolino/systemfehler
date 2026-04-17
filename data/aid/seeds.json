@@ -10,6 +10,7 @@
       "bedarfsgemeinschaft",
       "buergergeld",
       "buergergeld_rechner",
+      "hilfe_beratung_unterstuetzung",
       "kinderzuschlag",
       "kontakt_arbeitsagentur",
       "leichte_sprache_soziale_sicherheit",
@@ -20,6 +21,24 @@
     ]
   },
   "seeds": [
+    {
+      "url": "https://sanktionsfrei.de",
+      "enabled": true,
+      "source": "sanktionsfrei",
+      "label": "Hilfe Beratung Unterstuetzung Sanktionsfrei.de",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
     {
       "url": "https://sanktionsfrei.de/mehrbedarf",
       "enabled": true,
@@ -61,6 +80,22 @@
       "topics": [
         "buergergeld",
         "pflichten"
+      ],
+      "tags": [
+        "ngo_context_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://tacheles-sozialhilfe.de",
+      "enabled": true,
+      "source": "tacheles",
+      "label": "Hilfe Beratung Unterstuetzung Tacheles Sozialhilfe.de",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
       ],
       "tags": [
         "ngo_context_source"
@@ -429,6 +464,59 @@
       ]
     },
     {
+      "url": "https://www.caritas.de/hilfeundberatung",
+      "enabled": true,
+      "source": "caritas",
+      "label": "Hilfe Beratung Unterstuetzung Hilfeundberatung",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.der-paritaetische.de",
+      "enabled": true,
+      "source": "paritaetischer",
+      "label": "Hilfe Beratung Unterstuetzung Www.der Paritaetische.de",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_context_source"
+      ],
+      "targetGroups": [
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.diakonie.de",
+      "enabled": true,
+      "source": "diakonie",
+      "label": "Hilfe Beratung Unterstuetzung Www.diakonie.de",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "unemployed"
+      ]
+    },
+    {
       "url": "https://www.die-linke.de/mitmachen/linksaktiv/preise-deckeln/mehr-geld-in-der-krise/",
       "enabled": true,
       "source": "dielinke",
@@ -439,6 +527,75 @@
       "tags": [
         "discovery_context_source",
         "context"
+      ],
+      "targetGroups": [
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.drk.de/hilfe-in-deutschland",
+      "enabled": true,
+      "source": "drk",
+      "label": "Hilfe Beratung Unterstuetzung Hilfe In Deutschland",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families"
+      ]
+    },
+    {
+      "url": "https://www.gegen-hartz.de",
+      "enabled": true,
+      "source": "gegen_hartz",
+      "label": "Hilfe Beratung Unterstuetzung Www.gegen Hartz.de",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "discovery_context_source",
+        "context"
+      ],
+      "targetGroups": [
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.sanktionsfrei.de/buergergeld",
+      "enabled": true,
+      "source": "sanktionsfrei",
+      "label": "Hilfe Beratung Unterstuetzung Buergergeld",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.sozialplattform.de",
+      "enabled": true,
+      "source": "sozialplattform",
+      "label": "Hilfe Beratung Unterstuetzung Www.sozialplattform.de",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "meta_support_portal_source",
+        "directory",
+        "contact"
       ],
       "targetGroups": [
         "general_public"

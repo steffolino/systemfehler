@@ -9,6 +9,7 @@
       "antrag_bescheid",
       "buergergeld",
       "buergergeld_rechner",
+      "hilfe_beratung_unterstuetzung",
       "kinderzuschlag",
       "kontakt_arbeitsagentur"
     ]
@@ -115,6 +116,23 @@
       "tags": [
         "calculator",
         "elterngeld"
+      ]
+    },
+    {
+      "url": "https://www.sozialplattform.de",
+      "enabled": true,
+      "source": "sozialplattform",
+      "label": "Hilfe Beratung Unterstuetzung Www.sozialplattform.de",
+      "topics": [
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "tags": [
+        "meta_support_portal_source",
+        "directory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public"
       ]
     }
   ]

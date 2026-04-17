@@ -422,6 +422,8 @@ class TopicDiscovery:
             "official_light_language_source": ["official_light_language_source", "light_language"],
             "official_background_source": ["official_background_source"],
             "ngo_context_source": ["ngo_context_source"],
+            "ngo_support_source": ["ngo_support_source", "advisory", "contact"],
+            "meta_support_portal_source": ["meta_support_portal_source", "directory", "contact"],
             "trusted_tool_source": ["trusted_tool_source", "calculator"],
             "trusted_glossary_source": ["trusted_glossary_source", "glossary"],
             "discovery_context_source": ["discovery_context_source", "context"],
@@ -441,6 +443,8 @@ class TopicDiscovery:
             },
             "contacts": {
                 "official_contact_source",
+                "ngo_support_source",
+                "meta_support_portal_source",
             },
             "aid": {
                 "official_rule_source",
@@ -448,12 +452,15 @@ class TopicDiscovery:
                 "official_light_language_source",
                 "official_background_source",
                 "ngo_context_source",
+                "ngo_support_source",
+                "meta_support_portal_source",
                 "trusted_glossary_source",
                 "discovery_context_source",
                 "journalism_source",
             },
             "tools": {
                 "trusted_tool_source",
+                "meta_support_portal_source",
             },
         }
         return role in allowed_roles.get(domain, {role})

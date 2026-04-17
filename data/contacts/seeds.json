@@ -8,6 +8,7 @@
     "topicIds": [
       "antrag_bescheid",
       "buergergeld",
+      "hilfe_beratung_unterstuetzung",
       "kinderzuschlag",
       "kontakt_arbeitsagentur"
     ]
@@ -28,6 +29,25 @@
       "targetGroups": [
         "families",
         "parents"
+      ]
+    },
+    {
+      "url": "https://sanktionsfrei.de",
+      "enabled": true,
+      "source": "sanktionsfrei",
+      "label": "Hilfe Beratung Unterstuetzung Sanktionsfrei.de",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
       ]
     },
     {
@@ -161,6 +181,65 @@
       ]
     },
     {
+      "url": "https://www.caritas.de/hilfeundberatung",
+      "enabled": true,
+      "source": "caritas",
+      "label": "Hilfe Beratung Unterstuetzung Hilfeundberatung",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "families",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.diakonie.de",
+      "enabled": true,
+      "source": "diakonie",
+      "label": "Hilfe Beratung Unterstuetzung Www.diakonie.de",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families",
+        "unemployed"
+      ]
+    },
+    {
+      "url": "https://www.drk.de/hilfe-in-deutschland",
+      "enabled": true,
+      "source": "drk",
+      "label": "Hilfe Beratung Unterstuetzung Hilfe In Deutschland",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public",
+        "families"
+      ]
+    },
+    {
       "url": "https://www.gebaerdentelefon.de/115",
       "label": "Gebaerdentelefon 115",
       "source": "gebaerdentelefon",
@@ -175,6 +254,43 @@
       "targetGroups": [
         "general_public",
         "persons_with_disabilities"
+      ]
+    },
+    {
+      "url": "https://www.sanktionsfrei.de/buergergeld",
+      "enabled": true,
+      "source": "sanktionsfrei",
+      "label": "Hilfe Beratung Unterstuetzung Buergergeld",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "ngo_support_source",
+        "advisory",
+        "contact"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
+      "url": "https://www.sozialplattform.de",
+      "enabled": true,
+      "source": "sozialplattform",
+      "label": "Hilfe Beratung Unterstuetzung Www.sozialplattform.de",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts"
+      ],
+      "tags": [
+        "meta_support_portal_source",
+        "directory",
+        "contact"
+      ],
+      "targetGroups": [
+        "general_public"
       ]
     }
   ]

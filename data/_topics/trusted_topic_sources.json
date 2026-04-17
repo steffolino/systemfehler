@@ -552,6 +552,119 @@
       ]
     },
     {
+      "id": "hilfe_beratung_unterstuetzung",
+      "name": "Hilfe Beratung Unterstuetzung",
+      "domains": ["aid", "contacts", "tools"],
+      "keywords": [
+        "beratung",
+        "hilfeangebote",
+        "unterstuetzung",
+        "kontaktstellen",
+        "beratungsstellen",
+        "musterschreiben",
+        "krisenhilfe",
+        "schuldnerberatung",
+        "sozialberatung",
+        "obdachlosigkeit"
+      ],
+      "sources": [
+        {
+          "sourceId": "sozialplattform",
+          "role": "meta_support_portal_source",
+          "priority": "critical",
+          "preferredPathPatterns": [
+            "/",
+            "/hilfe",
+            "/beratung"
+          ],
+          "seedUrls": [
+            "https://www.sozialplattform.de"
+          ]
+        },
+        {
+          "sourceId": "caritas",
+          "role": "ngo_support_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/hilfeundberatung",
+            "/hilfe-und-beratung"
+          ],
+          "seedUrls": [
+            "https://www.caritas.de/hilfeundberatung"
+          ]
+        },
+        {
+          "sourceId": "diakonie",
+          "role": "ngo_support_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/"
+          ],
+          "seedUrls": [
+            "https://www.diakonie.de"
+          ]
+        },
+        {
+          "sourceId": "drk",
+          "role": "ngo_support_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/hilfe-in-deutschland"
+          ],
+          "seedUrls": [
+            "https://www.drk.de/hilfe-in-deutschland"
+          ]
+        },
+        {
+          "sourceId": "tacheles",
+          "role": "ngo_context_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/"
+          ],
+          "seedUrls": [
+            "https://tacheles-sozialhilfe.de"
+          ]
+        },
+        {
+          "sourceId": "paritaetischer",
+          "role": "ngo_context_source",
+          "priority": "medium",
+          "preferredPathPatterns": [
+            "/"
+          ],
+          "seedUrls": [
+            "https://www.der-paritaetische.de"
+          ]
+        },
+        {
+          "sourceId": "sanktionsfrei",
+          "role": "ngo_support_source",
+          "priority": "high",
+          "preferredPathPatterns": [
+            "/",
+            "/buergergeld",
+            "/studie"
+          ],
+          "seedUrls": [
+            "https://sanktionsfrei.de",
+            "https://www.sanktionsfrei.de/buergergeld"
+          ]
+        },
+        {
+          "sourceId": "gegen_hartz",
+          "role": "discovery_context_source",
+          "priority": "low",
+          "preferredPathPatterns": [
+            "/"
+          ],
+          "seedUrls": [
+            "https://www.gegen-hartz.de"
+          ]
+        }
+      ]
+    },
+    {
       "id": "sozialrecht_glossar",
       "name": "Sozialrecht Glossar",
       "domains": ["aid"],

@@ -305,6 +305,227 @@
       "status": "active"
     },
     {
+      "id": "diakonie",
+      "name": "Diakonie Deutschland",
+      "baseUrl": "https://www.diakonie.de",
+      "domains": [
+        "aid",
+        "contacts",
+        "organizations"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_2_ngo_watchdog",
+      "institutionType": "ngo",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "aid",
+        "contacts",
+        "rights"
+      ],
+      "defaultTags": [
+        "advisory",
+        "contact"
+      ],
+      "defaultTargetGroups": [
+        "general_public",
+        "families",
+        "unemployed"
+      ],
+      "services": [
+        "Beratungsstellen",
+        "Krisenhilfe",
+        "Sozialberatung"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "drk",
+      "name": "Deutsches Rotes Kreuz",
+      "baseUrl": "https://www.drk.de",
+      "domains": [
+        "aid",
+        "contacts",
+        "organizations"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_2_ngo_watchdog",
+      "institutionType": "ngo",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "aid",
+        "contacts",
+        "emergency_support"
+      ],
+      "defaultTags": [
+        "advisory",
+        "contact"
+      ],
+      "defaultTargetGroups": [
+        "general_public",
+        "families"
+      ],
+      "services": [
+        "Notfallhilfe",
+        "Soziale Unterstuetzung"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "tacheles",
+      "name": "Tacheles e.V.",
+      "baseUrl": "https://tacheles-sozialhilfe.de",
+      "domains": [
+        "aid",
+        "tools"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_2_ngo_watchdog",
+      "institutionType": "ngo",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "rights",
+        "financial_support",
+        "legal_remedies"
+      ],
+      "defaultTags": [
+        "advisory",
+        "templates",
+        "legal_context"
+      ],
+      "defaultTargetGroups": [
+        "unemployed",
+        "general_public"
+      ],
+      "services": [
+        "Musterschreiben",
+        "Fachinformationen",
+        "Sozialrechtsberatung"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "paritaetischer",
+      "name": "Der Paritaetische Gesamtverband",
+      "baseUrl": "https://www.der-paritaetische.de",
+      "domains": [
+        "aid",
+        "organizations"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "medium",
+      "sourceTier": "tier_2_ngo_watchdog",
+      "institutionType": "ngo",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "aid",
+        "rights",
+        "context"
+      ],
+      "defaultTags": [
+        "advisory",
+        "study",
+        "guidance"
+      ],
+      "defaultTargetGroups": [
+        "general_public"
+      ],
+      "services": [
+        "Leitfaeden",
+        "Studien",
+        "Sozialberatung"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "sozialplattform",
+      "name": "Sozialplattform",
+      "baseUrl": "https://www.sozialplattform.de",
+      "domains": [
+        "aid",
+        "contacts",
+        "tools"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_1_official",
+      "institutionType": "public_service",
+      "providerLevel": "federal",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "aid",
+        "contacts",
+        "directory"
+      ],
+      "defaultTags": [
+        "directory",
+        "contact",
+        "public_service"
+      ],
+      "defaultTargetGroups": [
+        "general_public"
+      ],
+      "services": [
+        "Hilfsangebotsuche",
+        "Beratungsstellensuche"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
+      "id": "gegen_hartz",
+      "name": "Gegen-Hartz.de",
+      "baseUrl": "https://www.gegen-hartz.de",
+      "domains": [
+        "aid"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "low",
+      "sourceTier": "tier_3_contextual",
+      "institutionType": "media",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "financial_support",
+        "context"
+      ],
+      "defaultTags": [
+        "context",
+        "news"
+      ],
+      "defaultTargetGroups": [
+        "general_public"
+      ],
+      "services": [
+        "Aktuelle Hinweise",
+        "Praxisbeispiele"
+      ],
+      "license": "unknown",
+      "status": "active"
+    },
+    {
       "id": "dasstehtdirzu",
       "name": "Das steht dir zu",
       "baseUrl": "https://www.das-steht-dir-zu.de",
