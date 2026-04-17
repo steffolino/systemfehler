@@ -728,7 +728,7 @@
       ]
     },
     {
-      "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen/",
+      "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
       "enabled": true,
       "source": "paritaetischer",
       "label": "Hilfe Beratung Unterstuetzung Finanzierung Sozialer Projekte Dienste Und Einrichtungen",
@@ -762,7 +762,7 @@
       ]
     },
     {
-      "url": "https://www.die-linke.de/mitmachen/linksaktiv/preise-deckeln/mehr-geld-in-der-krise/",
+      "url": "https://www.die-linke.de/mitmachen/linksaktiv/preise-deckeln/mehr-geld-in-der-krise",
       "enabled": true,
       "source": "dielinke",
       "label": "Buergergeld Rechner Mehr Geld In Der Krise",
@@ -796,25 +796,7 @@
       ]
     },
     {
-      "url": "https://www.drk.de/hilfe-in-deutschland/",
-      "enabled": true,
-      "source": "drk",
-      "label": "Hilfe Beratung Unterstuetzung Hilfe In Deutschland",
-      "topics": [
-        "hilfe_beratung_unterstuetzung"
-      ],
-      "tags": [
-        "ngo_support_source",
-        "advisory",
-        "contact"
-      ],
-      "targetGroups": [
-        "general_public",
-        "families"
-      ]
-    },
-    {
-      "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/",
+      "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe",
       "enabled": true,
       "source": "drk",
       "label": "Hilfe Beratung Unterstuetzung Existenzsichernde Hilfe",
@@ -832,7 +814,7 @@
       ]
     },
     {
-      "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung/",
+      "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung",
       "enabled": true,
       "source": "drk",
       "label": "Hilfe Beratung Unterstuetzung Schuldnerberatung",

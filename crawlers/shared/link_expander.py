@@ -15,6 +15,7 @@ from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
 
 from .base_crawler import BaseCrawler
+from .crawl_guardrails import CrawlGuardrails
 from .url_registry import URLRegistry
 
 
@@ -49,6 +50,7 @@ class LinkExpander(BaseCrawler):
     def __init__(self, user_agent: str, rate_limit_delay: float = 2.0, data_dir: str = './data') -> None:
         super().__init__('link-expander', user_agent, rate_limit_delay)
         self.data_dir = Path(data_dir)
+        self.guardrails = CrawlGuardrails(str(self.data_dir), self.normalize_url)
         self.registries: Dict[str, URLRegistry] = {}
 
     def expand(self, domain: str, limit: int = 50, verify: bool = True) -> Dict[str, Any]:
@@ -192,6 +194,9 @@ class LinkExpander(BaseCrawler):
                 continue
             if self._should_ignore_candidate(candidate):
                 continue
+            blocked, _ = self.guardrails.is_blocked(candidate)
+            if blocked:
+                continue
             if candidate in seen:
                 continue
 
@@ -269,6 +274,16 @@ class LinkExpander(BaseCrawler):
         added = 0
         for url in urls:
             normalized = self.normalize_url(url)
+            blocked, blocked_reason = self.guardrails.is_blocked(normalized)
+            if blocked:
+                self._get_registry(domain).record(
+                    normalized,
+                    status='invalid_url',
+                    reason=f'guardrail_{blocked_reason}',
+                    source='link_expander',
+                    skip=True,
+                )
+                continue
             if normalized in seen:
                 continue
             existing.append(normalized)
@@ -308,6 +323,16 @@ class LinkExpander(BaseCrawler):
             if not isinstance(raw, str):
                 continue
             normalized = self.normalize_url(raw)
+            blocked, blocked_reason = self.guardrails.is_blocked(normalized)
+            if blocked:
+                registry.record(
+                    normalized,
+                    status='invalid_url',
+                    reason=f'guardrail_{blocked_reason}',
+                    source='link_expander',
+                    skip=True,
+                )
+                continue
             if registry.should_skip(normalized):
                 continue
             preferred = registry.get_preferred_url(normalized)

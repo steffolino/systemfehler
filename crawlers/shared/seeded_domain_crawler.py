@@ -18,6 +18,7 @@ from bs4 import BeautifulSoup
 
 from .base_crawler import BaseCrawler
 from .crawl_metrics import CrawlMetrics
+from .crawl_guardrails import CrawlGuardrails
 from .quality_scorer import QualityScorer
 from .source_registry import SourceProfile, SourceRegistry
 from .url_registry import URLRegistry
@@ -43,6 +44,7 @@ class SeededDomainCrawler(BaseCrawler):
         self.quality_scorer = QualityScorer()
         self.validator = SchemaValidator()
         self.url_registry = URLRegistry(str(self.data_dir), domain, self.normalize_url)
+        self.guardrails = CrawlGuardrails(str(self.data_dir), self.normalize_url)
         self.source_registry = SourceRegistry(self.data_dir)
         self.metrics = CrawlMetrics(domain, crawler_name)
         self.discovered_seed_records: List[Dict[str, Any]] = []
@@ -237,6 +239,16 @@ class SeededDomainCrawler(BaseCrawler):
                 host = parsed[4:] if parsed.startswith('www.') else parsed
                 if not any(host == allowed or host.endswith(f".{allowed}") for allowed in include_hosts):
                     continue
+            blocked, blocked_reason = self.guardrails.is_blocked(cleaned)
+            if blocked:
+                self.url_registry.record(
+                    cleaned,
+                    status='invalid_url',
+                    reason=f'guardrail_{blocked_reason}',
+                    source='seeded_domain_crawler',
+                    skip=True,
+                )
+                continue
             if self.url_registry.should_skip(cleaned):
                 continue
             preferred = self.url_registry.get_preferred_url(cleaned)

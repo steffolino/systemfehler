@@ -1,0 +1,38 @@
+{
+  "version": "0.1.0",
+  "_meta": {
+    "note": "Persistent crawl guardrails to avoid low-signal or repeatedly problematic URLs",
+    "maintainedBy": "codex"
+  },
+  "blockedHosts": [
+    "de.facebook.com",
+    "facebook.com",
+    "www.facebook.com",
+    "www.facebook.de",
+    "instagram.com",
+    "www.instagram.com",
+    "twitter.com",
+    "www.twitter.com",
+    "x.com",
+    "www.x.com",
+    "linkedin.com",
+    "www.linkedin.com",
+    "de.linkedin.com"
+  ],
+  "blockedHostSuffixes": [
+    "facebook.com",
+    "facebook.de",
+    "instagram.com",
+    "twitter.com",
+    "x.com",
+    "linkedin.com"
+  ],
+  "blockedUrlContains": [
+    "facebook.com/sharer",
+    "twitter.com/intent",
+    "x.com/intent",
+    "wa.me/",
+    "whatsapp://send"
+  ],
+  "blockedUrlExact": []
+}

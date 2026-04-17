@@ -467,26 +467,7 @@
       ]
     },
     {
-      "url": "https://www.drk.de/hilfe-in-deutschland/",
-      "enabled": true,
-      "source": "drk",
-      "label": "Hilfe Beratung Unterstuetzung Hilfe In Deutschland",
-      "topics": [
-        "hilfe_beratung_unterstuetzung",
-        "contacts"
-      ],
-      "tags": [
-        "ngo_support_source",
-        "advisory",
-        "contact"
-      ],
-      "targetGroups": [
-        "general_public",
-        "families"
-      ]
-    },
-    {
-      "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/",
+      "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe",
       "enabled": true,
       "source": "drk",
       "label": "Hilfe Beratung Unterstuetzung Existenzsichernde Hilfe",
@@ -505,7 +486,7 @@
       ]
     },
     {
-      "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung/",
+      "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung",
       "enabled": true,
       "source": "drk",
       "label": "Hilfe Beratung Unterstuetzung Schuldnerberatung",

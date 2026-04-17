@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
@@ -28,6 +29,11 @@ class URLRegistry:
         self.normalizer = normalizer
         self.path = self.data_dir / domain / "url_status.jsonl"
         self.records: Dict[str, Dict[str, Any]] = {}
+        env_threshold = os.getenv("CRAWLER_FETCH_FAILED_SKIP_THRESHOLD", "3")
+        try:
+            self.fetch_failed_skip_threshold = max(1, int(env_threshold))
+        except ValueError:
+            self.fetch_failed_skip_threshold = 3
         self._load()
 
     def _load(self) -> None:
@@ -103,6 +109,10 @@ class URLRegistry:
     ) -> None:
         normalized_url = self.normalizer(url)
         record = dict(self.records.get(normalized_url, {}))
+        existing_fail_count = record.get("failCount")
+        if not isinstance(existing_fail_count, int):
+            existing_fail_count = 0
+
         record["url"] = normalized_url
         record["domain"] = self.domain
         record["source"] = source
@@ -117,10 +127,24 @@ class URLRegistry:
             record["reason"] = reason
         if status_code is not None:
             record["statusCode"] = status_code
-        if skip is not None:
-            record["skip"] = skip
-        elif status in TERMINAL_SKIP_STATUSES:
-            record["skip"] = True
+        if status == "fetch_failed":
+            fail_count = existing_fail_count + 1
+            record["failCount"] = fail_count
+            if skip is not None:
+                record["skip"] = skip
+            elif fail_count >= self.fetch_failed_skip_threshold:
+                record["skip"] = True
+                if not reason:
+                    record["reason"] = "fetch_failed_threshold"
+        else:
+            if status == "ok":
+                record.pop("failCount", None)
+                if skip is None:
+                    record["skip"] = False
+            if skip is not None:
+                record["skip"] = skip
+            elif status in TERMINAL_SKIP_STATUSES:
+                record["skip"] = True
 
         if extra:
             record.update(extra)
