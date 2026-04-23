@@ -413,6 +413,10 @@ class BaseCrawler:
             "zum inhalt",
             "barrierefreiheit",
             "impressum",
+            "einwilligung",
+            "webverhalten",
+            "tracking",
+            "analyse-tool",
         )
         return any(token in text for token in low_signal_tokens)
 

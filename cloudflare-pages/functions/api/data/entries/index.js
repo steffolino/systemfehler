@@ -1,5 +1,49 @@
 import { clampPositiveInt, jsonResponse } from '../../_lib/http.js';
 
+function mapRowsWithEntryJson(rows, includeTranslations) {
+  return rows.map((row) => {
+    const entry = row.entry_json ? JSON.parse(row.entry_json) : {};
+    entry.id = row.id;
+    entry.domain = row.domain;
+    entry.url = row.url;
+    entry.status = row.status;
+    entry.title_de = row.title_de;
+    entry.updated_at = row.updated_at;
+    if (!includeTranslations && entry.translations) {
+      delete entry.translations;
+    }
+    return entry;
+  });
+}
+
+function mapRowsLegacy(rows, includeTranslations) {
+  return rows.map((row) => {
+    const entry = {
+      id: row.id,
+      domain: row.domain,
+      url: row.url,
+      status: row.status,
+      title_de: row.title_de,
+      title_en: row.title_en,
+      title_easy_de: row.title_easy_de,
+      summary_de: row.summary_de,
+      summary_en: row.summary_en,
+      summary_easy_de: row.summary_easy_de,
+      content_de: row.content_de,
+      content_en: row.content_en,
+      content_easy_de: row.content_easy_de,
+      provenance: row.provenance ? JSON.parse(row.provenance) : null,
+      quality_scores: row.quality_scores ? JSON.parse(row.quality_scores) : null,
+      translations: row.translations ? JSON.parse(row.translations) : null,
+      updated_at: row.updated_at,
+    };
+    if (!includeTranslations) {
+      delete entry.translations;
+    }
+    return entry;
+  });
+}
+
 export async function onRequest(context) {
   const { request, env } = context;
   const url = new URL(request.url);
@@ -35,26 +79,40 @@ export async function onRequest(context) {
     const rowsParams = [...filterParams, limit, offset];
     const countParams = [...filterParams];
 
-    const [rowsResult, countRow] = await Promise.all([
-      db.prepare(rowsQuery).bind(...rowsParams).all(),
-      db.prepare(countQuery).bind(...countParams).first()
-    ]);
+    let rowsResult;
+    let countRow;
+    let entries;
+    try {
+      [rowsResult, countRow] = await Promise.all([
+        db.prepare(rowsQuery).bind(...rowsParams).all(),
+        db.prepare(countQuery).bind(...countParams).first(),
+      ]);
+      entries = mapRowsWithEntryJson(rowsResult.results, includeTranslations);
+    } catch (error) {
+      const message = String(error?.message || '');
+      if (!message.includes('no such column: entry_json')) {
+        throw error;
+      }
+
+      const legacyRowsQuery = `
+        SELECT
+          id, domain, url, status, updated_at,
+          title_de, title_en, title_easy_de,
+          summary_de, summary_en, summary_easy_de,
+          content_de, content_en, content_easy_de,
+          provenance, translations, quality_scores
+        FROM entries${whereClause}
+        ORDER BY updated_at DESC
+        LIMIT ? OFFSET ?`;
+
+      [rowsResult, countRow] = await Promise.all([
+        db.prepare(legacyRowsQuery).bind(...rowsParams).all(),
+        db.prepare(countQuery).bind(...countParams).first(),
+      ]);
+      entries = mapRowsLegacy(rowsResult.results, includeTranslations);
+    }
 
     const total = countRow ? countRow.count : 0;
-
-    const entries = rowsResult.results.map(row => {
-      const entry = row.entry_json ? JSON.parse(row.entry_json) : {};
-      entry.id = row.id;
-      entry.domain = row.domain;
-      entry.url = row.url;
-      entry.status = row.status;
-      entry.title_de = row.title_de;
-      entry.updated_at = row.updated_at;
-      if (!includeTranslations && entry.translations) {
-        delete entry.translations;
-      }
-      return entry;
-    });
 
     const page = Math.floor(offset / Math.max(limit, 1)) + 1;
     const pages = total > 0 ? Math.ceil(total / Math.max(limit, 1)) : 1;

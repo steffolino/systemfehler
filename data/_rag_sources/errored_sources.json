@@ -1,0 +1,12 @@
+{
+  "version": "0.1.0",
+  "_meta": {
+    "note": "Persistent denylist + error memory for RAG source ingestion",
+    "maintainedBy": "codex"
+  },
+  "blockedSourceIds": [
+    "kg1_antrag_de"
+  ],
+  "blockedUrls": [],
+  "errorsBySourceId": {}
+}

@@ -16,6 +16,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 from urllib.parse import urlparse
+import urllib.request
+import xml.etree.ElementTree as ET
 
 from .source_registry import SourceRegistry
 
@@ -31,6 +33,8 @@ LOW_SIGNAL_TOKENS = (
     "/meta/",
     "/gebaerdensprache",
 )
+SITEMAP_TIMEOUT_SECONDS = 8
+SITEMAP_MAX_URLS_PER_SOURCE = 40
 
 
 @dataclass(frozen=True)
@@ -212,6 +216,7 @@ class TopicDiscovery:
         self,
         domain: str,
         topic_ids: Optional[List[str]] = None,
+        include_sitemaps: bool = False,
         persist: bool = True,
     ) -> Dict[str, Any]:
         requested_topics = [
@@ -239,11 +244,18 @@ class TopicDiscovery:
 
         added = 0
         updated = 0
+        sitemap_added = 0
         for topic in requested_topics:
             for pref in topic.sources:
                 if not self._role_allowed_for_domain(domain, pref.role):
                     continue
-                for url in pref.seed_urls:
+                candidate_urls = list(pref.seed_urls)
+                if include_sitemaps:
+                    discovered_sitemap_urls = self._discover_sitemap_urls(pref, topic)
+                    candidate_urls.extend(discovered_sitemap_urls)
+                    sitemap_added += len(discovered_sitemap_urls)
+
+                for url in candidate_urls:
                     if not isinstance(url, str) or not url.strip():
                         continue
                     normalized_url = url.strip()
@@ -296,8 +308,73 @@ class TopicDiscovery:
             "seedCount": len(payload["seeds"]),
             "added": added,
             "updated": updated,
+            "sitemapCandidates": sitemap_added,
             "outputPath": str(seed_path),
         }
+
+    def _discover_sitemap_urls(self, preference: TopicSourcePreference, topic: TopicDefinition) -> List[str]:
+        profile = self.source_registry.get_profile_by_id(preference.source_id)
+        if profile is None or not profile.host:
+            return []
+
+        sitemap_urls = [f"https://{profile.host}/sitemap.xml", f"https://{profile.host}/sitemap_index.xml"]
+        robots_url = f"https://{profile.host}/robots.txt"
+        try:
+            with urllib.request.urlopen(robots_url, timeout=SITEMAP_TIMEOUT_SECONDS) as response:
+                robots_text = response.read().decode("utf-8", errors="ignore")
+            for line in robots_text.splitlines():
+                if line.lower().startswith("sitemap:"):
+                    value = line.split(":", 1)[1].strip()
+                    if value:
+                        sitemap_urls.append(value)
+        except Exception:
+            pass
+
+        discovered: List[str] = []
+        visited = set()
+        queue = [url for url in sitemap_urls if isinstance(url, str) and url.strip()]
+        while queue and len(discovered) < SITEMAP_MAX_URLS_PER_SOURCE:
+            sitemap_url = queue.pop(0).strip()
+            if sitemap_url in visited:
+                continue
+            visited.add(sitemap_url)
+            try:
+                with urllib.request.urlopen(sitemap_url, timeout=SITEMAP_TIMEOUT_SECONDS) as response:
+                    xml_text = response.read().decode("utf-8", errors="ignore")
+                root = ET.fromstring(xml_text)
+            except Exception:
+                continue
+
+            # Handle both urlset and sitemapindex by local-name suffix checks.
+            for element in root.iter():
+                tag = element.tag.lower()
+                if tag.endswith("loc") and element.text:
+                    loc = element.text.strip()
+                    if not loc.startswith("http"):
+                        continue
+                    if loc.endswith(".xml") and "sitemap" in loc.lower() and loc not in visited:
+                        queue.append(loc)
+                        continue
+                    if self._is_good_sitemap_candidate(loc, preference, topic):
+                        discovered.append(loc)
+                        if len(discovered) >= SITEMAP_MAX_URLS_PER_SOURCE:
+                            break
+
+        return discovered
+
+    def _is_good_sitemap_candidate(self, url: str, preference: TopicSourcePreference, topic: TopicDefinition) -> bool:
+        lowered = url.lower()
+        if any(token in lowered for token in LOW_SIGNAL_TOKENS):
+            return False
+        if any(token in lowered for token in ("/impressum", "/datenschutz", "/privacy", "/cookie")):
+            return False
+
+        if preference.preferred_path_patterns:
+            for pattern in preference.preferred_path_patterns:
+                if pattern and pattern.lower() in lowered:
+                    return True
+
+        return any(keyword in lowered for keyword in topic.keywords)
 
     def _load_urls(self, domain: str) -> Iterable[str]:
         path = self.data_dir / domain / "urls.json"

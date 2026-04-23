@@ -37,6 +37,7 @@ import json
 import os
 from pathlib import Path
 from typing import Any
+from datetime import datetime, timezone
 
 import requests
 from bs4 import BeautifulSoup
@@ -46,6 +47,7 @@ from .sources import RAG_SOURCES
 # Directory where raw text is cached so we don't re-fetch on every run
 _CACHE_DIR = Path(__file__).parent.parent.parent / "data" / "_rag_cache"
 _CACHE_DIR.mkdir(parents=True, exist_ok=True)
+_ERROR_REGISTRY_PATH = Path(__file__).parent.parent.parent / "data" / "_rag_sources" / "errored_sources.json"
 
 _PROJECT_ROOT = Path(__file__).parent.parent.parent
 
@@ -55,6 +57,86 @@ _SESSION.headers["User-Agent"] = (
 )
 _REQUEST_TIMEOUT = 30
 _RETRY_WAIT = 2.0
+
+
+def _load_error_registry() -> dict[str, Any]:
+    if not _ERROR_REGISTRY_PATH.exists():
+        return {
+            "version": "0.1.0",
+            "blockedSourceIds": [],
+            "blockedUrls": [],
+            "errorsBySourceId": {},
+        }
+    try:
+        payload = json.loads(_ERROR_REGISTRY_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return {
+            "version": "0.1.0",
+            "blockedSourceIds": [],
+            "blockedUrls": [],
+            "errorsBySourceId": {},
+        }
+    if not isinstance(payload, dict):
+        return {
+            "version": "0.1.0",
+            "blockedSourceIds": [],
+            "blockedUrls": [],
+            "errorsBySourceId": {},
+        }
+    payload.setdefault("version", "0.1.0")
+    payload.setdefault("blockedSourceIds", [])
+    payload.setdefault("blockedUrls", [])
+    payload.setdefault("errorsBySourceId", {})
+    return payload
+
+
+def _save_error_registry(payload: dict[str, Any]) -> None:
+    _ERROR_REGISTRY_PATH.parent.mkdir(parents=True, exist_ok=True)
+    _ERROR_REGISTRY_PATH.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
+def _is_blocked_source(source: dict[str, Any], registry: dict[str, Any]) -> bool:
+    source_id = source.get("id")
+    source_url = source.get("url")
+    blocked_ids = {
+        str(value).strip()
+        for value in registry.get("blockedSourceIds", [])
+        if isinstance(value, str) and value.strip()
+    }
+    blocked_urls = {
+        str(value).strip()
+        for value in registry.get("blockedUrls", [])
+        if isinstance(value, str) and value.strip()
+    }
+    return (isinstance(source_id, str) and source_id in blocked_ids) or (
+        isinstance(source_url, str) and source_url in blocked_urls
+    )
+
+
+def _record_source_error(source: dict[str, Any], error_message: str) -> None:
+    source_id = str(source.get("id") or "").strip()
+    if not source_id:
+        return
+
+    registry = _load_error_registry()
+    errors = registry.get("errorsBySourceId")
+    if not isinstance(errors, dict):
+        errors = {}
+        registry["errorsBySourceId"] = errors
+
+    current = errors.get(source_id) if isinstance(errors.get(source_id), dict) else {}
+    fail_count = int(current.get("failCount", 0)) + 1
+    errors[source_id] = {
+        "failCount": fail_count,
+        "lastError": error_message,
+        "lastSeenAt": datetime.now(timezone.utc).isoformat(),
+        "url": source.get("url"),
+        "title": source.get("title"),
+    }
+    _save_error_registry(registry)
 
 
 def _cache_path(source_id: str) -> Path:
@@ -145,6 +227,10 @@ def _fetch_text(source: dict[str, Any]) -> str:
 def fetch_source(source: dict[str, Any], force: bool = False) -> dict[str, Any]:
     """Fetch one source entry. Returns NormalizedDoc dict."""
     sid = source["id"]
+    registry = _load_error_registry()
+    if _is_blocked_source(source, registry):
+        return {**source, "text": "", "fetch_status": "skipped", "error": "blocked_by_error_registry"}
+
     cache = _cache_path(sid)
 
     if not force and cache.exists():
@@ -160,6 +246,7 @@ def fetch_source(source: dict[str, Any], force: bool = False) -> dict[str, Any]:
             if attempt < 3:
                 time.sleep(_RETRY_WAIT * attempt)
             else:
+                _record_source_error(source, str(exc))
                 return {**source, "text": "", "fetch_status": "error", "error": str(exc)}
 
     # unreachable, but keeps type-checker happy

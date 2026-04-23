@@ -1,7 +1,18 @@
-import { getWorkersAiModel } from '../_lib/ai.js';
+import { getRetrievalConfig, getWorkersAiModel, listLifeEventScenarios, loadLifeEventScenarios } from '../_lib/ai.js';
 
 export async function onRequest({ request, env }) {
   const url = new URL(request.url);
+  const retrievalConfig = getRetrievalConfig(env);
+  const lifeEventScenarios = await loadLifeEventScenarios(env, { requestUrl: request.url });
+  const externalEndpointHost = retrievalConfig.external.endpoint
+    ? (() => {
+        try {
+          return new URL(retrievalConfig.external.endpoint).host;
+        } catch {
+          return 'invalid';
+        }
+      })()
+    : null;
   return new Response(
     JSON.stringify({
       status: 'ok',
@@ -13,6 +24,18 @@ export async function onRequest({ request, env }) {
       },
       turnstile: {
         configured: Boolean(env.TURNSTILE_SECRET_KEY),
+      },
+      retrieval: {
+        requestedMode: retrievalConfig.requestedMode,
+        activeMode: retrievalConfig.activeMode,
+        strictOfficial: retrievalConfig.strictOfficial,
+        minSourceTier: retrievalConfig.minSourceTier,
+        minConfidence: retrievalConfig.minConfidence,
+        externalConfigured: retrievalConfig.external.configured,
+        externalAllowed: retrievalConfig.external.allowed,
+        externalEndpointHost,
+        externalTimeoutMs: retrievalConfig.external.timeoutMs,
+        lifeEvents: listLifeEventScenarios(lifeEventScenarios),
       },
       caching: {
         retrieveTtlSeconds: Number(env.AI_CACHE_TTL_RETRIEVE_SECONDS || 180),

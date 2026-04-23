@@ -12,7 +12,6 @@ The goal is to make information about social rights and support more transparent
   (`node scripts/validate_entries.js --fail-on-errors=false`, re-verified on
   2026-03-15 after data/schema reconciliation).
 - Public frontend and API are live on Cloudflare Pages at `https://systemfehler.pages.dev/`.
-- GitHub Pages remains available as a static snapshot fallback at `https://steffolino.github.io/systemfehler/`.
 
 ---
 
@@ -187,13 +186,19 @@ npm run api
 npm run dev
 ```
 
-**Or start both together:**
+**Or start the full production-like local stack (recommended):**
 
 ```bash
 npm run dev:all
 ```
 
-Open http://localhost:5173 in your browser to view the admin panel.
+Open http://127.0.0.1:8788 in your browser.
+
+**Legacy local stack (Express + Python AI sidecar + Ollama):**
+
+```bash
+npm run dev:all:legacy
+```
 
 ### Available Commands
 
@@ -210,7 +215,12 @@ npm run db:seed:benefits        # Import only benefits snapshot into PostgreSQL
 # API and Frontend
 npm run api                     # Start Express API server (port 3001)
 npm run dev                     # Start Vite frontend dev server (port 5173)
-npm run dev:all                 # Start both API and frontend concurrently
+npm run dev:all                 # Start full local Cloudflare Pages stack (recommended, port 8788)
+npm run dev:all:fast            # Start local Pages stack without D1 reset/reseed
+npm run dev:all:legacy          # Legacy stack: Express + Vite + Python AI sidecar + Ollama + Docker
+npm run prepare:dist-pages      # Build and assemble dist-pages artifact
+npm run dev:pages:d1:reset      # Reset local D1 schema + seed snapshot entries (chunked)
+npm run dev:pages:stop          # Stop stale local wrangler/workerd processes on port 8788
 
 # Validation and Quality
 npm run validate                # Validate entries against schemas
@@ -282,22 +292,6 @@ and is deployed together with the static build.
 Note: production hosting currently uses Cloudflare Pages as the primary live target.
 
 See `cloudflare-pages/README.md` for setup details.
-
----
-
-## GitHub Pages Deployment
-
-The repository also includes a GitHub Pages workflow for static fallback hosting.
-
-- Workflow: `.github/workflows/deploy-github-pages.yml`
-- Build directory: `frontend/dist`
-- Base path: `/systemfehler/`
-- Expected URL: `https://steffolino.github.io/systemfehler/`
-- Pages configuration must be set to `build_type: workflow` (GitHub Actions), not legacy branch/docs mode.
-- Workflow copies `data/*` and `moderation/review_queue.json` into `frontend/public` before build, so snapshots are served from the same origin.
-- Frontend snapshot fallback reads from same-origin paths in production:
-  - `/systemfehler/data/<domain>/entries.json`
-  - `/systemfehler/moderation/review_queue.json`
 
 ---
 

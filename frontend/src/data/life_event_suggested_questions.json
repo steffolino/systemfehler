@@ -1,0 +1,102 @@
+{
+  "job_loss_start": [
+    "Ich bin arbeitslos geworden und habe eine kuendigung bekommen. Was sind meine ersten Schritte?",
+    "Wie beantrage ich arbeitslosengeld oder buergergeld nach job verloren?",
+    "Wo finde ich jobcenter oder arbeitsagentur beratung nach entlassen?"
+  ],
+  "short_work_or_hours_cut": [
+    "Mein arbeitgeber hat kurzarbeit eingefuehrt. Welche hilfe gibt es?",
+    "Meine arbeitszeit wurde reduziert durch kurzarbeit und ich habe einkommensausfall. Was nun?",
+    "Wie bekomme ich kurzarbeitergeld oder aufstockung bei weniger stunden?"
+  ],
+  "self_employment_failed": [
+    "Meine selbstaendig taetigkeit ist gescheitert. Welche absicherung gibt es jetzt?",
+    "Ich musste meine firma aufgeben und habe kein einkommen. Welche hilfe?",
+    "Wo bekomme ich beratung bei insolvenz und schuldnerberatung nach selbststaendig?"
+  ],
+  "education_finished_no_income": [
+    "Meine ausbildung beendet und jetzt kein einkommen. Was kann ich beantragen?",
+    "Ich habe mein studium beendet und bin ohne job. Welche unterstuetzung gibt es?",
+    "Wie melde ich mich arbeitslos nach ausbildung oder studium beendet?"
+  ],
+  "low_income_topup": [
+    "Ich arbeite vollzeit im niedriglohn und mein geld reicht nicht. Was hilft?",
+    "Wie funktioniert aufstockung mit buergergeld bei zu wenig lohn?",
+    "Kann ich bei niedriglohn aufstockung mit wohngeld oder kinderzuschlag bekommen?"
+  ],
+  "upskilling": [
+    "Wie bekomme ich einen bildungsgutschein fuer weiterbildung?",
+    "Ich brauche umschulung wegen jobwechsel. Welche foerderung gibt es?",
+    "Wo finde ich berufsberatung fuer fortbildung und qualifizierung?"
+  ],
+  "family_children": [
+    "Ich habe ein baby bekommen. Wie beantrage ich kindergeld und elterngeld?",
+    "Welche hilfe fuer familie gibt es bei kinderzuschlag und familienkasse?",
+    "Ich habe kinder und wenig geld. Welche leistungen gibt es jetzt?"
+  ],
+  "single_parent_new": [
+    "Ich bin jetzt alleinerziehend. Welche hilfe kann ich sofort beantragen?",
+    "Wie bekomme ich unterhaltsvorschuss wenn ich allein mit kind bin?",
+    "Welche leistungen fuer alleinerziehend gibt es bei kindergeld und wohngeld?"
+  ],
+  "separation_divorce": [
+    "Nach trennung brauche ich finanzielle hilfe. Was ist moeglich?",
+    "Welche unterstuetzung gibt es bei scheidung und unterhalt?",
+    "Wo bekomme ich beratung zu unterhaltsvorschuss und gemeinsamer wohnung nach trennung?"
+  ],
+  "caregiving_relatives": [
+    "Ich habe pflege angehoerige uebernommen. Welche leistungen gibt es?",
+    "Wie beantrage ich pflegegrad und pflegegeld fuer pflege zuhause?",
+    "Wo finde ich pflegeberatung, entlastungsbetrag und pflegegrad hilfe bei pflege angehoerige?"
+  ],
+  "migration_arrival": [
+    "Ich bin neu in deutschland angekommen. Welche ersten hilfen gibt es?",
+    "Wo finde ich integrationskurs und sprachkurs mit beratung?",
+    "Welche leistungen kann ich bei jobcenter als neu im land beantragen?"
+  ],
+  "unclear_residence_status": [
+    "Mein aufenthaltsstatus unklar mit duldung. Wo bekomme ich schnelle beratung?",
+    "Ich habe nur duldung oder fiktionsbescheinigung. Welche hilfe gibt es?",
+    "Welche stellen helfen bei aufenthalt abgelaufen und auslaenderbehoerde terminen?"
+  ],
+  "recognition_missing": [
+    "Meine abschluesse anerkennung fehlt bei berufsanerkennung. Welche schritte muss ich gehen?",
+    "Wo bekomme ich anerkennungsberatung fuer berufsanerkennung?",
+    "Wie beantrage ich berufsanerkennung und anerkennung von zeugnis in deutschland?"
+  ],
+  "health_disruption": [
+    "Ich bin krank geworden und arbeitsunfaehig. Welche leistungen gibt es?",
+    "Wie bekomme ich krankengeld und welche antraege brauche ich?",
+    "Wo finde ich beratung zu reha und absicherung bei gesundheit problemen?"
+  ],
+  "long_term_work_incapacity": [
+    "Ich bin langfristig arbeitsunfaehig. Welche finanzielle hilfe gibt es?",
+    "Wie beantrage ich erwerbsminderungsrente oder grundsicherung?",
+    "Wo bekomme ich beratung zu reha, sozialamt und dauerhaft krank?"
+  ],
+  "mental_burnout": [
+    "Ich habe burnout und psychische belastung. Wo bekomme ich hilfe?",
+    "Welche leistungen gibt es bei depression und krankschreibung?",
+    "Wo finde ich krisenhilfe und psychosoziale beratung bei ueberlastet?"
+  ],
+  "housing_loss_homelessness_risk": [
+    "Ich habe eine kuendigung wohnung bekommen und drohe obdachlos zu werden. Hilfe?",
+    "Was kann ich tun bei raeumung und wohnung verloren?",
+    "Wo finde ich wohnungsnotfall hilfe und notunterkunft wenn ich wohnung verloren habe?"
+  ],
+  "energy_cost_unaffordable": [
+    "Ich kann strom und heizkosten nicht mehr zahlen. Welche hilfe gibt es?",
+    "Was tun bei energieschulden und drohender abschaltung?",
+    "Wie bekomme ich darlehen oder notfallhilfe bei energiekosten nicht bezahlbar?"
+  ],
+  "sanctions_conflict": [
+    "Meine leistung wurde gekuerzt durch sanktion. Was kann ich tun?",
+    "Wie lege ich widerspruch gegen einen bescheid ein und welche frist gilt?",
+    "Wo bekomme ich rechtsberatung bei pflichtverletzung und sanktion?"
+  ],
+  "debt_crisis": [
+    "Ich habe schulden und miete rueckstand. Wo bekomme ich schnelle hilfe?",
+    "Was kann ich bei pfaendung und finanzieller krise sofort tun?",
+    "Wo finde ich schuldnerberatung bei schulden, pfaendung und notfallhilfe?"
+  ]
+}

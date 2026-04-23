@@ -371,7 +371,7 @@ export default function EntryPage() {
           <SectionCard title={t('entry.public_summary')}>
             <p className="mb-4 text-sm text-muted-foreground">{t('entry.public_summary_body')}</p>
             <div className="mb-4 flex flex-wrap gap-2">
-              {(['standard', 'einfach', 'leicht'] as LanguageMode[]).map((mode) => (
+              {(['standard', 'einfach'] as LanguageMode[]).map((mode) => (
                 <button
                   key={mode}
                   type="button"

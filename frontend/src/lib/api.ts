@@ -17,17 +17,27 @@ import type {
 } from './db_types';
 import registeredSources from '../../../data/_sources/registered_sources.json';
 
-const DEFAULT_LOCAL_API_BASE_URL =
+const IS_LOCALHOST =
   typeof window !== 'undefined' &&
-  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-    ? 'http://127.0.0.1:3001/api'
-    : 'https://systemfehler-api-worker.inequality.workers.dev/api';
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+const IS_LOCAL_PAGES_DEV =
+  IS_LOCALHOST &&
+  typeof window !== 'undefined' &&
+  window.location.port === '8788';
+
+const DEFAULT_LOCAL_API_BASE_URL =
+  IS_LOCAL_PAGES_DEV
+    ? '/api'
+    : IS_LOCALHOST
+      ? 'http://127.0.0.1:3001/api'
+      : 'https://systemfehler-api-worker.inequality.workers.dev/api';
 const API_BASE_URL = import.meta.env.VITE_API_URL || DEFAULT_LOCAL_API_BASE_URL;
 const DEFAULT_LOCAL_AI_BASE_URL =
-  typeof window !== 'undefined' &&
-  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-    ? 'http://localhost:8002'
-    : '/api/ai';
+  IS_LOCAL_PAGES_DEV
+    ? '/api/ai'
+    : IS_LOCALHOST
+      ? 'http://localhost:8002'
+      : '/api/ai';
 const AI_API_BASE_URL = import.meta.env.VITE_AI_API_URL || DEFAULT_LOCAL_AI_BASE_URL;
 const DEFAULT_SNAPSHOT_BASE_URL =
   typeof window !== 'undefined'
@@ -269,10 +279,43 @@ interface AIEvidence {
   confidence: number;
 }
 
+interface AIEvidenceLanes {
+  official?: AIEvidence[];
+  assistive?: AIEvidence[];
+  contacts?: AIEvidence[];
+  context?: AIEvidence[];
+}
+
+interface AIRetrievalDiagnostics {
+  requested_mode?: string;
+  retrieval_mode?: string;
+  strict_official?: boolean;
+  min_source_tier?: string | null;
+  min_confidence?: number;
+  external_configured?: boolean;
+  external_status?: string;
+  evidence_before_filter?: number;
+  evidence_after_filter?: number;
+  dropped_by_policy?: number;
+  fallback?: boolean;
+  detected_stages?: string[];
+  selected_life_event?: string | null;
+}
+
+interface AIRetrievalOptions {
+  retrievalMode?: 'keyword' | 'hybrid' | 'external';
+  strictOfficial?: boolean;
+  lifeEvent?: string;
+  minSourceTier?: string;
+  minConfidence?: number;
+}
+
 interface AIRetrieveResponse {
   evidence: AIEvidence[];
+  evidence_lanes?: AIEvidenceLanes;
   weak_evidence?: boolean;
   latency_ms: number;
+  retrieval?: AIRetrievalDiagnostics;
 }
 
 interface AISynthesizeResponse {
@@ -284,8 +327,35 @@ interface AISynthesizeResponse {
   latency_ms: number;
   fallback: boolean;
   evidence: AIEvidence[];
+  evidence_lanes?: AIEvidenceLanes;
+  answer_lanes?: {
+    official?: {
+      answer?: string | null;
+      sources?: string[];
+      explanation?: string | null;
+    };
+    assistive?: {
+      answer?: string | null;
+      sources?: string[];
+      explanation?: string | null;
+    };
+    contacts?: {
+      answer?: string | null;
+      sources?: string[];
+      explanation?: string | null;
+    };
+  };
+  assistive_contacts?: Array<{
+    name: string;
+    url: string;
+    phone?: string | null;
+    email?: string | null;
+    source?: string | null;
+    confidence?: number;
+  }>;
   weak_evidence?: boolean;
   usage?: Record<string, unknown>;
+  retrieval?: AIRetrievalDiagnostics;
   plain_language?: {
     einfach?: string | null;
     leicht?: string | null;
@@ -333,6 +403,28 @@ interface AIHealthResponse {
   turnstile?: {
     configured: boolean;
   };
+  retrieval?: {
+    requestedMode: string;
+    activeMode: string;
+    strictOfficial: boolean;
+    minSourceTier?: string | null;
+    minConfidence: number;
+    externalConfigured: boolean;
+    externalAllowed?: boolean;
+    externalEndpointHost?: string | null;
+    externalTimeoutMs?: number;
+    lifeEvents?: Array<{
+      id: string;
+      label_de: string;
+      label_en?: string;
+      domains?: string[];
+      resource_targets?: {
+        documents?: string[];
+        information?: string[];
+        contacts?: string[];
+      };
+    }>;
+  };
   host: string;
   port: number;
 }
@@ -370,14 +462,19 @@ async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> 
       : normalizedEndpoint;
   const url = `${normalizedBase}${dedupedEndpoint}`;
   
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 20000);
+
   try {
     const response = await fetch(url, {
       ...options,
+      signal: options?.signal ?? controller.signal,
       headers: {
         'Content-Type': 'application/json',
         ...options?.headers,
       },
     });
+    window.clearTimeout(timeout);
 
     if (!response.ok) {
       // Try to parse JSON error, fall back to text
@@ -403,6 +500,10 @@ async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> 
 
     return await response.json();
   } catch (error) {
+    window.clearTimeout(timeout);
+    if (error instanceof DOMException && error.name === 'AbortError') {
+      throw new Error(`API request timed out for ${endpoint}`);
+    }
     if (error instanceof Error) {
       throw error;
     }
@@ -440,14 +541,14 @@ async function fetchAiApi<T>(endpoint: string, options?: RequestInit): Promise<T
   } catch (error) {
     window.clearTimeout(timeout);
     if (error instanceof DOMException && error.name === 'AbortError') {
-      throw new Error('AI request timed out after 45 seconds');
+      throw new Error('Guided request timed out after 45 seconds');
     }
     throw error;
   }
   window.clearTimeout(timeout);
 
   if (!response.ok) {
-    let errorMsg = `AI request failed (${response.status})`;
+    let errorMsg = `Guided request failed (${response.status})`;
     try {
       const payload = await response.json();
       errorMsg = JSON.stringify(payload);
@@ -455,7 +556,7 @@ async function fetchAiApi<T>(endpoint: string, options?: RequestInit): Promise<T
       try {
         errorMsg = await response.text();
       } catch {
-        errorMsg = `AI request failed (${response.status})`;
+        errorMsg = `Guided request failed (${response.status})`;
       }
     }
     throw new Error(errorMsg);
@@ -510,24 +611,27 @@ function parseEvidenceEntries(evidence: AIEvidence[]): Entry[] {
   return Array.from(relatedEntriesMap.values());
 }
 
-async function fetchAIResultBundle(query: string): Promise<AIResultBundle> {
+async function fetchAIResultBundle(query: string, retrieval?: AIRetrievalOptions): Promise<AIResultBundle> {
   const trimmed = query.trim();
   const [rewriteResult, retrieveResult, synthesisResult] = await Promise.allSettled([
     getAIRewrite(trimmed),
-    getAIRetrieve(trimmed),
-    getAISynthesis(trimmed),
+    getAIRetrieve(trimmed, retrieval),
+    getAISynthesis(trimmed, retrieval),
   ]);
 
   const rewrite =
     rewriteResult.status === 'fulfilled'
       ? rewriteResult.value
-      : buildAiTimeoutRewrite(trimmed, rewriteResult.reason instanceof Error ? rewriteResult.reason.message : 'AI rewrite failed');
+      : buildAiTimeoutRewrite(
+          trimmed,
+          rewriteResult.reason instanceof Error ? rewriteResult.reason.message : 'Guided rewrite failed'
+        );
 
   const synthesis =
     synthesisResult.status === 'fulfilled'
       ? synthesisResult.value
       : buildAiTimeoutSynthesis(
-          synthesisResult.reason instanceof Error ? synthesisResult.reason.message : 'AI synthesis failed'
+          synthesisResult.reason instanceof Error ? synthesisResult.reason.message : 'Guided synthesis failed'
         );
   const retrievalEvidence =
     retrieveResult.status === 'fulfilled'
@@ -540,6 +644,7 @@ async function fetchAIResultBundle(query: string): Promise<AIResultBundle> {
           ...synthesis,
           evidence: retrievalEvidence,
           weak_evidence: synthesis.weak_evidence ?? retrieveResult.value.weak_evidence,
+          retrieval: synthesis.retrieval || retrieveResult.value.retrieval,
         }
       : synthesis;
 
@@ -564,24 +669,38 @@ async function getAIRewrite(
 
 async function getAIRetrieve(
   query: string,
-  options?: { turnstileToken?: string }
+  options?: { turnstileToken?: string } & AIRetrievalOptions
 ): Promise<AIRetrieveResponse> {
   const trimmed = query.trim();
   return fetchAiApi<AIRetrieveResponse>('/retrieve', {
     method: 'POST',
-    body: JSON.stringify({ query: trimmed }),
+    body: JSON.stringify({
+      query: trimmed,
+      retrieval_mode: options?.retrievalMode,
+      strict_official: options?.strictOfficial,
+      life_event: options?.lifeEvent,
+      min_source_tier: options?.minSourceTier,
+      min_confidence: options?.minConfidence,
+    }),
     headers: options?.turnstileToken ? { 'x-turnstile-token': options.turnstileToken } : undefined,
   });
 }
 
 async function getAISynthesis(
   query: string,
-  options?: { turnstileToken?: string }
+  options?: { turnstileToken?: string } & AIRetrievalOptions
 ): Promise<AISynthesizeResponse> {
   const trimmed = query.trim();
   return fetchAiApi<AISynthesizeResponse>('/synthesize', {
     method: 'POST',
-    body: JSON.stringify({ query: trimmed }),
+    body: JSON.stringify({
+      query: trimmed,
+      retrieval_mode: options?.retrievalMode,
+      strict_official: options?.strictOfficial,
+      life_event: options?.lifeEvent,
+      min_source_tier: options?.minSourceTier,
+      min_confidence: options?.minConfidence,
+    }),
     headers: options?.turnstileToken ? { 'x-turnstile-token': options.turnstileToken } : undefined,
   });
 }
@@ -1221,7 +1340,7 @@ export const api = {
     }
   },
 
-  getAIResults: async (query: string): Promise<AIResultBundle> => {
+  getAIResults: async (query: string, retrieval?: AIRetrievalOptions): Promise<AIResultBundle> => {
     const trimmed = query.trim();
     if (!trimmed) {
       return {
@@ -1231,11 +1350,11 @@ export const api = {
           provider: 'none',
           latency_ms: 0,
           fallback: true,
-          explanation: 'Enter a search query to use the AI assistant.',
+          explanation: 'Enter a search query to use the guided assistant.',
         },
         synthesis: {
           answer: null,
-          explanation: 'Enter a search query to use the AI assistant.',
+          explanation: 'Enter a search query to use the guided assistant.',
           sources: [],
           provider: 'none',
           model: 'disabled',
@@ -1256,11 +1375,11 @@ export const api = {
           provider: 'none',
           latency_ms: 0,
           fallback: true,
-          explanation: 'AI sidecar is not available on GitHub Pages.',
+          explanation: 'Guided assistant is not available on GitHub Pages.',
         },
         synthesis: {
           answer: null,
-          explanation: 'AI sidecar is not available on GitHub Pages.',
+          explanation: 'Guided assistant is not available on GitHub Pages.',
           sources: [],
           provider: 'none',
           model: 'disabled',
@@ -1273,7 +1392,7 @@ export const api = {
       };
     }
 
-    return fetchAIResultBundle(trimmed);
+    return fetchAIResultBundle(trimmed, retrieval);
   },
 
   warmAIResults: async (queries: string[]): Promise<void> => {
@@ -1317,7 +1436,7 @@ export const api = {
           provider: 'none',
           configured: false,
           status: 'unreachable',
-          error: 'AI sidecar is not reachable at the configured URL.',
+          error: 'Guided assistant service is not reachable at the configured URL.',
         },
         host: AI_API_BASE_URL,
         port: 0,
@@ -1366,6 +1485,8 @@ export type {
   AIRewriteResponse,
   AISynthesizeResponse,
   AIEnrichmentResponse,
+  AIRetrievalOptions,
+  AIRetrievalDiagnostics,
   AIResultBundle,
   AIHealthResponse,
   SourceCatalogItem,

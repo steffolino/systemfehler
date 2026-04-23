@@ -59,6 +59,8 @@ postgres_data/
 dist-pages/
 cloudflare-pages/functions/dist/
 .deploy-main/
+# Wrangler local dev state (cache, KV, D1 snapshots — not for git)
+.wrangler/
 
 # ── Logs ──────────────────────────────────────────────────────────────────
 logs/

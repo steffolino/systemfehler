@@ -15,25 +15,25 @@ import {
   getReadableAnswerText,
   type LanguageMode,
 } from '@/lib/plain_language';
+import suggestedQuestionsByLifeEvent from '../data/life_event_suggested_questions.json';
 
 type TabKey = 'article' | 'ai';
-
-const AI_SUGGESTED_QUESTIONS = [
-  'Ich bin arbeitslos geworden. Was nun?',
-  'Wie beantrage ich Buergergeld beim Jobcenter?',
-  'Welche Unterstüzungen bekomme ich für meine Kinder?',
-  'Wie kann ich mich weiterbilden?'
-];
+type RetrievalMode = 'keyword' | 'hybrid' | 'external';
+type LifeEventOption = {
+  id: string;
+  label_de: string;
+  label_en?: string;
+};
 
 function parseEvidenceEntriesForPage(evidence: Array<{ content: string }>): Entry[] {
   if (typeof window !== 'undefined' && window.console) {
-    console.log('AI evidence array size:', evidence.length);
+    console.log('Guided evidence array size:', evidence.length);
   }
 
   const SAFE_MAX_EVIDENCE = 100;
   if (evidence.length > SAFE_MAX_EVIDENCE) {
     if (typeof window !== 'undefined' && window.console) {
-      console.error('AI evidence array too large, aborting processing. Evidence size:', evidence.length);
+      console.error('Guided evidence array too large, aborting processing. Evidence size:', evidence.length);
     }
     return [];
   }
@@ -60,12 +60,7 @@ function parseEvidenceEntriesForPage(evidence: Array<{ content: string }>): Entr
     }
 
     if (!relatedEntriesMap.has(entry.id)) {
-      relatedEntriesMap.set(entry.id, {
-        id: entry.id,
-        url: entry.url,
-        status: entry.status,
-        title: entry.title || '',
-      } as Entry);
+      relatedEntriesMap.set(entry.id, entry as Entry);
       count++;
     }
   }
@@ -109,8 +104,11 @@ export default function SearchPage() {
   const { t, locale } = useI18n();
   const translate = t as unknown as (key: string, vars?: Record<string, string | number>) => string;
 
+  const isLocalhost =
+    typeof window !== 'undefined' &&
+    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
   const turnstileSiteKey = (import.meta.env.VITE_TURNSTILE_SITE_KEY || '').trim();
-  const turnstileEnabled = Boolean(turnstileSiteKey);
+  const turnstileEnabled = Boolean(turnstileSiteKey) && !isLocalhost;
 
   const getTurnstileTokenRef = useRef<(() => Promise<string>) | null>(null);
 
@@ -119,6 +117,9 @@ export default function SearchPage() {
   const [aiDraftQuery, setAiDraftQuery] = useState('');
   const [submittedAiQuery, setSubmittedAiQuery] = useState('');
   const [aiLanguageMode, setAiLanguageMode] = useState<LanguageMode>('einfach');
+  const [retrievalMode, setRetrievalMode] = useState<RetrievalMode>('hybrid');
+  const [strictOfficialOnly, setStrictOfficialOnly] = useState(false);
+  const [lifeEventContext, setLifeEventContext] = useState<string>('');
   const [tab, setTab] = useState<TabKey>('ai');
   const [lastAiSubmitAt, setLastAiSubmitAt] = useState(0);
 
@@ -132,9 +133,9 @@ export default function SearchPage() {
 
   const [standardError, setStandardError] = useState<string | null>(null);
   const [aiError, setAiError] = useState<string | null>(null);
-  const [aiSuggestionsWarmed, setAiSuggestionsWarmed] = useState(false);
   const [turnstileReady, setTurnstileReady] = useState(false);
   const [showTechnicalDetails, setShowTechnicalDetails] = useState(false);
+  const warmedSuggestionContexts = useRef<Set<string>>(new Set());
 
   const handleTurnstileReady = useCallback((executor: (() => Promise<string>) | null) => {
     getTurnstileTokenRef.current = executor;
@@ -208,6 +209,11 @@ export default function SearchPage() {
     };
 
     void (async () => {
+      const retrievalOptions = {
+        retrievalMode,
+        strictOfficial: strictOfficialOnly,
+        lifeEvent: lifeEventContext || undefined,
+      } as const;
       let rewrite = pendingResult.rewrite;
       let evidence: Array<{ content: string, source: string, confidence: number }> = [];
       let weakEvidence = true;
@@ -222,7 +228,7 @@ export default function SearchPage() {
 
       try {
         const retrieveResult = await fetchWithTurnstile((turnstileToken) =>
-          api.getAIRetrieve(submittedAiQuery, { turnstileToken })
+          api.getAIRetrieve(submittedAiQuery, { turnstileToken, ...retrievalOptions })
         );
         evidence = retrieveResult.evidence;
         weakEvidence = Boolean(retrieveResult.weak_evidence);
@@ -250,7 +256,7 @@ export default function SearchPage() {
 
       try {
         const synthesis = await fetchWithTurnstile((turnstileToken) =>
-          api.getAISynthesis(submittedAiQuery, { turnstileToken })
+          api.getAISynthesis(submittedAiQuery, { turnstileToken, ...retrievalOptions })
         );
 
         if (cancelled) return;
@@ -292,7 +298,7 @@ export default function SearchPage() {
     return () => {
       cancelled = true;
     };
-  }, [submittedAiQuery, t, tab, translate, turnstileEnabled]);
+  }, [lifeEventContext, retrievalMode, strictOfficialOnly, submittedAiQuery, t, tab, translate, turnstileEnabled]);
 
   useEffect(() => {
     if (tab !== 'ai') return;
@@ -309,12 +315,18 @@ export default function SearchPage() {
   }, [tab]);
 
   useEffect(() => {
-    if (tab !== 'ai' || aiSuggestionsWarmed || turnstileEnabled) return;
+    if (tab !== 'ai' || turnstileEnabled) return;
+    if (!lifeEventContext) return;
+    const suggestions = Array.isArray((suggestedQuestionsByLifeEvent as Record<string, string[]>)[lifeEventContext])
+      ? (suggestedQuestionsByLifeEvent as Record<string, string[]>)[lifeEventContext]
+      : [];
+    if (suggestions.length === 0) return;
+    if (warmedSuggestionContexts.current.has(lifeEventContext)) return;
 
-    api.warmAIResults(AI_SUGGESTED_QUESTIONS).finally(() => {
-      setAiSuggestionsWarmed(true);
+    api.warmAIResults(suggestions).finally(() => {
+      warmedSuggestionContexts.current.add(lifeEventContext);
     });
-  }, [aiSuggestionsWarmed, tab, turnstileEnabled]);
+  }, [lifeEventContext, tab, turnstileEnabled]);
 
   function submitAiQuery() {
     const trimmed = aiDraftQuery.trim();
@@ -413,6 +425,11 @@ export default function SearchPage() {
           ? t('search.answer_source_fallback')
           : '';
 
+  const officialLaneAnswer = aiResult?.synthesis.answer_lanes?.official?.answer?.trim() || '';
+  const assistiveLaneAnswer = aiResult?.synthesis.answer_lanes?.assistive?.answer?.trim() || '';
+  const contactsLaneAnswer = aiResult?.synthesis.answer_lanes?.contacts?.answer?.trim() || '';
+  const assistiveContacts = aiResult?.synthesis.assistive_contacts || [];
+
   const evidenceRoleLabels = useMemo(() => {
     const labels = new Set<string>();
 
@@ -432,6 +449,25 @@ export default function SearchPage() {
 
     return aiHealth?.provider.configured ? t('search.status_ready_simple') : '';
   }, [aiError, aiHealth, aiLoading, aiResult?.relatedEntries?.length, submittedAiQuery, t]);
+
+  const lifeEventOptions = useMemo<LifeEventOption[]>(() => {
+    const fromHealth = aiHealth?.retrieval?.lifeEvents || [];
+    if (fromHealth.length === 0) return [];
+    return fromHealth
+      .filter((item) => typeof item?.id === 'string' && item.id.trim())
+      .map((item) => ({
+        id: item.id,
+        label_de: item.label_de || item.id,
+        label_en: item.label_en || item.label_de || item.id,
+      }));
+  }, [aiHealth?.retrieval?.lifeEvents]);
+
+  const selectedSuggestedQuestions = useMemo<string[]>(() => {
+    if (!lifeEventContext) return [];
+    const map = suggestedQuestionsByLifeEvent as Record<string, string[]>;
+    const suggestions = map[lifeEventContext];
+    return Array.isArray(suggestions) ? suggestions.slice(0, 5) : [];
+  }, [lifeEventContext]);
 
   return (
     <div className="mx-auto w-full max-w-5xl p-4 md:p-6">
@@ -469,26 +505,6 @@ export default function SearchPage() {
                 </div>
               </div>
 
-              {tab === 'ai' && (
-                <div className="rounded-2xl border bg-muted/20 p-3">
-                  <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                    {t('search.suggested_questions')}
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {AI_SUGGESTED_QUESTIONS.map((question) => (
-                      <Button
-                        key={question}
-                        variant="outline"
-                        className="h-auto whitespace-normal text-left"
-                        onClick={() => useSuggestedQuestion(question)}
-                      >
-                        {question}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
               <div className="flex flex-col gap-3 md:flex-row md:items-start">
                 <div className="flex-1">
                   <SearchInput
@@ -501,6 +517,84 @@ export default function SearchPage() {
                   <div className="mt-2 text-xs text-muted-foreground">
                     {tab === 'ai' ? t('search.ai_helper') : t('search.article_helper')}
                   </div>
+                  {tab === 'ai' && (
+                    <div className="mt-3 space-y-2">
+                      <div className="max-w-md">
+                        <div className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                          {t('search.life_event_context')}
+                        </div>
+                        <select
+                          value={lifeEventContext}
+                          onChange={(event) => setLifeEventContext(event.target.value)}
+                          className="h-10 w-full rounded-md border bg-background px-3 text-sm"
+                        >
+                          <option value="">{t('search.life_event_none')}</option>
+                          {lifeEventOptions.map((item) => (
+                            <option key={item.id} value={item.id}>
+                              {locale === 'en' ? item.label_en || item.label_de : item.label_de}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      {lifeEventContext && selectedSuggestedQuestions.length > 0 && (
+                        <div className="rounded-2xl border bg-muted/20 p-3">
+                          <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                            {t('search.suggested_questions')}
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {selectedSuggestedQuestions.map((question) => (
+                              <Button
+                                key={question}
+                                variant="outline"
+                                className="h-auto whitespace-normal text-left"
+                                onClick={() => useSuggestedQuestion(question)}
+                              >
+                                {question}
+                              </Button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      <div className="flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setRetrievalMode('keyword')}
+                        className={[
+                          'inline-flex rounded-full border px-3 py-1.5 text-xs font-medium transition',
+                          retrievalMode === 'keyword'
+                            ? 'border-foreground bg-foreground text-background'
+                            : 'border-border bg-background text-foreground hover:bg-muted',
+                        ].join(' ')}
+                      >
+                        {t('search.retrieval_keyword')}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setRetrievalMode('hybrid')}
+                        className={[
+                          'inline-flex rounded-full border px-3 py-1.5 text-xs font-medium transition',
+                          retrievalMode === 'hybrid'
+                            ? 'border-foreground bg-foreground text-background'
+                            : 'border-border bg-background text-foreground hover:bg-muted',
+                        ].join(' ')}
+                      >
+                        {t('search.retrieval_hybrid')}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setStrictOfficialOnly((value) => !value)}
+                        className={[
+                          'inline-flex rounded-full border px-3 py-1.5 text-xs font-medium transition',
+                          strictOfficialOnly
+                            ? 'border-foreground bg-foreground text-background'
+                            : 'border-border bg-background text-foreground hover:bg-muted',
+                        ].join(' ')}
+                      >
+                        {t('search.retrieval_official_only')}
+                      </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {tab === 'ai' && (
@@ -548,7 +642,7 @@ export default function SearchPage() {
                   </div>
 
                   <div className="flex flex-wrap gap-2">
-                    {(['standard', 'einfach', 'leicht'] as LanguageMode[]).map((mode) => (
+                    {(['standard', 'einfach'] as LanguageMode[]).map((mode) => (
                       <button
                         key={mode}
                         type="button"
@@ -588,13 +682,73 @@ export default function SearchPage() {
                   </div>
                 ) : (
                   <div className="space-y-4">
-                    <div className="whitespace-pre-line text-base leading-6 text-foreground">
-                      {submittedAiQuery
-                        ? displayedAiAnswer || t('search.ready_answer')
-                        : aiDraftQuery.trim()
-                          ? t('search.ready_answer')
-                          : t('search.prompt_ai')}
-                    </div>
+                    {submittedAiQuery && aiLanguageMode === 'standard' && (officialLaneAnswer || assistiveLaneAnswer || contactsLaneAnswer) ? (
+                      <div className="space-y-3">
+                        <div className="rounded-2xl border bg-background p-4">
+                          <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                            {t('search.answer_lane_official')}
+                          </div>
+                          <div className="whitespace-pre-line text-base leading-6 text-foreground">
+                            {officialLaneAnswer || t('search.answer_lane_official_empty')}
+                          </div>
+                        </div>
+                        <div className="rounded-2xl border bg-muted/20 p-4">
+                          <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                            {t('search.answer_lane_assistive')}
+                          </div>
+                          <div className="whitespace-pre-line text-base leading-6 text-foreground">
+                            {assistiveLaneAnswer || t('search.answer_lane_assistive_empty')}
+                          </div>
+                        </div>
+                        <div className="rounded-2xl border bg-muted/20 p-4">
+                          <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                            {t('search.answer_lane_contacts')}
+                          </div>
+                          <div className="whitespace-pre-line text-base leading-6 text-foreground">
+                            {contactsLaneAnswer || t('search.answer_lane_contacts_empty')}
+                          </div>
+                          <div className="mt-4">
+                            <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                              {t('search.assistive_contacts')}
+                            </div>
+                            {assistiveContacts.length > 0 ? (
+                              <div className="space-y-2">
+                                {assistiveContacts.map((contact, index) => (
+                                  <div key={`${contact.url}-${index}`} className="rounded-lg border bg-background p-3">
+                                    <a
+                                      href={contact.url}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      className="font-medium text-foreground underline underline-offset-4"
+                                    >
+                                      {contact.name}
+                                    </a>
+                                    <div className="mt-1 text-xs text-muted-foreground break-all">{contact.url}</div>
+                                    {(contact.phone || contact.email) && (
+                                      <div className="mt-1 text-sm text-foreground">
+                                        {contact.phone ? `${contact.phone}` : ''}
+                                        {contact.phone && contact.email ? ' · ' : ''}
+                                        {contact.email ? `${contact.email}` : ''}
+                                      </div>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            ) : (
+                              <div className="text-sm text-muted-foreground">{t('search.assistive_no_contacts')}</div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="whitespace-pre-line text-base leading-6 text-foreground">
+                        {submittedAiQuery
+                          ? displayedAiAnswer || t('search.ready_answer')
+                          : aiDraftQuery.trim()
+                            ? t('search.ready_answer')
+                            : t('search.prompt_ai')}
+                      </div>
+                    )}
 
                     {submittedAiQuery && aiResult?.synthesis.weak_evidence && (
                       <div className="rounded-xl border bg-muted/30 px-4 py-3 text-xs text-muted-foreground">
@@ -725,6 +879,10 @@ export default function SearchPage() {
                               {t('search.status_bot_protection')}:{' '}
                               {statusText(turnstileEnabled && turnstileReady, translate)}
                             </div>
+                            <div>{t('search.status_retrieval_mode')}: {aiResult?.synthesis.retrieval?.retrieval_mode || aiHealth?.retrieval?.activeMode || t('common.unknown')}</div>
+                            <div>{t('search.status_retrieval_filter')}: {statusText(strictOfficialOnly, translate)}</div>
+                            <div>{t('search.status_life_event')}: {aiResult?.synthesis.retrieval?.selected_life_event || lifeEventContext || t('common.unknown')}</div>
+                            <div>{t('search.status_retrieval_external')}: {aiResult?.synthesis.retrieval?.external_status || (aiHealth?.retrieval?.externalConfigured ? t('search.status_ready') : t('search.status_loading'))}</div>
                           </div>
 
                           {aiHealth?.provider.models && aiHealth.provider.models.length > 0 && (
@@ -789,3 +947,4 @@ export default function SearchPage() {
     </div>
   );
 }
+

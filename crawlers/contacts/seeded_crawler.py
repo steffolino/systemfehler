@@ -12,18 +12,39 @@ from ..shared.source_registry import SourceProfile
 
 
 class SeededContactsCrawler(SeededDomainCrawler):
+    CONTACT_SIGNAL_TERMS = (
+        'kontakt',
+        'telefon',
+        'hotline',
+        'sprechzeiten',
+        'ansprechpartner',
+        'servicecenter',
+        'service-center',
+        'servicetelefon',
+        'email',
+        'e-mail',
+        'chat',
+        'rufnummer',
+        'erreichen-sie-uns',
+        'helpdesk',
+        'notruf',
+        'gebaerden',
+        '115',
+    )
+    NON_CONTACT_PATH_TERMS = (
+        'leichte-sprache',
+        'de-leicht',
+    )
     RELATED_PATH_HINTS = {
         'arbeitsagentur.de': (
             '/service-bereich/so-erreichen-sie-uns',
             '/gebaerdensprache',
-            '/leichte-sprache',
         ),
         'bmas.de': (
             '/DE/Service/Kontakt/',
         ),
         '115.de': (
             '/gebaerdensprache',
-            '/de-leicht',
             '/kontakt',
         ),
         'gebaerdentelefon.de': (
@@ -98,6 +119,22 @@ class SeededContactsCrawler(SeededDomainCrawler):
             'linkedOrganization': linked_org,
         }
 
+    def should_keep_entry(
+        self,
+        url: str,
+        soup: BeautifulSoup,
+        entry: Dict[str, Any],
+        source_profile: Optional[SourceProfile] = None,
+    ) -> bool:
+        title = str(entry.get('title') or '').lower()
+        summary = str((entry.get('summary') or {}).get('de') or '').lower()
+        content = str((entry.get('content') or {}).get('de') or '').lower()
+        text = f"{url.lower()} {title} {summary} {content}"
+
+        if any(path_term in url.lower() for path_term in self.NON_CONTACT_PATH_TERMS):
+            return any(signal in text for signal in self.CONTACT_SIGNAL_TERMS)
+        return any(signal in text for signal in self.CONTACT_SIGNAL_TERMS)
+
     def discover_related_seed_records(
         self,
         url: str,
@@ -133,9 +170,8 @@ class SeededContactsCrawler(SeededDomainCrawler):
             elif '/kontakt' in candidate:
                 topics.extend(['contacts'])
                 tags.extend(['official_contact_source', 'contact'])
-            elif 'leichte-sprache' in candidate or 'de-leicht' in candidate:
-                topics.extend(['contacts', 'leichte_sprache_soziale_sicherheit'])
-                tags.extend(['official_contact_source', 'light_language'])
+            else:
+                continue
 
             candidate_profile = self.source_registry.resolve(candidate, self.domain)
             candidate_source = (

@@ -124,6 +124,15 @@ class SeededDomainCrawler(BaseCrawler):
     ) -> List[Dict[str, Any]]:
         return []
 
+    def should_keep_entry(
+        self,
+        url: str,
+        soup: BeautifulSoup,
+        entry: Dict[str, Any],
+        source_profile: Optional[SourceProfile] = None,
+    ) -> bool:
+        return True
+
     def _default_topics_for_url(self, source_profile: Optional[SourceProfile]) -> List[str]:
         if source_profile and source_profile.default_topics:
             return list(dict.fromkeys([*source_profile.default_topics, *self.default_topics()]))
@@ -341,6 +350,18 @@ class SeededDomainCrawler(BaseCrawler):
         if seed_record.get('targetGroups'):
             entry['targetGroups'] = list(dict.fromkeys(seed_record['targetGroups']))
         entry.update(self.build_domain_fields(canonical_url, soup, entry, source_profile))
+        if not self.should_keep_entry(canonical_url, soup, entry, source_profile):
+            self.metrics.note_url_status('filtered_out', reason='domain_filter')
+            self.url_registry.record(
+                canonical_url,
+                status='filtered_out',
+                final_url=final_url,
+                canonical_url=canonical_url,
+                reason='domain_filter',
+                status_code=response.get('status_code'),
+                source='seeded_domain_crawler',
+            )
+            return None
         self._capture_related_seed_records(canonical_url, soup, seed_record, source_profile)
 
         content_checksum = self.calculate_checksum(json.dumps(entry, sort_keys=True, ensure_ascii=False))

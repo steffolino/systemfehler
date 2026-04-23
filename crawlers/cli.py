@@ -249,16 +249,27 @@ def match_topic_query(query: str, data_dir: str):
     return True
 
 
-def sync_topic_seeds(domain: str, data_dir: str, topics: list[str] | None = None):
+def sync_topic_seeds(
+    domain: str,
+    data_dir: str,
+    topics: list[str] | None = None,
+    include_sitemaps: bool = False,
+):
     discovery = TopicDiscovery(data_dir)
-    report = discovery.sync_seed_manifest(domain=domain, topic_ids=topics or None, persist=True)
+    report = discovery.sync_seed_manifest(
+        domain=domain,
+        topic_ids=topics or None,
+        include_sitemaps=include_sitemaps,
+        persist=True,
+    )
     logger.info(
-        "Synced topic seeds for domain=%s topics=%s seed_count=%s added=%s updated=%s output=%s",
+        "Synced topic seeds for domain=%s topics=%s seed_count=%s added=%s updated=%s sitemap_candidates=%s output=%s",
         domain,
         ",".join(report["topicIds"]),
         report["seedCount"],
         report["added"],
         report["updated"],
+        report.get("sitemapCandidates", 0),
         report["outputPath"],
     )
     return True
@@ -785,6 +796,11 @@ def main():
         dest='topics',
         help='Optional topic id filter; repeatable',
     )
+    sync_topic_seeds_parser.add_argument(
+        '--with-sitemaps',
+        action='store_true',
+        help='Discover additional candidate URLs from source sitemap files before merging seeds',
+    )
     
     args = parser.parse_args()
     
@@ -839,6 +855,7 @@ def main():
             domain=args.domain,
             data_dir=args.data_dir,
             topics=args.topics,
+            include_sitemaps=args.with_sitemaps,
         )
     
     sys.exit(0 if success else 1)

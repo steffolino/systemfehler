@@ -23,7 +23,9 @@
     "expand:links:all": "python crawlers/cli.py expand-links --domain benefits && python crawlers/cli.py expand-links --domain aid && python crawlers/cli.py expand-links --domain tools && python crawlers/cli.py expand-links --domain organizations && python crawlers/cli.py expand-links --domain contacts",
     "api": "cross-env API_PORT=3001 node backend/server.js",
     "dev": "cd frontend && npm run dev",
-    "dev:all": "cross-env API_PORT=3001 AI_PORT=8002 DATABASE_URL=postgresql://systemfehler:dev_password@127.0.0.1:5432/systemfehler concurrently -k -n api,frontend,ai,ollama,docker -c blue,green,magenta,yellow,cyan \"npm run api\" \"npm run dev\" \"npm run ai:api:ollama\" \"npm run ollama:dev\" \"docker-compose up\"",
+    "dev:all": "npm run dev:all:pages",
+    "dev:all:fast": "npm run dev:all:pages:fast",
+    "dev:all:legacy": "cross-env API_PORT=3001 AI_PORT=8002 DATABASE_URL=postgresql://systemfehler:dev_password@127.0.0.1:5432/systemfehler concurrently -k -n api,frontend,ai,ollama,docker -c blue,green,magenta,yellow,cyan \"npm run api\" \"npm run dev\" \"npm run ai:api:ollama\" \"npm run ollama:dev\" \"docker-compose up\"",
     "ai:api": "cross-env AI_PORT=8002 uvicorn backend.ai_service.gateway:app --reload --port %AI_PORT%",
     "ai:api:ollama": "cross-env AI_PORT=8002 AI_PROVIDER=ollama AI_DEFAULT_MODEL=qwen2.5:3b AI_MODEL_REWRITE=qwen2.5:3b AI_MODEL_SYNTHESIZE=qwen2.5:3b AI_MODEL_ENRICH=qwen2.5:3b uvicorn backend.ai_service.gateway:app --reload --port %AI_PORT%",
     "ollama:dev": "node scripts/run_ollama_dev.js",
@@ -44,7 +46,22 @@
     "test:backend:py": "python -m unittest tests.test_ai_backend_unit tests.test_ai_provider_unit",
     "test:backend": "npm run test:backend:js && npm run test:backend:py",
     "build:frontend": "cd frontend && npm run build",
-    "deploy:all": "python crawlers/cli.py crawl benefits --source arbeitsagentur && python crawlers/cli.py validate --domain benefits && python crawlers/cli.py import --domain benefits --to-db && wrangler d1 execute systemfehler-db --remote --file=cloudflare-pages/d1/schema.sql && wrangler deploy --config wrangler.toml && wrangler pages deploy"
+    "ingest:d1:all": "python scripts/ingest_all_to_d1.py",
+    "eval:guided": "node scripts/eval_guided_retrieval_local.mjs",
+    "eval:guided:gold": "node scripts/eval_guided_retrieval_local.mjs --gold --fail-on-regression",
+    "build:life-event-suggested-fixture": "node scripts/build_life_event_suggested_fixture.mjs",
+    "test:life-event-suggested": "npm run build:life-event-suggested-fixture && node scripts/eval_guided_retrieval_local.mjs --gold tests/fixtures/life_event_suggested_queries.json --fail-on-regression",
+    "build:life-event-packs": "node scripts/build_life_event_resource_packs.mjs",
+    "audit:life-events": "node scripts/audit_life_event_coverage.mjs",
+    "prepare:dist-pages": "npm run build:life-event-packs && cd frontend && cross-env VITE_API_URL=/api VITE_AI_API_URL=/api/ai npm run build && cd .. && powershell -Command \"$ErrorActionPreference = 'Stop'; if (Test-Path 'dist-pages') { Remove-Item 'dist-pages' -Recurse -Force }; New-Item -ItemType Directory -Path 'dist-pages' | Out-Null; Copy-Item -Path 'frontend/dist/*' -Destination 'dist-pages' -Recurse -Force; New-Item -ItemType Directory -Force -Path 'dist-pages\\data\\_topics' | Out-Null; Copy-Item -Path 'data/_topics/life_events.json' -Destination 'dist-pages\\data\\_topics\\life_events.json' -Force; Copy-Item -Path 'data/_topics/life_event_resource_packs.json' -Destination 'dist-pages\\data\\_topics\\life_event_resource_packs.json' -Force\"",
+    "dev:pages:d1:reset": "npx wrangler d1 execute systemfehler-db --local --command \"DROP TABLE IF EXISTS entries; DROP TABLE IF EXISTS moderation_queue; DROP TABLE IF EXISTS benefits; DROP TABLE IF EXISTS aid; DROP TABLE IF EXISTS tools; DROP TABLE IF EXISTS organizations; DROP TABLE IF EXISTS contacts; DROP TABLE IF EXISTS audit_log;\" --config cloudflare-pages/wrangler.toml && npx wrangler d1 execute systemfehler-db --local --file=cloudflare-pages/d1/schema.sql --config cloudflare-pages/wrangler.toml && python scripts/seed_local_d1_chunked.py --database systemfehler-db --seed cloudflare-pages/d1/seed_entries.generated.sql --wrangler-cwd cloudflare-pages && npx wrangler d1 execute systemfehler-db --local --command \"DROP TABLE IF EXISTS entries; DROP TABLE IF EXISTS moderation_queue; DROP TABLE IF EXISTS benefits; DROP TABLE IF EXISTS aid; DROP TABLE IF EXISTS tools; DROP TABLE IF EXISTS organizations; DROP TABLE IF EXISTS contacts; DROP TABLE IF EXISTS audit_log;\" --config wrangler.toml && npx wrangler d1 execute systemfehler-db --local --file=cloudflare-pages/d1/schema.sql --config wrangler.toml && python scripts/seed_local_d1_chunked.py --database systemfehler-db --seed cloudflare-pages/d1/seed_entries.generated.sql --wrangler-cwd .",
+    "dev:pages:stop": "powershell -ExecutionPolicy Bypass -File scripts/stop_pages_dev.ps1",
+    "dev:all:pages": "npm run dev:pages:stop && npm run prepare:dist-pages && npm run dev:pages:d1:reset && npx wrangler pages dev ../dist-pages --port=8788 --live-reload --cwd cloudflare-pages",
+    "dev:all:pages:ai": "npm run dev:pages:stop && npm run prepare:dist-pages && npm run dev:pages:d1:reset && npx wrangler pages dev ../dist-pages --port=8788 --live-reload --ai AI --cwd cloudflare-pages",
+    "dev:all:pages:fast": "npm run dev:pages:stop && npm run prepare:dist-pages && npx wrangler pages dev ../dist-pages --port=8788 --live-reload --cwd cloudflare-pages",
+    "dev:all:pages:fast:ai": "npm run dev:pages:stop && npm run prepare:dist-pages && npx wrangler pages dev ../dist-pages --port=8788 --live-reload --ai AI --cwd cloudflare-pages",
+    "deploy:pages": "npm run prepare:dist-pages && npx wrangler pages deploy ../dist-pages --project-name=systemfehler --branch=main --cwd=cloudflare-pages",
+    "deploy:all": "python crawlers/cli.py crawl benefits --source arbeitsagentur && python crawlers/cli.py validate --domain benefits && python crawlers/cli.py import --domain benefits --to-db && wrangler d1 execute systemfehler-db --remote --file=cloudflare-pages/d1/schema.sql && python scripts/ingest_all_to_d1.py && wrangler deploy --config wrangler.toml && wrangler pages deploy"
   },
   "keywords": [
     "social-services",
@@ -60,7 +77,8 @@
     "node": ">=18.0.0"
   },
   "devDependencies": {
-    "cross-env": "^10.1.0"
+    "cross-env": "^10.1.0",
+    "wrangler": "^4.83.0"
   },
   "dependencies": {
     "ajv": "^8.17.1",

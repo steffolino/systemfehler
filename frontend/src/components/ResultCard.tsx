@@ -82,13 +82,15 @@ export default function ResultCard({ result }: { result: Entry }) {
               )}
             </div>
 
+            {(iqs != null || ais != null) && (
             <div>
               <div className="text-[11px] uppercase tracking-wide text-muted-foreground">{t('entry.source_quality')}</div>
               <div className="flex gap-3">
-                <span className={qualityTone(iqs)}>IQS {iqs != null ? iqs.toFixed(0) : '-'}</span>
-                <span className={qualityTone(ais)}>AIS {ais != null ? ais.toFixed(0) : '-'}</span>
+                {iqs != null && <span className={qualityTone(iqs)}>IQS {iqs.toFixed(0)}</span>}
+                {ais != null && <span className={qualityTone(ais)}>AIS {ais.toFixed(0)}</span>}
               </div>
             </div>
+            )}
           </div>
 
           {lastSeen && (
