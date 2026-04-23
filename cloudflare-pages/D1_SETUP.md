@@ -60,6 +60,13 @@ Also add the Pages base URL as a repository secret:
 - **Name**: `PAGES_INGEST_URL`
 - **Value**: e.g. `https://systemfehler.pages.dev`
 
+These two secrets are used by:
+- `.github/workflows/crawl-and-ingest.yml` (scheduled/manual ingest)
+- `.github/workflows/deploy-pages.yml` (post-deploy ingest sync)
+
+Both paths ingest all five domains via `scripts/ingest_all_to_d1.py`.
+The ingest client sends chunked batches to avoid `413 Payload Too Large` on larger snapshots.
+
 ## 4b. Add Turnstile and frontend build variables
 
 For bot protection and Auth0-enabled frontend builds, configure:

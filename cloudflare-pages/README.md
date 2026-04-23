@@ -38,7 +38,7 @@ Set these in repository settings (`Settings -> Secrets and variables -> Actions`
 - `CF_PAGES_API_TOKEN`
 - `CF_ACCOUNT_ID`
 
-For automated D1 ingest from `.github/workflows/crawl-and-ingest.yml`:
+For automated D1 ingest from workflows (`crawl-and-ingest.yml` and post-deploy in `deploy-pages.yml`):
 
 - `PAGES_INGEST_URL` (e.g. `https://systemfehler.pages.dev`)
 - `INGEST_TOKEN` (must match the Cloudflare Pages secret `INGEST_TOKEN`)
@@ -95,6 +95,10 @@ to same-origin Cloudflare Pages Functions instead of the local Python sidecar.
 Deployment runs from `.github/workflows/deploy-pages.yml` on:
 - pushes to `main`
 - manual workflow dispatch
+
+After Pages deploy, the workflow also attempts to sync all domain snapshots into D1
+via `scripts/ingest_all_to_d1.py` (when `PAGES_INGEST_URL` and `INGEST_TOKEN` are set).
+The ingest client uses chunked uploads to avoid `413 Payload Too Large` on large domains.
 
 ## Manual deployment (local)
 
