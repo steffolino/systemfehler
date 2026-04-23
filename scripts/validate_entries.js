@@ -58,7 +58,17 @@ function loadJson(filePath) {
 function toSetFromTaxonomy(filePath, key) {
   const payload = loadJson(filePath);
   const arr = Array.isArray(payload?.[key]) ? payload[key] : [];
-  return new Set(arr.map((item) => item.id).filter(Boolean));
+  const ids = new Set();
+  function collect(items) {
+    for (const item of items) {
+      if (item && typeof item.id === 'string') {
+        ids.add(item.id);
+        if (Array.isArray(item.children)) collect(item.children);
+      }
+    }
+  }
+  collect(arr);
+  return ids;
 }
 
 function asEntries(payload) {

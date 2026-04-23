@@ -80,11 +80,16 @@ def _load_taxonomy_ids(filename, key):
     except Exception:
         return set()
     values = payload.get(key, []) if isinstance(payload, dict) else []
-    return {
-        item.get("id")
-        for item in values
-        if isinstance(item, dict) and isinstance(item.get("id"), str)
-    }
+    result = set()
+
+    def _collect(items):
+        for item in items:
+            if isinstance(item, dict) and isinstance(item.get("id"), str):
+                result.add(item["id"])
+                _collect(item.get("children") or [])
+
+    _collect(values)
+    return result
 
 
 def _load_topic_profiles():

@@ -1,6 +1,6 @@
 {
-  "version": "0.1.0",
-  "description": "Topic taxonomy for classifying social services entries",
+  "version": "0.2.0",
+  "description": "Topic taxonomy for classifying social services entries. v0.2.0 adds hierarchical children for RAG retrieval expansion.",
   "topics": [
     {
       "id": "financial_support",
@@ -9,7 +9,89 @@
         "en": "Financial Support",
         "easy_de": "Geld-Hilfe"
       },
-      "children": []
+      "children": [
+        {
+          "id": "buergergeld",
+          "label": {
+            "de": "Bürgergeld",
+            "en": "Citizens' Benefit",
+            "easy_de": "Bürger-Geld"
+          },
+          "children": []
+        },
+        {
+          "id": "kinderzuschlag",
+          "label": {
+            "de": "Kinderzuschlag",
+            "en": "Child Supplement",
+            "easy_de": "Kinder-Zuschlag"
+          },
+          "children": []
+        },
+        {
+          "id": "regelbedarf",
+          "label": {
+            "de": "Regelbedarf",
+            "en": "Standard Benefit Amount",
+            "easy_de": "Grund-Betrag"
+          },
+          "children": []
+        },
+        {
+          "id": "mehrbedarf",
+          "label": {
+            "de": "Mehrbedarf",
+            "en": "Additional Need",
+            "easy_de": "Mehr Geld wegen besonderem Bedarf"
+          },
+          "children": []
+        },
+        {
+          "id": "aufstocker",
+          "label": {
+            "de": "Aufstocker",
+            "en": "Income Top-up",
+            "easy_de": "Arbeit mit Geld-Hilfe"
+          },
+          "children": []
+        },
+        {
+          "id": "wohngeld",
+          "label": {
+            "de": "Wohngeld",
+            "en": "Housing Benefit",
+            "easy_de": "Wohn-Geld"
+          },
+          "children": []
+        },
+        {
+          "id": "sozialhilfe",
+          "label": {
+            "de": "Sozialhilfe",
+            "en": "Social Assistance",
+            "easy_de": "Sozialhilfe"
+          },
+          "children": []
+        },
+        {
+          "id": "kindergeld",
+          "label": {
+            "de": "Kindergeld",
+            "en": "Child Benefit",
+            "easy_de": "Kinder-Geld"
+          },
+          "children": []
+        },
+        {
+          "id": "unterhaltsvorschuss",
+          "label": {
+            "de": "Unterhaltsvorschuss",
+            "en": "Child Maintenance Advance",
+            "easy_de": "Unterhalt-Vorschuss"
+          },
+          "children": []
+        }
+      ]
     },
     {
       "id": "housing",
@@ -18,7 +100,35 @@
         "en": "Housing",
         "easy_de": "Wohnung"
       },
-      "children": []
+      "children": [
+        {
+          "id": "kosten_der_unterkunft",
+          "label": {
+            "de": "Kosten der Unterkunft",
+            "en": "Housing Costs (KdU)",
+            "easy_de": "Wohn-Kosten"
+          },
+          "children": []
+        },
+        {
+          "id": "wohnberechtigungsschein",
+          "label": {
+            "de": "Wohnberechtigungsschein",
+            "en": "Housing Eligibility Certificate",
+            "easy_de": "Wohn-Schein"
+          },
+          "children": []
+        },
+        {
+          "id": "wohngeld",
+          "label": {
+            "de": "Wohngeld",
+            "en": "Housing Benefit",
+            "easy_de": "Wohn-Geld"
+          },
+          "children": []
+        }
+      ]
     },
     {
       "id": "healthcare",
@@ -27,7 +137,35 @@
         "en": "Healthcare",
         "easy_de": "Gesundheit"
       },
-      "children": []
+      "children": [
+        {
+          "id": "krankengeld",
+          "label": {
+            "de": "Krankengeld",
+            "en": "Sickness Benefit",
+            "easy_de": "Kranken-Geld"
+          },
+          "children": []
+        },
+        {
+          "id": "pflegeleistungen",
+          "label": {
+            "de": "Pflegeleistungen",
+            "en": "Care Benefits",
+            "easy_de": "Pflege-Hilfe"
+          },
+          "children": []
+        },
+        {
+          "id": "erwerbsminderungsrente",
+          "label": {
+            "de": "Erwerbsminderungsrente",
+            "en": "Disability Pension",
+            "easy_de": "Rente wegen Krankheit"
+          },
+          "children": []
+        }
+      ]
     },
     {
       "id": "employment",
@@ -36,7 +174,53 @@
         "en": "Employment",
         "easy_de": "Arbeit"
       },
-      "children": []
+      "children": [
+        {
+          "id": "buergergeld",
+          "label": {
+            "de": "Bürgergeld",
+            "en": "Citizens' Benefit",
+            "easy_de": "Bürger-Geld"
+          },
+          "children": []
+        },
+        {
+          "id": "aufstocker",
+          "label": {
+            "de": "Aufstocker",
+            "en": "Income Top-up",
+            "easy_de": "Arbeit mit Geld-Hilfe"
+          },
+          "children": []
+        },
+        {
+          "id": "arbeitslosengeld",
+          "label": {
+            "de": "Arbeitslosengeld",
+            "en": "Unemployment Benefit",
+            "easy_de": "Arbeitslosen-Geld"
+          },
+          "children": []
+        },
+        {
+          "id": "kurzarbeitergeld",
+          "label": {
+            "de": "Kurzarbeitergeld",
+            "en": "Short-time Work Benefit",
+            "easy_de": "Kurzarbeit-Geld"
+          },
+          "children": []
+        },
+        {
+          "id": "eingliederungsleistungen",
+          "label": {
+            "de": "Eingliederungsleistungen",
+            "en": "Integration Benefits",
+            "easy_de": "Hilfe in Arbeit"
+          },
+          "children": []
+        }
+      ]
     },
     {
       "id": "family",
@@ -45,7 +229,53 @@
         "en": "Family",
         "easy_de": "Familie"
       },
-      "children": []
+      "children": [
+        {
+          "id": "kindergeld",
+          "label": {
+            "de": "Kindergeld",
+            "en": "Child Benefit",
+            "easy_de": "Kinder-Geld"
+          },
+          "children": []
+        },
+        {
+          "id": "kinderzuschlag",
+          "label": {
+            "de": "Kinderzuschlag",
+            "en": "Child Supplement",
+            "easy_de": "Kinder-Zuschlag"
+          },
+          "children": []
+        },
+        {
+          "id": "elterngeld",
+          "label": {
+            "de": "Elterngeld",
+            "en": "Parental Benefit",
+            "easy_de": "Eltern-Geld"
+          },
+          "children": []
+        },
+        {
+          "id": "unterhaltsvorschuss",
+          "label": {
+            "de": "Unterhaltsvorschuss",
+            "en": "Child Maintenance Advance",
+            "easy_de": "Unterhalt-Vorschuss"
+          },
+          "children": []
+        },
+        {
+          "id": "bildung_und_teilhabe",
+          "label": {
+            "de": "Bildung und Teilhabe",
+            "en": "Education and Participation",
+            "easy_de": "Schule und Mitmachen"
+          },
+          "children": []
+        }
+      ]
     },
     {
       "id": "education",
@@ -54,7 +284,35 @@
         "en": "Education",
         "easy_de": "Lernen und Schule"
       },
-      "children": []
+      "children": [
+        {
+          "id": "bildung_und_teilhabe",
+          "label": {
+            "de": "Bildung und Teilhabe",
+            "en": "Education and Participation",
+            "easy_de": "Schule und Mitmachen"
+          },
+          "children": []
+        },
+        {
+          "id": "bafoeg",
+          "label": {
+            "de": "BAföG",
+            "en": "Student Financial Aid",
+            "easy_de": "Schul-Geld"
+          },
+          "children": []
+        },
+        {
+          "id": "ausbildungsfoerderung",
+          "label": {
+            "de": "Ausbildungsförderung",
+            "en": "Vocational Training Support",
+            "easy_de": "Ausbildungs-Hilfe"
+          },
+          "children": []
+        }
+      ]
     },
     {
       "id": "aid",
@@ -63,7 +321,44 @@
         "en": "Aid and Support",
         "easy_de": "Hilfe"
       },
-      "children": []
+      "children": [
+        {
+          "id": "schuldnerberatung",
+          "label": {
+            "de": "Schuldnerberatung",
+            "en": "Debt Counseling",
+            "easy_de": "Hilfe bei Schulden"
+          },
+          "children": []
+        },
+        {
+          "id": "suchtberatung",
+          "label": {
+            "de": "Suchtberatung",
+            "en": "Addiction Counseling",
+            "easy_de": "Hilfe bei Sucht"
+          },
+          "children": []
+        },
+        {
+          "id": "migrationsberatung",
+          "label": {
+            "de": "Migrationsberatung",
+            "en": "Migration Counseling",
+            "easy_de": "Hilfe für Zugezogene"
+          },
+          "children": []
+        },
+        {
+          "id": "wohnhilfe",
+          "label": {
+            "de": "Wohnhilfe",
+            "en": "Housing Assistance",
+            "easy_de": "Hilfe beim Wohnen"
+          },
+          "children": []
+        }
+      ]
     },
     {
       "id": "digital_service",
@@ -90,7 +385,44 @@
         "en": "Organizations",
         "easy_de": "Organisationen"
       },
-      "children": []
+      "children": [
+        {
+          "id": "jobcenter",
+          "label": {
+            "de": "Jobcenter",
+            "en": "Job Center",
+            "easy_de": "Jobcenter"
+          },
+          "children": []
+        },
+        {
+          "id": "sozialamt",
+          "label": {
+            "de": "Sozialamt",
+            "en": "Social Welfare Office",
+            "easy_de": "Sozialamt"
+          },
+          "children": []
+        },
+        {
+          "id": "familienkasse",
+          "label": {
+            "de": "Familienkasse",
+            "en": "Family Benefits Office",
+            "easy_de": "Familienkasse"
+          },
+          "children": []
+        },
+        {
+          "id": "wohlfahrtsverband",
+          "label": {
+            "de": "Wohlfahrtsverband",
+            "en": "Welfare Association",
+            "easy_de": "Wohl-Verband"
+          },
+          "children": []
+        }
+      ]
     },
     {
       "id": "contacts",
@@ -99,7 +431,35 @@
         "en": "Contact Points",
         "easy_de": "Kontakte"
       },
-      "children": []
+      "children": [
+        {
+          "id": "jobcenter",
+          "label": {
+            "de": "Jobcenter",
+            "en": "Job Center",
+            "easy_de": "Jobcenter"
+          },
+          "children": []
+        },
+        {
+          "id": "sozialamt",
+          "label": {
+            "de": "Sozialamt",
+            "en": "Social Welfare Office",
+            "easy_de": "Sozialamt"
+          },
+          "children": []
+        },
+        {
+          "id": "familienkasse",
+          "label": {
+            "de": "Familienkasse",
+            "en": "Family Benefits Office",
+            "easy_de": "Familienkasse"
+          },
+          "children": []
+        }
+      ]
     },
     {
       "id": "public_service",
@@ -117,7 +477,62 @@
         "en": "Benefits",
         "easy_de": "Leistungen"
       },
-      "children": []
+      "children": [
+        {
+          "id": "buergergeld",
+          "label": {
+            "de": "Bürgergeld",
+            "en": "Citizens' Benefit",
+            "easy_de": "Bürger-Geld"
+          },
+          "children": []
+        },
+        {
+          "id": "wohngeld",
+          "label": {
+            "de": "Wohngeld",
+            "en": "Housing Benefit",
+            "easy_de": "Wohn-Geld"
+          },
+          "children": []
+        },
+        {
+          "id": "kinderzuschlag",
+          "label": {
+            "de": "Kinderzuschlag",
+            "en": "Child Supplement",
+            "easy_de": "Kinder-Zuschlag"
+          },
+          "children": []
+        },
+        {
+          "id": "sozialhilfe",
+          "label": {
+            "de": "Sozialhilfe",
+            "en": "Social Assistance",
+            "easy_de": "Sozialhilfe"
+          },
+          "children": []
+        },
+        {
+          "id": "kindergeld",
+          "label": {
+            "de": "Kindergeld",
+            "en": "Child Benefit",
+            "easy_de": "Kinder-Geld"
+          },
+          "children": []
+        },
+        {
+          "id": "arbeitslosengeld",
+          "label": {
+            "de": "Arbeitslosengeld",
+            "en": "Unemployment Benefit",
+            "easy_de": "Arbeitslosen-Geld"
+          },
+          "children": []
+        }
+      ]
     },
     {
       "id": "buergergeld",
@@ -126,7 +541,80 @@
         "en": "Citizens' Benefit",
         "easy_de": "Bürger-Geld"
       },
-      "children": []
+      "children": [
+        {
+          "id": "regelbedarf",
+          "label": {
+            "de": "Regelbedarf",
+            "en": "Standard Benefit Amount",
+            "easy_de": "Grund-Betrag"
+          },
+          "children": []
+        },
+        {
+          "id": "mehrbedarf",
+          "label": {
+            "de": "Mehrbedarf",
+            "en": "Additional Need",
+            "easy_de": "Mehr Geld wegen besonderem Bedarf"
+          },
+          "children": []
+        },
+        {
+          "id": "bedarfsgemeinschaft",
+          "label": {
+            "de": "Bedarfsgemeinschaft",
+            "en": "Household Need Unit",
+            "easy_de": "Gemeinsamer Bedarf"
+          },
+          "children": []
+        },
+        {
+          "id": "aufstocker",
+          "label": {
+            "de": "Aufstocker",
+            "en": "Income Top-up",
+            "easy_de": "Arbeit mit Geld-Hilfe"
+          },
+          "children": []
+        },
+        {
+          "id": "pflichten",
+          "label": {
+            "de": "Pflichten",
+            "en": "Obligations",
+            "easy_de": "Pflichten"
+          },
+          "children": []
+        },
+        {
+          "id": "sanktionen",
+          "label": {
+            "de": "Sanktionen",
+            "en": "Sanctions",
+            "easy_de": "Strafen"
+          },
+          "children": []
+        },
+        {
+          "id": "kosten_der_unterkunft",
+          "label": {
+            "de": "Kosten der Unterkunft",
+            "en": "Housing Costs (KdU)",
+            "easy_de": "Wohn-Kosten"
+          },
+          "children": []
+        },
+        {
+          "id": "eingliederungsleistungen",
+          "label": {
+            "de": "Eingliederungsleistungen",
+            "en": "Integration Benefits",
+            "easy_de": "Hilfe in Arbeit"
+          },
+          "children": []
+        }
+      ]
     },
     {
       "id": "kinderzuschlag",
@@ -189,7 +677,35 @@
         "en": "Eligibility",
         "easy_de": "Wer es bekommen kann"
       },
-      "children": []
+      "children": [
+        {
+          "id": "hilfebeduerftigkeit",
+          "label": {
+            "de": "Hilfebedürftigkeit",
+            "en": "Financial Need",
+            "easy_de": "Bedürftig sein"
+          },
+          "children": []
+        },
+        {
+          "id": "erwerbsfaehigkeit",
+          "label": {
+            "de": "Erwerbsfähigkeit",
+            "en": "Capacity to Work",
+            "easy_de": "Arbeiten können"
+          },
+          "children": []
+        },
+        {
+          "id": "aufenthaltsrecht",
+          "label": {
+            "de": "Aufenthaltsrecht",
+            "en": "Right of Residence",
+            "easy_de": "Recht zu bleiben"
+          },
+          "children": []
+        }
+      ]
     },
     {
       "id": "application_process",
@@ -198,7 +714,26 @@
         "en": "Application Process",
         "easy_de": "Antrag und Antwort"
       },
-      "children": []
+      "children": [
+        {
+          "id": "widerspruch_einlegen",
+          "label": {
+            "de": "Widerspruch einlegen",
+            "en": "Filing an Appeal",
+            "easy_de": "Widerspruch machen"
+          },
+          "children": []
+        },
+        {
+          "id": "weiterbewilligung",
+          "label": {
+            "de": "Weiterbewilligung",
+            "en": "Benefit Renewal",
+            "easy_de": "Verlängerung"
+          },
+          "children": []
+        }
+      ]
     },
     {
       "id": "glossary",
@@ -226,11 +761,276 @@
         "easy_de": "Bürger-Geld-Rechner"
       },
       "children": []
+    },
+    {
+      "id": "wohngeld",
+      "label": {
+        "de": "Wohngeld",
+        "en": "Housing Benefit",
+        "easy_de": "Wohn-Geld"
+      },
+      "children": []
+    },
+    {
+      "id": "sozialhilfe",
+      "label": {
+        "de": "Sozialhilfe",
+        "en": "Social Assistance (SGB XII)",
+        "easy_de": "Sozialhilfe"
+      },
+      "children": []
+    },
+    {
+      "id": "kindergeld",
+      "label": {
+        "de": "Kindergeld",
+        "en": "Child Benefit",
+        "easy_de": "Kinder-Geld"
+      },
+      "children": []
+    },
+    {
+      "id": "kosten_der_unterkunft",
+      "label": {
+        "de": "Kosten der Unterkunft",
+        "en": "Housing Costs (KdU)",
+        "easy_de": "Wohn-Kosten"
+      },
+      "children": []
+    },
+    {
+      "id": "wohnberechtigungsschein",
+      "label": {
+        "de": "Wohnberechtigungsschein",
+        "en": "Housing Eligibility Certificate",
+        "easy_de": "Wohn-Schein"
+      },
+      "children": []
+    },
+    {
+      "id": "arbeitslosengeld",
+      "label": {
+        "de": "Arbeitslosengeld",
+        "en": "Unemployment Benefit (ALG I)",
+        "easy_de": "Arbeitslosen-Geld"
+      },
+      "children": []
+    },
+    {
+      "id": "kurzarbeitergeld",
+      "label": {
+        "de": "Kurzarbeitergeld",
+        "en": "Short-time Work Benefit",
+        "easy_de": "Kurzarbeit-Geld"
+      },
+      "children": []
+    },
+    {
+      "id": "eingliederungsleistungen",
+      "label": {
+        "de": "Eingliederungsleistungen",
+        "en": "Integration Benefits",
+        "easy_de": "Hilfe in Arbeit"
+      },
+      "children": []
+    },
+    {
+      "id": "elterngeld",
+      "label": {
+        "de": "Elterngeld",
+        "en": "Parental Benefit",
+        "easy_de": "Eltern-Geld"
+      },
+      "children": []
+    },
+    {
+      "id": "unterhaltsvorschuss",
+      "label": {
+        "de": "Unterhaltsvorschuss",
+        "en": "Child Maintenance Advance",
+        "easy_de": "Unterhalt-Vorschuss"
+      },
+      "children": []
+    },
+    {
+      "id": "bildung_und_teilhabe",
+      "label": {
+        "de": "Bildung und Teilhabe",
+        "en": "Education and Participation",
+        "easy_de": "Schule und Mitmachen"
+      },
+      "children": []
+    },
+    {
+      "id": "bafoeg",
+      "label": {
+        "de": "BAföG",
+        "en": "Student Financial Aid",
+        "easy_de": "Schul-Geld"
+      },
+      "children": []
+    },
+    {
+      "id": "ausbildungsfoerderung",
+      "label": {
+        "de": "Ausbildungsförderung",
+        "en": "Vocational Training Support",
+        "easy_de": "Ausbildungs-Hilfe"
+      },
+      "children": []
+    },
+    {
+      "id": "krankengeld",
+      "label": {
+        "de": "Krankengeld",
+        "en": "Sickness Benefit",
+        "easy_de": "Kranken-Geld"
+      },
+      "children": []
+    },
+    {
+      "id": "pflegeleistungen",
+      "label": {
+        "de": "Pflegeleistungen",
+        "en": "Care Benefits",
+        "easy_de": "Pflege-Hilfe"
+      },
+      "children": []
+    },
+    {
+      "id": "erwerbsminderungsrente",
+      "label": {
+        "de": "Erwerbsminderungsrente",
+        "en": "Disability Pension",
+        "easy_de": "Rente wegen Krankheit"
+      },
+      "children": []
+    },
+    {
+      "id": "sanktionen",
+      "label": {
+        "de": "Sanktionen",
+        "en": "Sanctions",
+        "easy_de": "Strafen"
+      },
+      "children": []
+    },
+    {
+      "id": "jobcenter",
+      "label": {
+        "de": "Jobcenter",
+        "en": "Job Center",
+        "easy_de": "Jobcenter"
+      },
+      "children": []
+    },
+    {
+      "id": "sozialamt",
+      "label": {
+        "de": "Sozialamt",
+        "en": "Social Welfare Office",
+        "easy_de": "Sozialamt"
+      },
+      "children": []
+    },
+    {
+      "id": "familienkasse",
+      "label": {
+        "de": "Familienkasse",
+        "en": "Family Benefits Office",
+        "easy_de": "Familienkasse"
+      },
+      "children": []
+    },
+    {
+      "id": "wohlfahrtsverband",
+      "label": {
+        "de": "Wohlfahrtsverband",
+        "en": "Welfare Association",
+        "easy_de": "Wohl-Verband"
+      },
+      "children": []
+    },
+    {
+      "id": "schuldnerberatung",
+      "label": {
+        "de": "Schuldnerberatung",
+        "en": "Debt Counseling",
+        "easy_de": "Hilfe bei Schulden"
+      },
+      "children": []
+    },
+    {
+      "id": "suchtberatung",
+      "label": {
+        "de": "Suchtberatung",
+        "en": "Addiction Counseling",
+        "easy_de": "Hilfe bei Sucht"
+      },
+      "children": []
+    },
+    {
+      "id": "migrationsberatung",
+      "label": {
+        "de": "Migrationsberatung",
+        "en": "Migration Counseling",
+        "easy_de": "Hilfe für Zugezogene"
+      },
+      "children": []
+    },
+    {
+      "id": "wohnhilfe",
+      "label": {
+        "de": "Wohnhilfe",
+        "en": "Housing Assistance",
+        "easy_de": "Hilfe beim Wohnen"
+      },
+      "children": []
+    },
+    {
+      "id": "hilfebeduerftigkeit",
+      "label": {
+        "de": "Hilfebedürftigkeit",
+        "en": "Financial Need",
+        "easy_de": "Bedürftig sein"
+      },
+      "children": []
+    },
+    {
+      "id": "erwerbsfaehigkeit",
+      "label": {
+        "de": "Erwerbsfähigkeit",
+        "en": "Capacity to Work",
+        "easy_de": "Arbeiten können"
+      },
+      "children": []
+    },
+    {
+      "id": "aufenthaltsrecht",
+      "label": {
+        "de": "Aufenthaltsrecht",
+        "en": "Right of Residence",
+        "easy_de": "Recht zu bleiben"
+      },
+      "children": []
+    },
+    {
+      "id": "widerspruch_einlegen",
+      "label": {
+        "de": "Widerspruch einlegen",
+        "en": "Filing an Appeal",
+        "easy_de": "Widerspruch machen"
+      },
+      "children": []
+    },
+    {
+      "id": "weiterbewilligung",
+      "label": {
+        "de": "Weiterbewilligung",
+        "en": "Benefit Renewal",
+        "easy_de": "Verlängerung"
+      },
+      "children": []
     }
-  ],
-  "_todo": [
-    "TODO: Expand topic hierarchy based on domain analysis",
-    "TODO: Add topic validation in DATA-05 (Issue #28)",
-    "TODO: Ensure taxonomy alignment with quality scoring per QUALITY-01 (Issue #21)"
   ]
 }

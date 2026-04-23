@@ -46,60 +46,108 @@ _DOCTYPE_WEIGHTS: dict[str, float] = {
 }
 
 # ---------------------------------------------------------------------------
+# Topic hierarchy — loaded from data/_taxonomy/topics.json
+# Used to expand topic IDs to include all descendants at query time.
+# ---------------------------------------------------------------------------
+
+def _collect_descendants(node: dict, parent_ids: list[str], mapping: dict[str, set[str]]) -> None:
+    """Recursively populate mapping[ancestor] with all descendant IDs."""
+    node_id = node.get("id")
+    if not node_id:
+        return
+    for ancestor in parent_ids:
+        mapping.setdefault(ancestor, set()).add(node_id)
+    for child in node.get("children") or []:
+        _collect_descendants(child, parent_ids + [node_id], mapping)
+
+
+@lru_cache(maxsize=1)
+def _load_topic_hierarchy() -> dict[str, set[str]]:
+    """
+    Return {topic_id: set_of_all_descendant_ids} built from topics.json.
+    Falls back to an empty dict on any read/parse error.
+    """
+    path = (
+        Path(__file__).resolve().parents[2]
+        / "data"
+        / "_taxonomy"
+        / "topics.json"
+    )
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    mapping: dict[str, set[str]] = {}
+    for topic in payload.get("topics") or []:
+        _collect_descendants(topic, [], mapping)
+    return mapping
+
+
+def _expand_topics(topic_ids: list[str]) -> set[str]:
+    """Return topic_ids plus all their descendants from the taxonomy."""
+    hierarchy = _load_topic_hierarchy()
+    expanded: set[str] = set(topic_ids)
+    for tid in topic_ids:
+        expanded.update(hierarchy.get(tid, set()))
+    return expanded
+
+
+# ---------------------------------------------------------------------------
 # Topic-keyword → boosted (document_types, topics) rules
 #
 # When a query contains any of the trigger keywords, chunks whose
-# document_type OR topics match the rule get their final score multiplied
-# by `boost`. Rules are checked in order; all matching boosts are applied.
+# document_type OR topics match the rule (or any descendant topic) get their
+# final score multiplied by `boost`. Rules are checked in order; all
+# matching boosts are applied.
 # ---------------------------------------------------------------------------
 
 TOPIC_BOOST_RULES: list[dict] = [
     {
         "keywords": ["kindergeld", "familienkasse", "beantragen", "antrag"],
         "document_types": ["formular"],
-        "topics": ["family", "child_benefit"],
+        "topics": ["family", "kindergeld"],
         "boost": 1.6,
     },
     {
         "keywords": ["sanktion", "leistungsminderung", "meldeversäumnis", "pflichtverletzung"],
         "document_types": ["weisung"],
-        "topics": ["sanctions"],
+        "topics": ["sanktionen", "buergergeld"],
         "boost": 1.35,
     },
     {
         "keywords": ["unterkunft", "kdu", "miete", "wohnen", "heizung", "angemessen"],
         "document_types": ["weisung"],
-        "topics": ["housing"],
+        "topics": ["housing", "kosten_der_unterkunft"],
         "boost": 1.35,
     },
     {
         "keywords": ["bürgergeld", "sgb ii", "grundsicherung", "alg ii", "arbeitslosengeld ii"],
         "document_types": ["statute", "merkblatt", "weisung"],
-        "topics": ["financial_support", "employment"],
+        "topics": ["financial_support", "buergergeld"],
         "boost": 1.2,
     },
     {
         "keywords": ["arbeitslosengeld", "alg i", "sgb iii", "arbeitslos"],
         "document_types": ["statute", "merkblatt"],
-        "topics": ["employment"],
+        "topics": ["employment", "arbeitslosengeld"],
         "boost": 1.2,
     },
     {
         "keywords": ["kindergeld", "familienkasse", "kind"],
         "document_types": ["formular", "merkblatt"],
-        "topics": ["family", "child_benefit"],
+        "topics": ["family", "kindergeld"],
         "boost": 1.2,
     },
     {
         "keywords": ["widerspruch", "klage", "rechtsmittel", "bescheid", "ablehnung"],
         "document_types": ["statute", "weisung", "guide"],
-        "topics": ["legal_remedies", "financial_support"],
+        "topics": ["application_process", "financial_support"],
         "boost": 1.3,
     },
     {
         "keywords": ["erwerbsfähigkeit", "arbeitsunfähig", "krankheit", "reha"],
         "document_types": ["weisung", "statute"],
-        "topics": ["health", "rehabilitation"],
+        "topics": ["healthcare", "eligibility"],
         "boost": 1.25,
     },
     {
@@ -108,12 +156,33 @@ TOPIC_BOOST_RULES: list[dict] = [
         "topics": ["financial_support", "employment"],
         "boost": 1.25,
     },
+    {
+        "keywords": ["wohngeld", "wohngeldantrag", "mietzuschuss"],
+        "document_types": ["formular", "merkblatt", "guide"],
+        "topics": ["housing", "wohngeld"],
+        "boost": 1.3,
+    },
+    {
+        "keywords": ["sozialhilfe", "sgb xii", "grundsicherung im alter", "hilfe zum lebensunterhalt"],
+        "document_types": ["statute", "merkblatt", "guide"],
+        "topics": ["financial_support", "sozialhilfe"],
+        "boost": 1.25,
+    },
+    {
+        "keywords": ["regelbedarf", "regelleistung", "grundsicherungsbetrag", "wie hoch bürgergeld",
+                     "bürgergeld höhe", "standard benefit", "regelleistung höhe"],
+        "document_types": ["statute", "merkblatt", "broschuere", "weisung"],
+        "topics": ["buergergeld", "regelbedarf", "financial_support"],
+        "boost": 1.4,
+    },
 ]
 
 
 def topic_boost_for_query(query: str, chunk_payload: dict) -> float:
     """
     Return a combined topic boost multiplier for a chunk given a query string.
+    Rule topic IDs are expanded to include all taxonomy descendants before
+    matching against the chunk's topics list.
     Multiplies all matching rule boosts together (capped at 2.0).
     """
     q = query.lower()
@@ -125,7 +194,8 @@ def topic_boost_for_query(query: str, chunk_payload: dict) -> float:
         if not any(kw in q for kw in rule["keywords"]):
             continue
         type_match = doc_type in rule["document_types"]
-        topic_match = any(t in topics for t in rule["topics"])
+        expanded_rule_topics = _expand_topics(rule["topics"])
+        topic_match = any(t in expanded_rule_topics for t in topics)
         if type_match or topic_match:
             combined *= rule["boost"]
 
@@ -190,3 +260,6 @@ def sources_by_trust_level(level: SourceTrustLevel) -> list[RagSource]:
 def invalidate_cache() -> None:
     """Force re-read of the registry (useful in tests)."""
     load_registry.cache_clear()
+
+
+RAG_SOURCES = [source.model_dump(mode="json") for source in load_registry()]
