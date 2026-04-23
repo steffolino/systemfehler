@@ -28,7 +28,7 @@ jobs:
         run: npm run build
         working-directory: frontend
         env:
-          PUBLIC_PATH: /systemfehler/
+          PUBLIC_PATH: /
           VITE_API_URL: /api
           VITE_AI_API_URL: /api/ai
           VITE_TURNSTILE_SITE_KEY: ${{ vars.VITE_TURNSTILE_SITE_KEY || secrets.VITE_TURNSTILE_SITE_KEY }}
