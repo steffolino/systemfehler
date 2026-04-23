@@ -5,13 +5,26 @@ import { defineConfig, loadEnv } from 'vite'
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const repoRoot = path.resolve(__dirname, '..')
+  const frontendEnv = loadEnv(mode, __dirname, '')
   const rootEnv = loadEnv(mode, repoRoot, '')
-  const publicPathRaw = (process.env.PUBLIC_PATH || rootEnv.PUBLIC_PATH || '/').trim()
+
+  // Keep local frontend/.env behavior, but backfill missing VITE_* keys from repo root .env.
+  for (const [key, value] of Object.entries(rootEnv)) {
+    if (!key.startsWith('VITE_')) continue
+    if (process.env[key] == null || process.env[key] === '') {
+      process.env[key] = value
+    }
+  }
+
+  const publicPathRaw = (
+    process.env.PUBLIC_PATH ||
+    frontendEnv.PUBLIC_PATH ||
+    rootEnv.PUBLIC_PATH ||
+    '/'
+  ).trim()
   const publicPath = publicPathRaw.endsWith('/') ? publicPathRaw : `${publicPathRaw}/`
 
   return {
-    // Read .env from repo root so frontend and backend share one env source.
-    envDir: repoRoot,
     // Base path for project pages; override with PUBLIC_PATH in CI.
     base: publicPath || '/',
     plugins: [react()],
