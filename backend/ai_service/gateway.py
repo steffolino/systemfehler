@@ -98,12 +98,17 @@ if __name__ == "__main__":
 # Placeholder endpoints
 @app.get("/health")
 def health():
+    turnstile_site_key = (
+        (os.environ.get("TURNSTILE_SITE_KEY", "") or "").strip()
+        or (os.environ.get("VITE_TURNSTILE_SITE_KEY", "") or "").strip()
+        or None
+    )
     return {
         "status": "ok",
         "provider": provider.healthcheck(),
         "turnstile": {
             "configured": is_turnstile_configured(),
-            "siteKey": (os.environ.get("TURNSTILE_SITE_KEY", "") or "").strip() or None,
+            "siteKey": turnstile_site_key,
         },
         "host": AI_HOST,
         "port": AI_PORT,
@@ -112,13 +117,18 @@ def health():
 
 @app.get("/version")
 def version():
+    turnstile_site_key = (
+        (os.environ.get("TURNSTILE_SITE_KEY", "") or "").strip()
+        or (os.environ.get("VITE_TURNSTILE_SITE_KEY", "") or "").strip()
+        or None
+    )
     return {
         "service": "systemfehler-ai-sidecar",
         "version": os.environ.get("npm_package_version", "0.1.0"),
         "provider": provider.healthcheck(),
         "turnstile": {
             "configured": is_turnstile_configured(),
-            "siteKey": (os.environ.get("TURNSTILE_SITE_KEY", "") or "").strip() or None,
+            "siteKey": turnstile_site_key,
         },
         "host": AI_HOST,
         "port": AI_PORT,

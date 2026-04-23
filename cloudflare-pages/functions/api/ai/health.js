@@ -2,6 +2,10 @@ import { getRetrievalConfig, getWorkersAiModel, listLifeEventScenarios, loadLife
 
 export async function onRequest({ request, env }) {
   const url = new URL(request.url);
+  const turnstileSiteKey =
+    (typeof env.TURNSTILE_SITE_KEY === 'string' && env.TURNSTILE_SITE_KEY.trim()) ||
+    (typeof env.VITE_TURNSTILE_SITE_KEY === 'string' && env.VITE_TURNSTILE_SITE_KEY.trim()) ||
+    null;
   const retrievalConfig = getRetrievalConfig(env);
   const lifeEventScenarios = await loadLifeEventScenarios(env, { requestUrl: request.url });
   const externalEndpointHost = retrievalConfig.external.endpoint
@@ -24,9 +28,7 @@ export async function onRequest({ request, env }) {
       },
       turnstile: {
         configured: Boolean(env.TURNSTILE_SECRET_KEY),
-        siteKey: typeof env.TURNSTILE_SITE_KEY === 'string' && env.TURNSTILE_SITE_KEY.trim()
-          ? env.TURNSTILE_SITE_KEY.trim()
-          : null,
+        siteKey: turnstileSiteKey,
       },
       retrieval: {
         requestedMode: retrievalConfig.requestedMode,

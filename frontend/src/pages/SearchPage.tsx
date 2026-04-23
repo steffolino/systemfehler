@@ -134,10 +134,9 @@ export default function SearchPage() {
   const [turnstileReady, setTurnstileReady] = useState(false);
   const [showTechnicalDetails, setShowTechnicalDetails] = useState(false);
   const warmedSuggestionContexts = useRef<Set<string>>(new Set());
-  const turnstileRequirementKnown = typeof aiHealth?.turnstile?.configured === 'boolean';
-  const requiresTurnstile = !isLocalhost && (aiHealth?.turnstile?.configured ?? true);
   const configuredTurnstileSiteKey =
     (aiHealth?.turnstile?.siteKey || import.meta.env.VITE_TURNSTILE_SITE_KEY || '').trim();
+  const requiresTurnstile = !isLocalhost && (aiHealth?.turnstile?.configured ?? Boolean(configuredTurnstileSiteKey));
   const turnstileEnabled = requiresTurnstile && Boolean(configuredTurnstileSiteKey);
   const turnstileMisconfigured = requiresTurnstile && !turnstileEnabled;
 
@@ -618,7 +617,6 @@ export default function SearchPage() {
                       disabled={
                         aiLoading ||
                         !aiDraftQuery.trim() ||
-                        (!turnstileRequirementKnown && !isLocalhost) ||
                         turnstileMisconfigured ||
                         (turnstileEnabled && !turnstileReady)
                       }
