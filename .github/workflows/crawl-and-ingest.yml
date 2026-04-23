@@ -35,8 +35,8 @@ jobs:
       - name: Validate entries
         run: npm run validate
 
-      - name: Ingest benefits entries into D1
-        run: python scripts/ingest_to_d1.py --domain benefits --snapshot data/benefits/entries.json
+      - name: Ingest all domain snapshots into D1
+        run: python scripts/ingest_all_to_d1.py
         env:
           PAGES_INGEST_URL: ${{ secrets.PAGES_INGEST_URL }}
           INGEST_TOKEN: ${{ secrets.INGEST_TOKEN }}
