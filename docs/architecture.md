@@ -205,7 +205,7 @@ This structure is indicative and can be refined as the implementation matures.
 
 ## 3.1 Deployment Targets (Canonical)
 
-The project has two deployment targets with distinct roles:
+The project has one canonical deployment target:
 
 1. **Cloudflare Pages (primary production target)**
 
@@ -213,13 +213,6 @@ The project has two deployment targets with distinct roles:
   * Hosts frontend static assets and Pages Functions API (`/api/*`)
   * Uses D1 (`DB` binding) for production API data
   * Deployment workflow: `.github/workflows/deploy-pages.yml`
-
-2. **GitHub Pages (static fallback target)**
-
-  * URL: `https://steffolino.github.io/systemfehler/`
-  * Hosts static frontend plus bundled snapshot JSON only
-  * No dynamic `/api/*` backend endpoints
-  * Deployment workflow: `.github/workflows/deploy-github-pages.yml`
 
 When resolving deployment-related ambiguity, this section is the canonical source.
 
@@ -268,11 +261,9 @@ When resolving deployment-related ambiguity, this section is the canonical sourc
 
    * Additional scripts generate exports for external tools, APIs, or UIs.
 
-9. **Hosting delivery (Cloudflare primary, GitHub fallback)**
+9. **Hosting delivery (Cloudflare Pages)**
 
   * Cloudflare Pages deploys frontend assets and Pages Functions API for `/api/*`.
-  * GitHub Pages deploys a static fallback artifact with same-origin snapshot JSON.
-  * Snapshot packaging (`data/*` and `moderation/review_queue.json`) preserves read access in fallback mode.
 
 ---
 

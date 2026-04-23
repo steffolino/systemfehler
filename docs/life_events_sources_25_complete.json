@@ -1,0 +1,1530 @@
+[
+  {
+    "life_event": "unemployed_recently",
+    "title_de": "Kürzlich arbeitslos geworden",
+    "official_sources": [
+      {
+        "name": "Bundesagentur für Arbeit – Arbeitslosigkeit",
+        "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden"
+      },
+      {
+        "name": "Jobcenter",
+        "url": "https://www.jobcenter.de/"
+      },
+      {
+        "name": "BMAS – Grundsicherung/Bürgergeld",
+        "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/grundsicherung-buergergeld.html"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "Sanktionsfrei",
+        "url": "https://sanktionsfrei.de/"
+      },
+      {
+        "name": "Tacheles e.V.",
+        "url": "https://tacheles-sozialhilfe.de/"
+      },
+      {
+        "name": "Sozialverband VdK",
+        "url": "https://www.vdk.de/"
+      },
+      {
+        "name": "SoVD",
+        "url": "https://www.sovd.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "Caritas – Allgemeine Sozialberatung vor Ort",
+        "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/adressen"
+      },
+      {
+        "name": "Diakonie – Einrichtungssuche",
+        "url": "https://www.diakonie.de/informieren/einrichtungssuche"
+      },
+      {
+        "name": "VdK vor Ort",
+        "url": "https://www.vdk.de/vdk-vor-ort/"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Merkblatt 1 – Arbeitslosigkeit",
+        "url": "https://www.arbeitsagentur.de/datei/merkblatt-fuer-arbeitslose_ba036520.pdf"
+      },
+      {
+        "title": "Merkblatt Bürgergeld (SGB II)",
+        "url": "https://www.arbeitsagentur.de/datei/merkblatt-buergergeld_ba043375.pdf"
+      },
+      {
+        "title": "Hauptantrag Bürgergeld",
+        "url": "https://www.arbeitsagentur.de/datei/antrag-sgb2_ba147846.pdf"
+      }
+    ]
+  },
+  {
+    "life_event": "short_time_work",
+    "title_de": "Kurzarbeit / Stunden reduziert",
+    "official_sources": [
+      {
+        "name": "Bundesagentur für Arbeit – Kurzarbeitergeld",
+        "url": "https://www.arbeitsagentur.de/unternehmen/finanziell/kurzarbeitergeld-uebersicht-kurzarbeitergeldformen"
+      },
+      {
+        "name": "Bundesagentur für Arbeit – Unternehmensdownloads",
+        "url": "https://www.arbeitsagentur.de/unternehmen/downloads-unternehmen"
+      },
+      {
+        "name": "BMAS",
+        "url": "https://www.bmas.de/DE/Startseite/start.html"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "DGB",
+        "url": "https://www.dgb.de/"
+      },
+      {
+        "name": "SoVD",
+        "url": "https://www.sovd.de/"
+      },
+      {
+        "name": "VdK",
+        "url": "https://www.vdk.de/"
+      },
+      {
+        "name": "Caritas",
+        "url": "https://www.caritas.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "Arbeitsagentur – Dienststelle vor Ort",
+        "url": "https://www.arbeitsagentur.de/"
+      },
+      {
+        "name": "Diakonie – Hilfe vor Ort",
+        "url": "https://www.diakonie.de/informieren/einrichtungssuche"
+      },
+      {
+        "name": "SoVD Beratungsstellen",
+        "url": "https://www.sovd.de/"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Merkblatt Kurzarbeitergeld (Arbeitnehmende)",
+        "url": "https://www.arbeitsagentur.de/datei/merkblatt-8b-kurzarbeitergeld_ba034285.pdf"
+      },
+      {
+        "title": "Merkblatt Kurzarbeitergeld (Arbeitgeber)",
+        "url": "https://www.arbeitsagentur.de/datei/merkblatt-8a-kurzarbeitergeld_ba036300.pdf"
+      }
+    ]
+  },
+  {
+    "life_event": "self_employment_failed",
+    "title_de": "Selbstständigkeit gescheitert",
+    "official_sources": [
+      {
+        "name": "Bundesagentur für Arbeit – Downloads Arbeitslosigkeit/Selbstständigkeit",
+        "url": "https://www.arbeitsagentur.de/downloads"
+      },
+      {
+        "name": "Jobcenter",
+        "url": "https://www.jobcenter.de/"
+      },
+      {
+        "name": "BMAS",
+        "url": "https://www.bmas.de/DE/Startseite/start.html"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "Caritas",
+        "url": "https://www.caritas.de/"
+      },
+      {
+        "name": "Diakonie",
+        "url": "https://www.diakonie.de/"
+      },
+      {
+        "name": "VdK",
+        "url": "https://www.vdk.de/"
+      },
+      {
+        "name": "SoVD",
+        "url": "https://www.sovd.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "Caritas – Sozialberatung",
+        "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/adressen"
+      },
+      {
+        "name": "Diakonie – Einrichtungssuche",
+        "url": "https://www.diakonie.de/informieren/einrichtungssuche"
+      },
+      {
+        "name": "Schuldnerberatung über BAG-SB / meine-schulden",
+        "url": "https://www.bag-sb.de/ratsuchende"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Merkblatt 1 – Arbeitslosigkeit",
+        "url": "https://www.arbeitsagentur.de/datei/merkblatt-fuer-arbeitslose_ba036520.pdf"
+      },
+      {
+        "title": "Merkblatt Bürgergeld (SGB II)",
+        "url": "https://www.arbeitsagentur.de/datei/merkblatt-buergergeld_ba043375.pdf"
+      }
+    ]
+  },
+  {
+    "life_event": "low_income_topup",
+    "title_de": "Niedriglohn / Aufstockung nötig",
+    "official_sources": [
+      {
+        "name": "Jobcenter",
+        "url": "https://www.jobcenter.de/"
+      },
+      {
+        "name": "Familienportal – Kinderzuschlag",
+        "url": "https://familienportal.de/familienportal/familienleistungen/kinderzuschlag"
+      },
+      {
+        "name": "BMWSB – Wohngeld",
+        "url": "https://www.bmwsb.bund.de/DE/wohnen/wohngeld/wohngeld_node.html"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "Sanktionsfrei",
+        "url": "https://sanktionsfrei.de/"
+      },
+      {
+        "name": "Tacheles e.V.",
+        "url": "https://tacheles-sozialhilfe.de/"
+      },
+      {
+        "name": "VdK",
+        "url": "https://www.vdk.de/"
+      },
+      {
+        "name": "SoVD",
+        "url": "https://www.sovd.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "Jobcenter vor Ort",
+        "url": "https://www.jobcenter.de/"
+      },
+      {
+        "name": "Wohngeldbehörde über Bundesportal",
+        "url": "https://verwaltung.bund.de/portal/"
+      },
+      {
+        "name": "Caritas – Sozialberatung",
+        "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/adressen"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Merkblatt Bürgergeld (SGB II)",
+        "url": "https://www.arbeitsagentur.de/datei/merkblatt-buergergeld_ba043375.pdf"
+      },
+      {
+        "title": "Merkblatt Kinderzuschlag",
+        "url": "https://www.arbeitsagentur.de/datei/kiz2-merkblattkinderzuschlag_ba034485.pdf"
+      },
+      {
+        "title": "Sozialhilfe kurz erklärt",
+        "url": "https://www.bmas.de/DE/Service/Publikationen/Broschueren/a209-sozialhilfe-kurz-und-knapp.html"
+      }
+    ]
+  },
+  {
+    "life_event": "child_birth",
+    "title_de": "Kind bekommen",
+    "official_sources": [
+      {
+        "name": "Familienportal – Elterngeld",
+        "url": "https://familienportal.de/familienportal/familienleistungen/elterngeld"
+      },
+      {
+        "name": "Familienportal – Kindergeld/Kinderzuschlag",
+        "url": "https://familienportal.de/"
+      },
+      {
+        "name": "Bundesagentur für Arbeit – Familie und Kinder",
+        "url": "https://www.arbeitsagentur.de/familie-und-kinder"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "pro familia",
+        "url": "https://www.profamilia.de/"
+      },
+      {
+        "name": "Caritas",
+        "url": "https://www.caritas.de/"
+      },
+      {
+        "name": "Diakonie",
+        "url": "https://www.diakonie.de/"
+      },
+      {
+        "name": "AWO Beratung",
+        "url": "https://awo.org/service/beratung/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "Familienportal – Beratung vor Ort",
+        "url": "https://familienportal.de/"
+      },
+      {
+        "name": "Caritas Leipzig / Familienberatung (Beispiel lokal)",
+        "url": "https://www.caritas-leipzig.de/"
+      },
+      {
+        "name": "Diakonie Leipzig / Familienhilfe (Beispiel lokal)",
+        "url": "https://www.diakonie-leipzig.de/"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Checkliste nach der Geburt",
+        "url": "https://familienportal.de/resource/blob/197878/265ab144eaa4bc32770d69a7f2568eb5/pdf-checkliste-nach-der-geburt-data.pdf"
+      },
+      {
+        "title": "Merkblatt Kinderzuschlag",
+        "url": "https://www.arbeitsagentur.de/datei/kiz2-merkblattkinderzuschlag_ba034485.pdf"
+      },
+      {
+        "title": "Was Sie zum Elterngeld wissen müssen",
+        "url": "https://familienportal.de/familienportal/familienleistungen/elterngeld/faq"
+      }
+    ]
+  },
+  {
+    "life_event": "single_parent",
+    "title_de": "Alleinerziehend geworden",
+    "official_sources": [
+      {
+        "name": "Familienportal – Allein- und getrennt erziehende Eltern",
+        "url": "https://familienportal.de/familienportal/lebenslagen/trennung/allein-und-getrennt-erziehende-eltern"
+      },
+      {
+        "name": "Familienportal – Unterhaltsvorschuss",
+        "url": "https://familienportal.de/familienportal/familienleistungen/unterhaltsvorschuss"
+      },
+      {
+        "name": "Bundesagentur für Arbeit – Familie und Kinder",
+        "url": "https://www.arbeitsagentur.de/familie-und-kinder"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "VAMV",
+        "url": "https://vamv.de/"
+      },
+      {
+        "name": "pro familia",
+        "url": "https://www.profamilia.de/"
+      },
+      {
+        "name": "Caritas",
+        "url": "https://www.caritas.de/"
+      },
+      {
+        "name": "Diakonie",
+        "url": "https://www.diakonie.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "Familienportal – Beratung vor Ort",
+        "url": "https://familienportal.de/familienportal/lebenslagen/trennung/staatliche-leistungen"
+      },
+      {
+        "name": "Jugendamt/Verwaltungsportal",
+        "url": "https://verwaltung.bund.de/portal/"
+      },
+      {
+        "name": "Caritas – Familienberatung",
+        "url": "https://www.caritas.de/"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Broschüre Unterhaltsvorschuss (verlinkt über Familienportal)",
+        "url": "https://familienportal.de/familienportal/familienleistungen/unterhaltsvorschuss"
+      },
+      {
+        "title": "Merkblatt Kinderzuschlag",
+        "url": "https://www.arbeitsagentur.de/datei/kiz2-merkblattkinderzuschlag_ba034485.pdf"
+      },
+      {
+        "title": "Checkliste nach der Geburt",
+        "url": "https://familienportal.de/resource/blob/197878/265ab144eaa4bc32770d69a7f2568eb5/pdf-checkliste-nach-der-geburt-data.pdf"
+      }
+    ]
+  },
+  {
+    "life_event": "separation_divorce",
+    "title_de": "Trennung / Scheidung",
+    "official_sources": [
+      {
+        "name": "Familienportal – Staatliche Leistungen bei Trennung",
+        "url": "https://familienportal.de/familienportal/lebenslagen/trennung/staatliche-leistungen"
+      },
+      {
+        "name": "Familienportal – STARK / Streit und Trennung",
+        "url": "https://familienportal.de/familienportal/meta/aktuelles/aktuelle-meldungen/digitales-angebot-unterstuetzt-familien-bei-streit-und-trennung-276658"
+      },
+      {
+        "name": "BMJ",
+        "url": "https://www.bmj.de/"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "pro familia",
+        "url": "https://www.profamilia.de/"
+      },
+      {
+        "name": "Caritas",
+        "url": "https://www.caritas.de/"
+      },
+      {
+        "name": "Diakonie",
+        "url": "https://www.diakonie.de/"
+      },
+      {
+        "name": "VAMV",
+        "url": "https://vamv.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "Familienportal – Beratung vor Ort",
+        "url": "https://familienportal.de/familienportal/lebenslagen/trennung/staatliche-leistungen"
+      },
+      {
+        "name": "Jugendamt / Bundesportal",
+        "url": "https://verwaltung.bund.de/portal/"
+      },
+      {
+        "name": "pro familia Beratungsstellen",
+        "url": "https://www.profamilia.de/"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Broschüre Unterhaltsvorschuss (über Familienportal)",
+        "url": "https://familienportal.de/familienportal/familienleistungen/unterhaltsvorschuss"
+      },
+      {
+        "title": "STARK – Informationsplattform",
+        "url": "https://familienportal.de/familienportal/meta/aktuelles/aktuelle-meldungen/digitales-angebot-unterstuetzt-familien-bei-streit-und-trennung-276658"
+      }
+    ]
+  },
+  {
+    "life_event": "care_for_relatives",
+    "title_de": "Pflege von Angehörigen übernommen",
+    "official_sources": [
+      {
+        "name": "BMG – Pflegestützpunkte",
+        "url": "https://www.bundesgesundheitsministerium.de/service/begriffe-von-a-z/p/pflegestuetzpunkte"
+      },
+      {
+        "name": "Pflegelotse",
+        "url": "https://www.pflegelotse.de/"
+      },
+      {
+        "name": "ZQP – Beratung zur Pflege",
+        "url": "https://www.zqp.de/beratung-pflege/"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "Caritas",
+        "url": "https://www.caritas.de/"
+      },
+      {
+        "name": "Diakonie",
+        "url": "https://www.diakonie.de/"
+      },
+      {
+        "name": "VdK",
+        "url": "https://www.vdk.de/"
+      },
+      {
+        "name": "SoVD",
+        "url": "https://www.sovd.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "Pflegestützpunkte",
+        "url": "https://www.bundesgesundheitsministerium.de/service/begriffe-von-a-z/p/pflegestuetzpunkte"
+      },
+      {
+        "name": "Pflegelotse",
+        "url": "https://www.pflegelotse.de/"
+      },
+      {
+        "name": "ZQP Beratungsstellensuche",
+        "url": "https://www.zqp.de/beratung-pflege/"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Gesund in Deutschland",
+        "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/5_Publikationen/Ministerium/Broschueren/BMG_Ratgeber_Gesund_in_Deutschland_bf.pdf"
+      },
+      {
+        "title": "Sozialhilfe kurz erklärt",
+        "url": "https://www.bmas.de/DE/Service/Publikationen/Broschueren/a209-sozialhilfe-kurz-und-knapp.html"
+      }
+    ]
+  },
+  {
+    "life_event": "new_in_country_orientation",
+    "title_de": "Neu im Land – Orientierung",
+    "official_sources": [
+      {
+        "name": "BAMF",
+        "url": "https://www.bamf.de/"
+      },
+      {
+        "name": "BAMF – Beratung für Erwachsene",
+        "url": "https://www.bamf.de/DE/Themen/Integration/ZugewanderteTeilnehmende/BeratungErwachsene/beratung-erwachsene-node.html"
+      },
+      {
+        "name": "Make it in Germany",
+        "url": "https://www.make-it-in-germany.com/de/"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "Pro Asyl",
+        "url": "https://www.proasyl.de/"
+      },
+      {
+        "name": "Caritas",
+        "url": "https://www.caritas.de/"
+      },
+      {
+        "name": "Diakonie",
+        "url": "https://www.diakonie.de/"
+      },
+      {
+        "name": "AWO Beratung",
+        "url": "https://awo.org/service/beratung/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "BAMF-NAvI Beratungsstellen",
+        "url": "https://bamf-navi.bamf.de/de/Themen/Beratungsstellen/"
+      },
+      {
+        "name": "MBE / migrationsberatung.org",
+        "url": "https://www.migrationsberatung.org/de/beratungsangebote"
+      },
+      {
+        "name": "mbeon",
+        "url": "https://www.mbeon.de/"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Gesund in Deutschland",
+        "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/5_Publikationen/Ministerium/Broschueren/BMG_Ratgeber_Gesund_in_Deutschland_bf.pdf"
+      },
+      {
+        "title": "Gut abgesichert: Ausländische Fachkräfte in Deutschland",
+        "url": "https://www.deutsche-rentenversicherung.de/DRV/DE/Ueber-uns-und-Presse/Mediathek/Broschueren/broschueren_node.html"
+      }
+    ]
+  },
+  {
+    "life_event": "no_residence_status",
+    "title_de": "Aufenthaltsstatus ungeklärt",
+    "official_sources": [
+      {
+        "name": "BAMF",
+        "url": "https://www.bamf.de/"
+      },
+      {
+        "name": "BAMF-NAvI Behörden/Beratungsstellen",
+        "url": "https://bamf-navi.bamf.de/de/"
+      },
+      {
+        "name": "Bundesportal / Ausländerbehörde",
+        "url": "https://verwaltung.bund.de/portal/"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "Pro Asyl",
+        "url": "https://www.proasyl.de/"
+      },
+      {
+        "name": "Flüchtlingsrat",
+        "url": "https://fluechtlingsrat.de/"
+      },
+      {
+        "name": "Caritas",
+        "url": "https://www.caritas.de/"
+      },
+      {
+        "name": "Diakonie",
+        "url": "https://www.diakonie.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "BAMF-NAvI",
+        "url": "https://bamf-navi.bamf.de/de/"
+      },
+      {
+        "name": "MBE",
+        "url": "https://www.migrationsberatung.org/de/beratungsangebote"
+      },
+      {
+        "name": "JMD vor Ort",
+        "url": "https://www.jugendmigrationsdienste.de/meinen-jmd-vor-ort-finden"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Gesund in Deutschland",
+        "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/5_Publikationen/Ministerium/Broschueren/BMG_Ratgeber_Gesund_in_Deutschland_bf.pdf"
+      }
+    ]
+  },
+  {
+    "life_event": "language_barrier",
+    "title_de": "Sprachprobleme / Integrationsbedarf",
+    "official_sources": [
+      {
+        "name": "BAMF – Integrationskurse",
+        "url": "https://www.bamf.de/DE/Themen/Integration/ZugewanderteTeilnehmende/Integrationskurse/integrationskurse-node.html"
+      },
+      {
+        "name": "BAMF-NAvI",
+        "url": "https://bamf-navi.bamf.de/de/"
+      },
+      {
+        "name": "Bundesagentur für Arbeit",
+        "url": "https://www.arbeitsagentur.de/"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "AWO Beratung",
+        "url": "https://awo.org/service/beratung/"
+      },
+      {
+        "name": "Caritas",
+        "url": "https://www.caritas.de/"
+      },
+      {
+        "name": "Diakonie",
+        "url": "https://www.diakonie.de/"
+      },
+      {
+        "name": "JMD",
+        "url": "https://www.jugendmigrationsdienste.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "BAMF-NAvI Kurs-/Beratungsstellensuche",
+        "url": "https://bamf-navi.bamf.de/de/"
+      },
+      {
+        "name": "JMD Finder",
+        "url": "https://www.jugendmigrationsdienste.de/meinen-jmd-vor-ort-finden"
+      },
+      {
+        "name": "mbeon",
+        "url": "https://www.mbeon.de/"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Gesund in Deutschland",
+        "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/5_Publikationen/Ministerium/Broschueren/BMG_Ratgeber_Gesund_in_Deutschland_bf.pdf"
+      },
+      {
+        "title": "Kindergeld-Flyer für Asylberechtigte und anerkannte Flüchtlinge (Downloadcenter)",
+        "url": "https://www.arbeitsagentur.de/familie-und-kinder/downloads-familie-und-kinder"
+      }
+    ]
+  },
+  {
+    "life_event": "illness_short_term",
+    "title_de": "Krank geworden",
+    "official_sources": [
+      {
+        "name": "BMG",
+        "url": "https://www.bundesgesundheitsministerium.de/"
+      },
+      {
+        "name": "GKV-Spitzenverband",
+        "url": "https://www.gkv-spitzenverband.de/"
+      },
+      {
+        "name": "Deutsche Rentenversicherung",
+        "url": "https://www.deutsche-rentenversicherung.de/"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "UPD / Unabhängige Patientenberatung",
+        "url": "https://www.patientenberatung.de/"
+      },
+      {
+        "name": "VdK",
+        "url": "https://www.vdk.de/"
+      },
+      {
+        "name": "SoVD",
+        "url": "https://www.sovd.de/"
+      },
+      {
+        "name": "Caritas",
+        "url": "https://www.caritas.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "UPD",
+        "url": "https://www.patientenberatung.de/"
+      },
+      {
+        "name": "Caritas – Sozialberatung",
+        "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/adressen"
+      },
+      {
+        "name": "Diakonie – Hilfe vor Ort",
+        "url": "https://www.diakonie.de/informieren/einrichtungssuche"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Gesund in Deutschland",
+        "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/5_Publikationen/Ministerium/Broschueren/BMG_Ratgeber_Gesund_in_Deutschland_bf.pdf"
+      },
+      {
+        "title": "Merkblatt Bürgergeld (SGB II)",
+        "url": "https://www.arbeitsagentur.de/datei/merkblatt-buergergeld_ba043375.pdf"
+      }
+    ]
+  },
+  {
+    "life_event": "long_term_illness_reha",
+    "title_de": "Langfristig arbeitsunfähig / Reha",
+    "official_sources": [
+      {
+        "name": "Deutsche Rentenversicherung",
+        "url": "https://www.deutsche-rentenversicherung.de/"
+      },
+      {
+        "name": "BMG",
+        "url": "https://www.bundesgesundheitsministerium.de/"
+      },
+      {
+        "name": "BMAS – Rehabilitation und Teilhabe",
+        "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/teilhabe-und-inklusion.html"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "VdK",
+        "url": "https://www.vdk.de/"
+      },
+      {
+        "name": "SoVD",
+        "url": "https://www.sovd.de/"
+      },
+      {
+        "name": "UPD",
+        "url": "https://www.patientenberatung.de/"
+      },
+      {
+        "name": "Diakonie",
+        "url": "https://www.diakonie.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "Deutsche Rentenversicherung",
+        "url": "https://www.deutsche-rentenversicherung.de/"
+      },
+      {
+        "name": "UPD",
+        "url": "https://www.patientenberatung.de/"
+      },
+      {
+        "name": "VdK vor Ort",
+        "url": "https://www.vdk.de/vdk-vor-ort/"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "DRV Broschürenübersicht",
+        "url": "https://www.deutsche-rentenversicherung.de/DRV/DE/Ueber-uns-und-Presse/Mediathek/Broschueren/broschueren_node.html"
+      },
+      {
+        "title": "Gesund in Deutschland",
+        "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/5_Publikationen/Ministerium/Broschueren/BMG_Ratgeber_Gesund_in_Deutschland_bf.pdf"
+      }
+    ]
+  },
+  {
+    "life_event": "mental_health_crisis",
+    "title_de": "Psychische Belastung / Krise",
+    "official_sources": [
+      {
+        "name": "BMG",
+        "url": "https://www.bundesgesundheitsministerium.de/"
+      },
+      {
+        "name": "Bundesportal",
+        "url": "https://verwaltung.bund.de/portal/"
+      },
+      {
+        "name": "GKV-Spitzenverband",
+        "url": "https://www.gkv-spitzenverband.de/"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "TelefonSeelsorge",
+        "url": "https://www.telefonseelsorge.de/"
+      },
+      {
+        "name": "Caritas",
+        "url": "https://www.caritas.de/"
+      },
+      {
+        "name": "Diakonie",
+        "url": "https://www.diakonie.de/"
+      },
+      {
+        "name": "VdK",
+        "url": "https://www.vdk.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "TelefonSeelsorge",
+        "url": "https://www.telefonseelsorge.de/telefon/"
+      },
+      {
+        "name": "KrisenKompass",
+        "url": "https://www.telefonseelsorge.de/krisenkompass/"
+      },
+      {
+        "name": "Caritas – Beratung",
+        "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/adressen"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Erste Hilfe in suizidalen Krisen",
+        "url": "https://www.telefonseelsorge.de/wp-content/uploads/2024/06/Suizidgefaehrdeten_helfen.pdf"
+      },
+      {
+        "title": "Handbuch Suizidprävention",
+        "url": "https://www.telefonseelsorge.de/wp-content/uploads/2024/06/Handbuch-Suizidpraevention.pdf"
+      },
+      {
+        "title": "KrisenKompass Flyer",
+        "url": "https://www.telefonseelsorge.de/wp-content/uploads/2024/09/90x60-KrisenKompass.pdf"
+      }
+    ]
+  },
+  {
+    "life_event": "disability",
+    "title_de": "Behinderung festgestellt",
+    "official_sources": [
+      {
+        "name": "BMAS – Teilhabe und Inklusion",
+        "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/teilhabe-und-inklusion.html"
+      },
+      {
+        "name": "BMAS – FAQ Bundesteilhabegesetz",
+        "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/Rehabilitation-und-Teilhabe/Fragen-und-Antworten-Bundesteilhabegesetz/faq-bundesteilhabegesetz.html"
+      },
+      {
+        "name": "Bundesportal / Schwerbehindertenausweis",
+        "url": "https://verwaltung.bund.de/portal/"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "VdK",
+        "url": "https://www.vdk.de/"
+      },
+      {
+        "name": "SoVD",
+        "url": "https://www.sovd.de/"
+      },
+      {
+        "name": "Caritas",
+        "url": "https://www.caritas.de/"
+      },
+      {
+        "name": "Diakonie",
+        "url": "https://www.diakonie.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "VdK vor Ort",
+        "url": "https://www.vdk.de/vdk-vor-ort/"
+      },
+      {
+        "name": "SoVD vor Ort",
+        "url": "https://www.sovd.de/"
+      },
+      {
+        "name": "Caritas – Beratung",
+        "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/adressen"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Versorgungsmedizin-Verordnung",
+        "url": "https://www.bmas.de/DE/Service/Publikationen/Broschueren/k710-anhaltspunkte-fuer-die-aerztliche-gutachtertaetigkeit.html"
+      },
+      {
+        "title": "Rehabilitation und Teilhabe von Menschen mit Behinderungen (BMAS-Broschüre, über Themenseite)",
+        "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/teilhabe-und-inklusion.html"
+      }
+    ]
+  },
+  {
+    "life_event": "housing_loss",
+    "title_de": "Wohnung verloren / drohende Wohnungslosigkeit",
+    "official_sources": [
+      {
+        "name": "Jobcenter – Kosten der Unterkunft",
+        "url": "https://www.jobcenter.de/"
+      },
+      {
+        "name": "BMWSB – Wohngeld",
+        "url": "https://www.bmwsb.bund.de/DE/wohnen/wohngeld/wohngeld_node.html"
+      },
+      {
+        "name": "Bundesportal / Wohngeldbehörde",
+        "url": "https://verwaltung.bund.de/portal/"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "Caritas – Wohnungslosigkeit",
+        "url": "https://www.caritas.de/hilfeundberatung/ratgeber/wohnungslosigkeit/zurueckindieeigenenvierwaende/wege-aus-der-wohnungslosigkeit"
+      },
+      {
+        "name": "Diakonie – Wohnungs- und Obdachlosigkeit",
+        "url": "https://www.diakonie.de/wissen-kompakt-wohnungs-und-obdachlosigkeit"
+      },
+      {
+        "name": "AWO Beratung",
+        "url": "https://awo.org/service/beratung/"
+      },
+      {
+        "name": "Deutscher Mieterbund",
+        "url": "https://mieterbund.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "Caritas – Hilfe vor Ort",
+        "url": "https://www.caritas.de/diecaritas/in-ihrer-naehe/in-ihrer-naehe"
+      },
+      {
+        "name": "Diakonie – Einrichtungssuche",
+        "url": "https://www.diakonie.de/informieren/einrichtungssuche"
+      },
+      {
+        "name": "Wohnungsnotfallhilfe Leipzig (Beispiel PDF lokal)",
+        "url": "https://static.leipzig.de/fileadmin/mediendatenbank/leipzig-de/Stadt/02.5_Dez5_Jugend_Soziales_Gesundheit_Schule/50_Sozialamt/Wohnungsnotfallhilfe_und_Notunterbringung/Angebote-der-Wohnungsnotfallhilfe-und-Notunterbringung-in-der-Stadt-Leipzig.pdf"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Angebote der Wohnungsnotfallhilfe und Notunterbringung in Leipzig (lokales Beispiel)",
+        "url": "https://static.leipzig.de/fileadmin/mediendatenbank/leipzig-de/Stadt/02.5_Dez5_Jugend_Soziales_Gesundheit_Schule/50_Sozialamt/Wohnungsnotfallhilfe_und_Notunterbringung/Angebote-der-Wohnungsnotfallhilfe-und-Notunterbringung-in-der-Stadt-Leipzig.pdf"
+      },
+      {
+        "title": "Merkblatt Bürgergeld (SGB II)",
+        "url": "https://www.arbeitsagentur.de/datei/merkblatt-buergergeld_ba043375.pdf"
+      }
+    ]
+  },
+  {
+    "life_event": "rent_too_high",
+    "title_de": "Miete steigt stark / Wohnen wird zu teuer",
+    "official_sources": [
+      {
+        "name": "BMWSB – Wohngeld Plus",
+        "url": "https://www.bmwsb.bund.de/DE/wohnen/wohngeld/wohngeld-plus/wohngeld-plus_node.html"
+      },
+      {
+        "name": "BMWSB – Wohngeld FAQ",
+        "url": "https://www.bmwsb.bund.de/SharedDocs/faqs/DE/wohnen/wohngeld/wohngeld-faq-liste.html"
+      },
+      {
+        "name": "BMWSB – Wohngeldrechner",
+        "url": "https://www.bmwsb.bund.de/DE/wohnen/wohngeld/wohngeldrechner/wohngeldrechner-2025_node.html"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "Deutscher Mieterbund",
+        "url": "https://mieterbund.de/"
+      },
+      {
+        "name": "Caritas",
+        "url": "https://www.caritas.de/"
+      },
+      {
+        "name": "Diakonie",
+        "url": "https://www.diakonie.de/"
+      },
+      {
+        "name": "AWO Beratung",
+        "url": "https://awo.org/service/beratung/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "Mieterverein vor Ort finden",
+        "url": "https://mieterbund.de/"
+      },
+      {
+        "name": "Wohngeldbehörde über Verwaltungsportal",
+        "url": "https://verwaltung.bund.de/portal/"
+      },
+      {
+        "name": "Caritas – Sozialberatung",
+        "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/adressen"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Wohngeld-FAQ",
+        "url": "https://www.bmwsb.bund.de/SharedDocs/faqs/DE/wohnen/wohngeld/wohngeld-faq-liste.html"
+      },
+      {
+        "title": "Sozialhilfe kurz erklärt",
+        "url": "https://www.bmas.de/DE/Service/Publikationen/Broschueren/a209-sozialhilfe-kurz-und-knapp.html"
+      }
+    ]
+  },
+  {
+    "life_event": "energy_cost_crisis",
+    "title_de": "Energiekosten nicht bezahlbar",
+    "official_sources": [
+      {
+        "name": "BMWSB – Wohngeld",
+        "url": "https://www.bmwsb.bund.de/DE/wohnen/wohngeld/wohngeld_node.html"
+      },
+      {
+        "name": "Jobcenter",
+        "url": "https://www.jobcenter.de/"
+      },
+      {
+        "name": "Bundesportal",
+        "url": "https://verwaltung.bund.de/portal/"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "Verbraucherzentrale",
+        "url": "https://www.verbraucherzentrale.de/"
+      },
+      {
+        "name": "Caritas",
+        "url": "https://www.caritas.de/"
+      },
+      {
+        "name": "Diakonie",
+        "url": "https://www.diakonie.de/"
+      },
+      {
+        "name": "AWO Beratung",
+        "url": "https://awo.org/service/beratung/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "Verbraucherzentrale – Beratungsstellen",
+        "url": "https://www.verbraucherzentrale.de/beratung"
+      },
+      {
+        "name": "Jobcenter vor Ort",
+        "url": "https://www.jobcenter.de/"
+      },
+      {
+        "name": "Caritas – Sozialberatung",
+        "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/adressen"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Merkblatt Bürgergeld (SGB II)",
+        "url": "https://www.arbeitsagentur.de/datei/merkblatt-buergergeld_ba043375.pdf"
+      },
+      {
+        "title": "Sozialhilfe kurz erklärt",
+        "url": "https://www.bmas.de/DE/Service/Publikationen/Broschueren/a209-sozialhilfe-kurz-und-knapp.html"
+      }
+    ]
+  },
+  {
+    "life_event": "debt_or_pfaendung",
+    "title_de": "Schulden / Pfändung",
+    "official_sources": [
+      {
+        "name": "BMJ",
+        "url": "https://www.bmj.de/"
+      },
+      {
+        "name": "Bundesportal",
+        "url": "https://verwaltung.bund.de/portal/"
+      },
+      {
+        "name": "Arbeitsagentur / Insolvenzgeld",
+        "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/arbeitslosengeld/finanzielle-hilfen/insolvenzgeld-arbeitnehmer"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "BAG-SB",
+        "url": "https://www.bag-sb.de/"
+      },
+      {
+        "name": "meine-schulden.de",
+        "url": "https://www.meine-schulden.de/"
+      },
+      {
+        "name": "Verbraucherzentrale",
+        "url": "https://www.verbraucherzentrale.de/"
+      },
+      {
+        "name": "AWO – Schuldnerberatung",
+        "url": "https://www.einfachmeinrecht.awo.org/de/beratung"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "BAG-SB – Hilfe finden",
+        "url": "https://www.bag-sb.de/ratsuchende"
+      },
+      {
+        "name": "Verbraucherzentrale – Beratungsstellen",
+        "url": "https://www.verbraucherzentrale.de/beratung"
+      },
+      {
+        "name": "Caritas – Sozialberatung",
+        "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/adressen"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Merkblatt Insolvenzgeld",
+        "url": "https://www.arbeitsagentur.de/datei/merkblatt-10-insolvenzgeld_ba032060.pdf"
+      },
+      {
+        "title": "Merkblatt 1 – Arbeitslosigkeit",
+        "url": "https://www.arbeitsagentur.de/datei/merkblatt-fuer-arbeitslose_ba036520.pdf"
+      }
+    ]
+  },
+  {
+    "life_event": "benefits_sanction_or_cut",
+    "title_de": "Sanktion / Leistung gekürzt",
+    "official_sources": [
+      {
+        "name": "Jobcenter",
+        "url": "https://www.jobcenter.de/"
+      },
+      {
+        "name": "BMAS – Gesetz zur Umgestaltung der Grundsicherung",
+        "url": "https://www.bmas.de/DE/Service/Gesetze-und-Gesetzesvorhaben/13-gesetz-zur-aenderung-zweiten-buch-sozialgesetzbuch-und-anderer-gesetze.html"
+      },
+      {
+        "name": "BMAS – Leistungen und Bedarfe im Bürgergeld",
+        "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Leistungen-und-Bedarfe-im-Buergergeld/leistungen-und-bedarfe-im-buergergeld.html"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "Sanktionsfrei",
+        "url": "https://sanktionsfrei.de/"
+      },
+      {
+        "name": "Tacheles e.V.",
+        "url": "https://tacheles-sozialhilfe.de/"
+      },
+      {
+        "name": "VdK",
+        "url": "https://www.vdk.de/"
+      },
+      {
+        "name": "SoVD",
+        "url": "https://www.sovd.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "VdK vor Ort",
+        "url": "https://www.vdk.de/vdk-vor-ort/"
+      },
+      {
+        "name": "Caritas – Sozialberatung",
+        "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/adressen"
+      },
+      {
+        "name": "Diakonie – Einrichtungssuche",
+        "url": "https://www.diakonie.de/informieren/einrichtungssuche"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Merkblatt Bürgergeld (SGB II)",
+        "url": "https://www.arbeitsagentur.de/datei/merkblatt-buergergeld_ba043375.pdf"
+      },
+      {
+        "title": "Hauptantrag Bürgergeld",
+        "url": "https://www.arbeitsagentur.de/datei/antrag-sgb2_ba147846.pdf"
+      }
+    ]
+  },
+  {
+    "life_event": "application_rejected_appeal",
+    "title_de": "Antrag abgelehnt / Widerspruch nötig",
+    "official_sources": [
+      {
+        "name": "BMAS",
+        "url": "https://www.bmas.de/DE/Startseite/start.html"
+      },
+      {
+        "name": "Jobcenter",
+        "url": "https://www.jobcenter.de/"
+      },
+      {
+        "name": "Bundesportal",
+        "url": "https://verwaltung.bund.de/portal/"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "Tacheles e.V.",
+        "url": "https://tacheles-sozialhilfe.de/"
+      },
+      {
+        "name": "Sanktionsfrei",
+        "url": "https://sanktionsfrei.de/"
+      },
+      {
+        "name": "VdK",
+        "url": "https://www.vdk.de/"
+      },
+      {
+        "name": "SoVD",
+        "url": "https://www.sovd.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "VdK vor Ort",
+        "url": "https://www.vdk.de/vdk-vor-ort/"
+      },
+      {
+        "name": "SoVD Beratungsstellen",
+        "url": "https://www.sovd.de/"
+      },
+      {
+        "name": "Caritas – Sozialberatung",
+        "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/adressen"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Merkblatt Bürgergeld (SGB II)",
+        "url": "https://www.arbeitsagentur.de/datei/merkblatt-buergergeld_ba043375.pdf"
+      },
+      {
+        "title": "Sozialhilfe kurz erklärt",
+        "url": "https://www.bmas.de/DE/Service/Publikationen/Broschueren/a209-sozialhilfe-kurz-und-knapp.html"
+      }
+    ]
+  },
+  {
+    "life_event": "retirement_low_income",
+    "title_de": "Rente reicht nicht / Grundsicherung im Alter",
+    "official_sources": [
+      {
+        "name": "Deutsche Rentenversicherung",
+        "url": "https://www.deutsche-rentenversicherung.de/"
+      },
+      {
+        "name": "BMAS – Sozialhilfe kurz erklärt",
+        "url": "https://www.bmas.de/DE/Service/Publikationen/Broschueren/a209-sozialhilfe-kurz-und-knapp.html"
+      },
+      {
+        "name": "BMAS – Regelbedarf",
+        "url": "https://www.bmas.de/DE/Service/Publikationen/Broschueren/a206-regelbedarf.html"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "VdK",
+        "url": "https://www.vdk.de/"
+      },
+      {
+        "name": "SoVD",
+        "url": "https://www.sovd.de/"
+      },
+      {
+        "name": "Caritas",
+        "url": "https://www.caritas.de/"
+      },
+      {
+        "name": "Diakonie",
+        "url": "https://www.diakonie.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "Deutsche Rentenversicherung",
+        "url": "https://www.deutsche-rentenversicherung.de/"
+      },
+      {
+        "name": "VdK vor Ort",
+        "url": "https://www.vdk.de/vdk-vor-ort/"
+      },
+      {
+        "name": "Caritas – Sozialberatung",
+        "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/adressen"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Sozialhilfe kurz erklärt",
+        "url": "https://www.bmas.de/DE/Service/Publikationen/Broschueren/a209-sozialhilfe-kurz-und-knapp.html"
+      },
+      {
+        "title": "Regelbedarf",
+        "url": "https://www.bmas.de/DE/Service/Publikationen/Broschueren/a206-regelbedarf.html"
+      },
+      {
+        "title": "DRV Broschürenübersicht",
+        "url": "https://www.deutsche-rentenversicherung.de/DRV/DE/Ueber-uns-und-Presse/Mediathek/Broschueren/broschueren_node.html"
+      }
+    ]
+  },
+  {
+    "life_event": "start_studies_or_training",
+    "title_de": "Studium / Ausbildung begonnen",
+    "official_sources": [
+      {
+        "name": "BAföG",
+        "url": "https://www.xn--bafg-7qa.de/"
+      },
+      {
+        "name": "BAföG – Antrag stellen",
+        "url": "https://www.xn--bafg-7qa.de/bafoeg/de/antrag-stellen/antrag-stellen_node.html"
+      },
+      {
+        "name": "BAföG – Formulare",
+        "url": "https://www.xn--bafg-7qa.de/bafoeg/de/antrag-stellen/alle-antragsformulare/alle-antragsformulare_node.html"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "Deutsches Studierendenwerk",
+        "url": "https://www.studierendenwerke.de/"
+      },
+      {
+        "name": "Caritas",
+        "url": "https://www.caritas.de/"
+      },
+      {
+        "name": "Diakonie",
+        "url": "https://www.diakonie.de/"
+      },
+      {
+        "name": "AWO Beratung",
+        "url": "https://awo.org/service/beratung/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "BAföG-Amt / Landesportale",
+        "url": "https://www.xn--bafg-7qa.de/"
+      },
+      {
+        "name": "Studierendenwerke",
+        "url": "https://www.studierendenwerke.de/"
+      },
+      {
+        "name": "Caritas – Sozialberatung",
+        "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/adressen"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "BAföG Formblätter",
+        "url": "https://www.xn--bafg-7qa.de/bafoeg/de/antrag-stellen/alle-antragsformulare/alle-antragsformulare_node.html"
+      },
+      {
+        "title": "BAföG – Einkommen der Auszubildenden",
+        "url": "https://www.xn--bafg-7qa.de/bafoeg/de/antrag-stellen/merkblaetter/einkommen-der-auszubildenden/einkommen-der-auszubildenden_node.html"
+      },
+      {
+        "title": "BAföG für Schülerinnen und Schüler",
+        "url": "https://www.xn--bafg-7qa.de/bafoeg/de/das-bafoeg-alle-infos-auf-einen-blick/_documents/bafoeg-fuer-schuelerinnen-und-schueler.html"
+      }
+    ]
+  },
+  {
+    "life_event": "violence_escape",
+    "title_de": "Gewalt im Haushalt / Flucht",
+    "official_sources": [
+      {
+        "name": "Hilfetelefon Gewalt gegen Frauen",
+        "url": "https://www.hilfetelefon.de/"
+      },
+      {
+        "name": "Hilfetelefon – Häusliche Gewalt",
+        "url": "https://www.hilfetelefon.de/gewalt-gegen-frauen/haeusliche-gewalt/"
+      },
+      {
+        "name": "Frauenhaus-Suche",
+        "url": "https://www.frauenhaus-suche.de/"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "Frauenhaus-Suche / ZIF",
+        "url": "https://www.frauenhaus-suche.de/"
+      },
+      {
+        "name": "Caritas",
+        "url": "https://www.caritas.de/"
+      },
+      {
+        "name": "Diakonie",
+        "url": "https://www.diakonie.de/"
+      },
+      {
+        "name": "AWO Beratung",
+        "url": "https://awo.org/service/beratung/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "Hilfetelefon 116 016",
+        "url": "https://www.hilfetelefon.de/das-hilfetelefon/"
+      },
+      {
+        "name": "Frauenhaus-Suche",
+        "url": "https://www.frauenhaus-suche.de/"
+      },
+      {
+        "name": "Hilfetelefon Chat-Beratung",
+        "url": "https://www.hilfetelefon.de/das-hilfetelefon/beratung/"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Hilfetelefon Flyer (mehrsprachig)",
+        "url": "https://www.hilfetelefon.de/fileadmin/content/04_Materialien/1_Materialien_Bestellen/Flyer/ab_2023/240902_BAFzA_Hilfetelefon_Flyer_mehrsprachig_10Seiter_100x210_bf.pdf"
+      },
+      {
+        "title": "Hilfetelefon Infoblatt Unterstützungseinrichtungen",
+        "url": "https://www.hilfetelefon.de/fileadmin/content/04_Materialien/1_Materialien_Bestellen/Infoblaetter/Unterstuetzungseinrichtungen/Hilfetelefon_Gewalt_gegen_Frauen_Infoblatt_Unterstuetzungseinrichtungen_bf.pdf"
+      }
+    ]
+  },
+  {
+    "life_event": "release_from_prison",
+    "title_de": "Haftentlassung / Wiedereinstieg",
+    "official_sources": [
+      {
+        "name": "justiz.de",
+        "url": "https://www.justiz.de/"
+      },
+      {
+        "name": "Bundesportal",
+        "url": "https://verwaltung.bund.de/portal/"
+      },
+      {
+        "name": "Jobcenter",
+        "url": "https://www.jobcenter.de/"
+      }
+    ],
+    "ngo_sources": [
+      {
+        "name": "BAG-S – Bundesarbeitsgemeinschaft Straffälligenhilfe",
+        "url": "https://bag-s.de/"
+      },
+      {
+        "name": "Caritas Straffälligenhilfe",
+        "url": "https://www.caritas.de/"
+      },
+      {
+        "name": "Diakonie",
+        "url": "https://www.diakonie.de/"
+      },
+      {
+        "name": "TelefonSeelsorge",
+        "url": "https://www.telefonseelsorge.de/"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "BAG-S – Hilfe finden",
+        "url": "https://bag-s.de/hilfe/"
+      },
+      {
+        "name": "Caritas – Straffälligenhilfe Leipzig (Beispiel lokal)",
+        "url": "https://www.caritas-leipzig.de/hilfeundberatung/sozialenotlagen/straffaelligenhilfe/straffaelligenhilfe"
+      },
+      {
+        "name": "Jobcenter vor Ort",
+        "url": "https://www.jobcenter.de/"
+      }
+    ],
+    "pdfs": [
+      {
+        "title": "Werkstattpapier zur frauenspezifischen Straffälligenhilfe",
+        "url": "https://bag-s.de/wp-content/uploads/2024/11/Werkstattpapier-zur-frauenspezifischen-Straffaelligenhilfe.pdf"
+      },
+      {
+        "title": "Informationsdienst Straffälligenhilfe 2024/1",
+        "url": "https://bag-s.de/wp-content/uploads/2025/04/Infodienst__2024_1_digital.pdf"
+      },
+      {
+        "title": "Informationsdienst Straffälligenhilfe 2018/2",
+        "url": "https://bag-s.de/wp-content/uploads/2025/03/Infodienst_2018_2.pdf"
+      }
+    ]
+  }
+]

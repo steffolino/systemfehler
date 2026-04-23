@@ -32,7 +32,5 @@ Available endpoints:
 ## Deployment notes
 
 - Primary production target: Cloudflare Pages
-- Static fallback target: GitHub Pages
-- Snapshot fallback reads same-origin JSON bundles on GitHub Pages
 
 For the detailed request and response reference, see `docs/api.md`.

@@ -78,7 +78,7 @@ Sitemap-first discovery is recommended, followed by lightweight manual curation.
 
 1. Register source in `data/_sources/registered_sources.json`.
 2. Add topic role + `seedUrls` in `data/_topics/trusted_topic_sources.json`.
-3. Sync seeds via `python crawlers/cli.py sync-topic-seeds --domain <domain>`.
+3. Sync seeds via `python crawlers/cli.py sync-topic-seeds --domain <domain> --with-sitemaps` (sitemap-first).
 4. Crawl seeded domains and inspect `crawl_metrics.json`.
 5. Promote candidates only through quality-filtered promotion pipeline.
 

@@ -160,6 +160,7 @@ AI_DEFAULT_MODEL=llama3.1:8b
 AI_MODEL_REWRITE=llama3.1:8b
 AI_MODEL_SYNTHESIZE=llama3.1:8b
 AI_MODEL_ENRICH=llama3.1:8b
+# Legacy sidecar frontend route (only needed for `npm run dev:all:legacy`)
 VITE_AI_API_URL=http://localhost:8002
 ```
 
@@ -179,8 +180,8 @@ npm run ai:api:ollama
 The AI tab will show sidecar/provider health, fallback state, rewritten query,
 synthesized answer, and evidence entries.
 
-`npm run dev:all` now also starts or reuses a local Ollama instance through the
-repo helper script, so local full-stack development can bring up API, frontend,
+`npm run dev:all:legacy` starts or reuses a local Ollama instance through the
+repo helper script, so legacy full-stack development can bring up API, frontend,
 AI sidecar, Ollama, and Docker-backed services together.
 
 ---
@@ -381,15 +382,22 @@ The admin panel will be available at: http://localhost:5173
 
 ### Run API and Frontend Together
 
-Use concurrently to run both servers:
+Recommended production-like local stack (Cloudflare Pages + Pages Functions + local D1):
 
 ```bash
 npm run dev:all
 ```
 
 This starts:
-- API server on port 3001
-- Frontend dev server on port 5173
+- `wrangler pages dev` on port `8788`
+- Pages Functions under `/api/*` (including `/api/ai/*`)
+- local D1 schema + seeded snapshot corpus
+
+Legacy stack (Express + Vite + Python AI sidecar + Ollama):
+
+```bash
+npm run dev:all:legacy
+```
 
 ---
 
@@ -397,6 +405,21 @@ This starts:
 
 The production app path is Cloudflare Pages + Pages Functions (`/api/*`), not
 the standalone API worker.
+
+### Pages Local Dev (Recommended)
+
+Run the full local Pages workflow:
+
+```bash
+npm run dev:all
+```
+
+Utility commands:
+
+```bash
+npm run prepare:dist-pages
+npm run dev:pages:d1:reset
+```
 
 ### Pages Deploy Steps
 
@@ -501,17 +524,6 @@ the standalone API worker.
 - Check that CORS is enabled in backend/server.js
 - Verify the frontend is running on port 5173
 - Update CORS_ORIGIN in `.env` if needed
-
-### GitHub Pages Snapshot Mode
-
-When running on GitHub Pages, the app reads same-origin snapshot JSON instead of `http://localhost:3001`:
-
-- `/systemfehler/data/<domain>/entries.json`
-- `/systemfehler/moderation/review_queue.json`
-
-If the live site appears empty after a push, verify the latest `deploy-github-pages.yml` run succeeded and hard-refresh the page (`Ctrl+F5`).
-
----
 
 ## Next Steps
 

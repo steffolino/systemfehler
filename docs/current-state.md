@@ -41,7 +41,6 @@ Treat these as reference or planning documents, not runtime truth:
 ### Delivery stack
 
 - Cloudflare Pages is the primary production deployment target.
-- GitHub Pages is a static fallback that serves bundled snapshot JSON.
 - Local development can use:
   - Express in `backend/server.js`
   - the AI sidecar in `backend/ai_service/gateway.py`
@@ -226,7 +225,7 @@ noise overwrite the published dataset.
 
 Cloudflare Pages deployment now intentionally excludes the large `data/*`
 snapshot files. The active production Pages app uses Pages Functions + D1 for
-data access, while GitHub Pages remains the static snapshot fallback path.
+data access.
 
 Production AI is now live on `systemfehler.pages.dev` through Pages Functions
 plus Cloudflare Workers AI. The active production stack is:

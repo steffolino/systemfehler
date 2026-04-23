@@ -118,17 +118,26 @@ multiplier to chunks whose `document_type` or `topics` match:
 
 | Query keywords (examples) | Matching chunks | Boost |
 |---|---|---|
-| `sanktion`, `pflichtverletzung` | `weisung` + `sanctions` topic | 1.35× |
-| `unterkunft`, `miete`, `kdu` | `weisung` + `housing` topic | 1.35× |
-| `widerspruch`, `klage`, `ablehnung` | `statute`, `weisung`, `guide` | 1.30× |
-| `erwerbsfähigkeit`, `reha` | `weisung`, `statute` | 1.25× |
+| `sanktion`, `pflichtverletzung` | `weisung` + `sanktionen`/`buergergeld` topic tree | 1.35× |
+| `unterkunft`, `miete`, `kdu` | `weisung` + `housing`/`kosten_der_unterkunft` topic tree | 1.35× |
+| `widerspruch`, `klage`, `ablehnung` | `statute`, `weisung`, `guide` + `application_process` tree | 1.30× |
+| `wohngeld`, `wohngeldantrag` | `formular`, `merkblatt` + `housing`/`wohngeld` topic tree | 1.30× |
+| `regelbedarf`, `regelleistung` | `statute`, `merkblatt`, `weisung` + `buergergeld`/`regelbedarf` tree | 1.40× |
+| `erwerbsfähigkeit`, `reha` | `weisung`, `statute` + `healthcare`/`eligibility` tree | 1.25× |
 | `nebeneinkommen`, `freibetrag` | `weisung`, `merkblatt`, `statute` | 1.25× |
-| `bürgergeld`, `grundsicherung` | `statute`, `merkblatt`, `weisung` | 1.20× |
-| `arbeitslosengeld`, `alg i` | `statute`, `merkblatt` | 1.20× |
-| `kindergeld`, `kind` | `formular`, `merkblatt` | 1.20× |
+| `bürgergeld`, `grundsicherung` | `statute`, `merkblatt`, `weisung` + `buergergeld` tree | 1.20× |
+| `arbeitslosengeld`, `alg i` | `statute`, `merkblatt` + `employment` tree | 1.20× |
+| `kindergeld`, `kind` | `formular`, `merkblatt` + `family`/`kindergeld` tree | 1.20× |
+| `sozialhilfe`, `sgb xii` | `statute`, `merkblatt` + `financial_support`/`sozialhilfe` tree | 1.25× |
 
 Multiple rules can fire simultaneously; their boosts are multiplied together
 (capped at 2.0×).
+
+**Topic hierarchy expansion:** rule `topics` lists are automatically expanded to
+include all child IDs from `data/_taxonomy/topics.json` before matching. A chunk
+tagged with `sanktionen` (a child of `buergergeld`) will therefore match the
+Bürgergeld rule even if only the parent topic appears in the rule definition.
+See `crawlers/rag/sources.py → _expand_topics()` for the implementation.
 
 **Why topic boost and not just better embeddings?**
 Embeddings capture semantic similarity well but treat all documents equally.
@@ -181,6 +190,10 @@ source_registry.json
 
 Text is cached on disk (`data/_rag_cache/`) so re-indexing a source does not
 re-fetch the document unless `--force` is passed.
+
+RAG fetch errors are persisted in `data/_rag_sources/errored_sources.json`.
+Blocked entries (for example encrypted PDFs) are skipped automatically, and
+repeated fetch failures are remembered so bad inputs are not retried endlessly.
 
 ---
 

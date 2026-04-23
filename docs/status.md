@@ -1,8 +1,8 @@
 # Systemfehler – Implementation Status
 
-> **Last updated:** 2026-03-15
+> **Last updated:** 2026-04-23
 >
-> Major frontend and admin dashboard improvements, TypeScript config enhancements, new reusable components, and expanded test coverage were completed in the latest session. The frontend is now fully integrated as part of the monorepo (no separate git repo). See below for details.
+> Hierarchical topic taxonomy, RAG topic-boost hierarchy expansion, umlaut normalisation for guided retrieval, and Regelbedarf/Bürgergeld query coverage were added in the latest session. See below for details.
 
 For the consolidated repo view across live issues, current docs, and runtime
 code, also see `docs/current-state.md`.
@@ -75,6 +75,9 @@ crawling logic to these files.
 | Plain-language clone | 🟡 Experimental | Public `Standard / Einfach / Leicht` modes exist on entries and AI answers; admin now has a dedicated `/admin/plain-language` review queue plus approve/reject actions for `Einfach` and `Leicht` drafts |
 | Data preview, quality metrics, moderation queue views | ✅ Working |
 | AI search tab | 🟡 Experimental | Retrieval now uses trusted topic roles at ranking time; deterministic rewrite and enrichment also use trusted topic profiles for topic-aware keywords |
+| Guided retrieval umlaut normalisation | ✅ Working | `normalizeGermanChars()` in `ai.js` folds ä/ö/ü/ß → ae/oe/ue/ss before keyword/scenario matching, so "Bürgergeld" queries hit scenario detection and term boosts |
+| Hierarchical topic taxonomy | ✅ Working | `data/_taxonomy/topics.json` v0.2.0 — all 13 domain topics have populated `children` arrays; 55 total IDs; `crawlers/rag/sources.py` expands rule topics to all descendants at query time |
+| Regelbedarf retrieval fix | ✅ Working | `regelbedarf`/`regelleistung` added as detection keywords and term boosts in `job_loss_start` + `low_income_topup` scenarios; dedicated RAG boost rule added |
 
 ### Cloudflare Pages (`cloudflare-pages/`)
 
@@ -97,6 +100,12 @@ The Pages AI layer now also applies per-IP rate limiting and short edge-cache
 TTL responses for rewrite, retrieve, and synthesize to reduce repeated Workers
 AI cost on common prompts.
 
+Pages AI retrieval now supports hybrid runtime controls:
+- retrieval mode switch (`keyword`, `hybrid`, `external`)
+- strict official-source filtering and source-tier floor support
+- optional external retrieval endpoint with host allowlist and timeout guardrails
+- retrieval diagnostics exposed in health/retrieve/synthesize responses
+
 Pages Functions now also enforce baseline API hardening:
 - security headers on JSON responses (`nosniff`, frame deny, strict referrer policy)
 - JSON content-type and body-size checks on AI/admin ingest endpoints
@@ -114,8 +123,9 @@ API worker remains future follow-up work.
 
 | Component | Status | Notes |
 |-----------|--------|-------|
-| Crawl + ingest workflow | ✅ Working | Requires GitHub secrets `PAGES_INGEST_URL` and `INGEST_TOKEN` |
+| Crawl + ingest workflow | ✅ Working | Syncs trusted topic seeds, crawls all domains, validates snapshots, and ingests all domains into D1 (requires `PAGES_INGEST_URL` and `INGEST_TOKEN`) |
 | `scripts/ingest_to_d1.py` | ✅ Working | Accepts both JSON array snapshots and `{ "entries": [...] }` snapshots |
+| `scripts/ingest_all_to_d1.py` | ✅ Working | Sequentially ingests `benefits`, `aid`, `tools`, `organizations`, and `contacts` snapshots |
 
 
 ### Validation scripts (`scripts/`)
@@ -192,8 +202,11 @@ npm run api
 # Start frontend dev server
 npm run dev
 
-# Start API + frontend together
+# Start full local Pages stack (recommended)
 npm run dev:all
+
+# Start legacy local stack (Express + sidecar + Ollama)
+npm run dev:all:legacy
 
 # Replace PostgreSQL data from current snapshots
 npm run db:seed

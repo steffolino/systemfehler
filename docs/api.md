@@ -390,6 +390,47 @@ Retrieve comprehensive quality metrics and reports.
 
 ---
 
+### Guided Assistant Retrieval
+
+Retrieve evidence snippets used by guided responses.
+
+**Endpoint:** `POST /api/ai/retrieve`
+
+**Request body:**
+
+```json
+{
+  "query": "Ich habe eine Sanktion bekommen. Was kann ich tun?",
+  "life_event": "sanctions_conflict",
+  "retrieval_mode": "hybrid",
+  "strict_official": false,
+  "min_source_tier": "tier_2_official",
+  "min_confidence": 0.6
+}
+```
+
+**Response fields (selected):**
+- `evidence[]`: retrieved evidence objects
+- `weak_evidence`: whether strong evidence was found
+- `retrieval`: runtime diagnostics (active mode, fallback, external status, dropped-by-policy counters)
+
+---
+
+### Guided Assistant Synthesis
+
+Generate a short answer grounded in retrieval evidence.
+
+**Endpoint:** `POST /api/ai/synthesize`
+
+Request fields are identical to `/api/ai/retrieve`.
+
+Response includes:
+- `answer`, `explanation`, `sources`
+- `evidence` and `weak_evidence`
+- `retrieval` diagnostics for transparency
+
+---
+
 ## Error Responses
 
 All endpoints may return error responses with the following format:
