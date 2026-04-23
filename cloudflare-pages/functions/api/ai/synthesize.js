@@ -11,7 +11,7 @@ import {
 } from '../_lib/ai.js';
 import { applySecurityHeaders, jsonResponse, optionsResponse, readJsonBody } from '../_lib/http.js';
 
-const SYNTH_CACHE_VERSION = '2026-04-22-sanitize-boilerplate';
+const SYNTH_CACHE_VERSION = '2026-04-23-relevance-fallback-3';
 
 export async function onRequest({ request, env }) {
   if (request.method === 'OPTIONS') {

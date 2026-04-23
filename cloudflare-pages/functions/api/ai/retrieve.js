@@ -10,7 +10,7 @@ import {
 } from '../_lib/ai.js';
 import { applySecurityHeaders, jsonResponse, optionsResponse, readJsonBody } from '../_lib/http.js';
 
-const RETRIEVE_CACHE_VERSION = '2026-04-21-rich-evidence-1';
+const RETRIEVE_CACHE_VERSION = '2026-04-23-relevance-fallback-2';
 
 export async function onRequest({ request, env }) {
   if (request.method === 'OPTIONS') {
