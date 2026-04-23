@@ -713,12 +713,15 @@ function applyScenarioRelevanceGuard(entries, scenario) {
     : [];
   if (required.length === 0 && blocked.length === 0) return entries;
 
-  return entries.filter((entry) => {
+  const filtered = entries.filter((entry) => {
     const blob = entryTextBlob(entry);
     if (required.length > 0 && !required.some((signal) => blob.includes(signal))) return false;
     if (blocked.length > 0 && blocked.some((signal) => blob.includes(signal))) return false;
     return true;
   });
+
+  // Never let an over-strict guard erase all evidence.
+  return filtered.length > 0 ? filtered : entries;
 }
 
 function confidenceFromScore(score) {
@@ -1084,12 +1087,15 @@ async function retrieveKeywordEvidence(env, query, options = {}) {
       'familienkasse',
     ];
 
-    normalizedEntries = normalizedEntries.filter((entry) => {
+    const narrowedEntries = normalizedEntries.filter((entry) => {
       const blob = entryTextBlob(entry);
       const hasRequired = requiredSignals.some((signal) => blob.includes(signal));
       const hasBlocked = blockedSignals.some((signal) => blob.includes(signal));
       return hasRequired && !hasBlocked;
     });
+    if (narrowedEntries.length > 0) {
+      normalizedEntries = narrowedEntries;
+    }
   }
 
   const scored = normalizedEntries
@@ -1843,7 +1849,6 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
     };
   }
 }
-
 
 
 
