@@ -70,8 +70,12 @@ jobs:
             --cwd=cloudflare-pages
 
       - name: Sync D1 snapshots after deploy
-        if: ${{ secrets.PAGES_INGEST_URL != '' && secrets.INGEST_TOKEN != '' }}
-        run: python scripts/ingest_all_to_d1.py
+        run: |
+          if [ -z "${PAGES_INGEST_URL:-}" ] || [ -z "${INGEST_TOKEN:-}" ]; then
+            echo "Skipping D1 ingest: missing PAGES_INGEST_URL or INGEST_TOKEN"
+            exit 0
+          fi
+          python scripts/ingest_all_to_d1.py
         env:
           PAGES_INGEST_URL: ${{ secrets.PAGES_INGEST_URL }}
           INGEST_TOKEN: ${{ secrets.INGEST_TOKEN }}
