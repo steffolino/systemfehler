@@ -1,0 +1,1965 @@
+{
+    "version": "0.3.0",
+    "description": "Curated life-event scenarios for guided retrieval. Intended for domain-expert maintenance.",
+    "scenarios": [
+        {
+            "id": "job_loss_start",
+            "label_de": "Arbeitslos geworden (Neustart)",
+            "label_en": "Just became unemployed",
+            "keywords": [
+                "arbeitslos",
+                "kuendigung",
+                "job verloren",
+                "entlassen",
+                "job weg",
+                "regelbedarf",
+                "regelleistung",
+                "buergergeld hoehe",
+                "wie hoch buergergeld",
+                "buergergeld berechnen",
+                "wie viel buergergeld",
+                "anspruch buergergeld",
+                "buergergeld antrag"
+            ],
+            "expansions": [
+                "arbeitslosengeld",
+                "alg",
+                "buergergeld",
+                "jobcenter",
+                "arbeitsagentur",
+                "antrag",
+                "regelbedarf",
+                "regelleistung"
+            ],
+            "domains": [
+                "benefits",
+                "aid",
+                "contacts",
+                "tools"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "benefits": 8,
+                    "aid": 5,
+                    "contacts": 4,
+                    "tools": 2,
+                    "organizations": -8
+                },
+                "term_boosts": {
+                    "arbeitslosengeld": 8,
+                    "buergergeld": 8,
+                    "jobcenter": 7,
+                    "arbeitsagentur": 6,
+                    "antrag": 3,
+                    "regelbedarf": 9,
+                    "regelleistung": 8,
+                    "grundsicherung": 6
+                },
+                "term_penalties": {
+                    "kurzarbeitergeld": 5,
+                    "elterngeld": 4
+                }
+            },
+            "resource_targets": {
+                "documents": [
+                    "antrag",
+                    "merkblatt",
+                    "anspruch",
+                    "arbeitslosengeld"
+                ],
+                "information": [
+                    "jobcenter",
+                    "arbeitsagentur",
+                    "buergergeld",
+                    "erstberatung"
+                ],
+                "contacts": [
+                    "jobcenter",
+                    "arbeitsagentur",
+                    "beratung",
+                    "hotline"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Jobcenter",
+                    "Arbeitsagentur",
+                    "Beratung"
+                ],
+                "url_keywords": [
+                    "jobcenter",
+                    "arbeitsagentur",
+                    "beratung",
+                    "hotline"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "arbeitslos",
+                    "arbeitsagentur",
+                    "jobcenter",
+                    "arbeitslosengeld",
+                    "buergergeld",
+                    "kuendigung"
+                ],
+                "blocked_any": [
+                    "elterngeld",
+                    "kindergeld",
+                    "pflegegrad",
+                    "vaterschaft"
+                ]
+            }
+        },
+        {
+            "id": "short_work_or_hours_cut",
+            "label_de": "Kurzarbeit / Stunden reduziert",
+            "label_en": "Short-time work / reduced hours",
+            "keywords": [
+                "kurzarbeit",
+                "stunden reduziert",
+                "arbeitszeit reduziert",
+                "weniger stunden"
+            ],
+            "expansions": [
+                "kurzarbeitergeld",
+                "aufstockung",
+                "arbeitsagentur",
+                "einkommensausfall"
+            ],
+            "domains": [
+                "benefits",
+                "aid",
+                "contacts"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "benefits": 7,
+                    "aid": 4,
+                    "contacts": 3,
+                    "tools": 1,
+                    "organizations": -5
+                },
+                "term_boosts": {
+                    "kurzarbeitergeld": 10,
+                    "aufstockung": 7,
+                    "arbeitsagentur": 5,
+                    "einkommen": 4
+                },
+                "term_penalties": {
+                    "elterngeld": 3
+                }
+            },
+            "resource_targets": {
+                "documents": [
+                    "kurzarbeitergeld",
+                    "anspruch",
+                    "antrag",
+                    "nachweis"
+                ],
+                "information": [
+                    "aufstockung",
+                    "fristen",
+                    "arbeitsagentur",
+                    "arbeitgeber"
+                ],
+                "contacts": [
+                    "arbeitsagentur",
+                    "beratung",
+                    "hotline",
+                    "jobcenter"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Arbeitsagentur",
+                    "Beratung"
+                ],
+                "url_keywords": [
+                    "kurzarbeit",
+                    "arbeitsagentur",
+                    "beratung"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "kurzarbeit",
+                    "stunden reduziert",
+                    "arbeitszeit",
+                    "teilzeit",
+                    "arbeitgeber"
+                ],
+                "blocked_any": [
+                    "pflegefamili",
+                    "pflegegeld",
+                    "pflegegrad",
+                    "migration",
+                    "integrationskurs",
+                    "aufenthalt",
+                    "obdachlos"
+                ]
+            }
+        },
+        {
+            "id": "self_employment_failed",
+            "label_de": "Selbstaendigkeit gescheitert",
+            "label_en": "Self-employment failed",
+            "keywords": [
+                "selbstaendig",
+                "selbststaendig",
+                "firma aufgegeben",
+                "insolvenz",
+                "aufgeben"
+            ],
+            "expansions": [
+                "grundsicherung",
+                "buergergeld",
+                "krankenversicherung",
+                "schuldnerberatung",
+                "uebergang"
+            ],
+            "domains": [
+                "aid",
+                "benefits",
+                "contacts",
+                "tools"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "aid": 7,
+                    "benefits": 6,
+                    "contacts": 5,
+                    "tools": 2,
+                    "organizations": -4
+                },
+                "term_boosts": {
+                    "selbststaendig": 5,
+                    "grundsicherung": 8,
+                    "buergergeld": 7,
+                    "schuldnerberatung": 8,
+                    "insolvenz": 8
+                },
+                "term_penalties": {}
+            },
+            "resource_targets": {
+                "documents": [
+                    "grundsicherung",
+                    "antrag",
+                    "insolvenz",
+                    "krankenversicherung"
+                ],
+                "information": [
+                    "uebergang",
+                    "einkommen",
+                    "beratung",
+                    "neustart"
+                ],
+                "contacts": [
+                    "schuldnerberatung",
+                    "jobcenter",
+                    "beratung",
+                    "caritas",
+                    "diakonie"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Schuldnerberatung",
+                    "Jobcenter",
+                    "Caritas",
+                    "Diakonie"
+                ],
+                "url_keywords": [
+                    "schuldner",
+                    "insolvenz",
+                    "beratung",
+                    "jobcenter"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "selbstaendig",
+                    "selbstständig",
+                    "firma",
+                    "gewerbe",
+                    "insolvenz",
+                    "gruendung"
+                ],
+                "blocked_any": [
+                    "pflegefamili",
+                    "pflegegeld",
+                    "pflegegrad",
+                    "kurzarbeit",
+                    "migration",
+                    "obdachlos"
+                ]
+            }
+        },
+        {
+            "id": "education_finished_no_income",
+            "label_de": "Ausbildung/Studium beendet ohne Einkommen",
+            "label_en": "Education completed without income",
+            "keywords": [
+                "ausbildung beendet",
+                "studium beendet",
+                "kein einkommen",
+                "uebergang arbeitsmarkt"
+            ],
+            "expansions": [
+                "arbeitslos melden",
+                "arbeitsagentur",
+                "buergergeld",
+                "berufsberatung",
+                "uebergang"
+            ],
+            "domains": [
+                "benefits",
+                "aid",
+                "contacts",
+                "tools"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "benefits": 7,
+                    "aid": 5,
+                    "contacts": 4,
+                    "tools": 3,
+                    "organizations": -4
+                },
+                "term_boosts": {
+                    "arbeitslos": 6,
+                    "arbeitsagentur": 7,
+                    "berufsberatung": 8,
+                    "buergergeld": 6,
+                    "ausbildung": 4
+                },
+                "term_penalties": {}
+            },
+            "resource_targets": {
+                "documents": [
+                    "arbeitslos melden",
+                    "antrag",
+                    "anspruch",
+                    "nachweise"
+                ],
+                "information": [
+                    "berufsberatung",
+                    "uebergang",
+                    "einkommen",
+                    "jobsuche"
+                ],
+                "contacts": [
+                    "arbeitsagentur",
+                    "jobcenter",
+                    "berufsberatung",
+                    "jugendberufsagentur"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Arbeitsagentur",
+                    "Berufsberatung",
+                    "Jugend"
+                ],
+                "url_keywords": [
+                    "berufsberatung",
+                    "arbeitsagentur",
+                    "jobcenter"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "ausbildung",
+                    "studium",
+                    "abschluss",
+                    "berufsstart",
+                    "berufseinsteiger",
+                    "praktikum"
+                ],
+                "blocked_any": [
+                    "pflegefamili",
+                    "pflegegeld",
+                    "pflegegrad",
+                    "migration",
+                    "integrationskurs",
+                    "sanktion",
+                    "obdachlos"
+                ]
+            }
+        },
+        {
+            "id": "low_income_topup",
+            "label_de": "Niedriglohn / Aufstockung noetig",
+            "label_en": "Low income / top-up needed",
+            "keywords": [
+                "niedriglohn",
+                "aufstockung",
+                "reicht nicht",
+                "zu wenig lohn",
+                "working poor",
+                "regelbedarf",
+                "regelleistung",
+                "grundsicherungsbetrag"
+            ],
+            "expansions": [
+                "aufstockung",
+                "buergergeld",
+                "wohngeld",
+                "kinderzuschlag",
+                "anspruch",
+                "regelbedarf",
+                "regelleistung"
+            ],
+            "domains": [
+                "benefits",
+                "aid",
+                "tools",
+                "contacts"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "benefits": 8,
+                    "aid": 4,
+                    "tools": 4,
+                    "contacts": 3,
+                    "organizations": -4
+                },
+                "term_boosts": {
+                    "aufstockung": 10,
+                    "buergergeld": 7,
+                    "wohngeld": 8,
+                    "kinderzuschlag": 7,
+                    "anspruch": 4,
+                    "regelbedarf": 9,
+                    "regelleistung": 8,
+                    "grundsicherung": 6
+                },
+                "term_penalties": {}
+            },
+            "resource_targets": {
+                "documents": [
+                    "anspruch",
+                    "berechnung",
+                    "antrag",
+                    "nachweis"
+                ],
+                "information": [
+                    "aufstockung",
+                    "wohngeld",
+                    "kinderzuschlag",
+                    "einkommen"
+                ],
+                "contacts": [
+                    "jobcenter",
+                    "wohngeldstelle",
+                    "beratung",
+                    "familienkasse"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Jobcenter",
+                    "Wohngeld",
+                    "Familienkasse",
+                    "Beratung"
+                ],
+                "url_keywords": [
+                    "aufstockung",
+                    "wohngeld",
+                    "jobcenter",
+                    "familie"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "aufstockung",
+                    "niedriglohn",
+                    "kinderzuschlag",
+                    "wohngeld",
+                    "minijob",
+                    "ergaenzend",
+                    "regelbedarf",
+                    "regelleistung",
+                    "grundsicherung"
+                ],
+                "blocked_any": [
+                    "pflegefamili",
+                    "pflegegeld",
+                    "pflegegrad",
+                    "migration",
+                    "integrationskurs",
+                    "obdachlos"
+                ]
+            }
+        },
+        {
+            "id": "upskilling",
+            "label_de": "Weiterbildung / Umschulung",
+            "label_en": "Upskilling / retraining",
+            "keywords": [
+                "weiterbildung",
+                "umschulung",
+                "bildungsgutschein",
+                "fortbildung",
+                "qualifizierung",
+                "kurs"
+            ],
+            "expansions": [
+                "weiterbildung",
+                "umschulung",
+                "bildungsgutschein",
+                "foerderung",
+                "kurskosten"
+            ],
+            "domains": [
+                "benefits",
+                "tools",
+                "aid",
+                "contacts"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "benefits": 2,
+                    "tools": 8,
+                    "aid": 6,
+                    "contacts": 5,
+                    "organizations": -6
+                },
+                "term_boosts": {
+                    "weiterbildung": 8,
+                    "umschulung": 8,
+                    "bildungsgutschein": 10,
+                    "foerderung": 5,
+                    "kurs": 3,
+                    "berufsberatung": 7,
+                    "kurssuche": 5
+                },
+                "term_penalties": {
+                    "elterngeld": 4,
+                    "grundsicherung": 4,
+                    "buergergeld": 4
+                }
+            },
+            "resource_targets": {
+                "documents": [
+                    "bildungsgutschein",
+                    "foerderung",
+                    "antrag",
+                    "voraussetzung"
+                ],
+                "information": [
+                    "umschulung",
+                    "weiterbildung",
+                    "arbeitsagentur",
+                    "kurssuche"
+                ],
+                "contacts": [
+                    "berufsberatung",
+                    "arbeitsagentur",
+                    "jobcenter",
+                    "beratung"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Berufsberatung",
+                    "Arbeitsagentur",
+                    "Jobcenter"
+                ],
+                "url_keywords": [
+                    "arbeitsagentur",
+                    "weiterbildung",
+                    "beratung",
+                    "kurs"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "weiterbildung",
+                    "bildungsgutschein",
+                    "umschulung",
+                    "qualifizierung",
+                    "fortbildung",
+                    "berufsberatung"
+                ],
+                "blocked_any": [
+                    "schuldner",
+                    "pfaendung",
+                    "kindergeld",
+                    "elterngeld",
+                    "vaterschaft"
+                ]
+            }
+        },
+        {
+            "id": "family_children",
+            "label_de": "Kind(er) / Familie",
+            "label_en": "Children / family",
+            "keywords": [
+                "kinder",
+                "kind",
+                "baby",
+                "familie",
+                "alleinerziehend",
+                "eltern"
+            ],
+            "expansions": [
+                "kindergeld",
+                "kinderzuschlag",
+                "elterngeld",
+                "familienkasse",
+                "unterhaltsvorschuss"
+            ],
+            "domains": [
+                "benefits",
+                "contacts",
+                "aid",
+                "tools"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "benefits": 8,
+                    "contacts": 5,
+                    "aid": 4,
+                    "tools": 2,
+                    "organizations": -5
+                },
+                "term_boosts": {
+                    "kindergeld": 10,
+                    "kinderzuschlag": 9,
+                    "elterngeld": 9,
+                    "familienkasse": 8,
+                    "unterhaltsvorschuss": 7
+                },
+                "term_penalties": {
+                    "kurzarbeitergeld": 3
+                }
+            },
+            "resource_targets": {
+                "documents": [
+                    "antrag",
+                    "kindergeld",
+                    "kinderzuschlag",
+                    "elterngeld"
+                ],
+                "information": [
+                    "familienkasse",
+                    "familienportal",
+                    "anspruch",
+                    "frist"
+                ],
+                "contacts": [
+                    "familienkasse",
+                    "jugendamt",
+                    "beratung",
+                    "hotline"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Familienkasse",
+                    "Familienportal",
+                    "Jugendamt",
+                    "Beratung"
+                ],
+                "url_keywords": [
+                    "familie",
+                    "kindergeld",
+                    "kinder",
+                    "familienkasse",
+                    "jugendamt"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "kindergeld",
+                    "elterngeld",
+                    "kinderzuschlag",
+                    "familienkasse",
+                    "familie",
+                    "kind"
+                ],
+                "blocked_any": [
+                    "schuldner",
+                    "pfaendung",
+                    "berufsanerkennung",
+                    "insolvenz"
+                ]
+            }
+        },
+        {
+            "id": "single_parent_new",
+            "label_de": "Alleinerziehend geworden",
+            "label_en": "Became a single parent",
+            "keywords": [
+                "alleinerziehend",
+                "allein mit kind",
+                "kein unterhalt",
+                "allein erziehen"
+            ],
+            "expansions": [
+                "unterhaltsvorschuss",
+                "kindergeld",
+                "kinderzuschlag",
+                "wohngeld",
+                "beratung"
+            ],
+            "domains": [
+                "benefits",
+                "contacts",
+                "aid"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "benefits": 8,
+                    "contacts": 6,
+                    "aid": 4,
+                    "tools": 2,
+                    "organizations": -4
+                },
+                "term_boosts": {
+                    "unterhaltsvorschuss": 10,
+                    "kindergeld": 7,
+                    "kinderzuschlag": 7,
+                    "alleinerziehend": 8,
+                    "wohngeld": 6
+                },
+                "term_penalties": {}
+            },
+            "resource_targets": {
+                "documents": [
+                    "unterhaltsvorschuss",
+                    "antrag",
+                    "kindergeld",
+                    "wohngeld"
+                ],
+                "information": [
+                    "anspruch",
+                    "frist",
+                    "jugendamt",
+                    "familienkasse"
+                ],
+                "contacts": [
+                    "jugendamt",
+                    "familienkasse",
+                    "beratung",
+                    "frauenberatung"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Jugendamt",
+                    "Familienkasse",
+                    "Beratung"
+                ],
+                "url_keywords": [
+                    "unterhalt",
+                    "jugendamt",
+                    "familie",
+                    "beratung"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "alleinerziehend",
+                    "allein mit kind",
+                    "unterhaltsvorschuss",
+                    "sorgerecht",
+                    "kindergeld"
+                ],
+                "blocked_any": [
+                    "pflegefamili",
+                    "vollzeitpflege",
+                    "bereitschaftspflege",
+                    "migration",
+                    "integrationskurs",
+                    "obdachlos",
+                    "sanktion"
+                ]
+            }
+        },
+        {
+            "id": "separation_divorce",
+            "label_de": "Trennung / Scheidung",
+            "label_en": "Separation / divorce",
+            "keywords": [
+                "trennung",
+                "scheidung",
+                "unterhalt",
+                "gemeinsame wohnung",
+                "sorgerecht"
+            ],
+            "expansions": [
+                "unterhalt",
+                "unterhaltsvorschuss",
+                "wohngeld",
+                "beratung",
+                "jugendamt"
+            ],
+            "domains": [
+                "aid",
+                "contacts",
+                "benefits"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "aid": 7,
+                    "contacts": 6,
+                    "benefits": 5,
+                    "tools": 1,
+                    "organizations": -4
+                },
+                "term_boosts": {
+                    "trennung": 7,
+                    "scheidung": 7,
+                    "unterhalt": 8,
+                    "unterhaltsvorschuss": 8,
+                    "jugendamt": 7
+                },
+                "term_penalties": {}
+            },
+            "resource_targets": {
+                "documents": [
+                    "unterhalt",
+                    "unterhaltsvorschuss",
+                    "antrag",
+                    "nachweise"
+                ],
+                "information": [
+                    "sorgerecht",
+                    "wohnung",
+                    "anspruch",
+                    "beratung"
+                ],
+                "contacts": [
+                    "jugendamt",
+                    "beratung",
+                    "frauenberatung",
+                    "familienkasse"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Jugendamt",
+                    "Beratung",
+                    "Familie"
+                ],
+                "url_keywords": [
+                    "trennung",
+                    "scheidung",
+                    "unterhalt",
+                    "beratung"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "trennung",
+                    "scheidung",
+                    "unterhalt",
+                    "getrennt",
+                    "ehe",
+                    "sorgerecht"
+                ],
+                "blocked_any": [
+                    "pflegefamili",
+                    "pflegegeld",
+                    "pflegegrad",
+                    "migration",
+                    "integrationskurs",
+                    "obdachlos",
+                    "sanktion"
+                ]
+            }
+        },
+        {
+            "id": "caregiving_relatives",
+            "label_de": "Pflege von Angehoerigen uebernommen",
+            "label_en": "Took over caregiving for relatives",
+            "keywords": [
+                "pflege angehoerige",
+                "pflege uebernommen",
+                "pflegefall",
+                "pflege zuhause"
+            ],
+            "expansions": [
+                "pflegegrad",
+                "pflegegeld",
+                "pflegeberatung",
+                "entlastungsbetrag",
+                "kurzzeitpflege"
+            ],
+            "domains": [
+                "benefits",
+                "contacts",
+                "aid",
+                "tools"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "benefits": 8,
+                    "contacts": 6,
+                    "aid": 4,
+                    "tools": 2,
+                    "organizations": -3
+                },
+                "term_boosts": {
+                    "pflegegrad": 9,
+                    "pflegegeld": 9,
+                    "pflegeberatung": 8,
+                    "entlastungsbetrag": 7,
+                    "kurzzeitpflege": 7
+                },
+                "term_penalties": {
+                    "buergergeld": -8,
+                    "arbeitslosengeld": -8,
+                    "arbeitslos": -6,
+                    "jobcenter": -6,
+                    "kuendigung": -6,
+                    "pflegefamili": -10,
+                    "vollzeitpflege": -10,
+                    "bereitschaftspflege": -10
+                }
+            },
+            "resource_targets": {
+                "documents": [
+                    "pflegegrad",
+                    "antrag",
+                    "pflegegeld",
+                    "leistung"
+                ],
+                "information": [
+                    "pflegeberatung",
+                    "entlastung",
+                    "kurzzeitpflege",
+                    "angehoerige",
+                    "vereinbarkeit",
+                    "pflegezeit",
+                    "gesetzliche regelungen"
+                ],
+                "contacts": [
+                    "pflegestuetzpunkt",
+                    "pflegekasse",
+                    "beratung",
+                    "sozialdienst",
+                    "pflegetelefon",
+                    "verhinderungspflege",
+                    "kurzzeitpflege"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Pflegestuetzpunkt",
+                    "Pflege",
+                    "Beratung"
+                ],
+                "url_keywords": [
+                    "pflege",
+                    "pflegekasse",
+                    "beratung"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "pflege",
+                    "pflegegeld",
+                    "pflegegrad",
+                    "pflegezeit",
+                    "pflegeperson",
+                    "entlastungsbetrag",
+                    "kurzzeitpflege",
+                    "pflegestuetzpunkt",
+                    "pflegekasse",
+                    "angehoerige",
+                    "angehÃ¶rige"
+                ],
+                "blocked_any": [
+                    "pflegefamilie",
+                    "pflegefamilien",
+                    "vollzeitpflege",
+                    "bereitschaftspflege",
+                    "adoptiv",
+                    "buergergeld/leistungen-und-bedarfe",
+                    "buergergeld/grundsicherung",
+                    "arbeitslosengeld",
+                    "finanzierung-sozialer-projekte",
+                    "der-paritaetische.de/leistungen-angebote/finanzierung",
+                    "bamf",
+                    "ausbildung-studium-mit-kind",
+                    "integrationskurs-angebot",
+                    "buergergeld/grundsicherung",
+                    "buergergeld/leistungen"
+                ]
+            }
+        },
+        {
+            "id": "migration_arrival",
+            "label_de": "Neu im Land",
+            "label_en": "New in the country",
+            "keywords": [
+                "neu in deutschland",
+                "neu im land",
+                "ankunft",
+                "neu angekommen",
+                "integration"
+            ],
+            "expansions": [
+                "aufenthalt",
+                "integrationskurs",
+                "jobcenter",
+                "beratung",
+                "sprachkurs"
+            ],
+            "domains": [
+                "aid",
+                "contacts",
+                "benefits"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "aid": 7,
+                    "contacts": 6,
+                    "benefits": 5,
+                    "tools": 2,
+                    "organizations": -3
+                },
+                "term_boosts": {
+                    "integration": 8,
+                    "integrationskurs": 9,
+                    "aufenthalt": 7,
+                    "sprachkurs": 8,
+                    "beratung": 5
+                },
+                "term_penalties": {}
+            },
+            "resource_targets": {
+                "documents": [
+                    "aufenthalt",
+                    "antrag",
+                    "integrationskurs",
+                    "nachweise"
+                ],
+                "information": [
+                    "sprachkurs",
+                    "jobcenter",
+                    "erstberatung",
+                    "leistungen"
+                ],
+                "contacts": [
+                    "migrationsberatung",
+                    "jobcenter",
+                    "auslaenderbehoerde",
+                    "beratung"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Migrationsberatung",
+                    "Jobcenter",
+                    "Beratung"
+                ],
+                "url_keywords": [
+                    "migration",
+                    "integration",
+                    "beratung",
+                    "aufenthalt"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "migration",
+                    "integration",
+                    "zuwander",
+                    "neu in deutschland",
+                    "aufenthalt",
+                    "gefluechtete",
+                    "fluechtling"
+                ],
+                "blocked_any": [
+                    "pflegefamili",
+                    "pflegegeld",
+                    "pflegegrad",
+                    "kurzarbeit",
+                    "sanktion",
+                    "schuldner",
+                    "obdachlos"
+                ]
+            }
+        },
+        {
+            "id": "unclear_residence_status",
+            "label_de": "Aufenthaltsstatus ungeklaert",
+            "label_en": "Residence status unclear",
+            "keywords": [
+                "aufenthaltsstatus unklar",
+                "duldung",
+                "fiktionsbescheinigung",
+                "aufenthalt abgelaufen"
+            ],
+            "expansions": [
+                "aufenthaltsrecht",
+                "auslaenderbehoerde",
+                "beratung",
+                "existenzsicherung",
+                "notfallhilfe"
+            ],
+            "domains": [
+                "aid",
+                "contacts",
+                "benefits"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "aid": 8,
+                    "contacts": 7,
+                    "benefits": 4,
+                    "tools": 1,
+                    "organizations": -3
+                },
+                "term_boosts": {
+                    "aufenthaltsstatus": 10,
+                    "duldung": 8,
+                    "auslaenderbehoerde": 8,
+                    "beratung": 6,
+                    "notfallhilfe": 6
+                },
+                "term_penalties": {
+                    "schuldnerberatung": 9,
+                    "schulden": 8,
+                    "pfaendung": 8,
+                    "jobcenter": 6,
+                    "arbeit": 4,
+                    "arbeitslos": 4
+                }
+            },
+            "resource_targets": {
+                "documents": [
+                    "aufenthalt",
+                    "frist",
+                    "bescheinigung",
+                    "antrag"
+                ],
+                "information": [
+                    "aufenthaltsstatus",
+                    "duldung",
+                    "fiktionsbescheinigung",
+                    "auslaenderbehoerde"
+                ],
+                "contacts": [
+                    "migrationsberatung",
+                    "auslaenderbehoerde",
+                    "rechtsberatung",
+                    "aufenthaltsrecht"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Migrationsberatung",
+                    "Rechtsberatung",
+                    "Auslaender"
+                ],
+                "url_keywords": [
+                    "aufenthalt",
+                    "migration",
+                    "recht",
+                    "beratung"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "aufenthalt",
+                    "duldung",
+                    "asyl",
+                    "aufenthaltserlaubnis",
+                    "auslaender",
+                    "visum"
+                ],
+                "blocked_any": [
+                    "pflegefamili",
+                    "pflegegeld",
+                    "pflegegrad",
+                    "kurzarbeit",
+                    "schuldner",
+                    "obdachlos",
+                    "buergergeld/leistungen"
+                ]
+            }
+        },
+        {
+            "id": "recognition_missing",
+            "label_de": "Anerkennung von Abschluessen fehlt",
+            "label_en": "Qualification recognition missing",
+            "keywords": [
+                "anerkennung fehlt",
+                "abschluss anerkennen",
+                "zeugnis anerkennung",
+                "berufsanerkennung"
+            ],
+            "expansions": [
+                "anerkennung",
+                "berufliche anerkennung",
+                "anerkennungsberatung",
+                "zeugnisbewertung",
+                "qualifizierung",
+                "gleichwertigkeit",
+                "anabin"
+            ],
+            "domains": [
+                "aid",
+                "tools",
+                "contacts",
+                "benefits"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "aid": 8,
+                    "tools": 7,
+                    "contacts": 6,
+                    "benefits": 3,
+                    "organizations": -3
+                },
+                "term_boosts": {
+                    "anerkennung": 10,
+                    "abschluss": 6,
+                    "berufsanerkennung": 8,
+                    "zeugnisbewertung": 8,
+                    "gleichwertigkeit": 8,
+                    "anerkennungsberatung": 8,
+                    "qualifikation": 7,
+                    "qualifikationen": 7,
+                    "beruf": 6,
+                    "qualifizierung": 6,
+                    "beratung": 5
+                },
+                "term_penalties": {
+                    "schuldner": 12,
+                    "schulden": 12,
+                    "vaterschaft": 12,
+                    "unterhalt": 9,
+                    "familie": 7,
+                    "kinder": 7,
+                    "miete": 7,
+                    "energie": 7,
+                    "gesundheit": 6
+                }
+            },
+            "resource_targets": {
+                "documents": [
+                    "anerkennung",
+                    "nachweise",
+                    "antrag",
+                    "abschluesse"
+                ],
+                "information": [
+                    "qualifizierung",
+                    "anerkennungsberatung",
+                    "zeugnisbewertung",
+                    "gleichwertigkeit"
+                ],
+                "contacts": [
+                    "anerkennungsberatung",
+                    "iq netzwerk",
+                    "ihk fosa",
+                    "zeugnisbewertung"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Anerkennung",
+                    "Anerkennungsberatung",
+                    "Zeugnisbewertung",
+                    "IHK"
+                ],
+                "url_keywords": [
+                    "anerkennung",
+                    "abschluss",
+                    "zeugnisbewertung",
+                    "berufsanerkennung"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "berufsanerkennung",
+                    "anerkennungsberatung",
+                    "zeugnisbewertung",
+                    "gleichwertigkeit",
+                    "qualifikation",
+                    "abschluss",
+                    "anabin",
+                    "iq netzwerk",
+                    "ihk fosa"
+                ],
+                "blocked_any": [
+                    "vaterschaft",
+                    "schuldner",
+                    "unterhalt",
+                    "kindergeld",
+                    "kinderzuschlag",
+                    "familienkasse",
+                    "frauenhaus"
+                ]
+            }
+        },
+        {
+            "id": "health_disruption",
+            "label_de": "Krank geworden",
+            "label_en": "Became ill",
+            "keywords": [
+                "krank geworden",
+                "krank",
+                "arbeitsunfaehig",
+                "krankgeschrieben",
+                "gesundheit"
+            ],
+            "expansions": [
+                "krankengeld",
+                "arbeitsunfaehigkeit",
+                "reha",
+                "beratung",
+                "sicherung"
+            ],
+            "domains": [
+                "benefits",
+                "aid",
+                "contacts",
+                "tools"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "benefits": 8,
+                    "aid": 5,
+                    "contacts": 4,
+                    "tools": 2,
+                    "organizations": -4
+                },
+                "term_boosts": {
+                    "krankengeld": 10,
+                    "arbeitsunfaehigkeit": 8,
+                    "reha": 7,
+                    "gesundheit": 5,
+                    "beratung": 4
+                },
+                "term_penalties": {}
+            },
+            "resource_targets": {
+                "documents": [
+                    "krankengeld",
+                    "antrag",
+                    "nachweis",
+                    "arbeitsunfaehigkeit"
+                ],
+                "information": [
+                    "reha",
+                    "gesundheit",
+                    "anspruch",
+                    "jobcenter"
+                ],
+                "contacts": [
+                    "krankenkasse",
+                    "jobcenter",
+                    "beratung",
+                    "sozialdienst"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Krankenkasse",
+                    "Sozial",
+                    "Beratung"
+                ],
+                "url_keywords": [
+                    "krank",
+                    "krankengeld",
+                    "reha",
+                    "beratung"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "krank",
+                    "krankheit",
+                    "erkrankung",
+                    "arbeitsunfaehig",
+                    "reha",
+                    "krankenversicherung",
+                    "krankengeld"
+                ],
+                "blocked_any": [
+                    "pflegefamili",
+                    "migration",
+                    "integrationskurs",
+                    "obdachlos",
+                    "sanktion",
+                    "schuldner"
+                ]
+            }
+        },
+        {
+            "id": "long_term_work_incapacity",
+            "label_de": "Langfristig arbeitsunfaehig",
+            "label_en": "Long-term work incapacity",
+            "keywords": [
+                "langfristig arbeitsunfaehig",
+                "dauerhaft krank",
+                "erwerbsminderung",
+                "nicht arbeitsfaehig"
+            ],
+            "expansions": [
+                "erwerbsminderungsrente",
+                "grundsicherung",
+                "reha",
+                "sozialamt",
+                "beratung"
+            ],
+            "domains": [
+                "benefits",
+                "aid",
+                "contacts"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "benefits": 8,
+                    "aid": 5,
+                    "contacts": 5,
+                    "tools": 1,
+                    "organizations": -3
+                },
+                "term_boosts": {
+                    "erwerbsminderung": 10,
+                    "erwerbsminderungsrente": 10,
+                    "grundsicherung": 7,
+                    "reha": 6,
+                    "sozialamt": 7
+                },
+                "term_penalties": {}
+            },
+            "resource_targets": {
+                "documents": [
+                    "erwerbsminderungsrente",
+                    "antrag",
+                    "nachweise",
+                    "grundsicherung"
+                ],
+                "information": [
+                    "reha",
+                    "sozialamt",
+                    "anspruch",
+                    "beratung"
+                ],
+                "contacts": [
+                    "rentenberatung",
+                    "sozialamt",
+                    "beratung",
+                    "krankenkasse"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Rente",
+                    "Sozialamt",
+                    "Beratung"
+                ],
+                "url_keywords": [
+                    "erwerbsminderung",
+                    "rente",
+                    "sozialamt",
+                    "beratung"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "langfristig arbeitsunfaehig",
+                    "dauerhaft krank",
+                    "erwerbsminderung",
+                    "rentenversicherung",
+                    "behinderung"
+                ],
+                "blocked_any": [
+                    "pflegefamili",
+                    "migration",
+                    "integrationskurs",
+                    "obdachlos",
+                    "sanktion",
+                    "schuldner",
+                    "kurzarbeit"
+                ]
+            }
+        },
+        {
+            "id": "mental_burnout",
+            "label_de": "Psychische Belastung / Burnout",
+            "label_en": "Mental stress / burnout",
+            "keywords": [
+                "burnout",
+                "psychische belastung",
+                "depression",
+                "ueberlastet",
+                "angst"
+            ],
+            "expansions": [
+                "krankschreibung",
+                "reha",
+                "psychosoziale beratung",
+                "krisenhilfe",
+                "gesundheit"
+            ],
+            "domains": [
+                "aid",
+                "contacts",
+                "benefits"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "aid": 8,
+                    "contacts": 7,
+                    "benefits": 4,
+                    "tools": 2,
+                    "organizations": -3
+                },
+                "term_boosts": {
+                    "burnout": 10,
+                    "psychische": 8,
+                    "krisenhilfe": 8,
+                    "beratung": 6,
+                    "reha": 6
+                },
+                "term_penalties": {}
+            },
+            "resource_targets": {
+                "documents": [
+                    "krankschreibung",
+                    "reha",
+                    "antrag",
+                    "leistungsanspruch"
+                ],
+                "information": [
+                    "krisenhilfe",
+                    "psychosozial",
+                    "gesundheit",
+                    "entlastung"
+                ],
+                "contacts": [
+                    "krisendienst",
+                    "sozialpsychiatrischer dienst",
+                    "beratung",
+                    "hotline"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Krisen",
+                    "Psych",
+                    "Beratung",
+                    "Hotline"
+                ],
+                "url_keywords": [
+                    "krise",
+                    "psych",
+                    "beratung",
+                    "hotline"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "burnout",
+                    "erschoepfung",
+                    "psychisch",
+                    "psychische krise",
+                    "ueberlastung",
+                    "seelisch",
+                    "mentale gesundheit"
+                ],
+                "blocked_any": [
+                    "pflegefamili",
+                    "pflegegeld",
+                    "pflegegrad",
+                    "migration",
+                    "integrationskurs",
+                    "obdachlos",
+                    "sanktion",
+                    "schuldner"
+                ]
+            }
+        },
+        {
+            "id": "housing_loss_homelessness_risk",
+            "label_de": "Wohnung verloren / drohende Obdachlosigkeit",
+            "label_en": "Lost housing / homelessness risk",
+            "keywords": [
+                "wohnung verloren",
+                "obdachlos",
+                "raeumung",
+                "kuendigung wohnung",
+                "wohnungslos"
+            ],
+            "expansions": [
+                "wohnungsnotfall",
+                "kdu",
+                "notunterkunft",
+                "mietschulden",
+                "sozialberatung"
+            ],
+            "domains": [
+                "aid",
+                "contacts",
+                "benefits",
+                "tools"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "aid": 8,
+                    "contacts": 7,
+                    "benefits": 5,
+                    "tools": 3,
+                    "organizations": -3
+                },
+                "term_boosts": {
+                    "wohnungsnotfall": 10,
+                    "obdachlos": 9,
+                    "raeumung": 8,
+                    "mietschulden": 8,
+                    "notunterkunft": 8
+                },
+                "term_penalties": {}
+            },
+            "resource_targets": {
+                "documents": [
+                    "mietschulden",
+                    "antrag",
+                    "kdu",
+                    "notfallhilfe"
+                ],
+                "information": [
+                    "wohnungsnotfall",
+                    "notunterkunft",
+                    "sozialberatung",
+                    "frist"
+                ],
+                "contacts": [
+                    "wohnungsnotfallhilfe",
+                    "sozialamt",
+                    "beratung",
+                    "notruf"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Wohnungsnotfall",
+                    "Sozial",
+                    "Beratung",
+                    "Not"
+                ],
+                "url_keywords": [
+                    "wohnung",
+                    "obdachlos",
+                    "notfall",
+                    "beratung"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "wohnung",
+                    "obdachlos",
+                    "raeumung",
+                    "mietschulden",
+                    "unterkunft",
+                    "wohnraumfoerderung"
+                ],
+                "blocked_any": [
+                    "pflegefamili",
+                    "pflegegeld",
+                    "pflegegrad",
+                    "migration",
+                    "integrationskurs",
+                    "sanktion",
+                    "arbeitslosengeld"
+                ]
+            }
+        },
+        {
+            "id": "energy_cost_unaffordable",
+            "label_de": "Energiekosten nicht bezahlbar",
+            "label_en": "Energy costs unaffordable",
+            "keywords": [
+                "strom nicht zahlbar",
+                "heizkosten",
+                "energieschulden",
+                "abschaltung",
+                "energiekosten"
+            ],
+            "expansions": [
+                "energieschulden",
+                "notfallhilfe",
+                "darlehen",
+                "sozialberatung",
+                "kdu"
+            ],
+            "domains": [
+                "aid",
+                "benefits",
+                "contacts",
+                "tools"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "aid": 8,
+                    "benefits": 6,
+                    "contacts": 5,
+                    "tools": 3,
+                    "organizations": -3
+                },
+                "term_boosts": {
+                    "energieschulden": 10,
+                    "heizkosten": 8,
+                    "strom": 7,
+                    "darlehen": 7,
+                    "notfallhilfe": 8
+                },
+                "term_penalties": {}
+            },
+            "resource_targets": {
+                "documents": [
+                    "darlehen",
+                    "antrag",
+                    "heizkosten",
+                    "energieschulden"
+                ],
+                "information": [
+                    "abschaltung",
+                    "notfall",
+                    "kdu",
+                    "beratung"
+                ],
+                "contacts": [
+                    "energieberatung",
+                    "schuldnerberatung",
+                    "sozialberatung",
+                    "hotline"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Energie",
+                    "Schuldnerberatung",
+                    "Beratung"
+                ],
+                "url_keywords": [
+                    "energie",
+                    "strom",
+                    "heizung",
+                    "beratung"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "strom",
+                    "heizung",
+                    "energiekosten",
+                    "energieschulden",
+                    "abschlag",
+                    "strom gesperrt"
+                ],
+                "blocked_any": [
+                    "pflegefamili",
+                    "pflegegeld",
+                    "pflegegrad",
+                    "migration",
+                    "integrationskurs",
+                    "obdachlos"
+                ]
+            }
+        },
+        {
+            "id": "sanctions_conflict",
+            "label_de": "Sanktion / Widerspruch",
+            "label_en": "Sanction / appeal",
+            "keywords": [
+                "sanktion",
+                "widerspruch",
+                "bescheid",
+                "pflichtverletzung",
+                "klage"
+            ],
+            "expansions": [
+                "widerspruch",
+                "rechtsbehelf",
+                "frist",
+                "beratung"
+            ],
+            "domains": [
+                "benefits",
+                "aid",
+                "contacts"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "benefits": 7,
+                    "aid": 5,
+                    "contacts": 4,
+                    "tools": 1,
+                    "organizations": -4
+                },
+                "term_boosts": {
+                    "widerspruch": 10,
+                    "rechtsbehelf": 8,
+                    "frist": 7,
+                    "sanktion": 8,
+                    "beratung": 4
+                },
+                "term_penalties": {}
+            },
+            "resource_targets": {
+                "documents": [
+                    "widerspruch",
+                    "bescheid",
+                    "frist",
+                    "rechtsbehelf"
+                ],
+                "information": [
+                    "sanktion",
+                    "pflichtverletzung",
+                    "verfahren",
+                    "nachweise"
+                ],
+                "contacts": [
+                    "beratung",
+                    "rechtsberatung",
+                    "sozialberatung",
+                    "anlaufstelle"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Beratung",
+                    "Sozial",
+                    "Recht"
+                ],
+                "url_keywords": [
+                    "widerspruch",
+                    "beratung",
+                    "recht",
+                    "hilfe"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "sanktion",
+                    "widerspruch",
+                    "bescheid",
+                    "pflichtverletzung",
+                    "buergergeld",
+                    "jobcenter"
+                ],
+                "blocked_any": [
+                    "pflegefamili",
+                    "pflegegeld",
+                    "pflegegrad",
+                    "migration",
+                    "integrationskurs",
+                    "obdachlos",
+                    "schuldner"
+                ]
+            }
+        },
+        {
+            "id": "debt_crisis",
+            "label_de": "Schulden / finanzielle Krise",
+            "label_en": "Debt / financial crisis",
+            "keywords": [
+                "schulden",
+                "strom",
+                "miete",
+                "krise",
+                "pfaendung",
+                "pfandung"
+            ],
+            "expansions": [
+                "schuldnerberatung",
+                "sozialberatung",
+                "notfallhilfe",
+                "caritas",
+                "diakonie",
+                "energieschulden"
+            ],
+            "domains": [
+                "aid",
+                "contacts",
+                "benefits",
+                "tools"
+            ],
+            "ranking": {
+                "domain_boosts": {
+                    "aid": 8,
+                    "contacts": 7,
+                    "benefits": 4,
+                    "tools": 3,
+                    "organizations": -4
+                },
+                "term_boosts": {
+                    "schuldnerberatung": 10,
+                    "notfallhilfe": 8,
+                    "sozialberatung": 8,
+                    "pfaendung": 8,
+                    "mietschulden": 7,
+                    "energieschulden": 7,
+                    "caritas": 6,
+                    "diakonie": 6
+                },
+                "term_penalties": {
+                    "elterngeld": 3
+                }
+            },
+            "resource_targets": {
+                "documents": [
+                    "schulden",
+                    "pfaendung",
+                    "miete",
+                    "energieschulden",
+                    "notfallhilfe"
+                ],
+                "information": [
+                    "schuldnerberatung",
+                    "sozialberatung",
+                    "krise",
+                    "notlage"
+                ],
+                "contacts": [
+                    "schuldnerberatung",
+                    "caritas",
+                    "diakonie",
+                    "beratungsstelle",
+                    "hotline"
+                ]
+            },
+            "contact_priority": {
+                "name_keywords": [
+                    "Schuldnerberatung",
+                    "Caritas",
+                    "Diakonie",
+                    "Beratung"
+                ],
+                "url_keywords": [
+                    "schuldner",
+                    "caritas",
+                    "diakonie",
+                    "beratung",
+                    "notfall"
+                ]
+            },
+            "relevance_guard": {
+                "required_any": [
+                    "schuldner",
+                    "schulden",
+                    "pfaendung",
+                    "inkasso",
+                    "insolvenz",
+                    "rueckstand"
+                ],
+                "blocked_any": [
+                    "kindergeld",
+                    "elterngeld",
+                    "berufsanerkennung",
+                    "zeugnisbewertung"
+                ]
+            }
+        }
+    ]
+}

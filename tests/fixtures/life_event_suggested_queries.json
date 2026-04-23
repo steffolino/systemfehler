@@ -1,0 +1,1184 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2026-04-18T20:55:20.621Z",
+  "source": {
+    "suggestions_file": "frontend/src/data/life_event_suggested_questions.json",
+    "life_events_file": "data/_topics/life_events.json"
+  },
+  "query_count": 60,
+  "queries": [
+    {
+      "id": "suggested-job_loss_start-01",
+      "query": "Ich bin arbeitslos geworden und habe eine kuendigung bekommen. Was sind meine ersten Schritte?",
+      "expected_life_event": "job_loss_start",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "arbeitslos",
+        "arbeitsagentur",
+        "jobcenter",
+        "arbeitslosengeld",
+        "buergergeld",
+        "kuendigung"
+      ],
+      "blocked_terms_any": [
+        "elterngeld",
+        "kindergeld",
+        "pflegegrad",
+        "vaterschaft"
+      ],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-job_loss_start-02",
+      "query": "Wie beantrage ich arbeitslosengeld oder buergergeld nach job verloren?",
+      "expected_life_event": "job_loss_start",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "arbeitslos",
+        "arbeitsagentur",
+        "jobcenter",
+        "arbeitslosengeld",
+        "buergergeld",
+        "kuendigung"
+      ],
+      "blocked_terms_any": [
+        "elterngeld",
+        "kindergeld",
+        "pflegegrad",
+        "vaterschaft"
+      ],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-job_loss_start-03",
+      "query": "Wo finde ich jobcenter oder arbeitsagentur beratung nach entlassen?",
+      "expected_life_event": "job_loss_start",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "arbeitslos",
+        "arbeitsagentur",
+        "jobcenter",
+        "arbeitslosengeld",
+        "buergergeld",
+        "kuendigung"
+      ],
+      "blocked_terms_any": [
+        "elterngeld",
+        "kindergeld",
+        "pflegegrad",
+        "vaterschaft"
+      ],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-short_work_or_hours_cut-01",
+      "query": "Mein arbeitgeber hat kurzarbeit eingefuehrt. Welche hilfe gibt es?",
+      "expected_life_event": "short_work_or_hours_cut",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "kurzarbeitergeld",
+        "aufstockung",
+        "arbeitsagentur",
+        "einkommensausfall"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-short_work_or_hours_cut-02",
+      "query": "Meine arbeitszeit wurde reduziert durch kurzarbeit und ich habe einkommensausfall. Was nun?",
+      "expected_life_event": "short_work_or_hours_cut",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "kurzarbeitergeld",
+        "aufstockung",
+        "arbeitsagentur",
+        "einkommensausfall"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-short_work_or_hours_cut-03",
+      "query": "Wie bekomme ich kurzarbeitergeld oder aufstockung bei weniger stunden?",
+      "expected_life_event": "short_work_or_hours_cut",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "kurzarbeitergeld",
+        "aufstockung",
+        "arbeitsagentur",
+        "einkommensausfall"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-self_employment_failed-01",
+      "query": "Meine selbstaendig taetigkeit ist gescheitert. Welche absicherung gibt es jetzt?",
+      "expected_life_event": "self_employment_failed",
+      "required_domains_any": [
+        "aid",
+        "benefits"
+      ],
+      "expected_terms_any": [
+        "grundsicherung",
+        "buergergeld",
+        "krankenversicherung",
+        "schuldnerberatung",
+        "uebergang"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-self_employment_failed-02",
+      "query": "Ich musste meine firma aufgeben und habe kein einkommen. Welche hilfe?",
+      "expected_life_event": "self_employment_failed",
+      "required_domains_any": [
+        "aid",
+        "benefits"
+      ],
+      "expected_terms_any": [
+        "grundsicherung",
+        "buergergeld",
+        "krankenversicherung",
+        "schuldnerberatung",
+        "uebergang"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-self_employment_failed-03",
+      "query": "Wo bekomme ich beratung bei insolvenz und schuldnerberatung nach selbststaendig?",
+      "expected_life_event": "self_employment_failed",
+      "required_domains_any": [
+        "aid",
+        "benefits"
+      ],
+      "expected_terms_any": [
+        "grundsicherung",
+        "buergergeld",
+        "krankenversicherung",
+        "schuldnerberatung",
+        "uebergang"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-education_finished_no_income-01",
+      "query": "Meine ausbildung beendet und jetzt kein einkommen. Was kann ich beantragen?",
+      "expected_life_event": "education_finished_no_income",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "arbeitslos melden",
+        "arbeitsagentur",
+        "buergergeld",
+        "berufsberatung",
+        "uebergang"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-education_finished_no_income-02",
+      "query": "Ich habe mein studium beendet und bin ohne job. Welche unterstuetzung gibt es?",
+      "expected_life_event": "education_finished_no_income",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "arbeitslos melden",
+        "arbeitsagentur",
+        "buergergeld",
+        "berufsberatung",
+        "uebergang"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-education_finished_no_income-03",
+      "query": "Wie melde ich mich arbeitslos nach ausbildung oder studium beendet?",
+      "expected_life_event": "education_finished_no_income",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "arbeitslos melden",
+        "arbeitsagentur",
+        "buergergeld",
+        "berufsberatung",
+        "uebergang"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-low_income_topup-01",
+      "query": "Ich arbeite vollzeit im niedriglohn und mein geld reicht nicht. Was hilft?",
+      "expected_life_event": "low_income_topup",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "aufstockung",
+        "buergergeld",
+        "wohngeld",
+        "kinderzuschlag",
+        "anspruch"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-low_income_topup-02",
+      "query": "Wie funktioniert aufstockung mit buergergeld bei zu wenig lohn?",
+      "expected_life_event": "low_income_topup",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "aufstockung",
+        "buergergeld",
+        "wohngeld",
+        "kinderzuschlag",
+        "anspruch"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-low_income_topup-03",
+      "query": "Kann ich bei niedriglohn aufstockung mit wohngeld oder kinderzuschlag bekommen?",
+      "expected_life_event": "low_income_topup",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "aufstockung",
+        "buergergeld",
+        "wohngeld",
+        "kinderzuschlag",
+        "anspruch"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-upskilling-01",
+      "query": "Wie bekomme ich einen bildungsgutschein fuer weiterbildung?",
+      "expected_life_event": "upskilling",
+      "required_domains_any": [
+        "benefits",
+        "tools"
+      ],
+      "expected_terms_any": [
+        "weiterbildung",
+        "bildungsgutschein",
+        "umschulung",
+        "qualifizierung",
+        "fortbildung",
+        "berufsberatung"
+      ],
+      "blocked_terms_any": [
+        "schuldner",
+        "pfaendung",
+        "kindergeld",
+        "elterngeld",
+        "vaterschaft"
+      ],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-upskilling-02",
+      "query": "Ich brauche umschulung wegen jobwechsel. Welche foerderung gibt es?",
+      "expected_life_event": "upskilling",
+      "required_domains_any": [
+        "benefits",
+        "tools"
+      ],
+      "expected_terms_any": [
+        "weiterbildung",
+        "bildungsgutschein",
+        "umschulung",
+        "qualifizierung",
+        "fortbildung",
+        "berufsberatung"
+      ],
+      "blocked_terms_any": [
+        "schuldner",
+        "pfaendung",
+        "kindergeld",
+        "elterngeld",
+        "vaterschaft"
+      ],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-upskilling-03",
+      "query": "Wo finde ich berufsberatung fuer fortbildung und qualifizierung?",
+      "expected_life_event": "upskilling",
+      "required_domains_any": [
+        "benefits",
+        "tools"
+      ],
+      "expected_terms_any": [
+        "weiterbildung",
+        "bildungsgutschein",
+        "umschulung",
+        "qualifizierung",
+        "fortbildung",
+        "berufsberatung"
+      ],
+      "blocked_terms_any": [
+        "schuldner",
+        "pfaendung",
+        "kindergeld",
+        "elterngeld",
+        "vaterschaft"
+      ],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-family_children-01",
+      "query": "Ich habe ein baby bekommen. Wie beantrage ich kindergeld und elterngeld?",
+      "expected_life_event": "family_children",
+      "required_domains_any": [
+        "benefits",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "kindergeld",
+        "elterngeld",
+        "kinderzuschlag",
+        "familienkasse",
+        "familie",
+        "kind"
+      ],
+      "blocked_terms_any": [
+        "schuldner",
+        "pfaendung",
+        "berufsanerkennung",
+        "insolvenz"
+      ],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-family_children-02",
+      "query": "Welche hilfe fuer familie gibt es bei kinderzuschlag und familienkasse?",
+      "expected_life_event": "family_children",
+      "required_domains_any": [
+        "benefits",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "kindergeld",
+        "elterngeld",
+        "kinderzuschlag",
+        "familienkasse",
+        "familie",
+        "kind"
+      ],
+      "blocked_terms_any": [
+        "schuldner",
+        "pfaendung",
+        "berufsanerkennung",
+        "insolvenz"
+      ],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-family_children-03",
+      "query": "Ich habe kinder und wenig geld. Welche leistungen gibt es jetzt?",
+      "expected_life_event": "family_children",
+      "required_domains_any": [
+        "benefits",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "kindergeld",
+        "elterngeld",
+        "kinderzuschlag",
+        "familienkasse",
+        "familie",
+        "kind"
+      ],
+      "blocked_terms_any": [
+        "schuldner",
+        "pfaendung",
+        "berufsanerkennung",
+        "insolvenz"
+      ],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-single_parent_new-01",
+      "query": "Ich bin jetzt alleinerziehend. Welche hilfe kann ich sofort beantragen?",
+      "expected_life_event": "single_parent_new",
+      "required_domains_any": [
+        "benefits",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "unterhaltsvorschuss",
+        "kindergeld",
+        "kinderzuschlag",
+        "wohngeld",
+        "beratung"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-single_parent_new-02",
+      "query": "Wie bekomme ich unterhaltsvorschuss wenn ich allein mit kind bin?",
+      "expected_life_event": "single_parent_new",
+      "required_domains_any": [
+        "benefits",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "unterhaltsvorschuss",
+        "kindergeld",
+        "kinderzuschlag",
+        "wohngeld",
+        "beratung"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-single_parent_new-03",
+      "query": "Welche leistungen fuer alleinerziehend gibt es bei kindergeld und wohngeld?",
+      "expected_life_event": "single_parent_new",
+      "required_domains_any": [
+        "benefits",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "unterhaltsvorschuss",
+        "kindergeld",
+        "kinderzuschlag",
+        "wohngeld",
+        "beratung"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-separation_divorce-01",
+      "query": "Nach trennung brauche ich finanzielle hilfe. Was ist moeglich?",
+      "expected_life_event": "separation_divorce",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "unterhalt",
+        "unterhaltsvorschuss",
+        "wohngeld",
+        "beratung",
+        "jugendamt"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-separation_divorce-02",
+      "query": "Welche unterstuetzung gibt es bei scheidung und unterhalt?",
+      "expected_life_event": "separation_divorce",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "unterhalt",
+        "unterhaltsvorschuss",
+        "wohngeld",
+        "beratung",
+        "jugendamt"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-separation_divorce-03",
+      "query": "Wo bekomme ich beratung zu unterhaltsvorschuss und gemeinsamer wohnung nach trennung?",
+      "expected_life_event": "separation_divorce",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "unterhalt",
+        "unterhaltsvorschuss",
+        "wohngeld",
+        "beratung",
+        "jugendamt"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-caregiving_relatives-01",
+      "query": "Ich habe pflege angehoerige uebernommen. Welche leistungen gibt es?",
+      "expected_life_event": "caregiving_relatives",
+      "required_domains_any": [
+        "benefits",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "pflegegrad",
+        "pflegegeld",
+        "pflegeberatung",
+        "entlastungsbetrag",
+        "kurzzeitpflege"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-caregiving_relatives-02",
+      "query": "Wie beantrage ich pflegegrad und pflegegeld fuer pflege zuhause?",
+      "expected_life_event": "caregiving_relatives",
+      "required_domains_any": [
+        "benefits",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "pflegegrad",
+        "pflegegeld",
+        "pflegeberatung",
+        "entlastungsbetrag",
+        "kurzzeitpflege"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-caregiving_relatives-03",
+      "query": "Wo finde ich pflegeberatung, entlastungsbetrag und pflegegrad hilfe bei pflege angehoerige?",
+      "expected_life_event": "caregiving_relatives",
+      "required_domains_any": [
+        "benefits",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "pflegegrad",
+        "pflegegeld",
+        "pflegeberatung",
+        "entlastungsbetrag",
+        "kurzzeitpflege"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-migration_arrival-01",
+      "query": "Ich bin neu in deutschland angekommen. Welche ersten hilfen gibt es?",
+      "expected_life_event": "migration_arrival",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "aufenthalt",
+        "integrationskurs",
+        "jobcenter",
+        "beratung",
+        "sprachkurs"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-migration_arrival-02",
+      "query": "Wo finde ich integrationskurs und sprachkurs mit beratung?",
+      "expected_life_event": "migration_arrival",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "aufenthalt",
+        "integrationskurs",
+        "jobcenter",
+        "beratung",
+        "sprachkurs"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-migration_arrival-03",
+      "query": "Welche leistungen kann ich bei jobcenter als neu im land beantragen?",
+      "expected_life_event": "migration_arrival",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "aufenthalt",
+        "integrationskurs",
+        "jobcenter",
+        "beratung",
+        "sprachkurs"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-unclear_residence_status-01",
+      "query": "Mein aufenthaltsstatus unklar mit duldung. Wo bekomme ich schnelle beratung?",
+      "expected_life_event": "unclear_residence_status",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "aufenthaltsrecht",
+        "auslaenderbehoerde",
+        "beratung",
+        "existenzsicherung",
+        "notfallhilfe"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-unclear_residence_status-02",
+      "query": "Ich habe nur duldung oder fiktionsbescheinigung. Welche hilfe gibt es?",
+      "expected_life_event": "unclear_residence_status",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "aufenthaltsrecht",
+        "auslaenderbehoerde",
+        "beratung",
+        "existenzsicherung",
+        "notfallhilfe"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-unclear_residence_status-03",
+      "query": "Welche stellen helfen bei aufenthalt abgelaufen und auslaenderbehoerde terminen?",
+      "expected_life_event": "unclear_residence_status",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "aufenthaltsrecht",
+        "auslaenderbehoerde",
+        "beratung",
+        "existenzsicherung",
+        "notfallhilfe"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-recognition_missing-01",
+      "query": "Meine abschluesse anerkennung fehlt bei berufsanerkennung. Welche schritte muss ich gehen?",
+      "expected_life_event": "recognition_missing",
+      "required_domains_any": [
+        "aid",
+        "tools"
+      ],
+      "expected_terms_any": [
+        "berufsanerkennung",
+        "anerkennungsberatung",
+        "zeugnisbewertung",
+        "gleichwertigkeit",
+        "qualifikation",
+        "abschluss"
+      ],
+      "blocked_terms_any": [
+        "vaterschaft",
+        "schuldner",
+        "unterhalt",
+        "kindergeld",
+        "kinderzuschlag",
+        "familienkasse"
+      ],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-recognition_missing-02",
+      "query": "Wo bekomme ich anerkennungsberatung fuer berufsanerkennung?",
+      "expected_life_event": "recognition_missing",
+      "required_domains_any": [
+        "aid",
+        "tools"
+      ],
+      "expected_terms_any": [
+        "berufsanerkennung",
+        "anerkennungsberatung",
+        "zeugnisbewertung",
+        "gleichwertigkeit",
+        "qualifikation",
+        "abschluss"
+      ],
+      "blocked_terms_any": [
+        "vaterschaft",
+        "schuldner",
+        "unterhalt",
+        "kindergeld",
+        "kinderzuschlag",
+        "familienkasse"
+      ],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-recognition_missing-03",
+      "query": "Wie beantrage ich berufsanerkennung und anerkennung von zeugnis in deutschland?",
+      "expected_life_event": "recognition_missing",
+      "required_domains_any": [
+        "aid",
+        "tools"
+      ],
+      "expected_terms_any": [
+        "berufsanerkennung",
+        "anerkennungsberatung",
+        "zeugnisbewertung",
+        "gleichwertigkeit",
+        "qualifikation",
+        "abschluss"
+      ],
+      "blocked_terms_any": [
+        "vaterschaft",
+        "schuldner",
+        "unterhalt",
+        "kindergeld",
+        "kinderzuschlag",
+        "familienkasse"
+      ],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-health_disruption-01",
+      "query": "Ich bin krank geworden und arbeitsunfaehig. Welche leistungen gibt es?",
+      "expected_life_event": "health_disruption",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "krankengeld",
+        "arbeitsunfaehigkeit",
+        "reha",
+        "beratung",
+        "sicherung"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-health_disruption-02",
+      "query": "Wie bekomme ich krankengeld und welche antraege brauche ich?",
+      "expected_life_event": "health_disruption",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "krankengeld",
+        "arbeitsunfaehigkeit",
+        "reha",
+        "beratung",
+        "sicherung"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-health_disruption-03",
+      "query": "Wo finde ich beratung zu reha und absicherung bei gesundheit problemen?",
+      "expected_life_event": "health_disruption",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "krankengeld",
+        "arbeitsunfaehigkeit",
+        "reha",
+        "beratung",
+        "sicherung"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-long_term_work_incapacity-01",
+      "query": "Ich bin langfristig arbeitsunfaehig. Welche finanzielle hilfe gibt es?",
+      "expected_life_event": "long_term_work_incapacity",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "erwerbsminderungsrente",
+        "grundsicherung",
+        "reha",
+        "sozialamt",
+        "beratung"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-long_term_work_incapacity-02",
+      "query": "Wie beantrage ich erwerbsminderungsrente oder grundsicherung?",
+      "expected_life_event": "long_term_work_incapacity",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "erwerbsminderungsrente",
+        "grundsicherung",
+        "reha",
+        "sozialamt",
+        "beratung"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-long_term_work_incapacity-03",
+      "query": "Wo bekomme ich beratung zu reha, sozialamt und dauerhaft krank?",
+      "expected_life_event": "long_term_work_incapacity",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "erwerbsminderungsrente",
+        "grundsicherung",
+        "reha",
+        "sozialamt",
+        "beratung"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-mental_burnout-01",
+      "query": "Ich habe burnout und psychische belastung. Wo bekomme ich hilfe?",
+      "expected_life_event": "mental_burnout",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "krankschreibung",
+        "reha",
+        "psychosoziale beratung",
+        "krisenhilfe",
+        "gesundheit"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-mental_burnout-02",
+      "query": "Welche leistungen gibt es bei depression und krankschreibung?",
+      "expected_life_event": "mental_burnout",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "krankschreibung",
+        "reha",
+        "psychosoziale beratung",
+        "krisenhilfe",
+        "gesundheit"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-mental_burnout-03",
+      "query": "Wo finde ich krisenhilfe und psychosoziale beratung bei ueberlastet?",
+      "expected_life_event": "mental_burnout",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "krankschreibung",
+        "reha",
+        "psychosoziale beratung",
+        "krisenhilfe",
+        "gesundheit"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-housing_loss_homelessness_risk-01",
+      "query": "Ich habe eine kuendigung wohnung bekommen und drohe obdachlos zu werden. Hilfe?",
+      "expected_life_event": "housing_loss_homelessness_risk",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "wohnungsnotfall",
+        "kdu",
+        "notunterkunft",
+        "mietschulden",
+        "sozialberatung"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-housing_loss_homelessness_risk-02",
+      "query": "Was kann ich tun bei raeumung und wohnung verloren?",
+      "expected_life_event": "housing_loss_homelessness_risk",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "wohnungsnotfall",
+        "kdu",
+        "notunterkunft",
+        "mietschulden",
+        "sozialberatung"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-housing_loss_homelessness_risk-03",
+      "query": "Wo finde ich wohnungsnotfall hilfe und notunterkunft wenn ich wohnung verloren habe?",
+      "expected_life_event": "housing_loss_homelessness_risk",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "wohnungsnotfall",
+        "kdu",
+        "notunterkunft",
+        "mietschulden",
+        "sozialberatung"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-energy_cost_unaffordable-01",
+      "query": "Ich kann strom und heizkosten nicht mehr zahlen. Welche hilfe gibt es?",
+      "expected_life_event": "energy_cost_unaffordable",
+      "required_domains_any": [
+        "aid",
+        "benefits"
+      ],
+      "expected_terms_any": [
+        "energieschulden",
+        "notfallhilfe",
+        "darlehen",
+        "sozialberatung",
+        "kdu"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-energy_cost_unaffordable-02",
+      "query": "Was tun bei energieschulden und drohender abschaltung?",
+      "expected_life_event": "energy_cost_unaffordable",
+      "required_domains_any": [
+        "aid",
+        "benefits"
+      ],
+      "expected_terms_any": [
+        "energieschulden",
+        "notfallhilfe",
+        "darlehen",
+        "sozialberatung",
+        "kdu"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-energy_cost_unaffordable-03",
+      "query": "Wie bekomme ich darlehen oder notfallhilfe bei energiekosten nicht bezahlbar?",
+      "expected_life_event": "energy_cost_unaffordable",
+      "required_domains_any": [
+        "aid",
+        "benefits"
+      ],
+      "expected_terms_any": [
+        "energieschulden",
+        "notfallhilfe",
+        "darlehen",
+        "sozialberatung",
+        "kdu"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-sanctions_conflict-01",
+      "query": "Meine leistung wurde gekuerzt durch sanktion. Was kann ich tun?",
+      "expected_life_event": "sanctions_conflict",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "widerspruch",
+        "rechtsbehelf",
+        "frist",
+        "beratung"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-sanctions_conflict-02",
+      "query": "Wie lege ich widerspruch gegen einen bescheid ein und welche frist gilt?",
+      "expected_life_event": "sanctions_conflict",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "widerspruch",
+        "rechtsbehelf",
+        "frist",
+        "beratung"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-sanctions_conflict-03",
+      "query": "Wo bekomme ich rechtsberatung bei pflichtverletzung und sanktion?",
+      "expected_life_event": "sanctions_conflict",
+      "required_domains_any": [
+        "benefits",
+        "aid"
+      ],
+      "expected_terms_any": [
+        "widerspruch",
+        "rechtsbehelf",
+        "frist",
+        "beratung"
+      ],
+      "blocked_terms_any": [],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-debt_crisis-01",
+      "query": "Ich habe schulden und miete rueckstand. Wo bekomme ich schnelle hilfe?",
+      "expected_life_event": "debt_crisis",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "schuldner",
+        "schulden",
+        "pfaendung",
+        "inkasso",
+        "insolvenz",
+        "rueckstand"
+      ],
+      "blocked_terms_any": [
+        "kindergeld",
+        "elterngeld",
+        "berufsanerkennung",
+        "zeugnisbewertung"
+      ],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-debt_crisis-02",
+      "query": "Was kann ich bei pfaendung und finanzieller krise sofort tun?",
+      "expected_life_event": "debt_crisis",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "schuldner",
+        "schulden",
+        "pfaendung",
+        "inkasso",
+        "insolvenz",
+        "rueckstand"
+      ],
+      "blocked_terms_any": [
+        "kindergeld",
+        "elterngeld",
+        "berufsanerkennung",
+        "zeugnisbewertung"
+      ],
+      "top_k": 8
+    },
+    {
+      "id": "suggested-debt_crisis-03",
+      "query": "Wo finde ich schuldnerberatung bei schulden, pfaendung und notfallhilfe?",
+      "expected_life_event": "debt_crisis",
+      "required_domains_any": [
+        "aid",
+        "contacts"
+      ],
+      "expected_terms_any": [
+        "schuldner",
+        "schulden",
+        "pfaendung",
+        "inkasso",
+        "insolvenz",
+        "rueckstand"
+      ],
+      "blocked_terms_any": [
+        "kindergeld",
+        "elterngeld",
+        "berufsanerkennung",
+        "zeugnisbewertung"
+      ],
+      "top_k": 8
+    }
+  ]
+}

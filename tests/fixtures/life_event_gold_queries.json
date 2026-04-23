@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "queries": [
+    {
+      "id": "life-job-loss-001",
+      "query": "Ich bin arbeitslos geworden. Welche Hilfe bekomme ich sofort?",
+      "expected_life_event": "job_loss_start",
+      "required_domains_all": ["benefits", "contacts"],
+      "required_domains_any": ["aid"],
+      "expected_terms_any": ["arbeitslosengeld", "buergergeld", "jobcenter", "arbeitsagentur"],
+      "contact_keywords_any": ["jobcenter", "arbeitsagentur", "beratung"],
+      "top_k": 8
+    },
+    {
+      "id": "life-upskilling-001",
+      "query": "Wie bekomme ich einen Bildungsgutschein fuer eine Umschulung?",
+      "expected_life_event": "upskilling",
+      "required_domains_all": ["benefits", "tools"],
+      "required_domains_any": ["contacts", "aid"],
+      "expected_terms_any": ["bildungsgutschein", "umschulung", "weiterbildung", "foerderung"],
+      "contact_keywords_any": ["foerderung", "weiterbildung", "berufsberatung", "beratung"],
+      "top_k": 8
+    },
+    {
+      "id": "life-family-001",
+      "query": "Ich habe ein Baby bekommen. Was kann ich bei Kindergeld und Elterngeld beantragen?",
+      "expected_life_event": "family_children",
+      "required_domains_all": ["benefits", "contacts"],
+      "required_domains_any": ["aid"],
+      "expected_terms_any": ["kindergeld", "elterngeld", "kinderzuschlag", "familienkasse"],
+      "contact_keywords_any": ["familienkasse", "jugendamt", "familie"],
+      "top_k": 8
+    },
+    {
+      "id": "life-debt-001",
+      "query": "Ich habe Schulden und Mietrueckstaende. Wo finde ich schnelle Hilfe?",
+      "expected_life_event": "debt_crisis",
+      "required_domains_all": ["aid", "contacts"],
+      "required_domains_any": ["benefits", "tools"],
+      "expected_terms_any": ["schuldnerberatung", "notfallhilfe", "miete", "sozialberatung", "caritas", "diakonie"],
+      "contact_keywords_any": ["schuldner", "beratung", "caritas", "diakonie"],
+      "top_k": 8
+    }
+  ]
+}

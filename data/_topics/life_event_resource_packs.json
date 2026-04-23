@@ -1,0 +1,2641 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2026-04-22T19:10:19.613Z",
+  "targets": {
+    "docsMin": 5,
+    "docsMax": 10,
+    "contacts": 5,
+    "ngoMin": 3,
+    "ngoMax": 5
+  },
+  "scenarios": [
+    {
+      "scenario_id": "job_loss_start",
+      "label_de": "Arbeitslos geworden (Neustart)",
+      "resources": {
+        "documents": [
+          {
+            "title": "Bürgergeld online beantragen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/buergergeld-beantragen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Bürgergeld: Antrag und Bescheid",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/antrag-bescheid",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Einkommen mit Bürgergeld ergänzen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Finanziell absichern mit Bürgergeld",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Termin beim Jobcenter",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/termin-jobcenter",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Arbeit finden mit Hilfe des Jobcenters",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/arbeit-finden",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Jobcenter: Unterstützung bei gesundheitlichen Problemen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/gesundheit",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Jobcenter: Infos für Menschen aus dem Ausland",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/infos-fuer-menschen-aus-dem-ausland",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Jobcenter: Unterstützung für Familien",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/unterstuetzung-fuer-familien",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Freiwillige Arbeitslosenversicherung",
+            "url": "https://www.arbeitsagentur.de/freiwillige-arbeitslosenversicherung",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Bürgergeld (Arbeitslosengeld II)",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld",
+            "domain": "benefits",
+            "source_tier": "unknown"
+          },
+          {
+            "title": "Bürgergeld online beantragen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/buergergeld-beantragen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Bürgergeld: Antrag und Bescheid",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/antrag-bescheid",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Einkommen mit Bürgergeld ergänzen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Finanziell absichern mit Bürgergeld",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Widerspruch gegen Sanktionsbescheid: Fristen und Rechtsbehelf",
+            "url": "https://sanktionsfrei.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Wohnungslosigkeit: Sozialberatung und Notunterkunft finden",
+            "url": "https://www.diakonie.de/wissen-kompakt-wohnungs-und-obdachlosigkeit",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Widerspruch und Klage gegen Bescheid – Rechtsbehelf und Frist",
+            "url": "https://www.vdk.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Der Bürgergeld-Rechner der Caritas.",
+            "url": "https://www.das-steht-dir-zu.de/arbeit/buergergeld/der-buergergeld-rechner/index.html",
+            "domain": "tools",
+            "source_tier": "tier_2_ngo_watchdog"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "short_work_or_hours_cut",
+      "label_de": "Kurzarbeit / Stunden reduziert",
+      "resources": {
+        "documents": [
+          {
+            "title": "Gleichstellungsantrag: Upload-Service",
+            "url": "https://www.arbeitsagentur.de/menschen-mit-behinderungen/spezielle-hilfe-und-unterstuetzung/gleichstellung/gleichstellung-upload",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Digitale Angebote für Arbeit und Berufsleben",
+            "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Digitale-Angebote-fuer-Arbeit-und-Berufsleben/digitale-angebote-fuer-arbeit-und-berufsleben.html",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Informationen in Gebärdensprache",
+            "url": "https://www.arbeitsagentur.de/gebaerdensprache",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Bürgergeld: Antrag und Bescheid",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/antrag-bescheid",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Einkommen mit Bürgergeld ergänzen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Termin beim Jobcenter",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/termin-jobcenter",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Technischer Beratungsdienst",
+            "url": "https://www.arbeitsagentur.de/ueber-uns/technischer-beratungsdienst",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Familienkasse: Änderung und Nachweise online übermitteln",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/veraenderungen-mitteilen",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Finanziell absichern mit Bürgergeld",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Kinderzuschlag verstehen",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Gleichstellungsantrag: Upload-Service",
+            "url": "https://www.arbeitsagentur.de/menschen-mit-behinderungen/spezielle-hilfe-und-unterstuetzung/gleichstellung/gleichstellung-upload",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Informationen in Gebärdensprache",
+            "url": "https://www.arbeitsagentur.de/gebaerdensprache",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Kurzarbeitergeld",
+            "url": "https://www.arbeitsagentur.de/kurzarbeitergeld",
+            "domain": "benefits",
+            "source_tier": "unknown"
+          },
+          {
+            "title": "Digitale Angebote für Arbeit und Berufsleben",
+            "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Digitale-Angebote-fuer-Arbeit-und-Berufsleben/digitale-angebote-fuer-arbeit-und-berufsleben.html",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Video in Gebärdensprache: Kurzarbeitergeld – Informationen für Arbeitnehmer",
+            "url": "https://www.arbeitsagentur.de/gebaerdensprache/video-kurzarbeitergeld-arbeitnehmer",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Widerspruch und Klage gegen Bescheid – Rechtsbehelf und Frist",
+            "url": "https://www.vdk.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Widerspruch gegen Sanktionsbescheid: Fristen und Rechtsbehelf",
+            "url": "https://sanktionsfrei.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Rechtsberatung bei Sanktionen und Pflichtverletzung im Bürgergeld",
+            "url": "https://tacheles-sozialhilfe.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Finanzierung sozialer Projekte, Dienste und Einrichtungen",
+            "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "self_employment_failed",
+      "label_de": "Selbstaendigkeit gescheitert",
+      "resources": {
+        "documents": [
+          {
+            "title": "Jobcenter: Infos für Menschen aus dem Ausland",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/infos-fuer-menschen-aus-dem-ausland",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Reha und Sozialamt: Hilfe bei dauerhafter Erwerbsminderung",
+            "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/teilhabe-und-inklusion.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Finanziell absichern mit Bürgergeld",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Begriffserklärung: Bedarfsgemeinschaft",
+            "url": "https://www.arbeitsagentur.de/lexikon/bedarfsgemeinschaft",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Oft gestellte Fragen und Antworten zur Sozialhilfe",
+            "url": "https://www.bmas.de/DE/Soziales/Sozialhilfe/Fragen-und-Antworten-Sozialhilfe/fragen-und-antworten-sozialhilfe.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Gesundheit & Erholung",
+            "url": "https://familienportal.de/familienportal/lebenslagen/kinder-jugendliche/gesundheit-erholung",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Digitale Verwaltung",
+            "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Das-Onlinezugangsgesetz/onlinezugangsgesetz.html",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Berufsberatung und Berufsorientierung",
+            "url": "https://www.bmas.de/DE/Arbeit/Aus-und-Weiterbildung/Berufliche-Ausbildung/Berufsberatung-und-Berufsorientierung/berufsberatung-und-berufsorientierung.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Familienversicherung",
+            "url": "https://familienportal.de/familienportal/lebenslagen/kinder-jugendliche/familienversicherung",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Bürgergeld: Pflichten verstehen und beachten",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/pflichten-verstehen-und-beachten",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Hilfe & Beratung für Familien",
+            "url": "https://familienportal.de/familienportal/lebenslagen/krise-und-konflikt/hilfe-beratung-familien",
+            "domain": "aid",
+            "source_tier": "tier_unknown"
+          },
+          {
+            "title": "Bundesteilhabegesetz",
+            "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/Rehabilitation-und-Teilhabe/Bundesteilhabegesetz/bundesteilhabegesetz.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Schuldnerberatung",
+            "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Jobcenter: Infos für Menschen aus dem Ausland",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/infos-fuer-menschen-aus-dem-ausland",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Reha und Sozialamt: Hilfe bei dauerhafter Erwerbsminderung",
+            "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/teilhabe-und-inklusion.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Schuldnerberatung",
+            "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Energieschulden und Notfallhilfe: Was tun bei drohender Abschaltung?",
+            "url": "https://www.verbraucherzentrale.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Der Bürgergeld-Rechner der Caritas.",
+            "url": "https://www.das-steht-dir-zu.de/arbeit/buergergeld/der-buergergeld-rechner/index.html",
+            "domain": "tools",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Widerspruch und Klage gegen Bescheid – Rechtsbehelf und Frist",
+            "url": "https://www.vdk.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "education_finished_no_income",
+      "label_de": "Ausbildung/Studium beendet ohne Einkommen",
+      "resources": {
+        "documents": [
+          {
+            "title": "Einkommen mit Bürgergeld ergänzen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Finanziell absichern mit Bürgergeld",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Bürgergeld: Antrag und Bescheid",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/antrag-bescheid",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Termin beim Jobcenter",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/termin-jobcenter",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Kinderzuschlag: Anspruch, Höhe, Dauer",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kinderzuschlag-anspruch-hoehe-dauer",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Digitale Angebote für Arbeit und Berufsleben",
+            "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Digitale-Angebote-fuer-Arbeit-und-Berufsleben/digitale-angebote-fuer-arbeit-und-berufsleben.html",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Kinderzuschlag verstehen",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Aktuelle Meldungen der BA",
+            "url": "https://www.arbeitsagentur.de/news",
+            "domain": "organizations",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Bürgergeld online beantragen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/buergergeld-beantragen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Bürgergeld: Voraussetzungen, Einkommen und Vermögen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/voraussetzungen-einkommen-vermoegen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Einkommen mit Bürgergeld ergänzen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Bürgergeld (Arbeitslosengeld II)",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld",
+            "domain": "benefits",
+            "source_tier": "unknown"
+          },
+          {
+            "title": "Mehr Geld in der Krise",
+            "url": "https://www.die-linke.de/mitmachen/linksaktiv/preise-deckeln/mehr-geld-in-der-krise",
+            "domain": "aid",
+            "source_tier": "tier_3_contextual"
+          },
+          {
+            "title": "Finanziell absichern mit Bürgergeld",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Bürgergeld: Antrag und Bescheid",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/antrag-bescheid",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Der Bürgergeld-Rechner der Caritas.",
+            "url": "https://www.das-steht-dir-zu.de/arbeit/buergergeld/der-buergergeld-rechner/index.html",
+            "domain": "tools",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Finanzierung sozialer Projekte, Dienste und Einrichtungen",
+            "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Energieschulden und Notfallhilfe: Was tun bei drohender Abschaltung?",
+            "url": "https://www.verbraucherzentrale.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "low_income_topup",
+      "label_de": "Niedriglohn / Aufstockung noetig",
+      "resources": {
+        "documents": [
+          {
+            "title": "Kinderzuschlag: Anspruch, Höhe, Dauer",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kinderzuschlag-anspruch-hoehe-dauer",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Kinderzuschlag verstehen",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Unterstützung für Eltern",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/weitere-hilfen-fuer-eltern",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Einkommen mit Bürgergeld ergänzen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Kinderzuschlag und Leistungen für Bildung und Teilhabe",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kinderzuschlag-und-leistungen-fuer-bildung-und-teilhabe-73906",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Familienkasse: Änderung und Nachweise online übermitteln",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/veraenderungen-mitteilen",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Finanziell absichern mit Bürgergeld",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Bürgergeld: Antrag und Bescheid",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/antrag-bescheid",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Ki Z-Lotse: Anspruch auf Kinderzuschlag online prüfen",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kiz-lotse",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Online-Rechner und interaktive Anwendungen",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/service/online-rechner",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Kinderzuschlag: Anspruch, Höhe, Dauer",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kinderzuschlag-anspruch-hoehe-dauer",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Mehr Geld in der Krise",
+            "url": "https://www.die-linke.de/mitmachen/linksaktiv/preise-deckeln/mehr-geld-in-der-krise",
+            "domain": "aid",
+            "source_tier": "tier_3_contextual"
+          },
+          {
+            "title": "Kinderzuschlag verstehen",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Bundesteilhabegesetz",
+            "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/Rehabilitation-und-Teilhabe/Bundesteilhabegesetz/bundesteilhabegesetz.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Unterstützung für Eltern",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/weitere-hilfen-fuer-eltern",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Der Bürgergeld-Rechner der Caritas.",
+            "url": "https://www.das-steht-dir-zu.de/arbeit/buergergeld/der-buergergeld-rechner/index.html",
+            "domain": "tools",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Widerspruch und Klage gegen Bescheid – Rechtsbehelf und Frist",
+            "url": "https://www.vdk.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Finanzierung sozialer Projekte, Dienste und Einrichtungen",
+            "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Widerspruch gegen Sanktionsbescheid: Fristen und Rechtsbehelf",
+            "url": "https://sanktionsfrei.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "upskilling",
+      "label_de": "Weiterbildung / Umschulung",
+      "resources": {
+        "documents": [
+          {
+            "title": "Termin beim Jobcenter",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/termin-jobcenter",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Freiwillige Arbeitslosenversicherung",
+            "url": "https://www.arbeitsagentur.de/freiwillige-arbeitslosenversicherung",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Berufliche Rehabilitation",
+            "url": "https://www.arbeitsagentur.de/menschen-mit-behinderungen/berufliche-rehabilitation",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Digitale Angebote für Arbeit und Berufsleben",
+            "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Digitale-Angebote-fuer-Arbeit-und-Berufsleben/digitale-angebote-fuer-arbeit-und-berufsleben.html",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Jobcenter: Unterstützung bei gesundheitlichen Problemen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/gesundheit",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Jobcenter: Unterstützung für Familien",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/unterstuetzung-fuer-familien",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Weiterbildungslotse",
+            "url": "https://www.bmas.de/DE/Arbeit/Aus-und-Weiterbildung/Berufliche-Weiterbildung/Weiterbildungslotse/weiterbildungslotse.html",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Berufsberatung und Berufsorientierung",
+            "url": "https://www.bmas.de/DE/Arbeit/Aus-und-Weiterbildung/Berufliche-Ausbildung/Berufsberatung-und-Berufsorientierung/berufsberatung-und-berufsorientierung.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Hilfe beim Hauptschulabschluss",
+            "url": "https://www.bmas.de/DE/Arbeit/Aus-und-Weiterbildung/Berufliche-Ausbildung/Hilfe-beim-Hauptschulabschluss/hilfe-beim-hauptschulabschluss.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Integrationskurs und Sprachkurs: Beratung für Zugewanderte",
+            "url": "https://www.bamf.de/DE/Themen/Integration/ZugewanderteTeilnehmende/BeratungErwachsene/beratung-erwachsene-node.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Termin beim Jobcenter",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/termin-jobcenter",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Freiwillige Arbeitslosenversicherung",
+            "url": "https://www.arbeitsagentur.de/freiwillige-arbeitslosenversicherung",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Berufliche Rehabilitation",
+            "url": "https://www.arbeitsagentur.de/menschen-mit-behinderungen/berufliche-rehabilitation",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Digitale Angebote für Arbeit und Berufsleben",
+            "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Digitale-Angebote-fuer-Arbeit-und-Berufsleben/digitale-angebote-fuer-arbeit-und-berufsleben.html",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Ihr Weg zur Förderung der beruflichen Weiterbildung",
+            "url": "https://www.bmas.de/DE/Arbeit/Aus-und-Weiterbildung/Berufliche-Weiterbildung/Foerderung-der-beruflichen-Weiterbildung/foerderung-der-beruflichen-weiterbildung.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Finanzierung sozialer Projekte, Dienste und Einrichtungen",
+            "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Widerspruch und Klage gegen Bescheid – Rechtsbehelf und Frist",
+            "url": "https://www.vdk.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Entlastungsbetrag und Kurzzeitpflege nutzen – Pflegeberatung",
+            "url": "https://www.zqp.de/beratung-pflege/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Widerspruch gegen Sanktionsbescheid: Fristen und Rechtsbehelf",
+            "url": "https://sanktionsfrei.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "family_children",
+      "label_de": "Kind(er) / Familie",
+      "resources": {
+        "documents": [
+          {
+            "title": "Unterstützung für Eltern",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/weitere-hilfen-fuer-eltern",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Kinderzuschlag: Anspruch, Höhe, Dauer",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kinderzuschlag-anspruch-hoehe-dauer",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Selbstständigkeit mit Kind",
+            "url": "https://familienportal.de/familienportal/lebenslagen/ausbildung-beruf/selbststaendigkeit",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Kinderzuschlag und Leistungen für Bildung und Teilhabe",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kinderzuschlag-und-leistungen-fuer-bildung-und-teilhabe-73906",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Kinderzuschlag verstehen",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Familienleistungen",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Familie und Kinder",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Die wichtigsten Merkblätter, Formulare und Anträge der Familienkasse zum Download",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/downloads-familie-und-kinder",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Familienkasse: Änderung und Nachweise online übermitteln",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/veraenderungen-mitteilen",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "BMBFSFJ",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Unterstützung für Eltern",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/weitere-hilfen-fuer-eltern",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Informationen für Geflüchtete aus der Ukraine",
+            "url": "https://familienportal.de/familienportal/lebenslagen/zuwanderung-und-integration/informationen-ukraine",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Kinderzuschlag: Anspruch, Höhe, Dauer",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kinderzuschlag-anspruch-hoehe-dauer",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Oικογενειακές παροχές",
+            "url": "https://familienportal.de/familienportal/meta/languages/oikogeneiakes-paroches",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Selbstständigkeit mit Kind",
+            "url": "https://familienportal.de/familienportal/lebenslagen/ausbildung-beruf/selbststaendigkeit",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Leistungen Deutschland",
+            "url": "https://www.drk.de/hilfe-in-deutschland",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Der Bürgergeld-Rechner der Caritas.",
+            "url": "https://www.das-steht-dir-zu.de/arbeit/buergergeld/der-buergergeld-rechner/index.html",
+            "domain": "tools",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Finanzierung sozialer Projekte, Dienste und Einrichtungen",
+            "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Beratung für Kinder und Jugendliche",
+            "url": "https://www.nummergegenkummer.de/kinder-und-jugendberatung",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Widerspruch und Klage gegen Bescheid – Rechtsbehelf und Frist",
+            "url": "https://www.vdk.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "single_parent_new",
+      "label_de": "Alleinerziehend geworden",
+      "resources": {
+        "documents": [
+          {
+            "title": "Unterstützung für Eltern",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/weitere-hilfen-fuer-eltern",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Kinderzuschlag verstehen",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Kinderzuschlag: Anspruch, Höhe, Dauer",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kinderzuschlag-anspruch-hoehe-dauer",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Kinderzuschlag und Leistungen für Bildung und Teilhabe",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kinderzuschlag-und-leistungen-fuer-bildung-und-teilhabe-73906",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Familie und Kinder",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Unterhaltsvorschuss",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/unterhaltsvorschuss",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Die wichtigsten Merkblätter, Formulare und Anträge der Familienkasse zum Download",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/downloads-familie-und-kinder",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Familienkasse: Änderung und Nachweise online übermitteln",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/veraenderungen-mitteilen",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Familienkasse: Kindergeld-Antrag stellen",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/kindergeld-anspruch-hoehe-dauer/kindergeld-antrag-starten",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Selbstständigkeit mit Kind",
+            "url": "https://familienportal.de/familienportal/lebenslagen/ausbildung-beruf/selbststaendigkeit",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Oικογενειακές παροχές",
+            "url": "https://familienportal.de/familienportal/meta/languages/oikogeneiakes-paroches",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Kinderzuschlag",
+            "url": "https://familienportal.de/familienportal/familienleistungen/kinderzuschlag",
+            "domain": "benefits",
+            "source_tier": "tier_unknown"
+          },
+          {
+            "title": "Unterstützung für Eltern",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/weitere-hilfen-fuer-eltern",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Obiteljske beneficije",
+            "url": "https://familienportal.de/familienportal/meta/languages/obiteljske-beneficije",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Informationen für Geflüchtete aus der Ukraine",
+            "url": "https://familienportal.de/familienportal/lebenslagen/zuwanderung-und-integration/informationen-ukraine",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Finanzierung sozialer Projekte, Dienste und Einrichtungen",
+            "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Entlastungsbetrag und Kurzzeitpflege nutzen – Pflegeberatung",
+            "url": "https://www.zqp.de/beratung-pflege/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Opfer-Telefon",
+            "url": "https://weisser-ring.de/hilfe-fuer-opfer/opfer-telefon",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Schuldnerberatung",
+            "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "separation_divorce",
+      "label_de": "Trennung / Scheidung",
+      "resources": {
+        "documents": [
+          {
+            "title": "Unterhaltsvorschuss",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/unterhaltsvorschuss",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Digitale Verwaltung",
+            "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Das-Onlinezugangsgesetz/onlinezugangsgesetz.html",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Jobcenter: Infos für Menschen aus dem Ausland",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/infos-fuer-menschen-aus-dem-ausland",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Einkommen mit Bürgergeld ergänzen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Unterhaltsvorschuss regelsaetze ab 01 01 2025 data",
+            "url": "https://www.bmbfsfj.bund.de/resource/blob/165740/7d97bd93b506b5fa10abbb350f31d493/unterhaltsvorschuss-regelsaetze-ab-01-01-2025-data.pdf",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Merkblatt unterhaltsvorschussgesetz data",
+            "url": "https://www.bmbfsfj.bund.de/resource/blob/237134/5cc35c258d336dee0d36c4c6d09c5bed/merkblatt-unterhaltsvorschussgesetz-data.pdf",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Ressortforschung",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/ressortforschung",
+            "domain": "organizations",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Berufsberatung und Berufsorientierung",
+            "url": "https://www.bmas.de/DE/Arbeit/Aus-und-Weiterbildung/Berufliche-Ausbildung/Berufsberatung-und-Berufsorientierung/berufsberatung-und-berufsorientierung.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Begriffserklärung: Bedarfsgemeinschaft",
+            "url": "https://www.arbeitsagentur.de/lexikon/bedarfsgemeinschaft",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Bürgergeld: Voraussetzungen, Einkommen und Vermögen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/voraussetzungen-einkommen-vermoegen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Bundesteilhabegesetz",
+            "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/Rehabilitation-und-Teilhabe/Bundesteilhabegesetz/bundesteilhabegesetz.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Getrennt erziehend & Alleinerziehend",
+            "url": "https://familienportal.de/familienportal/lebenslagen/trennung/allein-und-getrennt-erziehende-eltern",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Oικογενειακές παροχές",
+            "url": "https://familienportal.de/familienportal/meta/languages/oikogeneiakes-paroches",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Kinderzuschlag",
+            "url": "https://familienportal.de/familienportal/familienleistungen/kinderzuschlag",
+            "domain": "benefits",
+            "source_tier": "tier_unknown"
+          },
+          {
+            "title": "Tod eines Angehörigen",
+            "url": "https://familienportal.de/familienportal/lebenslagen/krise-und-konflikt/tod-eines-angehoerigen",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Der Bürgergeld-Rechner der Caritas.",
+            "url": "https://www.das-steht-dir-zu.de/arbeit/buergergeld/der-buergergeld-rechner/index.html",
+            "domain": "tools",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Finanzierung sozialer Projekte, Dienste und Einrichtungen",
+            "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Opfer-Telefon",
+            "url": "https://weisser-ring.de/hilfe-fuer-opfer/opfer-telefon",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Schuldnerberatung",
+            "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "caregiving_relatives",
+      "label_de": "Pflege von Angehoerigen uebernommen",
+      "resources": {
+        "documents": [
+          {
+            "title": "Pflegegrad und Pflegegeld: Leistungen der Pflegeversicherung",
+            "url": "https://www.bundesgesundheitsministerium.de/service/begriffe-von-a-z/p/pflegestuetzpunkte",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Unabhängiger Beirat für die Vereinbarkeit von Pflege und Beruf",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/unabhaengiger-beirat-fuer-die-vereinbarkeit-von-pflege-und-beruf-108568",
+            "domain": "organizations",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Gesetzliche Regelungen zur Pflege und Betreuung",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/hilfe-und-pflege/gesetzliche-regelungen",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Inhalt",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/inhalt-107174",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Das Pflegetelefon",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/service/publikationen/das-pflegetelefon-schnelle-hilfe-fuer-angehoerige-187090",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Vereinbarkeit von Pflege und Beruf",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/vereinbarkeit-von-pflege-und-beruf",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Wege zur Pflege",
+            "url": "https://www.wege-zur-pflege.de/",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Krankengeld und Arbeitsunfähigkeit: Leistungen bei Krankheit",
+            "url": "https://www.gkv-spitzenverband.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Grundsicherung bei Erwerbsminderung und Reha (SGB XII)",
+            "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/teilhabe-und-inklusion.html",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Oft gestellte Fragen und Antworten zur Sozialhilfe",
+            "url": "https://www.bmas.de/DE/Soziales/Sozialhilfe/Fragen-und-Antworten-Sozialhilfe/fragen-und-antworten-sozialhilfe.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Pflegegrad und Pflegegeld: Leistungen der Pflegeversicherung",
+            "url": "https://www.bundesgesundheitsministerium.de/service/begriffe-von-a-z/p/pflegestuetzpunkte",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Pflegestützpunkte und Pflegeberatung: Beratung für pflegende Angehörige",
+            "url": "https://www.pflegelotse.de/",
+            "domain": "contacts",
+            "source_tier": "tier_2_official"
+          },
+          {
+            "title": "Entlastungsbetrag und Kurzzeitpflege nutzen – Pflegeberatung",
+            "url": "https://www.zqp.de/beratung-pflege/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Das Pflegetelefon",
+            "url": "https://www.wege-zur-pflege.de/wege-zur-pflege/pflegende-angehoerige/beratungsangebote/das-pflegetelefon-252968",
+            "domain": "aid",
+            "source_tier": "tier_unknown"
+          },
+          {
+            "title": "Unabhängiger Beirat für die Vereinbarkeit von Pflege und Beruf",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/unabhaengiger-beirat-fuer-die-vereinbarkeit-von-pflege-und-beruf-108568",
+            "domain": "organizations",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Entlastungsbetrag und Kurzzeitpflege nutzen – Pflegeberatung",
+            "url": "https://www.zqp.de/beratung-pflege/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Widerspruch gegen Sanktionsbescheid: Fristen und Rechtsbehelf",
+            "url": "https://sanktionsfrei.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Widerspruch und Klage gegen Bescheid – Rechtsbehelf und Frist",
+            "url": "https://www.vdk.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Leistungen Deutschland",
+            "url": "https://www.drk.de/hilfe-in-deutschland",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Schuldnerberatung",
+            "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "migration_arrival",
+      "label_de": "Neu im Land",
+      "resources": {
+        "documents": [
+          {
+            "title": "Integrationskurs und Sprachkurs: Beratung für Zugewanderte",
+            "url": "https://www.bamf.de/DE/Themen/Integration/ZugewanderteTeilnehmende/BeratungErwachsene/beratung-erwachsene-node.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Sprachkurs und Aufenthaltsberatung für Neuzugewanderte",
+            "url": "https://www.make-it-in-germany.com/de/",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Jobcenter: Unterstützung für Familien",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/unterstuetzung-fuer-familien",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Technischer Beratungsdienst",
+            "url": "https://www.arbeitsagentur.de/ueber-uns/technischer-beratungsdienst",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "KdU und Mietschulden: Übernahme durch das Jobcenter",
+            "url": "https://www.jobcenter.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Faire Integration",
+            "url": "https://www.bmas.de/DE/Arbeit/Arbeitsrecht/Arbeitnehmerrechte/Beratungsangebot-Faire-Integration/beratungsangebot-faire-integration.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Digitaler Zugang zu Förderinstrumenten der Arbeits- und Sozialpolitik",
+            "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Digitale-Angebote-fuer-Foerdermittel/digitale-angebote-fuer-foerdermittel.html",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Geschäftsbericht für das Jahr 2024",
+            "url": "https://www.arbeitsagentur.de/ueber-uns/geschaeftsbericht-2024",
+            "domain": "organizations",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Termin beim Jobcenter",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/termin-jobcenter",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Arbeit finden mit Hilfe des Jobcenters",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/arbeit-finden",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Integrationskurs und Sprachkurs: Beratung für Zugewanderte",
+            "url": "https://www.bamf.de/DE/Themen/Integration/ZugewanderteTeilnehmende/BeratungErwachsene/beratung-erwachsene-node.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "BAMF: Migrationsberatung und Integrationskurs-Beratung",
+            "url": "https://www.bamf.de/",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Der Asylprozess und staatliche Unterstützung",
+            "url": "https://www.bmas.de/DE/Arbeit/Migration-und-Arbeit/Flucht-und-Aysl/Der-Asylprozess-und-staatliche-Unterstuetzung/der-asylprozess-und-staatliche-unterstuetzung.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Fachkräfteeinwanderungsgesetz",
+            "url": "https://www.bmas.de/DE/Arbeit/Migration-und-Arbeit/Rechtliches-zu-Einreise-Arbeitsmarktzugang-und-Absicherung/Fachkraefteeinwanderungsgesetz/fachkraefteeinwanderungsgesetz.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Unterstützung für Zugewanderte und ihre Familien",
+            "url": "https://familienportal.de/familienportal/lebenslagen/zuwanderung-und-integration/zuwanderung",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Existenzsicherung und Notfallhilfe bei unklarem Aufenthalt",
+            "url": "https://fluechtlingsrat.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Energieschulden und Notfallhilfe: Was tun bei drohender Abschaltung?",
+            "url": "https://www.verbraucherzentrale.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Aufenthaltsrecht und Ausländerbehörde: Beratung bei Duldung und unklarem Status",
+            "url": "https://www.proasyl.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Finanzierung sozialer Projekte, Dienste und Einrichtungen",
+            "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "unclear_residence_status",
+      "label_de": "Aufenthaltsstatus ungeklaert",
+      "resources": {
+        "documents": [
+          {
+            "title": "Integrationskurs und Sprachkurs: Beratung für Zugewanderte",
+            "url": "https://www.bamf.de/DE/Themen/Integration/ZugewanderteTeilnehmende/BeratungErwachsene/beratung-erwachsene-node.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Krankengeld und Arbeitsunfähigkeit: Leistungen bei Krankheit",
+            "url": "https://www.gkv-spitzenverband.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Darlehen für Energiekosten und KdU: Notfallhilfe bei Heizkosten",
+            "url": "https://www.jobcenter.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Jobcenter: Unterstützung bei gesundheitlichen Problemen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/gesundheit",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Grundsicherung bei Erwerbsminderung und Reha (SGB XII)",
+            "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/teilhabe-und-inklusion.html",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Faire Integration",
+            "url": "https://www.bmas.de/DE/Arbeit/Arbeitsrecht/Arbeitnehmerrechte/Beratungsangebot-Faire-Integration/beratungsangebot-faire-integration.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Infos über die Stiftung",
+            "url": "https://www.bmas.de/DE/Soziales/Soziale-Entschaedigung/Stiftung-Anerkennung-und-Hilfe/Infos-ueber-die-Stiftung/infos-ueber-die-stiftung.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Oft gestellte Fragen und Antworten zur Sozialhilfe",
+            "url": "https://www.bmas.de/DE/Soziales/Sozialhilfe/Fragen-und-Antworten-Sozialhilfe/fragen-und-antworten-sozialhilfe.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Gesetz über die Berufe in der Altenpflege (Altenpflegegesetz)",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/hilfe-und-pflege/gesetz-ueber-die-berufe-in-der-altenpflege-altenpflegegesetz--77744",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Sprachkurs und Aufenthaltsberatung für Neuzugewanderte",
+            "url": "https://www.make-it-in-germany.com/de/",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Aufenthaltsrecht und Ausländerbehörde: Beratung bei Duldung und unklarem Status",
+            "url": "https://www.proasyl.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Existenzsicherung und Notfallhilfe bei unklarem Aufenthalt",
+            "url": "https://fluechtlingsrat.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Ausländerbehörde und Aufenthaltsberatung: Notfallhilfe bei ungeklärtem Status",
+            "url": "https://bamf-navi.bamf.de/de/",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Wer? Was? Wo?",
+            "url": "https://www.bmas.de/DE/Arbeit/Migration-und-Arbeit/Orientierung-und-Vermittlung/Wer-Was-Wo/wer-was-wo.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Fachkräfteeinwanderungsgesetz",
+            "url": "https://www.bmas.de/DE/Arbeit/Migration-und-Arbeit/Rechtliches-zu-Einreise-Arbeitsmarktzugang-und-Absicherung/Fachkraefteeinwanderungsgesetz/fachkraefteeinwanderungsgesetz.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Aufenthaltsrecht und Ausländerbehörde: Beratung bei Duldung und unklarem Status",
+            "url": "https://www.proasyl.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Existenzsicherung und Notfallhilfe bei unklarem Aufenthalt",
+            "url": "https://fluechtlingsrat.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Widerspruch und Klage gegen Bescheid – Rechtsbehelf und Frist",
+            "url": "https://www.vdk.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Widerspruch gegen Sanktionsbescheid: Fristen und Rechtsbehelf",
+            "url": "https://sanktionsfrei.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "recognition_missing",
+      "label_de": "Anerkennung von Abschluessen fehlt",
+      "resources": {
+        "documents": [
+          {
+            "title": "Anerkennung und Erinnerung",
+            "url": "https://www.bmas.de/DE/Soziales/Soziale-Entschaedigung/Stiftung-Anerkennung-und-Hilfe/Anerkennung-und-Erinnerung/anerkennung-und-erinnerung.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Aufarbeitung",
+            "url": "https://www.bmas.de/DE/Soziales/Soziale-Entschaedigung/Stiftung-Anerkennung-und-Hilfe/Aufarbeitung/aufarbeitung.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Infos über die Stiftung",
+            "url": "https://www.bmas.de/DE/Soziales/Soziale-Entschaedigung/Stiftung-Anerkennung-und-Hilfe/Infos-ueber-die-Stiftung/infos-ueber-die-stiftung.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Weitere Informationen",
+            "url": "https://www.bmas.de/DE/Soziales/Soziale-Entschaedigung/Stiftung-Anerkennung-und-Hilfe/Weitere-Informationen/weitere-informationen.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Stiftung Anerkennung und Hilfe",
+            "url": "https://www.bmas.de/DE/Soziales/Soziale-Entschaedigung/Stiftung-Anerkennung-und-Hilfe/stiftung-anerkennung-und-hilfe.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Zehn Jahre Pflegetelefon",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/hilfe-und-pflege/zehn-jahre-pflegetelefon",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Berufliche Bildung",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/berufliche-bildung",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Engagement stärken",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/engagement-staerken",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Termin beim Jobcenter",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/termin-jobcenter",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Gleichstellungsantrag: Upload-Service",
+            "url": "https://www.arbeitsagentur.de/menschen-mit-behinderungen/spezielle-hilfe-und-unterstuetzung/gleichstellung/gleichstellung-upload",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Anerkennung Ihrer Qualifikationen",
+            "url": "https://www.bmas.de/DE/Arbeit/Migration-und-Arbeit/Anerkennung-und-Qualifizierung/Anerkennung-Ihrer-Qualifikationen/anerkennung-ihrer-qualifikationen.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Programme für Beschäftigungschancen (SGB III)",
+            "url": "https://www.bmas.de/DE/Arbeit/Arbeitsfoerderung/Programme-fuer-Beschaeftigungschancen/programme-fuer-beschaeftigungschancen.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Deutsch lernen für den Beruf",
+            "url": "https://www.bmas.de/DE/Arbeit/Migration-und-Arbeit/Anerkennung-und-Qualifizierung/Deutsch-lernen-fuer-den-Beruf/deutsch-lernen-fuer-den-beruf.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Förderprogramm \"Integration durch Qualifizierung",
+            "url": "https://www.bmas.de/DE/Arbeit/Migration-und-Arbeit/Anerkennung-und-Qualifizierung/Foerderprogramm-IQ/foerderprogramm-iq.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Wer? Was? Wo?",
+            "url": "https://www.bmas.de/DE/Arbeit/Migration-und-Arbeit/Orientierung-und-Vermittlung/Wer-Was-Wo/wer-was-wo.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Widerspruch und Klage gegen Bescheid – Rechtsbehelf und Frist",
+            "url": "https://www.vdk.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Finanzierung sozialer Projekte, Dienste und Einrichtungen",
+            "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Entlastungsbetrag und Kurzzeitpflege nutzen – Pflegeberatung",
+            "url": "https://www.zqp.de/beratung-pflege/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "health_disruption",
+      "label_de": "Krank geworden",
+      "resources": {
+        "documents": [
+          {
+            "title": "Gesundheit & Erholung",
+            "url": "https://familienportal.de/familienportal/lebenslagen/kinder-jugendliche/gesundheit-erholung",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Krankengeld beantragen – Absicherung bei Krankheit",
+            "url": "https://www.bundesgesundheitsministerium.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Reha-Beratung und Absicherung bei Krankheit und Arbeitsunfähigkeit",
+            "url": "https://www.patientenberatung.de/",
+            "domain": "aid",
+            "source_tier": "tier_2_official"
+          },
+          {
+            "title": "Krankengeld und Arbeitsunfähigkeit: Leistungen bei Krankheit",
+            "url": "https://www.gkv-spitzenverband.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Aufgabe des Ärztlichen Dienstes",
+            "url": "https://www.arbeitsagentur.de/ueber-uns/aerztlicher-dienst",
+            "domain": "organizations",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Informationen und Beratung",
+            "url": "https://www.bmas.de/DE/Europa-und-die-Welt/Europa/Arbeiten-innerhalb-der-EU/Informationen-und-Beratung/informationen-und-beratung.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Jobcenter: Unterstützung bei gesundheitlichen Problemen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/gesundheit",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Pflegegrad und Pflegegeld: Leistungen der Pflegeversicherung",
+            "url": "https://www.bundesgesundheitsministerium.de/service/begriffe-von-a-z/p/pflegestuetzpunkte",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Grundsicherung bei Erwerbsminderung und Reha (SGB XII)",
+            "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/teilhabe-und-inklusion.html",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Digitale Angebote der Sozialversicherung",
+            "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Digitale-Angebote-der-Sozialversicherung/digitale-angebote-der-sozialversicherung.html",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Gesundheit & Erholung",
+            "url": "https://familienportal.de/familienportal/lebenslagen/kinder-jugendliche/gesundheit-erholung",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Bundesteilhabegesetz",
+            "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/Rehabilitation-und-Teilhabe/Bundesteilhabegesetz/bundesteilhabegesetz.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Reha-Beratung und Absicherung bei Krankheit und Arbeitsunfähigkeit",
+            "url": "https://www.patientenberatung.de/",
+            "domain": "aid",
+            "source_tier": "tier_2_official"
+          },
+          {
+            "title": "Krankengeld und Arbeitsunfähigkeit: Leistungen bei Krankheit",
+            "url": "https://www.gkv-spitzenverband.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Aufgabe des Ärztlichen Dienstes",
+            "url": "https://www.arbeitsagentur.de/ueber-uns/aerztlicher-dienst",
+            "domain": "organizations",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Krisenhilfe und psychosoziale Beratung bei Burnout und psychischer Belastung",
+            "url": "https://www.telefonseelsorge.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Energieschulden und Notfallhilfe: Was tun bei drohender Abschaltung?",
+            "url": "https://www.verbraucherzentrale.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Der Bürgergeld-Rechner der Caritas.",
+            "url": "https://www.das-steht-dir-zu.de/arbeit/buergergeld/der-buergergeld-rechner/index.html",
+            "domain": "tools",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Finanzierung sozialer Projekte, Dienste und Einrichtungen",
+            "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "long_term_work_incapacity",
+      "label_de": "Langfristig arbeitsunfaehig",
+      "resources": {
+        "documents": [
+          {
+            "title": "Grundsicherung bei Erwerbsminderung und Reha (SGB XII)",
+            "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/teilhabe-und-inklusion.html",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Oft gestellte Fragen und Antworten zur Sozialhilfe",
+            "url": "https://www.bmas.de/DE/Soziales/Sozialhilfe/Fragen-und-Antworten-Sozialhilfe/fragen-und-antworten-sozialhilfe.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Reha-Beratung und Absicherung bei Krankheit und Arbeitsunfähigkeit",
+            "url": "https://www.patientenberatung.de/",
+            "domain": "aid",
+            "source_tier": "tier_2_official"
+          },
+          {
+            "title": "Erwerbsminderungsrente beantragen",
+            "url": "https://www.deutsche-rentenversicherung.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Gesundheit & Erholung",
+            "url": "https://familienportal.de/familienportal/lebenslagen/kinder-jugendliche/gesundheit-erholung",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Krankengeld und Arbeitsunfähigkeit: Leistungen bei Krankheit",
+            "url": "https://www.gkv-spitzenverband.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Berufsberatung und Berufsorientierung",
+            "url": "https://www.bmas.de/DE/Arbeit/Aus-und-Weiterbildung/Berufliche-Ausbildung/Berufsberatung-und-Berufsorientierung/berufsberatung-und-berufsorientierung.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Geschichte des Ministeriums",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/geschichte",
+            "domain": "organizations",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Jobcenter: Infos für Menschen aus dem Ausland",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/infos-fuer-menschen-aus-dem-ausland",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Technischer Beratungsdienst",
+            "url": "https://www.arbeitsagentur.de/ueber-uns/technischer-beratungsdienst",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Grundsicherung bei Erwerbsminderung und Reha (SGB XII)",
+            "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/teilhabe-und-inklusion.html",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Bundesteilhabegesetz",
+            "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/Rehabilitation-und-Teilhabe/Bundesteilhabegesetz/bundesteilhabegesetz.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Oft gestellte Fragen und Antworten zur Sozialhilfe",
+            "url": "https://www.bmas.de/DE/Soziales/Sozialhilfe/Fragen-und-Antworten-Sozialhilfe/fragen-und-antworten-sozialhilfe.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Reha-Beratung und Absicherung bei Krankheit und Arbeitsunfähigkeit",
+            "url": "https://www.patientenberatung.de/",
+            "domain": "aid",
+            "source_tier": "tier_2_official"
+          },
+          {
+            "title": "Gesundheit & Erholung",
+            "url": "https://familienportal.de/familienportal/lebenslagen/kinder-jugendliche/gesundheit-erholung",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Krisenhilfe und psychosoziale Beratung bei Burnout und psychischer Belastung",
+            "url": "https://www.telefonseelsorge.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Der Bürgergeld-Rechner der Caritas.",
+            "url": "https://www.das-steht-dir-zu.de/arbeit/buergergeld/der-buergergeld-rechner/index.html",
+            "domain": "tools",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Finanzierung sozialer Projekte, Dienste und Einrichtungen",
+            "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Entlastungsbetrag und Kurzzeitpflege nutzen – Pflegeberatung",
+            "url": "https://www.zqp.de/beratung-pflege/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "mental_burnout",
+      "label_de": "Psychische Belastung / Burnout",
+      "resources": {
+        "documents": [
+          {
+            "title": "Gesundheit & Erholung",
+            "url": "https://familienportal.de/familienportal/lebenslagen/kinder-jugendliche/gesundheit-erholung",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Krankengeld beantragen – Absicherung bei Krankheit",
+            "url": "https://www.bundesgesundheitsministerium.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Aufgabe des Ärztlichen Dienstes",
+            "url": "https://www.arbeitsagentur.de/ueber-uns/aerztlicher-dienst",
+            "domain": "organizations",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Krankengeld und Arbeitsunfähigkeit: Leistungen bei Krankheit",
+            "url": "https://www.gkv-spitzenverband.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Grundsicherung bei Erwerbsminderung und Reha (SGB XII)",
+            "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/teilhabe-und-inklusion.html",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Berufliche Rehabilitation",
+            "url": "https://www.arbeitsagentur.de/menschen-mit-behinderungen/berufliche-rehabilitation",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Erwerbsminderungsrente beantragen",
+            "url": "https://www.deutsche-rentenversicherung.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Technischer Beratungsdienst",
+            "url": "https://www.arbeitsagentur.de/ueber-uns/technischer-beratungsdienst",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Reha-Beratung und Absicherung bei Krankheit und Arbeitsunfähigkeit",
+            "url": "https://www.patientenberatung.de/",
+            "domain": "aid",
+            "source_tier": "tier_2_official"
+          },
+          {
+            "title": "Jobcenter: Unterstützung bei gesundheitlichen Problemen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/gesundheit",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Krisenhilfe und psychosoziale Beratung bei Burnout und psychischer Belastung",
+            "url": "https://www.telefonseelsorge.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Psychosoziale Beratung und Krisenhilfe – Sozialpsychiatrischer Dienst",
+            "url": "https://www.diakonie.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Psychosoziale Beratungsstellen und Krisenhilfe finden",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Bundesteilhabegesetz",
+            "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/Rehabilitation-und-Teilhabe/Bundesteilhabegesetz/bundesteilhabegesetz.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Gesundheit & Erholung",
+            "url": "https://familienportal.de/familienportal/lebenslagen/kinder-jugendliche/gesundheit-erholung",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Krisenhilfe und psychosoziale Beratung bei Burnout und psychischer Belastung",
+            "url": "https://www.telefonseelsorge.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Psychosoziale Beratung und Krisenhilfe – Sozialpsychiatrischer Dienst",
+            "url": "https://www.diakonie.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Psychosoziale Beratungsstellen und Krisenhilfe finden",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Finanzierung sozialer Projekte, Dienste und Einrichtungen",
+            "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Opfer-Telefon",
+            "url": "https://weisser-ring.de/hilfe-fuer-opfer/opfer-telefon",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "housing_loss_homelessness_risk",
+      "label_de": "Wohnung verloren / drohende Obdachlosigkeit",
+      "resources": {
+        "documents": [
+          {
+            "title": "KdU und Mietschulden: Übernahme durch das Jobcenter",
+            "url": "https://www.jobcenter.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Krankengeld und Arbeitsunfähigkeit: Leistungen bei Krankheit",
+            "url": "https://www.gkv-spitzenverband.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Digitale Verwaltung",
+            "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Das-Onlinezugangsgesetz/onlinezugangsgesetz.html",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Grundsicherung bei Erwerbsminderung und Reha (SGB XII)",
+            "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/teilhabe-und-inklusion.html",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Oft gestellte Fragen und Antworten zur Sozialhilfe",
+            "url": "https://www.bmas.de/DE/Soziales/Sozialhilfe/Fragen-und-Antworten-Sozialhilfe/fragen-und-antworten-sozialhilfe.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Unterhaltsvorschuss regelsaetze ab 01 01 2025 data",
+            "url": "https://www.bmbfsfj.bund.de/resource/blob/165740/7d97bd93b506b5fa10abbb350f31d493/unterhaltsvorschuss-regelsaetze-ab-01-01-2025-data.pdf",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Gross werden mit medien aber richtig der medienratgeber fuer familien rumaenisch data",
+            "url": "https://www.bmbfsfj.bund.de/resource/blob/280424/601e437ed91b13112fae3576726bceef/gross-werden-mit-medien-aber-richtig-der-medienratgeber-fuer-familien-rumaenisch-data.pdf",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Gesetz über die Berufe in der Altenpflege (Altenpflegegesetz)",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/hilfe-und-pflege/gesetz-ueber-die-berufe-in-der-altenpflege-altenpflegegesetz--77744",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Ausbildung & Studium mit Kind",
+            "url": "https://familienportal.de/familienportal/lebenslagen/ausbildung-beruf/ausbildung-studium-mit-kind",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Gesundheit & Erholung",
+            "url": "https://familienportal.de/familienportal/lebenslagen/kinder-jugendliche/gesundheit-erholung",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Wohnungsnotfall: Notunterkunft, Mietschulden und Wohnungslosenhilfe",
+            "url": "https://www.caritas.de/hilfeundberatung/ratgeber/wohnungslosigkeit/zurueckindieeigenenvierwaende/wege-aus-der-wohnungslosigkeit",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Wohnungsnotfallhilfe und Sozialberatung bei Wohnungsverlust",
+            "url": "https://awo.org/service/beratung/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Wohnungslosigkeit: Sozialberatung und Notunterkunft finden",
+            "url": "https://www.diakonie.de/wissen-kompakt-wohnungs-und-obdachlosigkeit",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "KdU und Mietschulden: Übernahme durch das Jobcenter",
+            "url": "https://www.jobcenter.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Wohnungsnotfall: Notunterkunft, Mietschulden und Wohnungslosenhilfe",
+            "url": "https://www.caritas.de/hilfeundberatung/ratgeber/wohnungslosigkeit/zurueckindieeigenenvierwaende/wege-aus-der-wohnungslosigkeit",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Wohnungsnotfallhilfe und Sozialberatung bei Wohnungsverlust",
+            "url": "https://awo.org/service/beratung/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Wohnungslosigkeit: Sozialberatung und Notunterkunft finden",
+            "url": "https://www.diakonie.de/wissen-kompakt-wohnungs-und-obdachlosigkeit",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Energieschulden und Notfallhilfe: Was tun bei drohender Abschaltung?",
+            "url": "https://www.verbraucherzentrale.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "energy_cost_unaffordable",
+      "label_de": "Energiekosten nicht bezahlbar",
+      "resources": {
+        "documents": [
+          {
+            "title": "Darlehen für Energiekosten und KdU: Notfallhilfe bei Heizkosten",
+            "url": "https://www.jobcenter.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Krankengeld und Arbeitsunfähigkeit: Leistungen bei Krankheit",
+            "url": "https://www.gkv-spitzenverband.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Ki Z-Lotse: Anspruch auf Kinderzuschlag online prüfen",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kiz-lotse",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Digitaler Zugang zu Förderinstrumenten der Arbeits- und Sozialpolitik",
+            "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Digitale-Angebote-fuer-Foerdermittel/digitale-angebote-fuer-foerdermittel.html",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Unterhaltsvorschuss regelsaetze ab 01 01 2025 data",
+            "url": "https://www.bmbfsfj.bund.de/resource/blob/165740/7d97bd93b506b5fa10abbb350f31d493/unterhaltsvorschuss-regelsaetze-ab-01-01-2025-data.pdf",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Gross werden mit medien aber richtig der medienratgeber fuer familien rumaenisch data",
+            "url": "https://www.bmbfsfj.bund.de/resource/blob/280424/601e437ed91b13112fae3576726bceef/gross-werden-mit-medien-aber-richtig-der-medienratgeber-fuer-familien-rumaenisch-data.pdf",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Grundsicherung bei Erwerbsminderung und Reha (SGB XII)",
+            "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/teilhabe-und-inklusion.html",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Oft gestellte Fragen und Antworten zur Sozialhilfe",
+            "url": "https://www.bmas.de/DE/Soziales/Sozialhilfe/Fragen-und-Antworten-Sozialhilfe/fragen-und-antworten-sozialhilfe.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Gesetz über die Berufe in der Altenpflege (Altenpflegegesetz)",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/hilfe-und-pflege/gesetz-ueber-die-berufe-in-der-altenpflege-altenpflegegesetz--77744",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Ausbildung & Studium mit Kind",
+            "url": "https://familienportal.de/familienportal/lebenslagen/ausbildung-beruf/ausbildung-studium-mit-kind",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Darlehen für Energiekosten und KdU: Notfallhilfe bei Heizkosten",
+            "url": "https://www.jobcenter.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Energieschulden und Notfallhilfe: Was tun bei drohender Abschaltung?",
+            "url": "https://www.verbraucherzentrale.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Finanzierung sozialer Projekte, Dienste und Einrichtungen",
+            "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Krankengeld und Arbeitsunfähigkeit: Leistungen bei Krankheit",
+            "url": "https://www.gkv-spitzenverband.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Energieschulden und Notfallhilfe: Was tun bei drohender Abschaltung?",
+            "url": "https://www.verbraucherzentrale.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Finanzierung sozialer Projekte, Dienste und Einrichtungen",
+            "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
+            "title": "Widerspruch und Klage gegen Bescheid – Rechtsbehelf und Frist",
+            "url": "https://www.vdk.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Schuldnerberatung",
+            "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung",
+            "domain": "aid",
+            "source_tier": "tier_2_ngo_watchdog"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "sanctions_conflict",
+      "label_de": "Sanktion / Widerspruch",
+      "resources": {
+        "documents": [
+          {
+            "title": "Jobcenter: Unterstützung bei gesundheitlichen Problemen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/gesundheit",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Infos über die Stiftung",
+            "url": "https://www.bmas.de/DE/Soziales/Soziale-Entschaedigung/Stiftung-Anerkennung-und-Hilfe/Infos-ueber-die-Stiftung/infos-ueber-die-stiftung.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Erwerbsminderungsrente beantragen",
+            "url": "https://www.deutsche-rentenversicherung.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Kündigungsschutz",
+            "url": "https://www.bmas.de/DE/Arbeit/Arbeitsrecht/Arbeitnehmerrechte/Kuendigungsschutz/kuendigungsschutz.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Geschäftsbericht für das Jahr 2024",
+            "url": "https://www.arbeitsagentur.de/ueber-uns/geschaeftsbericht-2024",
+            "domain": "organizations",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Ressortforschung",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/ressortforschung",
+            "domain": "organizations",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Gleichstellungsantrag: Upload-Service",
+            "url": "https://www.arbeitsagentur.de/menschen-mit-behinderungen/spezielle-hilfe-und-unterstuetzung/gleichstellung/gleichstellung-upload",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Digitaler Zugang zu Förderinstrumenten der Arbeits- und Sozialpolitik",
+            "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Digitale-Angebote-fuer-Foerdermittel/digitale-angebote-fuer-foerdermittel.html",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Krankengeld und Arbeitsunfähigkeit: Leistungen bei Krankheit",
+            "url": "https://www.gkv-spitzenverband.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "KdU und Mietschulden: Übernahme durch das Jobcenter",
+            "url": "https://www.jobcenter.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Widerspruch gegen Sanktionsbescheid: Fristen und Rechtsbehelf",
+            "url": "https://sanktionsfrei.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Widerspruch und Klage gegen Bescheid – Rechtsbehelf und Frist",
+            "url": "https://www.vdk.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Rechtsberatung bei Sanktionen und Pflichtverletzung im Bürgergeld",
+            "url": "https://tacheles-sozialhilfe.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Beratung bei Widerspruch und Rechtsbehelf gegen Bescheide",
+            "url": "https://www.sovd.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Widerspruch gegen Sanktionsbescheid: Fristen und Rechtsbehelf",
+            "url": "https://sanktionsfrei.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Widerspruch und Klage gegen Bescheid – Rechtsbehelf und Frist",
+            "url": "https://www.vdk.de/",
+            "domain": "benefits",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Rechtsberatung bei Sanktionen und Pflichtverletzung im Bürgergeld",
+            "url": "https://tacheles-sozialhilfe.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Beratung bei Widerspruch und Rechtsbehelf gegen Bescheide",
+            "url": "https://www.sovd.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "debt_crisis",
+      "label_de": "Schulden / finanzielle Krise",
+      "resources": {
+        "documents": [
+          {
+            "title": "Darlehen für Energiekosten und KdU: Notfallhilfe bei Heizkosten",
+            "url": "https://www.jobcenter.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Schuldnerberatung",
+            "url": "https://sozialplattform.de/schuldnerberatung",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Reha und Sozialamt: Hilfe bei dauerhafter Erwerbsminderung",
+            "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/teilhabe-und-inklusion.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Bedarfe: So setzt sich Bürgergeld zusammen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/zusammensetzung-bedarfe",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Bürgergeld: Wohnen und Miete",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/wohnen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Die Jugendstrategie der Bundesregierung",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend/jugendbildung/jugendstrategie/jugendstrategie",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Schnelle Hilfen",
+            "url": "https://www.bmas.de/DE/Soziales/Soziale-Entschaedigung/Neues-Soziales-Entschaedigungsrecht/Schnelle-Hilfen/schnelle-hilfen.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Kommunales Bildungsmanagement",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/kommunales-bildungsmanagement",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Jungen und Männer",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/jungen-und-maenner",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Krankengeld und Arbeitsunfähigkeit: Leistungen bei Krankheit",
+            "url": "https://www.gkv-spitzenverband.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          }
+        ],
+        "contacts": [
+          {
+            "title": "Darlehen für Energiekosten und KdU: Notfallhilfe bei Heizkosten",
+            "url": "https://www.jobcenter.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Energieschulden und Notfallhilfe: Was tun bei drohender Abschaltung?",
+            "url": "https://www.verbraucherzentrale.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Hilfe & Beratung für Familien",
+            "url": "https://familienportal.de/familienportal/lebenslagen/krise-und-konflikt/hilfe-beratung-familien",
+            "domain": "aid",
+            "source_tier": "tier_unknown"
+          },
+          {
+            "title": "Wohnungsnotfall: Notunterkunft, Mietschulden und Wohnungslosenhilfe",
+            "url": "https://www.caritas.de/hilfeundberatung/ratgeber/wohnungslosigkeit/zurueckindieeigenenvierwaende/wege-aus-der-wohnungslosigkeit",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          }
+        ],
+        "ngo_assistance": [
+          {
+            "title": "Energieschulden und Notfallhilfe: Was tun bei drohender Abschaltung?",
+            "url": "https://www.verbraucherzentrale.de/",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+            "url": "https://www.caritas.de/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Wohnungsnotfall: Notunterkunft, Mietschulden und Wohnungslosenhilfe",
+            "url": "https://www.caritas.de/hilfeundberatung/ratgeber/wohnungslosigkeit/zurueckindieeigenenvierwaende/wege-aus-der-wohnungslosigkeit",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Wohnungslosigkeit: Sozialberatung und Notunterkunft finden",
+            "url": "https://www.diakonie.de/wissen-kompakt-wohnungs-und-obdachlosigkeit",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Wohnungsnotfallhilfe und Sozialberatung bei Wohnungsverlust",
+            "url": "https://awo.org/service/beratung/",
+            "domain": "contacts",
+            "source_tier": "tier_3_ngo"
+          }
+        ]
+      }
+    }
+  ]
+}
