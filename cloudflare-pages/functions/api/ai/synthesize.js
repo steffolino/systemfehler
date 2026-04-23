@@ -67,14 +67,39 @@ export async function onRequest({ request, env }) {
     minConfidence,
   });
   const startedAt = Date.now();
-  const { evidence, lanes, diagnostics } = await retrieveEvidence(env, query, {
-    retrievalMode,
-    strictOfficial,
-    lifeEventId: lifeEvent,
-    minSourceTier,
-    minConfidence,
-    requestUrl: request.url,
-  });
+  let evidence = [];
+  let lanes = { official: [], assistive: [], contacts: [], context: [] };
+  let diagnostics = {
+    requested_mode: retrievalConfig.requestedMode,
+    retrieval_mode: retrievalConfig.activeMode,
+    strict_official: retrievalConfig.strictOfficial,
+    min_source_tier: retrievalConfig.minSourceTier,
+    min_confidence: retrievalConfig.minConfidence,
+    external_configured: retrievalConfig.external.configured,
+    external_status: 'error',
+    evidence_before_filter: 0,
+    evidence_after_filter: 0,
+    dropped_by_policy: 0,
+    fallback: true,
+    detected_stages: [],
+    selected_life_event: lifeEvent || null,
+  };
+
+  try {
+    const retrieved = await retrieveEvidence(env, query, {
+      retrievalMode,
+      strictOfficial,
+      lifeEventId: lifeEvent,
+      minSourceTier,
+      minConfidence,
+      requestUrl: request.url,
+    });
+    evidence = Array.isArray(retrieved?.evidence) ? retrieved.evidence : [];
+    lanes = retrieved?.lanes || lanes;
+    diagnostics = retrieved?.diagnostics || diagnostics;
+  } catch (error) {
+    console.error('retrieveEvidence failed during synthesize:', error);
+  }
   const evidenceKey = evidence
     .filter((item) => item.confidence >= 0.7)
     .slice(0, 3)
@@ -104,7 +129,25 @@ export async function onRequest({ request, env }) {
       },
     });
   }
-  const response = await buildSynthesis(env, query, evidence, diagnostics, lanes);
+  let response;
+  try {
+    response = await buildSynthesis(env, query, evidence, diagnostics, lanes);
+  } catch (error) {
+    console.error('buildSynthesis failed:', error);
+    response = {
+      answer: null,
+      explanation: 'Die hilfreiche Antwort ist gerade nicht verfuegbar. Bitte versuche es erneut.',
+      sources: [],
+      provider: env.AI ? 'workers-ai' : 'none',
+      model: env.CF_AI_MODEL || 'fallback',
+      latency_ms: 0,
+      fallback: true,
+      evidence,
+      evidence_lanes: lanes,
+      weak_evidence: true,
+      retrieval: diagnostics,
+    };
+  }
   response.latency_ms = Date.now() - startedAt;
   const cachedResponse = await cacheJsonResponse(cache, cacheKey, response, getCacheTtl(env, 'synthesize'));
   cachedResponse.headers.set('X-Cache', 'MISS');

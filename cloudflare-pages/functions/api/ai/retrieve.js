@@ -88,14 +88,39 @@ export async function onRequest({ request, env }) {
       },
     });
   }
-  const { evidence, lanes, diagnostics } = await retrieveEvidence(env, query, {
-    retrievalMode,
-    strictOfficial,
-    lifeEventId: lifeEvent,
-    minSourceTier,
-    minConfidence,
-    requestUrl: request.url,
-  });
+  let evidence = [];
+  let lanes = { official: [], assistive: [], contacts: [], context: [] };
+  let diagnostics = {
+    requested_mode: retrievalConfig.requestedMode,
+    retrieval_mode: retrievalConfig.activeMode,
+    strict_official: retrievalConfig.strictOfficial,
+    min_source_tier: retrievalConfig.minSourceTier,
+    min_confidence: retrievalConfig.minConfidence,
+    external_configured: retrievalConfig.external.configured,
+    external_status: 'error',
+    evidence_before_filter: 0,
+    evidence_after_filter: 0,
+    dropped_by_policy: 0,
+    fallback: true,
+    detected_stages: [],
+    selected_life_event: lifeEvent || null,
+  };
+
+  try {
+    const retrieved = await retrieveEvidence(env, query, {
+      retrievalMode,
+      strictOfficial,
+      lifeEventId: lifeEvent,
+      minSourceTier,
+      minConfidence,
+      requestUrl: request.url,
+    });
+    evidence = Array.isArray(retrieved?.evidence) ? retrieved.evidence : [];
+    lanes = retrieved?.lanes || lanes;
+    diagnostics = retrieved?.diagnostics || diagnostics;
+  } catch (error) {
+    console.error('retrieveEvidence failed:', error);
+  }
   const payload = {
     evidence,
     evidence_lanes: lanes,
