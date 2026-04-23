@@ -39,6 +39,10 @@ jobs:
         run: |
           mkdir -p dist-pages
           cp -r frontend/dist/. dist-pages/
+          # Copy static data assets served by env.ASSETS in Pages Functions
+          mkdir -p dist-pages/data/_topics
+          cp data/_topics/life_events.json dist-pages/data/_topics/life_events.json
+          cp data/_topics/life_event_resource_packs.json dist-pages/data/_topics/life_event_resource_packs.json
           mkdir -p dist-pages/moderation
           # Keep Pages artifact small: ship only a tiny fallback moderation queue file.
           # Production moderation data is served from Pages Functions + D1.
