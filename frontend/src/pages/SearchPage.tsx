@@ -107,8 +107,6 @@ export default function SearchPage() {
   const isLocalhost =
     typeof window !== 'undefined' &&
     (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
-  const turnstileSiteKey = (import.meta.env.VITE_TURNSTILE_SITE_KEY || '').trim();
-  const turnstileEnabled = Boolean(turnstileSiteKey) && !isLocalhost;
 
   const getTurnstileTokenRef = useRef<(() => Promise<string>) | null>(null);
 
@@ -136,6 +134,11 @@ export default function SearchPage() {
   const [turnstileReady, setTurnstileReady] = useState(false);
   const [showTechnicalDetails, setShowTechnicalDetails] = useState(false);
   const warmedSuggestionContexts = useRef<Set<string>>(new Set());
+  const configuredTurnstileSiteKey =
+    (aiHealth?.turnstile?.siteKey || import.meta.env.VITE_TURNSTILE_SITE_KEY || '').trim();
+  const backendTurnstileConfigured = Boolean(aiHealth?.turnstile?.configured) && !isLocalhost;
+  const turnstileEnabled = backendTurnstileConfigured && Boolean(configuredTurnstileSiteKey);
+  const turnstileMisconfigured = backendTurnstileConfigured && !turnstileEnabled;
 
   const handleTurnstileReady = useCallback((executor: (() => Promise<string>) | null) => {
     getTurnstileTokenRef.current = executor;
@@ -195,8 +198,12 @@ export default function SearchPage() {
     const fetchWithTurnstile = async <T,>(
       request: (turnstileToken?: string) => Promise<T>
     ): Promise<T> => {
-      if (!turnstileEnabled) {
+      if (!backendTurnstileConfigured) {
         return request();
+      }
+
+      if (turnstileMisconfigured) {
+        throw new Error(t('search.bot_protection_failed'));
       }
 
       const getToken = getTurnstileTokenRef.current;
@@ -315,7 +322,7 @@ export default function SearchPage() {
   }, [tab]);
 
   useEffect(() => {
-    if (tab !== 'ai' || turnstileEnabled) return;
+    if (tab !== 'ai' || turnstileEnabled || backendTurnstileConfigured) return;
     if (!lifeEventContext) return;
     const suggestions = Array.isArray((suggestedQuestionsByLifeEvent as Record<string, string[]>)[lifeEventContext])
       ? (suggestedQuestionsByLifeEvent as Record<string, string[]>)[lifeEventContext]
@@ -326,7 +333,7 @@ export default function SearchPage() {
     api.warmAIResults(suggestions).finally(() => {
       warmedSuggestionContexts.current.add(lifeEventContext);
     });
-  }, [lifeEventContext, tab, turnstileEnabled]);
+  }, [backendTurnstileConfigured, lifeEventContext, tab, turnstileEnabled]);
 
   function submitAiQuery() {
     const trimmed = aiDraftQuery.trim();
@@ -334,6 +341,11 @@ export default function SearchPage() {
 
     if (now - lastAiSubmitAt < 3000) {
       setAiError(t('search.ask_wait'));
+      return;
+    }
+
+    if (turnstileMisconfigured) {
+      setAiError(t('search.bot_protection_failed'));
       return;
     }
 
@@ -602,7 +614,13 @@ export default function SearchPage() {
                     <Button
                       className="h-11 w-full"
                       onClick={submitAiQuery}
-                      disabled={aiLoading || !aiDraftQuery.trim() || (turnstileEnabled && !turnstileReady)}
+                      disabled={
+                        aiLoading ||
+                        !aiDraftQuery.trim() ||
+                        (!aiHealth && !isLocalhost) ||
+                        turnstileMisconfigured ||
+                        (turnstileEnabled && !turnstileReady)
+                      }
                     >
                       {aiLoading ? t('search.working') : t('search.ask_ai')}
                     </Button>
@@ -877,7 +895,7 @@ export default function SearchPage() {
                             </div>
                             <div>
                               {t('search.status_bot_protection')}:{' '}
-                              {statusText(turnstileEnabled && turnstileReady, translate)}
+                              {statusText((turnstileEnabled && turnstileReady) || turnstileMisconfigured, translate)}
                             </div>
                             <div>{t('search.status_retrieval_mode')}: {aiResult?.synthesis.retrieval?.retrieval_mode || aiHealth?.retrieval?.activeMode || t('common.unknown')}</div>
                             <div>{t('search.status_retrieval_filter')}: {statusText(strictOfficialOnly, translate)}</div>
@@ -901,11 +919,16 @@ export default function SearchPage() {
 
                   {turnstileEnabled && (
                     <>
-                      <TurnstileWidget siteKey={turnstileSiteKey} onReady={handleTurnstileReady} />
+                      <TurnstileWidget siteKey={configuredTurnstileSiteKey} onReady={handleTurnstileReady} />
                       <div className="rounded-xl border bg-muted/30 px-4 py-3 text-xs text-muted-foreground">
                         {t('search.bot_protection_note')}
                       </div>
                     </>
+                  )}
+                  {turnstileMisconfigured && (
+                    <div className="rounded-xl border border-red-200 bg-red-50/50 px-4 py-3 text-xs text-red-700">
+                      {t('search.bot_protection_failed')}
+                    </div>
                   )}
                 </div>
               </div>

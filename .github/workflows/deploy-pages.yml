@@ -24,6 +24,15 @@ jobs:
         run: npm ci
         working-directory: frontend
 
+      - name: Validate required frontend env
+        env:
+          VITE_TURNSTILE_SITE_KEY: ${{ vars.VITE_TURNSTILE_SITE_KEY || secrets.VITE_TURNSTILE_SITE_KEY }}
+        run: |
+          if [ -z "$VITE_TURNSTILE_SITE_KEY" ]; then
+            echo "::error::Missing VITE_TURNSTILE_SITE_KEY (repo variable/secret). Refusing to deploy a broken frontend config."
+            exit 1
+          fi
+
       - name: Build frontend for Pages
         run: npm run build
         working-directory: frontend
@@ -31,7 +40,7 @@ jobs:
           PUBLIC_PATH: /systemfehler/
           VITE_API_URL: /api
           VITE_AI_API_URL: /api/ai
-          VITE_TURNSTILE_SITE_KEY: ${{ vars.VITE_TURNSTILE_SITE_KEY }}
+          VITE_TURNSTILE_SITE_KEY: ${{ vars.VITE_TURNSTILE_SITE_KEY || secrets.VITE_TURNSTILE_SITE_KEY }}
           VITE_AUTH0_DOMAIN: ${{ vars.VITE_AUTH0_DOMAIN }}
           VITE_AUTH0_CLIENT_ID: ${{ vars.VITE_AUTH0_CLIENT_ID }}
 

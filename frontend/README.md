@@ -47,6 +47,7 @@ This avoids cross-origin requests to raw GitHub URLs and prevents CORS failures 
 
 ## Environment Variables
 
+- Frontend builds read `.env` from the repository root (`../.env`) via Vite `envDir`.
 - `VITE_API_URL`: Override backend API base URL.
 - `VITE_SNAPSHOT_BASE_URL`: Optional override for snapshot JSON base URL.
 - `VITE_TURNSTILE_SITE_KEY`: Public Cloudflare Turnstile site key for AI search protection.

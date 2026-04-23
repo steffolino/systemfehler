@@ -103,6 +103,7 @@ def health():
         "provider": provider.healthcheck(),
         "turnstile": {
             "configured": is_turnstile_configured(),
+            "siteKey": (os.environ.get("TURNSTILE_SITE_KEY", "") or "").strip() or None,
         },
         "host": AI_HOST,
         "port": AI_PORT,
@@ -117,6 +118,7 @@ def version():
         "provider": provider.healthcheck(),
         "turnstile": {
             "configured": is_turnstile_configured(),
+            "siteKey": (os.environ.get("TURNSTILE_SITE_KEY", "") or "").strip() or None,
         },
         "host": AI_HOST,
         "port": AI_PORT,

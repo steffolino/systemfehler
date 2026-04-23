@@ -402,6 +402,7 @@ interface AIHealthResponse {
   };
   turnstile?: {
     configured: boolean;
+    siteKey?: string | null;
   };
   retrieval?: {
     requestedMode: string;
@@ -551,7 +552,22 @@ async function fetchAiApi<T>(endpoint: string, options?: RequestInit): Promise<T
     let errorMsg = `Guided request failed (${response.status})`;
     try {
       const payload = await response.json();
-      errorMsg = JSON.stringify(payload);
+      if (isJsonRecord(payload)) {
+        const message = typeof payload.message === 'string' ? payload.message : null;
+        const error = typeof payload.error === 'string' ? payload.error : null;
+        const serialized = JSON.stringify(payload);
+        errorMsg = message || error || serialized;
+      } else {
+        errorMsg = JSON.stringify(payload);
+      }
+
+      if (
+        response.status === 403 &&
+        typeof errorMsg === 'string' &&
+        /missing turnstile token/i.test(errorMsg)
+      ) {
+        errorMsg = 'Bot protection is not ready yet. Please reload the page.';
+      }
     } catch {
       try {
         errorMsg = await response.text();
