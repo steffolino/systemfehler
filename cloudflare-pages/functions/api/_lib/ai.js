@@ -576,6 +576,7 @@ function scoreEntry(query, entry, context = null, scenarioPack = null) {
   }
 
   const matchedScenarios = Array.isArray(context?.matchedScenarios) ? context.matchedScenarios : [];
+  const selectedLifeEvent = typeof context?.selectedLifeEvent === 'string' ? context.selectedLifeEvent : null;
   for (const scenario of matchedScenarios) {
     const domainBoost = Number(scenario.ranking?.domain_boosts?.[String(entry.domain || '').toLowerCase()] || 0);
     score += domainBoost;
@@ -592,10 +593,12 @@ function scoreEntry(query, entry, context = null, scenarioPack = null) {
     const guardBlocked = Array.isArray(scenario.relevance_guard?.blocked_any)
       ? scenario.relevance_guard.blocked_any
       : [];
-    if (guardRequired.length > 0 && !guardRequired.some((term) => normalizedText.includes(term))) {
+    const applyGuardPenalties =
+      matchedScenarios.length <= 1 || (selectedLifeEvent && selectedLifeEvent === scenario.id);
+    if (applyGuardPenalties && guardRequired.length > 0 && !guardRequired.some((term) => normalizedText.includes(term))) {
       score -= 16;
     }
-    if (guardBlocked.length > 0 && guardBlocked.some((term) => normalizedText.includes(term))) {
+    if (applyGuardPenalties && guardBlocked.length > 0 && guardBlocked.some((term) => normalizedText.includes(term))) {
       score -= 18;
     }
     for (const term of guardRequired) {
@@ -1849,7 +1852,6 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
     };
   }
 }
-
 
 
 

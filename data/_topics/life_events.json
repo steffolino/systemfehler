@@ -394,6 +394,9 @@
                 "niedriglohn",
                 "aufstockung",
                 "reicht nicht",
+                "wenig geld",
+                "zu wenig geld",
+                "geld reicht nicht",
                 "zu wenig lohn",
                 "working poor",
                 "regelbedarf",
@@ -473,6 +476,8 @@
                 "required_any": [
                     "aufstockung",
                     "niedriglohn",
+                    "wenig geld",
+                    "geld reicht nicht",
                     "kinderzuschlag",
                     "wohngeld",
                     "minijob",
