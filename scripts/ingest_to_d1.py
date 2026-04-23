@@ -22,6 +22,12 @@ def main():
     parser = argparse.ArgumentParser(description='Ingest snapshot entries into D1')
     parser.add_argument('--domain', required=True, help='Domain name (e.g. benefits)')
     parser.add_argument('--snapshot', required=True, help='Path to entries JSON snapshot')
+    parser.add_argument(
+        '--chunk-size',
+        type=int,
+        default=0,
+        help='Optional chunk size for entries per request (0 = send all at once)',
+    )
     args = parser.parse_args()
 
     ingest_url = os.environ.get('PAGES_INGEST_URL', '').rstrip('/') + '/api/admin/ingest'
@@ -72,25 +78,45 @@ def main():
         if 'targetGroups' in entry:
             entry['target_groups'] = entry.pop('targetGroups')
 
-    payload = json.dumps({'domain': args.domain, 'entries': entries}).encode()
-    req = urllib.request.Request(
-        ingest_url,
-        data=payload,
-        headers={
-            'Authorization': f'Bearer {token}',
-            'Content-Type': 'application/json',
-            'User-Agent': 'systemfehler-ingest-bot/1.0 (+https://github.com/steffolino/systemfehler)',
-        },
-        method='POST',
-    )
-    try:
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'Content-Type': 'application/json',
+        'User-Agent': 'systemfehler-ingest-bot/1.0 (+https://github.com/steffolino/systemfehler)',
+    }
+
+    def send_batch(batch, index=None, total=None):
+        payload = json.dumps({'domain': args.domain, 'entries': batch}).encode()
+        req = urllib.request.Request(
+            ingest_url,
+            data=payload,
+            headers=headers,
+            method='POST',
+        )
         with urllib.request.urlopen(req) as resp:
             body = json.loads(resp.read())
-            print(f"Ingest ok: upserted={body.get('upserted', '?')} skipped={body.get('skipped', '?')}")
-    except urllib.error.HTTPError as e:
-        print(f'Ingest failed: HTTP {e.code} {e.reason}', file=sys.stderr)
-        print(e.read().decode(), file=sys.stderr)
-        sys.exit(1)
+            prefix = f"[{index}/{total}] " if index is not None and total is not None else ""
+            print(
+                f"{prefix}Ingest ok: upserted={body.get('upserted', '?')} skipped={body.get('skipped', '?')}"
+            )
+
+    chunk_size = max(0, int(args.chunk_size or 0))
+    if chunk_size <= 0:
+        try:
+            send_batch(entries)
+        except urllib.error.HTTPError as e:
+            print(f'Ingest failed: HTTP {e.code} {e.reason}', file=sys.stderr)
+            print(e.read().decode(), file=sys.stderr)
+            sys.exit(1)
+    else:
+        total_batches = (len(entries) + chunk_size - 1) // chunk_size
+        for i in range(total_batches):
+            batch = entries[i * chunk_size:(i + 1) * chunk_size]
+            try:
+                send_batch(batch, i + 1, total_batches)
+            except urllib.error.HTTPError as e:
+                print(f'Ingest failed in batch {i + 1}/{total_batches}: HTTP {e.code} {e.reason}', file=sys.stderr)
+                print(e.read().decode(), file=sys.stderr)
+                sys.exit(1)
 
 
 if __name__ == '__main__':

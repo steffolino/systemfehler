@@ -49,6 +49,8 @@ def main() -> int:
             domain,
             "--snapshot",
             str(snapshot),
+            "--chunk-size",
+            "250",
         ]
         print(f"Ingesting {domain} from {snapshot}...")
         result = subprocess.run(command, check=False)
