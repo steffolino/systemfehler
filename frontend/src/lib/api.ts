@@ -1454,6 +1454,11 @@ export const api = {
           status: 'unreachable',
           error: 'Guided assistant service is not reachable at the configured URL.',
         },
+        // Conservative default: require bot protection unless health says otherwise.
+        turnstile: {
+          configured: true,
+          siteKey: (import.meta.env.VITE_TURNSTILE_SITE_KEY || '').trim() || null,
+        },
         host: AI_API_BASE_URL,
         port: 0,
       };

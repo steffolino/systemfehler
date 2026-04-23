@@ -134,11 +134,12 @@ export default function SearchPage() {
   const [turnstileReady, setTurnstileReady] = useState(false);
   const [showTechnicalDetails, setShowTechnicalDetails] = useState(false);
   const warmedSuggestionContexts = useRef<Set<string>>(new Set());
+  const turnstileRequirementKnown = typeof aiHealth?.turnstile?.configured === 'boolean';
+  const requiresTurnstile = !isLocalhost && (aiHealth?.turnstile?.configured ?? true);
   const configuredTurnstileSiteKey =
     (aiHealth?.turnstile?.siteKey || import.meta.env.VITE_TURNSTILE_SITE_KEY || '').trim();
-  const backendTurnstileConfigured = Boolean(aiHealth?.turnstile?.configured) && !isLocalhost;
-  const turnstileEnabled = backendTurnstileConfigured && Boolean(configuredTurnstileSiteKey);
-  const turnstileMisconfigured = backendTurnstileConfigured && !turnstileEnabled;
+  const turnstileEnabled = requiresTurnstile && Boolean(configuredTurnstileSiteKey);
+  const turnstileMisconfigured = requiresTurnstile && !turnstileEnabled;
 
   const handleTurnstileReady = useCallback((executor: (() => Promise<string>) | null) => {
     getTurnstileTokenRef.current = executor;
@@ -198,7 +199,7 @@ export default function SearchPage() {
     const fetchWithTurnstile = async <T,>(
       request: (turnstileToken?: string) => Promise<T>
     ): Promise<T> => {
-      if (!backendTurnstileConfigured) {
+      if (!requiresTurnstile) {
         return request();
       }
 
@@ -305,7 +306,7 @@ export default function SearchPage() {
     return () => {
       cancelled = true;
     };
-  }, [lifeEventContext, retrievalMode, strictOfficialOnly, submittedAiQuery, t, tab, translate, turnstileEnabled]);
+  }, [lifeEventContext, requiresTurnstile, retrievalMode, strictOfficialOnly, submittedAiQuery, t, tab, translate, turnstileEnabled, turnstileMisconfigured]);
 
   useEffect(() => {
     if (tab !== 'ai') return;
@@ -322,7 +323,7 @@ export default function SearchPage() {
   }, [tab]);
 
   useEffect(() => {
-    if (tab !== 'ai' || turnstileEnabled || backendTurnstileConfigured) return;
+    if (tab !== 'ai' || turnstileEnabled || requiresTurnstile) return;
     if (!lifeEventContext) return;
     const suggestions = Array.isArray((suggestedQuestionsByLifeEvent as Record<string, string[]>)[lifeEventContext])
       ? (suggestedQuestionsByLifeEvent as Record<string, string[]>)[lifeEventContext]
@@ -333,7 +334,7 @@ export default function SearchPage() {
     api.warmAIResults(suggestions).finally(() => {
       warmedSuggestionContexts.current.add(lifeEventContext);
     });
-  }, [backendTurnstileConfigured, lifeEventContext, tab, turnstileEnabled]);
+  }, [lifeEventContext, requiresTurnstile, tab, turnstileEnabled]);
 
   function submitAiQuery() {
     const trimmed = aiDraftQuery.trim();
@@ -617,7 +618,7 @@ export default function SearchPage() {
                       disabled={
                         aiLoading ||
                         !aiDraftQuery.trim() ||
-                        (!aiHealth && !isLocalhost) ||
+                        (!turnstileRequirementKnown && !isLocalhost) ||
                         turnstileMisconfigured ||
                         (turnstileEnabled && !turnstileReady)
                       }
