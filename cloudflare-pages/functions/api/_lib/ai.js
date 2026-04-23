@@ -1101,16 +1101,19 @@ async function retrieveKeywordEvidence(env, query, options = {}) {
     }
   }
 
-  const scored = normalizedEntries
+  const scoredAll = normalizedEntries
     .filter((entry) => !isLowSignalEntry(entry))
     .map((entry) => ({ entry, score: scoreEntry(query, entry, context, scenarioPack) }))
-    .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score);
-  return diversifyScoredEntries(scored, context, 8)
+
+  const positiveScored = scoredAll.filter((item) => item.score > 0);
+  const ranked = positiveScored.length > 0 ? positiveScored : scoredAll.slice(0, 24);
+
+  return diversifyScoredEntries(ranked, context, 8)
     .map(({ entry, score }) => ({
       source: entry.url || 'unknown',
       content: JSON.stringify(entry),
-      confidence: confidenceFromScore(score),
+      confidence: confidenceFromScore(score > 0 ? score : 1),
     }));
 }
 
@@ -1852,6 +1855,5 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
     };
   }
 }
-
 
 
