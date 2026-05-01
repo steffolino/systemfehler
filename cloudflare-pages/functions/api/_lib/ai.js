@@ -240,6 +240,35 @@ function normalizeGermanChars(str) {
     .replace(/ß/g, 'ss');
 }
 
+function normalizeScenarioMatchText(value) {
+  return normalizeGermanChars(String(value || '').toLowerCase())
+    .replace(/[^\p{L}\p{N}\s-]/gu, ' ')
+    .replace(/[-_]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function compactScenarioMatchText(value) {
+  return normalizeScenarioMatchText(value).replace(/\s+/g, '');
+}
+
+function queryMatchesScenarioKeyword(queryText, keyword) {
+  const normalizedKeyword = normalizeScenarioMatchText(keyword);
+  if (!normalizedKeyword) return false;
+  if (queryText.includes(normalizedKeyword)) return true;
+
+  const compactQuery = compactScenarioMatchText(queryText);
+  const compactKeyword = compactScenarioMatchText(normalizedKeyword);
+  if (compactKeyword && compactQuery.includes(compactKeyword)) return true;
+
+  const keywordTokens = normalizedKeyword
+    .split(/\s+/)
+    .filter((token) => token.length >= 3);
+  if (keywordTokens.length < 2) return false;
+  const queryTokens = new Set(queryText.split(/\s+/).filter(Boolean));
+  return keywordTokens.every((token) => queryTokens.has(token));
+}
+
 function normalizeLifeEventScenario(raw) {
   if (!raw || typeof raw !== 'object') return null;
   const id = String(raw.id || '').trim().toLowerCase();
@@ -665,10 +694,10 @@ function findLifeEventById(scenarios, lifeEventId) {
 }
 
 function inferUserStageContext(query, scenarios, forcedLifeEventId = null) {
-  const q = normalizeGermanChars(String(query || '').toLowerCase());
+  const q = normalizeScenarioMatchText(query);
   const list = Array.isArray(scenarios) ? scenarios : [];
   const matchedRules = list.filter((rule) =>
-    rule.keywords.some((keyword) => q.includes(keyword))
+    rule.keywords.some((keyword) => queryMatchesScenarioKeyword(q, keyword))
   );
   const forcedScenario = findLifeEventById(list, forcedLifeEventId);
 
@@ -701,7 +730,11 @@ function inferUserStageContext(query, scenarios, forcedLifeEventId = null) {
     stageIds: effectiveRules.map((rule) => rule.id),
     expansions,
     domains: domains.length > 0 ? domains : guidedSearchDomains(query),
-    selectedLifeEvent: forcedScenario ? forcedScenario.id : null,
+    selectedLifeEvent: forcedScenario
+      ? forcedScenario.id
+      : effectiveRules.length === 1
+        ? effectiveRules[0].id
+        : null,
     matchedScenarios: effectiveRules,
   };
 }
@@ -1263,9 +1296,20 @@ export async function retrieveEvidence(env, query, options = {}) {
   const keywordEvidence = await retrieveKeywordEvidence(env, query, {
     lifeEventId: options.lifeEventId || null,
     lifeEventScenarios: scenarios,
-    scenarioPack: selectedPack,
+    scenarioPack: options.lifeEventId ? selectedPack : null,
   });
-  let combinedEvidence = keywordEvidence;
+  const curatedEvidence = selectedPack
+    ? buildCuratedEvidenceFromScenarioResources([
+        {
+          id: selectedPack.scenario_id,
+          curated_resources: selectedPack.resources,
+        },
+      ])
+    : [];
+  const shouldAddCuratedEvidence = curatedEvidence.length > 0 && keywordEvidence.length < 3;
+  let combinedEvidence = shouldAddCuratedEvidence
+    ? dedupeEvidence([...keywordEvidence, ...curatedEvidence])
+    : keywordEvidence;
 
   if (config.activeMode === 'hybrid' || config.activeMode === 'external') {
     const externalResult = await retrieveExternalEvidence(env, query, MAX_EXTERNAL_EVIDENCE);
@@ -1274,11 +1318,17 @@ export async function retrieveEvidence(env, query, options = {}) {
     if (externalResult.status === 'ok') {
       combinedEvidence = config.activeMode === 'external'
         ? externalResult.evidence
-        : dedupeEvidence([...externalResult.evidence, ...keywordEvidence]);
+        : dedupeEvidence([
+            ...externalResult.evidence,
+            ...keywordEvidence,
+            ...(shouldAddCuratedEvidence ? curatedEvidence : []),
+          ]);
     } else if (config.activeMode === 'external') {
       diagnostics.fallback = true;
       diagnostics.retrieval_mode = 'keyword';
-      combinedEvidence = keywordEvidence;
+      combinedEvidence = shouldAddCuratedEvidence
+        ? dedupeEvidence([...keywordEvidence, ...curatedEvidence])
+        : keywordEvidence;
     }
   }
 
@@ -1314,7 +1364,7 @@ export function localEvaluateEntries(entries, query, options = {}) {
   const scenarios = parseLifeEventScenariosPayload({ scenarios: options.lifeEventScenarios || [] });
   const context = inferUserStageContext(query, scenarios, options.lifeEventId || null);
   let selectedPack = null;
-  if (context.selectedLifeEvent && options.lifeEventResourcePacks) {
+  if (context.selectedLifeEvent && options.lifeEventId && options.lifeEventResourcePacks) {
     if (options.lifeEventResourcePacks instanceof Map) {
       selectedPack = options.lifeEventResourcePacks.get(context.selectedLifeEvent) || null;
     } else if (Array.isArray(options.lifeEventResourcePacks?.scenarios)) {
@@ -1430,6 +1480,15 @@ function buildCuratedEvidenceFromScenarioResources(scenarioResources = []) {
       if (!url) continue;
       const domain = String(item?.domain || '').trim().toLowerCase() || 'aid';
       const title = String(item?.title || '').trim() || 'Quelle';
+      const sourceTier = String(item?.source_tier || '').trim().toLowerCase() || 'tier_2_official';
+      const sourceRole =
+        sourceTier.startsWith('tier_1_') || sourceTier === 'tier_2_official'
+          ? 'official_info'
+          : domain === 'contacts'
+            ? 'contact_info'
+            : domain === 'tools'
+              ? 'trusted_tool'
+              : 'context_info';
       items.push({
         source: url,
         confidence,
@@ -1440,8 +1499,8 @@ function buildCuratedEvidenceFromScenarioResources(scenarioResources = []) {
           summary: { de: 'Kuratiert fuer den gewaehlten Lebenskontext.' },
           provenance: {
             source: url,
-            sourceTier: String(item?.source_tier || '').trim().toLowerCase() || 'tier_2_official',
-            sourceRole: domain === 'contacts' ? 'contact_info' : 'context_info',
+            sourceTier,
+            sourceRole,
           },
         }),
       });
@@ -1855,5 +1914,3 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
     };
   }
 }
-
-

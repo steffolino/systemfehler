@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_at": "2026-04-22T19:10:19.613Z",
+  "generated_at": "2026-05-01T09:46:14.433Z",
   "targets": {
     "docsMin": 5,
     "docsMax": 10,
@@ -15,6 +15,12 @@
       "resources": {
         "documents": [
           {
+            "title": "Einkommen mit Bürgergeld ergänzen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
             "title": "Bürgergeld online beantragen",
             "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/buergergeld-beantragen",
             "domain": "benefits",
@@ -27,14 +33,14 @@
             "source_tier": "tier_1_official"
           },
           {
-            "title": "Einkommen mit Bürgergeld ergänzen",
-            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+            "title": "Finanziell absichern mit Bürgergeld",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern",
             "domain": "benefits",
             "source_tier": "tier_1_official"
           },
           {
-            "title": "Finanziell absichern mit Bürgergeld",
-            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern",
+            "title": "Bedarfe: So setzt sich Bürgergeld zusammen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/zusammensetzung-bedarfe",
             "domain": "benefits",
             "source_tier": "tier_1_official"
           },
@@ -67,15 +73,15 @@
             "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/unterstuetzung-fuer-familien",
             "domain": "benefits",
             "source_tier": "tier_1_official"
-          },
-          {
-            "title": "Freiwillige Arbeitslosenversicherung",
-            "url": "https://www.arbeitsagentur.de/freiwillige-arbeitslosenversicherung",
-            "domain": "aid",
-            "source_tier": "tier_1_official"
           }
         ],
         "contacts": [
+          {
+            "title": "Einkommen mit Bürgergeld ergänzen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
           {
             "title": "Bürgergeld (Arbeitslosengeld II)",
             "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld",
@@ -91,12 +97,6 @@
           {
             "title": "Bürgergeld: Antrag und Bescheid",
             "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/antrag-bescheid",
-            "domain": "benefits",
-            "source_tier": "tier_1_official"
-          },
-          {
-            "title": "Einkommen mit Bürgergeld ergänzen",
-            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
             "domain": "benefits",
             "source_tier": "tier_1_official"
           },
@@ -537,6 +537,12 @@
       "resources": {
         "documents": [
           {
+            "title": "Einkommen mit Bürgergeld ergänzen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
             "title": "Kinderzuschlag: Anspruch, Höhe, Dauer",
             "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kinderzuschlag-anspruch-hoehe-dauer",
             "domain": "aid",
@@ -555,14 +561,14 @@
             "source_tier": "tier_1_official"
           },
           {
-            "title": "Einkommen mit Bürgergeld ergänzen",
-            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
-            "domain": "benefits",
+            "title": "Kinderzuschlag und Leistungen für Bildung und Teilhabe",
+            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kinderzuschlag-und-leistungen-fuer-bildung-und-teilhabe-73906",
+            "domain": "aid",
             "source_tier": "tier_1_official"
           },
           {
-            "title": "Kinderzuschlag und Leistungen für Bildung und Teilhabe",
-            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kinderzuschlag-und-leistungen-fuer-bildung-und-teilhabe-73906",
+            "title": "Begriffserklärung: Bedarfsgemeinschaft",
+            "url": "https://www.arbeitsagentur.de/lexikon/bedarfsgemeinschaft",
             "domain": "aid",
             "source_tier": "tier_1_official"
           },
@@ -589,15 +595,15 @@
             "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kiz-lotse",
             "domain": "tools",
             "source_tier": "tier_1_official"
-          },
-          {
-            "title": "Online-Rechner und interaktive Anwendungen",
-            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/service/online-rechner",
-            "domain": "tools",
-            "source_tier": "tier_1_official"
           }
         ],
         "contacts": [
+          {
+            "title": "Einkommen mit Bürgergeld ergänzen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
           {
             "title": "Kinderzuschlag: Anspruch, Höhe, Dauer",
             "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kinderzuschlag-anspruch-hoehe-dauer",
@@ -620,12 +626,6 @@
             "title": "Bundesteilhabegesetz",
             "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/Rehabilitation-und-Teilhabe/Bundesteilhabegesetz/bundesteilhabegesetz.html",
             "domain": "contacts",
-            "source_tier": "tier_1_official"
-          },
-          {
-            "title": "Unterstützung für Eltern",
-            "url": "https://www.arbeitsagentur.de/familie-und-kinder/weitere-hilfen-fuer-eltern",
-            "domain": "aid",
             "source_tier": "tier_1_official"
           }
         ],
