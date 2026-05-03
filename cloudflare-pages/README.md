@@ -19,6 +19,7 @@ The deployment workflow builds the frontend app from `frontend/` and deploys:
 - `/api/data/entries/:id` -> single entry
 - `/api/data/moderation-queue` -> moderation queue from D1 table `moderation_queue`
 - `/api/data/quality-report` -> quality metrics + missing translation report
+- `/api/data/life-event-review` -> semantic review cases + manual override lifecycle
 - `/api/ai/health` -> Workers AI health/config
 - `/api/ai/rewrite` -> query rewrite
 - `/api/ai/retrieve` -> retrieval-only evidence
@@ -65,6 +66,7 @@ to same-origin Cloudflare Pages Functions instead of the local Python sidecar.
 4. In **Pages -> Settings -> Environment variables / Secrets**, add server-side secrets:
    - `TURNSTILE_SECRET_KEY`
    - `INGEST_TOKEN`
+   - optional temporary E2E-only secret: `TURNSTILE_E2E_BYPASS_TOKEN`
 5. In **Pages -> Settings -> Environment variables**, add non-secret values if they are consumed by Functions:
    - `PAGES_BASE_URL` (for example `https://systemfehler.pages.dev`)
 6. In **Pages -> Settings -> Functions**, add bindings:
@@ -99,6 +101,20 @@ Deployment runs from `.github/workflows/deploy-pages.yml` on:
 After Pages deploy, the workflow also attempts to sync all domain snapshots into D1
 via `scripts/ingest_all_to_d1.py` (when `PAGES_INGEST_URL` and `INGEST_TOKEN` are set).
 The ingest client uses chunked uploads to avoid `413 Payload Too Large` on large domains.
+
+## Production E2E with Turnstile (temporary bypass runbook)
+
+Use this only for controlled test runs when Turnstile would otherwise block
+automation.
+
+1. Generate a random token locally and store it temporarily.
+2. Set `TURNSTILE_E2E_BYPASS_TOKEN` as a Pages secret.
+3. Run production query tests with header `x-e2e-bypass-token` set to that token.
+4. Delete the secret immediately after the run.
+5. Remove local temporary token files.
+
+Latest validated result: full production suggested-query retrieval suite passed
+`60/60` on 2026-05-03, followed by secret cleanup.
 
 ## Manual deployment (local)
 

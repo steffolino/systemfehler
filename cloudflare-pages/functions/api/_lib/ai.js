@@ -69,6 +69,7 @@ const QUERY_STOPWORDS = new Set([
 const LIFE_EVENT_TOPICS_ASSET_PATH = '/data/_topics/life_events.json';
 const LIFE_EVENT_RESOURCE_PACKS_ASSET_PATH = '/data/_topics/life_event_resource_packs.json';
 const LIFE_EVENT_CACHE_TTL_MS = 5 * 60 * 1000;
+const LIFE_EVENT_OVERRIDE_CACHE_TTL_MS = 60 * 1000;
 const DEFAULT_GUIDED_DOMAINS = ['benefits', 'aid', 'contacts', 'tools'];
 let lifeEventScenarioCache = {
   loadedAt: 0,
@@ -78,6 +79,11 @@ let lifeEventResourcePackCache = {
   loadedAt: 0,
   packsById: new Map(),
 };
+let lifeEventOverrideCache = {
+  loadedAt: 0,
+  overrides: [],
+};
+let lifeEventReviewTablesReadyPromise = null;
 const SOURCE_TIER_RANK = {
   tier_1_law: 4,
   tier_1_official: 4,
@@ -250,6 +256,197 @@ function normalizeScenarioMatchText(value) {
 
 function compactScenarioMatchText(value) {
   return normalizeScenarioMatchText(value).replace(/\s+/g, '');
+}
+
+async function ensureLifeEventReviewTables(db) {
+  if (!db) return;
+  if (lifeEventReviewTablesReadyPromise) {
+    await lifeEventReviewTablesReadyPromise;
+    return;
+  }
+
+  lifeEventReviewTablesReadyPromise = db.exec([
+    `CREATE TABLE IF NOT EXISTS life_event_review_cases (
+      id TEXT PRIMARY KEY,
+      query TEXT NOT NULL,
+      normalized_query TEXT NOT NULL,
+      detected_stages TEXT,
+      selected_life_event TEXT,
+      editorial_review_reasons TEXT,
+      occurrence_count INTEGER NOT NULL DEFAULT 1,
+      first_seen TEXT NOT NULL,
+      last_seen TEXT NOT NULL,
+      resolved_status TEXT NOT NULL DEFAULT 'open',
+      resolution_notes TEXT,
+      resolved_by TEXT,
+      resolved_at TEXT
+    )`,
+    'CREATE INDEX IF NOT EXISTS idx_life_event_review_cases_status ON life_event_review_cases(resolved_status, last_seen DESC)',
+    `CREATE TABLE IF NOT EXISTS life_event_overrides (
+      id TEXT PRIMARY KEY,
+      trigger_text TEXT NOT NULL,
+      normalized_trigger_text TEXT NOT NULL,
+      target_life_event TEXT NOT NULL,
+      note TEXT,
+      reviewer TEXT,
+      status TEXT NOT NULL DEFAULT 'active',
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      applied_count INTEGER NOT NULL DEFAULT 0,
+      last_applied_at TEXT
+    )`,
+    'CREATE INDEX IF NOT EXISTS idx_life_event_overrides_status ON life_event_overrides(status, updated_at DESC)',
+  ].join(';\n'));
+
+  try {
+    await lifeEventReviewTablesReadyPromise;
+  } catch (error) {
+    lifeEventReviewTablesReadyPromise = null;
+    throw error;
+  }
+}
+
+async function loadActiveLifeEventOverrides(env) {
+  const db = env?.DB;
+  if (!db) return [];
+
+  const now = Date.now();
+  if (
+    now - lifeEventOverrideCache.loadedAt < LIFE_EVENT_OVERRIDE_CACHE_TTL_MS &&
+    Array.isArray(lifeEventOverrideCache.overrides)
+  ) {
+    return lifeEventOverrideCache.overrides;
+  }
+
+  await ensureLifeEventReviewTables(db);
+  const rowsResult = await db
+    .prepare('SELECT id, trigger_text, normalized_trigger_text, target_life_event, note, reviewer, status, updated_at FROM life_event_overrides WHERE status = ? ORDER BY updated_at DESC LIMIT 500')
+    .bind('active')
+    .all();
+  const overrides = (rowsResult?.results || []).map((row) => ({
+    id: row.id,
+    triggerText: String(row.trigger_text || ''),
+    normalizedTriggerText: String(row.normalized_trigger_text || ''),
+    targetLifeEvent: String(row.target_life_event || '').toLowerCase(),
+    note: row.note || null,
+    reviewer: row.reviewer || null,
+    status: String(row.status || 'active'),
+  })).filter((row) => row.triggerText && row.targetLifeEvent);
+
+  lifeEventOverrideCache = {
+    loadedAt: now,
+    overrides,
+  };
+
+  return overrides;
+}
+
+function findLifeEventOverride(query, overrides) {
+  const normalizedQuery = normalizeScenarioMatchText(query);
+  if (!normalizedQuery) return null;
+
+  let best = null;
+  for (const override of Array.isArray(overrides) ? overrides : []) {
+    const normalizedTrigger = override.normalizedTriggerText || normalizeScenarioMatchText(override.triggerText || '');
+    if (!normalizedTrigger) continue;
+    const matches = normalizedQuery.includes(normalizedTrigger) || normalizedTrigger.includes(normalizedQuery);
+    if (!matches) continue;
+    const score = normalizedTrigger.length;
+    if (!best || score > best.score) {
+      best = {
+        override,
+        score,
+      };
+    }
+  }
+
+  return best ? best.override : null;
+}
+
+function applyLifeEventOverrideToContext(context, override, scenarios) {
+  if (!override || !override.targetLifeEvent) return context;
+  const target = String(override.targetLifeEvent || '').trim().toLowerCase();
+  if (!target) return context;
+
+  const scenarioList = Array.isArray(scenarios) ? scenarios : [];
+  const targetScenario = scenarioList.find((scenario) => scenario.id === target);
+  if (!targetScenario) return context;
+
+  const existingStages = Array.isArray(context?.stageIds) ? context.stageIds : [];
+  const stageIds = [target, ...existingStages.filter((id) => id !== target)];
+  const existingMatched = Array.isArray(context?.matchedScenarios) ? context.matchedScenarios : [];
+  const matchedScenarios = [
+    targetScenario,
+    ...existingMatched.filter((scenario) => scenario && scenario.id !== target),
+  ];
+
+  return {
+    ...context,
+    stageIds,
+    selectedLifeEvent: target,
+    matchedScenarios,
+    needsEditorialReview: false,
+    editorialReviewReasons: ['manual_override_applied'],
+    overrideApplied: true,
+    appliedOverrideId: override.id,
+    appliedOverrideTarget: target,
+  };
+}
+
+async function recordLifeEventReviewCase(env, query, stageContext) {
+  const db = env?.DB;
+  if (!db) return;
+  if (!stageContext?.needsEditorialReview) return;
+
+  await ensureLifeEventReviewTables(db);
+
+  const normalizedQuery = normalizeScenarioMatchText(query);
+  if (!normalizedQuery) return;
+  const caseId = await sha256Hex(`life-event-review::${normalizedQuery}`);
+  const now = new Date().toISOString();
+  const detectedStages = JSON.stringify(Array.isArray(stageContext.stageIds) ? stageContext.stageIds : []);
+  const reviewReasons = JSON.stringify(Array.isArray(stageContext.editorialReviewReasons) ? stageContext.editorialReviewReasons : []);
+
+  await db
+    .prepare(
+      `INSERT INTO life_event_review_cases (
+        id, query, normalized_query, detected_stages, selected_life_event, editorial_review_reasons, occurrence_count, first_seen, last_seen, resolved_status
+      ) VALUES (?, ?, ?, ?, ?, ?, 1, ?, ?, 'open')
+      ON CONFLICT(id) DO UPDATE SET
+        query = excluded.query,
+        detected_stages = excluded.detected_stages,
+        selected_life_event = excluded.selected_life_event,
+        editorial_review_reasons = excluded.editorial_review_reasons,
+        occurrence_count = life_event_review_cases.occurrence_count + 1,
+        last_seen = excluded.last_seen,
+        resolved_status = CASE
+          WHEN life_event_review_cases.resolved_status = 'resolved' THEN life_event_review_cases.resolved_status
+          ELSE 'open'
+        END`
+    )
+    .bind(
+      caseId,
+      String(query || '').trim(),
+      normalizedQuery,
+      detectedStages,
+      stageContext.selectedLifeEvent || null,
+      reviewReasons,
+      now,
+      now
+    )
+    .run();
+}
+
+async function recordLifeEventOverrideUsage(env, overrideId) {
+  if (!overrideId) return;
+  const db = env?.DB;
+  if (!db) return;
+  await ensureLifeEventReviewTables(db);
+  const now = new Date().toISOString();
+  await db
+    .prepare('UPDATE life_event_overrides SET applied_count = applied_count + 1, last_applied_at = ?, updated_at = ? WHERE id = ?')
+    .bind(now, now, overrideId)
+    .run();
 }
 
 function queryMatchesScenarioKeyword(queryText, keyword) {
@@ -693,12 +890,51 @@ function findLifeEventById(scenarios, lifeEventId) {
   return (Array.isArray(scenarios) ? scenarios : []).find((scenario) => scenario.id === normalized) || null;
 }
 
+function scoreMatchedScenario(queryText, scenario) {
+  const matchedKeywords = (scenario.keywords || []).filter((keyword) => queryMatchesScenarioKeyword(queryText, keyword));
+  if (matchedKeywords.length === 0) return null;
+
+  let score = 0;
+  for (const keyword of matchedKeywords) {
+    const normalizedKeyword = normalizeScenarioMatchText(keyword);
+    if (!normalizedKeyword) continue;
+    const tokenCount = normalizedKeyword.split(/\s+/).filter(Boolean).length;
+    score += tokenCount >= 2 ? 3 : 1.5;
+  }
+
+  const compactQuery = compactScenarioMatchText(queryText);
+
+  // Penalize known semantic drift where completed education is confused with upskilling.
+  if (scenario.id === 'upskilling') {
+    const hasCompletedEducationSignal =
+      compactQuery.includes('ausbildungbeendet') ||
+      compactQuery.includes('ausbildungabgeschlossen') ||
+      compactQuery.includes('nachausbildung');
+    const hasUpskillingSignal =
+      compactQuery.includes('weiterbildung') ||
+      compactQuery.includes('umschulung') ||
+      compactQuery.includes('bildungsgutschein') ||
+      compactQuery.includes('qualifizierung');
+    if (hasCompletedEducationSignal && !hasUpskillingSignal) {
+      score -= 8;
+    }
+  }
+
+  return {
+    scenario,
+    score,
+    matchedKeywords,
+  };
+}
+
 function inferUserStageContext(query, scenarios, forcedLifeEventId = null) {
   const q = normalizeScenarioMatchText(query);
   const list = Array.isArray(scenarios) ? scenarios : [];
-  const matchedRules = list.filter((rule) =>
-    rule.keywords.some((keyword) => queryMatchesScenarioKeyword(q, keyword))
-  );
+  const scoredMatches = list
+    .map((rule) => scoreMatchedScenario(q, rule))
+    .filter(Boolean)
+    .sort((a, b) => b.score - a.score);
+  const matchedRules = scoredMatches.map((item) => item.scenario);
   const forcedScenario = findLifeEventById(list, forcedLifeEventId);
 
   const effectiveRules = forcedScenario
@@ -712,7 +948,37 @@ function inferUserStageContext(query, scenarios, forcedLifeEventId = null) {
       domains: guidedSearchDomains(query),
       selectedLifeEvent: null,
       matchedScenarios: [],
+      needsEditorialReview: false,
+      editorialReviewReasons: [],
+      overrideApplied: false,
+      appliedOverrideId: null,
+      appliedOverrideTarget: null,
     };
+  }
+
+  const scoredEffective = effectiveRules
+    .map((rule) => {
+      const matched = scoredMatches.find((item) => item.scenario.id === rule.id);
+      return {
+        rule,
+        score: matched ? matched.score : 0,
+      };
+    })
+    .sort((a, b) => b.score - a.score);
+
+  const editorialReviewReasons = [];
+  const topScore = scoredEffective[0]?.score ?? 0;
+  const secondScore = scoredEffective[1]?.score ?? Number.NEGATIVE_INFINITY;
+  const scoreGap = topScore - secondScore;
+  const isAmbiguous = scoredEffective.length > 1 && scoreGap < 2;
+  if (isAmbiguous) {
+    editorialReviewReasons.push('multiple_stage_candidates_close_score');
+  }
+
+  if (
+    scoredEffective.some((item) => item.rule.id === 'upskilling' && item.score < 0)
+  ) {
+    editorialReviewReasons.push('upskilling_penalized_completed_education_signal');
   }
 
   const expansions = Array.from(
@@ -727,15 +993,22 @@ function inferUserStageContext(query, scenarios, forcedLifeEventId = null) {
   );
 
   return {
-    stageIds: effectiveRules.map((rule) => rule.id),
+    stageIds: scoredEffective.map((item) => item.rule.id),
     expansions,
     domains: domains.length > 0 ? domains : guidedSearchDomains(query),
     selectedLifeEvent: forcedScenario
       ? forcedScenario.id
-      : effectiveRules.length === 1
-        ? effectiveRules[0].id
-        : null,
+      : scoredEffective.length === 1
+        ? scoredEffective[0].rule.id
+        : !isAmbiguous && (scoredEffective[0]?.score ?? 0) > 0
+          ? scoredEffective[0].rule.id
+          : null,
     matchedScenarios: effectiveRules,
+    needsEditorialReview: editorialReviewReasons.length > 0,
+    editorialReviewReasons,
+    overrideApplied: false,
+    appliedOverrideId: null,
+    appliedOverrideTarget: null,
   };
 }
 
@@ -1263,7 +1536,34 @@ export async function retrieveEvidence(env, query, options = {}) {
   const resourcePacks = await loadLifeEventResourcePacks(env, {
     requestUrl: options.requestUrl || null,
   });
-  const stageContext = inferUserStageContext(query, scenarios, options.lifeEventId || null);
+  let stageContext = inferUserStageContext(query, scenarios, options.lifeEventId || null);
+  let appliedOverrideId = null;
+  if (!options.lifeEventId) {
+    try {
+      const overrides = await loadActiveLifeEventOverrides(env);
+      const matchedOverride = findLifeEventOverride(query, overrides);
+      if (matchedOverride) {
+        stageContext = applyLifeEventOverrideToContext(stageContext, matchedOverride, scenarios);
+        appliedOverrideId = matchedOverride.id;
+      }
+    } catch (error) {
+      console.error('life-event override lookup failed:', error);
+    }
+  }
+
+  if (appliedOverrideId) {
+    try {
+      await recordLifeEventOverrideUsage(env, appliedOverrideId);
+    } catch (error) {
+      console.error('life-event override usage tracking failed:', error);
+    }
+  }
+
+  try {
+    await recordLifeEventReviewCase(env, query, stageContext);
+  } catch (error) {
+    console.error('life-event review case logging failed:', error);
+  }
   const selectedPack = stageContext.selectedLifeEvent
     ? resourcePacks.get(stageContext.selectedLifeEvent) || null
     : null;
@@ -1281,6 +1581,13 @@ export async function retrieveEvidence(env, query, options = {}) {
     fallback: false,
     detected_stages: stageContext.stageIds,
     selected_life_event: stageContext.selectedLifeEvent,
+    editorial_review_required: Boolean(stageContext.needsEditorialReview),
+    editorial_review_reasons: Array.isArray(stageContext.editorialReviewReasons)
+      ? stageContext.editorialReviewReasons
+      : [],
+    override_applied: Boolean(stageContext.overrideApplied),
+    override_id: stageContext.appliedOverrideId || null,
+    override_target_life_event: stageContext.appliedOverrideTarget || null,
     stage_domains: stageContext.domains,
     scenario_resources: stageContext.matchedScenarios.map((scenario) => ({
       id: scenario.id,
@@ -1293,10 +1600,11 @@ export async function retrieveEvidence(env, query, options = {}) {
     })),
   };
 
+  const effectiveLifeEventId = options.lifeEventId || stageContext.selectedLifeEvent || null;
   const keywordEvidence = await retrieveKeywordEvidence(env, query, {
-    lifeEventId: options.lifeEventId || null,
+    lifeEventId: effectiveLifeEventId,
     lifeEventScenarios: scenarios,
-    scenarioPack: options.lifeEventId ? selectedPack : null,
+    scenarioPack: effectiveLifeEventId ? selectedPack : null,
   });
   const curatedEvidence = selectedPack
     ? buildCuratedEvidenceFromScenarioResources([
@@ -1637,6 +1945,16 @@ export async function verifyTurnstile(request, env) {
     return { configured: Boolean(env.TURNSTILE_SECRET_KEY), success: true, skipped: 'local-dev' };
   }
 
+  // Optional secret-based bypass for short-lived automated E2E checks.
+  // This path only activates when TURNSTILE_E2E_BYPASS_TOKEN is configured.
+  const bypassToken = request.headers.get('x-e2e-bypass-token');
+  const configuredBypassToken = typeof env.TURNSTILE_E2E_BYPASS_TOKEN === 'string'
+    ? env.TURNSTILE_E2E_BYPASS_TOKEN.trim()
+    : '';
+  if (configuredBypassToken && bypassToken === configuredBypassToken) {
+    return { configured: Boolean(env.TURNSTILE_SECRET_KEY), success: true, skipped: 'e2e-bypass' };
+  }
+
   const configured = Boolean(env.TURNSTILE_SECRET_KEY);
   if (!configured) {
     return { configured: false, success: true };
@@ -1800,7 +2118,7 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
   if (evidence.length === 0) {
     return {
       answer: null,
-      explanation: 'Keine verlaessliche Information gefunden.',
+      explanation: 'Keine verlässliche Information gefunden.',
       sources: [],
       provider: env.AI ? 'workers-ai' : 'none',
       model: env.AI ? getWorkersAiModel(env) : 'disabled',

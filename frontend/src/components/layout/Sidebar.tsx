@@ -46,6 +46,13 @@ export default function Sidebar() {
           Plain Language
         </NavLink>
 
+        <NavLink to="/admin/life-events"
+          className={({ isActive }) =>
+            `${linkClass} ${isActive ? activeClass : ""}`
+          }>
+          Life Event Review
+        </NavLink>
+
         <NavLink to="/admin/duplicates"
           className={({ isActive }) =>
             `${linkClass} ${isActive ? activeClass : ""}`

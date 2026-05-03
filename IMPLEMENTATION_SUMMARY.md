@@ -1,5 +1,9 @@
 # Implementation Summary: PR #1 - Data Platform Foundation
 
+> Historical note: this document summarizes an early foundation phase.
+> For the current runtime truth, use `docs/status.md` and
+> `docs/current-state.md`.
+
 ## Overview
 
 This PR implements the complete foundational infrastructure for the Systemfehler data platform, including Python crawlers, PostgreSQL database, Node.js API, and React admin panel.

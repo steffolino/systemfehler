@@ -11,7 +11,7 @@ import {
 } from '../_lib/ai.js';
 import { applySecurityHeaders, jsonResponse, optionsResponse, readJsonBody } from '../_lib/http.js';
 
-const SYNTH_CACHE_VERSION = '2026-05-01-scenario-pack-retrieval-1';
+const SYNTH_CACHE_VERSION = '2026-05-03-schema-fix-1';
 
 export async function onRequest({ request, env }) {
   if (request.method === 'OPTIONS') {

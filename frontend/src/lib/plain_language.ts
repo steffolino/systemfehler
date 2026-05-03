@@ -105,10 +105,26 @@ function shortenLines(lines: string[], maxLines: number) {
 }
 
 function buildEinfachFromText(title: string, text: string) {
-  const sentences = splitSentences(text).slice(0, 6).map((sentence) => simplifySentence(sentence, 'einfach'));
-  const definitions = buildDefinitionLines(text, 'einfach').slice(0, 3);
-  const lines = [title ? `${title}` : '', ...sentences, ...definitions];
-  return shortenLines(lines, 8).join('\n\n');
+  const sentences = splitSentences(text)
+    .slice(0, 6)
+    .map((sentence) => simplifySentence(sentence, 'einfach'))
+    .filter(Boolean);
+
+  const intro = title ? `${title}.` : '';
+  const body = sentences.join(' ');
+  const definitions = buildDefinitionLines(text, 'einfach')
+    .slice(0, 2)
+    .map((line) => normalizeWhitespace(line));
+
+  const explanatoryTail = definitions.length > 0
+    ? `Wichtige Begriffe: ${definitions.join(' ')}`
+    : '';
+
+  return [intro, body, explanatoryTail]
+    .map((part) => normalizeWhitespace(part))
+    .filter(Boolean)
+    .join(' ')
+    .trim();
 }
 
 function buildLeichtFromText(title: string, text: string) {
@@ -123,7 +139,7 @@ function buildLeichtFromText(title: string, text: string) {
     simpleLines.push(...simplified);
   }
 
-  const definitions = buildDefinitionLines(text, 'leicht').slice(0, 6);
+  const definitions = buildDefinitionLines(text, 'leicht').slice(0, 4);
   const lines = [title ? `${title}` : '', ...simpleLines, ...definitions];
   return shortenLines(lines, 14).join('\n');
 }
@@ -231,19 +247,39 @@ export function buildGroundedReadableAnswer(
   const selectedEntries = entries.slice(0, 3);
   if (selectedEntries.length === 0) return '';
 
-  // Build a more narrative grounded answer by extracting readable entry text
-  // for the requested mode and concatenating into coherent paragraphs.
-  const paragraphs: string[] = [];
+  const snippets: string[] = [];
   for (const entry of selectedEntries) {
     const readable = getReadableEntryText(entry, mode);
     if (!readable) continue;
-    const title = getPrimaryTitle(entry);
-    // If title is present, prepend it as a short heading, then the readable text.
-    paragraphs.push(title ? `${title}\n\n${readable}` : readable);
+    const firstSentence = splitSentences(readable)[0] || normalizeWhitespace(readable);
+    snippets.push(firstSentence);
   }
 
-  // Join paragraphs with spacing to produce a readable answer rather than bullet lists.
-  return paragraphs.slice(0, 3).join('\n\n');
+  if (snippets.length === 0) return '';
+
+  if (mode === 'leicht') {
+    return shortenLines([
+      'Das ist jetzt wichtig:',
+      ...snippets.slice(0, 3).map((line) => normalizeWhitespace(line)),
+      'Pruefen Sie die passenden Stellen in den Quellen unten.',
+    ], 8).join('\n');
+  }
+
+  const parts = snippets.slice(0, 3);
+  const first = parts[0] || '';
+  const second = parts[1] ? `Als naechster Schritt gilt: ${parts[1]}` : '';
+  const third = parts[2] ? `Zusaetzlich ist wichtig: ${parts[2]}` : '';
+  return [
+    'Das passt zu Ihrer Situation.',
+    first,
+    second,
+    third,
+    'Unten finden Sie die passenden Quellen und Anlaufstellen.',
+  ]
+    .map((line) => normalizeWhitespace(line))
+    .filter(Boolean)
+    .join(' ')
+    .trim();
 }
 
 function sentenceCount(text: string) {

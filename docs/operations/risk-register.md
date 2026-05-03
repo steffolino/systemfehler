@@ -1,17 +1,19 @@
 # Risk Register
-_Last updated: 2025-10-19_
+_Last updated: 2026-05-03_
 
 ### Key Risks
 | Risk | Impact | Mitigation |
 |-------|---------|-------------|
-| Source sites block crawlers | High | Respect robots.txt, rotate user agents, manual scraping backup |
-| Data removal from official pages | High | Keep snapshot and archive copies |
-| Wrong or outdated information | Medium | Editorial review and timestamps |
-| Legal uncertainty on reuse | Medium | License field + legal review for each domain |
-| Loss of funding / LLM quota | Low | Open-source fallback models and caching |
+| Source sites block crawlers | High | Respect robots.txt, conservative crawl rate limits, seed curation, fallback discovery |
+| Data removal from official pages | High | Keep canonical snapshots plus provenance and checksum history |
+| Semantic misclassification in guided retrieval | High | Editorial review cases in D1 + manual life-event overrides + diagnostics |
+| Weak evidence answers in sensitive topics | High | Retrieval confidence thresholds, weak-evidence signaling, no-guess fallback wording |
+| Turnstile test bypass leakage into normal ops | Medium | Temporary secret only, scoped E2E usage, immediate secret cleanup after tests |
+| Legal uncertainty on reuse | Medium | Source-tier policy, provenance metadata, legal review before promoting uncertain sources |
+| Workers AI quota or latency pressure | Medium | Rate limiting, cache TTL tuning, retrieval-first strategy |
 
 ### Monitoring
-- Nightly link check (HTTP 404, SSL errors)  
-- Diff tracker for policy text changes  
-- Dashboard showing “coverage per topic”  
-- Backup to Cloudflare R2 weekly
+- Crawl metrics and failure reasons (`data/<domain>/crawl_metrics.json`)  
+- Retrieval regression suites (local and production suggested-query runs)  
+- Review-case and override activity in `/api/data/life-event-review`  
+- D1 health and ingestion checks in deployment workflows

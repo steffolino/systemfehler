@@ -1,6 +1,6 @@
 # Systemfehler Current State
 
-_Last updated: 2026-03-15_
+_Last updated: 2026-05-03_
 
 This document consolidates the repository's current reality across:
 
@@ -10,6 +10,22 @@ This document consolidates the repository's current reality across:
 
 Use this file together with `docs/status.md` when deciding what is real,
 what is legacy scaffolding, and what should be worked on next.
+
+## Latest Confirmed Runtime Changes
+
+- Production AI retrieval on `https://systemfehler.pages.dev` passed the full
+  suggested-query validation suite (`60/60`) on 2026-05-03.
+- Public guided search now defaults to the `standard` answer mode, with
+  `einfach` and `leicht` as explicit user choices.
+- The simple-language answer builder was improved to produce coherent narrative
+  output instead of fragmented line-by-line text.
+- Human editorial governance for life-event semantics is now implemented end to
+  end:
+  - runtime review case capture in AI retrieval
+  - D1-backed review/override API at `/api/data/life-event-review`
+  - admin dashboard route at `/admin/life-events`
+- Temporary Turnstile E2E bypass secret usage is now an operational-only test
+  path and was cleaned up after the successful production run.
 
 ## Authoritative Sources
 
@@ -236,6 +252,11 @@ plus Cloudflare Workers AI. The active production stack is:
 - Workers AI at `/api/ai/*`
 - Turnstile for public AI requests
 
+Recent production verification (2026-05-03):
+
+- full production retrieval run: `60/60` passing suggested life-event queries
+- temporary E2E bypass secret removed immediately after validation
+
 The standalone `systemfehler-api-worker` remains a separate future deployment
 target and is not the active production API path today.
 
@@ -246,7 +267,7 @@ Highest-value housekeeping work:
 1. Close or rewrite stale issues `#6`, `#18`, and `#28` after acceptance review.
 2. Merge duplicate issues `#45/#46` and `#85/#86`.
 3. Replace remaining legacy references to Node crawler runtime paths.
-4. Decide whether the AI stack is experimental or supported, then document that
-   explicitly in `docs/status.md`.
-5. Audit placeholder admin pages and tag them as implemented shell vs working
-   workflow.
+4. Expand editorial override tooling with reviewer analytics, conflict
+  resolution, and export/report support.
+5. Audit remaining placeholder admin pages and tag them as implemented shell
+  vs working workflow.

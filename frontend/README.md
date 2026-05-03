@@ -2,6 +2,11 @@
 
 React + TypeScript + Vite admin interface for viewing and validating Systemfehler data snapshots.
 
+Current UI behavior:
+- Public guided search defaults to `standard` answer mode.
+- Users can switch to `einfach` and `leicht` modes explicitly.
+- Admin includes a life-event semantic review workflow at `/admin/life-events`.
+
 ## Development
 
 From repository root:

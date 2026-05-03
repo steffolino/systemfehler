@@ -300,6 +300,46 @@ interface AIRetrievalDiagnostics {
   fallback?: boolean;
   detected_stages?: string[];
   selected_life_event?: string | null;
+  editorial_review_required?: boolean;
+  editorial_review_reasons?: string[];
+  override_applied?: boolean;
+  override_id?: string | null;
+  override_target_life_event?: string | null;
+}
+
+interface LifeEventReviewCase {
+  id: string;
+  query: string;
+  normalized_query: string;
+  detected_stages: string[];
+  selected_life_event: string | null;
+  editorial_review_reasons: string[];
+  occurrence_count: number;
+  first_seen: string;
+  last_seen: string;
+  resolved_status: 'open' | 'resolved';
+  resolution_notes?: string | null;
+  resolved_by?: string | null;
+  resolved_at?: string | null;
+}
+
+interface LifeEventOverride {
+  id: string;
+  trigger_text: string;
+  normalized_trigger_text: string;
+  target_life_event: string;
+  note?: string | null;
+  reviewer?: string | null;
+  status: 'active' | 'disabled';
+  created_at: string;
+  updated_at: string;
+  applied_count: number;
+  last_applied_at?: string | null;
+}
+
+interface LifeEventReviewResponse {
+  cases: LifeEventReviewCase[];
+  overrides: LifeEventOverride[];
 }
 
 interface AIRetrievalOptions {
@@ -452,6 +492,22 @@ interface PlainLanguageReviewResponse {
   entry: Entry;
   mode: 'einfach' | 'leicht';
   action: 'approve' | 'reject';
+}
+
+interface CreateLifeEventOverridePayload {
+  action: 'create_override';
+  case_id?: string;
+  trigger_text: string;
+  target_life_event: string;
+  note?: string;
+  reviewer?: string;
+}
+
+interface DisableLifeEventOverridePayload {
+  action: 'disable_override';
+  override_id: string;
+  note?: string;
+  reviewer?: string;
 }
 
 async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> {
@@ -1472,6 +1528,50 @@ export const api = {
 
   reviewPlainLanguageTranslation,
 
+  getLifeEventReview: async (params?: {
+    status?: 'open' | 'resolved' | 'all';
+    limit?: number;
+    overrideStatus?: 'active' | 'disabled' | 'all';
+  }): Promise<LifeEventReviewResponse> => {
+    if (IS_GITHUB_PAGES) {
+      return { cases: [], overrides: [] };
+    }
+
+    const queryParams = new URLSearchParams();
+    if (params?.status) queryParams.append('status', params.status);
+    if (params?.limit) queryParams.append('limit', String(params.limit));
+    if (params?.overrideStatus) queryParams.append('override_status', params.overrideStatus);
+
+    const suffix = queryParams.toString();
+    return fetchApi<LifeEventReviewResponse>(`/api/data/life-event-review${suffix ? `?${suffix}` : ''}`);
+  },
+
+  createLifeEventOverride: async (payload: CreateLifeEventOverridePayload) => {
+    if (IS_GITHUB_PAGES) {
+      throw new Error('Life-event review is not available on GitHub Pages.');
+    }
+    return fetchApi<{ ok: boolean; action: string; override: Pick<LifeEventOverride, 'id' | 'trigger_text' | 'target_life_event'> }>(
+      '/api/data/life-event-review',
+      {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      }
+    );
+  },
+
+  disableLifeEventOverride: async (payload: DisableLifeEventOverridePayload) => {
+    if (IS_GITHUB_PAGES) {
+      throw new Error('Life-event review is not available on GitHub Pages.');
+    }
+    return fetchApi<{ ok: boolean; action: string; override: Pick<LifeEventOverride, 'id' | 'status'> }>(
+      '/api/data/life-event-review',
+      {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      }
+    );
+  },
+
   autocomplete: async ({ query, limit = 10 }: { query: string; limit?: number }) => {
     if (!query || query.length < 1) return [];
     const res = await api.getEntries({ search: query, limit });
@@ -1512,4 +1612,7 @@ export type {
   AIHealthResponse,
   SourceCatalogItem,
   PlainLanguageReviewResponse,
+  LifeEventReviewCase,
+  LifeEventOverride,
+  LifeEventReviewResponse,
 };

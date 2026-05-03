@@ -4,14 +4,16 @@ Systemfehler is a modular, extensible, preservation-oriented data platform for s
 
 The goal is to make information about social rights and support more transparent, accessible, and robust against removal or silent change.
 
-## Current Snapshot (2026-03-15)
+## Current Snapshot (2026-05-03)
 
 - Real data is published for all five domains (`benefits`, `aid`, `tools`, `organizations`, `contacts`).
-- Current dataset size: **25 entries** (5 per domain).
-- Validation status: **0 schema/structural errors, 0 lint warnings**
-  (`node scripts/validate_entries.js --fail-on-errors=false`, re-verified on
-  2026-03-15 after data/schema reconciliation).
+- Current validated dataset size: **1006 entries**
+  (`benefits` 5, `aid` 140, `tools` 127, `organizations` 379, `contacts` 355).
+- Validation status (latest full pass): **0 schema/structural errors, 994 lint warnings**
+  (`node scripts/validate_entries.js --fail-on-errors=false`, warnings mainly
+  from missing Easy German translations on newer promoted entries).
 - Public frontend and API are live on Cloudflare Pages at `https://systemfehler.pages.dev/`.
+- Production AI retrieval validation (suggested life-event suite): **60/60 passed** (2026-05-03).
 
 ---
 
@@ -306,16 +308,16 @@ For a detailed description of the architecture, see:
 
 ---
 
-## Recent Changes (2026-03-14)
+## Recent Changes (2026-05-03)
 
-- Enhanced TypeScript configuration and added path aliases for easier imports.
-- Added tailwindcss-animate and cross-env as dependencies.
-- Created new admin panel components: AdminLayout, AuditLog, DuplicateDetection, MetricCard, ModerationPanel, UserTrustProfile.
-- Implemented DataTable stub for future use.
-- Developed admin pages: AdminAuditLog, AdminDuplicates, AdminModeration, AdminQuality, AdminRawEntries, AdminUserTrust.
-- Added reusable UI components (Input, Card).
-- Introduced tests for moderation API and queue functionalities.
-- The frontend is now fully integrated as part of the monorepo (no separate git repo).
+- Guided AI search now defaults to `standard` answer mode in the public search flow.
+- Simple-language (`Einfach`) answer generation was reworked for coherent narrative output.
+- Added editorial life-event semantic governance:
+  - D1-backed review-case and override persistence
+  - API endpoint `/api/data/life-event-review`
+  - admin dashboard route `/admin/life-events`
+- Retrieval diagnostics now include editorial review and override metadata.
+- Production deployment was validated with a full suggested-query run (`60/60`) and temporary Turnstile E2E bypass cleanup.
 
 ---
 

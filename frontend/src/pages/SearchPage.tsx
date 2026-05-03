@@ -114,7 +114,7 @@ export default function SearchPage() {
   const [debouncedStandardQuery, setDebouncedStandardQuery] = useState('');
   const [aiDraftQuery, setAiDraftQuery] = useState('');
   const [submittedAiQuery, setSubmittedAiQuery] = useState('');
-  const [aiLanguageMode, setAiLanguageMode] = useState<LanguageMode>('einfach');
+  const [aiLanguageMode, setAiLanguageMode] = useState<LanguageMode>('standard');
   const [retrievalMode, setRetrievalMode] = useState<RetrievalMode>('hybrid');
   const [strictOfficialOnly, setStrictOfficialOnly] = useState(false);
   const [lifeEventContext, setLifeEventContext] = useState<string>('');
@@ -184,6 +184,16 @@ export default function SearchPage() {
       setAiEvidenceLoading(false);
       setAiError(null);
       setAiResult(null);
+      return;
+    }
+
+    // If Turnstile is required but not yet ready, show a loading state and
+    // wait — this effect will re-run automatically once turnstileReady becomes true.
+    if (turnstileEnabled && !turnstileReady) {
+      setAiLoading(true);
+      setAiEvidenceLoading(true);
+      setAiError(null);
+      setAiResult(buildPendingAiResult(submittedAiQuery, translate));
       return;
     }
 
@@ -305,7 +315,7 @@ export default function SearchPage() {
     return () => {
       cancelled = true;
     };
-  }, [lifeEventContext, requiresTurnstile, retrievalMode, strictOfficialOnly, submittedAiQuery, t, tab, translate, turnstileEnabled, turnstileMisconfigured]);
+  }, [lifeEventContext, requiresTurnstile, retrievalMode, strictOfficialOnly, submittedAiQuery, t, tab, translate, turnstileEnabled, turnstileMisconfigured, turnstileReady]);
 
   useEffect(() => {
     if (tab !== 'ai') return;
@@ -363,7 +373,7 @@ export default function SearchPage() {
     }
   }
 
-  function useSuggestedQuestion(question: string) {
+  function applySuggestedQuestion(question: string) {
     setAiDraftQuery(question);
     setSubmittedAiQuery(question);
   }
@@ -410,7 +420,7 @@ export default function SearchPage() {
     const candidate = backendPlainLanguage || groundedAnswer || base;
     if (!candidate) return '';
 
-    return getReadableAnswerText(candidate, aiLanguageMode, t('search.ai_synthesis'));
+    return getReadableAnswerText(candidate, aiLanguageMode);
   }, [
     aiLanguageMode,
     aiResult?.relatedEntries,
@@ -418,7 +428,6 @@ export default function SearchPage() {
     aiResult?.synthesis.explanation,
     aiResult?.synthesis.plain_language?.einfach,
     aiResult?.synthesis.plain_language?.leicht,
-    t,
   ]);
 
   const plainLanguageSource =
@@ -441,6 +450,13 @@ export default function SearchPage() {
   const assistiveLaneAnswer = aiResult?.synthesis.answer_lanes?.assistive?.answer?.trim() || '';
   const contactsLaneAnswer = aiResult?.synthesis.answer_lanes?.contacts?.answer?.trim() || '';
   const assistiveContacts = aiResult?.synthesis.assistive_contacts || [];
+  const hasNoStrongAiEvidence = Boolean(
+    submittedAiQuery &&
+    !aiLoading &&
+    !aiEvidenceLoading &&
+    aiResult?.synthesis.weak_evidence &&
+    (aiResult?.relatedEntries?.length || 0) === 0
+  );
 
   const evidenceRoleLabels = useMemo(() => {
     const labels = new Set<string>();
@@ -517,6 +533,47 @@ export default function SearchPage() {
                 </div>
               </div>
 
+              {tab === 'ai' && (
+                <div className="space-y-2">
+                  <div className="max-w-md">
+                    <div className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                      {t('search.life_event_context')}
+                    </div>
+                    <select
+                      value={lifeEventContext}
+                      onChange={(event) => setLifeEventContext(event.target.value)}
+                      className="h-10 w-full rounded-md border bg-background px-3 text-sm"
+                    >
+                      <option value="">{t('search.life_event_none')}</option>
+                      {lifeEventOptions.map((item) => (
+                        <option key={item.id} value={item.id}>
+                          {locale === 'en' ? item.label_en || item.label_de : item.label_de}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  {lifeEventContext && selectedSuggestedQuestions.length > 0 && (
+                    <div className="rounded-2xl border bg-muted/20 p-3">
+                      <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                        {t('search.suggested_questions')}
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedSuggestedQuestions.map((question) => (
+                          <Button
+                            key={question}
+                            variant="outline"
+                            className="h-auto whitespace-normal text-left"
+                            onClick={() => applySuggestedQuestion(question)}
+                          >
+                            {question}
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
               <div className="flex flex-col gap-3 md:flex-row md:items-start">
                 <div className="flex-1">
                   <SearchInput
@@ -530,44 +587,7 @@ export default function SearchPage() {
                     {tab === 'ai' ? t('search.ai_helper') : t('search.article_helper')}
                   </div>
                   {tab === 'ai' && (
-                    <div className="mt-3 space-y-2">
-                      <div className="max-w-md">
-                        <div className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                          {t('search.life_event_context')}
-                        </div>
-                        <select
-                          value={lifeEventContext}
-                          onChange={(event) => setLifeEventContext(event.target.value)}
-                          className="h-10 w-full rounded-md border bg-background px-3 text-sm"
-                        >
-                          <option value="">{t('search.life_event_none')}</option>
-                          {lifeEventOptions.map((item) => (
-                            <option key={item.id} value={item.id}>
-                              {locale === 'en' ? item.label_en || item.label_de : item.label_de}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                      {lifeEventContext && selectedSuggestedQuestions.length > 0 && (
-                        <div className="rounded-2xl border bg-muted/20 p-3">
-                          <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                            {t('search.suggested_questions')}
-                          </div>
-                          <div className="flex flex-wrap gap-2">
-                            {selectedSuggestedQuestions.map((question) => (
-                              <Button
-                                key={question}
-                                variant="outline"
-                                className="h-auto whitespace-normal text-left"
-                                onClick={() => useSuggestedQuestion(question)}
-                              >
-                                {question}
-                              </Button>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                      <div className="flex flex-wrap gap-2">
+                    <div className="mt-3 flex flex-wrap gap-2">
                       <button
                         type="button"
                         onClick={() => setRetrievalMode('keyword')}
@@ -604,7 +624,6 @@ export default function SearchPage() {
                       >
                         {t('search.retrieval_official_only')}
                       </button>
-                      </div>
                     </div>
                   )}
                 </div>
@@ -688,7 +707,7 @@ export default function SearchPage() {
 
               <div className="p-5 md:p-6">
                 {aiLoading ? (
-                  <div className="flex min-h-[220px] flex-col items-center justify-center gap-3">
+                  <div className="flex min-h-55 flex-col items-center justify-center gap-3">
                     <Spinner />
                     <div className="text-sm text-muted-foreground">{t('common.loading_results')}</div>
                   </div>
@@ -699,7 +718,19 @@ export default function SearchPage() {
                   </div>
                 ) : (
                   <div className="space-y-4">
-                    {submittedAiQuery && aiLanguageMode === 'standard' && (officialLaneAnswer || assistiveLaneAnswer || contactsLaneAnswer) ? (
+                    {hasNoStrongAiEvidence ? (
+                      <div className="rounded-2xl border border-amber-200 bg-amber-50/60 p-5">
+                        <div className="text-base font-semibold text-amber-950">
+                          {t('search.no_reliable_answer_title')}
+                        </div>
+                        <div className="mt-2 text-sm leading-6 text-amber-950/85">
+                          {t('search.no_reliable_answer_body')}
+                        </div>
+                        <div className="mt-3 text-sm leading-6 text-amber-950/85">
+                          {t('search.no_reliable_answer_next')}
+                        </div>
+                      </div>
+                    ) : submittedAiQuery && aiLanguageMode === 'standard' && (officialLaneAnswer || assistiveLaneAnswer || contactsLaneAnswer) ? (
                       <div className="space-y-3">
                         <div className="rounded-2xl border bg-background p-4">
                           <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
@@ -767,7 +798,7 @@ export default function SearchPage() {
                       </div>
                     )}
 
-                    {submittedAiQuery && aiResult?.synthesis.weak_evidence && (
+                    {submittedAiQuery && aiResult?.synthesis.weak_evidence && !hasNoStrongAiEvidence && (
                       <div className="rounded-xl border bg-muted/30 px-4 py-3 text-xs text-muted-foreground">
                         {t('search.status_weak_evidence')}
                       </div>
@@ -803,7 +834,7 @@ export default function SearchPage() {
                     </div>
                     <div className="mt-2">
                       {aiEvidenceLoading ? (
-                        <div className="flex min-h-[180px] flex-col items-center justify-center gap-3">
+                        <div className="flex min-h-45 flex-col items-center justify-center gap-3">
                           <Spinner />
                           <div className="text-sm text-muted-foreground">{t('common.loading_results')}</div>
                         </div>
@@ -900,6 +931,15 @@ export default function SearchPage() {
                             <div>{t('search.status_retrieval_filter')}: {statusText(strictOfficialOnly, translate)}</div>
                             <div>{t('search.status_life_event')}: {aiResult?.synthesis.retrieval?.selected_life_event || lifeEventContext || t('common.unknown')}</div>
                             <div>{t('search.status_retrieval_external')}: {aiResult?.synthesis.retrieval?.external_status || (aiHealth?.retrieval?.externalConfigured ? t('search.status_ready') : t('search.status_loading'))}</div>
+                            <div>
+                              Redaktionelle Pruefung:{' '}
+                              {statusText(Boolean(aiResult?.synthesis.retrieval?.editorial_review_required), translate)}
+                            </div>
+                            {(aiResult?.synthesis.retrieval?.editorial_review_reasons || []).length > 0 && (
+                              <div>
+                                Review-Hinweise: {(aiResult?.synthesis.retrieval?.editorial_review_reasons || []).join(', ')}
+                              </div>
+                            )}
                           </div>
 
                           {aiHealth?.provider.models && aiHealth.provider.models.length > 0 && (

@@ -196,6 +196,18 @@ export default function AdminApp() {
         </Card>
 
         <Card className="p-5">
+          <div className="text-base font-semibold">Life Event Review</div>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Review semantic misclassification cases and apply manual stage overrides.
+          </p>
+          <div className="mt-4">
+            <Button asChild variant="outline">
+              <Link to="/admin/life-events">Open life event review</Link>
+            </Button>
+          </div>
+        </Card>
+
+        <Card className="p-5">
           <div className="text-base font-semibold">Duplicate Review</div>
           <p className="mt-2 text-sm text-muted-foreground">
             Compare likely duplicates and resolve merge or rejection decisions.

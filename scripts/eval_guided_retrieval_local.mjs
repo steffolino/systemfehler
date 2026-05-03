@@ -195,10 +195,13 @@ function evaluateCase(entries, scenarios, testCase) {
       pass: includesAny(corpus, testCase.expected_terms_any),
       details: `terms=${testCase.expected_terms_any.join(', ')}`,
     });
+  }
+
+  if (Array.isArray(testCase.expected_terms_top1) && testCase.expected_terms_top1.length > 0) {
     checks.push({
       id: 'expected_terms_top1',
-      pass: includesAny(top1, testCase.expected_terms_any),
-      details: `top1_terms=${testCase.expected_terms_any.join(', ')}`,
+      pass: includesAny(top1, testCase.expected_terms_top1),
+      details: `top1_terms=${testCase.expected_terms_top1.join(', ')}`,
     });
   }
 

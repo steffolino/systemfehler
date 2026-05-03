@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_at": "2026-05-01T09:46:14.433Z",
+  "generated_at": "2026-05-03T08:34:17.961Z",
   "targets": {
     "docsMin": 5,
     "docsMax": 10,
@@ -2547,27 +2547,27 @@
             "source_tier": "tier_1_official"
           },
           {
-            "title": "Schnelle Hilfen",
-            "url": "https://www.bmas.de/DE/Soziales/Soziale-Entschaedigung/Neues-Soziales-Entschaedigungsrecht/Schnelle-Hilfen/schnelle-hilfen.html",
-            "domain": "aid",
-            "source_tier": "tier_1_official"
-          },
-          {
-            "title": "Kommunales Bildungsmanagement",
-            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/kommunales-bildungsmanagement",
-            "domain": "aid",
-            "source_tier": "tier_1_official"
-          },
-          {
-            "title": "Jungen und Männer",
-            "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/jungen-und-maenner",
-            "domain": "aid",
-            "source_tier": "tier_1_official"
-          },
-          {
             "title": "Krankengeld und Arbeitsunfähigkeit: Leistungen bei Krankheit",
             "url": "https://www.gkv-spitzenverband.de/",
             "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Familienportal",
+            "url": "https://familienportal.de/",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Faire Integration",
+            "url": "https://www.bmas.de/DE/Arbeit/Arbeitsrecht/Arbeitnehmerrechte/Beratungsangebot-Faire-Integration/beratungsangebot-faire-integration.html",
+            "domain": "aid",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Schnelle Hilfen",
+            "url": "https://www.bmas.de/DE/Soziales/Soziale-Entschaedigung/Neues-Soziales-Entschaedigungsrecht/Schnelle-Hilfen/schnelle-hilfen.html",
+            "domain": "aid",
             "source_tier": "tier_1_official"
           }
         ],
@@ -2591,14 +2591,14 @@
             "source_tier": "tier_3_ngo"
           },
           {
-            "title": "Hilfe & Beratung für Familien",
-            "url": "https://familienportal.de/familienportal/lebenslagen/krise-und-konflikt/hilfe-beratung-familien",
-            "domain": "aid",
-            "source_tier": "tier_unknown"
-          },
-          {
             "title": "Wohnungsnotfall: Notunterkunft, Mietschulden und Wohnungslosenhilfe",
             "url": "https://www.caritas.de/hilfeundberatung/ratgeber/wohnungslosigkeit/zurueckindieeigenenvierwaende/wege-aus-der-wohnungslosigkeit",
+            "domain": "aid",
+            "source_tier": "tier_3_ngo"
+          },
+          {
+            "title": "Wohnungslosigkeit: Sozialberatung und Notunterkunft finden",
+            "url": "https://www.diakonie.de/wissen-kompakt-wohnungs-und-obdachlosigkeit",
             "domain": "aid",
             "source_tier": "tier_3_ngo"
           }

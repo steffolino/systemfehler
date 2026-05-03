@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_at": "2026-04-18T20:55:20.621Z",
+  "generated_at": "2026-05-02T06:01:52.640Z",
   "source": {
     "suggestions_file": "frontend/src/data/life_event_suggested_questions.json",
     "life_events_file": "data/_topics/life_events.json"
@@ -88,12 +88,20 @@
         "aid"
       ],
       "expected_terms_any": [
-        "kurzarbeitergeld",
-        "aufstockung",
-        "arbeitsagentur",
-        "einkommensausfall"
+        "kurzarbeit",
+        "stunden reduziert",
+        "arbeitszeit",
+        "teilzeit",
+        "arbeitgeber"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "aufenthalt"
+      ],
       "top_k": 8
     },
     {
@@ -105,29 +113,45 @@
         "aid"
       ],
       "expected_terms_any": [
-        "kurzarbeitergeld",
-        "aufstockung",
-        "arbeitsagentur",
-        "einkommensausfall"
+        "kurzarbeit",
+        "stunden reduziert",
+        "arbeitszeit",
+        "teilzeit",
+        "arbeitgeber"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "aufenthalt"
+      ],
       "top_k": 8
     },
     {
       "id": "suggested-short_work_or_hours_cut-03",
-      "query": "Wie bekomme ich kurzarbeitergeld oder aufstockung bei weniger stunden?",
+      "query": "Wie bekomme ich kurzarbeitergeld wenn mein arbeitgeber kurzarbeit angemeldet hat?",
       "expected_life_event": "short_work_or_hours_cut",
       "required_domains_any": [
         "benefits",
         "aid"
       ],
       "expected_terms_any": [
-        "kurzarbeitergeld",
-        "aufstockung",
-        "arbeitsagentur",
-        "einkommensausfall"
+        "kurzarbeit",
+        "stunden reduziert",
+        "arbeitszeit",
+        "teilzeit",
+        "arbeitgeber"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "aufenthalt"
+      ],
       "top_k": 8
     },
     {
@@ -139,31 +163,47 @@
         "benefits"
       ],
       "expected_terms_any": [
-        "grundsicherung",
-        "buergergeld",
-        "krankenversicherung",
-        "schuldnerberatung",
-        "uebergang"
+        "selbstaendig",
+        "selbstständig",
+        "firma",
+        "gewerbe",
+        "insolvenz",
+        "gruendung"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "kurzarbeit",
+        "migration",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
       "id": "suggested-self_employment_failed-02",
-      "query": "Ich musste meine firma aufgeben und habe kein einkommen. Welche hilfe?",
+      "query": "Ich war selbstaendig und musste meine firma aufgeben. Wo bekomme ich jetzt hilfe?",
       "expected_life_event": "self_employment_failed",
       "required_domains_any": [
         "aid",
         "benefits"
       ],
       "expected_terms_any": [
-        "grundsicherung",
-        "buergergeld",
-        "krankenversicherung",
-        "schuldnerberatung",
-        "uebergang"
+        "selbstaendig",
+        "selbstständig",
+        "firma",
+        "gewerbe",
+        "insolvenz",
+        "gruendung"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "kurzarbeit",
+        "migration",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -175,13 +215,21 @@
         "benefits"
       ],
       "expected_terms_any": [
-        "grundsicherung",
-        "buergergeld",
-        "krankenversicherung",
-        "schuldnerberatung",
-        "uebergang"
+        "selbstaendig",
+        "selbstständig",
+        "firma",
+        "gewerbe",
+        "insolvenz",
+        "gruendung"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "kurzarbeit",
+        "migration",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -193,13 +241,21 @@
         "aid"
       ],
       "expected_terms_any": [
-        "arbeitslos melden",
-        "arbeitsagentur",
-        "buergergeld",
-        "berufsberatung",
-        "uebergang"
+        "ausbildung",
+        "studium",
+        "abschluss",
+        "berufsstart",
+        "berufseinsteiger",
+        "praktikum"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "sanktion"
+      ],
       "top_k": 8
     },
     {
@@ -211,31 +267,47 @@
         "aid"
       ],
       "expected_terms_any": [
-        "arbeitslos melden",
-        "arbeitsagentur",
-        "buergergeld",
-        "berufsberatung",
-        "uebergang"
+        "ausbildung",
+        "studium",
+        "abschluss",
+        "berufsstart",
+        "berufseinsteiger",
+        "praktikum"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "sanktion"
+      ],
       "top_k": 8
     },
     {
       "id": "suggested-education_finished_no_income-03",
-      "query": "Wie melde ich mich arbeitslos nach ausbildung oder studium beendet?",
+      "query": "Ich habe meine ausbildung beendet und bin auf jobsuche. Was kann ich bei berufsberatung oder arbeitsagentur beantragen?",
       "expected_life_event": "education_finished_no_income",
       "required_domains_any": [
         "benefits",
         "aid"
       ],
       "expected_terms_any": [
-        "arbeitslos melden",
-        "arbeitsagentur",
-        "buergergeld",
-        "berufsberatung",
-        "uebergang"
+        "ausbildung",
+        "studium",
+        "abschluss",
+        "berufsstart",
+        "berufseinsteiger",
+        "praktikum"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "sanktion"
+      ],
       "top_k": 8
     },
     {
@@ -248,12 +320,20 @@
       ],
       "expected_terms_any": [
         "aufstockung",
-        "buergergeld",
-        "wohngeld",
+        "niedriglohn",
+        "wenig geld",
+        "geld reicht nicht",
         "kinderzuschlag",
-        "anspruch"
+        "wohngeld"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -266,12 +346,20 @@
       ],
       "expected_terms_any": [
         "aufstockung",
-        "buergergeld",
-        "wohngeld",
+        "niedriglohn",
+        "wenig geld",
+        "geld reicht nicht",
         "kinderzuschlag",
-        "anspruch"
+        "wohngeld"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -284,12 +372,20 @@
       ],
       "expected_terms_any": [
         "aufstockung",
-        "buergergeld",
-        "wohngeld",
+        "niedriglohn",
+        "wenig geld",
+        "geld reicht nicht",
         "kinderzuschlag",
-        "anspruch"
+        "wohngeld"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -448,13 +544,20 @@
         "contacts"
       ],
       "expected_terms_any": [
+        "alleinerziehend",
+        "allein mit kind",
         "unterhaltsvorschuss",
-        "kindergeld",
-        "kinderzuschlag",
-        "wohngeld",
-        "beratung"
+        "sorgerecht",
+        "kindergeld"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "vollzeitpflege",
+        "bereitschaftspflege",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -466,13 +569,20 @@
         "contacts"
       ],
       "expected_terms_any": [
+        "alleinerziehend",
+        "allein mit kind",
         "unterhaltsvorschuss",
-        "kindergeld",
-        "kinderzuschlag",
-        "wohngeld",
-        "beratung"
+        "sorgerecht",
+        "kindergeld"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "vollzeitpflege",
+        "bereitschaftspflege",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -484,13 +594,20 @@
         "contacts"
       ],
       "expected_terms_any": [
+        "alleinerziehend",
+        "allein mit kind",
         "unterhaltsvorschuss",
-        "kindergeld",
-        "kinderzuschlag",
-        "wohngeld",
-        "beratung"
+        "sorgerecht",
+        "kindergeld"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "vollzeitpflege",
+        "bereitschaftspflege",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -502,13 +619,21 @@
         "contacts"
       ],
       "expected_terms_any": [
+        "trennung",
+        "scheidung",
         "unterhalt",
-        "unterhaltsvorschuss",
-        "wohngeld",
-        "beratung",
-        "jugendamt"
+        "getrennt",
+        "ehe",
+        "sorgerecht"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -520,13 +645,21 @@
         "contacts"
       ],
       "expected_terms_any": [
+        "trennung",
+        "scheidung",
         "unterhalt",
-        "unterhaltsvorschuss",
-        "wohngeld",
-        "beratung",
-        "jugendamt"
+        "getrennt",
+        "ehe",
+        "sorgerecht"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -538,13 +671,21 @@
         "contacts"
       ],
       "expected_terms_any": [
+        "trennung",
+        "scheidung",
         "unterhalt",
-        "unterhaltsvorschuss",
-        "wohngeld",
-        "beratung",
-        "jugendamt"
+        "getrennt",
+        "ehe",
+        "sorgerecht"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -556,13 +697,21 @@
         "contacts"
       ],
       "expected_terms_any": [
-        "pflegegrad",
+        "pflege",
         "pflegegeld",
-        "pflegeberatung",
-        "entlastungsbetrag",
-        "kurzzeitpflege"
+        "pflegegrad",
+        "pflegezeit",
+        "pflegeperson",
+        "entlastungsbetrag"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamilie",
+        "pflegefamilien",
+        "vollzeitpflege",
+        "bereitschaftspflege",
+        "adoptiv",
+        "buergergeld/leistungen-und-bedarfe"
+      ],
       "top_k": 8
     },
     {
@@ -574,13 +723,21 @@
         "contacts"
       ],
       "expected_terms_any": [
-        "pflegegrad",
+        "pflege",
         "pflegegeld",
-        "pflegeberatung",
-        "entlastungsbetrag",
-        "kurzzeitpflege"
+        "pflegegrad",
+        "pflegezeit",
+        "pflegeperson",
+        "entlastungsbetrag"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamilie",
+        "pflegefamilien",
+        "vollzeitpflege",
+        "bereitschaftspflege",
+        "adoptiv",
+        "buergergeld/leistungen-und-bedarfe"
+      ],
       "top_k": 8
     },
     {
@@ -592,13 +749,21 @@
         "contacts"
       ],
       "expected_terms_any": [
-        "pflegegrad",
+        "pflege",
         "pflegegeld",
-        "pflegeberatung",
-        "entlastungsbetrag",
-        "kurzzeitpflege"
+        "pflegegrad",
+        "pflegezeit",
+        "pflegeperson",
+        "entlastungsbetrag"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamilie",
+        "pflegefamilien",
+        "vollzeitpflege",
+        "bereitschaftspflege",
+        "adoptiv",
+        "buergergeld/leistungen-und-bedarfe"
+      ],
       "top_k": 8
     },
     {
@@ -610,13 +775,21 @@
         "contacts"
       ],
       "expected_terms_any": [
+        "migration",
+        "integration",
+        "zuwander",
+        "neu in deutschland",
         "aufenthalt",
-        "integrationskurs",
-        "jobcenter",
-        "beratung",
-        "sprachkurs"
+        "gefluechtete"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "kurzarbeit",
+        "sanktion",
+        "schuldner"
+      ],
       "top_k": 8
     },
     {
@@ -628,13 +801,21 @@
         "contacts"
       ],
       "expected_terms_any": [
+        "migration",
+        "integration",
+        "zuwander",
+        "neu in deutschland",
         "aufenthalt",
-        "integrationskurs",
-        "jobcenter",
-        "beratung",
-        "sprachkurs"
+        "gefluechtete"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "kurzarbeit",
+        "sanktion",
+        "schuldner"
+      ],
       "top_k": 8
     },
     {
@@ -646,13 +827,21 @@
         "contacts"
       ],
       "expected_terms_any": [
+        "migration",
+        "integration",
+        "zuwander",
+        "neu in deutschland",
         "aufenthalt",
-        "integrationskurs",
-        "jobcenter",
-        "beratung",
-        "sprachkurs"
+        "gefluechtete"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "kurzarbeit",
+        "sanktion",
+        "schuldner"
+      ],
       "top_k": 8
     },
     {
@@ -664,13 +853,21 @@
         "contacts"
       ],
       "expected_terms_any": [
-        "aufenthaltsrecht",
-        "auslaenderbehoerde",
-        "beratung",
-        "existenzsicherung",
-        "notfallhilfe"
+        "aufenthalt",
+        "duldung",
+        "asyl",
+        "aufenthaltserlaubnis",
+        "auslaender",
+        "visum"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "kurzarbeit",
+        "schuldner",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -682,13 +879,21 @@
         "contacts"
       ],
       "expected_terms_any": [
-        "aufenthaltsrecht",
-        "auslaenderbehoerde",
-        "beratung",
-        "existenzsicherung",
-        "notfallhilfe"
+        "aufenthalt",
+        "duldung",
+        "asyl",
+        "aufenthaltserlaubnis",
+        "auslaender",
+        "visum"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "kurzarbeit",
+        "schuldner",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -700,13 +905,21 @@
         "contacts"
       ],
       "expected_terms_any": [
-        "aufenthaltsrecht",
-        "auslaenderbehoerde",
-        "beratung",
-        "existenzsicherung",
-        "notfallhilfe"
+        "aufenthalt",
+        "duldung",
+        "asyl",
+        "aufenthaltserlaubnis",
+        "auslaender",
+        "visum"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "kurzarbeit",
+        "schuldner",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -796,13 +1009,21 @@
         "aid"
       ],
       "expected_terms_any": [
-        "krankengeld",
-        "arbeitsunfaehigkeit",
+        "krank",
+        "krankheit",
+        "erkrankung",
+        "arbeitsunfaehig",
         "reha",
-        "beratung",
-        "sicherung"
+        "krankenversicherung"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "migration",
+        "integrationskurs",
+        "obdachlos",
+        "sanktion",
+        "schuldner"
+      ],
       "top_k": 8
     },
     {
@@ -814,13 +1035,21 @@
         "aid"
       ],
       "expected_terms_any": [
-        "krankengeld",
-        "arbeitsunfaehigkeit",
+        "krank",
+        "krankheit",
+        "erkrankung",
+        "arbeitsunfaehig",
         "reha",
-        "beratung",
-        "sicherung"
+        "krankenversicherung"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "migration",
+        "integrationskurs",
+        "obdachlos",
+        "sanktion",
+        "schuldner"
+      ],
       "top_k": 8
     },
     {
@@ -832,13 +1061,21 @@
         "aid"
       ],
       "expected_terms_any": [
-        "krankengeld",
-        "arbeitsunfaehigkeit",
+        "krank",
+        "krankheit",
+        "erkrankung",
+        "arbeitsunfaehig",
         "reha",
-        "beratung",
-        "sicherung"
+        "krankenversicherung"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "migration",
+        "integrationskurs",
+        "obdachlos",
+        "sanktion",
+        "schuldner"
+      ],
       "top_k": 8
     },
     {
@@ -850,13 +1087,20 @@
         "aid"
       ],
       "expected_terms_any": [
-        "erwerbsminderungsrente",
-        "grundsicherung",
-        "reha",
-        "sozialamt",
-        "beratung"
+        "langfristig arbeitsunfaehig",
+        "dauerhaft krank",
+        "erwerbsminderung",
+        "rentenversicherung",
+        "behinderung"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "migration",
+        "integrationskurs",
+        "obdachlos",
+        "sanktion",
+        "schuldner"
+      ],
       "top_k": 8
     },
     {
@@ -868,13 +1112,20 @@
         "aid"
       ],
       "expected_terms_any": [
-        "erwerbsminderungsrente",
-        "grundsicherung",
-        "reha",
-        "sozialamt",
-        "beratung"
+        "langfristig arbeitsunfaehig",
+        "dauerhaft krank",
+        "erwerbsminderung",
+        "rentenversicherung",
+        "behinderung"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "migration",
+        "integrationskurs",
+        "obdachlos",
+        "sanktion",
+        "schuldner"
+      ],
       "top_k": 8
     },
     {
@@ -886,13 +1137,20 @@
         "aid"
       ],
       "expected_terms_any": [
-        "erwerbsminderungsrente",
-        "grundsicherung",
-        "reha",
-        "sozialamt",
-        "beratung"
+        "langfristig arbeitsunfaehig",
+        "dauerhaft krank",
+        "erwerbsminderung",
+        "rentenversicherung",
+        "behinderung"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "migration",
+        "integrationskurs",
+        "obdachlos",
+        "sanktion",
+        "schuldner"
+      ],
       "top_k": 8
     },
     {
@@ -904,13 +1162,21 @@
         "contacts"
       ],
       "expected_terms_any": [
-        "krankschreibung",
-        "reha",
-        "psychosoziale beratung",
-        "krisenhilfe",
-        "gesundheit"
+        "burnout",
+        "erschoepfung",
+        "psychisch",
+        "psychische krise",
+        "ueberlastung",
+        "seelisch"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -922,13 +1188,21 @@
         "contacts"
       ],
       "expected_terms_any": [
-        "krankschreibung",
-        "reha",
-        "psychosoziale beratung",
-        "krisenhilfe",
-        "gesundheit"
+        "burnout",
+        "erschoepfung",
+        "psychisch",
+        "psychische krise",
+        "ueberlastung",
+        "seelisch"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -940,13 +1214,21 @@
         "contacts"
       ],
       "expected_terms_any": [
-        "krankschreibung",
-        "reha",
-        "psychosoziale beratung",
-        "krisenhilfe",
-        "gesundheit"
+        "burnout",
+        "erschoepfung",
+        "psychisch",
+        "psychische krise",
+        "ueberlastung",
+        "seelisch"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -958,13 +1240,21 @@
         "contacts"
       ],
       "expected_terms_any": [
-        "wohnungsnotfall",
-        "kdu",
-        "notunterkunft",
+        "wohnung",
+        "obdachlos",
+        "raeumung",
         "mietschulden",
-        "sozialberatung"
+        "unterkunft",
+        "wohnraumfoerderung"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "sanktion"
+      ],
       "top_k": 8
     },
     {
@@ -976,13 +1266,21 @@
         "contacts"
       ],
       "expected_terms_any": [
-        "wohnungsnotfall",
-        "kdu",
-        "notunterkunft",
+        "wohnung",
+        "obdachlos",
+        "raeumung",
         "mietschulden",
-        "sozialberatung"
+        "unterkunft",
+        "wohnraumfoerderung"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "sanktion"
+      ],
       "top_k": 8
     },
     {
@@ -994,13 +1292,21 @@
         "contacts"
       ],
       "expected_terms_any": [
-        "wohnungsnotfall",
-        "kdu",
-        "notunterkunft",
+        "wohnung",
+        "obdachlos",
+        "raeumung",
         "mietschulden",
-        "sozialberatung"
+        "unterkunft",
+        "wohnraumfoerderung"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "sanktion"
+      ],
       "top_k": 8
     },
     {
@@ -1012,13 +1318,21 @@
         "benefits"
       ],
       "expected_terms_any": [
+        "strom",
+        "heizung",
+        "energiekosten",
         "energieschulden",
-        "notfallhilfe",
-        "darlehen",
-        "sozialberatung",
-        "kdu"
+        "abschlag",
+        "strom gesperrt"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -1030,13 +1344,21 @@
         "benefits"
       ],
       "expected_terms_any": [
+        "strom",
+        "heizung",
+        "energiekosten",
         "energieschulden",
-        "notfallhilfe",
-        "darlehen",
-        "sozialberatung",
-        "kdu"
+        "abschlag",
+        "strom gesperrt"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -1048,13 +1370,21 @@
         "benefits"
       ],
       "expected_terms_any": [
+        "strom",
+        "heizung",
+        "energiekosten",
         "energieschulden",
-        "notfallhilfe",
-        "darlehen",
-        "sozialberatung",
-        "kdu"
+        "abschlag",
+        "strom gesperrt"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -1066,12 +1396,21 @@
         "aid"
       ],
       "expected_terms_any": [
+        "sanktion",
         "widerspruch",
-        "rechtsbehelf",
-        "frist",
-        "beratung"
+        "bescheid",
+        "pflichtverletzung",
+        "buergergeld",
+        "jobcenter"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -1083,12 +1422,21 @@
         "aid"
       ],
       "expected_terms_any": [
+        "sanktion",
         "widerspruch",
-        "rechtsbehelf",
-        "frist",
-        "beratung"
+        "bescheid",
+        "pflichtverletzung",
+        "buergergeld",
+        "jobcenter"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {
@@ -1100,12 +1448,21 @@
         "aid"
       ],
       "expected_terms_any": [
+        "sanktion",
         "widerspruch",
-        "rechtsbehelf",
-        "frist",
-        "beratung"
+        "bescheid",
+        "pflichtverletzung",
+        "buergergeld",
+        "jobcenter"
       ],
-      "blocked_terms_any": [],
+      "blocked_terms_any": [
+        "pflegefamili",
+        "pflegegeld",
+        "pflegegrad",
+        "migration",
+        "integrationskurs",
+        "obdachlos"
+      ],
       "top_k": 8
     },
     {

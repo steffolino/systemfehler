@@ -1,5 +1,17 @@
 # Overview Changelog
 
+## 2026-05-03
+
+- Guided search default mode switched to `standard` for public responses.
+- `Einfach` answer rendering was reworked to produce coherent narrative text.
+- Added semantic editorial governance for life-event retrieval:
+	- review-case persistence in D1
+	- manual override lifecycle API at `/api/data/life-event-review`
+	- admin workflow route `/admin/life-events`
+- Retrieval diagnostics now include editorial review flags and override metadata.
+- Production retrieval validation completed with `60/60` suggested queries passing on `systemfehler.pages.dev`.
+- Temporary Turnstile E2E bypass secret flow documented and verified with post-run cleanup.
+
 ## 2026-03-06
 
 - Finalized Cloudflare Pages deployment path with working Functions routing for `/api/*`.

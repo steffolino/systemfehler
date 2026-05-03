@@ -3,8 +3,9 @@
 This guide provides detailed instructions for setting up the Systemfehler data platform for local development.
 
 Current baseline: all five domains are populated with real snapshot data
-(25 entries total), and validation was re-verified on 2026-03-15 with
-0 schema/structural errors and 0 lint warnings.
+(1006 entries total), and validation was re-verified on 2026-03-15 with
+0 schema/structural errors and 994 lint warnings (mostly missing Easy German
+translations on newer promoted entries).
 
 ## Table of Contents
 

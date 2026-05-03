@@ -1,8 +1,8 @@
 # Systemfehler – Implementation Status
 
-> **Last updated:** 2026-04-23
+> **Last updated:** 2026-05-03
 >
-> Hierarchical topic taxonomy, RAG topic-boost hierarchy expansion, umlaut normalisation for guided retrieval, and Regelbedarf/Bürgergeld query coverage were added in the latest session. See below for details.
+> Latest operational update: production AI retrieval validation completed with a full 60/60 pass against suggested life-event queries on `systemfehler.pages.dev` after redeploy, followed by temporary Turnstile E2E bypass cleanup.
 
 For the consolidated repo view across live issues, current docs, and runtime
 code, also see `docs/current-state.md`.
@@ -73,6 +73,8 @@ crawling logic to these files.
 | Public AI search mode | ✅ Working | AI search is now the default public search mode; classic search remains available as article-based search |
 | Frontend language toggle | 🟡 Experimental | Lightweight app-level `de` / `en` UI translation support exists for the public shell and search/source pages |
 | Plain-language clone | 🟡 Experimental | Public `Standard / Einfach / Leicht` modes exist on entries and AI answers; admin now has a dedicated `/admin/plain-language` review queue plus approve/reject actions for `Einfach` and `Leicht` drafts |
+| Guided AI default answer mode | ✅ Working | Public search defaults to `standard`; `einfach` and `leicht` remain optional user modes |
+| Life-event semantic review dashboard | ✅ Working | Admin route `/admin/life-events` supports queue review, manual override creation, and override deactivation |
 | Data preview, quality metrics, moderation queue views | ✅ Working |
 | AI search tab | 🟡 Experimental | Retrieval now uses trusted topic roles at ranking time; deterministic rewrite and enrichment also use trusted topic profiles for topic-aware keywords |
 | Guided retrieval umlaut normalisation | ✅ Working | `normalizeGermanChars()` in `ai.js` folds ä/ö/ü/ß → ae/oe/ue/ss before keyword/scenario matching, so "Bürgergeld" queries hit scenario detection and term boosts |
@@ -85,6 +87,7 @@ crawling logic to these files.
 |-----------|--------|-------|
 | Pages deploy workflow (`.github/workflows/deploy-pages.yml`) | ✅ Working | Frontend build uses `VITE_API_URL=/api` and injects public frontend vars for Turnstile/Auth0; deploy runs with `wrangler@4.71.0` and `--cwd=cloudflare-pages` |
 | Pages Functions API | ✅ Working | Worker-safe handlers for `/api/health`, `/api/status`, `/api/data/entries`, `/api/data/entries/:id`, `/api/data/moderation-queue`, `/api/data/quality-report` |
+| Semantic review API | ✅ Working | `/api/data/life-event-review` stores review cases and manual overrides in D1 (`life_event_review_cases`, `life_event_overrides`) and supports override lifecycle actions |
 | D1 schema (`cloudflare-pages/d1/schema.sql`) | ✅ Working | Includes `entries` and `moderation_queue` tables |
 | Production Pages deployment | ✅ Working | `https://systemfehler.pages.dev` is live with Pages Functions, D1, Workers AI, Turnstile, and the 1006-entry production corpus |
 
@@ -99,6 +102,10 @@ entry hydration inside Pages Functions and Workers AI retrieval.
 The Pages AI layer now also applies per-IP rate limiting and short edge-cache
 TTL responses for rewrite, retrieve, and synthesize to reduce repeated Workers
 AI cost on common prompts.
+
+Production validation note (2026-05-03):
+- Full production retrieval suite passed: `60/60` suggested life-event queries.
+- A temporary E2E bypass secret (`TURNSTILE_E2E_BYPASS_TOKEN`) was used only for test execution and deleted immediately after the successful run.
 
 Pages AI retrieval now supports hybrid runtime controls:
 - retrieval mode switch (`keyword`, `hybrid`, `external`)
@@ -217,7 +224,14 @@ python crawlers/cli.py import --domain benefits --to-db
 
 # Trigger crawl + ingest workflow
 gh workflow run "Crawl and Ingest" --repo steffolino/systemfehler
+
+# Production suggested-query retrieval validation (with temporary Turnstile bypass)
+node scripts/test_production_queries.mjs https://systemfehler.pages.dev
 ```
+
+For controlled E2E runs where Turnstile must be bypassed, pass
+`TURNSTILE_E2E_BYPASS_TOKEN` only temporarily and delete the corresponding
+Pages secret immediately after the run.
 
 ---
 

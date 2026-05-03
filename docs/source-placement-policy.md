@@ -1,5 +1,5 @@
 # Source Placement Policy
-_Last updated: 2026-04-17_
+_Last updated: 2026-05-03_
 
 This policy defines where each information type belongs in Systemfehler's hybrid model.
 
@@ -87,3 +87,9 @@ Sitemap-first discovery is recommended, followed by lightweight manual curation.
 - This policy does not replace legal review.
 - This policy does not assert legal bindingness of NGO material.
 - This policy does not force all support pages into RAG primary corpus.
+
+## Operational Note (Current Runtime)
+
+When source placement and retrieval semantics diverge in production queries,
+cases should be routed through the life-event editorial review workflow
+(`/api/data/life-event-review`, `/admin/life-events`) rather than patched ad hoc.

@@ -2,7 +2,7 @@
 
 This document tracks non-production data artifacts that are intentionally present in the repository.
 
-Last reviewed: 2026-03-01
+Last reviewed: 2026-05-03
 
 ## Replaced During Audit
 
@@ -20,7 +20,7 @@ Last reviewed: 2026-03-01
 - `data/organizations/urls.json`
 - `data/contacts/urls.json`
   - Previous state: empty placeholder seed files.
-  - Current state: populated with real official source URLs (5 per domain).
+  - Current state: populated with real seed URLs and synced topic-guided sources.
 
 - `data/benefits/entries.json`
 - `data/aid/entries.json`
@@ -28,7 +28,8 @@ Last reviewed: 2026-03-01
 - `data/organizations/entries.json`
 - `data/contacts/entries.json`
   - Previous state: empty placeholders or synthetic data.
-  - Current state: populated with validated real entries (5 per domain, 25 total).
+  - Current state: populated with validated real entries across all domains
+    (current canonical corpus: 1006 total entries).
 
 ## Remaining Synthetic/Reference Data
 
