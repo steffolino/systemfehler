@@ -40,8 +40,6 @@ Treat these files as authoritative unless code proves otherwise:
 Treat these as reference or planning documents, not runtime truth:
 
 - `docs/architecture.md`
-- `docs/blueprint.md`
-- `docs/ai-roadmap.md`
 - `IMPLEMENTATION_SUMMARY.md`
 
 ## Runtime Truth
@@ -188,21 +186,12 @@ be manually reviewed against acceptance criteria:
   - both cover building reliable non-governmental source and expertise
     networks, with very similar scope.
 
-## Documentation Drift Found
+## Documentation Consolidation (2026-05-03)
 
-The following docs were stale before this consolidation pass:
+The following docs were removed as stale or redundant:
+- `blueprint.md`, `ai-roadmap.md`, `onboarding.md`, `rag-overview.md`, `rag-deep-dive.md`, `multilingual-plan.md`, `data-synthetic-inventory.md`, `stakeholder-guide.md`, `stakeholder-guide.de.md`, `api/overview.md`, `overview/mission.md`, `overview/changelog.md`, `crawling/federal-crawler-follow-up.md`, `external-context/`
 
-- `docs/onboarding.md`
-  - pointed contributors at `services/<domain>/crawler/` as if it were active.
-- `docs/architecture.md`
-  - used `services/<domain>/crawler/` as the main crawler path in examples.
-- `docs/api/overview.md`
-  - documented an obsolete `/api/v1/` API shape.
-- `docs/ai-roadmap.md`
-  - referred to a `Nuxt` frontend even though the repo uses React/Vite.
-- `.github/copilot-instructions.md`
-  - listed priorities that no longer match `docs/status.md` or the live issue
-    tracker.
+Current active docs: `status.md`, `current-state.md`, `architecture.md`, `setup.md`, `api.md`, `crawling-guide.md`, `plain-language.md`, `vision.md`, `source-placement-policy.md`, `life-events-retrieval.md`, and `operations/`.
 
 ## What To Trust When Making Changes
 

@@ -192,9 +192,10 @@ systemfehler/
 
   docs/
     architecture.md
-    onboarding.md
+    setup.md
     vision.md
-    blueprint.md
+    api.md
+    status.md
 
   README.md
 ```
@@ -233,7 +234,7 @@ When resolving deployment-related ambiguity, this section is the canonical sourc
 
 3. **Diff generation**
 
-   * `scripts/generate_diff.js` compares candidate entries against existing entries in `data/<domain>/entries.json`.
+   * `crawlers/shared/diff_generator.py` compares candidate entries against existing entries in `data/<domain>/entries.json`.
    * Differences are captured as structured diffs.
 
 4. **Moderation queue**
@@ -249,7 +250,7 @@ When resolving deployment-related ambiguity, this section is the canonical sourc
 
 6. **Scoring**
 
-   * `scripts/calculate_quality_scores.js` computes IQS and AIS for each entry.
+   * `crawlers/shared/quality_scorer.py` computes IQS and AIS for each entry.
    * Scores are stored in a `qualityScores` block in the entry.
 
 7. **Archival and temporal processing**

@@ -7,15 +7,19 @@ Current baseline: all five domains are populated with real snapshot data
 0 schema/structural errors and 994 lint warnings (mostly missing Easy German
 translations on newer promoted entries).
 
+> **Primary dev stack:** Cloudflare Pages + Pages Functions + local D1 via `wrangler`.
+> PostgreSQL/Docker is a legacy option only needed if you specifically work on the Express backend.
+
 ## Table of Contents
 
 1. [System Requirements](#system-requirements)
 2. [Installation Steps](#installation-steps)
-3. [Database Setup](#database-setup)
+3. [Primary Dev Stack (Cloudflare Pages + D1)](#primary-dev-stack-cloudflare-pages--d1)
 4. [Running Crawlers](#running-crawlers)
 5. [Starting the API](#starting-the-api)
 6. [Starting the Frontend](#starting-the-frontend)
-7. [Troubleshooting](#troubleshooting)
+7. [Legacy Database Setup (PostgreSQL)](#legacy-database-setup-postgresql)
+8. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -27,14 +31,9 @@ translations on newer promoted entries).
   - Download from https://nodejs.org/
   - Verify: `node --version`
 
-- **Python** 3.11 or higher
+- **Python** 3.11 or higher (required for crawling, validation, and import)
   - Download from https://www.python.org/
   - Verify: `python --version` or `python3 --version`
-
-- **PostgreSQL** 16 or higher
-  - Download from https://www.postgresql.org/download/
-  - Or use Docker (recommended for development)
-  - Verify: `psql --version`
 
 - **Git**
   - Download from https://git-scm.com/
@@ -42,13 +41,10 @@ translations on newer promoted entries).
 
 ### Optional Software
 
-- **Docker** and **Docker Compose**
-  - For running PostgreSQL in a container
-  - Download from https://www.docker.com/
-
-- **Python virtual environment tool**
-  - `venv` (included with Python 3.3+)
-  - Or `virtualenv`, `conda`, etc.
+- **PostgreSQL** 16 or higher — only needed for the legacy Express backend
+  - Download from https://www.postgresql.org/download/ or use Docker
+- **Docker** and **Docker Compose** — for running the legacy PostgreSQL container
+- **Python virtual environment tool** — `venv` (included with Python 3.3+)
 
 ---
 
@@ -187,7 +183,33 @@ AI sidecar, Ollama, and Docker-backed services together.
 
 ---
 
-## Database Setup
+## Primary Dev Stack (Cloudflare Pages + D1)
+
+The recommended local development stack uses `wrangler` to run Pages Functions and a local D1 database — the same setup as production.
+
+```bash
+npm run dev:all
+```
+
+This starts:
+- `wrangler pages dev` on port `8788`
+- Pages Functions under `/api/*` (including `/api/ai/*`)
+- Local D1 schema + seeded snapshot corpus
+
+Frontend is available at `http://localhost:8788`.
+
+To seed the local D1 database:
+```bash
+npx wrangler d1 execute systemfehler-db --local --config cloudflare-pages/wrangler.toml --file cloudflare-pages/d1/schema.sql
+npx wrangler d1 execute systemfehler-db --local --config cloudflare-pages/wrangler.toml --file cloudflare-pages/d1/seed_entries.generated.sql
+```
+
+---
+
+## Legacy Database Setup (PostgreSQL)
+
+> Only needed if you specifically work on the Express backend (`backend/server.js`).
+> For all other development, use `npm run dev:all` (Cloudflare Pages + D1) above.
 
 ### Option 1: Using Docker (Recommended)
 

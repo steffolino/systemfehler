@@ -2,15 +2,30 @@
 
 The Systemfehler API provides REST endpoints for accessing crawled data, quality metrics, and moderation queue information.
 
+For the endpoint summary table and deployment notes, see [`docs/api/overview.md`](api/overview.md).
+
 ## Base URL
 
+**Production (Cloudflare Pages):**
+```
+https://systemfehler.pages.dev
+```
+
+**Local development (Cloudflare Pages dev with wrangler):**
+```
+http://localhost:8788
+```
+
+**Legacy local development (Express):**
 ```
 http://localhost:3001
 ```
 
+The Express server (`npm run api`) is retained for local development without wrangler. All production traffic runs through Cloudflare Pages Functions.
+
 ## Authentication
 
-Currently, the API does not require authentication. Authentication will be added in a future release (PR #2).
+The public endpoints (`/api/data/entries`, `/api/ai/*`) do not require authentication. The admin endpoints (`/api/data/moderation-queue`, `/api/data/life-event-review`) require Auth0 session authentication in production.
 
 ---
 

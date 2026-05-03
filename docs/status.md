@@ -281,7 +281,7 @@ against this 1006-entry corpus.
 - Add more detailed logging and cost tracking for all AI/model calls.
 - Improve Easy German coverage on newly promoted seeded entries to reduce the
   remaining validator warnings.
-- Regularly update `docs/status.md` and `docs/ai-roadmap.md` as new features are stabilized.
+- Regularly update `docs/status.md` and `docs/current-state.md` as new features are stabilized.
 
 See open issues and `IMPLEMENTATION_SUMMARY.md` for details.
 

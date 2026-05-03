@@ -52,7 +52,8 @@ The core idea is: **information about rights and social support should not silen
 - A unified, structured overview of relevant benefits and aid programs.
 - Clear indication of deadlines and validity periods.
 - Preserved multilingual content even if the original site no longer provides it.
-- Potential future UIs that allow search by location, target group, and situation.
+- A public AI-guided search interface with plain-language answer modes (Standard / Einfach / Leicht) at `systemfehler.pages.dev`.
+- Future tools can also be built on Systemfehler data (search by location, target group, situation).
 
 ### 4.2 For Researchers and Policy Analysts
 
@@ -70,7 +71,7 @@ The core idea is: **information about rights and social support should not silen
 
 ## 5. Long-Term Outlook
 
-Over time, Systemfehler can grow beyond a proof of concept into:
+Systemfehler has moved beyond proof of concept into a live, production platform. Over time it can grow into:
 
 - A stable, widely-used dataset for social services and related support structures.
 - A technical foundation for digital advisory assistants and inclusive service navigation tools.
