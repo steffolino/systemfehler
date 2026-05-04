@@ -1031,6 +1031,105 @@
         "easy_de": "Verlängerung"
       },
       "children": []
+    },
+    {
+      "id": "caregiving",
+      "label": {
+        "de": "Pflege",
+        "en": "Caregiving",
+        "easy_de": "Pflege"
+      },
+      "children": []
+    },
+    {
+      "id": "disability",
+      "label": {
+        "de": "Behinderung",
+        "en": "Disability",
+        "easy_de": "Behinderung"
+      },
+      "children": []
+    },
+    {
+      "id": "energy",
+      "label": {
+        "de": "Energie",
+        "en": "Energy",
+        "easy_de": "Strom und Heizung"
+      },
+      "children": []
+    },
+    {
+      "id": "legal",
+      "label": {
+        "de": "Recht",
+        "en": "Legal",
+        "easy_de": "Recht"
+      },
+      "children": []
+    },
+    {
+      "id": "hilfe_beratung_unterstuetzung",
+      "label": {
+        "de": "Hilfe, Beratung und Unterstuetzung",
+        "en": "Help, Advice and Support",
+        "easy_de": "Hilfe und Beratung"
+      },
+      "children": []
+    },
+    {
+      "id": "integration",
+      "label": {
+        "de": "Integration",
+        "en": "Integration",
+        "easy_de": "Ankommen und Mitmachen"
+      },
+      "children": []
+    },
+    {
+      "id": "language",
+      "label": {
+        "de": "Sprache",
+        "en": "Language",
+        "easy_de": "Sprache lernen"
+      },
+      "children": []
+    },
+    {
+      "id": "migration",
+      "label": {
+        "de": "Migration",
+        "en": "Migration",
+        "easy_de": "Zuwanderung"
+      },
+      "children": []
+    },
+    {
+      "id": "rehabilitation",
+      "label": {
+        "de": "Rehabilitation",
+        "en": "Rehabilitation",
+        "easy_de": "Wieder gesund werden"
+      },
+      "children": []
+    },
+    {
+      "id": "mental_health",
+      "label": {
+        "de": "Psychische Gesundheit",
+        "en": "Mental Health",
+        "easy_de": "Seelische Gesundheit"
+      },
+      "children": []
+    },
+    {
+      "id": "social_services",
+      "label": {
+        "de": "Soziale Dienste",
+        "en": "Social Services",
+        "easy_de": "Soziale Hilfe"
+      },
+      "children": []
     }
   ]
 }

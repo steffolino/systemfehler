@@ -20,8 +20,26 @@
       "description": "Persistent unique identifier (string or UUID object)"
     },
     "title": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/multilingualText"
+        }
+      ],
+      "description": "Display title as plain text or multilingual text"
+    },
+    "domain": {
       "type": "string",
-      "description": "Display title as plain text"
+      "enum": [
+        "benefits",
+        "aid",
+        "tools",
+        "organizations",
+        "contacts"
+      ],
+      "description": "Entry domain when materialized into a combined index or fixture"
     },
     "summary": {
       "$ref": "#/definitions/multilingualText",

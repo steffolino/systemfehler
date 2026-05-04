@@ -28,7 +28,17 @@
     { "id": "official_light_language_source", "label": { "de": "Amtliche Leichte-Sprache-Quelle", "en": "Official Easy-Language Source" } },
     { "id": "official_rule_source", "label": { "de": "Amtliche Regelquelle", "en": "Official Rule Source" } },
     { "id": "public_service", "label": { "de": "Öffentlicher Dienst", "en": "Public Service" } },
-    { "id": "trusted_tool_source", "label": { "de": "Vertrauenswürdige Werkzeugquelle", "en": "Trusted Tool Source" } }
+    { "id": "trusted_tool_source", "label": { "de": "Vertrauenswürdige Werkzeugquelle", "en": "Trusted Tool Source" } },
+    { "id": "meta_support_portal_source", "label": { "de": "Meta-Unterstuetzungsportal", "en": "Meta Support Portal Source" } },
+    { "id": "directory", "label": { "de": "Verzeichnis", "en": "Directory" } },
+    { "id": "ngo_context_source", "label": { "de": "NGO-Kontextquelle", "en": "NGO Context Source" } },
+    { "id": "discovery_context_source", "label": { "de": "Discovery-Kontextquelle", "en": "Discovery Context Source" } },
+    { "id": "context", "label": { "de": "Kontext", "en": "Context" } },
+    { "id": "ngo_support_source", "label": { "de": "NGO-Unterstuetzungsquelle", "en": "NGO Support Source" } },
+    { "id": "advisory", "label": { "de": "Beratung", "en": "Advisory" } },
+    { "id": "hotline", "label": { "de": "Hotline", "en": "Hotline" } },
+    { "id": "emergency_aid", "label": { "de": "Nothilfe", "en": "Emergency Aid" } },
+    { "id": "accessibility", "label": { "de": "Barrierefreiheit", "en": "Accessibility" } }
   ],
   "_todo": [
     "TODO: Expand tags based on crawler output analysis",

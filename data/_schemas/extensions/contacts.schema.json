@@ -22,6 +22,10 @@
       },
       "description": "Areas of specialization"
     },
+    "eligibilityCriteria": {
+      "$ref": "#/definitions/multilingualText",
+      "description": "Eligibility or intake requirements for using the contact point"
+    },
     "availability": {
       "type": "object",
       "properties": {
@@ -39,6 +43,37 @@
     "linkedOrganization": {
       "type": "string",
       "description": "Reference to parent organization"
+    }
+  },
+  "definitions": {
+    "multilingualText": {
+      "type": "object",
+      "properties": {
+        "de": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "en": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "easy_de": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
     }
   }
 }

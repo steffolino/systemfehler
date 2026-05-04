@@ -49,6 +49,34 @@
     {
       "id": "parents",
       "label": { "de": "Eltern", "en": "Parents", "easy_de": "Eltern" }
+    },
+    {
+      "id": "caregivers",
+      "label": { "de": "Pflegende Angehoerige", "en": "Caregivers", "easy_de": "Menschen, die pflegen" }
+    },
+    {
+      "id": "elderly",
+      "label": { "de": "Aeltere Menschen", "en": "Elderly people", "easy_de": "Aeltere Menschen" }
+    },
+    {
+      "id": "disabled_persons",
+      "label": { "de": "Menschen mit Behinderung", "en": "Disabled persons", "easy_de": "Menschen mit Behinderung" }
+    },
+    {
+      "id": "employees",
+      "label": { "de": "Beschaeftigte", "en": "Employees", "easy_de": "Menschen mit Arbeit" }
+    },
+    {
+      "id": "homeless",
+      "label": { "de": "Wohnungslose Menschen", "en": "Homeless people", "easy_de": "Menschen ohne Wohnung" }
+    },
+    {
+      "id": "low_income",
+      "label": { "de": "Menschen mit geringem Einkommen", "en": "Low-income people", "easy_de": "Menschen mit wenig Geld" }
+    },
+    {
+      "id": "migrants",
+      "label": { "de": "Zugewanderte Menschen", "en": "Migrants", "easy_de": "Menschen aus anderen Laendern" }
     }
   ],
   "_todo": [
