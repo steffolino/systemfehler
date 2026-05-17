@@ -415,8 +415,13 @@ class BaseCrawler:
             "impressum",
             "einwilligung",
             "webverhalten",
+            "webverhalten- analysetool",
+            "webverhalten-analysetool",
+            "webverhalten analysetool",
             "tracking",
             "analyse-tool",
+            "matomo",
+            "einwilligen ablehnen",
         )
         return any(token in text for token in low_signal_tokens)
 

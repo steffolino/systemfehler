@@ -1,6 +1,6 @@
 import { clampPositiveInt, jsonResponse, optionsResponse, readJsonBody } from '../_lib/http.js';
 
-const TABLE_SCHEMA_SQL = [
+const TABLE_SCHEMA_STATEMENTS = [
   `CREATE TABLE IF NOT EXISTS life_event_review_cases (
     id TEXT PRIMARY KEY,
     query TEXT NOT NULL,
@@ -33,7 +33,16 @@ const TABLE_SCHEMA_SQL = [
   )`,
   'CREATE INDEX IF NOT EXISTS idx_life_event_overrides_status ON life_event_overrides(status, updated_at DESC)',
   'CREATE INDEX IF NOT EXISTS idx_life_event_overrides_target ON life_event_overrides(target_life_event, status)',
-].join(';\n');
+  `CREATE TABLE IF NOT EXISTS audit_log (
+    id TEXT PRIMARY KEY,
+    timestamp TEXT NOT NULL,
+    action TEXT NOT NULL,
+    user_id TEXT,
+    entry_id TEXT,
+    details TEXT
+  )`,
+  'CREATE INDEX IF NOT EXISTS idx_audit_log_timestamp ON audit_log(timestamp DESC)',
+];
 
 function normalizeScenarioMatchText(value) {
   return String(value || '')
@@ -58,7 +67,9 @@ function parseJsonSafe(value, fallback = null) {
 }
 
 async function ensureTables(db) {
-  await db.exec(TABLE_SCHEMA_SQL);
+  for (const statement of TABLE_SCHEMA_STATEMENTS) {
+    await db.prepare(statement).run();
+  }
 }
 
 async function listCases(db, status, limit) {

@@ -431,6 +431,30 @@ interface AIResultBundle {
   relatedEntries: Entry[];
 }
 
+interface AIChatMessage {
+  role: 'user' | 'assistant';
+  content: string;
+}
+
+interface AIChatResponse {
+  answer: string | null;
+  explanation: string;
+  standalone_query: string;
+  sources: string[];
+  provider: string;
+  model: string;
+  latency_ms: number;
+  fallback: boolean;
+  evidence: AIEvidence[];
+  evidence_lanes?: AIEvidenceLanes;
+  answer_lanes?: AISynthesizeResponse['answer_lanes'];
+  assistive_contacts?: AISynthesizeResponse['assistive_contacts'];
+  weak_evidence?: boolean;
+  usage?: Record<string, unknown>;
+  retrieval?: AIRetrievalDiagnostics;
+  plain_language?: AISynthesizeResponse['plain_language'];
+}
+
 interface AIHealthResponse {
   status: string;
   provider: {
@@ -767,6 +791,24 @@ async function getAISynthesis(
     method: 'POST',
     body: JSON.stringify({
       query: trimmed,
+      retrieval_mode: options?.retrievalMode,
+      strict_official: options?.strictOfficial,
+      life_event: options?.lifeEvent,
+      min_source_tier: options?.minSourceTier,
+      min_confidence: options?.minConfidence,
+    }),
+    headers: options?.turnstileToken ? { 'x-turnstile-token': options.turnstileToken } : undefined,
+  });
+}
+
+async function getAIChat(
+  messages: AIChatMessage[],
+  options?: { turnstileToken?: string } & AIRetrievalOptions
+): Promise<AIChatResponse> {
+  return fetchAiApi<AIChatResponse>('/chat', {
+    method: 'POST',
+    body: JSON.stringify({
+      messages,
       retrieval_mode: options?.retrievalMode,
       strict_official: options?.strictOfficial,
       life_event: options?.lifeEvent,
@@ -1483,6 +1525,8 @@ export const api = {
 
   getAISynthesis,
 
+  getAIChat,
+
   getAIEnrichment,
 
   getAIHealth: async (): Promise<AIHealthResponse> => {
@@ -1609,6 +1653,8 @@ export type {
   AIRetrievalOptions,
   AIRetrievalDiagnostics,
   AIResultBundle,
+  AIChatMessage,
+  AIChatResponse,
   AIHealthResponse,
   SourceCatalogItem,
   PlainLanguageReviewResponse,

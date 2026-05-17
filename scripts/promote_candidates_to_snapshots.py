@@ -34,9 +34,19 @@ LOW_SIGNAL_URL_TOKENS = (
     "/impressum",
     "/privacy",
     "/cookie",
+    "/dynamic/action/",
+    "!zip-search",
     "/search",
     "/tag/",
     "/author/",
+)
+LOW_SIGNAL_CONTENT_TOKENS = (
+    "mit der einwilligung von nutzenden",
+    "webverhalten- analysetool",
+    "webverhalten-analysetool",
+    "webverhalten analysetool",
+    "matomo",
+    "einwilligen ablehnen",
 )
 DOMAIN_LOW_SIGNAL_TITLE_TOKENS = {
     "aid": (
@@ -206,6 +216,7 @@ def keep_candidate(
     title = best_text(entry, "title").lower()
     summary = best_text(entry, "summary").lower()
     content = best_text(entry, "content")
+    content_lower = content.lower()
     url = str(entry.get("url") or "").lower()
     iqs = score_value(entry, "iqs")
     ais = score_value(entry, "ais")
@@ -222,6 +233,8 @@ def keep_candidate(
         return False, "low_signal_url"
     if any(token in url for token in DOMAIN_LOW_SIGNAL_URL_TOKENS.get(domain, ())):
         return False, "domain_low_signal_url"
+    if any(token in summary or token in content_lower for token in LOW_SIGNAL_CONTENT_TOKENS):
+        return False, "low_signal_content"
     if resolved_source_tier(entry, domain) in {"", "tier_unknown"}:
         return False, "unknown_source_tier"
     if len(content.strip()) < min_content_length:

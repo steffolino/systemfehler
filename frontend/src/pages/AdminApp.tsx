@@ -87,7 +87,9 @@ export default function AdminApp() {
         <div className="min-w-0">
           <h1 className="text-2xl font-semibold tracking-tight">Admin Dashboard</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Manage moderation workflows, inspect raw data, and review platform quality.
+            Overview of the editorial and governance tools behind the demo. Use this
+            landing page to jump into review queues, inspect the source data, and see
+            which workflows are already operational versus still planned.
           </p>
         </div>
 

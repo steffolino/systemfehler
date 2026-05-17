@@ -30,8 +30,10 @@ const LOW_SIGNAL_CONTENT_TOKENS = [
   'einwilligung von nutzenden',
   'webverhalten- analysetool',
   'webverhalten-analysetool',
+  'webverhalten analysetool',
   'matomo',
   'mit der einwilligung',
+  'mit der einwilligung von nutzenden',
   'cookie-einwilligung',
   'cookiehinweis',
   'tracking',
@@ -265,7 +267,7 @@ async function ensureLifeEventReviewTables(db) {
     return;
   }
 
-  lifeEventReviewTablesReadyPromise = db.exec([
+  const statements = [
     `CREATE TABLE IF NOT EXISTS life_event_review_cases (
       id TEXT PRIMARY KEY,
       query TEXT NOT NULL,
@@ -296,7 +298,19 @@ async function ensureLifeEventReviewTables(db) {
       last_applied_at TEXT
     )`,
     'CREATE INDEX IF NOT EXISTS idx_life_event_overrides_status ON life_event_overrides(status, updated_at DESC)',
-  ].join(';\n'));
+  ];
+
+  lifeEventReviewTablesReadyPromise = (async () => {
+    if (typeof db.exec === 'function') {
+      await db.exec(statements.join(';\n'));
+      return;
+    }
+    for (const statement of statements) {
+      const prepared = db.prepare(statement);
+      if (typeof prepared.run !== 'function') return;
+      await prepared.run();
+    }
+  })();
 
   try {
     await lifeEventReviewTablesReadyPromise;
@@ -1041,6 +1055,16 @@ function confidenceFromScore(score) {
   return 0.55;
 }
 
+function entryMatchesScenarioSignals(entry, scenario) {
+  if (!entry || !scenario) return false;
+  const blob = entryTextBlob(entry);
+  const signals = (Array.isArray(scenario.relevance_guard?.required_any) ? scenario.relevance_guard.required_any : [])
+    .map((signal) => normalizeScenarioMatchText(signal))
+    .filter((signal) => signal && signal.length >= 4);
+
+  return signals.some((signal) => blob.includes(signal));
+}
+
 function diversifyScoredEntries(scoredEntries, context, limit = 12) {
   const sorted = [...(Array.isArray(scoredEntries) ? scoredEntries : [])]
     .sort((a, b) => b.score - a.score);
@@ -1048,16 +1072,31 @@ function diversifyScoredEntries(scoredEntries, context, limit = 12) {
 
   const selected = [];
   const used = new Set();
+  const matchedScenarios = Array.isArray(context?.matchedScenarios) ? context.matchedScenarios : [];
   const targetDomains = Array.from(
     new Set(
-      (Array.isArray(context?.matchedScenarios) ? context.matchedScenarios : [])
-        .flatMap((scenario) => scenario.domains || [])
+      matchedScenarios.flatMap((scenario) => scenario.domains || [])
     )
   ).slice(0, 4);
 
   // Keep the single best-scoring hit at rank 1.
   selected.push(sorted[0]);
   used.add(0);
+
+  // Compound life-event queries need at least one evidence item per detected
+  // situation; otherwise one strong family/employment cluster can bury another
+  // explicit signal such as illness.
+  for (const scenario of matchedScenarios) {
+    if (selected.length >= limit) break;
+    if (selected.some((item) => entryMatchesScenarioSignals(item.entry, scenario))) continue;
+    const index = sorted.findIndex((item, idx) =>
+      !used.has(idx) && entryMatchesScenarioSignals(item.entry, scenario)
+    );
+    if (index >= 0) {
+      selected.push(sorted[index]);
+      used.add(index);
+    }
+  }
 
   // Then ensure domain diversity for remaining ranks.
   for (const domain of targetDomains) {

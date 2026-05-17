@@ -198,6 +198,110 @@ class AIBackendUnitTests(unittest.TestCase):
         self.assertEqual(payload["explanation"], "provider exploded")
         self.assertEqual(payload["sources"], ["https://example.org"])
 
+    def test_chat_endpoint_requires_user_message(self):
+        response = client.post("/chat", json={"messages": []})
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertEqual(payload["standalone_query"], "")
+        self.assertTrue(payload["fallback"])
+        self.assertTrue(payload["weak_evidence"])
+        self.assertEqual(payload["evidence"], [])
+
+    def test_chat_endpoint_uses_extractive_grounded_response(self):
+        fake_evidence = [
+            Evidence(
+                source="https://example.org/buergergeld",
+                content=json.dumps(
+                    {
+                        "title": "Buergergeld",
+                        "summary": {"de": "Kurzinfo zum Antrag"},
+                        "url": "https://example.org/buergergeld",
+                        "domain": "benefits",
+                    }
+                ),
+                confidence=0.91,
+            )
+        ]
+
+        with patch("backend.ai_service.endpoints.provider.name", "ollama"), patch(
+            "backend.ai_service.endpoints.LOCAL_SYNTHESIS_STRATEGY",
+            "extractive",
+        ), patch(
+            "backend.ai_service.endpoints.retrieve_evidence",
+            return_value=fake_evidence,
+        ):
+            response = client.post(
+                "/chat",
+                json={
+                    "messages": [
+                        {"role": "user", "content": "Ich bin arbeitslos geworden. Was soll ich tun?"}
+                    ]
+                },
+            )
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertEqual(payload["standalone_query"], "Ich bin arbeitslos geworden. Was soll ich tun?")
+        self.assertFalse(payload["fallback"])
+        self.assertFalse(payload["weak_evidence"])
+        self.assertIn("extractive", payload["model"])
+        self.assertTrue(payload["answer"].startswith("Wahrscheinlich zuerst relevant:"))
+        self.assertEqual(payload["sources"], ["https://example.org/buergergeld"])
+        self.assertIn("plain_language", payload)
+
+    def test_chat_endpoint_rewrites_followup_before_retrieval(self):
+        fake_evidence = [
+            Evidence(
+                source="https://example.org/sanktion",
+                content=json.dumps(
+                    {
+                        "title": "Sanktion",
+                        "summary": {"de": "Kurzinfo zu Sanktionen"},
+                        "url": "https://example.org/sanktion",
+                        "domain": "benefits",
+                    }
+                ),
+                confidence=0.91,
+            )
+        ]
+        retrieval_queries = []
+
+        def fake_retrieve(query):
+            retrieval_queries.append(query)
+            return fake_evidence
+
+        with patch("backend.ai_service.endpoints.provider.name", "mock"), patch(
+            "backend.ai_service.endpoints.provider.is_configured",
+            return_value=True,
+        ), patch(
+            "backend.ai_service.endpoints.provider.generate_text",
+            side_effect=[
+                {"text": "buergergeld sanktion widerspruch", "usage": {"total_tokens": 4}},
+                {"text": "Beleggestuetzte Antwort", "usage": {"total_tokens": 8}},
+            ],
+        ), patch(
+            "backend.ai_service.endpoints.retrieve_evidence",
+            side_effect=fake_retrieve,
+        ):
+            response = client.post(
+                "/chat",
+                json={
+                    "messages": [
+                        {"role": "user", "content": "Ich bekomme Buergergeld."},
+                        {"role": "assistant", "content": "Welche Frage hast du dazu?"},
+                        {"role": "user", "content": "Und wenn ich eine Sanktion bekomme?"},
+                    ]
+                },
+            )
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertEqual(payload["standalone_query"], "buergergeld sanktion widerspruch")
+        self.assertEqual(retrieval_queries, ["buergergeld sanktion widerspruch"])
+        self.assertEqual(payload["answer"], "Beleggestuetzte Antwort")
+        self.assertFalse(payload["fallback"])
+
     def test_health_endpoint_reports_provider_shape(self):
         response = client.get("/health")
         self.assertEqual(response.status_code, 200)

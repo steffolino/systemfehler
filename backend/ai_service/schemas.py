@@ -15,6 +15,16 @@ class QueryRequest(BaseModel):
     explicit_escalation: bool = False
 
 
+class ChatMessage(BaseModel):
+    role: str
+    content: str
+
+
+class ChatRequest(BaseModel):
+    messages: List[ChatMessage] = Field(default_factory=list)
+    explicit_escalation: bool = False
+
+
 class RewriteResponse(BaseModel):
     rewritten_query: str
     model: str
@@ -49,6 +59,10 @@ class AnswerResponse(BaseModel):
     weak_evidence: Optional[bool] = False
     usage: Dict[str, Any] = Field(default_factory=dict)
     plain_language: PlainLanguageAnswerVariants = Field(default_factory=PlainLanguageAnswerVariants)
+
+
+class ChatResponse(AnswerResponse):
+    standalone_query: str
 
 
 class EnrichmentFacet(BaseModel):

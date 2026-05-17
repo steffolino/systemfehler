@@ -193,7 +193,9 @@ export default function AdminRawEntries() {
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Raw Entries</h1>
           <p className="text-sm text-muted-foreground">
-            Browse, inspect, and verify imported entries.
+            Inspect the exact structured records behind public search results. Use
+            this page to check source URLs, provenance, quality metadata,
+            translations, and AI enrichment suggestions for individual entries.
           </p>
         </div>
 

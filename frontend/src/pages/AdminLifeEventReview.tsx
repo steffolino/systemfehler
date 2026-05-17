@@ -115,15 +115,62 @@ export default function AdminLifeEventReview() {
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Life Event Review</h1>
           <p className="text-sm text-muted-foreground">
-            Redaktionelle Nacharbeit fuer semantisch mehrdeutige oder fehlerhafte Zuordnungen.
+            Demo review queue for guided-search phrases that could map to the wrong
+            life event. Cases appear here only after ambiguous or low-confidence user
+            questions are collected; reviewers can then create routing overrides and
+            watch how often those corrections are applied.
           </p>
         </div>
         <div className="text-sm text-muted-foreground">
-          {loading ? 'Lade Review-Daten...' : `${cases.length} Faelle · ${activeOverrides.length} aktive Overrides`}
+          {loading ? 'Lade Review-Daten...' : `${cases.length} Review-Faelle - ${activeOverrides.length} aktive Overrides`}
         </div>
       </div>
 
       {error && <Card className="mb-4 border-red-200 bg-red-50 p-4 text-sm text-red-700">{error}</Card>}
+
+      <Card className="mb-4 p-4">
+        <div className="mb-3 flex flex-col gap-1 md:flex-row md:items-center md:justify-between">
+          <div>
+            <div className="text-sm font-semibold">Configured Life Events</div>
+            <div className="space-y-2 text-sm text-muted-foreground">
+              <p>
+                These are the existing guided-search situations loaded from the
+                retrieval configuration. They are a curated routing taxonomy for
+                welfare-service search, not a scientific life-event scale.
+              </p>
+              <p>
+                The initial list was assembled from common social-benefit,
+                counselling, and administrative-procedure use cases, then checked
+                against the suggested-query retrieval tests. It is intentionally
+                expandable: domain experts can add, split, merge, or rename
+                situations as real review feedback shows gaps.
+              </p>
+              <p>
+                Review cases below are only the exception queue for ambiguous or
+                incorrect routing; they do not represent the full configured list.
+              </p>
+            </div>
+          </div>
+          <div className="text-sm text-muted-foreground">
+            {loading ? 'Lade...' : `${lifeEvents.length} Life Events`}
+          </div>
+        </div>
+        {lifeEvents.length === 0 ? (
+          <div className="rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">
+            Keine Life Events geladen. Das ist ein Daten- oder API-Problem, weil
+            diese Liste aus der AI-Health-Konfiguration kommen muss.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
+            {lifeEvents.map((item) => (
+              <div key={item.id} className="rounded-md border p-3">
+                <div className="text-sm font-medium">{item.label_de}</div>
+                <div className="mt-1 text-xs text-muted-foreground">{item.id}</div>
+              </div>
+            ))}
+          </div>
+        )}
+      </Card>
 
       <Card className="mb-4 p-4">
         <div className="flex flex-wrap items-center gap-2">
@@ -149,7 +196,18 @@ export default function AdminLifeEventReview() {
           {loading ? (
             <div className="p-3 text-sm text-muted-foreground">Lade...</div>
           ) : cases.length === 0 ? (
-            <div className="p-3 text-sm text-muted-foreground">Keine Faelle fuer diesen Filter.</div>
+            <div className="space-y-2 p-3 text-sm text-muted-foreground">
+              <div className="font-medium text-foreground">Keine Review-Faelle fuer diesen Filter.</div>
+              <p>
+                Das ist fuer die Demo okay: Die Queue fuellt sich erst, wenn echte
+                Such- oder Chatfragen als mehrdeutig, widerspruechlich oder
+                niedrig vertrauenswuerdig markiert werden.
+              </p>
+              <p>
+                Sobald ein Fall vorhanden ist, kann links eine Frage ausgewaehlt
+                und rechts ein passender Life-Event-Override angelegt werden.
+              </p>
+            </div>
           ) : (
             <ul className="space-y-2">
               {cases.map((item) => {
@@ -188,7 +246,15 @@ export default function AdminLifeEventReview() {
         <div className="space-y-4">
           <Card className="p-4">
             {!selectedCase ? (
-              <div className="text-sm text-muted-foreground">Waehle links einen Fall aus.</div>
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <div className="font-medium text-foreground">Kein Fall ausgewaehlt.</div>
+                <p>
+                  Wenn Review-Faelle vorhanden sind, erscheint hier das Formular
+                  zum Korrigieren der Zuordnung: Trigger-Text pruefen,
+                  Ziel-Lebenssituation waehlen, Notiz erfassen und Override
+                  speichern.
+                </p>
+              </div>
             ) : (
               <div className="space-y-3">
                 <div>
@@ -253,7 +319,11 @@ export default function AdminLifeEventReview() {
           <Card className="p-4">
             <div className="mb-2 text-sm font-semibold">Aktive Overrides</div>
             {activeOverrides.length === 0 ? (
-              <div className="text-sm text-muted-foreground">Noch keine aktiven Overrides.</div>
+              <div className="text-sm text-muted-foreground">
+                Noch keine aktiven Overrides. Angelegte Korrekturen werden hier
+                mit Trigger-Text, Ziel-Lebenssituation und Anwendungszaehler
+                sichtbar.
+              </div>
             ) : (
               <div className="space-y-2">
                 {activeOverrides.map((item) => (

@@ -188,7 +188,9 @@ export default function AdminPlainLanguage() {
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Plain Language Review</h1>
           <p className="text-sm text-muted-foreground">
-            Review Einfach and Leicht drafts, approve them, or send them back.
+            Review simplified German variants before they are trusted in the public
+            interface. Compare suggested Einfach/Leicht text with the source entry,
+            approve safe versions, or reject drafts that lose important meaning.
           </p>
         </div>
         <div className="text-sm text-muted-foreground">

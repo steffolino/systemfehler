@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_at": "2026-05-02T06:01:52.640Z",
+  "generated_at": "2026-05-17T19:03:04.249Z",
   "source": {
     "suggestions_file": "frontend/src/data/life_event_suggested_questions.json",
     "life_events_file": "data/_topics/life_events.json"

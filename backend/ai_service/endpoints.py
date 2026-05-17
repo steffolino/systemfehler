@@ -28,6 +28,8 @@ from .retrieval import retrieve_evidence
 from .routing import ModelRouter
 from .schemas import (
     AnswerResponse,
+    ChatRequest,
+    ChatResponse,
     EnrichmentFacet,
     EnrichmentPayload,
     EnrichmentRequest,
@@ -45,6 +47,8 @@ provider = get_provider()
 MAX_REWRITE_TOKENS = 24
 MAX_SYNTHESIS_TOKENS = 400
 MAX_ENRICH_TOKENS = 96
+MAX_CHAT_HISTORY_MESSAGES = 8
+MAX_CHAT_MESSAGE_CHARS = 1200
 
 REWRITE_SYSTEM_PROMPT = (
     "You rewrite search queries for a German social-services retrieval system. "
@@ -66,6 +70,12 @@ ENRICH_SYSTEM_PROMPT = (
     "You are assisting editors of a structured public-information database. "
     "Based on the supplied entry excerpt, propose short, concrete metadata improvements in German. "
     "Do not invent facts not grounded in the entry."
+)
+
+CHAT_QUERY_SYSTEM_PROMPT = (
+    "You turn a short chat history into a standalone German search query for a "
+    "German social-services retrieval system. Preserve facts from the history, "
+    "do not add new facts, and return only the search query."
 )
 
 LOCAL_SYNTHESIS_STRATEGY = os.getenv("AI_LOCAL_SYNTHESIS_STRATEGY", "extractive").strip().lower()
@@ -423,6 +433,51 @@ def _compact_evidence_block(evidence):
         compact_rows.append("\n".join(lines))
 
     return "\n\n".join(compact_rows)
+
+
+def _clean_chat_messages(messages):
+    cleaned = []
+    for message in messages or []:
+        role = "assistant" if getattr(message, "role", "") == "assistant" else "user"
+        content = str(getattr(message, "content", "") or "").strip()[:MAX_CHAT_MESSAGE_CHARS]
+        if content:
+            cleaned.append({"role": role, "content": content})
+    return cleaned[-MAX_CHAT_HISTORY_MESSAGES:]
+
+
+def _latest_user_message(messages):
+    for message in reversed(messages):
+        if message.get("role") == "user":
+            return message.get("content", "")
+    return ""
+
+
+def _compact_chat_history(messages):
+    return "\n".join(
+        f"{'Assistant' if message.get('role') == 'assistant' else 'User'}: {message.get('content', '')}"
+        for message in messages
+    )
+
+
+def _standalone_chat_query(messages, model, explicit_escalation=False):
+    latest = _latest_user_message(messages)
+    if not latest or len(messages) <= 1 or not provider.is_configured():
+        return latest
+
+    try:
+        completion = provider.generate_text(
+            model=model,
+            system_prompt=CHAT_QUERY_SYSTEM_PROMPT,
+            user_prompt=(
+                f"Chat history:\n{_compact_chat_history(messages)}\n\n"
+                "Return a short standalone German search query for the latest user question."
+            ),
+            temperature=0.1,
+            max_tokens=80,
+        )
+        return completion["text"].strip() or latest
+    except AIProviderError:
+        return latest
 
 
 def _clean_list(values):
@@ -907,6 +962,119 @@ async def synthesize_answer(body: QueryRequest):
         )
         ai_cache.set(synth_cache_key, _cacheable_response(response), CACHE_TTL_SYNTHESIZE)
         return response
+
+
+@router.post("/chat", response_model=ChatResponse)
+async def chat_answer(body: ChatRequest):
+    start = time.time()
+    model = model_router.route("synthesize", explicit_escalation=body.explicit_escalation)
+    messages = _clean_chat_messages(body.messages)
+    standalone_query = _standalone_chat_query(messages, model, body.explicit_escalation)
+
+    if not standalone_query:
+        latency = int((time.time() - start) * 1000)
+        return ChatResponse(
+            standalone_query="",
+            answer=None,
+            explanation="Bitte stelle zuerst eine Frage.",
+            sources=[],
+            provider=provider.name,
+            model=model,
+            latency_ms=latency,
+            fallback=True,
+            evidence=[],
+            weak_evidence=True,
+        )
+
+    evidence = retrieve_evidence(standalone_query)
+    sufficient = any(ev.confidence >= 0.7 for ev in evidence)
+    plain_language_variants = PlainLanguageAnswerVariants()
+    if sufficient:
+        _, _, plain_language_variants = _extractive_answer(evidence)
+
+    if not sufficient:
+        latency = int((time.time() - start) * 1000)
+        log_telemetry("chat", model, latency, False, 0, 0.0)
+        return ChatResponse(
+            standalone_query=standalone_query,
+            answer=None,
+            explanation="Keine verlaessliche Information gefunden.",
+            sources=[],
+            provider=provider.name,
+            model=model,
+            latency_ms=latency,
+            fallback=True,
+            evidence=evidence,
+            weak_evidence=True,
+            plain_language=plain_language_variants,
+        )
+
+    use_extractive_local = provider.name == "ollama" and LOCAL_SYNTHESIS_STRATEGY == "extractive"
+    if use_extractive_local or not provider.is_configured():
+        answer, sources, plain_language_variants = _extractive_answer(evidence)
+        latency = int((time.time() - start) * 1000)
+        log_telemetry("chat", model, latency, True, 0, 0.0)
+        return ChatResponse(
+            standalone_query=standalone_query,
+            answer=answer,
+            explanation="Antwort basiert direkt auf den relevantesten Eintraegen.",
+            sources=sources,
+            provider=provider.name,
+            model=f"{model}:extractive" if use_extractive_local else model,
+            latency_ms=latency,
+            fallback=not provider.is_configured(),
+            evidence=evidence,
+            weak_evidence=False,
+            plain_language=plain_language_variants,
+        )
+
+    evidence_block = _compact_evidence_block(evidence)
+    try:
+        completion = provider.generate_text(
+            model=model,
+            system_prompt=SYNTHESIZE_SYSTEM_PROMPT,
+            user_prompt=(
+                f"Standalone user question:\n{standalone_query}\n\n"
+                f"Recent chat history:\n{_compact_chat_history(messages)}\n\n"
+                f"Retrieved evidence:\n{evidence_block}\n\n"
+                "Answer the latest user question in German, grounded only in the evidence. "
+                "If the chat history asks for follow-up context, use it only to understand references, not as a source of facts."
+            ),
+            temperature=0.2,
+            max_tokens=MAX_SYNTHESIS_TOKENS,
+        )
+        usage, total_tokens = _usage_totals(completion)
+        latency = int((time.time() - start) * 1000)
+        log_telemetry("chat", model, latency, True, total_tokens, 0.0)
+        return ChatResponse(
+            standalone_query=standalone_query,
+            answer=completion["text"],
+            explanation="Antwort basiert auf abgerufenen Eintraegen.",
+            sources=[ev.source for ev in evidence if ev.confidence >= 0.7],
+            provider=provider.name,
+            model=model,
+            latency_ms=latency,
+            fallback=False,
+            evidence=evidence,
+            usage=usage,
+            plain_language=plain_language_variants,
+        )
+    except AIProviderError as exc:
+        answer, sources, plain_language_variants = _extractive_answer(evidence)
+        latency = int((time.time() - start) * 1000)
+        log_telemetry("chat", model, latency, False, 0, 0.0)
+        return ChatResponse(
+            standalone_query=standalone_query,
+            answer=answer,
+            explanation=str(exc),
+            sources=sources,
+            provider=provider.name,
+            model=model,
+            latency_ms=latency,
+            fallback=True,
+            evidence=evidence,
+            plain_language=plain_language_variants,
+        )
 
 
 @router.post("/enrich", response_model=EnrichmentSuggestion)

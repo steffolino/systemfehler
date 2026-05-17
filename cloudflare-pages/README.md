@@ -24,9 +24,10 @@ The deployment workflow builds the frontend app from `frontend/` and deploys:
 - `/api/ai/rewrite` -> query rewrite
 - `/api/ai/retrieve` -> retrieval-only evidence
 - `/api/ai/synthesize` -> retrieval-backed answer synthesis
+- `/api/ai/chat` -> session chat that rewrites follow-ups into standalone retrieval queries
 - `/api/ai/enrich` -> lightweight enrichment fallback
 
-`/api/ai/retrieve` and `/api/ai/synthesize` support optional request fields:
+`/api/ai/retrieve`, `/api/ai/synthesize`, and `/api/ai/chat` support optional request fields:
 - `retrieval_mode`: `keyword | hybrid | external`
 - `strict_official`: `true | false`
 - `min_source_tier`: source-tier floor (for example `tier_2_official`)

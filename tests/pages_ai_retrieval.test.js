@@ -47,6 +47,28 @@ test('caregiving rewrite with compound umlauts resolves to strong care evidence'
   assert.ok(result.results.some((item) => item.domain === 'contacts' && /pflegeberatung|pflegest/i.test(item.title)));
 });
 
+test('compound single-parent and illness query keeps health evidence near the top', () => {
+  const entries = loadEntries();
+  const scenarios = loadJson('data/_topics/life_events.json').scenarios;
+  const packs = loadJson('data/_topics/life_event_resource_packs.json');
+  const result = localEvaluateEntries(
+    entries,
+    'Ich bin alleinerziehend geworden und krank. wo bekomme ich hilfe?',
+    {
+      lifeEventScenarios: scenarios,
+      lifeEventResourcePacks: packs,
+    }
+  );
+
+  assert.ok(result.stages.includes('single_parent_new'));
+  assert.ok(result.stages.includes('health_disruption'));
+  assert.ok(
+    result.results
+      .slice(0, 4)
+      .some((item) => /krank|krankengeld|krankenkasse|gesundheit|arbeitsunfaehig/i.test(`${item.title} ${item.url}`))
+  );
+});
+
 test('retrieval includes curated official care evidence when keyword DB search misses', async () => {
   const env = {
     DB: {

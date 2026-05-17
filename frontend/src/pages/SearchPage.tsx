@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { api, getEntrySourceMeta, getSourceRoleLabel, type Entry } from '../lib/api';
-import type { AIHealthResponse, AIResultBundle } from '../lib/api';
+import type { AIChatMessage, AIHealthResponse, AIResultBundle } from '../lib/api';
 import SearchInput from '../components/SearchInput';
 import ResultsList from '../components/ResultsList';
 import TurnstileWidget from '../components/TurnstileWidget';
@@ -23,6 +23,11 @@ type LifeEventOption = {
   id: string;
   label_de: string;
   label_en?: string;
+};
+type ChatThreadMessage = AIChatMessage & {
+  id: string;
+  evidenceCount?: number;
+  weakEvidence?: boolean;
 };
 
 function parseEvidenceEntriesForPage(evidence: Array<{ content: string }>): Entry[] {
@@ -114,6 +119,7 @@ export default function SearchPage() {
   const [debouncedStandardQuery, setDebouncedStandardQuery] = useState('');
   const [aiDraftQuery, setAiDraftQuery] = useState('');
   const [submittedAiQuery, setSubmittedAiQuery] = useState('');
+  const [chatMessages, setChatMessages] = useState<ChatThreadMessage[]>([]);
   const [aiLanguageMode, setAiLanguageMode] = useState<LanguageMode>('standard');
   const [retrievalMode, setRetrievalMode] = useState<RetrievalMode>('hybrid');
   const [strictOfficialOnly, setStrictOfficialOnly] = useState(false);
@@ -177,6 +183,8 @@ export default function SearchPage() {
   }, [debouncedStandardQuery, t]);
 
   useEffect(() => {
+    return;
+
     if (tab !== 'ai') return;
 
     if (!submittedAiQuery) {
@@ -345,8 +353,8 @@ export default function SearchPage() {
     });
   }, [lifeEventContext, requiresTurnstile, tab, turnstileEnabled]);
 
-  function submitAiQuery() {
-    const trimmed = aiDraftQuery.trim();
+  async function submitAiQuery(nextQuery?: unknown) {
+    const trimmed = (typeof nextQuery === 'string' ? nextQuery : aiDraftQuery).trim();
     const now = Date.now();
 
     if (now - lastAiSubmitAt < 3000) {
@@ -366,16 +374,118 @@ export default function SearchPage() {
 
     setLastAiSubmitAt(now);
     setSubmittedAiQuery(trimmed);
+    setAiDraftQuery('');
 
     if (!trimmed) {
       setAiResult(null);
       setAiError(null);
+      setChatMessages([]);
+      setAiLoading(false);
+      setAiEvidenceLoading(false);
+      return;
+    }
+
+    const userMessage: ChatThreadMessage = {
+      id: `user-${now}`,
+      role: 'user',
+      content: trimmed,
+    };
+    const nextMessages = [...chatMessages, userMessage].slice(-8);
+    setChatMessages(nextMessages);
+    setAiLoading(true);
+    setAiEvidenceLoading(true);
+    setAiError(null);
+    setAiResult(buildPendingAiResult(trimmed, translate));
+
+    const fetchWithTurnstile = async <T,>(
+      request: (turnstileToken?: string) => Promise<T>
+    ): Promise<T> => {
+      if (!requiresTurnstile) {
+        return request();
+      }
+
+      const getToken = getTurnstileTokenRef.current;
+      if (!getToken) {
+        throw new Error(t('search.bot_protection_failed'));
+      }
+
+      const token = await getToken();
+      return request(token);
+    };
+
+    try {
+      const retrievalOptions = {
+        retrievalMode,
+        strictOfficial: strictOfficialOnly,
+        lifeEvent: lifeEventContext || undefined,
+      } as const;
+      const chatResponse = await fetchWithTurnstile((turnstileToken) =>
+        api.getAIChat(nextMessages, { turnstileToken, ...retrievalOptions })
+      );
+      const relatedEntries = parseEvidenceEntriesForPage(chatResponse.evidence || []);
+      const answerText = chatResponse.answer || chatResponse.explanation || t('search.no_reliable_answer_title');
+
+      setAiResult({
+        rewrite: {
+          rewritten_query: chatResponse.standalone_query || trimmed,
+          model: chatResponse.model,
+          provider: chatResponse.provider,
+          latency_ms: chatResponse.latency_ms,
+          fallback: chatResponse.fallback,
+          explanation: chatResponse.standalone_query && chatResponse.standalone_query !== trimmed
+            ? t('search.chat_standalone_note')
+            : undefined,
+        },
+        synthesis: {
+          answer: chatResponse.answer,
+          explanation: chatResponse.explanation,
+          sources: chatResponse.sources,
+          provider: chatResponse.provider,
+          model: chatResponse.model,
+          latency_ms: chatResponse.latency_ms,
+          fallback: chatResponse.fallback,
+          evidence: chatResponse.evidence,
+          evidence_lanes: chatResponse.evidence_lanes,
+          answer_lanes: chatResponse.answer_lanes,
+          assistive_contacts: chatResponse.assistive_contacts,
+          weak_evidence: chatResponse.weak_evidence,
+          usage: chatResponse.usage,
+          retrieval: chatResponse.retrieval,
+          plain_language: chatResponse.plain_language,
+        },
+        relatedEntries,
+      });
+      setChatMessages((current) => [
+        ...current,
+        {
+          id: `assistant-${Date.now()}`,
+          role: 'assistant',
+          content: answerText,
+          evidenceCount: relatedEntries.length,
+          weakEvidence: Boolean(chatResponse.weak_evidence),
+        },
+      ]);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : t('common.error_title');
+      setAiError(message);
+      setChatMessages((current) => [
+        ...current,
+        {
+          id: `assistant-error-${Date.now()}`,
+          role: 'assistant',
+          content: message,
+          weakEvidence: true,
+        },
+      ]);
+    } finally {
+      setAiLoading(false);
+      setAiEvidenceLoading(false);
     }
   }
 
   function applySuggestedQuestion(question: string) {
     setAiDraftQuery(question);
-    setSubmittedAiQuery(question);
+    void submitAiQuery(question);
   }
 
   useEffect(() => {
@@ -665,6 +775,74 @@ export default function SearchPage() {
 
         {tab === 'ai' ? (
           <>
+            {chatMessages.length > 0 && (
+              <Card className="rounded-3xl border shadow-sm">
+                <div className="border-b p-4 md:p-5">
+                  <div className="flex items-center justify-between gap-3">
+                    <div>
+                      <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                        Chat
+                      </div>
+                      <div className="mt-1 text-sm text-muted-foreground">
+                        Jede Antwort wird neu mit passenden Belegen gesucht.
+                      </div>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        setChatMessages([]);
+                        setSubmittedAiQuery('');
+                        setAiDraftQuery('');
+                        setAiResult(null);
+                        setAiError(null);
+                        setAiLoading(false);
+                        setAiEvidenceLoading(false);
+                      }}
+                    >
+                      Neuer Chat
+                    </Button>
+                  </div>
+                </div>
+                <div className="space-y-3 p-4 md:p-5">
+                  {chatMessages.map((message) => (
+                    <div
+                      key={message.id}
+                      className={[
+                        'flex',
+                        message.role === 'user' ? 'justify-end' : 'justify-start',
+                      ].join(' ')}
+                    >
+                      <div
+                        className={[
+                          'max-w-[85%] rounded-2xl border px-4 py-3 text-sm leading-6',
+                          message.role === 'user'
+                            ? 'bg-foreground text-background'
+                            : 'bg-muted/30 text-foreground',
+                        ].join(' ')}
+                      >
+                        <div className="whitespace-pre-line">{message.content}</div>
+                        {message.role === 'assistant' && typeof message.evidenceCount === 'number' && (
+                          <div className="mt-2 text-xs opacity-75">
+                            {message.evidenceCount} Belege
+                            {message.weakEvidence ? ` ${t('search.status_weak_evidence')}` : ''}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                  {aiLoading && (
+                    <div className="flex justify-start">
+                      <div className="inline-flex items-center gap-2 rounded-2xl border bg-muted/30 px-4 py-3 text-sm text-muted-foreground">
+                        <Spinner />
+                        {t('search.working')}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </Card>
+            )}
+
             <Card className="rounded-3xl border shadow-md">
               <div className="border-b bg-[linear-gradient(180deg,rgba(248,250,252,0.96),rgba(255,255,255,1))] p-5 md:p-6">
                 <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
