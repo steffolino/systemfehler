@@ -191,7 +191,7 @@ be manually reviewed against acceptance criteria:
 The following docs were removed as stale or redundant:
 - `blueprint.md`, `ai-roadmap.md`, `onboarding.md`, `rag-overview.md`, `rag-deep-dive.md`, `multilingual-plan.md`, `data-synthetic-inventory.md`, `stakeholder-guide.md`, `stakeholder-guide.de.md`, `api/overview.md`, `overview/mission.md`, `overview/changelog.md`, `crawling/federal-crawler-follow-up.md`, `external-context/`
 
-Current active docs: `status.md`, `current-state.md`, `architecture.md`, `setup.md`, `api.md`, `crawling-guide.md`, `plain-language.md`, `vision.md`, `source-placement-policy.md`, `life-events-retrieval.md`, and `operations/`.
+Current active docs: `status.md`, `current-state.md`, `architecture.md`, `setup.md`, `api.md`, `crawling-guide.md`, `plain-language.md`, `vision.md`, `ueberblick.md`, `source-placement-policy.md`, `life-events-retrieval.md`, and `operations/`.
 
 ## What To Trust When Making Changes
 

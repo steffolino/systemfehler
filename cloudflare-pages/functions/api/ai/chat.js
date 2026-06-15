@@ -12,6 +12,7 @@ import { jsonResponse, optionsResponse } from '../_lib/http.js';
 
 const MAX_CHAT_MESSAGES = 8;
 const MAX_MESSAGE_CHARS = 1200;
+export const MAX_ASSISTANT_RESPONSES = 3;
 
 function normalizeMessages(value) {
   if (!Array.isArray(value)) return [];
@@ -29,6 +30,10 @@ function latestUserMessage(messages) {
     if (messages[index].role === 'user') return messages[index].content;
   }
   return '';
+}
+
+export function countAssistantResponses(messages) {
+  return messages.filter((message) => message.role === 'assistant').length;
 }
 
 function compactConversation(messages) {
@@ -98,6 +103,13 @@ export async function onRequest({ request, env }) {
   const latest = latestUserMessage(messages);
   if (!latest) {
     return jsonResponse({ error: 'At least one user message is required.' }, { status: 400, request, env, cors: true });
+  }
+
+  if (countAssistantResponses(messages) >= MAX_ASSISTANT_RESPONSES) {
+    return jsonResponse(
+      { error: 'Dieser Demo-Chat ist auf drei Antworten begrenzt. Starte einen neuen Chat, wenn du eine neue Frage prüfen möchtest.' },
+      { status: 429, request, env, cors: true, headers: rateLimit.headers }
+    );
   }
 
   const retrievalMode = typeof body?.retrieval_mode === 'string' ? body.retrieval_mode : undefined;

@@ -261,7 +261,7 @@ export function buildGroundedReadableAnswer(
     return shortenLines([
       'Das ist jetzt wichtig:',
       ...snippets.slice(0, 3).map((line) => normalizeWhitespace(line)),
-      'Pruefen Sie die passenden Stellen in den Quellen unten.',
+      'Prüfen Sie die passenden Stellen in den Quellen unten.',
     ], 8).join('\n');
   }
 

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
 import { api, getEntrySourceMeta, getSourceRoleLabel, type Entry } from '../lib/api';
@@ -28,7 +28,128 @@ type ChatThreadMessage = AIChatMessage & {
   id: string;
   evidenceCount?: number;
   weakEvidence?: boolean;
+  isError?: boolean;
 };
+
+const MAX_DEMO_ASSISTANT_RESPONSES = 3;
+
+function renderInlineMarkdown(text: string): ReactNode[] {
+  const nodes: ReactNode[] = [];
+  const pattern = /\*\*([^*]+)\*\*/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      nodes.push(text.slice(lastIndex, match.index));
+    }
+    nodes.push(<strong key={`${match.index}-${match[1]}`} className="font-semibold">{match[1]}</strong>);
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < text.length) {
+    nodes.push(text.slice(lastIndex));
+  }
+
+  return nodes.length > 0 ? nodes : [text];
+}
+
+function extractSourceLinks(text: string): { cleanText: string; sources: string[] } {
+  const sources: string[] = [];
+  const cleanText = String(text || '')
+    .replace(/\[Quelle:\s*(https?:\/\/[^\]\s]+)\]/gi, (_match, url: string) => {
+      sources.push(url);
+      return '';
+    })
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+
+  return { cleanText, sources };
+}
+
+function SourceLinks({ sources }: { sources: string[] }) {
+  const validSources = sources.filter((source) => {
+    try {
+      const url = new URL(source);
+      return url.protocol === 'https:' || url.protocol === 'http:';
+    } catch {
+      return false;
+    }
+  });
+
+  if (validSources.length === 0) return null;
+
+  return (
+    <div className="mt-2 space-y-1 text-xs leading-5">
+      {validSources.map((source) => (
+        <a
+          key={source}
+          href={source}
+          target="_blank"
+          rel="noreferrer"
+          className="block break-all rounded-md border bg-background px-2 py-1 text-foreground underline underline-offset-2"
+        >
+          Quelle: {source}
+        </a>
+      ))}
+    </div>
+  );
+}
+
+function MarkdownLine({ text }: { text: string }) {
+  const { cleanText, sources } = extractSourceLinks(text);
+
+  return (
+    <>
+      {cleanText && <span>{renderInlineMarkdown(cleanText)}</span>}
+      <SourceLinks sources={sources} />
+    </>
+  );
+}
+
+function MarkdownText({ text, className = '' }: { text: string; className?: string }) {
+  const blocks: ReactNode[] = [];
+  const lines = String(text || '').split(/\r?\n/);
+  let bulletItems: string[] = [];
+
+  function flushBullets(key: string) {
+    if (bulletItems.length === 0) return;
+    blocks.push(
+      <ul key={key} className="my-2 list-disc space-y-1 pl-5">
+        {bulletItems.map((item, index) => (
+          <li key={`${key}-${index}`}>
+            <MarkdownLine text={item} />
+          </li>
+        ))}
+      </ul>
+    );
+    bulletItems = [];
+  }
+
+  lines.forEach((line, index) => {
+    const trimmed = line.trim();
+    const bullet = trimmed.match(/^[-*]\s+(.+)$/);
+    if (bullet) {
+      bulletItems.push(bullet[1]);
+      return;
+    }
+
+    flushBullets(`bullets-${index}`);
+    if (!trimmed) {
+      blocks.push(<div key={`space-${index}`} className="h-2" />);
+      return;
+    }
+    blocks.push(
+      <div key={`p-${index}`}>
+        <MarkdownLine text={trimmed} />
+      </div>
+    );
+  });
+
+  flushBullets('bullets-end');
+
+  return <div className={['space-y-1', className].filter(Boolean).join(' ')}>{blocks}</div>;
+}
 
 function parseEvidenceEntriesForPage(evidence: Array<{ content: string }>): Entry[] {
   if (typeof window !== 'undefined' && window.console) {
@@ -105,6 +226,17 @@ function statusText(value: boolean | undefined, t: (key: string) => string) {
   return value ? t('common.yes') : t('common.no');
 }
 
+function userFacingAiError(error: unknown, t: (key: string) => string) {
+  const message = error instanceof Error ? error.message : '';
+  if (/turnstile timed out|challenge expired|request already in progress/i.test(message)) {
+    return t('search.bot_protection_timeout');
+  }
+  if (/turnstile|bot protection|challenge failed/i.test(message)) {
+    return t('search.bot_protection_failed');
+  }
+  return message || t('common.error_title');
+}
+
 export default function SearchPage() {
   const { t, locale } = useI18n();
   const translate = t as unknown as (key: string, vars?: Record<string, string | number>) => string;
@@ -145,6 +277,10 @@ export default function SearchPage() {
   const requiresTurnstile = !isLocalhost && (aiHealth?.turnstile?.configured ?? Boolean(configuredTurnstileSiteKey));
   const turnstileEnabled = requiresTurnstile && Boolean(configuredTurnstileSiteKey);
   const turnstileMisconfigured = requiresTurnstile && !turnstileEnabled;
+  const assistantResponseCount = chatMessages.filter(
+    (message) => message.role === 'assistant' && !message.isError
+  ).length;
+  const chatLimitReached = assistantResponseCount >= MAX_DEMO_ASSISTANT_RESPONSES;
 
   const handleTurnstileReady = useCallback((executor: (() => Promise<string>) | null) => {
     getTurnstileTokenRef.current = executor;
@@ -357,6 +493,22 @@ export default function SearchPage() {
     const trimmed = (typeof nextQuery === 'string' ? nextQuery : aiDraftQuery).trim();
     const now = Date.now();
 
+    if (!trimmed) {
+      setSubmittedAiQuery('');
+      setAiDraftQuery('');
+      setAiResult(null);
+      setAiError(null);
+      setChatMessages([]);
+      setAiLoading(false);
+      setAiEvidenceLoading(false);
+      return;
+    }
+
+    if (chatLimitReached) {
+      setAiError(t('search.chat_limit_notice'));
+      return;
+    }
+
     if (now - lastAiSubmitAt < 3000) {
       setAiError(t('search.ask_wait'));
       return;
@@ -376,21 +528,12 @@ export default function SearchPage() {
     setSubmittedAiQuery(trimmed);
     setAiDraftQuery('');
 
-    if (!trimmed) {
-      setAiResult(null);
-      setAiError(null);
-      setChatMessages([]);
-      setAiLoading(false);
-      setAiEvidenceLoading(false);
-      return;
-    }
-
     const userMessage: ChatThreadMessage = {
       id: `user-${now}`,
       role: 'user',
       content: trimmed,
     };
-    const nextMessages = [...chatMessages, userMessage].slice(-8);
+    const nextMessages = [...chatMessages.filter((message) => !message.isError), userMessage].slice(-8);
     setChatMessages(nextMessages);
     setAiLoading(true);
     setAiEvidenceLoading(true);
@@ -466,7 +609,7 @@ export default function SearchPage() {
         },
       ]);
     } catch (err) {
-      const message = err instanceof Error ? err.message : t('common.error_title');
+      const message = userFacingAiError(err, translate);
       setAiError(message);
       setChatMessages((current) => [
         ...current,
@@ -475,6 +618,7 @@ export default function SearchPage() {
           role: 'assistant',
           content: message,
           weakEvidence: true,
+          isError: true,
         },
       ]);
     } finally {
@@ -674,6 +818,7 @@ export default function SearchPage() {
                             variant="outline"
                             className="h-auto whitespace-normal text-left"
                             onClick={() => applySuggestedQuestion(question)}
+                            disabled={chatLimitReached}
                           >
                             {question}
                           </Button>
@@ -692,6 +837,7 @@ export default function SearchPage() {
                     enableAutocomplete={tab === 'article'}
                     onSubmit={tab === 'ai' ? submitAiQuery : undefined}
                     placeholder={tab === 'ai' ? t('search.ai_placeholder') : t('search.article_placeholder')}
+                    disabled={tab === 'ai' && chatLimitReached}
                   />
                   <div className="mt-2 text-xs text-muted-foreground">
                     {tab === 'ai' ? t('search.ai_helper') : t('search.article_helper')}
@@ -746,6 +892,7 @@ export default function SearchPage() {
                       disabled={
                         aiLoading ||
                         !aiDraftQuery.trim() ||
+                        chatLimitReached ||
                         turnstileMisconfigured ||
                         (turnstileEnabled && !turnstileReady)
                       }
@@ -821,7 +968,7 @@ export default function SearchPage() {
                             : 'bg-muted/30 text-foreground',
                         ].join(' ')}
                       >
-                        <div className="whitespace-pre-line">{message.content}</div>
+                        <MarkdownText text={message.content} />
                         {message.role === 'assistant' && typeof message.evidenceCount === 'number' && (
                           <div className="mt-2 text-xs opacity-75">
                             {message.evidenceCount} Belege
@@ -835,11 +982,51 @@ export default function SearchPage() {
                     <div className="flex justify-start">
                       <div className="inline-flex items-center gap-2 rounded-2xl border bg-muted/30 px-4 py-3 text-sm text-muted-foreground">
                         <Spinner />
-                        {t('search.working')}
+                      {t('search.working')}
                       </div>
                     </div>
                   )}
+                  {chatLimitReached && (
+                    <div className="rounded-2xl border bg-muted/20 px-4 py-3 text-sm text-muted-foreground">
+                      {t('search.chat_limit_notice')}
+                    </div>
+                  )}
                 </div>
+                <form
+                  className="border-t p-4 md:p-5"
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    submitAiQuery();
+                  }}
+                >
+                  <div className="flex flex-col gap-3 md:flex-row md:items-start">
+                    <div className="flex-1">
+                      <SearchInput
+                        value={aiDraftQuery}
+                        onChange={setAiDraftQuery}
+                        enableAutocomplete={false}
+                        onSubmit={submitAiQuery}
+                        placeholder={t('search.chat_followup_placeholder')}
+                        disabled={chatLimitReached}
+                      />
+                    </div>
+                    <div className="md:w-36">
+                      <Button
+                        className="h-11 w-full"
+                        type="submit"
+                        disabled={
+                          aiLoading ||
+                          !aiDraftQuery.trim() ||
+                          chatLimitReached ||
+                          turnstileMisconfigured ||
+                          (turnstileEnabled && !turnstileReady)
+                        }
+                      >
+                        {aiLoading ? t('search.working') : t('search.chat_reply')}
+                      </Button>
+                    </div>
+                  </div>
+                </form>
               </Card>
             )}
 
@@ -914,25 +1101,28 @@ export default function SearchPage() {
                           <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                             {t('search.answer_lane_official')}
                           </div>
-                          <div className="whitespace-pre-line text-base leading-6 text-foreground">
-                            {officialLaneAnswer || t('search.answer_lane_official_empty')}
-                          </div>
+                          <MarkdownText
+                            className="text-base leading-6 text-foreground"
+                            text={officialLaneAnswer || t('search.answer_lane_official_empty')}
+                          />
                         </div>
                         <div className="rounded-2xl border bg-muted/20 p-4">
                           <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                             {t('search.answer_lane_assistive')}
                           </div>
-                          <div className="whitespace-pre-line text-base leading-6 text-foreground">
-                            {assistiveLaneAnswer || t('search.answer_lane_assistive_empty')}
-                          </div>
+                          <MarkdownText
+                            className="text-base leading-6 text-foreground"
+                            text={assistiveLaneAnswer || t('search.answer_lane_assistive_empty')}
+                          />
                         </div>
                         <div className="rounded-2xl border bg-muted/20 p-4">
                           <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                             {t('search.answer_lane_contacts')}
                           </div>
-                          <div className="whitespace-pre-line text-base leading-6 text-foreground">
-                            {contactsLaneAnswer || t('search.answer_lane_contacts_empty')}
-                          </div>
+                          <MarkdownText
+                            className="text-base leading-6 text-foreground"
+                            text={contactsLaneAnswer || t('search.answer_lane_contacts_empty')}
+                          />
                           <div className="mt-4">
                             <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                               {t('search.assistive_contacts')}
@@ -967,13 +1157,16 @@ export default function SearchPage() {
                         </div>
                       </div>
                     ) : (
-                      <div className="whitespace-pre-line text-base leading-6 text-foreground">
-                        {submittedAiQuery
-                          ? displayedAiAnswer || t('search.ready_answer')
-                          : aiDraftQuery.trim()
-                            ? t('search.ready_answer')
-                            : t('search.prompt_ai')}
-                      </div>
+                      <MarkdownText
+                        className="text-base leading-6 text-foreground"
+                        text={
+                          submittedAiQuery
+                            ? displayedAiAnswer || t('search.ready_answer')
+                            : aiDraftQuery.trim()
+                              ? t('search.ready_answer')
+                              : t('search.prompt_ai')
+                        }
+                      />
                     )}
 
                     {submittedAiQuery && aiResult?.synthesis.weak_evidence && !hasNoStrongAiEvidence && (
@@ -1110,7 +1303,7 @@ export default function SearchPage() {
                             <div>{t('search.status_life_event')}: {aiResult?.synthesis.retrieval?.selected_life_event || lifeEventContext || t('common.unknown')}</div>
                             <div>{t('search.status_retrieval_external')}: {aiResult?.synthesis.retrieval?.external_status || (aiHealth?.retrieval?.externalConfigured ? t('search.status_ready') : t('search.status_loading'))}</div>
                             <div>
-                              Redaktionelle Pruefung:{' '}
+                              Redaktionelle Prüfung:{' '}
                               {statusText(Boolean(aiResult?.synthesis.retrieval?.editorial_review_required), translate)}
                             </div>
                             {(aiResult?.synthesis.retrieval?.editorial_review_reasons || []).length > 0 && (

@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_at": "2026-05-17T19:03:24.421Z",
+  "generated_at": "2026-05-18T10:38:25.423Z",
   "targets": {
     "docsMin": 5,
     "docsMax": 10,
@@ -275,7 +275,7 @@
     },
     {
       "scenario_id": "self_employment_failed",
-      "label_de": "Selbstaendigkeit gescheitert",
+      "label_de": "Selbständigkeit gescheitert",
       "resources": {
         "documents": [
           {
@@ -533,7 +533,7 @@
     },
     {
       "scenario_id": "low_income_topup",
-      "label_de": "Niedriglohn / Aufstockung noetig",
+      "label_de": "Niedriglohn / Aufstockung nötig",
       "resources": {
         "documents": [
           {
@@ -1193,7 +1193,7 @@
     },
     {
       "scenario_id": "caregiving_relatives",
-      "label_de": "Pflege von Angehoerigen uebernommen",
+      "label_de": "Pflege von Angehörigen übernommen",
       "resources": {
         "documents": [
           {
@@ -1457,7 +1457,7 @@
     },
     {
       "scenario_id": "unclear_residence_status",
-      "label_de": "Aufenthaltsstatus ungeklaert",
+      "label_de": "Aufenthaltsstatus ungeklärt",
       "resources": {
         "documents": [
           {
@@ -1589,7 +1589,7 @@
     },
     {
       "scenario_id": "recognition_missing",
-      "label_de": "Anerkennung von Abschluessen fehlt",
+      "label_de": "Anerkennung von Abschlüssen fehlt",
       "resources": {
         "documents": [
           {
@@ -1661,6 +1661,12 @@
             "source_tier": "tier_1_official"
           },
           {
+            "title": "Informationen für Geflüchteteaus der Ukraine",
+            "url": "https://www.bmas.de/DE/Europa-und-die-Welt/Europa/Ukraine/ukraine.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
             "title": "Programme für Beschäftigungschancen (SGB III)",
             "url": "https://www.bmas.de/DE/Arbeit/Arbeitsfoerderung/Programme-fuer-Beschaeftigungschancen/programme-fuer-beschaeftigungschancen.html",
             "domain": "contacts",
@@ -1675,12 +1681,6 @@
           {
             "title": "Förderprogramm \"Integration durch Qualifizierung",
             "url": "https://www.bmas.de/DE/Arbeit/Migration-und-Arbeit/Anerkennung-und-Qualifizierung/Foerderprogramm-IQ/foerderprogramm-iq.html",
-            "domain": "contacts",
-            "source_tier": "tier_1_official"
-          },
-          {
-            "title": "Wer? Was? Wo?",
-            "url": "https://www.bmas.de/DE/Arbeit/Migration-und-Arbeit/Orientierung-und-Vermittlung/Wer-Was-Wo/wer-was-wo.html",
             "domain": "contacts",
             "source_tier": "tier_1_official"
           }
@@ -1847,7 +1847,7 @@
     },
     {
       "scenario_id": "long_term_work_incapacity",
-      "label_de": "Langfristig arbeitsunfaehig",
+      "label_de": "Langfristig arbeitsunfähig",
       "resources": {
         "documents": [
           {

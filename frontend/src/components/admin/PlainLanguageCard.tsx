@@ -83,7 +83,7 @@ export function PlainLanguageCard({
   entry: Entry;
   onEntryUpdated?: (entry: Entry) => void;
 }) {
-  const { user } = useAppAuth();
+  const { user, isDemoReadOnly } = useAppAuth();
   const [savingMode, setSavingMode] = useState<'einfach' | 'leicht' | null>(null);
   const [error, setError] = useState<string | null>(null);
   const reviewer = getReviewer(user);
@@ -99,6 +99,11 @@ export function PlainLanguageCard({
   const leichtSuggested = translations['de-LEICHT-SUGGESTED'];
 
   async function handleReview(mode: 'einfach' | 'leicht', action: 'approve' | 'reject') {
+    if (isDemoReadOnly) {
+      setError('Demo-Zugang ist read-only. Review-Entscheidungen werden nicht gespeichert.');
+      return;
+    }
+
     setSavingMode(mode);
     setError(null);
     try {
@@ -119,6 +124,11 @@ export function PlainLanguageCard({
           Automatic Einfach and Leicht drafts plus a rule-based checker and review actions.
         </p>
         {reviewer && <p className="mt-2 text-xs text-muted-foreground">Decisions are recorded as: {reviewer}</p>}
+        {isDemoReadOnly && (
+          <p className="mt-2 rounded-md border bg-muted/30 px-3 py-2 text-xs text-muted-foreground">
+            Demo-Zugang: read-only. Approve/Reject ist deaktiviert.
+          </p>
+        )}
       </div>
 
       {error && <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</div>}
@@ -145,7 +155,7 @@ export function PlainLanguageCard({
             <Button
               size="sm"
               onClick={() => void handleReview('einfach', 'approve')}
-              disabled={savingMode === 'einfach'}
+              disabled={isDemoReadOnly || savingMode === 'einfach'}
             >
               {savingMode === 'einfach' ? 'Saving...' : 'Approve Einfach'}
             </Button>
@@ -153,7 +163,7 @@ export function PlainLanguageCard({
               variant="outline"
               size="sm"
               onClick={() => void handleReview('einfach', 'reject')}
-              disabled={savingMode === 'einfach'}
+              disabled={isDemoReadOnly || savingMode === 'einfach'}
             >
               Reject
             </Button>
@@ -181,7 +191,7 @@ export function PlainLanguageCard({
             <Button
               size="sm"
               onClick={() => void handleReview('leicht', 'approve')}
-              disabled={savingMode === 'leicht'}
+              disabled={isDemoReadOnly || savingMode === 'leicht'}
             >
               {savingMode === 'leicht' ? 'Saving...' : 'Approve Leicht'}
             </Button>
@@ -189,7 +199,7 @@ export function PlainLanguageCard({
               variant="outline"
               size="sm"
               onClick={() => void handleReview('leicht', 'reject')}
-              disabled={savingMode === 'leicht'}
+              disabled={isDemoReadOnly || savingMode === 'leicht'}
             >
               Reject
             </Button>

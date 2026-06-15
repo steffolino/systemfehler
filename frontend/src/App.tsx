@@ -1,10 +1,12 @@
-import { lazy, Suspense, type JSX } from "react";
+import { lazy, Suspense, useState, type FormEvent, type JSX } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import { Header } from "./components/layout/Header";
 import AdminLayout from "./components/admin/AdminLayout";
 import { I18nProvider, useI18n } from "./lib/i18n";
 import { useAppAuth } from "./lib/auth";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 const SearchPage = lazy(() => import("./pages/SearchPage"));
 const EntryPage = lazy(() => import("./pages/EntryPage"));
@@ -25,9 +27,73 @@ function ProtectedRoute({ children }: { children: JSX.Element }) {
 
   if (isLoading) return <div className="p-6">{t("common.loading")}</div>;
   if (!isConfigured) return <Navigate to="/" replace />;
-  if (!isAuthenticated) return <Navigate to="/" replace />;
+  if (!isAuthenticated) return <AdminLoginGate />;
 
   return children;
+}
+
+function AdminLoginGate() {
+  const { loginWithRedirect, loginWithDemoCredentials } = useAppAuth();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  async function submitDemoLogin(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError(null);
+    const ok = await loginWithDemoCredentials(username, password);
+    if (!ok) setError("Demo-Zugangsdaten stimmen nicht.");
+  }
+
+  return (
+    <div className="mx-auto flex min-h-[60vh] w-full max-w-3xl items-center justify-center p-6">
+      <Card className="w-full max-w-xl p-8">
+        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border text-lg font-semibold">
+          A
+        </div>
+        <h1 className="text-center text-2xl font-semibold tracking-tight">Admin access</h1>
+        <p className="mt-2 text-center text-sm text-muted-foreground">
+          Demo reviewers can sign in read-only. Editors can continue to use GitHub login.
+        </p>
+
+        <form className="mt-6 space-y-3" onSubmit={submitDemoLogin}>
+          <label className="block text-sm">
+            <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-muted-foreground">
+              Demo user
+            </span>
+            <input
+              className="h-10 w-full rounded-md border bg-background px-3"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+              autoComplete="username"
+            />
+          </label>
+          <label className="block text-sm">
+            <span className="mb-1 block text-xs font-medium uppercase tracking-wide text-muted-foreground">
+              Demo password
+            </span>
+            <input
+              className="h-10 w-full rounded-md border bg-background px-3"
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              autoComplete="current-password"
+            />
+          </label>
+          {error && <div className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</div>}
+          <Button className="w-full" type="submit">
+            Login read-only
+          </Button>
+        </form>
+
+        <div className="mt-4">
+          <Button variant="outline" className="w-full" onClick={() => loginWithRedirect()}>
+            Login with GitHub
+          </Button>
+        </div>
+      </Card>
+    </div>
+  );
 }
 
 export default function App() {

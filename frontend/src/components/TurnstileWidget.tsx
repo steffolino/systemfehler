@@ -79,6 +79,9 @@ export default function TurnstileWidget({
 
         widgetIdRef.current = window.turnstile.render(containerRef.current, {
           sitekey: siteKey,
+          size: 'compact',
+          execution: 'execute',
+          appearance: 'interaction-only',
           callback: (token: string) => {
             pendingRef.current = false;
             resolveRef.current?.(token);
@@ -116,6 +119,9 @@ export default function TurnstileWidget({
             const timeoutId = window.setTimeout(() => {
               if (pendingRef.current) {
                 pendingRef.current = false;
+                if (window.turnstile && widgetIdRef.current) {
+                  window.turnstile.reset(widgetIdRef.current);
+                }
                 rejectRef.current?.(new Error('Turnstile timed out.'));
                 resolveRef.current = null;
                 rejectRef.current = null;
@@ -168,8 +174,7 @@ export default function TurnstileWidget({
   return (
     <div
       ref={containerRef}
-      className="pointer-events-none absolute -left-[9999px] top-0 h-px w-px overflow-hidden opacity-0"
-      aria-hidden="true"
+      className="min-h-[65px]"
     />
   );
 }

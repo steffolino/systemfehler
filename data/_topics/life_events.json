@@ -201,7 +201,7 @@
         },
         {
             "id": "self_employment_failed",
-            "label_de": "Selbstaendigkeit gescheitert",
+            "label_de": "Selbständigkeit gescheitert",
             "label_en": "Self-employment failed",
             "keywords": [
                 "selbstaendig",
@@ -388,7 +388,7 @@
         },
         {
             "id": "low_income_topup",
-            "label_de": "Niedriglohn / Aufstockung noetig",
+            "label_de": "Niedriglohn / Aufstockung nötig",
             "label_en": "Low income / top-up needed",
             "keywords": [
                 "niedriglohn",
@@ -877,13 +877,15 @@
         },
         {
             "id": "caregiving_relatives",
-            "label_de": "Pflege von Angehoerigen uebernommen",
+            "label_de": "Pflege von Angehörigen übernommen",
             "label_en": "Took over caregiving for relatives",
             "keywords": [
                 "pflege angehoerige",
                 "pflege uebernommen",
                 "pflegefall",
-                "pflege zuhause"
+                "pflege zuhause",
+                "pflegeberatung",
+                "pflegende angehoerige"
             ],
             "expansions": [
                 "pflegegrad",
@@ -1091,13 +1093,14 @@
         },
         {
             "id": "unclear_residence_status",
-            "label_de": "Aufenthaltsstatus ungeklaert",
+            "label_de": "Aufenthaltsstatus ungeklärt",
             "label_en": "Residence status unclear",
             "keywords": [
                 "aufenthaltsstatus unklar",
                 "duldung",
                 "fiktionsbescheinigung",
-                "aufenthalt abgelaufen"
+                "aufenthalt abgelaufen",
+                "auslaenderbehoerde"
             ],
             "expansions": [
                 "aufenthaltsrecht",
@@ -1190,7 +1193,7 @@
         },
         {
             "id": "recognition_missing",
-            "label_de": "Anerkennung von Abschluessen fehlt",
+            "label_de": "Anerkennung von Abschlüssen fehlt",
             "label_en": "Qualification recognition missing",
             "keywords": [
                 "anerkennung fehlt",
@@ -1251,7 +1254,7 @@
                     "anerkennung",
                     "nachweise",
                     "antrag",
-                    "abschluesse"
+                    "abschlüsse"
                 ],
                 "information": [
                     "qualifizierung",
@@ -1399,7 +1402,7 @@
         },
         {
             "id": "long_term_work_incapacity",
-            "label_de": "Langfristig arbeitsunfaehig",
+            "label_de": "Langfristig arbeitsunfähig",
             "label_en": "Long-term work incapacity",
             "keywords": [
                 "langfristig arbeitsunfaehig",
@@ -1497,6 +1500,8 @@
                 "psychische belastung",
                 "depression",
                 "ueberlastet",
+                "ueberlastung",
+                "krisenhilfe",
                 "angst"
             ],
             "expansions": [

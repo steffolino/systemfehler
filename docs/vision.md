@@ -1,5 +1,8 @@
 # Systemfehler – Vision and Strategic Context
 
+For a non-technical German overview, see
+[`docs/ueberblick.md`](ueberblick.md).
+
 ## 1. Background
 
 Information about social services in Germany is fragmented across many websites, often presented in complex language and frequently changed or removed. People who rely on these services face high barriers when trying to understand what support exists, who is eligible, and how to apply.

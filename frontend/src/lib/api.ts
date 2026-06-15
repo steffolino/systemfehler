@@ -482,6 +482,7 @@ interface AIHealthResponse {
       id: string;
       label_de: string;
       label_en?: string;
+      tagwords?: string[];
       domains?: string[];
       resource_targets?: {
         documents?: string[];
@@ -942,7 +943,7 @@ function getSourceRoleLabel(role: SourceRole, locale: keyof MultilingualText = '
         }
       : {
           official_info: 'Amtliche Info',
-          trusted_tool: 'Vertrauenswuerdiges Werkzeug',
+          trusted_tool: 'Vertrauenswürdiges Werkzeug',
           context_info: 'Kontext',
         };
   return labels[role];

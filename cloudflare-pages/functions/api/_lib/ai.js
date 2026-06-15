@@ -665,8 +665,56 @@ export function listLifeEventScenarios(scenarios) {
     label_de: scenario.label_de || scenario.id,
     label_en: scenario.label_en || scenario.label_de || scenario.id,
     domains: scenario.domains,
+    tagwords: deriveLifeEventTagwords(scenario),
     resource_targets: scenario.resource_targets,
   }));
+}
+
+function deriveLifeEventTagwords(scenario) {
+  const raw = [
+    scenario?.label_de,
+    ...(Array.isArray(scenario?.keywords) ? scenario.keywords : []),
+    ...(Array.isArray(scenario?.expansions) ? scenario.expansions : []),
+    ...(Array.isArray(scenario?.resource_targets?.documents) ? scenario.resource_targets.documents : []),
+    ...(Array.isArray(scenario?.resource_targets?.information) ? scenario.resource_targets.information : []),
+    ...(Array.isArray(scenario?.resource_targets?.contacts) ? scenario.resource_targets.contacts : []),
+  ];
+  const stopwords = new Set([
+    'und',
+    'oder',
+    'mit',
+    'ohne',
+    'fuer',
+    'von',
+    'bei',
+    'der',
+    'die',
+    'das',
+    'ein',
+    'eine',
+    'geworden',
+    'needed',
+    'became',
+    'with',
+    'without',
+  ]);
+  const seen = new Set();
+  const tagwords = [];
+
+  for (const item of raw) {
+    const normalized = normalizeScenarioMatchText(item);
+    if (!normalized || normalized.length < 4 || stopwords.has(normalized)) continue;
+    const parts = normalized.split(/\s+/).filter((part) => part.length >= 4 && !stopwords.has(part));
+    const candidates = parts.length > 1 && normalized.length >= 22 ? parts : [normalized];
+    for (const candidate of candidates) {
+      if (seen.has(candidate)) continue;
+      seen.add(candidate);
+      tagwords.push(candidate);
+      if (tagwords.length >= 12) return tagwords;
+    }
+  }
+
+  return tagwords;
 }
 
 async function sha256Hex(value) {
@@ -1943,6 +1991,120 @@ function buildAssistiveContacts(evidence, scenarioResources = []) {
     .map(({ _rank, ...rest }) => rest);
 }
 
+const INSTITUTION_FALLBACK_ROUTES = [
+  {
+    id: 'stadt_leipzig_sozialamt',
+    label: 'Stadt Leipzig',
+    url: 'https://www.leipzig.de/',
+    keywords: ['sozialamt', 'sozialhilfe', 'sgb xii', 'grundsicherung im alter', 'leipzig'],
+    cityKeywords: ['leipzig'],
+    note: 'Suche auf der offiziellen Stadtseite nach dem Sozialamt oder der passenden Sozialleistung. Dort findest du die zuständige Stelle, Kontaktwege und aktuelle Öffnungszeiten.',
+  },
+  {
+    id: 'kommune_sozialamt',
+    label: 'Stadt- oder Gemeindeverwaltung',
+    url: 'https://www.service.bund.de/',
+    keywords: ['sozialamt', 'sozialhilfe', 'sgb xii', 'grundsicherung im alter', 'wohngeldstelle', 'buergeramt', 'bürgeramt', 'jugendamt'],
+    note: 'Sozialämter und viele andere Behörden sind kommunal organisiert. Suche bei deiner Stadt oder Gemeinde nach der zuständigen Stelle.',
+  },
+  {
+    id: 'arbeitsagentur',
+    label: 'Bundesagentur für Arbeit',
+    url: 'https://web.arbeitsagentur.de/portal/metasuche/suche/dienststellen',
+    keywords: ['arbeitsagentur', 'agentur fuer arbeit', 'agentur für arbeit', 'jobcenter', 'familienkasse', 'dienststelle', 'arbeitsamt', 'biz'],
+    note: 'Dort kannst du nach Arbeitsagenturen, Jobcentern, Familienkassen und weiteren Dienststellen vor Ort suchen.',
+  },
+  {
+    id: 'buergergeld',
+    label: 'Bundesagentur für Arbeit: Bürgergeld',
+    url: 'https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld',
+    keywords: ['buergergeld', 'bürgergeld', 'grundsicherung', 'aufstockung', 'jobcenter'],
+    note: 'Dort findest du Informationen zu Bürgergeld, Antrag, Jobcenter und Kontaktwegen.',
+  },
+  {
+    id: 'krankengeld',
+    label: 'Bundesgesundheitsministerium: Krankengeld',
+    url: 'https://www.bundesgesundheitsministerium.de/krankengeld',
+    keywords: ['krankengeld', 'krank', 'arbeitsunfaehig', 'arbeitsunfähig', 'krankschreibung', 'krankenkasse'],
+    note: 'Dort findest du allgemeine Informationen zu Krankengeld und Arbeitsunfähigkeit.',
+  },
+  {
+    id: 'pflege',
+    label: 'Bundesgesundheitsministerium: Pflegegeld',
+    url: 'https://www.bundesgesundheitsministerium.de/pflegegeld.html',
+    keywords: ['pflegegeld', 'pflegegrad', 'pflegebeduerftig', 'pflegebedürftig', 'pflegekasse', 'pflege'],
+    note: 'Dort findest du allgemeine Informationen zu Pflegegeld und Pflegebedürftigkeit.',
+  },
+  {
+    id: 'migration',
+    label: 'BAMF: Migrationsberatung für Erwachsene',
+    url: 'https://www.bamf.de/DE/Themen/Integration/ZugewanderteTeilnehmende/BeratungErwachsene/beratung-erwachsene-node.html',
+    keywords: ['migration', 'migrationsberatung', 'integration', 'integrationskurs', 'aufenthalt', 'auslaenderbehoerde', 'ausländerbehörde', 'duldung', 'asyl'],
+    note: 'Dort findest du Informationen zur Migrationsberatung und zu wohnortnahen Angeboten.',
+  },
+  {
+    id: 'familie',
+    label: 'Familienportal: Kindergeld',
+    url: 'https://familienportal.de/familienportal/familienleistungen/kindergeld',
+    keywords: ['kindergeld', 'kinderzuschlag', 'elterngeld', 'familienkasse', 'familie'],
+    note: 'Dort findest du Informationen zu Familienleistungen und weiteren zuständigen Stellen.',
+  },
+  {
+    id: 'schulden',
+    label: 'Verbraucherzentrale: Schuldnerberatung',
+    url: 'https://www.verbraucherzentrale.de/geld-versicherungen/kredit-schulden-insolvenz/schuldnerberatung-so-erkennen-sie-gute-angebote-95414',
+    keywords: ['schulden', 'schuldnerberatung', 'pfaendung', 'pfändung', 'inkasso', 'insolvenz', 'mietrueckstand', 'mietrückstand'],
+    note: 'Dort findest du Hinweise, wie du seriöse Schuldnerberatung erkennst.',
+  },
+];
+
+function hasLocalLookupIntent(normalizedQuery) {
+  return /\b(in meiner stadt|in meiner naehe|in der naehe|vor ort|bei mir|postleitzahl|plz|adresse|dienststelle|wo finde ich|wo ist|wo gibt es|wo bekomme ich)\b/.test(normalizedQuery);
+}
+
+function buildInstitutionFallback(query, { evidence = [], strongEvidence = [] } = {}) {
+  const normalized = normalizeGermanChars(String(query || '').toLowerCase());
+  if (!normalized.trim()) return null;
+
+  const matchedRoutes = INSTITUTION_FALLBACK_ROUTES
+    .map((route) => ({
+      ...route,
+      score: route.keywords.reduce((score, keyword) => {
+        const normalizedKeyword = normalizeGermanChars(String(keyword).toLowerCase());
+        return normalized.includes(normalizedKeyword) ? score + 1 : score;
+      }, 0),
+    }))
+    .filter((route) => {
+      if (route.score <= 0) return false;
+      if (!Array.isArray(route.cityKeywords) || route.cityKeywords.length === 0) return true;
+      return route.cityKeywords.some((keyword) => normalized.includes(normalizeGermanChars(String(keyword).toLowerCase())));
+    })
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
+
+  if (matchedRoutes.length === 0) return null;
+
+  const localIntent = hasLocalLookupIntent(normalized);
+  const weakEvidence = evidence.length === 0 || strongEvidence.length === 0;
+  if (!localIntent && !weakEvidence) return null;
+
+  const intro = localIntent
+    ? 'Dazu haben wir keinen verlässlichen lokalen Treffer im aktuellen Datenbestand.'
+    : 'Dazu haben wir gerade keinen ausreichend passenden Eintrag im aktuellen Datenbestand.';
+  const routeIntro = matchedRoutes.length === 1
+    ? 'Aufgrund deiner Frage passt wahrscheinlich diese Anlaufstelle:'
+    : 'Aufgrund deiner Stichwörter passen wahrscheinlich diese Anlaufstellen:';
+  const routeLines = matchedRoutes.map((route) =>
+    `- ${route.label}: ${route.note}\n[Quelle: ${route.url}]`
+  );
+
+  return {
+    answer: [intro, routeIntro, ...routeLines].join('\n\n'),
+    sources: matchedRoutes.map((route) => route.url),
+    routes: matchedRoutes,
+  };
+}
+
 export function getWorkersAiModel(env) {
   return env.CF_AI_MODEL || DEFAULT_MODEL;
 }
@@ -2091,6 +2253,50 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
   ])
     .filter((item) => Number(item.confidence || 0) >= 0.45)
     .slice(0, 5);
+  const institutionFallback = buildInstitutionFallback(query, { evidence, strongEvidence });
+  if (institutionFallback) {
+    return {
+      answer: institutionFallback.answer,
+      explanation: 'Keine genaue Antwort im Datenbestand; passende Anlaufstelle anhand der Anfrage vorgeschlagen.',
+      sources: institutionFallback.sources,
+      provider: env.AI ? 'workers-ai' : 'none',
+      model: env.AI ? getWorkersAiModel(env) : 'router',
+      fallback: true,
+      evidence,
+      evidence_lanes: lanes,
+      answer_lanes: {
+        official: {
+          answer: institutionFallback.answer,
+          sources: institutionFallback.sources,
+          explanation: null,
+        },
+        assistive: {
+          answer: null,
+          sources: [],
+          explanation: 'Keine zusätzliche Hilfsquelle vorgeschlagen.',
+        },
+        contacts: {
+          answer: null,
+          sources: [],
+          explanation: 'Keine konkrete lokale Kontaktstelle im Datenbestand.',
+        },
+      },
+      assistive_contacts: institutionFallback.routes.map((route) => ({
+        name: route.label,
+        url: route.url,
+        phone: null,
+        email: null,
+        source: route.url,
+        confidence: 0.7,
+      })),
+      weak_evidence: true,
+      usage: {},
+      retrieval: {
+        ...(retrievalDiagnostics || {}),
+        fallback_router: institutionFallback.routes.map((route) => route.id),
+      },
+    };
+  }
 
   async function synthesizeLane(laneName, laneEvidence, systemPromptSuffix) {
     if (laneEvidence.length === 0) {
@@ -2114,8 +2320,8 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
           systemPromptSuffix,
         userPrompt:
           `Nutzerfrage:\n${query}\n\nBelege:\n${compactEvidenceBlock(laneEvidence)}\n\n` +
-          'Antworte mit 2–4 konkreten Stichpunkten auf Deutsch. Nenne konkrete nächste Schritte, Adressen oder Leistungen aus den Belegen. Zitiere URLs als [Quelle: URL]. Beende jeden Stichpunkt vollständig.',
-        maxTokens: 320,
+          'Antworte mit konkreten Stichpunkten auf Deutsch. Beginne sofort mit dem ersten Stichpunkt, ohne Einleitung und ohne die Anzahl der Stichpunkte anzukündigen. Nenne konkrete nächste Schritte, Adressen oder Leistungen aus den Belegen. Setze Quellen immer als eigene Zeile direkt unter den passenden Stichpunkt im Format [Quelle: URL]. Beende jeden Stichpunkt und jede Quelle vollständig.',
+        maxTokens: 650,
       });
       return {
         answer: completion.text || extractiveSynthesisAnswer(laneEvidence),
@@ -2186,9 +2392,9 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
           'Wenn die Belege unzureichend sind, sage das klar. Antworte auf Deutsch.',
         userPrompt:
           `Nutzerfrage:\n${query}\n\nBelege:\n${compactEvidenceBlock(synthesisEvidence)}\n\n` +
-          'Antworte mit 2–4 konkreten Stichpunkten auf Deutsch. Beginne mit dem wichtigsten nächsten Schritt. ' +
-          'Nenne konkrete Leistungen, Anlaufstellen oder Anträge aus den Belegen. Zitiere URLs als [Quelle: URL]. Beende jeden Stichpunkt vollständig.',
-        maxTokens: 350,
+          'Antworte mit konkreten Stichpunkten auf Deutsch. Beginne sofort mit dem wichtigsten nächsten Schritt, ohne Einleitung und ohne die Anzahl der Stichpunkte anzukündigen. ' +
+          'Nenne konkrete Leistungen, Anlaufstellen oder Anträge aus den Belegen. Setze Quellen immer als eigene Zeile direkt unter den passenden Stichpunkt im Format [Quelle: URL]. Beende jeden Stichpunkt und jede Quelle vollständig.',
+        maxTokens: 800,
       }),
       (async () => {
         // Einfach gets a richer evidence pool that always includes contacts + assistive
@@ -2209,8 +2415,8 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
             'Beginne SOFORT mit dem ersten Stichpunkt. Kein einleitender Satz davor.',
           userPrompt:
             `Nutzerfrage:\n${query}\n\nBelege:\n${compactEvidenceBlock(einfachEvidence)}\n\n` +
-            'Schreibe 4–6 Stichpunkte auf Deutsch. Kurze Sätze. Jeder Punkt ein anderes Thema. Nenne konkrete Leistungen, nächste Schritte und Anlaufstellen mit URL. Zitiere URLs als [Quelle: URL].',
-          maxTokens: 450,
+            'Schreibe konkrete Stichpunkte auf Deutsch. Keine Einleitung. Keine Anzahl ankündigen. Kurze Sätze. Jeder Punkt ein anderes Thema. Nenne konkrete Leistungen, nächste Schritte und Anlaufstellen mit URL. Setze Quellen immer als eigene Zeile direkt unter den passenden Stichpunkt im Format [Quelle: URL]. Beende jeden Stichpunkt und jede Quelle vollständig.',
+          maxTokens: 900,
         });
       })(),
     ]);

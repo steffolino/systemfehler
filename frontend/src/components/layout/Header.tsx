@@ -22,7 +22,7 @@ export function Header() {
   const [searchValue, setSearchValue] = useState("");
   const { locale, setLocale, t } = useI18n();
 
-  const { isAuthenticated, loginWithRedirect, logout, user, isLoading, isConfigured } =
+  const { isAuthenticated, logout, user, isLoading, isConfigured } =
     useAppAuth();
 
   const location = useLocation();
@@ -51,9 +51,7 @@ export function Header() {
   };
 
   const handleLogin = () => {
-    loginWithRedirect({
-      appState: { returnTo: "/admin" },
-    });
+    navigate("/admin");
   };
 
   const handleLogout = () => {

@@ -19,6 +19,7 @@ interface SearchInputProps {
   placeholder?: string;
   enableAutocomplete?: boolean;
   onSubmit?: () => void;
+  disabled?: boolean;
 }
 
 function escapeRegExp(value: string): string {
@@ -32,6 +33,7 @@ export default function SearchInput({
   placeholder = 'Search...',
   enableAutocomplete = true,
   onSubmit,
+  disabled = false,
 }: SearchInputProps) {
   const [suggestions, setSuggestions] = useState<AutocompleteSuggestion[]>([]);
   const [isFocused, setIsFocused] = useState(false);
@@ -40,7 +42,7 @@ export default function SearchInput({
   useEffect(() => {
     let cancelled = false;
 
-    if (enableAutocomplete && value.trim().length > 1) {
+    if (!disabled && enableAutocomplete && value.trim().length > 1) {
       api.autocomplete({ query: value, limit: 8 }).then((results) => {
         if (!cancelled) {
           setSuggestions(
@@ -60,9 +62,9 @@ export default function SearchInput({
     return () => {
       cancelled = true;
     };
-  }, [enableAutocomplete, value]);
+  }, [disabled, enableAutocomplete, value]);
 
-  const showSuggestions = enableAutocomplete && isFocused && suggestions.length > 0;
+  const showSuggestions = !disabled && enableAutocomplete && isFocused && suggestions.length > 0;
 
   const normalizedSuggestions = useMemo(
     () =>
@@ -104,6 +106,7 @@ export default function SearchInput({
             window.setTimeout(() => setIsFocused(false), 120);
           }}
           onKeyDown={(e) => {
+            if (disabled) return;
             if (e.key === 'Enter' && onSubmit) {
               e.preventDefault();
               onSubmit();
@@ -111,6 +114,7 @@ export default function SearchInput({
           }}
           placeholder={placeholder}
           autoComplete="off"
+          disabled={disabled}
         />
       </div>
 

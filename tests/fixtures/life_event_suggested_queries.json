@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_at": "2026-05-17T19:03:04.249Z",
+  "generated_at": "2026-05-18T06:55:41.130Z",
   "source": {
     "suggestions_file": "frontend/src/data/life_event_suggested_questions.json",
     "life_events_file": "data/_topics/life_events.json"
@@ -9,7 +9,7 @@
   "queries": [
     {
       "id": "suggested-job_loss_start-01",
-      "query": "Ich bin arbeitslos geworden und habe eine kuendigung bekommen. Was sind meine ersten Schritte?",
+      "query": "Ich bin arbeitslos geworden und habe eine Kündigung bekommen. Was sind meine ersten Schritte?",
       "expected_life_event": "job_loss_start",
       "required_domains_any": [
         "benefits",
@@ -33,7 +33,7 @@
     },
     {
       "id": "suggested-job_loss_start-02",
-      "query": "Wie beantrage ich arbeitslosengeld oder buergergeld nach job verloren?",
+      "query": "Wie beantrage ich Arbeitslosengeld oder Bürgergeld nach einem Jobverlust?",
       "expected_life_event": "job_loss_start",
       "required_domains_any": [
         "benefits",
@@ -57,7 +57,7 @@
     },
     {
       "id": "suggested-job_loss_start-03",
-      "query": "Wo finde ich jobcenter oder arbeitsagentur beratung nach entlassen?",
+      "query": "Ich wurde entlassen. Wo bekomme ich Beratung beim Jobcenter oder bei der Arbeitsagentur?",
       "expected_life_event": "job_loss_start",
       "required_domains_any": [
         "benefits",
@@ -81,7 +81,7 @@
     },
     {
       "id": "suggested-short_work_or_hours_cut-01",
-      "query": "Mein arbeitgeber hat kurzarbeit eingefuehrt. Welche hilfe gibt es?",
+      "query": "Mein Arbeitgeber hat Kurzarbeit eingeführt. Welche Hilfe gibt es?",
       "expected_life_event": "short_work_or_hours_cut",
       "required_domains_any": [
         "benefits",
@@ -106,7 +106,7 @@
     },
     {
       "id": "suggested-short_work_or_hours_cut-02",
-      "query": "Meine arbeitszeit wurde reduziert durch kurzarbeit und ich habe einkommensausfall. Was nun?",
+      "query": "Meine Arbeitszeit wurde reduziert und mein Einkommen reicht nicht mehr. Was kann ich tun?",
       "expected_life_event": "short_work_or_hours_cut",
       "required_domains_any": [
         "benefits",
@@ -131,7 +131,7 @@
     },
     {
       "id": "suggested-short_work_or_hours_cut-03",
-      "query": "Wie bekomme ich kurzarbeitergeld wenn mein arbeitgeber kurzarbeit angemeldet hat?",
+      "query": "Wie bekomme ich Kurzarbeitergeld, wenn mein Arbeitgeber Kurzarbeit angemeldet hat?",
       "expected_life_event": "short_work_or_hours_cut",
       "required_domains_any": [
         "benefits",
@@ -156,7 +156,7 @@
     },
     {
       "id": "suggested-self_employment_failed-01",
-      "query": "Meine selbstaendig taetigkeit ist gescheitert. Welche absicherung gibt es jetzt?",
+      "query": "Meine selbständige Tätigkeit ist gescheitert. Welche Absicherung gibt es jetzt?",
       "expected_life_event": "self_employment_failed",
       "required_domains_any": [
         "aid",
@@ -182,7 +182,7 @@
     },
     {
       "id": "suggested-self_employment_failed-02",
-      "query": "Ich war selbstaendig und musste meine firma aufgeben. Wo bekomme ich jetzt hilfe?",
+      "query": "Ich musste meine Selbständigkeit aufgeben. Wo bekomme ich jetzt Hilfe?",
       "expected_life_event": "self_employment_failed",
       "required_domains_any": [
         "aid",
@@ -208,7 +208,7 @@
     },
     {
       "id": "suggested-self_employment_failed-03",
-      "query": "Wo bekomme ich beratung bei insolvenz und schuldnerberatung nach selbststaendig?",
+      "query": "Wo bekomme ich Beratung, wenn ich mein Gewerbe wegen Insolvenz aufgeben musste?",
       "expected_life_event": "self_employment_failed",
       "required_domains_any": [
         "aid",
@@ -234,7 +234,7 @@
     },
     {
       "id": "suggested-education_finished_no_income-01",
-      "query": "Meine ausbildung beendet und jetzt kein einkommen. Was kann ich beantragen?",
+      "query": "Meine Ausbildung ist beendet und ich habe noch kein Einkommen. Was kann ich beantragen?",
       "expected_life_event": "education_finished_no_income",
       "required_domains_any": [
         "benefits",
@@ -260,7 +260,7 @@
     },
     {
       "id": "suggested-education_finished_no_income-02",
-      "query": "Ich habe mein studium beendet und bin ohne job. Welche unterstuetzung gibt es?",
+      "query": "Ich habe mein Studium beendet und bin ohne Job. Welche Unterstützung gibt es?",
       "expected_life_event": "education_finished_no_income",
       "required_domains_any": [
         "benefits",
@@ -286,7 +286,7 @@
     },
     {
       "id": "suggested-education_finished_no_income-03",
-      "query": "Ich habe meine ausbildung beendet und bin auf jobsuche. Was kann ich bei berufsberatung oder arbeitsagentur beantragen?",
+      "query": "Ich habe meine Ausbildung beendet und suche Arbeit. Was kann ich bei Berufsberatung oder Arbeitsagentur beantragen?",
       "expected_life_event": "education_finished_no_income",
       "required_domains_any": [
         "benefits",
@@ -312,7 +312,7 @@
     },
     {
       "id": "suggested-low_income_topup-01",
-      "query": "Ich arbeite vollzeit im niedriglohn und mein geld reicht nicht. Was hilft?",
+      "query": "Ich arbeite Vollzeit, aber mein Geld reicht nicht. Welche Unterstützung gibt es?",
       "expected_life_event": "low_income_topup",
       "required_domains_any": [
         "benefits",
@@ -338,7 +338,7 @@
     },
     {
       "id": "suggested-low_income_topup-02",
-      "query": "Wie funktioniert aufstockung mit buergergeld bei zu wenig lohn?",
+      "query": "Wie funktioniert Aufstockung mit Bürgergeld bei zu wenig Lohn?",
       "expected_life_event": "low_income_topup",
       "required_domains_any": [
         "benefits",
@@ -364,7 +364,7 @@
     },
     {
       "id": "suggested-low_income_topup-03",
-      "query": "Kann ich bei niedriglohn aufstockung mit wohngeld oder kinderzuschlag bekommen?",
+      "query": "Kann ich bei niedrigem Einkommen Aufstockung, Wohngeld oder Kinderzuschlag bekommen?",
       "expected_life_event": "low_income_topup",
       "required_domains_any": [
         "benefits",
@@ -390,7 +390,7 @@
     },
     {
       "id": "suggested-upskilling-01",
-      "query": "Wie bekomme ich einen bildungsgutschein fuer weiterbildung?",
+      "query": "Wie bekomme ich einen Bildungsgutschein für Weiterbildung?",
       "expected_life_event": "upskilling",
       "required_domains_any": [
         "benefits",
@@ -415,7 +415,7 @@
     },
     {
       "id": "suggested-upskilling-02",
-      "query": "Ich brauche umschulung wegen jobwechsel. Welche foerderung gibt es?",
+      "query": "Ich brauche wegen eines Jobwechsels eine Umschulung. Welche Förderung gibt es?",
       "expected_life_event": "upskilling",
       "required_domains_any": [
         "benefits",
@@ -440,7 +440,7 @@
     },
     {
       "id": "suggested-upskilling-03",
-      "query": "Wo finde ich berufsberatung fuer fortbildung und qualifizierung?",
+      "query": "Wo bekomme ich Berufsberatung zu Fortbildung und Qualifizierung?",
       "expected_life_event": "upskilling",
       "required_domains_any": [
         "benefits",
@@ -465,7 +465,7 @@
     },
     {
       "id": "suggested-family_children-01",
-      "query": "Ich habe ein baby bekommen. Wie beantrage ich kindergeld und elterngeld?",
+      "query": "Ich habe ein Baby bekommen. Wie beantrage ich Kindergeld und Elterngeld?",
       "expected_life_event": "family_children",
       "required_domains_any": [
         "benefits",
@@ -489,7 +489,7 @@
     },
     {
       "id": "suggested-family_children-02",
-      "query": "Welche hilfe fuer familie gibt es bei kinderzuschlag und familienkasse?",
+      "query": "Welche Hilfe für Familien gibt es bei Kinderzuschlag und Familienkasse?",
       "expected_life_event": "family_children",
       "required_domains_any": [
         "benefits",
@@ -513,7 +513,7 @@
     },
     {
       "id": "suggested-family_children-03",
-      "query": "Ich habe kinder und wenig geld. Welche leistungen gibt es jetzt?",
+      "query": "Ich habe Kinder und wenig Geld. Welche Leistungen kommen jetzt infrage?",
       "expected_life_event": "family_children",
       "required_domains_any": [
         "benefits",
@@ -537,7 +537,7 @@
     },
     {
       "id": "suggested-single_parent_new-01",
-      "query": "Ich bin jetzt alleinerziehend. Welche hilfe kann ich sofort beantragen?",
+      "query": "Ich bin jetzt alleinerziehend. Welche Hilfe kann ich sofort beantragen?",
       "expected_life_event": "single_parent_new",
       "required_domains_any": [
         "benefits",
@@ -562,7 +562,7 @@
     },
     {
       "id": "suggested-single_parent_new-02",
-      "query": "Wie bekomme ich unterhaltsvorschuss wenn ich allein mit kind bin?",
+      "query": "Wie bekomme ich Unterhaltsvorschuss, wenn ich allein mit meinem Kind bin?",
       "expected_life_event": "single_parent_new",
       "required_domains_any": [
         "benefits",
@@ -587,7 +587,7 @@
     },
     {
       "id": "suggested-single_parent_new-03",
-      "query": "Welche leistungen fuer alleinerziehend gibt es bei kindergeld und wohngeld?",
+      "query": "Welche Leistungen für Alleinerziehende gibt es bei Kindergeld, Wohngeld und Unterhalt?",
       "expected_life_event": "single_parent_new",
       "required_domains_any": [
         "benefits",
@@ -612,7 +612,7 @@
     },
     {
       "id": "suggested-separation_divorce-01",
-      "query": "Nach trennung brauche ich finanzielle hilfe. Was ist moeglich?",
+      "query": "Nach einer Trennung brauche ich finanzielle Hilfe. Was ist möglich?",
       "expected_life_event": "separation_divorce",
       "required_domains_any": [
         "aid",
@@ -638,7 +638,7 @@
     },
     {
       "id": "suggested-separation_divorce-02",
-      "query": "Welche unterstuetzung gibt es bei scheidung und unterhalt?",
+      "query": "Welche Unterstützung gibt es bei Scheidung und Unterhalt?",
       "expected_life_event": "separation_divorce",
       "required_domains_any": [
         "aid",
@@ -664,7 +664,7 @@
     },
     {
       "id": "suggested-separation_divorce-03",
-      "query": "Wo bekomme ich beratung zu unterhaltsvorschuss und gemeinsamer wohnung nach trennung?",
+      "query": "Wo bekomme ich Beratung zu Unterhaltsvorschuss, Sorgerecht und gemeinsamer Wohnung nach der Trennung?",
       "expected_life_event": "separation_divorce",
       "required_domains_any": [
         "aid",
@@ -690,7 +690,7 @@
     },
     {
       "id": "suggested-caregiving_relatives-01",
-      "query": "Ich habe pflege angehoerige uebernommen. Welche leistungen gibt es?",
+      "query": "Ich habe die Pflege von Angehörigen übernommen. Welche Leistungen gibt es?",
       "expected_life_event": "caregiving_relatives",
       "required_domains_any": [
         "benefits",
@@ -716,7 +716,7 @@
     },
     {
       "id": "suggested-caregiving_relatives-02",
-      "query": "Wie beantrage ich pflegegrad und pflegegeld fuer pflege zuhause?",
+      "query": "Wie beantrage ich Pflegegrad und Pflegegeld für Pflege zuhause?",
       "expected_life_event": "caregiving_relatives",
       "required_domains_any": [
         "benefits",
@@ -742,7 +742,7 @@
     },
     {
       "id": "suggested-caregiving_relatives-03",
-      "query": "Wo finde ich pflegeberatung, entlastungsbetrag und pflegegrad hilfe bei pflege angehoerige?",
+      "query": "Wo bekomme ich Pflegeberatung zu Entlastungsbetrag und Hilfe für pflegende Angehörige?",
       "expected_life_event": "caregiving_relatives",
       "required_domains_any": [
         "benefits",
@@ -768,7 +768,7 @@
     },
     {
       "id": "suggested-migration_arrival-01",
-      "query": "Ich bin neu in deutschland angekommen. Welche ersten hilfen gibt es?",
+      "query": "Ich bin neu in Deutschland angekommen. Welche ersten Hilfen gibt es?",
       "expected_life_event": "migration_arrival",
       "required_domains_any": [
         "aid",
@@ -794,7 +794,7 @@
     },
     {
       "id": "suggested-migration_arrival-02",
-      "query": "Wo finde ich integrationskurs und sprachkurs mit beratung?",
+      "query": "Wo bekomme ich Beratung zu Integrationskurs, Sprachkurs und Arbeit?",
       "expected_life_event": "migration_arrival",
       "required_domains_any": [
         "aid",
@@ -820,7 +820,7 @@
     },
     {
       "id": "suggested-migration_arrival-03",
-      "query": "Welche leistungen kann ich bei jobcenter als neu im land beantragen?",
+      "query": "Welche Leistungen kann ich beim Jobcenter beantragen, wenn ich neu in Deutschland bin?",
       "expected_life_event": "migration_arrival",
       "required_domains_any": [
         "aid",
@@ -846,7 +846,7 @@
     },
     {
       "id": "suggested-unclear_residence_status-01",
-      "query": "Mein aufenthaltsstatus unklar mit duldung. Wo bekomme ich schnelle beratung?",
+      "query": "Mein Aufenthaltsstatus ist unklar und ich habe eine Duldung. Wo bekomme ich schnelle Beratung?",
       "expected_life_event": "unclear_residence_status",
       "required_domains_any": [
         "aid",
@@ -872,7 +872,7 @@
     },
     {
       "id": "suggested-unclear_residence_status-02",
-      "query": "Ich habe nur duldung oder fiktionsbescheinigung. Welche hilfe gibt es?",
+      "query": "Ich habe nur eine Duldung oder Fiktionsbescheinigung. Welche Hilfe gibt es?",
       "expected_life_event": "unclear_residence_status",
       "required_domains_any": [
         "aid",
@@ -898,7 +898,7 @@
     },
     {
       "id": "suggested-unclear_residence_status-03",
-      "query": "Welche stellen helfen bei aufenthalt abgelaufen und auslaenderbehoerde terminen?",
+      "query": "Welche Stellen helfen bei abgelaufenem Aufenthalt und Terminen bei der Ausländerbehörde?",
       "expected_life_event": "unclear_residence_status",
       "required_domains_any": [
         "aid",
@@ -924,7 +924,7 @@
     },
     {
       "id": "suggested-recognition_missing-01",
-      "query": "Meine abschluesse anerkennung fehlt bei berufsanerkennung. Welche schritte muss ich gehen?",
+      "query": "Meine Abschlussanerkennung fehlt. Welche Schritte brauche ich für die Berufsanerkennung?",
       "expected_life_event": "recognition_missing",
       "required_domains_any": [
         "aid",
@@ -950,7 +950,7 @@
     },
     {
       "id": "suggested-recognition_missing-02",
-      "query": "Wo bekomme ich anerkennungsberatung fuer berufsanerkennung?",
+      "query": "Wo bekomme ich Anerkennungsberatung für meine Berufsanerkennung?",
       "expected_life_event": "recognition_missing",
       "required_domains_any": [
         "aid",
@@ -976,7 +976,7 @@
     },
     {
       "id": "suggested-recognition_missing-03",
-      "query": "Wie beantrage ich berufsanerkennung und anerkennung von zeugnis in deutschland?",
+      "query": "Wie beantrage ich Berufsanerkennung oder die Anerkennung von Zeugnissen in Deutschland?",
       "expected_life_event": "recognition_missing",
       "required_domains_any": [
         "aid",
@@ -1002,7 +1002,7 @@
     },
     {
       "id": "suggested-health_disruption-01",
-      "query": "Ich bin krank geworden und arbeitsunfaehig. Welche leistungen gibt es?",
+      "query": "Ich bin krank geworden und arbeitsunfähig. Welche Leistungen gibt es?",
       "expected_life_event": "health_disruption",
       "required_domains_any": [
         "benefits",
@@ -1028,7 +1028,7 @@
     },
     {
       "id": "suggested-health_disruption-02",
-      "query": "Wie bekomme ich krankengeld und welche antraege brauche ich?",
+      "query": "Wie bekomme ich Krankengeld und welche Anträge brauche ich?",
       "expected_life_event": "health_disruption",
       "required_domains_any": [
         "benefits",
@@ -1054,7 +1054,7 @@
     },
     {
       "id": "suggested-health_disruption-03",
-      "query": "Wo finde ich beratung zu reha und absicherung bei gesundheit problemen?",
+      "query": "Wo bekomme ich Beratung zu Reha und finanzieller Absicherung bei gesundheitlichen Problemen?",
       "expected_life_event": "health_disruption",
       "required_domains_any": [
         "benefits",
@@ -1080,7 +1080,7 @@
     },
     {
       "id": "suggested-long_term_work_incapacity-01",
-      "query": "Ich bin langfristig arbeitsunfaehig. Welche finanzielle hilfe gibt es?",
+      "query": "Ich bin langfristig arbeitsunfähig. Welche finanzielle Hilfe gibt es?",
       "expected_life_event": "long_term_work_incapacity",
       "required_domains_any": [
         "benefits",
@@ -1105,7 +1105,7 @@
     },
     {
       "id": "suggested-long_term_work_incapacity-02",
-      "query": "Wie beantrage ich erwerbsminderungsrente oder grundsicherung?",
+      "query": "Wie beantrage ich Erwerbsminderungsrente oder Grundsicherung?",
       "expected_life_event": "long_term_work_incapacity",
       "required_domains_any": [
         "benefits",
@@ -1130,7 +1130,7 @@
     },
     {
       "id": "suggested-long_term_work_incapacity-03",
-      "query": "Wo bekomme ich beratung zu reha, sozialamt und dauerhaft krank?",
+      "query": "Wo bekomme ich Beratung zu Reha, Sozialamt und Hilfe, wenn ich dauerhaft krank bin?",
       "expected_life_event": "long_term_work_incapacity",
       "required_domains_any": [
         "benefits",
@@ -1155,7 +1155,7 @@
     },
     {
       "id": "suggested-mental_burnout-01",
-      "query": "Ich habe burnout und psychische belastung. Wo bekomme ich hilfe?",
+      "query": "Ich habe Burnout und psychische Belastung. Wo bekomme ich Hilfe?",
       "expected_life_event": "mental_burnout",
       "required_domains_any": [
         "aid",
@@ -1181,7 +1181,7 @@
     },
     {
       "id": "suggested-mental_burnout-02",
-      "query": "Welche leistungen gibt es bei depression und krankschreibung?",
+      "query": "Welche Leistungen gibt es bei Depression und Krankschreibung?",
       "expected_life_event": "mental_burnout",
       "required_domains_any": [
         "aid",
@@ -1207,7 +1207,7 @@
     },
     {
       "id": "suggested-mental_burnout-03",
-      "query": "Wo finde ich krisenhilfe und psychosoziale beratung bei ueberlastet?",
+      "query": "Wo finde ich Krisenhilfe und psychosoziale Beratung bei Überlastung?",
       "expected_life_event": "mental_burnout",
       "required_domains_any": [
         "aid",
@@ -1233,7 +1233,7 @@
     },
     {
       "id": "suggested-housing_loss_homelessness_risk-01",
-      "query": "Ich habe eine kuendigung wohnung bekommen und drohe obdachlos zu werden. Hilfe?",
+      "query": "Ich habe eine Kündigung der Wohnung bekommen und drohe obdachlos zu werden. Wo bekomme ich Hilfe?",
       "expected_life_event": "housing_loss_homelessness_risk",
       "required_domains_any": [
         "aid",
@@ -1259,7 +1259,7 @@
     },
     {
       "id": "suggested-housing_loss_homelessness_risk-02",
-      "query": "Was kann ich tun bei raeumung und wohnung verloren?",
+      "query": "Was kann ich bei Räumung und drohendem Wohnungsverlust tun?",
       "expected_life_event": "housing_loss_homelessness_risk",
       "required_domains_any": [
         "aid",
@@ -1285,7 +1285,7 @@
     },
     {
       "id": "suggested-housing_loss_homelessness_risk-03",
-      "query": "Wo finde ich wohnungsnotfall hilfe und notunterkunft wenn ich wohnung verloren habe?",
+      "query": "Wo finde ich Wohnungsnotfallhilfe und eine Notunterkunft, wenn ich meine Wohnung verloren habe?",
       "expected_life_event": "housing_loss_homelessness_risk",
       "required_domains_any": [
         "aid",
@@ -1311,7 +1311,7 @@
     },
     {
       "id": "suggested-energy_cost_unaffordable-01",
-      "query": "Ich kann strom und heizkosten nicht mehr zahlen. Welche hilfe gibt es?",
+      "query": "Ich kann Strom und Heizkosten nicht mehr zahlen. Welche Hilfe gibt es?",
       "expected_life_event": "energy_cost_unaffordable",
       "required_domains_any": [
         "aid",
@@ -1337,7 +1337,7 @@
     },
     {
       "id": "suggested-energy_cost_unaffordable-02",
-      "query": "Was tun bei energieschulden und drohender abschaltung?",
+      "query": "Was kann ich bei Energieschulden und drohender Abschaltung tun?",
       "expected_life_event": "energy_cost_unaffordable",
       "required_domains_any": [
         "aid",
@@ -1363,7 +1363,7 @@
     },
     {
       "id": "suggested-energy_cost_unaffordable-03",
-      "query": "Wie bekomme ich darlehen oder notfallhilfe bei energiekosten nicht bezahlbar?",
+      "query": "Wie bekomme ich ein Darlehen oder Notfallhilfe bei unbezahlbaren Energiekosten?",
       "expected_life_event": "energy_cost_unaffordable",
       "required_domains_any": [
         "aid",
@@ -1389,7 +1389,7 @@
     },
     {
       "id": "suggested-sanctions_conflict-01",
-      "query": "Meine leistung wurde gekuerzt durch sanktion. Was kann ich tun?",
+      "query": "Meine Leistung wurde durch eine Sanktion gekürzt. Was kann ich tun?",
       "expected_life_event": "sanctions_conflict",
       "required_domains_any": [
         "benefits",
@@ -1415,7 +1415,7 @@
     },
     {
       "id": "suggested-sanctions_conflict-02",
-      "query": "Wie lege ich widerspruch gegen einen bescheid ein und welche frist gilt?",
+      "query": "Wie lege ich Widerspruch gegen einen Bescheid ein und welche Frist gilt?",
       "expected_life_event": "sanctions_conflict",
       "required_domains_any": [
         "benefits",
@@ -1441,7 +1441,7 @@
     },
     {
       "id": "suggested-sanctions_conflict-03",
-      "query": "Wo bekomme ich rechtsberatung bei pflichtverletzung und sanktion?",
+      "query": "Wo bekomme ich Rechtsberatung bei Sanktion, Pflichtverletzung oder Ärger mit dem Jobcenter?",
       "expected_life_event": "sanctions_conflict",
       "required_domains_any": [
         "benefits",
@@ -1467,7 +1467,7 @@
     },
     {
       "id": "suggested-debt_crisis-01",
-      "query": "Ich habe schulden und miete rueckstand. Wo bekomme ich schnelle hilfe?",
+      "query": "Ich habe Schulden und Mietrückstand. Wo bekomme ich schnelle Hilfe?",
       "expected_life_event": "debt_crisis",
       "required_domains_any": [
         "aid",
@@ -1491,7 +1491,7 @@
     },
     {
       "id": "suggested-debt_crisis-02",
-      "query": "Was kann ich bei pfaendung und finanzieller krise sofort tun?",
+      "query": "Was kann ich bei Pfändung und finanzieller Krise sofort tun?",
       "expected_life_event": "debt_crisis",
       "required_domains_any": [
         "aid",
@@ -1515,7 +1515,7 @@
     },
     {
       "id": "suggested-debt_crisis-03",
-      "query": "Wo finde ich schuldnerberatung bei schulden, pfaendung und notfallhilfe?",
+      "query": "Wo finde ich Schuldnerberatung bei Schulden, Pfändung und akuter Notlage?",
       "expected_life_event": "debt_crisis",
       "required_domains_any": [
         "aid",

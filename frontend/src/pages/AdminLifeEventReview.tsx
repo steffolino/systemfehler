@@ -3,17 +3,19 @@ import { useEffect, useMemo, useState } from 'react';
 import { api, type LifeEventOverride, type LifeEventReviewCase } from '@/lib/api';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useAppAuth } from '@/lib/auth';
 
 type CaseStatusFilter = 'open' | 'resolved' | 'all';
 
 export default function AdminLifeEventReview() {
+  const { isDemoReadOnly } = useAppAuth();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<CaseStatusFilter>('open');
   const [cases, setCases] = useState<LifeEventReviewCase[]>([]);
   const [overrides, setOverrides] = useState<LifeEventOverride[]>([]);
-  const [lifeEvents, setLifeEvents] = useState<Array<{ id: string; label_de: string }>>([]);
+  const [lifeEvents, setLifeEvents] = useState<Array<{ id: string; label_de: string; tagwords: string[] }>>([]);
   const [selectedCaseId, setSelectedCaseId] = useState<string | null>(null);
   const [triggerText, setTriggerText] = useState('');
   const [targetLifeEvent, setTargetLifeEvent] = useState('');
@@ -34,6 +36,7 @@ export default function AdminLifeEventReview() {
       setLifeEvents((health.retrieval?.lifeEvents || []).map((item) => ({
         id: item.id,
         label_de: item.label_de || item.id,
+        tagwords: Array.isArray(item.tagwords) ? item.tagwords : [],
       })));
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load life-event review data');
@@ -65,8 +68,13 @@ export default function AdminLifeEventReview() {
   }, [cases, selectedCase, targetLifeEvent]);
 
   async function applyOverride() {
+    if (isDemoReadOnly) {
+      setError('Demo-Zugang ist read-only. Overrides können hier nur angesehen werden.');
+      return;
+    }
+
     if (!selectedCase || !triggerText.trim() || !targetLifeEvent.trim()) {
-      setError('Bitte Trigger-Text und Ziel-Lebenssituation ausfuellen.');
+      setError('Bitte Trigger-Text und Ziel-Lebenssituation ausfüllen.');
       return;
     }
 
@@ -91,6 +99,11 @@ export default function AdminLifeEventReview() {
   }
 
   async function disableOverride(overrideId: string) {
+    if (isDemoReadOnly) {
+      setError('Demo-Zugang ist read-only. Overrides können hier nur angesehen werden.');
+      return;
+    }
+
     setSaving(true);
     setError(null);
     try {
@@ -122,11 +135,16 @@ export default function AdminLifeEventReview() {
           </p>
         </div>
         <div className="text-sm text-muted-foreground">
-          {loading ? 'Lade Review-Daten...' : `${cases.length} Review-Faelle - ${activeOverrides.length} aktive Overrides`}
+          {loading ? 'Lade Review-Daten...' : `${cases.length} Review-Fälle - ${activeOverrides.length} aktive Overrides`}
         </div>
       </div>
 
       {error && <Card className="mb-4 border-red-200 bg-red-50 p-4 text-sm text-red-700">{error}</Card>}
+      {isDemoReadOnly && (
+        <Card className="mb-4 border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+          Demo-Zugang: read-only. Review-Fälle und Overrides sind sichtbar, aber Änderungen sind deaktiviert.
+        </Card>
+      )}
 
       <Card className="mb-4 p-4">
         <div className="mb-3 flex flex-col gap-1 md:flex-row md:items-center md:justify-between">
@@ -166,6 +184,18 @@ export default function AdminLifeEventReview() {
               <div key={item.id} className="rounded-md border p-3">
                 <div className="text-sm font-medium">{item.label_de}</div>
                 <div className="mt-1 text-xs text-muted-foreground">{item.id}</div>
+                {item.tagwords.length > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {item.tagwords.slice(0, 8).map((tagword) => (
+                      <span
+                        key={tagword}
+                        className="inline-flex rounded-full border bg-muted px-2 py-0.5 text-[11px] text-muted-foreground"
+                      >
+                        {tagword}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -197,14 +227,14 @@ export default function AdminLifeEventReview() {
             <div className="p-3 text-sm text-muted-foreground">Lade...</div>
           ) : cases.length === 0 ? (
             <div className="space-y-2 p-3 text-sm text-muted-foreground">
-              <div className="font-medium text-foreground">Keine Review-Faelle fuer diesen Filter.</div>
+              <div className="font-medium text-foreground">Keine Review-Fälle für diesen Filter.</div>
               <p>
-                Das ist fuer die Demo okay: Die Queue fuellt sich erst, wenn echte
-                Such- oder Chatfragen als mehrdeutig, widerspruechlich oder
-                niedrig vertrauenswuerdig markiert werden.
+                Das ist für die Demo okay: Die Queue füllt sich erst, wenn echte
+                Such- oder Chatfragen als mehrdeutig, widersprüchlich oder
+                niedrig vertrauenswürdig markiert werden.
               </p>
               <p>
-                Sobald ein Fall vorhanden ist, kann links eine Frage ausgewaehlt
+                Sobald ein Fall vorhanden ist, kann links eine Frage ausgewählt
                 und rechts ein passender Life-Event-Override angelegt werden.
               </p>
             </div>
@@ -247,11 +277,11 @@ export default function AdminLifeEventReview() {
           <Card className="p-4">
             {!selectedCase ? (
               <div className="space-y-2 text-sm text-muted-foreground">
-                <div className="font-medium text-foreground">Kein Fall ausgewaehlt.</div>
+                <div className="font-medium text-foreground">Kein Fall ausgewählt.</div>
                 <p>
-                  Wenn Review-Faelle vorhanden sind, erscheint hier das Formular
-                  zum Korrigieren der Zuordnung: Trigger-Text pruefen,
-                  Ziel-Lebenssituation waehlen, Notiz erfassen und Override
+                  Wenn Review-Fälle vorhanden sind, erscheint hier das Formular
+                  zum Korrigieren der Zuordnung: Trigger-Text prüfen,
+                  Ziel-Lebenssituation wählen, Notiz erfassen und Override
                   speichern.
                 </p>
               </div>
@@ -269,6 +299,7 @@ export default function AdminLifeEventReview() {
                       className="min-h-24 w-full rounded-md border bg-background px-3 py-2"
                       value={triggerText}
                       onChange={(event) => setTriggerText(event.target.value)}
+                      disabled={isDemoReadOnly}
                     />
                   </label>
 
@@ -278,8 +309,9 @@ export default function AdminLifeEventReview() {
                       className="h-10 w-full rounded-md border bg-background px-3"
                       value={targetLifeEvent}
                       onChange={(event) => setTargetLifeEvent(event.target.value)}
+                      disabled={isDemoReadOnly}
                     >
-                      <option value="">Bitte waehlen</option>
+                      <option value="">Bitte wählen</option>
                       {lifeEvents.map((item) => (
                         <option key={item.id} value={item.id}>{item.id} - {item.label_de}</option>
                       ))}
@@ -294,6 +326,7 @@ export default function AdminLifeEventReview() {
                       className="h-10 w-full rounded-md border bg-background px-3"
                       value={reviewer}
                       onChange={(event) => setReviewer(event.target.value)}
+                      disabled={isDemoReadOnly}
                     />
                   </label>
 
@@ -303,12 +336,13 @@ export default function AdminLifeEventReview() {
                       className="h-10 w-full rounded-md border bg-background px-3"
                       value={note}
                       onChange={(event) => setNote(event.target.value)}
+                      disabled={isDemoReadOnly}
                     />
                   </label>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Button onClick={applyOverride} disabled={saving}>
+                  <Button onClick={applyOverride} disabled={isDemoReadOnly || saving}>
                     {saving ? 'Speichere...' : 'Override anlegen und Fall aufgeloest markieren'}
                   </Button>
                 </div>
@@ -321,7 +355,7 @@ export default function AdminLifeEventReview() {
             {activeOverrides.length === 0 ? (
               <div className="text-sm text-muted-foreground">
                 Noch keine aktiven Overrides. Angelegte Korrekturen werden hier
-                mit Trigger-Text, Ziel-Lebenssituation und Anwendungszaehler
+                mit Trigger-Text, Ziel-Lebenssituation und Anwendungszähler
                 sichtbar.
               </div>
             ) : (
@@ -332,7 +366,7 @@ export default function AdminLifeEventReview() {
                     <div className="mt-1 text-xs text-muted-foreground">Trigger: {item.trigger_text}</div>
                     <div className="mt-1 text-xs text-muted-foreground">Applied: {item.applied_count}</div>
                     <div className="mt-2">
-                      <Button variant="outline" size="sm" disabled={saving} onClick={() => disableOverride(item.id)}>
+                      <Button variant="outline" size="sm" disabled={isDemoReadOnly || saving} onClick={() => disableOverride(item.id)}>
                         Deaktivieren
                       </Button>
                     </div>

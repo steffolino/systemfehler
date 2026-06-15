@@ -4,6 +4,9 @@ Systemfehler is a modular, extensible, preservation-oriented data platform for s
 
 The goal is to make information about social rights and support more transparent, accessible, and robust against removal or silent change.
 
+For a high-level German overview for non-technical readers, see
+[`docs/ueberblick.md`](docs/ueberblick.md).
+
 ## Current Snapshot (2026-05-03)
 
 - Real data is published for all five domains (`benefits`, `aid`, `tools`, `organizations`, `contacts`).
@@ -88,9 +91,10 @@ scripts/
 
 docs/
   architecture.md
-  onboarding.md
+  current-state.md
+  status.md
+  ueberblick.md
   vision.md
-  blueprint.md
 ```
 
 For details, see `docs/architecture.md`.
@@ -302,9 +306,10 @@ See `cloudflare-pages/README.md` for setup details.
 For a detailed description of the architecture, see:
 
 * `docs/architecture.md` – architectural overview and data flow.
-* `docs/blueprint.md` – system diagrams (PlantUML and Mermaid).
+* `docs/ueberblick.md` – German high-level overview for non-technical readers.
 * `docs/vision.md` – strategic and stakeholder-focused overview.
-* `docs/data-synthetic-inventory.md` – current synthetic/placeholder data inventory and replacement status.
+* `docs/current-state.md` – current implemented state and active documentation map.
+* `docs/status.md` – implementation status and known operational limits.
 
 ---
 

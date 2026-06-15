@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { localEvaluateEntries, retrieveEvidence } from '../cloudflare-pages/functions/api/_lib/ai.js';
+import { buildSynthesis, localEvaluateEntries, retrieveEvidence } from '../cloudflare-pages/functions/api/_lib/ai.js';
 
 const DOMAINS = ['benefits', 'aid', 'tools', 'organizations', 'contacts'];
 
@@ -109,4 +109,70 @@ test('retrieval includes curated official care evidence when keyword DB search m
   assert.ok(result.evidence.length >= 2);
   assert.ok(result.evidence.some((item) => item.source.includes('bundesgesundheitsministerium.de')));
   assert.ok(result.evidence.some((item) => item.source.includes('pflegelotse.de')));
+});
+
+test('synthesis routes local institution questions to official finders when exact data is unavailable', async () => {
+  const response = await buildSynthesis(
+    {},
+    'Wo finde ich eine Arbeitsagentur in meiner Stadt?',
+    [],
+    { retrieval_mode: 'keyword' },
+    { official: [], assistive: [], contacts: [], context: [] }
+  );
+
+  assert.equal(response.fallback, true);
+  assert.equal(response.weak_evidence, true);
+  assert.match(response.answer, /keinen verlässlichen lokalen Treffer/i);
+  assert.match(response.answer, /Bundesagentur für Arbeit/i);
+  assert.ok(response.sources.includes('https://web.arbeitsagentur.de/portal/metasuche/suche/dienststellen'));
+  assert.deepEqual(response.retrieval.fallback_router, ['arbeitsagentur']);
+});
+
+test('synthesis routes weak health questions to a matching official institution source', async () => {
+  const response = await buildSynthesis(
+    {},
+    'Welche Stelle hilft bei Krankengeld?',
+    [],
+    { retrieval_mode: 'keyword' },
+    { official: [], assistive: [], contacts: [], context: [] }
+  );
+
+  assert.equal(response.fallback, true);
+  assert.match(response.answer, /keinen ausreichend passenden Eintrag/i);
+  assert.match(response.answer, /Bundesgesundheitsministerium: Krankengeld/i);
+  assert.ok(response.sources.includes('https://www.bundesgesundheitsministerium.de/krankengeld'));
+});
+
+test('synthesis prioritizes local Sozialamt lookup over thematic benefit evidence', async () => {
+  const evidence = [
+    {
+      source: 'https://www.deutsche-rentenversicherung.de/',
+      confidence: 0.88,
+      content: JSON.stringify({
+        title: 'Grundsicherung bei Erwerbsminderung und Reha',
+        url: 'https://www.deutsche-rentenversicherung.de/',
+        domain: 'benefits',
+        summary: { de: 'Thematischer Beleg, aber keine lokale Sozialamt-Adresse.' },
+        provenance: {
+          source: 'https://www.deutsche-rentenversicherung.de/',
+          sourceTier: 'tier_2_official',
+          sourceRole: 'official_info',
+        },
+      }),
+    },
+  ];
+
+  const response = await buildSynthesis(
+    {},
+    'Und wo ist das Sozialamt in Leipzig?',
+    evidence,
+    { retrieval_mode: 'keyword' },
+    { official: evidence, assistive: [], contacts: [], context: [] }
+  );
+
+  assert.equal(response.fallback, true);
+  assert.match(response.answer, /keinen verlässlichen lokalen Treffer/i);
+  assert.match(response.answer, /Stadt Leipzig/i);
+  assert.ok(response.sources.includes('https://www.leipzig.de/'));
+  assert.ok(response.retrieval.fallback_router.includes('stadt_leipzig_sozialamt'));
 });
