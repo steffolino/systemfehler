@@ -44,9 +44,9 @@ jobs:
         run: |
           # Basic check: try to load core schema with python jsonschema
           python - <<'PY'
-import json, sys
-from jsonschema import Draft7Validator
-with open('data/_schemas/core.schema.json','r',encoding='utf-8') as f:
-    s=json.load(f)
-print('Loaded core.schema.json, version', s.get('version'))
-PY
+          import json, sys
+          from jsonschema import Draft7Validator
+          with open('data/_schemas/core.schema.json','r',encoding='utf-8') as f:
+              s=json.load(f)
+          print('Loaded core.schema.json, version', s.get('version'))
+          PY
