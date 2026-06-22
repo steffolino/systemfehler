@@ -1248,6 +1248,17 @@ function scoreEntry(query, entry, context = null, scenarioPack = null) {
   }
 
   if (
+    (title.includes('selbststaendigkeit mit kind') || url.includes('/selbststaendigkeit')) &&
+    !q.includes('selbst') &&
+    !q.includes('selbstaendig') &&
+    !q.includes('selbstständig') &&
+    !q.includes('freiberuf') &&
+    !q.includes('unternehmen')
+  ) {
+    score -= 55;
+  }
+
+  if (
     (q.includes('energie') || q.includes('strom') || q.includes('heizkosten') || q.includes('abschaltung')) &&
     !q.includes('wohnung') &&
     !q.includes('obdach') &&

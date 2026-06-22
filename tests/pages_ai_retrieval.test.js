@@ -167,6 +167,47 @@ test('compound single-parent and illness query keeps health evidence near the to
   );
 });
 
+test('family application retrieval keeps self-employment context out of top results', () => {
+  const entries = loadEntries();
+  const scenarios = loadJson('data/_topics/life_events.json').scenarios;
+  const packs = loadJson('data/_topics/life_event_resource_packs.json');
+  const topics = loadJson('data/_topics/topic_links.json');
+  const result = localEvaluateEntries(
+    entries,
+    'Wo kann ich Kindergeld und Kinderzuschlag beantragen?',
+    {
+      lifeEventScenarios: scenarios,
+      lifeEventResourcePacks: packs,
+      topicLinks: topics,
+    }
+  );
+
+  const topTitles = result.results.slice(0, 5).map((item) => item.title);
+  assert.ok(topTitles.some((title) => /Kindergeld-Antrag/i.test(title)));
+  assert.ok(topTitles.some((title) => /Kinderzuschlag/i.test(title)));
+  assert.ok(!topTitles.some((title) => /Selbstst/i.test(title)));
+});
+
+test('family amount retrieval keeps self-employment context out of top results', () => {
+  const entries = loadEntries();
+  const scenarios = loadJson('data/_topics/life_events.json').scenarios;
+  const packs = loadJson('data/_topics/life_event_resource_packs.json');
+  const topics = loadJson('data/_topics/topic_links.json');
+  const result = localEvaluateEntries(
+    entries,
+    'Wie viel Kindergeld und Kinderzuschlag bekomme ich?',
+    {
+      lifeEventScenarios: scenarios,
+      lifeEventResourcePacks: packs,
+      topicLinks: topics,
+    }
+  );
+
+  const topTitles = result.results.slice(0, 5).map((item) => item.title);
+  assert.ok(topTitles.some((title) => /Kinderzuschlag: Anspruch/i.test(title)));
+  assert.ok(!topTitles.some((title) => /Selbstst/i.test(title)));
+});
+
 test('retrieval includes curated official care evidence when keyword DB search misses', async () => {
   const env = {
     DB: {

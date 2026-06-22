@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 
 import {
   MAX_ASSISTANT_RESPONSES,
+  buildStandaloneQuery,
   countAssistantResponses,
   onRequest,
 } from '../cloudflare-pages/functions/api/ai/chat.js';
@@ -31,6 +32,26 @@ test('counts only assistant role messages for the demo chat limit', () => {
     ]),
     2
   );
+});
+
+test('chat rewrite resolves short application follow-up from recent user subjects', async () => {
+  const messages = [
+    { role: 'user', content: 'Ich moechte Kindergeld und Kinderzuschlag verstehen.' },
+    {
+      role: 'assistant',
+      content:
+        'Kindergeld und Kinderzuschlag sind Familienleistungen.\nQuelle: https://familienportal.de/familienportal/lebenslagen/ausbildung-beruf/selbststaendigkeit',
+    },
+    { role: 'user', content: 'wieviel geld bekomm?' },
+    { role: 'assistant', content: 'Antwort mit Quellen.' },
+    { role: 'user', content: 'Wo kann ich beantragen?' },
+  ];
+
+  const standalone = await buildStandaloneQuery({}, messages);
+  assert.match(standalone, /kindergeld/i);
+  assert.match(standalone, /kinderzuschlag/i);
+  assert.match(standalone, /beantrag/i);
+  assert.doesNotMatch(standalone, /selbststaendigkeit|familienportal/i);
 });
 
 test('chat API rejects the fourth assistant response in one demo chat', async () => {

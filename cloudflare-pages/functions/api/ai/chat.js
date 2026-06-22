@@ -15,6 +15,19 @@ import { jsonResponse, optionsResponse } from '../_lib/http.js';
 const MAX_CHAT_MESSAGES = 8;
 const MAX_MESSAGE_CHARS = 1200;
 export const MAX_ASSISTANT_RESPONSES = 3;
+const FOLLOWUP_SUBJECTS = [
+  ['kinderzuschlag', 'Kinderzuschlag'],
+  ['kindergeld', 'Kindergeld'],
+  ['elterngeld', 'Elterngeld'],
+  ['buergergeld', 'Buergergeld'],
+  ['bürgergeld', 'Buergergeld'],
+  ['arbeitslosengeld', 'Arbeitslosengeld'],
+  ['bildungsgutschein', 'Bildungsgutschein'],
+  ['wohngeld', 'Wohngeld'],
+  ['krankengeld', 'Krankengeld'],
+  ['pflegegeld', 'Pflegegeld'],
+  ['unterhaltsvorschuss', 'Unterhaltsvorschuss'],
+];
 
 function normalizeMessages(value) {
   if (!Array.isArray(value)) return [];
@@ -44,18 +57,86 @@ function compactConversation(messages) {
     .join('\n');
 }
 
-async function buildStandaloneQuery(env, messages) {
+function normalizeFollowupText(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/ä/g, 'ae')
+    .replace(/ö/g, 'oe')
+    .replace(/ü/g, 'ue')
+    .replace(/ß/g, 'ss');
+}
+
+function findSubjects(text) {
+  const normalized = normalizeFollowupText(text);
+  return FOLLOWUP_SUBJECTS
+    .filter(([token]) => normalized.includes(normalizeFollowupText(token)))
+    .map(([, label]) => label);
+}
+
+function uniqueOrdered(values) {
+  const seen = new Set();
+  return values.filter((value) => {
+    const key = normalizeFollowupText(value);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function recentUserSubjects(messages, latest) {
+  const latestSubjects = findSubjects(latest);
+  if (latestSubjects.length > 0) return uniqueOrdered(latestSubjects);
+
+  const previousUserMessages = messages
+    .filter((message) => message.role === 'user' && message.content !== latest)
+    .slice(-4)
+    .reverse();
+  return uniqueOrdered(previousUserMessages.flatMap((message) => findSubjects(message.content))).slice(0, 3);
+}
+
+function deterministicStandaloneFollowup(messages) {
   const latest = latestUserMessage(messages);
   if (!latest) return '';
+
+  const normalized = normalizeFollowupText(latest);
+  const subjects = recentUserSubjects(messages, latest);
+  if (subjects.length === 0 || findSubjects(latest).length > 0) return '';
+
+  const subjectText = subjects.join(' und ');
+  const shortFollowup = latest.length <= 90;
+  const asksApplication = /\bwo\b/.test(normalized) && /(beantrag|antrag|stelle|zustaendig|zustandig|bekomm)/.test(normalized);
+  const asksAmount = /(wie\s*viel|wieviel|wie hoch|hoehe|betrag|geld|bekomm)/.test(normalized);
+  const asksContact = /(wer hilft|hilfe|beratung|kontakt|telefon|an wen)/.test(normalized);
+
+  if (!shortFollowup) return '';
+  if (asksApplication) return `Wo kann ich ${subjectText} beantragen?`;
+  if (asksAmount) return `Wie viel ${subjectText} bekomme ich?`;
+  if (asksContact) return `Wo bekomme ich Hilfe zu ${subjectText}?`;
+  return '';
+}
+
+function compactUserConversation(messages) {
+  return messages
+    .filter((message) => message.role === 'user')
+    .map((message) => `User: ${message.content}`)
+    .join('\n');
+}
+
+export async function buildStandaloneQuery(env, messages) {
+  const latest = latestUserMessage(messages);
+  if (!latest) return '';
+  const deterministic = deterministicStandaloneFollowup(messages);
+  if (deterministic) return normalizeQuery(deterministic) || deterministic;
   if (messages.length <= 1 || !isLlmConfigured(env)) return latest;
 
   try {
     const completion = await runWorkersAiText(env, {
       systemPrompt:
         'Du formulierst Chat-Verlauf in eine eigenstaendige Suchfrage fuer ein deutsches Sozialleistungs-Retrieval-System um. ' +
-        'Erhalte Fakten aus dem Verlauf, erfinde nichts dazu, und gib nur die Suchfrage auf Deutsch zurueck.',
+        'Erhalte Fakten aus dem Nutzerverlauf, erfinde nichts dazu, und gib nur die Suchfrage auf Deutsch zurueck. ' +
+        'Ignoriere Quellen-URLs und Formulierungen aus Assistant-Antworten, wenn sie nicht in Nutzerfragen vorkamen.',
       userPrompt:
-        `Chat-Verlauf:\n${compactConversation(messages)}\n\n` +
+        `Nutzerverlauf:\n${compactUserConversation(messages) || compactConversation(messages)}\n\n` +
         'Gib eine kurze, eigenstaendige Suchfrage zur letzten Nutzerfrage zurueck.',
       maxTokens: 80,
       task: 'chat_rewrite',
