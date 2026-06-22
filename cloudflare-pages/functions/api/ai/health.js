@@ -1,4 +1,4 @@
-import { getRetrievalConfig, getWorkersAiModel, listLifeEventScenarios, loadLifeEventScenarios } from '../_lib/ai.js';
+import { getRetrievalConfig, getWorkersAiModel, getWorkersAiModelConfig, listLifeEventScenarios, loadLifeEventScenarios } from '../_lib/ai.js';
 
 export async function onRequest({ request, env }) {
   const url = new URL(request.url);
@@ -25,6 +25,7 @@ export async function onRequest({ request, env }) {
         configured: Boolean(env.AI),
         status: env.AI ? 'ok' : 'disabled',
         models: env.AI ? [getWorkersAiModel(env)] : [],
+        modelConfig: getWorkersAiModelConfig(env),
       },
       turnstile: {
         configured: Boolean(env.TURNSTILE_SECRET_KEY),

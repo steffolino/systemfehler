@@ -405,6 +405,18 @@ Retrieve comprehensive quality metrics and reports.
 
 ---
 
+### Guided Assistant Health
+
+Inspect AI provider, retrieval, cache, rate-limit, and model configuration.
+
+**Endpoint:** `GET /api/ai/health`
+
+The provider block includes `modelConfig`, which resolves the shared
+`CF_AI_MODEL` and any task-specific overrides such as
+`CF_AI_MODEL_SYNTHESIZE` or `CF_AI_MODEL_PLAIN_LANGUAGE`.
+
+---
+
 ### Guided Assistant Retrieval
 
 Retrieve evidence snippets used by guided responses.

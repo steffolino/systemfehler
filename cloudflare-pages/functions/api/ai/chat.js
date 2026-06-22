@@ -56,6 +56,7 @@ async function buildStandaloneQuery(env, messages) {
         `Chat-Verlauf:\n${compactConversation(messages)}\n\n` +
         'Gib eine kurze, eigenstaendige Suchfrage zur letzten Nutzerfrage zurueck.',
       maxTokens: 80,
+      task: 'chat_rewrite',
     });
     return normalizeQuery(completion.text || latest) || latest;
   } catch (error) {
@@ -173,7 +174,7 @@ export async function onRequest({ request, env }) {
       explanation: 'Die Chat-Antwort ist gerade nicht verfuegbar. Bitte versuche es erneut.',
       sources: [],
       provider: env.AI ? 'workers-ai' : 'none',
-      model: env.AI ? getWorkersAiModel(env) : 'fallback',
+      model: env.AI ? getWorkersAiModel(env, 'synthesize') : 'fallback',
       fallback: true,
       evidence,
       evidence_lanes: lanes,

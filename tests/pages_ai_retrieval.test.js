@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { buildSynthesis, localEvaluateEntries, retrieveEvidence } from '../cloudflare-pages/functions/api/_lib/ai.js';
+import { buildSynthesis, getWorkersAiModel, getWorkersAiModelConfig, localEvaluateEntries, retrieveEvidence } from '../cloudflare-pages/functions/api/_lib/ai.js';
 
 const DOMAINS = ['benefits', 'aid', 'tools', 'organizations', 'contacts'];
 
@@ -27,6 +27,28 @@ function loadEntries() {
   }
   return entries;
 }
+
+test('Workers AI model config supports task-specific overrides without changing defaults', () => {
+  assert.equal(getWorkersAiModel({}, 'synthesize'), '@cf/meta/llama-3.1-8b-instruct');
+  assert.equal(getWorkersAiModel({ CF_AI_MODEL: '@cf/base/model' }, 'rewrite'), '@cf/base/model');
+  assert.equal(
+    getWorkersAiModel({
+      CF_AI_MODEL: '@cf/base/model',
+      CF_AI_MODEL_PLAIN_LANGUAGE: '@cf/plain/model',
+    }, 'plain_language'),
+    '@cf/plain/model'
+  );
+
+  const config = getWorkersAiModelConfig({
+    AI: {},
+    CF_AI_MODEL: '@cf/base/model',
+    CF_AI_MODEL_REWRITE: '@cf/rewrite/model',
+  });
+  assert.equal(config.provider, 'workers-ai');
+  assert.equal(config.defaultModel, '@cf/base/model');
+  assert.equal(config.tasks.rewrite.model, '@cf/rewrite/model');
+  assert.equal(config.tasks.synthesize.model, '@cf/base/model');
+});
 
 test('caregiving rewrite with compound umlauts resolves to strong care evidence', () => {
   const entries = loadEntries();

@@ -1,5 +1,13 @@
 ﻿const DEFAULT_MODEL = '@cf/meta/llama-3.1-8b-instruct';
 const DEFAULT_RATE_LIMIT_WINDOW_SECONDS = 60;
+const WORKERS_AI_MODEL_ENV_BY_TASK = {
+  default: 'CF_AI_MODEL',
+  rewrite: 'CF_AI_MODEL_REWRITE',
+  synthesize: 'CF_AI_MODEL_SYNTHESIZE',
+  plain_language: 'CF_AI_MODEL_PLAIN_LANGUAGE',
+  chat_rewrite: 'CF_AI_MODEL_CHAT_REWRITE',
+  enrich: 'CF_AI_MODEL_ENRICH',
+};
 const DEFAULT_RATE_LIMIT_MAX_REQUESTS = 12;
 const DEFAULT_CACHE_TTL_RETRIEVE_SECONDS = 180;
 const DEFAULT_CACHE_TTL_REWRITE_SECONDS = 3600;
@@ -2591,6 +2599,7 @@ async function buildPlainLanguageAnswer(env, query, evidence) {
         'Keine Einleitung. Keine neuen Informationen. ' +
         'Maximal 5 Stichpunkte.',
       maxTokens: 700,
+      task: 'plain_language',
     });
     const candidate = completion.text || '';
     const quality = auditSimpleLanguageAnswer(candidate, simpleEvidence);
@@ -2932,8 +2941,31 @@ function buildInstitutionFallback(query, { evidence = [], strongEvidence = [] } 
   };
 }
 
-export function getWorkersAiModel(env) {
-  return env.CF_AI_MODEL || DEFAULT_MODEL;
+export function getWorkersAiModel(env, task = 'default') {
+  const taskKey = Object.prototype.hasOwnProperty.call(WORKERS_AI_MODEL_ENV_BY_TASK, task)
+    ? task
+    : 'default';
+  const taskEnvName = WORKERS_AI_MODEL_ENV_BY_TASK[taskKey];
+  const taskModel = typeof env?.[taskEnvName] === 'string' ? env[taskEnvName].trim() : '';
+  const fallbackModel = typeof env?.CF_AI_MODEL === 'string' ? env.CF_AI_MODEL.trim() : '';
+  return taskModel || fallbackModel || DEFAULT_MODEL;
+}
+
+export function getWorkersAiModelConfig(env) {
+  const tasks = {};
+  for (const task of Object.keys(WORKERS_AI_MODEL_ENV_BY_TASK)) {
+    tasks[task] = {
+      env: WORKERS_AI_MODEL_ENV_BY_TASK[task],
+      model: getWorkersAiModel(env, task),
+      configured: Boolean(String(env?.[WORKERS_AI_MODEL_ENV_BY_TASK[task]] || '').trim()),
+    };
+  }
+  return {
+    provider: env?.AI ? 'workers-ai' : 'none',
+    configured: Boolean(env?.AI),
+    defaultModel: getWorkersAiModel(env),
+    tasks,
+  };
 }
 
 function extractTextFromAiResponse(response) {
@@ -2946,12 +2978,12 @@ function extractTextFromAiResponse(response) {
   return '';
 }
 
-export async function runWorkersAiText(env, { systemPrompt, userPrompt, maxTokens = 160 }) {
+export async function runWorkersAiText(env, { systemPrompt, userPrompt, maxTokens = 160, task = 'default' }) {
   if (!env.AI) {
     throw new Error('Workers AI binding is not configured.');
   }
 
-  const response = await env.AI.run(getWorkersAiModel(env), {
+  const response = await env.AI.run(getWorkersAiModel(env, task), {
     messages: [
       { role: 'system', content: systemPrompt },
       { role: 'user', content: userPrompt },
@@ -3017,7 +3049,7 @@ export async function buildRewrite(env, query) {
   if (!query?.trim()) {
     return {
       rewritten_query: '',
-      model: env.AI ? getWorkersAiModel(env) : 'disabled',
+      model: env.AI ? getWorkersAiModel(env, 'rewrite') : 'disabled',
       provider: env.AI ? 'workers-ai' : 'none',
       latency_ms: 0,
       fallback: true,
@@ -3031,10 +3063,11 @@ export async function buildRewrite(env, query) {
         'Du optimierst Suchanfragen für ein deutsches Sozialleistungs-Retrieval-System. Gib nur eine kurze deutsche Suchanfrage zurück, die den Recall verbessert, ohne neue Fakten hinzuzufügen.',
       userPrompt: `Ursprüngliche Anfrage:\n${query}\n\nGib nur die optimierte Suchanfrage zurück.`,
       maxTokens: 32,
+      task: 'rewrite',
     });
     return {
       rewritten_query: completion.text || query,
-      model: getWorkersAiModel(env),
+      model: getWorkersAiModel(env, 'rewrite'),
       provider: 'workers-ai',
       latency_ms: 0,
       fallback: false,
@@ -3042,7 +3075,7 @@ export async function buildRewrite(env, query) {
   } catch (error) {
     return {
       rewritten_query: query,
-      model: env.AI ? getWorkersAiModel(env) : 'disabled',
+      model: env.AI ? getWorkersAiModel(env, 'rewrite') : 'disabled',
       provider: env.AI ? 'workers-ai' : 'none',
       latency_ms: 0,
       fallback: true,
@@ -3164,6 +3197,7 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
           `Nutzerfrage:\n${query}\n\nBelege:\n${compactEvidenceBlock(laneEvidence)}\n\n` +
           'Antworte mit konkreten Stichpunkten auf Deutsch. Beginne sofort mit dem ersten Stichpunkt, ohne Einleitung und ohne die Anzahl der Stichpunkte anzukündigen. Nenne konkrete nächste Schritte, Adressen oder Leistungen aus den Belegen. Setze Quellen immer als eigene Zeile direkt unter den passenden Stichpunkt im Format [Quelle: URL]. Beende jeden Stichpunkt und jede Quelle vollständig.',
         maxTokens: 650,
+        task: 'synthesize',
       });
       return {
         answer: completion.text || extractiveSynthesisAnswer(laneEvidence),
@@ -3213,7 +3247,7 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
       explanation: 'Keine verlässliche Information gefunden.',
       sources: [],
       provider: env.AI ? 'workers-ai' : 'none',
-      model: env.AI ? getWorkersAiModel(env) : 'disabled',
+      model: env.AI ? getWorkersAiModel(env, 'synthesize') : 'disabled',
       fallback: true,
       evidence,
       evidence_lanes: lanes,
@@ -3247,6 +3281,7 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
           'Antworte mit konkreten Stichpunkten auf Deutsch. Beginne sofort mit dem wichtigsten nächsten Schritt, ohne Einleitung und ohne die Anzahl der Stichpunkte anzukündigen. ' +
           'Nenne konkrete Leistungen, Anlaufstellen oder Anträge aus den Belegen. Setze Quellen immer als eigene Zeile direkt unter den passenden Stichpunkt im Format [Quelle: URL]. Beende jeden Stichpunkt und jede Quelle vollständig.',
         maxTokens: 800,
+        task: 'synthesize',
       }),
       buildPlainLanguageAnswer(env, query, plainLanguageEvidence),
     ]);
@@ -3278,7 +3313,7 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
         ...synthesisEvidence.map((item) => item.source),
       ])),
       provider: 'workers-ai',
-      model: getWorkersAiModel(env),
+      model: getWorkersAiModel(env, 'synthesize'),
       fallback: !answerShape.passed,
       evidence,
       evidence_lanes: lanes,
@@ -3305,7 +3340,7 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
       explanation: error instanceof Error ? error.message : 'Workers AI request failed.',
       sources: synthesisEvidence.map((item) => item.source),
       provider: env.AI ? 'workers-ai' : 'none',
-      model: env.AI ? getWorkersAiModel(env) : 'disabled',
+      model: env.AI ? getWorkersAiModel(env, 'synthesize') : 'disabled',
       fallback: true,
       evidence,
       evidence_lanes: lanes,

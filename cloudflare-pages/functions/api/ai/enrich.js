@@ -1,4 +1,5 @@
 import { jsonResponse, optionsResponse, readJsonBody } from '../_lib/http.js';
+import { getWorkersAiModel } from '../_lib/ai.js';
 
 export async function onRequest({ request, env }) {
   if (request.method === 'OPTIONS') {
@@ -31,7 +32,7 @@ export async function onRequest({ request, env }) {
       },
       provenance: {
         provider: env.AI ? 'workers-ai' : 'none',
-        model: env.CF_AI_MODEL || '@cf/meta/llama-3.1-8b-instruct',
+        model: env.AI ? getWorkersAiModel(env, 'enrich') : 'disabled',
         fallback: true,
       },
     },

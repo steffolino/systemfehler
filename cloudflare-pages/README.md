@@ -40,6 +40,12 @@ guarded by rule-based quality checks and falls back to a source-cited extractive
 summary if Workers AI is unavailable or the generated simplification fails the
 guard.
 
+Workers AI model selection is role-aware but model-neutral by default. Optional
+environment variables can override the shared `CF_AI_MODEL` per task:
+`CF_AI_MODEL_REWRITE`, `CF_AI_MODEL_SYNTHESIZE`,
+`CF_AI_MODEL_PLAIN_LANGUAGE`, `CF_AI_MODEL_CHAT_REWRITE`, and
+`CF_AI_MODEL_ENRICH`. See `docs/llm-integration.md` before changing models.
+
 ## Required GitHub Secrets
 
 Set these in repository settings (`Settings -> Secrets and variables -> Actions`):

@@ -23,6 +23,9 @@ what is legacy scaffolding, and what should be worked on next.
 - Standard AI answers now also pass an answer-shape guard. If a generated answer
   misses the user's intent, such as a `Wo ... beantragen?` question, synthesis
   falls back to a source-cited extractive answer.
+- Workers AI model selection is prepared but not product-selected: the runtime
+  supports optional task-specific env vars for rewrite, synthesis, simple
+  language, chat rewrite, and enrichment while preserving the current default.
 - Human editorial governance for life-event semantics is now implemented end to
   end:
   - runtime review case capture in AI retrieval

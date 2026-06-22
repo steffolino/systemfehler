@@ -4,6 +4,7 @@ import {
   enforceRateLimit,
   getCachedJsonResponse,
   getCacheTtl,
+  getWorkersAiModel,
   normalizeQuery,
   verifyTurnstile,
 } from '../_lib/ai.js';
@@ -48,7 +49,7 @@ export async function onRequest({ request, env }) {
   const body = bodyResult.body;
   const query = normalizeQuery(typeof body?.query === 'string' ? body.query : '');
   const startedAt = Date.now();
-  const { cache, cacheKey, cached } = await getCachedJsonResponse(request, ['rewrite', env.CF_AI_MODEL || '', query]);
+  const { cache, cacheKey, cached } = await getCachedJsonResponse(request, ['rewrite', getWorkersAiModel(env, 'rewrite'), query]);
   if (cached) {
     return jsonResponse(JSON.parse(await cached.text()), {
       request,

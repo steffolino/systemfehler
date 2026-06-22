@@ -103,6 +103,10 @@ The Pages AI layer now also applies per-IP rate limiting and short edge-cache
 TTL responses for rewrite, retrieve, and synthesize to reduce repeated Workers
 AI cost on common prompts.
 
+Workers AI model selection is prepared with task-specific optional environment
+variables, but no new model has been selected as a product decision. The active
+runtime keeps the shared model fallback unless a task-specific override is set.
+
 Production validation note (2026-05-03):
 - Full production retrieval suite passed: `60/60` suggested life-event queries.
 - A temporary E2E bypass secret (`TURNSTILE_E2E_BYPASS_TOKEN`) was used only for test execution and deleted immediately after the successful run.
