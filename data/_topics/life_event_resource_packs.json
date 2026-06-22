@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_at": "2026-05-18T10:38:25.423Z",
+  "generated_at": "2026-06-22T08:07:27.538Z",
   "targets": {
     "docsMin": 5,
     "docsMax": 10,
@@ -73,12 +73,6 @@
             "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/infos-fuer-menschen-aus-dem-ausland",
             "domain": "benefits",
             "source_tier": "tier_1_official"
-          },
-          {
-            "title": "Jobcenter: Unterstützung für Familien",
-            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/unterstuetzung-fuer-familien",
-            "domain": "benefits",
-            "source_tier": "tier_1_official"
           }
         ],
         "contacts": [
@@ -109,12 +103,6 @@
           {
             "title": "Bürgergeld: Antrag und Bescheid",
             "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/antrag-bescheid",
-            "domain": "benefits",
-            "source_tier": "tier_1_official"
-          },
-          {
-            "title": "Finanziell absichern mit Bürgergeld",
-            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern",
             "domain": "benefits",
             "source_tier": "tier_1_official"
           }
@@ -739,15 +727,21 @@
             "url": "https://www.bmas.de/DE/Arbeit/Aus-und-Weiterbildung/Berufliche-Ausbildung/Hilfe-beim-Hauptschulabschluss/hilfe-beim-hauptschulabschluss.html",
             "domain": "aid",
             "source_tier": "tier_1_official"
-          },
-          {
-            "title": "Integrationskurs und Sprachkurs: Beratung für Zugewanderte",
-            "url": "https://www.bamf.de/DE/Themen/Integration/ZugewanderteTeilnehmende/BeratungErwachsene/beratung-erwachsene-node.html",
-            "domain": "aid",
-            "source_tier": "tier_1_official"
           }
         ],
         "contacts": [
+          {
+            "title": "Ihr Weg zur Förderung der beruflichen Weiterbildung",
+            "url": "https://www.bmas.de/DE/Arbeit/Aus-und-Weiterbildung/Berufliche-Weiterbildung/Foerderung-der-beruflichen-Weiterbildung/foerderung-der-beruflichen-weiterbildung.html",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "Bildungsgutschein und berufliche Weiterbildungsförderung",
+            "url": "https://web.arbeitsagentur.de/fbwo/fbwo-ui/pd/anfrage",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
           {
             "title": "Termin beim Jobcenter",
             "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/termin-jobcenter",
@@ -764,18 +758,6 @@
             "title": "Berufliche Rehabilitation",
             "url": "https://www.arbeitsagentur.de/menschen-mit-behinderungen/berufliche-rehabilitation",
             "domain": "tools",
-            "source_tier": "tier_1_official"
-          },
-          {
-            "title": "Digitale Angebote für Arbeit und Berufsleben",
-            "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Digitale-Angebote-fuer-Arbeit-und-Berufsleben/digitale-angebote-fuer-arbeit-und-berufsleben.html",
-            "domain": "tools",
-            "source_tier": "tier_1_official"
-          },
-          {
-            "title": "Ihr Weg zur Förderung der beruflichen Weiterbildung",
-            "url": "https://www.bmas.de/DE/Arbeit/Aus-und-Weiterbildung/Berufliche-Weiterbildung/Foerderung-der-beruflichen-Weiterbildung/foerderung-der-beruflichen-weiterbildung.html",
-            "domain": "contacts",
             "source_tier": "tier_1_official"
           }
         ],
@@ -819,14 +801,14 @@
       "resources": {
         "documents": [
           {
-            "title": "Familienkasse: Kindergeld-Antrag stellen",
-            "url": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/kindergeld-anspruch-hoehe-dauer/kindergeld-antrag-starten",
+            "title": "ElterngeldDigital: Elterngeld online beantragen",
+            "url": "https://www.elterngeld-digital.de/",
             "domain": "tools",
             "source_tier": "tier_1_official"
           },
           {
-            "title": "ElterngeldDigital: Elterngeld online beantragen",
-            "url": "https://www.elterngeld-digital.de/",
+            "title": "Familienkasse: Kindergeld-Antrag stellen",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/kindergeld-anspruch-hoehe-dauer/kindergeld-antrag-starten",
             "domain": "tools",
             "source_tier": "tier_1_official"
           },
@@ -875,18 +857,6 @@
           {
             "title": "Die wichtigsten Merkblätter, Formulare und Anträge der Familienkasse zum Download",
             "url": "https://www.arbeitsagentur.de/familie-und-kinder/downloads-familie-und-kinder",
-            "domain": "tools",
-            "source_tier": "tier_1_official"
-          },
-          {
-            "title": "Familienkasse: Änderung und Nachweise online übermitteln",
-            "url": "https://www.arbeitsagentur.de/familie-und-kinder/veraenderungen-mitteilen",
-            "domain": "tools",
-            "source_tier": "tier_1_official"
-          },
-          {
-            "title": "BMBFSFJ",
-            "url": "https://www.bmbfsfj.bund.de/bmbfsfj",
             "domain": "tools",
             "source_tier": "tier_1_official"
           }

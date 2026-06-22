@@ -96,6 +96,27 @@ function uniqByUrl(items) {
   return out;
 }
 
+function pinnedEntries(entries, pins = []) {
+  if (!Array.isArray(pins)) return [];
+  return pins
+    .map((pin) => {
+      if (!pin || typeof pin !== 'object') return null;
+      const url = String(pin.url || '').trim();
+      if (!url) return null;
+      const matched = entries.find((entry) => entry.url === url);
+      return {
+        id: matched?.id || `${pin.domain || 'pinned'}:${url}`,
+        domain: pin.domain || matched?.domain || 'benefits',
+        url,
+        title: pin.title || matched?.title || url,
+        sourceTier: normalizeText(pin.source_tier || pin.sourceTier || matched?.sourceTier || 'unknown'),
+        institutionType: matched?.institutionType || 'unknown',
+        blob: matched?.blob || normalizeText([pin.title, url, pin.domain].join(' ')),
+      };
+    })
+    .filter(Boolean);
+}
+
 function score(entry, scenario) {
   let s = 0;
   const text = entry.blob;
@@ -136,22 +157,32 @@ function pickScenarioPack(entries, scenario, ngoFallback) {
     .sort((a, b) => b.score - a.score)
     .map((x) => x.entry);
 
-  const docs = uniqByUrl(
-    ranked.filter((e) => e.domain !== 'contacts' && OFFICIAL_TIERS.has(e.sourceTier))
+  const pinnedDocuments = pinnedEntries(entries, scenario.resource_pins?.documents);
+  const pinnedContacts = pinnedEntries(entries, scenario.resource_pins?.contacts);
+  const pinnedNgo = pinnedEntries(entries, scenario.resource_pins?.ngo_assistance);
+
+  const docs = uniqByUrl([
+    ...pinnedDocuments,
+    ...ranked.filter((e) => e.domain !== 'contacts' && OFFICIAL_TIERS.has(e.sourceTier)),
+  ]
   ).slice(0, TARGETS.docsMax);
 
-  const contacts = uniqByUrl(
-    ranked.filter((e) =>
+  const contacts = uniqByUrl([
+    ...pinnedContacts,
+    ...ranked.filter((e) =>
       e.domain === 'contacts' ||
       CONTACT_HINTS.some((hint) => e.blob.includes(hint))
-    )
+    ),
+  ]
   ).slice(0, TARGETS.contacts);
 
-  let ngo = uniqByUrl(
-    ranked.filter((e) =>
+  let ngo = uniqByUrl([
+    ...pinnedNgo,
+    ...ranked.filter((e) =>
       e.domain !== 'organizations' &&
       (e.institutionType === 'ngo' || NGO_TIERS.has(e.sourceTier))
-    )
+    ),
+  ]
   ).slice(0, TARGETS.ngoMax);
 
   if (ngo.length < TARGETS.ngoMin) {

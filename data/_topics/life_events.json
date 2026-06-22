@@ -80,6 +80,24 @@
                     "hotline"
                 ]
             },
+            "resource_pins": {
+                "documents": [
+                    {
+                        "title": "Arbeitslos melden und Arbeitslosengeld beantragen",
+                        "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/arbeitslosengeld",
+                        "domain": "benefits",
+                        "source_tier": "tier_1_official"
+                    }
+                ],
+                "contacts": [
+                    {
+                        "title": "Arbeitsagentur und Jobcenter vor Ort finden",
+                        "url": "https://web.arbeitsagentur.de/portal/metasuche/suche/dienststellen",
+                        "domain": "contacts",
+                        "source_tier": "tier_1_official"
+                    }
+                ]
+            },
             "contact_priority": {
                 "name_keywords": [
                     "Jobcenter",
@@ -564,6 +582,24 @@
                     "beratung"
                 ]
             },
+            "resource_pins": {
+                "documents": [
+                    {
+                        "title": "Bildungsgutschein und berufliche Weiterbildungsförderung",
+                        "url": "https://web.arbeitsagentur.de/fbwo/fbwo-ui/pd/anfrage",
+                        "domain": "tools",
+                        "source_tier": "tier_1_official"
+                    }
+                ],
+                "contacts": [
+                    {
+                        "title": "Ihr Weg zur Förderung der beruflichen Weiterbildung",
+                        "url": "https://www.bmas.de/DE/Arbeit/Aus-und-Weiterbildung/Berufliche-Weiterbildung/Foerderung-der-beruflichen-Weiterbildung/foerderung-der-beruflichen-weiterbildung.html",
+                        "domain": "contacts",
+                        "source_tier": "tier_1_official"
+                    }
+                ]
+            },
             "contact_priority": {
                 "name_keywords": [
                     "Berufsberatung",
@@ -657,6 +693,22 @@
                     "jugendamt",
                     "beratung",
                     "hotline"
+                ]
+            },
+            "resource_pins": {
+                "documents": [
+                    {
+                        "title": "ElterngeldDigital: Elterngeld online beantragen",
+                        "url": "https://www.elterngeld-digital.de/",
+                        "domain": "tools",
+                        "source_tier": "tier_1_official"
+                    },
+                    {
+                        "title": "Familienkasse: Kindergeld-Antrag stellen",
+                        "url": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/kindergeld-anspruch-hoehe-dauer/kindergeld-antrag-starten",
+                        "domain": "tools",
+                        "source_tier": "tier_1_official"
+                    }
                 ]
             },
             "contact_priority": {
