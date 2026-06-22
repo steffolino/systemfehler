@@ -206,6 +206,7 @@ function main() {
   const lifeEvents = loadJson(LIFE_EVENTS_FILE);
   const scenarios = Array.isArray(lifeEvents?.scenarios) ? lifeEvents.scenarios : [];
   const entries = collectEntries();
+  const previousOutput = fs.existsSync(OUTPUT_FILE) ? loadJson(OUTPUT_FILE) : null;
 
   const ngoFallback = uniqByUrl(entries.filter((e) =>
     e.domain !== 'organizations' && (e.institutionType === 'ngo' || NGO_TIERS.has(e.sourceTier))
@@ -215,7 +216,7 @@ function main() {
 
   const output = {
     version: '1.0.0',
-    generated_at: new Date().toISOString(),
+    generated_at: previousOutput?.generated_at || new Date().toISOString(),
     targets: TARGETS,
     scenarios: packs,
   };
