@@ -25,7 +25,7 @@ In the Cloudflare dashboard:
 2. Under **D1 database bindings**, add a binding:
    - **Variable name**: `DB`
    - **D1 database**: select `systemfehler-db`
-3. Under **AI bindings**, add a binding:
+3. Optional for `LLM_PROVIDER=workers-ai`: under **AI bindings**, add a binding:
    - **Variable name**: `AI`
    - select a Workers AI binding
 4. Save and redeploy.
@@ -86,12 +86,22 @@ These public frontend values are injected during the Pages build by
 
 ### Optional Cloudflare Pages variables
 
+- `LLM_PROVIDER` (`none|workers-ai|mistral|scaleway|openai-compatible|local`)
+- `LLM_MODEL` and task-specific `LLM_MODEL_*` overrides
+- `MISTRAL_MODEL` and task-specific `MISTRAL_MODEL_*` overrides when `LLM_PROVIDER=mistral`
+- `MISTRAL_BASE_URL` (optional, defaults to `https://api.mistral.ai/v1`)
+- `LLM_BASE_URL` and `LLM_API_KEY` for OpenAI-compatible providers
 - `CF_AI_MODEL` (defaults to `@cf/meta/llama-3.1-8b-instruct`)
 - `AI_RATE_LIMIT_WINDOW_SECONDS` (defaults to `60`)
 - `AI_RATE_LIMIT_MAX_REQUESTS` (defaults to `12`)
 - `AI_CACHE_TTL_RETRIEVE_SECONDS` (defaults to `180`)
 - `AI_CACHE_TTL_REWRITE_SECONDS` (defaults to `3600`)
 - `AI_CACHE_TTL_SYNTHESIZE_SECONDS` (defaults to `900`)
+
+### Optional Cloudflare Pages secrets
+
+- `MISTRAL_API_KEY` when `LLM_PROVIDER=mistral`
+- `LLM_API_KEY` when the selected OpenAI-compatible provider requires bearer auth
 
 ## 5. Verify
 

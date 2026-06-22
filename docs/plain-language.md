@@ -105,8 +105,9 @@ The goal is to improve comprehension without overwriting the canonical source te
 - AI answers expose `Standard` and `Einfach` modes in public search.
 - `Einfach` AI answers are generated from retrieval evidence and checked by a
   rule-based quality guard.
-- If Workers AI is unavailable, or if the generated simple-language text fails
-  the guard, the API returns a source-cited extractive `Einfach` fallback.
+- If the configured LLM provider is unavailable, or if the generated
+  simple-language text fails the guard, the API returns a source-cited
+  extractive `Einfach` fallback.
 - `Leicht` remains an entry-data/admin review target, not a generated AI-answer
   mode in the current public search flow.
 

@@ -2,7 +2,17 @@ import fs from 'node:fs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { buildSynthesis, getWorkersAiModel, getWorkersAiModelConfig, localEvaluateEntries, retrieveEvidence } from '../cloudflare-pages/functions/api/_lib/ai.js';
+import {
+  buildSynthesis,
+  getLlmModel,
+  getLlmModelConfig,
+  getLlmProvider,
+  getWorkersAiModel,
+  getWorkersAiModelConfig,
+  localEvaluateEntries,
+  retrieveEvidence,
+  runLlmText,
+} from '../cloudflare-pages/functions/api/_lib/ai.js';
 
 const DOMAINS = ['benefits', 'aid', 'tools', 'organizations', 'contacts'];
 
@@ -48,6 +58,72 @@ test('Workers AI model config supports task-specific overrides without changing 
   assert.equal(config.defaultModel, '@cf/base/model');
   assert.equal(config.tasks.rewrite.model, '@cf/rewrite/model');
   assert.equal(config.tasks.synthesize.model, '@cf/base/model');
+});
+
+test('LLM model config supports Mistral and task-specific overrides', () => {
+  const env = {
+    LLM_PROVIDER: 'mistral',
+    MISTRAL_API_KEY: 'test-key',
+    MISTRAL_MODEL: 'mistral-small-latest',
+    LLM_MODEL_PLAIN_LANGUAGE: 'custom-simple-model',
+  };
+
+  assert.equal(getLlmProvider(env), 'mistral');
+  assert.equal(getLlmModel(env, 'synthesize'), 'mistral-small-latest');
+  assert.equal(getLlmModel(env, 'plain_language'), 'custom-simple-model');
+
+  const config = getLlmModelConfig(env);
+  assert.equal(config.provider, 'mistral');
+  assert.equal(config.configured, true);
+  assert.equal(config.defaultModel, 'mistral-small-latest');
+  assert.equal(config.tasks.plain_language.model, 'custom-simple-model');
+});
+
+test('runLlmText calls Mistral chat completions without Workers AI binding', async () => {
+  const originalFetch = globalThis.fetch;
+  const calls = [];
+  globalThis.fetch = async (url, init) => {
+    calls.push({ url: String(url), init });
+    return new Response(
+      JSON.stringify({
+        choices: [
+          {
+            message: {
+              content: 'Antwort in Einfacher Sprache.',
+            },
+          },
+        ],
+      }),
+      { status: 200, headers: { 'content-type': 'application/json' } }
+    );
+  };
+
+  try {
+    const result = await runLlmText(
+      {
+        LLM_PROVIDER: 'mistral',
+        MISTRAL_API_KEY: 'test-key',
+        MISTRAL_MODEL_PLAIN_LANGUAGE: 'mistral-small-latest',
+      },
+      {
+        systemPrompt: 'System',
+        userPrompt: 'User',
+        maxTokens: 42,
+        task: 'plain_language',
+      }
+    );
+
+    assert.equal(result.text, 'Antwort in Einfacher Sprache.');
+    assert.equal(calls.length, 1);
+    assert.equal(calls[0].url, 'https://api.mistral.ai/v1/chat/completions');
+    assert.equal(calls[0].init.headers.Authorization, 'Bearer test-key');
+    const body = JSON.parse(calls[0].init.body);
+    assert.equal(body.model, 'mistral-small-latest');
+    assert.equal(body.max_tokens, 42);
+    assert.deepEqual(body.messages.map((message) => message.role), ['system', 'user']);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });
 
 test('caregiving rewrite with compound umlauts resolves to strong care evidence', () => {

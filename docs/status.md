@@ -89,23 +89,25 @@ crawling logic to these files.
 | Pages Functions API | ✅ Working | Worker-safe handlers for `/api/health`, `/api/status`, `/api/data/entries`, `/api/data/entries/:id`, `/api/data/moderation-queue`, `/api/data/quality-report` |
 | Semantic review API | ✅ Working | `/api/data/life-event-review` stores review cases and manual overrides in D1 (`life_event_review_cases`, `life_event_overrides`) and supports override lifecycle actions |
 | D1 schema (`cloudflare-pages/d1/schema.sql`) | ✅ Working | Includes `entries` and `moderation_queue` tables |
-| Production Pages deployment | ✅ Working | `https://systemfehler.pages.dev` is live with Pages Functions, D1, Workers AI, Turnstile, and the 1006-entry production corpus |
+| Production Pages deployment | ✅ Working | `https://systemfehler.pages.dev` is live with Pages Functions, D1, configurable LLM provider support, Turnstile, and the 1006-entry production corpus |
 
-The current Cloudflare Pages deployment path uses Auth0 for `/admin`. The
-The same deployment now has an experimental same-origin Workers AI path at
-`/api/ai/*`, backed by Pages bindings `DB` and `AI`, with Turnstile protecting
-public AI requests when `TURNSTILE_SECRET_KEY` is configured.
+The current Cloudflare Pages deployment path uses Auth0 for `/admin`. The same
+deployment now has an experimental same-origin guided AI path at
+`/api/ai/*`, backed by Pages binding `DB` and an optional LLM provider, with
+Turnstile protecting public AI requests when `TURNSTILE_SECRET_KEY` is
+configured.
 
 The D1 schema/runtime path also depends on the `entry_json` column for full
-entry hydration inside Pages Functions and Workers AI retrieval.
+entry hydration inside Pages Functions and guided retrieval.
 
 The Pages AI layer now also applies per-IP rate limiting and short edge-cache
-TTL responses for rewrite, retrieve, and synthesize to reduce repeated Workers
-AI cost on common prompts.
+TTL responses for rewrite, retrieve, and synthesize to reduce repeated LLM cost
+on common prompts.
 
-Workers AI model selection is prepared with task-specific optional environment
-variables, but no new model has been selected as a product decision. The active
-runtime keeps the shared model fallback unless a task-specific override is set.
+LLM provider selection is prepared with task-specific optional environment
+variables, but no new production provider/model has been selected as a product
+decision. The active runtime keeps the existing fallback behavior unless a
+provider and task-specific override are set.
 
 Production validation note (2026-05-03):
 - Full production retrieval suite passed: `60/60` suggested life-event queries.

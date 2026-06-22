@@ -1,5 +1,5 @@
 import { jsonResponse, optionsResponse, readJsonBody } from '../_lib/http.js';
-import { getWorkersAiModel } from '../_lib/ai.js';
+import { getLlmModel, getLlmProvider, isLlmConfigured } from '../_lib/ai.js';
 
 export async function onRequest({ request, env }) {
   if (request.method === 'OPTIONS') {
@@ -31,8 +31,8 @@ export async function onRequest({ request, env }) {
         keywords: { current: [], suggested: [], added: [], removed: [], confidence: 0, rationale: '' },
       },
       provenance: {
-        provider: env.AI ? 'workers-ai' : 'none',
-        model: env.AI ? getWorkersAiModel(env, 'enrich') : 'disabled',
+        provider: isLlmConfigured(env) ? getLlmProvider(env) : 'none',
+        model: isLlmConfigured(env) ? getLlmModel(env, 'enrich') : 'disabled',
         fallback: true,
       },
     },

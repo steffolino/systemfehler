@@ -1,4 +1,5 @@
 ﻿const DEFAULT_MODEL = '@cf/meta/llama-3.1-8b-instruct';
+const DEFAULT_MISTRAL_MODEL = 'mistral-small-latest';
 const DEFAULT_RATE_LIMIT_WINDOW_SECONDS = 60;
 const WORKERS_AI_MODEL_ENV_BY_TASK = {
   default: 'CF_AI_MODEL',
@@ -7,6 +8,22 @@ const WORKERS_AI_MODEL_ENV_BY_TASK = {
   plain_language: 'CF_AI_MODEL_PLAIN_LANGUAGE',
   chat_rewrite: 'CF_AI_MODEL_CHAT_REWRITE',
   enrich: 'CF_AI_MODEL_ENRICH',
+};
+const LLM_MODEL_ENV_BY_TASK = {
+  default: 'LLM_MODEL',
+  rewrite: 'LLM_MODEL_REWRITE',
+  synthesize: 'LLM_MODEL_SYNTHESIZE',
+  plain_language: 'LLM_MODEL_PLAIN_LANGUAGE',
+  chat_rewrite: 'LLM_MODEL_CHAT_REWRITE',
+  enrich: 'LLM_MODEL_ENRICH',
+};
+const MISTRAL_MODEL_ENV_BY_TASK = {
+  default: 'MISTRAL_MODEL',
+  rewrite: 'MISTRAL_MODEL_REWRITE',
+  synthesize: 'MISTRAL_MODEL_SYNTHESIZE',
+  plain_language: 'MISTRAL_MODEL_PLAIN_LANGUAGE',
+  chat_rewrite: 'MISTRAL_MODEL_CHAT_REWRITE',
+  enrich: 'MISTRAL_MODEL_ENRICH',
 };
 const DEFAULT_RATE_LIMIT_MAX_REQUESTS = 12;
 const DEFAULT_CACHE_TTL_RETRIEVE_SECONDS = 180;
@@ -2574,7 +2591,7 @@ async function buildPlainLanguageAnswer(env, query, evidence) {
   const simpleEvidence = dedupeEvidence(Array.isArray(evidence) ? evidence : []).slice(0, 10);
   const fallback = buildExtractiveSimpleAnswer(query, simpleEvidence);
 
-  if (!env.AI || simpleEvidence.length === 0) {
+  if (!isLlmConfigured(env) || simpleEvidence.length === 0) {
     return {
       einfach: fallback,
       source: fallback ? 'fallback' : 'none',
@@ -2622,7 +2639,7 @@ async function buildPlainLanguageAnswer(env, query, evidence) {
       source: fallback ? 'fallback_error' : 'none',
       quality: {
         ...auditSimpleLanguageAnswer(fallback || '', simpleEvidence),
-        error: error instanceof Error ? error.message : 'Workers AI request failed.',
+        error: error instanceof Error ? error.message : 'LLM request failed.',
       },
     };
   }
@@ -2951,6 +2968,52 @@ export function getWorkersAiModel(env, task = 'default') {
   return taskModel || fallbackModel || DEFAULT_MODEL;
 }
 
+function getTaskEnvName(map, task) {
+  const taskKey = Object.prototype.hasOwnProperty.call(map, task) ? task : 'default';
+  return map[taskKey];
+}
+
+function readEnvString(env, name) {
+  return typeof env?.[name] === 'string' ? env[name].trim() : '';
+}
+
+export function getLlmProvider(env) {
+  const configured = readEnvString(env, 'LLM_PROVIDER').toLowerCase();
+  if (configured) return configured;
+  if (env?.AI) return 'workers-ai';
+  return 'none';
+}
+
+export function isLlmConfigured(env) {
+  const provider = getLlmProvider(env);
+  if (provider === 'none') return false;
+  if (provider === 'workers-ai') return Boolean(env?.AI);
+  if (provider === 'mistral') return Boolean(readEnvString(env, 'MISTRAL_API_KEY'));
+  return Boolean(readEnvString(env, 'LLM_API_KEY') || readEnvString(env, 'LLM_BASE_URL'));
+}
+
+export function getLlmModel(env, task = 'default') {
+  const provider = getLlmProvider(env);
+  const genericTaskModel = readEnvString(env, getTaskEnvName(LLM_MODEL_ENV_BY_TASK, task));
+  const genericFallbackModel = readEnvString(env, 'LLM_MODEL');
+
+  if (provider === 'workers-ai') {
+    return getWorkersAiModel(env, task);
+  }
+
+  if (provider === 'mistral') {
+    const mistralTaskModel = readEnvString(env, getTaskEnvName(MISTRAL_MODEL_ENV_BY_TASK, task));
+    const mistralFallbackModel = readEnvString(env, 'MISTRAL_MODEL');
+    return genericTaskModel || mistralTaskModel || genericFallbackModel || mistralFallbackModel || DEFAULT_MISTRAL_MODEL;
+  }
+
+  if (provider === 'none') {
+    return 'disabled';
+  }
+
+  return genericTaskModel || genericFallbackModel || readEnvString(env, 'OPENAI_COMPAT_MODEL') || 'configured';
+}
+
 export function getWorkersAiModelConfig(env) {
   const tasks = {};
   for (const task of Object.keys(WORKERS_AI_MODEL_ENV_BY_TASK)) {
@@ -2968,6 +3031,33 @@ export function getWorkersAiModelConfig(env) {
   };
 }
 
+export function getLlmModelConfig(env) {
+  const provider = getLlmProvider(env);
+  const tasks = {};
+  for (const task of Object.keys(LLM_MODEL_ENV_BY_TASK)) {
+    tasks[task] = {
+      env: LLM_MODEL_ENV_BY_TASK[task],
+      model: getLlmModel(env, task),
+      configured: Boolean(
+        readEnvString(env, LLM_MODEL_ENV_BY_TASK[task]) ||
+          (provider === 'workers-ai' && readEnvString(env, WORKERS_AI_MODEL_ENV_BY_TASK[task])) ||
+          (provider === 'mistral' && readEnvString(env, MISTRAL_MODEL_ENV_BY_TASK[task]))
+      ),
+    };
+  }
+  return {
+    provider,
+    configured: isLlmConfigured(env),
+    defaultModel: getLlmModel(env),
+    baseUrl:
+      provider === 'mistral'
+        ? 'https://api.mistral.ai/v1'
+        : readEnvString(env, 'LLM_BASE_URL') || null,
+    tasks,
+    workersAi: getWorkersAiModelConfig(env),
+  };
+}
+
 function extractTextFromAiResponse(response) {
   if (!response || typeof response !== 'object') return '';
   if (typeof response.response === 'string') return response.response.trim();
@@ -2975,10 +3065,13 @@ function extractTextFromAiResponse(response) {
   if (Array.isArray(response.result) && typeof response.result[0]?.response === 'string') {
     return response.result[0].response.trim();
   }
+  const choice = Array.isArray(response.choices) ? response.choices[0] : null;
+  if (typeof choice?.message?.content === 'string') return choice.message.content.trim();
+  if (typeof choice?.text === 'string') return choice.text.trim();
   return '';
 }
 
-export async function runWorkersAiText(env, { systemPrompt, userPrompt, maxTokens = 160, task = 'default' }) {
+async function runWorkersAiTextDirect(env, { systemPrompt, userPrompt, maxTokens = 160, task = 'default' }) {
   if (!env.AI) {
     throw new Error('Workers AI binding is not configured.');
   }
@@ -2995,6 +3088,104 @@ export async function runWorkersAiText(env, { systemPrompt, userPrompt, maxToken
     text: extractTextFromAiResponse(response),
     raw: response,
   };
+}
+
+function buildChatCompletionPayload({ systemPrompt, userPrompt, maxTokens }) {
+  return {
+    messages: [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: userPrompt },
+    ],
+    max_tokens: maxTokens,
+  };
+}
+
+async function runOpenAiCompatibleText(env, {
+  baseUrl,
+  apiKey,
+  model,
+  systemPrompt,
+  userPrompt,
+  maxTokens = 160,
+  providerName,
+}) {
+  if (!baseUrl) {
+    throw new Error(`${providerName} base URL is not configured.`);
+  }
+  if (!model || model === 'configured') {
+    throw new Error(`${providerName} model is not configured.`);
+  }
+
+  const url = `${baseUrl.replace(/\/+$/, '')}/chat/completions`;
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+  if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      ...buildChatCompletionPayload({ systemPrompt, userPrompt, maxTokens }),
+      model,
+    }),
+  });
+
+  let raw = null;
+  try {
+    raw = await response.json();
+  } catch {
+    raw = { error: await response.text().catch(() => '') };
+  }
+
+  if (!response.ok) {
+    const message =
+      typeof raw?.error?.message === 'string'
+        ? raw.error.message
+        : typeof raw?.message === 'string'
+          ? raw.message
+          : `${providerName} request failed with HTTP ${response.status}.`;
+    throw new Error(message);
+  }
+
+  return {
+    text: extractTextFromAiResponse(raw),
+    raw,
+  };
+}
+
+export async function runLlmText(env, { systemPrompt, userPrompt, maxTokens = 160, task = 'default' }) {
+  const provider = getLlmProvider(env);
+  if (provider === 'workers-ai') {
+    return runWorkersAiTextDirect(env, { systemPrompt, userPrompt, maxTokens, task });
+  }
+  if (provider === 'mistral') {
+    return runOpenAiCompatibleText(env, {
+      baseUrl: readEnvString(env, 'MISTRAL_BASE_URL') || 'https://api.mistral.ai/v1',
+      apiKey: readEnvString(env, 'MISTRAL_API_KEY'),
+      model: getLlmModel(env, task),
+      systemPrompt,
+      userPrompt,
+      maxTokens,
+      providerName: 'Mistral',
+    });
+  }
+  if (provider === 'scaleway' || provider === 'openai-compatible' || provider === 'local') {
+    return runOpenAiCompatibleText(env, {
+      baseUrl: readEnvString(env, 'LLM_BASE_URL'),
+      apiKey: readEnvString(env, 'LLM_API_KEY'),
+      model: getLlmModel(env, task),
+      systemPrompt,
+      userPrompt,
+      maxTokens,
+      providerName: provider,
+    });
+  }
+  throw new Error('LLM provider is not configured.');
+}
+
+export async function runWorkersAiText(env, options) {
+  return runLlmText(env, options);
 }
 
 export async function verifyTurnstile(request, env) {
@@ -3049,8 +3240,8 @@ export async function buildRewrite(env, query) {
   if (!query?.trim()) {
     return {
       rewritten_query: '',
-      model: env.AI ? getWorkersAiModel(env, 'rewrite') : 'disabled',
-      provider: env.AI ? 'workers-ai' : 'none',
+      model: isLlmConfigured(env) ? getLlmModel(env, 'rewrite') : 'disabled',
+      provider: isLlmConfigured(env) ? getLlmProvider(env) : 'none',
       latency_ms: 0,
       fallback: true,
       explanation: 'Enter a search query to use the guidance assistant.',
@@ -3067,19 +3258,19 @@ export async function buildRewrite(env, query) {
     });
     return {
       rewritten_query: completion.text || query,
-      model: getWorkersAiModel(env, 'rewrite'),
-      provider: 'workers-ai',
+      model: getLlmModel(env, 'rewrite'),
+      provider: getLlmProvider(env),
       latency_ms: 0,
       fallback: false,
     };
   } catch (error) {
     return {
       rewritten_query: query,
-      model: env.AI ? getWorkersAiModel(env, 'rewrite') : 'disabled',
-      provider: env.AI ? 'workers-ai' : 'none',
+      model: isLlmConfigured(env) ? getLlmModel(env, 'rewrite') : 'disabled',
+      provider: isLlmConfigured(env) ? getLlmProvider(env) : 'none',
       latency_ms: 0,
       fallback: true,
-      explanation: error instanceof Error ? error.message : 'Workers AI request failed.',
+      explanation: error instanceof Error ? error.message : 'LLM request failed.',
     };
   }
 }
@@ -3134,8 +3325,8 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
       },
       explanation: 'Keine genaue Antwort im Datenbestand; passende Anlaufstelle anhand der Anfrage vorgeschlagen.',
       sources: institutionFallback.sources,
-      provider: env.AI ? 'workers-ai' : 'none',
-      model: env.AI ? getWorkersAiModel(env) : 'router',
+      provider: isLlmConfigured(env) ? getLlmProvider(env) : 'none',
+      model: isLlmConfigured(env) ? getLlmModel(env) : 'router',
       fallback: true,
       evidence,
       evidence_lanes: lanes,
@@ -3208,7 +3399,7 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
       return {
         answer: extractiveSynthesisAnswer(laneEvidence),
         sources: laneEvidence.map((item) => item.source),
-        explanation: error instanceof Error ? error.message : 'Workers AI request failed.',
+        explanation: error instanceof Error ? error.message : 'LLM request failed.',
       };
     }
   }
@@ -3246,8 +3437,8 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
       },
       explanation: 'Keine verlässliche Information gefunden.',
       sources: [],
-      provider: env.AI ? 'workers-ai' : 'none',
-      model: env.AI ? getWorkersAiModel(env, 'synthesize') : 'disabled',
+      provider: isLlmConfigured(env) ? getLlmProvider(env) : 'none',
+      model: isLlmConfigured(env) ? getLlmModel(env, 'synthesize') : 'disabled',
       fallback: true,
       evidence,
       evidence_lanes: lanes,
@@ -3312,8 +3503,8 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
         ...contactsLane.sources,
         ...synthesisEvidence.map((item) => item.source),
       ])),
-      provider: 'workers-ai',
-      model: getWorkersAiModel(env, 'synthesize'),
+      provider: getLlmProvider(env),
+      model: getLlmModel(env, 'synthesize'),
       fallback: !answerShape.passed,
       evidence,
       evidence_lanes: lanes,
@@ -3337,10 +3528,10 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
         sources: { einfach: fallbackPlainLanguage.source },
         quality: { einfach: fallbackPlainLanguage.quality },
       },
-      explanation: error instanceof Error ? error.message : 'Workers AI request failed.',
+      explanation: error instanceof Error ? error.message : 'LLM request failed.',
       sources: synthesisEvidence.map((item) => item.source),
-      provider: env.AI ? 'workers-ai' : 'none',
-      model: env.AI ? getWorkersAiModel(env, 'synthesize') : 'disabled',
+      provider: isLlmConfigured(env) ? getLlmProvider(env) : 'none',
+      model: isLlmConfigured(env) ? getLlmModel(env, 'synthesize') : 'disabled',
       fallback: true,
       evidence,
       evidence_lanes: lanes,

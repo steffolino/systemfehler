@@ -20,7 +20,7 @@ The deployment workflow builds the frontend app from `frontend/` and deploys:
 - `/api/data/moderation-queue` -> moderation queue from D1 table `moderation_queue`
 - `/api/data/quality-report` -> quality metrics + missing translation report
 - `/api/data/life-event-review` -> semantic review cases + manual override lifecycle
-- `/api/ai/health` -> Workers AI health/config
+- `/api/ai/health` -> LLM provider health/config
 - `/api/ai/rewrite` -> query rewrite
 - `/api/ai/retrieve` -> retrieval-only evidence
 - `/api/ai/synthesize` -> retrieval-backed answer synthesis
@@ -37,14 +37,17 @@ The deployment workflow builds the frontend app from `frontend/` and deploys:
 `/api/ai/synthesize` and `/api/ai/chat` return the standard answer plus
 `plain_language.einfach` when evidence is available. The simple-language text is
 guarded by rule-based quality checks and falls back to a source-cited extractive
-summary if Workers AI is unavailable or the generated simplification fails the
+summary if the configured LLM is unavailable or the generated simplification fails the
 guard.
 
-Workers AI model selection is role-aware but model-neutral by default. Optional
-environment variables can override the shared `CF_AI_MODEL` per task:
-`CF_AI_MODEL_REWRITE`, `CF_AI_MODEL_SYNTHESIZE`,
-`CF_AI_MODEL_PLAIN_LANGUAGE`, `CF_AI_MODEL_CHAT_REWRITE`, and
-`CF_AI_MODEL_ENRICH`. See `docs/llm-integration.md` before changing models.
+LLM selection is provider-neutral and role-aware. `LLM_PROVIDER` can select
+`none`, `workers-ai`, `mistral`, `scaleway`, `openai-compatible`, or `local`.
+Optional environment variables can override the shared `LLM_MODEL` per task:
+`LLM_MODEL_REWRITE`, `LLM_MODEL_SYNTHESIZE`,
+`LLM_MODEL_PLAIN_LANGUAGE`, `LLM_MODEL_CHAT_REWRITE`, and
+`LLM_MODEL_ENRICH`. Workers AI keeps the existing `CF_AI_MODEL*` overrides;
+Mistral also supports `MISTRAL_MODEL*` overrides. See
+`docs/llm-integration.md` before changing providers or models.
 
 ## Required GitHub Secrets
 
@@ -85,8 +88,13 @@ to same-origin Cloudflare Pages Functions instead of the local Python sidecar.
    - `PAGES_BASE_URL` (for example `https://systemfehler.pages.dev`)
 6. In **Pages -> Settings -> Functions**, add bindings:
    - D1 binding: `DB`
-   - Workers AI binding: `AI`
+   - optional Workers AI binding: `AI` (only needed for `LLM_PROVIDER=workers-ai`)
 7. Optionally add a non-secret environment variable:
+   - `LLM_PROVIDER` (`none|workers-ai|mistral|scaleway|openai-compatible|local`; defaults to `workers-ai` only when an `AI` binding exists, otherwise `none`)
+   - `LLM_MODEL` and task-specific `LLM_MODEL_*` overrides
+   - `MISTRAL_MODEL` and task-specific `MISTRAL_MODEL_*` overrides when `LLM_PROVIDER=mistral`
+   - `MISTRAL_BASE_URL` (optional, defaults to `https://api.mistral.ai/v1`)
+   - `LLM_BASE_URL` and `LLM_API_KEY` for OpenAI-compatible providers
    - `CF_AI_MODEL` (defaults to `@cf/meta/llama-3.1-8b-instruct`)
    - `AI_RATE_LIMIT_WINDOW_SECONDS` (defaults to `60`)
    - `AI_RATE_LIMIT_MAX_REQUESTS` (defaults to `12`)
@@ -105,6 +113,9 @@ to same-origin Cloudflare Pages Functions instead of the local Python sidecar.
    - `CORS_ALLOWED_ORIGINS` (comma-separated extra origins allowed for CORS; same-origin is always allowed)
    - `INGEST_MAX_BODY_BYTES` (defaults to `8000000`)
    - `INGEST_MAX_ENTRIES` (defaults to `1500`)
+8. Add secrets for selected LLM providers:
+   - `MISTRAL_API_KEY` when `LLM_PROVIDER=mistral`
+   - `LLM_API_KEY` when the selected OpenAI-compatible provider requires bearer auth
 
 ## Deployment Trigger
 

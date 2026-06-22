@@ -18,14 +18,16 @@ what is legacy scaffolding, and what should be worked on next.
 - Public guided search now defaults to the `standard` answer mode, with
   `einfach` as the current simple-language AI answer mode.
 - The simple-language answer builder now uses retrieval evidence, a rule-based
-  quality guard, and a source-cited extractive fallback when Workers AI is
-  unavailable or generated simple-language text fails validation.
+  quality guard, and a source-cited extractive fallback when the configured LLM
+  provider is unavailable or generated simple-language text fails validation.
 - Standard AI answers now also pass an answer-shape guard. If a generated answer
   misses the user's intent, such as a `Wo ... beantragen?` question, synthesis
   falls back to a source-cited extractive answer.
-- Workers AI model selection is prepared but not product-selected: the runtime
-  supports optional task-specific env vars for rewrite, synthesis, simple
-  language, chat rewrite, and enrichment while preserving the current default.
+- LLM provider selection is prepared but not product-selected: the runtime
+  supports `none`, `workers-ai`, `mistral`, `scaleway`, `openai-compatible`,
+  and `local` providers plus optional task-specific env vars for rewrite,
+  synthesis, simple language, chat rewrite, and enrichment while preserving the
+  current fallback behavior.
 - Human editorial governance for life-event semantics is now implemented end to
   end:
   - runtime review case capture in AI retrieval
@@ -239,13 +241,13 @@ Cloudflare Pages deployment now intentionally excludes the large `data/*`
 snapshot files. The active production Pages app uses Pages Functions + D1 for
 data access.
 
-Production AI is now live on `systemfehler.pages.dev` through Pages Functions
-plus Cloudflare Workers AI. The active production stack is:
+Production guided AI is now live on `systemfehler.pages.dev` through Pages
+Functions with configurable LLM provider support. The active production stack is:
 
 - Cloudflare Pages frontend
 - Cloudflare Pages Functions API at `/api/*`
 - D1-backed entry storage
-- Workers AI at `/api/ai/*`
+- guided AI endpoints at `/api/ai/*`
 - Turnstile for public AI requests
 
 Recent production verification (2026-05-03):

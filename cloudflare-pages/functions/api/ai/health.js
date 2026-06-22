@@ -1,4 +1,4 @@
-import { getRetrievalConfig, getWorkersAiModel, getWorkersAiModelConfig, listLifeEventScenarios, loadLifeEventScenarios } from '../_lib/ai.js';
+import { getLlmModel, getLlmModelConfig, getLlmProvider, getRetrievalConfig, isLlmConfigured, listLifeEventScenarios, loadLifeEventScenarios } from '../_lib/ai.js';
 
 export async function onRequest({ request, env }) {
   const url = new URL(request.url);
@@ -21,11 +21,11 @@ export async function onRequest({ request, env }) {
     JSON.stringify({
       status: 'ok',
       provider: {
-        provider: env.AI ? 'workers-ai' : 'none',
-        configured: Boolean(env.AI),
-        status: env.AI ? 'ok' : 'disabled',
-        models: env.AI ? [getWorkersAiModel(env)] : [],
-        modelConfig: getWorkersAiModelConfig(env),
+        provider: getLlmProvider(env),
+        configured: isLlmConfigured(env),
+        status: isLlmConfigured(env) ? 'ok' : 'disabled',
+        models: isLlmConfigured(env) ? [getLlmModel(env)] : [],
+        modelConfig: getLlmModelConfig(env),
       },
       turnstile: {
         configured: Boolean(env.TURNSTILE_SECRET_KEY),

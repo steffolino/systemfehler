@@ -411,9 +411,11 @@ Inspect AI provider, retrieval, cache, rate-limit, and model configuration.
 
 **Endpoint:** `GET /api/ai/health`
 
-The provider block includes `modelConfig`, which resolves the shared
-`CF_AI_MODEL` and any task-specific overrides such as
-`CF_AI_MODEL_SYNTHESIZE` or `CF_AI_MODEL_PLAIN_LANGUAGE`.
+The provider block includes `modelConfig`, which resolves `LLM_PROVIDER`, the
+shared `LLM_MODEL`, and task-specific overrides such as
+`LLM_MODEL_SYNTHESIZE` or `LLM_MODEL_PLAIN_LANGUAGE`. Provider-specific
+overrides such as `CF_AI_MODEL_SYNTHESIZE` or
+`MISTRAL_MODEL_PLAIN_LANGUAGE` are also reflected when that provider is active.
 
 ---
 
@@ -464,9 +466,10 @@ Response includes:
 - `retrieval` diagnostics for transparency
 
 The `plain_language.einfach` field is generated from the same evidence as the
-standard answer. If Workers AI is unavailable or the simple-language quality
-guard rejects the generated text, the API returns a source-cited extractive
-fallback instead of an unverified simple-language rewrite.
+standard answer. If the configured LLM provider is unavailable or the
+simple-language quality guard rejects the generated text, the API returns a
+source-cited extractive fallback instead of an unverified simple-language
+rewrite.
 
 The standard answer also passes a lightweight answer-shape guard. For example,
 questions that ask `Wo ... beantragen?` must produce an answer with an

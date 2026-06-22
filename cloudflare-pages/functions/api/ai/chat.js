@@ -1,8 +1,10 @@
 import {
   buildSynthesis,
   enforceRateLimit,
+  getLlmModel,
+  getLlmProvider,
   getRetrievalConfig,
-  getWorkersAiModel,
+  isLlmConfigured,
   normalizeQuery,
   retrieveEvidence,
   runWorkersAiText,
@@ -45,7 +47,7 @@ function compactConversation(messages) {
 async function buildStandaloneQuery(env, messages) {
   const latest = latestUserMessage(messages);
   if (!latest) return '';
-  if (messages.length <= 1 || !env.AI) return latest;
+  if (messages.length <= 1 || !isLlmConfigured(env)) return latest;
 
   try {
     const completion = await runWorkersAiText(env, {
@@ -173,8 +175,8 @@ export async function onRequest({ request, env }) {
       answer: null,
       explanation: 'Die Chat-Antwort ist gerade nicht verfuegbar. Bitte versuche es erneut.',
       sources: [],
-      provider: env.AI ? 'workers-ai' : 'none',
-      model: env.AI ? getWorkersAiModel(env, 'synthesize') : 'fallback',
+      provider: isLlmConfigured(env) ? getLlmProvider(env) : 'none',
+      model: isLlmConfigured(env) ? getLlmModel(env, 'synthesize') : 'fallback',
       fallback: true,
       evidence,
       evidence_lanes: lanes,

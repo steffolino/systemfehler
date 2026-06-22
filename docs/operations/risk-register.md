@@ -10,7 +10,7 @@ _Last updated: 2026-05-03_
 | Weak evidence answers in sensitive topics | High | Retrieval confidence thresholds, weak-evidence signaling, no-guess fallback wording |
 | Turnstile test bypass leakage into normal ops | Medium | Temporary secret only, scoped E2E usage, immediate secret cleanup after tests |
 | Legal uncertainty on reuse | Medium | Source-tier policy, provenance metadata, legal review before promoting uncertain sources |
-| Workers AI quota or latency pressure | Medium | Rate limiting, cache TTL tuning, retrieval-first strategy |
+| LLM provider quota, cost, or latency pressure | Medium | Rate limiting, cache TTL tuning, retrieval-first strategy, provider-neutral fallback |
 
 ### Monitoring
 - Crawl metrics and failure reasons (`data/<domain>/crawl_metrics.json`)  
