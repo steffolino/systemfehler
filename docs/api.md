@@ -447,13 +447,20 @@ Response includes:
 - `plain_language.einfach` for the Easy German answer mode, when evidence is available
 - `plain_language.sources.einfach` describing whether the simple answer is `ai-generated`, `fallback`, `fallback_quality_guard`, `fallback_error`, or `none`
 - `plain_language.quality.einfach` with rule-based quality diagnostics for the simple-language answer
-- `answer_quality` grounding diagnostics for the standard answer
+- `answer_quality` grounding and answer-shape diagnostics for the standard answer
+- `answer_guard` when a generated standard answer was rejected because it did not match the user's question intent
 - `retrieval` diagnostics for transparency
 
 The `plain_language.einfach` field is generated from the same evidence as the
 standard answer. If Workers AI is unavailable or the simple-language quality
 guard rejects the generated text, the API returns a source-cited extractive
 fallback instead of an unverified simple-language rewrite.
+
+The standard answer also passes a lightweight answer-shape guard. For example,
+questions that ask `Wo ... beantragen?` must produce an answer with an
+application path or responsible place. If the generated answer misses that
+intent, the API returns a source-cited extractive fallback and includes the
+failed guard result in `answer_guard`.
 
 ---
 

@@ -20,6 +20,9 @@ what is legacy scaffolding, and what should be worked on next.
 - The simple-language answer builder now uses retrieval evidence, a rule-based
   quality guard, and a source-cited extractive fallback when Workers AI is
   unavailable or generated simple-language text fails validation.
+- Standard AI answers now also pass an answer-shape guard. If a generated answer
+  misses the user's intent, such as a `Wo ... beantragen?` question, synthesis
+  falls back to a source-cited extractive answer.
 - Human editorial governance for life-event semantics is now implemented end to
   end:
   - runtime review case capture in AI retrieval

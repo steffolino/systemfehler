@@ -18,7 +18,13 @@ extractive synthesis fallback. It checks:
 - required source families,
 - cited source count,
 - unsupported answer claims,
-- whether the answer is too generic for the question.
+- whether the answer is too generic for the question,
+- whether the answer shape matches the question intent.
+
+The Pages synthesis path now applies the same intent idea at runtime. If a
+generated standard answer misses the expected shape for questions such as
+`Wo kann ich ... beantragen?`, the API replaces it with a source-cited
+extractive fallback and returns the failed guard result as `answer_guard`.
 
 The command does not fail the build by default. Use this for CI once the
 baseline is intentionally green:

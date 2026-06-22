@@ -396,6 +396,25 @@ interface AISynthesizeResponse {
   weak_evidence?: boolean;
   usage?: Record<string, unknown>;
   retrieval?: AIRetrievalDiagnostics;
+  answer_quality?: {
+    checked_claims?: number;
+    unsupported_claims?: unknown[];
+    generic_claims?: unknown[];
+    cited_source_count?: number;
+    available_source_count?: number;
+    grounded?: boolean;
+    query_specific?: boolean;
+    answer_shape?: {
+      passed?: boolean;
+      intents?: string[];
+      findings?: string[];
+    };
+  };
+  answer_guard?: {
+    passed?: boolean;
+    intents?: string[];
+    findings?: string[];
+  };
   plain_language?: {
     einfach?: string | null;
     leicht?: string | null;

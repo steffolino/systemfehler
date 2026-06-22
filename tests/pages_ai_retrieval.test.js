@@ -179,6 +179,52 @@ test('synthesis provides simple-language fallback without Workers AI', async () 
   assert.deepEqual(response.plain_language.quality.einfach.findings, []);
 });
 
+test('synthesis guards generated answers that miss application-place intent', async () => {
+  const evidence = [
+    {
+      source: 'https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/buergergeld-beantragen',
+      confidence: 0.92,
+      content: JSON.stringify({
+        title: 'Buergergeld online beantragen',
+        url: 'https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/buergergeld-beantragen',
+        domain: 'benefits',
+        summary: {
+          de: 'Buergergeld koennen Sie online beim Jobcenter beantragen.',
+        },
+        provenance: {
+          sourceTier: 'tier_1_official',
+          sourceRole: 'official_info',
+        },
+      }),
+    },
+  ];
+  const env = {
+    AI: {
+      async run() {
+        return {
+          response: '- Einkommen mit Buergergeld ergaenzen, wenn der Lohn nicht reicht.',
+        };
+      },
+    },
+  };
+
+  const response = await buildSynthesis(
+    env,
+    'Wo kann ich Buergergeld beantragen?',
+    evidence,
+    { retrieval_mode: 'keyword' },
+    { official: evidence, assistive: [], contacts: [], context: [] }
+  );
+
+  assert.equal(response.fallback, true);
+  assert.equal(response.answer_guard.passed, false);
+  assert.ok(response.answer_guard.findings.includes('missing_place_answer'));
+  assert.match(response.answer, /Antrag starten/i);
+  assert.match(response.answer, /Buergergeld online beantragen/i);
+  assert.match(response.answer, /\[Quelle: https:\/\/www\.arbeitsagentur\.de\/arbeitslos-arbeit-finden\/buergergeld\/buergergeld-beantragen\]/);
+  assert.equal(response.answer_quality.answer_shape.passed, true);
+});
+
 test('synthesis prioritizes local Sozialamt lookup over thematic benefit evidence', async () => {
   const evidence = [
     {

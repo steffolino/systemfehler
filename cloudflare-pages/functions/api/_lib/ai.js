@@ -341,6 +341,130 @@ export function evaluateAnswerGrounding(answer, evidence, query = '') {
   };
 }
 
+function inferAnswerIntent(query) {
+  const normalized = normalizeGermanChars(String(query || '').toLowerCase());
+  const intents = [];
+
+  if (/\bwo\b/.test(normalized) || /\bzustaendig|\bstelle\b|\badresse\b|\bamt\b/.test(normalized)) {
+    intents.push('place');
+  }
+  if (/beantrag|antrag|formular|online starten|stellen\b/.test(normalized)) {
+    intents.push('application');
+  }
+  if (/wie\s+(viel|hoch)|hoehe|betrag|kosten|regelsatz|regelbedarf/.test(normalized)) {
+    intents.push('amount');
+  }
+  if (/frist|bis wann|deadline|termin|datum/.test(normalized)) {
+    intents.push('deadline');
+  }
+  if (/wer hilft|hilfe|beratung|an wen|kontakt|telefon|e-?mail/.test(normalized)) {
+    intents.push('contact');
+  }
+
+  return intents.length > 0 ? intents : ['general'];
+}
+
+function auditAnswerShape(query, answer, evidence) {
+  const intents = inferAnswerIntent(query);
+  const normalizedAnswer = normalizeGermanChars(String(answer || '').toLowerCase());
+  const normalizedEvidence = normalizeGermanChars(evidenceSupportText(evidence).toLowerCase());
+  const findings = [];
+
+  if (!normalizedAnswer.trim()) findings.push('empty_answer');
+
+  if (intents.includes('place')) {
+    const hasPlaceCue = /jobcenter|familienkasse|elterngeldstelle|sozialamt|arbeitsagentur|dienststelle|stelle|amt|portal|online|adresse|kontakt|zustaendig/.test(normalizedAnswer);
+    if (!hasPlaceCue) findings.push('missing_place_answer');
+  }
+
+  if (intents.includes('application')) {
+    const hasApplicationCue = /beantrag|antrag|formular|online|portal|stellen|jobcenter|familienkasse|elterngelddigital/.test(normalizedAnswer);
+    if (!hasApplicationCue) findings.push('missing_application_answer');
+  }
+
+  if (intents.includes('amount')) {
+    const hasAmountCue = /euro|betrag|hoehe|regelbedarf|regelsatz|berechn|anspruch/.test(normalizedAnswer);
+    if (!hasAmountCue && /euro|betrag|hoehe|regelbedarf|regelsatz|berechn/.test(normalizedEvidence)) {
+      findings.push('missing_amount_answer');
+    }
+  }
+
+  if (intents.includes('deadline')) {
+    const hasDeadlineCue = /frist|bis|termin|datum|monat|tag|woche|rueckwirkend/.test(normalizedAnswer);
+    if (!hasDeadlineCue && /frist|termin|datum|monat|tag|woche|rueckwirkend/.test(normalizedEvidence)) {
+      findings.push('missing_deadline_answer');
+    }
+  }
+
+  if (intents.includes('contact')) {
+    const hasContactCue = /beratung|kontakt|telefon|e-mail|email|stelle|hilfe|hotline|termin/.test(normalizedAnswer);
+    if (!hasContactCue) findings.push('missing_contact_answer');
+  }
+
+  return {
+    passed: findings.length === 0,
+    intents,
+    findings,
+  };
+}
+
+function buildQuestionFocusedExtractiveAnswer(query, evidence) {
+  const entries = dedupeEvidence(Array.isArray(evidence) ? evidence : [])
+    .slice(0, 4)
+    .map((item) => {
+      const entry = parseJsonSafe(item.content, null);
+      if (!entry) return null;
+      const title = getLocalizedString(entry.title, entry.title_de || 'Eintrag');
+      const summary = firstUsefulSentence(
+        getLocalizedString(entry.summary, entry.summary_de || '') ||
+        getLocalizedString(entry.content, entry.content_de || ''),
+        'Direkt pruefen.'
+      );
+      return {
+        title,
+        summary,
+        source: entry.url || item.source || '',
+        domain: entry.domain || inferEvidenceMeta(item).domain,
+      };
+    })
+    .filter(Boolean);
+
+  if (entries.length === 0) return null;
+
+  const intents = inferAnswerIntent(query);
+  const lines = [];
+
+  for (const item of entries.slice(0, 3)) {
+    const normalizedTitle = normalizeGermanChars(item.title.toLowerCase());
+    if (intents.includes('place') && intents.includes('application')) {
+      if (/online|beantrag|antrag|formular|portal/.test(normalizedTitle)) {
+        lines.push(`- Antrag starten: ${item.title}.`);
+      } else if (item.domain === 'contacts' || /jobcenter|familienkasse|elterngeldstelle|sozialamt|arbeitsagentur|dienststelle/.test(normalizedTitle)) {
+        lines.push(`- Zustaendige Stelle finden: ${item.title}.`);
+      } else {
+        lines.push(`- Fuer den Antrag wichtig: ${item.title}.`);
+      }
+    } else if (intents.includes('place')) {
+      lines.push(`- Passende Stelle pruefen: ${item.title}.`);
+    } else if (intents.includes('application')) {
+      lines.push(`- Antrag pruefen oder starten: ${item.title}.`);
+    } else if (intents.includes('contact')) {
+      lines.push(`- Hilfe bekommen: ${item.title}.`);
+    } else if (intents.includes('amount')) {
+      lines.push(`- Betrag oder Anspruch pruefen: ${item.title}.`);
+    } else {
+      lines.push(`- Zuerst relevant: ${item.title}.`);
+    }
+
+    if (item.summary && !normalizeGermanChars(item.summary.toLowerCase()).includes(normalizedTitle)) {
+      lines.push(`  ${item.summary}`);
+    }
+    if (item.source) lines.push(`[Quelle: ${item.source}]`);
+  }
+
+  return lines.join('\n');
+}
+
 function normalizeScenarioMatchText(value) {
   return normalizeGermanChars(String(value || '').toLowerCase())
     .replace(/[^\p{L}\p{N}\s-]/gu, ' ')
@@ -2956,10 +3080,16 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
   ])
     .filter((item) => Number(item.confidence || 0) >= 0.45)
     .slice(0, 5);
-  const attachAnswerQuality = (payload) => ({
-    ...payload,
-    answer_quality: evaluateAnswerGrounding(payload?.answer || '', evidence, query),
-  });
+  const attachAnswerQuality = (payload) => {
+    const grounding = evaluateAnswerGrounding(payload?.answer || '', evidence, query);
+    return {
+      ...payload,
+      answer_quality: {
+        ...grounding,
+        answer_shape: auditAnswerShape(query, payload?.answer || '', evidence),
+      },
+    };
+  };
   const institutionFallback = buildInstitutionFallback(query, { evidence, strongEvidence });
   if (institutionFallback) {
     return attachAnswerQuality({
@@ -3127,14 +3257,20 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
         assistiveLane.answer ? `\nNGO-/Praktische Hilfe:\n${assistiveLane.answer}` : '',
         contactsLane.answer ? `\nDirekte Kontakte:\n${contactsLane.answer}` : '',
       ].filter(Boolean).join('\n');
+    const answerShape = auditAnswerShape(query, standardAnswer, synthesisEvidence);
+    const guardedAnswer = answerShape.passed
+      ? standardAnswer
+      : buildQuestionFocusedExtractiveAnswer(query, synthesisEvidence) || standardAnswer;
     return attachAnswerQuality({
-      answer: standardAnswer,
+      answer: guardedAnswer,
       plain_language: {
         einfach: plainLanguage.einfach || null,
         sources: { einfach: plainLanguage.source },
         quality: { einfach: plainLanguage.quality },
       },
-      explanation: 'Antwort basiert auf abgerufenen Eintraegen.',
+      explanation: answerShape.passed
+        ? 'Antwort basiert auf abgerufenen Eintraegen.'
+        : 'Antwort wurde durch eine fragefokussierte, belegbasierte Fallback-Antwort ersetzt.',
       sources: Array.from(new Set([
         ...officialLane.sources,
         ...assistiveLane.sources,
@@ -3143,7 +3279,7 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
       ])),
       provider: 'workers-ai',
       model: getWorkersAiModel(env),
-      fallback: false,
+      fallback: !answerShape.passed,
       evidence,
       evidence_lanes: lanes,
       answer_lanes: {
@@ -3153,13 +3289,14 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
       },
       assistive_contacts: assistiveContacts,
       weak_evidence: strongEvidence.length === 0,
+      answer_guard: answerShape,
       usage: {},
       retrieval: retrievalDiagnostics,
     });
   } catch (error) {
     const fallbackPlainLanguage = await buildPlainLanguageAnswer(env, query, synthesisEvidence);
     return attachAnswerQuality({
-      answer: extractiveSynthesisAnswer(synthesisEvidence),
+      answer: buildQuestionFocusedExtractiveAnswer(query, synthesisEvidence) || extractiveSynthesisAnswer(synthesisEvidence),
       plain_language: {
         einfach: fallbackPlainLanguage.einfach || null,
         sources: { einfach: fallbackPlainLanguage.source },
