@@ -114,7 +114,9 @@ Deployment runs from `.github/workflows/deploy-pages.yml` on:
 
 After Pages deploy, the workflow also attempts to sync all domain snapshots into D1
 via `scripts/ingest_all_to_d1.py` (when `PAGES_INGEST_URL` and `INGEST_TOKEN` are set).
-The ingest client uses chunked uploads to avoid `413 Payload Too Large` on large domains.
+The ingest client uses entry-count and byte-size based uploads to avoid
+`413 Payload Too Large` on large domains. Override the default batch payload
+limit with `INGEST_MAX_BATCH_BYTES` if the Pages ingest limit changes.
 
 ## Production E2E with Turnstile (temporary bypass runbook)
 

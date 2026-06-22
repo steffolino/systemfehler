@@ -17,6 +17,44 @@ import sys
 import urllib.error
 import urllib.request
 
+DEFAULT_MAX_BATCH_BYTES = 6_000_000
+
+
+def make_payload(domain, batch):
+    return json.dumps(
+        {'domain': domain, 'entries': batch},
+        ensure_ascii=False,
+        separators=(',', ':'),
+    ).encode('utf-8')
+
+
+def split_batches_by_size(domain, entries, max_entries, max_bytes):
+    batches = []
+    current = []
+
+    for entry in entries:
+        single_payload_size = len(make_payload(domain, [entry]))
+        if single_payload_size > max_bytes:
+            entry_id = entry.get('id') if isinstance(entry, dict) else None
+            raise ValueError(
+                f"Entry {entry_id or '<unknown>'} is too large for ingest "
+                f"({single_payload_size} bytes > {max_bytes} bytes)."
+            )
+
+        candidate = [*current, entry]
+        if current and (
+            len(candidate) > max_entries or
+            len(make_payload(domain, candidate)) > max_bytes
+        ):
+            batches.append(current)
+            current = [entry]
+        else:
+            current = candidate
+
+    if current:
+        batches.append(current)
+    return batches
+
 
 def main():
     parser = argparse.ArgumentParser(description='Ingest snapshot entries into D1')
@@ -26,7 +64,13 @@ def main():
         '--chunk-size',
         type=int,
         default=0,
-        help='Optional chunk size for entries per request (0 = send all at once)',
+        help='Maximum entries per request (0 = only use byte-based batching)',
+    )
+    parser.add_argument(
+        '--max-bytes',
+        type=int,
+        default=int(os.environ.get('INGEST_MAX_BATCH_BYTES', DEFAULT_MAX_BATCH_BYTES)),
+        help='Maximum JSON payload bytes per request',
     )
     args = parser.parse_args()
 
@@ -85,7 +129,7 @@ def main():
     }
 
     def send_batch(batch, index=None, total=None):
-        payload = json.dumps({'domain': args.domain, 'entries': batch}).encode()
+        payload = make_payload(args.domain, batch)
         req = urllib.request.Request(
             ingest_url,
             data=payload,
@@ -96,27 +140,26 @@ def main():
             body = json.loads(resp.read())
             prefix = f"[{index}/{total}] " if index is not None and total is not None else ""
             print(
-                f"{prefix}Ingest ok: upserted={body.get('upserted', '?')} skipped={body.get('skipped', '?')}"
+                f"{prefix}Ingest ok: entries={len(batch)} bytes={len(payload)} "
+                f"upserted={body.get('upserted', '?')} skipped={body.get('skipped', '?')}"
             )
 
-    chunk_size = max(0, int(args.chunk_size or 0))
-    if chunk_size <= 0:
+    chunk_size = max(0, int(args.chunk_size or 0)) or len(entries) or 1
+    max_bytes = max(1024, int(args.max_bytes or DEFAULT_MAX_BATCH_BYTES))
+    try:
+        batches = split_batches_by_size(args.domain, entries, chunk_size, max_bytes)
+    except ValueError as e:
+        print(f'Ingest failed before upload: {e}', file=sys.stderr)
+        sys.exit(1)
+
+    total_batches = len(batches)
+    for i, batch in enumerate(batches, start=1):
         try:
-            send_batch(entries)
+            send_batch(batch, i, total_batches)
         except urllib.error.HTTPError as e:
-            print(f'Ingest failed: HTTP {e.code} {e.reason}', file=sys.stderr)
+            print(f'Ingest failed in batch {i}/{total_batches}: HTTP {e.code} {e.reason}', file=sys.stderr)
             print(e.read().decode(), file=sys.stderr)
             sys.exit(1)
-    else:
-        total_batches = (len(entries) + chunk_size - 1) // chunk_size
-        for i in range(total_batches):
-            batch = entries[i * chunk_size:(i + 1) * chunk_size]
-            try:
-                send_batch(batch, i + 1, total_batches)
-            except urllib.error.HTTPError as e:
-                print(f'Ingest failed in batch {i + 1}/{total_batches}: HTTP {e.code} {e.reason}', file=sys.stderr)
-                print(e.read().decode(), file=sys.stderr)
-                sys.exit(1)
 
 
 if __name__ == '__main__':
