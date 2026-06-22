@@ -47,7 +47,7 @@ const LOW_SIGNAL_TITLE_TOKENS = [
   'anreiseinformationen',
   'kommende veranstaltungen',
   'veranstaltungen auf einen blick',
-  'Ã¼bersicht der internetseite',
+  'übersicht der internetseite',
   'uebersicht der internetseite',
   'bundeskabinett',
   'leichte sprache',
@@ -63,13 +63,14 @@ const QUERY_STOPWORDS = new Set([
   'ich', 'du', 'er', 'sie', 'wir', 'ihr',
   'mir', 'mich', 'dir', 'dich', 'uns', 'euch',
   'ist', 'sind', 'war', 'waren', 'wird', 'werden',
-  'mit', 'ohne', 'fuer', 'fÃ¼r', 'auf', 'bei', 'von', 'zu', 'im', 'in', 'am', 'an',
+  'mit', 'ohne', 'fuer', 'für', 'auf', 'bei', 'von', 'zu', 'im', 'in', 'am', 'an',
   'was', 'wie', 'wo', 'wer', 'wann', 'warum', 'wieso', 'weshalb',
   'nun', 'jetzt', 'heute', 'morgen', 'gestern',
   'bitte', 'danke', 'hallo',
 ]);
 const LIFE_EVENT_TOPICS_ASSET_PATH = '/data/_topics/life_events.json';
 const LIFE_EVENT_RESOURCE_PACKS_ASSET_PATH = '/data/_topics/life_event_resource_packs.json';
+const TOPIC_LINKS_ASSET_PATH = '/data/_topics/topic_links.json';
 const LIFE_EVENT_CACHE_TTL_MS = 5 * 60 * 1000;
 const LIFE_EVENT_OVERRIDE_CACHE_TTL_MS = 60 * 1000;
 const DEFAULT_GUIDED_DOMAINS = ['benefits', 'aid', 'contacts', 'tools'];
@@ -80,6 +81,10 @@ let lifeEventScenarioCache = {
 let lifeEventResourcePackCache = {
   loadedAt: 0,
   packsById: new Map(),
+};
+let topicLinkCache = {
+  loadedAt: 0,
+  nodesById: new Map(),
 };
 let lifeEventOverrideCache = {
   loadedAt: 0,
@@ -246,6 +251,94 @@ function normalizeGermanChars(str) {
     .replace(/ö/g, 'oe')
     .replace(/ü/g, 'ue')
     .replace(/ß/g, 'ss');
+}
+
+function normalizeForAnswerQuality(value) {
+  return normalizeGermanChars(String(value || '').toLowerCase())
+    .replace(/[^\p{L}\p{N}\s-]/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function answerQualityTokens(value) {
+  return normalizeForAnswerQuality(value)
+    .split(/\s+/)
+    .map((token) => token.trim())
+    .filter((token) => token.length >= 4 && !QUERY_STOPWORDS.has(token));
+}
+
+function splitAnswerClaims(answer) {
+  return String(answer || '')
+    .split(/\n+/)
+    .flatMap((line) => line.split(/(?<=[.!?])\s+/))
+    .map((line) => line.replace(/^[-*]\s*/, '').trim())
+    .filter((line) => {
+      if (!line) return false;
+      if (/^\[?quelle:/i.test(line)) return false;
+      if (/^(wahrscheinlich zuerst relevant|amtliche grundlage|ngo-|praktische hilfe|direkte kontakte|kurzantwort|voraussetzungen|was du jetzt tun kannst):?$/i.test(line)) return false;
+      return line.length >= 24;
+    });
+}
+
+function evidenceSupportText(evidence) {
+  return (Array.isArray(evidence) ? evidence : [])
+    .map((item) => {
+      const entry = parseJsonSafe(item?.content, {});
+      return [
+        getLocalizedString(entry.title, entry.title_de || ''),
+        getLocalizedString(entry.summary, entry.summary_de || ''),
+        getLocalizedString(entry.content, entry.content_de || ''),
+        entry.url || item?.source || '',
+        entry.domain || '',
+      ].join(' ');
+    })
+    .join(' ');
+}
+
+export function evaluateAnswerGrounding(answer, evidence, query = '') {
+  const claims = splitAnswerClaims(answer);
+  const supportTokens = new Set(answerQualityTokens(evidenceSupportText(evidence)));
+  const queryTokens = new Set(answerQualityTokens(query));
+  const unsupportedClaims = [];
+  const genericClaims = [];
+
+  for (const claim of claims) {
+    const claimTokens = Array.from(new Set(answerQualityTokens(claim)));
+    if (claimTokens.length === 0) continue;
+
+    const supportHits = claimTokens.filter((token) => supportTokens.has(token));
+    const queryHits = claimTokens.filter((token) => queryTokens.has(token));
+    const supportRatio = supportHits.length / claimTokens.length;
+
+    if (supportHits.length < 2 && supportRatio < 0.22) {
+      unsupportedClaims.push({
+        claim,
+        support_hits: supportHits,
+        support_ratio: Number(supportRatio.toFixed(3)),
+      });
+    }
+    if (queryTokens.size >= 2 && queryHits.length === 0 && supportRatio < 0.45) {
+      genericClaims.push({
+        claim,
+        reason: 'low_query_specificity',
+      });
+    }
+  }
+
+  const sourceUrls = (Array.isArray(evidence) ? evidence : [])
+    .map((item) => String(item?.source || '').trim())
+    .filter(Boolean);
+  const citedUrls = sourceUrls.filter((url) => String(answer || '').includes(url));
+
+  return {
+    checked_claims: claims.length,
+    unsupported_claims: unsupportedClaims,
+    generic_claims: genericClaims,
+    cited_source_count: new Set(citedUrls).size,
+    available_source_count: new Set(sourceUrls).size,
+    grounded: unsupportedClaims.length === 0,
+    query_specific: genericClaims.length <= Math.max(1, Math.floor(claims.length / 3)),
+  };
 }
 
 function normalizeScenarioMatchText(value) {
@@ -564,6 +657,31 @@ function parseLifeEventResourcePacksPayload(payload) {
   return packsById;
 }
 
+function normalizeTopicLinkNode(raw) {
+  if (!raw || typeof raw !== 'object') return null;
+  const id = String(raw.id || '').trim().toLowerCase();
+  if (!id) return null;
+  return {
+    id,
+    type: String(raw.type || 'topic').trim().toLowerCase(),
+    aliases: normalizeStringList(raw.aliases),
+    strong_links: normalizeStringList(raw.strong_links),
+    weak_links: normalizeStringList(raw.weak_links),
+    blocked_links: normalizeStringList(raw.blocked_links),
+    first_answer_order: normalizeStringList(raw.first_answer_order),
+  };
+}
+
+function parseTopicLinksPayload(payload) {
+  const nodes = Array.isArray(payload?.nodes) ? payload.nodes : [];
+  const nodesById = new Map();
+  for (const raw of nodes) {
+    const node = normalizeTopicLinkNode(raw);
+    if (node) nodesById.set(node.id, node);
+  }
+  return nodesById;
+}
+
 async function fetchLifeEventScenariosFromAssets(env, requestUrl) {
   if (!env?.ASSETS?.fetch || !requestUrl) return [];
   try {
@@ -603,6 +721,28 @@ async function fetchLifeEventResourcePacksFromEnv(env) {
   if (!raw) return new Map();
   try {
     return parseLifeEventResourcePacksPayload(JSON.parse(raw));
+  } catch {
+    return new Map();
+  }
+}
+
+async function fetchTopicLinksFromAssets(env, requestUrl) {
+  if (!env?.ASSETS?.fetch || !requestUrl) return new Map();
+  try {
+    const assetUrl = new URL(TOPIC_LINKS_ASSET_PATH, requestUrl);
+    const response = await env.ASSETS.fetch(new Request(assetUrl.toString()));
+    if (!response.ok) return new Map();
+    return parseTopicLinksPayload(await response.json());
+  } catch {
+    return new Map();
+  }
+}
+
+async function fetchTopicLinksFromEnv(env) {
+  const raw = String(env?.AI_TOPIC_LINKS_JSON || '').trim();
+  if (!raw) return new Map();
+  try {
+    return parseTopicLinksPayload(JSON.parse(raw));
   } catch {
     return new Map();
   }
@@ -655,6 +795,34 @@ export async function loadLifeEventResourcePacks(env, options = {}) {
   lifeEventResourcePackCache = {
     loadedAt: now,
     packsById: fromAssets,
+  };
+  return fromAssets;
+}
+
+export async function loadTopicLinks(env, options = {}) {
+  const forceReload = Boolean(options?.forceReload);
+  const explicitTopicLinks = options?.topicLinks;
+  if (explicitTopicLinks instanceof Map) return explicitTopicLinks;
+  if (Array.isArray(explicitTopicLinks?.nodes)) {
+    return parseTopicLinksPayload(explicitTopicLinks);
+  }
+
+  const now = Date.now();
+  if (
+    !forceReload &&
+    topicLinkCache.nodesById.size > 0 &&
+    now - topicLinkCache.loadedAt < LIFE_EVENT_CACHE_TTL_MS
+  ) {
+    return topicLinkCache.nodesById;
+  }
+
+  const fromEnv = await fetchTopicLinksFromEnv(env);
+  const fromAssets = fromEnv.size > 0
+    ? fromEnv
+    : await fetchTopicLinksFromAssets(env, options?.requestUrl || null);
+  topicLinkCache = {
+    loadedAt: now,
+    nodesById: fromAssets,
   };
   return fromAssets;
 }
@@ -802,13 +970,45 @@ function canonicalizeUrl(raw) {
   return url.replace(/\/+$/, '');
 }
 
+function hasApplicationPlaceIntent(normalizedQuery) {
+  return (
+    /\bwo\b.*\b(beantrag|antrag|stelle|zustaendig|zuständig|bekomme)\b/.test(normalizedQuery) ||
+    /\bwie\b.*\b(beantrag|antrag stellen)\b/.test(normalizedQuery)
+  );
+}
+
+function applicationSubjectTokens(query) {
+  const actionTokens = new Set([
+    'beantrag',
+    'beantrage',
+    'beantragen',
+    'antrag',
+    'stellen',
+    'stelle',
+    'zustaendig',
+    'zuständig',
+    'zustandig',
+    'online',
+    'bekomme',
+    'kann',
+  ]);
+
+  return normalizedQueryTokens(query)
+    .map((token) => normalizeGermanChars(token.toLowerCase()))
+    .filter((token) => token.length >= 4 && !actionTokens.has(token));
+}
+
 function scoreEntry(query, entry, context = null, scenarioPack = null) {
   const q = normalizeGermanChars((query || '').toLowerCase());
   const text = entryTextBlob(entry);
   const normalizedText = normalizeGermanChars(text);
-  const title = getLocalizedString(entry.title, entry.title_de || '').toLowerCase();
+  const title = normalizeGermanChars(getLocalizedString(entry.title, entry.title_de || '').toLowerCase());
   const url = canonicalizeUrl(entry.url || '');
   const contextExpansions = Array.isArray(context?.expansions) ? context.expansions : [];
+  const strongTopicLinks = Array.isArray(context?.topicLinks) ? context.topicLinks : [];
+  const weakTopicLinks = Array.isArray(context?.weakTopicLinks) ? context.weakTopicLinks : [];
+  const blockedTopicLinks = Array.isArray(context?.blockedTopicLinks) ? context.blockedTopicLinks : [];
+  const firstAnswerOrder = Array.isArray(context?.firstAnswerOrder) ? context.firstAnswerOrder : [];
   const tokens = Array.from(
     new Set([
       ...normalizedQueryTokens(query),
@@ -822,11 +1022,94 @@ function scoreEntry(query, entry, context = null, scenarioPack = null) {
     if (text.includes(token)) score += 1.25;
   }
 
+  for (const term of strongTopicLinks) {
+    const normalizedTerm = normalizeGermanChars(String(term || '').toLowerCase());
+    if (!normalizedTerm) continue;
+    if (title.includes(normalizedTerm)) score += 8;
+    if (normalizedText.includes(normalizedTerm)) score += 4;
+  }
+
+  for (const [index, term] of firstAnswerOrder.entries()) {
+    const normalizedTerm = normalizeGermanChars(String(term || '').toLowerCase());
+    if (!normalizedTerm) continue;
+    if (title.includes(normalizedTerm) || normalizedText.includes(normalizedTerm)) {
+      score += Math.max(2, 10 - index * 2);
+    }
+  }
+
+  for (const term of weakTopicLinks) {
+    const normalizedTerm = normalizeGermanChars(String(term || '').toLowerCase());
+    if (!normalizedTerm) continue;
+    if (q.includes(normalizedTerm) && (title.includes(normalizedTerm) || normalizedText.includes(normalizedTerm))) {
+      score += 5;
+    }
+  }
+
+  for (const term of blockedTopicLinks) {
+    const normalizedTerm = normalizeGermanChars(String(term || '').toLowerCase());
+    if (!normalizedTerm || q.includes(normalizedTerm)) continue;
+    if (title.includes(normalizedTerm) || normalizedText.includes(normalizedTerm)) {
+      score -= 22;
+    }
+  }
+
   if (q.includes('kontakt') || q.includes('telefon') || q.includes('erreichen')) {
     if (entry.domain === 'contacts') score += 5;
   }
 
-  if (q.includes('hilfe') || q.includes('unterstuetz') || q.includes('unterstÃ¼tz')) {
+  if (q.includes('arbeitslos')) {
+    if (title.includes('arbeitslos melden') || normalizedText.includes('arbeitslos melden')) score += 60;
+    if (title.includes('arbeitslosengeld') || normalizedText.includes('arbeitslosengeld beantragen')) score += 24;
+    if (url.includes('arbeitslosengeld')) score += 18;
+    if (normalizedText.includes('arbeitsagentur und jobcenter vor ort')) score += 42;
+    if (
+      normalizedText.includes('freiwillige arbeitslosenversicherung') &&
+      !q.includes('selbst') &&
+      !q.includes('umschulung') &&
+      !q.includes('elternzeit') &&
+      !q.includes('ausland')
+    ) {
+      score -= 45;
+    }
+  }
+
+  if (
+    !q.includes('sanktion') &&
+    !q.includes('widerspruch') &&
+    !q.includes('bescheid') &&
+    !q.includes('klage') &&
+    (normalizedText.includes('sanktion') || normalizedText.includes('widerspruch') || normalizedText.includes('rechtsberatung'))
+  ) {
+    score -= 35;
+  }
+
+  if (
+    !q.includes('migration') &&
+    !q.includes('zugewander') &&
+    !q.includes('ausland') &&
+    !q.includes('aufenthalt') &&
+    !q.includes('asyl') &&
+    (normalizedText.includes('integrationskurs') ||
+      normalizedText.includes('zugewanderte') ||
+      normalizedText.includes('migration') ||
+      normalizedText.includes('gefluechtete') ||
+      normalizedText.includes('ukraine'))
+  ) {
+    score -= 35;
+  }
+
+  if (
+    (q.includes('energie') || q.includes('strom') || q.includes('heizkosten') || q.includes('abschaltung')) &&
+    !q.includes('wohnung') &&
+    !q.includes('obdach') &&
+    !q.includes('raeumung') &&
+    !q.includes('räumung') &&
+    (normalizedText.includes('obdachlos') || normalizedText.includes('wohnungslos') || normalizedText.includes('notunterkunft'))
+  ) {
+    score -= 45;
+  }
+
+  if (q.includes('hilfe') || q.includes('unterstuetz') || q.includes('unterstütz')) {
     if (entry.domain === 'aid') score += 4;
     if (entry.domain === 'contacts') score += 3.5;
     if (entry.domain === 'benefits') score += 2.5;
@@ -836,6 +1119,67 @@ function scoreEntry(query, entry, context = null, scenarioPack = null) {
   if (q.includes('online') || q.includes('antrag') || q.includes('beantrag')) {
     if (entry.domain === 'tools') score += 3;
     if (text.includes('eservices')) score += 3;
+  }
+
+  if (hasApplicationPlaceIntent(q)) {
+    const subjectTokens = applicationSubjectTokens(query);
+    const subjectHits = subjectTokens.filter((token) =>
+      title.includes(token) || url.includes(token) || normalizedText.includes(token)
+    );
+    const hasApplicationSurface =
+      title.includes('beantrag') ||
+      title.includes('antrag') ||
+      url.includes('beantrag') ||
+      url.includes('antrag') ||
+      normalizedText.includes('online beantragen') ||
+      normalizedText.includes('antrag stellen') ||
+      normalizedText.includes('zustaendig') ||
+      normalizedText.includes('zuständig') ||
+      normalizedText.includes('jobcenter') ||
+      normalizedText.includes('familienkasse') ||
+      normalizedText.includes('sozialamt');
+
+    if (subjectTokens.length > 0 && subjectHits.length === 0) {
+      score -= 18;
+    }
+    if (subjectHits.length > 0 && hasApplicationSurface) {
+      score += 18 + subjectHits.length * 5;
+    }
+    if (subjectHits.length > 0 && (title.includes('beantrag') || url.includes('beantrag'))) {
+      score += 18;
+    }
+  }
+
+  if (q.includes('buergergeld') && (q.includes('antrag') || q.includes('beantrag') || q.includes('wo kann'))) {
+    if (title.includes('buergergeld online beantragen') || url.includes('buergergeld-beantragen')) score += 80;
+    if (title.includes('buergergeld') && title.includes('antrag und bescheid')) score += 48;
+    if (title.includes('buergergeld') && url.endsWith('/buergergeld')) score += 36;
+    if (normalizedText.includes('jobcenter') || url.includes('jobcenter')) score += 22;
+    if (title.includes('einkommen') && title.includes('ergaenzen')) score -= 45;
+    if (normalizedText.includes('freiwillige arbeitslosenversicherung')) score -= 70;
+    if (!q.includes('arbeitslosengeld') && title.includes('arbeitslosengeld')) score -= 28;
+  }
+
+  if (q.includes('bildungsgutschein')) {
+    if (title.includes('bildungsgutschein') || normalizedText.includes('bildungsgutschein')) score += 18;
+    if (title.includes('weiterbildungsfoerderung') || normalizedText.includes('weiterbildungsfoerderung')) score += 10;
+    if (url.includes('fbwo')) score += 8;
+    if (normalizedText.includes('freiwillige arbeitslosenversicherung')) score -= 14;
+    if (normalizedText.includes('berufliche rehabilitation') && !q.includes('rehabilitation') && !q.includes('behinderung')) score -= 8;
+  }
+
+  if ((q.includes('elterngeld') || q.includes('kindergeld')) && (q.includes('antrag') || q.includes('beantrag'))) {
+    if (normalizedText.includes('beantragen') || normalizedText.includes('antrag stellen')) score += 5;
+    if (q.includes('kindergeld') && (title.includes('kindergeld-antrag') || url.includes('kindergeld-antrag'))) score += 18;
+    if (q.includes('elterngeld') && normalizedText.includes('elterngelddigital')) score += 14;
+    if (q.includes('elterngeld') && normalizedText.includes('elterngeld') && normalizedText.includes('beantragen')) score += 12;
+    if (q.includes('kindergeld') && normalizedText.includes('kindergeld-antrag stellen')) score += 45;
+    if (q.includes('elterngeld') && title.includes('elterngelddigital')) score += 90;
+    if (!q.includes('kinderzuschlag') && normalizedText.includes('kinderzuschlag')) score -= 10;
+  }
+
+  if (url.includes('/meta/languages') || normalizedText.includes('oικογενειακές') || normalizedText.includes('paroches')) {
+    score -= 60;
   }
 
   // Hard disambiguation for qualification-recognition intent.
@@ -920,7 +1264,28 @@ function scoreEntry(query, entry, context = null, scenarioPack = null) {
     if (contactMatches) score += 12;
   }
 
+  if (entry._curatedLifeEventBridge) {
+    score += 18;
+  }
+
   return score;
+}
+
+function dedupeScoredEntriesByUrl(scored) {
+  const bestByUrl = new Map();
+  const withoutUrl = [];
+  for (const item of scored) {
+    const url = canonicalizeUrl(item?.entry?.url || '');
+    if (!url) {
+      withoutUrl.push(item);
+      continue;
+    }
+    const existing = bestByUrl.get(url);
+    if (!existing || Number(item.score || 0) > Number(existing.score || 0)) {
+      bestByUrl.set(url, item);
+    }
+  }
+  return [...bestByUrl.values(), ...withoutUrl].sort((a, b) => Number(b.score || 0) - Number(a.score || 0));
 }
 
 function isLowSignalEntry(entry) {
@@ -1071,6 +1436,58 @@ function inferUserStageContext(query, scenarios, forcedLifeEventId = null) {
     overrideApplied: false,
     appliedOverrideId: null,
     appliedOverrideTarget: null,
+  };
+}
+
+function topicNodeMatchesQuery(node, query) {
+  const q = normalizeScenarioMatchText(query);
+  return (node.aliases || []).some((alias) => queryMatchesScenarioKeyword(q, alias));
+}
+
+function applyTopicLinksToContext(context, topicLinks, query = '') {
+  const links = topicLinks instanceof Map ? topicLinks : parseTopicLinksPayload(topicLinks || {});
+  if (!links || links.size === 0) {
+    return {
+      ...context,
+      topicLinks: [],
+      weakTopicLinks: [],
+      blockedTopicLinks: [],
+      firstAnswerOrder: [],
+    };
+  }
+
+  const contextIds = new Set([
+    context?.selectedLifeEvent,
+    ...(Array.isArray(context?.stageIds) ? context.stageIds : []),
+    ...(Array.isArray(context?.matchedScenarios) ? context.matchedScenarios.map((scenario) => scenario.id) : []),
+  ].filter(Boolean));
+
+  const matchedNodes = Array.from(links.values()).filter((node) =>
+    contextIds.has(node.id) || topicNodeMatchesQuery(node, query)
+  );
+  if (matchedNodes.length === 0) {
+    return {
+      ...context,
+      topicLinks: [],
+      weakTopicLinks: [],
+      blockedTopicLinks: [],
+      firstAnswerOrder: [],
+    };
+  }
+
+  const strongLinks = Array.from(new Set(matchedNodes.flatMap((node) => node.strong_links || [])));
+  const weakLinks = Array.from(new Set(matchedNodes.flatMap((node) => node.weak_links || [])));
+  const blockedLinks = Array.from(new Set(matchedNodes.flatMap((node) => node.blocked_links || [])));
+  const firstAnswerOrder = Array.from(new Set(matchedNodes.flatMap((node) => node.first_answer_order || [])));
+
+  return {
+    ...context,
+    expansions: Array.from(new Set([...(context.expansions || []), ...strongLinks])),
+    topicLinks: strongLinks,
+    weakTopicLinks: weakLinks,
+    blockedTopicLinks: blockedLinks,
+    firstAnswerOrder,
+    matchedTopicLinkNodes: matchedNodes.map((node) => node.id),
   };
 }
 
@@ -1374,11 +1791,12 @@ async function retrieveKeywordEvidence(env, query, options = {}) {
   const db = env.DB;
   if (!db || !query?.trim()) return [];
 
-  const context = inferUserStageContext(
+  let context = inferUserStageContext(
     query,
     options.lifeEventScenarios || [],
     options.lifeEventId || null
   );
+  context = applyTopicLinksToContext(context, options.topicLinks || new Map(), query);
   const scenarioPack = options.scenarioPack || null;
   const expandedQuery = `${query} ${context.expansions.join(' ')}`.trim();
   const tokenCandidates = normalizedQueryTokens(expandedQuery).slice(0, 12);
@@ -1620,10 +2038,15 @@ export async function retrieveEvidence(env, query, options = {}) {
     requestUrl: options.requestUrl || null,
     lifeEventScenarios: options.lifeEventScenarios,
   });
+  const topicLinks = await loadTopicLinks(env, {
+    requestUrl: options.requestUrl || null,
+    topicLinks: options.topicLinks,
+  });
   const resourcePacks = await loadLifeEventResourcePacks(env, {
     requestUrl: options.requestUrl || null,
   });
   let stageContext = inferUserStageContext(query, scenarios, options.lifeEventId || null);
+  stageContext = applyTopicLinksToContext(stageContext, topicLinks, query);
   let appliedOverrideId = null;
   if (!options.lifeEventId) {
     try {
@@ -1631,6 +2054,7 @@ export async function retrieveEvidence(env, query, options = {}) {
       const matchedOverride = findLifeEventOverride(query, overrides);
       if (matchedOverride) {
         stageContext = applyLifeEventOverrideToContext(stageContext, matchedOverride, scenarios);
+        stageContext = applyTopicLinksToContext(stageContext, topicLinks, query);
         appliedOverrideId = matchedOverride.id;
       }
     } catch (error) {
@@ -1676,6 +2100,11 @@ export async function retrieveEvidence(env, query, options = {}) {
     override_id: stageContext.appliedOverrideId || null,
     override_target_life_event: stageContext.appliedOverrideTarget || null,
     stage_domains: stageContext.domains,
+    topic_links: stageContext.topicLinks || [],
+    weak_topic_links: stageContext.weakTopicLinks || [],
+    blocked_topic_links: stageContext.blockedTopicLinks || [],
+    first_answer_order: stageContext.firstAnswerOrder || [],
+    matched_topic_link_nodes: stageContext.matchedTopicLinkNodes || [],
     scenario_resources: stageContext.matchedScenarios.map((scenario) => ({
       id: scenario.id,
       resource_targets: scenario.resource_targets,
@@ -1692,6 +2121,7 @@ export async function retrieveEvidence(env, query, options = {}) {
     lifeEventId: effectiveLifeEventId,
     lifeEventScenarios: scenarios,
     scenarioPack: effectiveLifeEventId ? selectedPack : null,
+    topicLinks,
   });
   const curatedEvidence = selectedPack
     ? buildCuratedEvidenceFromScenarioResources([
@@ -1701,7 +2131,7 @@ export async function retrieveEvidence(env, query, options = {}) {
         },
       ])
     : [];
-  const shouldAddCuratedEvidence = curatedEvidence.length > 0 && keywordEvidence.length < 3;
+  const shouldAddCuratedEvidence = curatedEvidence.length > 0;
   let combinedEvidence = shouldAddCuratedEvidence
     ? dedupeEvidence([...keywordEvidence, ...curatedEvidence])
     : keywordEvidence;
@@ -1757,9 +2187,13 @@ export async function retrieveEvidence(env, query, options = {}) {
 
 export function localEvaluateEntries(entries, query, options = {}) {
   const scenarios = parseLifeEventScenariosPayload({ scenarios: options.lifeEventScenarios || [] });
-  const context = inferUserStageContext(query, scenarios, options.lifeEventId || null);
+  let context = inferUserStageContext(query, scenarios, options.lifeEventId || null);
+  const topicLinks = options.topicLinks instanceof Map
+    ? options.topicLinks
+    : parseTopicLinksPayload(options.topicLinks || {});
+  context = applyTopicLinksToContext(context, topicLinks, query);
   let selectedPack = null;
-  if (context.selectedLifeEvent && options.lifeEventId && options.lifeEventResourcePacks) {
+  if (context.selectedLifeEvent && options.lifeEventResourcePacks) {
     if (options.lifeEventResourcePacks instanceof Map) {
       selectedPack = options.lifeEventResourcePacks.get(context.selectedLifeEvent) || null;
     } else if (Array.isArray(options.lifeEventResourcePacks?.scenarios)) {
@@ -1771,6 +2205,12 @@ export function localEvaluateEntries(entries, query, options = {}) {
     .filter((entry) => entry && typeof entry === 'object' && entry.status === 'active')
     .filter((entry) => context.domains.includes(String(entry.domain || '')))
     .filter((entry) => !isLowSignalEntry(entry));
+  if (selectedPack) {
+    candidateEntries = [
+      ...candidateEntries,
+      ...buildEntriesFromScenarioPack(selectedPack).filter((entry) => context.domains.includes(String(entry.domain || ''))),
+    ];
+  }
 
   const selectedScenario = Array.isArray(context.matchedScenarios)
     ? context.matchedScenarios.find((scenario) => scenario.id === context.selectedLifeEvent) || null
@@ -1788,12 +2228,17 @@ export function localEvaluateEntries(entries, query, options = {}) {
     }))
     .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score);
-  const ranked = diversifyScoredEntries(scored, context, 12);
+  const ranked = diversifyScoredEntries(dedupeScoredEntriesByUrl(scored), context, 12);
 
   return {
     stages: context.stageIds,
     domains: context.domains,
     expansions: context.expansions,
+    topic_links: context.topicLinks || [],
+    weak_topic_links: context.weakTopicLinks || [],
+    blocked_topic_links: context.blockedTopicLinks || [],
+    first_answer_order: context.firstAnswerOrder || [],
+    matched_topic_link_nodes: context.matchedTopicLinkNodes || [],
     scenarios: context.matchedScenarios.map((scenario) => ({
       id: scenario.id,
       label_de: scenario.label_de,
@@ -1804,6 +2249,8 @@ export function localEvaluateEntries(entries, query, options = {}) {
       id: item.entry.id,
       domain: item.entry.domain,
       title: getLocalizedString(item.entry.title, item.entry.title_de || ''),
+      summary: getLocalizedString(item.entry.summary, item.entry.summary_de || ''),
+      content: getLocalizedString(item.entry.content, item.entry.content_de || ''),
       url: item.entry.url || '',
       score: item.score,
     })),
@@ -1813,29 +2260,39 @@ export function localEvaluateEntries(entries, query, options = {}) {
 export function extractiveSynthesisAnswer(evidence) {
   const entries = evidence
     .slice(0, 3)
-    .map((item) => parseJsonSafe(item.content, null))
+    .map((item) => {
+      const entry = parseJsonSafe(item.content, null);
+      if (!entry) return null;
+      return {
+        entry,
+        source: entry.url || item.source || '',
+      };
+    })
     .filter(Boolean);
 
   if (entries.length === 0) return null;
 
-  const primary = entries[0];
+  const primary = entries[0].entry;
   const lines = [
     'Wahrscheinlich zuerst relevant:',
     `- ${getLocalizedString(primary.title, primary.title_de || 'Eintrag')}: ${getLocalizedString(primary.summary, primary.summary_de || 'Direkt pruefen.')}`,
   ];
+  if (entries[0].source) lines.push(`[Quelle: ${entries[0].source}]`);
 
   if (entries.length > 1) {
     lines.push('');
     lines.push('Was du jetzt tun kannst:');
-    for (const entry of entries.slice(1)) {
+    for (const item of entries.slice(1)) {
+      const entry = item.entry;
       const title = getLocalizedString(entry.title, entry.title_de || 'Eintrag');
       if (entry.domain === 'tools') {
         lines.push(`- Online starten ueber ${title}.`);
       } else if (entry.domain === 'contacts') {
-        lines.push(`- Kontakt aufnehmen ueber ${title}.`);
+        lines.push(`- Anlaufstelle finden ueber ${title}.`);
       } else {
         lines.push(`- Danach ${title} pruefen.`);
       }
+      if (item.source) lines.push(`[Quelle: ${item.source}]`);
     }
   }
 
@@ -1867,9 +2324,205 @@ function compactEvidenceBlock(evidence) {
     .join('\n\n');
 }
 
+function extractCitationUrls(text) {
+  return Array.from(String(text || '').matchAll(/\[Quelle:\s*(https?:\/\/[^\]\s]+)\]/gi))
+    .map((match) => match[1])
+    .filter(Boolean);
+}
+
+function splitSimpleSentences(text) {
+  return String(text || '')
+    .replace(/\[Quelle:\s*https?:\/\/[^\]\s]+\]/gi, '')
+    .split(/\n+|(?<=[.!?])\s+/)
+    .map((line) => line.replace(/^[-*]\s*/, '').trim())
+    .filter(Boolean);
+}
+
+function averageWordsPerSentence(text) {
+  const sentences = splitSimpleSentences(text);
+  if (sentences.length === 0) return 0;
+  const words = sentences.reduce((count, sentence) => (
+    count + sentence.split(/\s+/).filter(Boolean).length
+  ), 0);
+  return words / sentences.length;
+}
+
+function auditSimpleLanguageAnswer(text, evidence) {
+  const normalized = String(text || '').trim();
+  const sentences = splitSimpleSentences(normalized);
+  const avgWords = averageWordsPerSentence(normalized);
+  const citations = new Set(extractCitationUrls(normalized));
+  const allowedSources = new Set(
+    (Array.isArray(evidence) ? evidence : [])
+      .flatMap((item) => {
+        const entry = parseJsonSafe(item?.content, {});
+        return [item?.source, entry?.url];
+      })
+      .filter(Boolean)
+  );
+  const findings = [];
+
+  if (!normalized) findings.push('empty');
+  if (sentences.some((sentence) => sentence.split(/\s+/).filter(Boolean).length > 24)) {
+    findings.push('long_sentence');
+  }
+  if (avgWords > 16) findings.push('high_average_sentence_length');
+  if (/[;()]/.test(normalized)) findings.push('complex_punctuation');
+  if (allowedSources.size > 0 && citations.size === 0) findings.push('missing_citations');
+  for (const citation of citations) {
+    if (!allowedSources.has(citation)) findings.push('unknown_citation');
+  }
+
+  return {
+    passed: findings.length === 0,
+    findings,
+    sentence_count: sentences.length,
+    average_words_per_sentence: Number(avgWords.toFixed(2)),
+    cited_source_count: citations.size,
+  };
+}
+
+function firstUsefulSentence(value, fallback = '') {
+  const text = sanitizeText(String(value || '')).replace(/\s+/g, ' ').trim();
+  if (!text) return fallback;
+  const sentence = text.split(/(?<=[.!?])\s+/)[0]?.trim() || text;
+  return sentence.length > 180 ? sentence.slice(0, 180).replace(/\s+\S*$/, '') + '.' : sentence;
+}
+
+function buildExtractiveSimpleAnswer(query, evidence) {
+  const entries = (Array.isArray(evidence) ? evidence : [])
+    .slice(0, 4)
+    .map((item) => {
+      const entry = parseJsonSafe(item.content, null);
+      if (!entry) return null;
+      return {
+        entry,
+        source: entry.url || item.source || '',
+      };
+    })
+    .filter(Boolean);
+
+  if (entries.length === 0) return null;
+
+  const normalizedQuery = normalizeGermanChars(String(query || '').toLowerCase());
+  const lines = [];
+  for (const item of entries.slice(0, 3)) {
+    const entry = item.entry;
+    const title = getLocalizedString(entry.title, entry.title_de || 'Diese Information');
+    const summary = firstUsefulSentence(
+      getLocalizedString(entry.summary, entry.summary_de || '') ||
+      getLocalizedString(entry.content, entry.content_de || ''),
+      'Pruefen Sie diese Information.'
+    );
+    const normalizedTitle = normalizeGermanChars(title.toLowerCase());
+
+    if (normalizedQuery.includes('wo') && (normalizedQuery.includes('beantrag') || normalizedQuery.includes('antrag'))) {
+      if (normalizedTitle.includes('online') || normalizedTitle.includes('beantrag')) {
+        lines.push(`- Sie koennen den Antrag hier starten: ${title}.`);
+      } else if (normalizedTitle.includes('jobcenter') || entry.domain === 'contacts') {
+        lines.push(`- Dort finden Sie die zustaendige Stelle: ${title}.`);
+      } else {
+        lines.push(`- Wichtig fuer den Antrag: ${title}.`);
+      }
+    } else if (entry.domain === 'contacts') {
+      lines.push(`- Diese Anlaufstelle kann helfen: ${title}.`);
+    } else {
+      lines.push(`- Pruefen Sie zuerst: ${title}.`);
+    }
+    if (summary && !summary.toLowerCase().includes(title.toLowerCase())) {
+      lines.push(`  ${summary}`);
+    }
+    if (item.source) lines.push(`[Quelle: ${item.source}]`);
+  }
+
+  return lines.join('\n');
+}
+
+async function buildPlainLanguageAnswer(env, query, evidence) {
+  const simpleEvidence = dedupeEvidence(Array.isArray(evidence) ? evidence : []).slice(0, 10);
+  const fallback = buildExtractiveSimpleAnswer(query, simpleEvidence);
+
+  if (!env.AI || simpleEvidence.length === 0) {
+    return {
+      einfach: fallback,
+      source: fallback ? 'fallback' : 'none',
+      quality: auditSimpleLanguageAnswer(fallback || '', simpleEvidence),
+    };
+  }
+
+  try {
+    const completion = await runWorkersAiText(env, {
+      systemPrompt:
+        'Du schreibst Antworten in Einfacher Sprache. ' +
+        'Benutze nur die Belege. Erfinde keine Fakten. ' +
+        'Schreibe fuer Erwachsene, nicht kindlich. ' +
+        'Regeln: kurze Saetze, Alltagssprache, konkrete naechste Schritte. ' +
+        'Erklaere Fachwoerter sofort. ' +
+        'Jeder Punkt muss vollstaendig sein. ' +
+        'Quellen bleiben als eigene Zeile im Format [Quelle: URL].',
+      userPrompt:
+        `Nutzerfrage:\n${query}\n\nBelege:\n${compactEvidenceBlock(simpleEvidence)}\n\n` +
+        'Schreibe eine kurze Antwort in Einfacher Sprache. ' +
+        'Beginne mit dem wichtigsten Schritt. ' +
+        'Keine Einleitung. Keine neuen Informationen. ' +
+        'Maximal 5 Stichpunkte.',
+      maxTokens: 700,
+    });
+    const candidate = completion.text || '';
+    const quality = auditSimpleLanguageAnswer(candidate, simpleEvidence);
+    if (quality.passed) {
+      return {
+        einfach: candidate,
+        source: 'ai-generated',
+        quality,
+      };
+    }
+
+    return {
+      einfach: fallback,
+      source: fallback ? 'fallback_quality_guard' : 'none',
+      quality,
+    };
+  } catch (error) {
+    return {
+      einfach: fallback,
+      source: fallback ? 'fallback_error' : 'none',
+      quality: {
+        ...auditSimpleLanguageAnswer(fallback || '', simpleEvidence),
+        error: error instanceof Error ? error.message : 'Workers AI request failed.',
+      },
+    };
+  }
+}
+
 function buildCuratedEvidenceFromScenarioResources(scenarioResources = []) {
   const items = [];
-  const pushItems = (list, confidence) => {
+  const curatedConfidence = (scenarioId, item, baseConfidence) => {
+    const title = normalizeGermanChars(String(item?.title || '').toLowerCase());
+    const url = canonicalizeUrl(item?.url || '');
+
+    if (scenarioId === 'job_loss_start') {
+      if (title.includes('arbeitslos melden') || url.includes('/arbeitslosengeld')) return 0.88;
+      if (title.includes('arbeitsagentur und jobcenter') || url.includes('dienststellen')) return 0.8;
+      if (
+        title.includes('energieschulden') ||
+        title.includes('abschaltung') ||
+        title.includes('sanktions') ||
+        title.includes('wohnungslos') ||
+        title.includes('obdachlos') ||
+        title.includes('widerspruch') ||
+        title.includes('rechtsbehelf')
+      ) return 0.42;
+      if (title.includes('buergergeld online') || url.includes('buergergeld-beantragen')) return 0.74;
+      if (title.includes('antrag und bescheid')) return 0.72;
+      if (title.includes('finanziell absichern')) return 0.68;
+      if (title.includes('einkommen') && title.includes('ergaenzen')) return 0.46;
+      if (title.includes('freiwillige arbeitslosenversicherung')) return 0.4;
+    }
+
+    return baseConfidence;
+  };
+  const pushItems = (list, baseConfidence, scenarioId) => {
     for (const item of list || []) {
       const url = String(item?.url || '').trim();
       if (!url) continue;
@@ -1886,7 +2539,7 @@ function buildCuratedEvidenceFromScenarioResources(scenarioResources = []) {
               : 'context_info';
       items.push({
         source: url,
-        confidence,
+        confidence: curatedConfidence(scenarioId, item, baseConfidence),
         content: JSON.stringify({
           title,
           url,
@@ -1903,11 +2556,61 @@ function buildCuratedEvidenceFromScenarioResources(scenarioResources = []) {
   };
   for (const scenario of Array.isArray(scenarioResources) ? scenarioResources : []) {
     const curated = scenario?.curated_resources || {};
-    pushItems(curated.documents, 0.72);
-    pushItems(curated.ngo_assistance, 0.74);
-    pushItems(curated.contacts, 0.78);
+    const scenarioId = String(scenario?.id || '').trim().toLowerCase();
+    pushItems(curated.documents, 0.72, scenarioId);
+    pushItems(curated.ngo_assistance, 0.74, scenarioId);
+    pushItems(curated.contacts, 0.78, scenarioId);
   }
   return dedupeEvidence(items);
+}
+
+function buildEntriesFromScenarioPack(scenarioPack) {
+  if (!scenarioPack?.resources) return [];
+  const resources = scenarioPack.resources;
+  const rows = [
+    ...(Array.isArray(resources.documents) ? resources.documents : []),
+    ...(Array.isArray(resources.ngo_assistance) ? resources.ngo_assistance : []),
+    ...(Array.isArray(resources.contacts) ? resources.contacts : []),
+  ];
+  const seen = new Set();
+
+  return rows
+    .map((item) => {
+      const url = String(item?.url || '').trim();
+      if (!url) return null;
+      const key = canonicalizeUrl(url);
+      if (!key || seen.has(key)) return null;
+      seen.add(key);
+      const title = String(item?.title || 'Quelle').trim();
+      const normalizedTitle = normalizeGermanChars(title.toLowerCase());
+      const summary = normalizedTitle.includes('arbeitslos melden')
+        ? 'Melde dich zuerst bei der Agentur für Arbeit arbeitslos und prüfe Arbeitslosengeld. Wenn das nicht reicht oder kein Anspruch besteht, prüfe ergänzend Bürgergeld beim Jobcenter.'
+        : normalizedTitle.includes('arbeitsagentur und jobcenter')
+          ? 'Finde die zuständige Agentur für Arbeit oder das Jobcenter vor Ort. Dort bekommst du Beratung, Termine und die passende Zuständigkeit.'
+          : normalizedTitle.includes('kindergeld-antrag')
+            ? 'Beantrage Kindergeld für dein neugeborenes Kind bei der Familienkasse. Der Online-Antrag kann mit Zugangscode oder mit den nötigen Steuerdaten gestartet werden.'
+            : normalizedTitle.includes('elterngelddigital')
+              ? 'Beantrage Elterngeld online über ElterngeldDigital, wenn dein Bundesland den Dienst unterstützt. Prüfe zusätzlich die zuständige Elterngeldstelle.'
+          : `Kuratiert für diesen Lebenskontext: ${title}.`;
+      return {
+        id: `curated:${key}`,
+        title,
+        summary: { de: summary },
+        content: {
+          de: summary,
+        },
+        url,
+        domain: String(item?.domain || 'aid').trim().toLowerCase(),
+        status: 'active',
+        provenance: {
+          source: url,
+          sourceTier: String(item?.source_tier || '').trim().toLowerCase(),
+          sourceRole: 'life_event_bridge',
+        },
+        _curatedLifeEventBridge: true,
+      };
+    })
+    .filter(Boolean);
 }
 
 function buildAssistiveContacts(evidence, scenarioResources = []) {
@@ -2253,10 +2956,19 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
   ])
     .filter((item) => Number(item.confidence || 0) >= 0.45)
     .slice(0, 5);
+  const attachAnswerQuality = (payload) => ({
+    ...payload,
+    answer_quality: evaluateAnswerGrounding(payload?.answer || '', evidence, query),
+  });
   const institutionFallback = buildInstitutionFallback(query, { evidence, strongEvidence });
   if (institutionFallback) {
-    return {
+    return attachAnswerQuality({
       answer: institutionFallback.answer,
+      plain_language: {
+        einfach: institutionFallback.answer,
+        sources: { einfach: 'fallback' },
+        quality: { einfach: auditSimpleLanguageAnswer(institutionFallback.answer, []) },
+      },
       explanation: 'Keine genaue Antwort im Datenbestand; passende Anlaufstelle anhand der Anfrage vorgeschlagen.',
       sources: institutionFallback.sources,
       provider: env.AI ? 'workers-ai' : 'none',
@@ -2295,7 +3007,7 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
         ...(retrievalDiagnostics || {}),
         fallback_router: institutionFallback.routes.map((route) => route.id),
       },
-    };
+    });
   }
 
   async function synthesizeLane(laneName, laneEvidence, systemPromptSuffix) {
@@ -2361,8 +3073,13 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
   ], scenarioResources);
 
   if (evidence.length === 0) {
-    return {
+    return attachAnswerQuality({
       answer: null,
+      plain_language: {
+        einfach: null,
+        sources: { einfach: 'none' },
+        quality: { einfach: auditSimpleLanguageAnswer('', []) },
+      },
       explanation: 'Keine verlässliche Information gefunden.',
       sources: [],
       provider: env.AI ? 'workers-ai' : 'none',
@@ -2379,13 +3096,18 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
       weak_evidence: true,
       usage: {},
       retrieval: retrievalDiagnostics,
-    };
+    });
   }
 
   const synthesisEvidence = strongEvidence.length > 0 ? strongEvidence : evidence.slice(0, 3);
 
   try {
-    const [completion, einfachCompletion] = await Promise.all([
+    const plainLanguageEvidence = dedupeEvidence([
+      ...synthesisEvidence,
+      ...contactsStrong,
+      ...assistiveStrong,
+    ]).slice(0, 10);
+    const [completion, plainLanguage] = await Promise.all([
       runWorkersAiText(env, {
         systemPrompt:
           'Du bist ein Retrieval-Assistent für deutsche Sozialleistungen. Benutze nur die bereitgestellten Belege. ' +
@@ -2396,29 +3118,7 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
           'Nenne konkrete Leistungen, Anlaufstellen oder Anträge aus den Belegen. Setze Quellen immer als eigene Zeile direkt unter den passenden Stichpunkt im Format [Quelle: URL]. Beende jeden Stichpunkt und jede Quelle vollständig.',
         maxTokens: 800,
       }),
-      (async () => {
-        // Einfach gets a richer evidence pool that always includes contacts + assistive
-        const einfachEvidence = dedupeEvidence([
-          ...synthesisEvidence,
-          ...contactsStrong,
-          ...assistiveStrong,
-        ]).slice(0, 10);
-        return runWorkersAiText(env, {
-          systemPrompt:
-            'Du schreibst Informationen über Sozialleistungen in Einfacher Sprache. ' +
-            'Regeln: Kurze Sätze – maximal 10 Wörter pro Satz. ' +
-            'Fachbegriffe sofort einfach erklären. ' +
-            'Jeden Stichpunkt vollständig beenden. ' +
-            'Keine doppelten Themen – jeder Stichpunkt behandelt etwas anderes. ' +
-            'Gib konkrete Leistungen mit Beträgen, konkrete nächste Schritte und Anlaufstellen mit URL aus den Belegen an. ' +
-            'Erfinde keine Informationen. Benutze nur die Belege. ' +
-            'Beginne SOFORT mit dem ersten Stichpunkt. Kein einleitender Satz davor.',
-          userPrompt:
-            `Nutzerfrage:\n${query}\n\nBelege:\n${compactEvidenceBlock(einfachEvidence)}\n\n` +
-            'Schreibe konkrete Stichpunkte auf Deutsch. Keine Einleitung. Keine Anzahl ankündigen. Kurze Sätze. Jeder Punkt ein anderes Thema. Nenne konkrete Leistungen, nächste Schritte und Anlaufstellen mit URL. Setze Quellen immer als eigene Zeile direkt unter den passenden Stichpunkt im Format [Quelle: URL]. Beende jeden Stichpunkt und jede Quelle vollständig.',
-          maxTokens: 900,
-        });
-      })(),
+      buildPlainLanguageAnswer(env, query, plainLanguageEvidence),
     ]);
     const standardAnswer =
       completion.text ||
@@ -2427,11 +3127,12 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
         assistiveLane.answer ? `\nNGO-/Praktische Hilfe:\n${assistiveLane.answer}` : '',
         contactsLane.answer ? `\nDirekte Kontakte:\n${contactsLane.answer}` : '',
       ].filter(Boolean).join('\n');
-    return {
+    return attachAnswerQuality({
       answer: standardAnswer,
       plain_language: {
-        einfach: einfachCompletion.text || null,
-        sources: { einfach: einfachCompletion.text ? 'ai-generated' : 'fallback' },
+        einfach: plainLanguage.einfach || null,
+        sources: { einfach: plainLanguage.source },
+        quality: { einfach: plainLanguage.quality },
       },
       explanation: 'Antwort basiert auf abgerufenen Eintraegen.',
       sources: Array.from(new Set([
@@ -2454,10 +3155,16 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
       weak_evidence: strongEvidence.length === 0,
       usage: {},
       retrieval: retrievalDiagnostics,
-    };
+    });
   } catch (error) {
-    return {
+    const fallbackPlainLanguage = await buildPlainLanguageAnswer(env, query, synthesisEvidence);
+    return attachAnswerQuality({
       answer: extractiveSynthesisAnswer(synthesisEvidence),
+      plain_language: {
+        einfach: fallbackPlainLanguage.einfach || null,
+        sources: { einfach: fallbackPlainLanguage.source },
+        quality: { einfach: fallbackPlainLanguage.quality },
+      },
       explanation: error instanceof Error ? error.message : 'Workers AI request failed.',
       sources: synthesisEvidence.map((item) => item.source),
       provider: env.AI ? 'workers-ai' : 'none',
@@ -2474,6 +3181,6 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
       weak_evidence: strongEvidence.length === 0,
       usage: {},
       retrieval: retrievalDiagnostics,
-    };
+    });
   }
 }

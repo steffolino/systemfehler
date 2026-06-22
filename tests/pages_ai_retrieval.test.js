@@ -143,6 +143,42 @@ test('synthesis routes weak health questions to a matching official institution 
   assert.ok(response.sources.includes('https://www.bundesgesundheitsministerium.de/krankengeld'));
 });
 
+test('synthesis provides simple-language fallback without Workers AI', async () => {
+  const evidence = [
+    {
+      source: 'https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/buergergeld-beantragen',
+      confidence: 0.9,
+      content: JSON.stringify({
+        title: 'Bürgergeld online beantragen',
+        url: 'https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/buergergeld-beantragen',
+        domain: 'benefits',
+        summary: {
+          de: 'Bürgergeld können Sie online beim Jobcenter beantragen.',
+        },
+        provenance: {
+          sourceTier: 'tier_1_official',
+          sourceRole: 'official_info',
+        },
+      }),
+    },
+  ];
+
+  const response = await buildSynthesis(
+    {},
+    'Wo kann ich Bürgergeld beantragen?',
+    evidence,
+    { retrieval_mode: 'keyword' },
+    { official: evidence, assistive: [], contacts: [], context: [] }
+  );
+
+  assert.equal(response.provider, 'none');
+  assert.ok(response.plain_language?.einfach);
+  assert.equal(response.plain_language.sources.einfach, 'fallback');
+  assert.match(response.plain_language.einfach, /Antrag/i);
+  assert.match(response.plain_language.einfach, /\[Quelle: https:\/\/www\.arbeitsagentur\.de\/arbeitslos-arbeit-finden\/buergergeld\/buergergeld-beantragen\]/);
+  assert.deepEqual(response.plain_language.quality.einfach.findings, []);
+});
+
 test('synthesis prioritizes local Sozialamt lookup over thematic benefit evidence', async () => {
   const evidence = [
     {

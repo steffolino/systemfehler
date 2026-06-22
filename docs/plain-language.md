@@ -102,10 +102,17 @@ The goal is to improve comprehension without overwriting the canonical source te
   - approve `Leicht`
   - reject `Leicht`
 - dedicated admin review queue at `/admin/plain-language`
-- AI answers prefer reviewed or generated `Einfach` / `Leicht` evidence summaries before falling back to raw synthesis text
+- AI answers expose `Standard` and `Einfach` modes in public search.
+- `Einfach` AI answers are generated from retrieval evidence and checked by a
+  rule-based quality guard.
+- If Workers AI is unavailable, or if the generated simple-language text fails
+  the guard, the API returns a source-cited extractive `Einfach` fallback.
+- `Leicht` remains an entry-data/admin review target, not a generated AI-answer
+  mode in the current public search flow.
 
 ## Next Steps
 
 - add reviewed benchmark set across multiple domains
 - add plain-language review history beyond the current queue state
-- feed topic roles into live retrieval and plain-language generation
+- expand the simple-language quality guard with reviewed benchmark cases
+- decide whether `Leicht` should become a public AI-answer mode after editorial validation

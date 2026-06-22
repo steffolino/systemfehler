@@ -13,6 +13,7 @@ const repoRoot = path.resolve(__dirname, '..');
 const DOMAINS = ['benefits', 'aid', 'tools', 'organizations', 'contacts'];
 const DEFAULT_GOLD_FIXTURE = path.join(repoRoot, 'tests', 'fixtures', 'life_event_gold_queries.json');
 const DEFAULT_RESOURCE_PACKS = path.join(repoRoot, 'data', '_topics', 'life_event_resource_packs.json');
+const DEFAULT_TOPIC_LINKS = path.join(repoRoot, 'data', '_topics', 'topic_links.json');
 
 function loadJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -46,6 +47,11 @@ function loadLifeEventScenarios() {
 function loadLifeEventResourcePacks() {
   if (!fs.existsSync(DEFAULT_RESOURCE_PACKS)) return null;
   return loadJson(DEFAULT_RESOURCE_PACKS);
+}
+
+function loadTopicLinks() {
+  if (!fs.existsSync(DEFAULT_TOPIC_LINKS)) return null;
+  return loadJson(DEFAULT_TOPIC_LINKS);
 }
 
 function parseQueries(argv) {
@@ -124,6 +130,9 @@ function printResult(query, result) {
   if (result.expansions.length > 0) {
     console.log(`Expansion terms: ${result.expansions.join(', ')}`);
   }
+  if ((result.topic_links || []).length > 0) {
+    console.log(`Topic links: ${(result.topic_links || []).join(', ')}`);
+  }
   if (result.results.length === 0) {
     console.log('Top results: (none)');
     return;
@@ -145,10 +154,12 @@ function includesAny(text, terms) {
 
 function evaluateCase(entries, scenarios, testCase) {
   const resourcePacks = loadLifeEventResourcePacks();
+  const topicLinks = loadTopicLinks();
   const result = localEvaluateEntries(entries, testCase.query, {
     lifeEventId: testCase.life_event || undefined,
     lifeEventScenarios: scenarios,
     lifeEventResourcePacks: resourcePacks,
+    topicLinks,
   });
   const topK = Math.max(1, Number(testCase.top_k || 8));
   const top = result.results.slice(0, topK);
@@ -274,10 +285,12 @@ function runGoldSuite(entries, scenarios, goldPath, failOnRegression) {
 function main() {
   const entries = loadAllEntries();
   const scenarios = loadLifeEventScenarios();
+  const topicLinks = loadTopicLinks();
   const parsed = parseQueries(process.argv.slice(2));
 
   console.log(`Loaded entries: ${entries.length}`);
   console.log(`Loaded life-event scenarios: ${scenarios.length}`);
+  console.log(`Loaded topic-link nodes: ${Array.isArray(topicLinks?.nodes) ? topicLinks.nodes.length : 0}`);
 
   if (parsed.mode === 'gold' || parsed.runGold) {
     runGoldSuite(entries, scenarios, parsed.goldPath, parsed.failOnRegression);
@@ -294,6 +307,7 @@ function main() {
       lifeEventId: parsed.lifeEvent || undefined,
       lifeEventScenarios: scenarios,
       lifeEventResourcePacks: resourcePacks,
+      topicLinks,
     });
     printResult(query, result);
   }

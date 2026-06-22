@@ -1,0 +1,72 @@
+{
+  "version": "1.0",
+  "description": "Answer-quality checks for grounded, question-specific social-services answers.",
+  "cases": [
+    {
+      "id": "answer-job-loss-generic-001",
+      "query": "Ich bin arbeitslos geworden. Was nun?",
+      "life_event": "job_loss_start",
+      "top_k": 8,
+      "must_mention_any": ["Arbeitsagentur", "Jobcenter"],
+      "must_mention_all": ["arbeitslos melden", "Arbeitslosengeld", "Bürgergeld"],
+      "required_sources_any": ["arbeitsagentur.de", "jobcenter"],
+      "must_not_mention": ["Kindergeld", "Elterngeld", "Pflegegeld", "Integrationskurs", "Zugewanderte", "Migration"],
+      "min_cited_sources": 2
+    },
+    {
+      "id": "answer-buergergeld-amount-001",
+      "query": "Wie hoch ist Bürgergeld und was muss ich als erstes beantragen?",
+      "life_event": "job_loss_start",
+      "top_k": 8,
+      "must_mention_any": ["Bürgergeld", "Jobcenter", "Antrag", "Regelbedarf"],
+      "must_mention_all": ["beantragen"],
+      "required_sources_any": ["arbeitsagentur.de", "jobcenter"],
+      "must_not_mention": ["Kindergeld ist Bürgergeld"],
+      "min_cited_sources": 1
+    },
+    {
+      "id": "answer-sanction-001",
+      "query": "Ich habe eine Sanktion vom Jobcenter bekommen. Was kann ich jetzt tun?",
+      "life_event": "sanctions_conflict",
+      "top_k": 8,
+      "must_mention_any": ["Jobcenter", "Widerspruch", "Bescheid", "Beratung", "Frist"],
+      "must_mention_all": ["Sanktion"],
+      "required_sources_any": ["arbeitsagentur.de", "jobcenter", "sozialberatung", "caritas", "diakonie"],
+      "must_not_mention": ["Sanktionen sind immer rechtswidrig"],
+      "min_cited_sources": 1
+    },
+    {
+      "id": "answer-education-voucher-001",
+      "query": "Wie bekomme ich einen Bildungsgutschein für eine Umschulung?",
+      "life_event": "upskilling",
+      "top_k": 8,
+      "must_mention_any": ["Bildungsgutschein", "Umschulung", "Weiterbildung", "Agentur für Arbeit", "Jobcenter"],
+      "must_mention_all": ["Bildungsgutschein"],
+      "required_sources_any": ["arbeitsagentur.de"],
+      "must_not_mention": ["Kindergeld"],
+      "min_cited_sources": 1
+    },
+    {
+      "id": "answer-debt-rent-001",
+      "query": "Ich habe Schulden und Mietrückstände. Wo finde ich schnelle Hilfe?",
+      "life_event": "debt_crisis",
+      "top_k": 8,
+      "must_mention_any": ["Schuldnerberatung", "Mietrückstände", "Beratung", "Caritas", "Diakonie"],
+      "must_mention_all": ["Hilfe"],
+      "required_sources_any": ["caritas", "diakonie", "verbraucherzentrale", "schuldnerberatung"],
+      "must_not_mention": ["Bürgergeld löst alle Schulden"],
+      "min_cited_sources": 1
+    },
+    {
+      "id": "answer-family-benefits-001",
+      "query": "Ich habe ein Baby bekommen. Was kann ich bei Kindergeld und Elterngeld beantragen?",
+      "life_event": "family_children",
+      "top_k": 8,
+      "must_mention_any": ["beantrage", "beantragen", "Antrag"],
+      "must_mention_all": ["Kindergeld", "Elterngeld"],
+      "required_sources_any": ["familienportal.de", "arbeitsagentur.de", "familienkasse"],
+      "must_not_mention": ["Pflegegeld"],
+      "min_cited_sources": 1
+    }
+  ]
+}

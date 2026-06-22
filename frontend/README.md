@@ -4,7 +4,8 @@ React + TypeScript + Vite admin interface for viewing and validating Systemfehle
 
 Current UI behavior:
 - Public guided search defaults to `standard` answer mode.
-- Users can switch to `einfach` and `leicht` modes explicitly.
+- Users can switch guided AI answers between `standard` and `einfach`.
+- Entry pages also expose reviewed/generated plain-language entry text where available.
 - Admin includes a life-event semantic review workflow at `/admin/life-events`.
 
 ## Development

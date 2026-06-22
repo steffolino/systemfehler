@@ -1,6 +1,6 @@
 # Systemfehler – Implementation Status
 
-> **Last updated:** 2026-05-03
+> **Last updated:** 2026-06-22
 >
 > Latest operational update: production AI retrieval validation completed with a full 60/60 pass against suggested life-event queries on `systemfehler.pages.dev` after redeploy, followed by temporary Turnstile E2E bypass cleanup.
 
@@ -72,8 +72,8 @@ crawling logic to these files.
 | Backend unit-test harness | ✅ Working | `node:test` covers Express/query helpers and `unittest` covers AI sidecar cache/provider/endpoints without extra dependencies |
 | Public AI search mode | ✅ Working | AI search is now the default public search mode; classic search remains available as article-based search |
 | Frontend language toggle | 🟡 Experimental | Lightweight app-level `de` / `en` UI translation support exists for the public shell and search/source pages |
-| Plain-language clone | 🟡 Experimental | Public `Standard / Einfach / Leicht` modes exist on entries and AI answers; admin now has a dedicated `/admin/plain-language` review queue plus approve/reject actions for `Einfach` and `Leicht` drafts |
-| Guided AI default answer mode | ✅ Working | Public search defaults to `standard`; `einfach` and `leicht` remain optional user modes |
+| Plain-language clone | 🟡 Experimental | Entry data and admin review support `Standard / Einfach / Leicht`; public AI answers currently expose `standard` and `einfach`, with quality-guarded fallback |
+| Guided AI default answer mode | ✅ Working | Public search defaults to `standard`; `einfach` is the optional simple-language AI answer mode |
 | Life-event semantic review dashboard | ✅ Working | Admin route `/admin/life-events` supports queue review, manual override creation, and override deactivation |
 | Data preview, quality metrics, moderation queue views | ✅ Working |
 | AI search tab | 🟡 Experimental | Retrieval now uses trusted topic roles at ranking time; deterministic rewrite and enrichment also use trusted topic profiles for topic-aware keywords |

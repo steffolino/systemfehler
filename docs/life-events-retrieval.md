@@ -36,6 +36,12 @@ Runtime retrieval loads this file via `env.ASSETS` (with cache) and applies:
 - per-scenario resource targets (`documents`, `information`, `contacts`)
 - contact-priority hints for assistive contact ranking
 
+Runtime retrieval also loads `data/_topics/life_event_resource_packs.json` and
+`data/_topics/topic_links.json`. Topic links add lightweight semantic adjacency
+for concrete topic questions such as `Wo kann ich Buergergeld beantragen?`, so
+the ranker can prefer application pages and responsible offices over merely
+related explainers.
+
 Scenario processing implementation:
 
 - `cloudflare-pages/functions/api/_lib/ai.js`
@@ -76,12 +82,15 @@ node scripts/eval_guided_retrieval_local.mjs --gold --fail-on-regression
 node scripts/eval_guided_retrieval_local.mjs --gold tests/fixtures/life_event_suggested_queries.json --fail-on-regression
 ```
 
-## Eval fixture status (as of 2026-04-23)
+## Eval fixture status (as of 2026-06-22)
 
 | Fixture | Cases | Checks | Status |
 |---|---|---|---|
-| `life_event_gold_queries.json` | 4/4 (100%) | 24/24 (100%) | ✅ baseline |
+| `life_event_gold_queries.json` | 6/6 (100%) | 28/28 (100%) | current baseline |
 | `life_event_suggested_queries.json` | 60/60 (100%) | 255/255 (100%) | ✅ green |
+
+Current local run on 2026-06-22: `life_event_gold_queries.json` passes 6/6
+cases and 28/28 checks.
 
 ## How the local retrieval pipeline works
 
@@ -93,6 +102,7 @@ Key files:
 - **Entry data:** `data/{benefits,aid,contacts,tools,organizations}/entries.json`
 - **Scenarios + detection keywords:** `data/_topics/life_events.json`
 - **Resource packs:** `data/_topics/life_event_resource_packs.json`
+- **Topic links:** `data/_topics/topic_links.json`
 - **Scorer/ranker:** `cloudflare-pages/functions/api/_lib/ai.js` → `localEvaluateEntries()`
 - **Gold fixture:** `tests/fixtures/life_event_gold_queries.json`
 - **Suggested-queries fixture:** `tests/fixtures/life_event_suggested_queries.json`

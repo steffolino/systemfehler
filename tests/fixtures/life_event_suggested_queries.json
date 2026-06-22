@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_at": "2026-05-18T06:55:41.130Z",
+  "generated_at": "2026-06-18T11:41:55.485Z",
   "source": {
     "suggestions_file": "frontend/src/data/life_event_suggested_questions.json",
     "life_events_file": "data/_topics/life_events.json"
@@ -13,7 +13,7 @@
       "expected_life_event": "job_loss_start",
       "required_domains_any": [
         "benefits",
-        "aid"
+        "contacts"
       ],
       "expected_terms_any": [
         "arbeitslos",
@@ -37,7 +37,7 @@
       "expected_life_event": "job_loss_start",
       "required_domains_any": [
         "benefits",
-        "aid"
+        "contacts"
       ],
       "expected_terms_any": [
         "arbeitslos",
@@ -61,7 +61,7 @@
       "expected_life_event": "job_loss_start",
       "required_domains_any": [
         "benefits",
-        "aid"
+        "contacts"
       ],
       "expected_terms_any": [
         "arbeitslos",
@@ -468,8 +468,8 @@
       "query": "Ich habe ein Baby bekommen. Wie beantrage ich Kindergeld und Elterngeld?",
       "expected_life_event": "family_children",
       "required_domains_any": [
-        "benefits",
-        "contacts"
+        "tools",
+        "benefits"
       ],
       "expected_terms_any": [
         "kindergeld",
@@ -492,8 +492,8 @@
       "query": "Welche Hilfe für Familien gibt es bei Kinderzuschlag und Familienkasse?",
       "expected_life_event": "family_children",
       "required_domains_any": [
-        "benefits",
-        "contacts"
+        "tools",
+        "benefits"
       ],
       "expected_terms_any": [
         "kindergeld",
@@ -516,8 +516,8 @@
       "query": "Ich habe Kinder und wenig Geld. Welche Leistungen kommen jetzt infrage?",
       "expected_life_event": "family_children",
       "required_domains_any": [
-        "benefits",
-        "contacts"
+        "tools",
+        "benefits"
       ],
       "expected_terms_any": [
         "kindergeld",

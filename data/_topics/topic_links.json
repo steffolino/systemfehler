@@ -1,0 +1,179 @@
+{
+  "version": "0.1.0",
+  "description": "Lightweight semantic adjacency layer for connecting broad user situations to concrete topics. Strong links expand retrieval; weak links are follow-up context.",
+  "nodes": [
+    {
+      "id": "buergergeld_application",
+      "type": "topic",
+      "aliases": [
+        "buergergeld beantragen",
+        "buergergeld antrag",
+        "wo buergergeld beantragen",
+        "jobcenter buergergeld"
+      ],
+      "strong_links": [
+        "buergergeld online beantragen",
+        "buergergeld",
+        "jobcenter",
+        "antrag und bescheid"
+      ],
+      "weak_links": [
+        "bedarfe",
+        "finanziell absichern",
+        "dienststelle finden"
+      ],
+      "blocked_links": [
+        "freiwillige arbeitslosenversicherung",
+        "einkommen ergaenzen",
+        "aufstockung",
+        "arbeitslosengeld"
+      ],
+      "first_answer_order": [
+        "buergergeld online beantragen",
+        "jobcenter",
+        "antrag und bescheid",
+        "buergergeld"
+      ]
+    },
+    {
+      "id": "job_loss_start",
+      "type": "life_event",
+      "aliases": [
+        "arbeitslos geworden",
+        "arbeit verloren",
+        "job verloren",
+        "gekuendigt",
+        "entlassen"
+      ],
+      "strong_links": [
+        "arbeitslos melden",
+        "arbeitslosengeld",
+        "buergergeld",
+        "jobcenter",
+        "arbeitsagentur",
+        "dienststelle finden"
+      ],
+      "weak_links": [
+        "bildungsgutschein",
+        "weiterbildung",
+        "schuldnerberatung",
+        "krankenversicherung"
+      ],
+      "blocked_links": [
+        "kindergeld",
+        "elterngeld",
+        "pflegegeld",
+        "asyl",
+        "aufenthaltstitel"
+      ],
+      "first_answer_order": [
+        "arbeitslos melden",
+        "arbeitslosengeld",
+        "buergergeld",
+        "dienststelle finden"
+      ]
+    },
+    {
+      "id": "sanctions_conflict",
+      "type": "life_event",
+      "aliases": [
+        "sanktion",
+        "sanktionsbescheid",
+        "pflichtverletzung",
+        "widerspruch",
+        "aerger mit dem jobcenter"
+      ],
+      "strong_links": [
+        "sanktion",
+        "widerspruch",
+        "bescheid",
+        "frist",
+        "rechtsberatung",
+        "jobcenter"
+      ],
+      "weak_links": [
+        "buergergeld",
+        "sozialberatung",
+        "klage"
+      ],
+      "blocked_links": [
+        "kindergeld",
+        "elterngeld",
+        "bildungsgutschein",
+        "arbeitslos melden"
+      ],
+      "first_answer_order": [
+        "bescheid",
+        "frist",
+        "widerspruch",
+        "beratung"
+      ]
+    },
+    {
+      "id": "family_children",
+      "type": "life_event",
+      "aliases": [
+        "baby bekommen",
+        "kind bekommen",
+        "schwanger",
+        "familie"
+      ],
+      "strong_links": [
+        "kindergeld",
+        "elterngeld",
+        "familienkasse",
+        "elterngeldstelle",
+        "kinderzuschlag"
+      ],
+      "weak_links": [
+        "unterhalt",
+        "wohngeld",
+        "buergergeld",
+        "kita"
+      ],
+      "blocked_links": [
+        "arbeitslosengeld",
+        "sanktion",
+        "asyl"
+      ],
+      "first_answer_order": [
+        "kindergeld",
+        "elterngeld",
+        "familienkasse",
+        "elterngeldstelle"
+      ]
+    },
+    {
+      "id": "upskilling",
+      "type": "life_event",
+      "aliases": [
+        "umschulung",
+        "weiterbildung",
+        "qualifizierung"
+      ],
+      "strong_links": [
+        "bildungsgutschein",
+        "weiterbildung",
+        "umschulung",
+        "jobcenter",
+        "arbeitsagentur"
+      ],
+      "weak_links": [
+        "arbeitslosengeld",
+        "buergergeld",
+        "berufliche rehabilitation"
+      ],
+      "blocked_links": [
+        "kindergeld",
+        "elterngeld",
+        "mietschulden"
+      ],
+      "first_answer_order": [
+        "beratung",
+        "bildungsgutschein",
+        "weiterbildung",
+        "umschulung"
+      ]
+    }
+  ]
+}

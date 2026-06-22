@@ -12,6 +12,24 @@
       "top_k": 8
     },
     {
+      "id": "life-job-loss-002",
+      "query": "Wie beantrage ich Arbeitslosengeld oder Bürgergeld nach einem Jobverlust?",
+      "expected_life_event": "job_loss_start",
+      "required_domains_all": ["benefits", "contacts"],
+      "expected_terms_top1": ["arbeitslosengeld"],
+      "expected_terms_any": ["arbeitslosengeld", "buergergeld", "jobcenter", "arbeitsagentur"],
+      "contact_keywords_any": ["jobcenter", "arbeitsagentur", "beratung"],
+      "top_k": 8
+    },
+    {
+      "id": "topic-buergergeld-application-001",
+      "query": "Wo kann ich Bürgergeld beantragen?",
+      "expected_terms_top1": ["buergergeld-beantragen", "bürgergeld online beantragen"],
+      "expected_terms_any": ["buergergeld", "jobcenter", "antrag"],
+      "blocked_terms_any": ["freiwillige arbeitslosenversicherung", "einkommen mit bürgergeld ergänzen"],
+      "top_k": 8
+    },
+    {
       "id": "life-upskilling-001",
       "query": "Wie bekomme ich einen Bildungsgutschein fuer eine Umschulung?",
       "expected_life_event": "upskilling",

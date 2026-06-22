@@ -30,8 +30,15 @@ The deployment workflow builds the frontend app from `frontend/` and deploys:
 `/api/ai/retrieve`, `/api/ai/synthesize`, and `/api/ai/chat` support optional request fields:
 - `retrieval_mode`: `keyword | hybrid | external`
 - `strict_official`: `true | false`
+- `life_event`: optional forced life-event/scenario id for guided retrieval
 - `min_source_tier`: source-tier floor (for example `tier_2_official`)
 - `min_confidence`: confidence floor from `0.0` to `1.0`
+
+`/api/ai/synthesize` and `/api/ai/chat` return the standard answer plus
+`plain_language.einfach` when evidence is available. The simple-language text is
+guarded by rule-based quality checks and falls back to a source-cited extractive
+summary if Workers AI is unavailable or the generated simplification fails the
+guard.
 
 ## Required GitHub Secrets
 

@@ -15,6 +15,12 @@
       "resources": {
         "documents": [
           {
+            "title": "Arbeitslos melden und Arbeitslosengeld beantragen",
+            "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/arbeitslosengeld",
+            "domain": "benefits",
+            "source_tier": "tier_1_official"
+          },
+          {
             "title": "Einkommen mit Bürgergeld ergänzen",
             "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
             "domain": "benefits",
@@ -76,6 +82,12 @@
           }
         ],
         "contacts": [
+          {
+            "title": "Arbeitsagentur und Jobcenter vor Ort finden",
+            "url": "https://web.arbeitsagentur.de/portal/metasuche/suche/dienststellen",
+            "domain": "contacts",
+            "source_tier": "tier_1_official"
+          },
           {
             "title": "Einkommen mit Bürgergeld ergänzen",
             "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
@@ -669,6 +681,12 @@
       "resources": {
         "documents": [
           {
+            "title": "Bildungsgutschein und berufliche Weiterbildungsförderung",
+            "url": "https://web.arbeitsagentur.de/fbwo/fbwo-ui/pd/anfrage",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
             "title": "Termin beim Jobcenter",
             "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/termin-jobcenter",
             "domain": "benefits",
@@ -800,6 +818,18 @@
       "label_de": "Kind(er) / Familie",
       "resources": {
         "documents": [
+          {
+            "title": "Familienkasse: Kindergeld-Antrag stellen",
+            "url": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/kindergeld-anspruch-hoehe-dauer/kindergeld-antrag-starten",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
+          {
+            "title": "ElterngeldDigital: Elterngeld online beantragen",
+            "url": "https://www.elterngeld-digital.de/",
+            "domain": "tools",
+            "source_tier": "tier_1_official"
+          },
           {
             "title": "Unterstützung für Eltern",
             "url": "https://www.arbeitsagentur.de/familie-und-kinder/weitere-hilfen-fuer-eltern",

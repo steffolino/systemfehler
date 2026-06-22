@@ -1,6 +1,6 @@
 # Systemfehler Current State
 
-_Last updated: 2026-05-03_
+_Last updated: 2026-06-22_
 
 This document consolidates the repository's current reality across:
 
@@ -16,9 +16,10 @@ what is legacy scaffolding, and what should be worked on next.
 - Production AI retrieval on `https://systemfehler.pages.dev` passed the full
   suggested-query validation suite (`60/60`) on 2026-05-03.
 - Public guided search now defaults to the `standard` answer mode, with
-  `einfach` and `leicht` as explicit user choices.
-- The simple-language answer builder was improved to produce coherent narrative
-  output instead of fragmented line-by-line text.
+  `einfach` as the current simple-language AI answer mode.
+- The simple-language answer builder now uses retrieval evidence, a rule-based
+  quality guard, and a source-cited extractive fallback when Workers AI is
+  unavailable or generated simple-language text fails validation.
 - Human editorial governance for life-event semantics is now implemented end to
   end:
   - runtime review case capture in AI retrieval

@@ -33,8 +33,8 @@
             ],
             "domains": [
                 "benefits",
-                "aid",
                 "contacts",
+                "aid",
                 "tools"
             ],
             "ranking": {
@@ -615,10 +615,10 @@
                 "unterhaltsvorschuss"
             ],
             "domains": [
+                "tools",
                 "benefits",
-                "contacts",
                 "aid",
-                "tools"
+                "contacts"
             ],
             "ranking": {
                 "domain_boosts": {
@@ -976,7 +976,7 @@
                     "pflegestuetzpunkt",
                     "pflegekasse",
                     "angehoerige",
-                    "angehÃ¶rige"
+                    "angehoerige"
                 ],
                 "blocked_any": [
                     "pflegefamilie",

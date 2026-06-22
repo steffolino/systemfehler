@@ -442,7 +442,18 @@ Request fields are identical to `/api/ai/retrieve`.
 Response includes:
 - `answer`, `explanation`, `sources`
 - `evidence` and `weak_evidence`
+- `evidence_lanes` and `answer_lanes` for official, assistive, and contact-oriented answer sections
+- `assistive_contacts` when contact-like evidence can be surfaced directly
+- `plain_language.einfach` for the Easy German answer mode, when evidence is available
+- `plain_language.sources.einfach` describing whether the simple answer is `ai-generated`, `fallback`, `fallback_quality_guard`, `fallback_error`, or `none`
+- `plain_language.quality.einfach` with rule-based quality diagnostics for the simple-language answer
+- `answer_quality` grounding diagnostics for the standard answer
 - `retrieval` diagnostics for transparency
+
+The `plain_language.einfach` field is generated from the same evidence as the
+standard answer. If Workers AI is unavailable or the simple-language quality
+guard rejects the generated text, the API returns a source-cited extractive
+fallback instead of an unverified simple-language rewrite.
 
 ---
 
@@ -475,7 +486,16 @@ To configure CORS for production, set the `CORS_ORIGIN` environment variable.
 
 ## Rate Limiting
 
-Currently, no rate limiting is implemented. Rate limiting will be added in a future release.
+Cloudflare Pages AI endpoints enforce lightweight per-IP rate limiting through
+the edge cache. The default window is 60 seconds with 12 requests per route.
+
+Configure with:
+
+- `AI_RATE_LIMIT_WINDOW_SECONDS`
+- `AI_RATE_LIMIT_MAX_REQUESTS`
+
+When the limit is exceeded, AI endpoints return `429 Too Many Requests` with
+rate-limit headers.
 
 ---
 

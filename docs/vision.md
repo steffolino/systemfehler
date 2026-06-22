@@ -55,7 +55,7 @@ The core idea is: **information about rights and social support should not silen
 - A unified, structured overview of relevant benefits and aid programs.
 - Clear indication of deadlines and validity periods.
 - Preserved multilingual content even if the original site no longer provides it.
-- A public AI-guided search interface with plain-language answer modes (Standard / Einfach / Leicht) at `systemfehler.pages.dev`.
+- A public AI-guided search interface with `Standard` and `Einfach` answer modes at `systemfehler.pages.dev`; `Leicht` remains part of reviewed entry-data/admin plain-language workflows.
 - Future tools can also be built on Systemfehler data (search by location, target group, situation).
 
 ### 4.2 For Researchers and Policy Analysts
