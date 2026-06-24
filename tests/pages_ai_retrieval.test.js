@@ -413,6 +413,79 @@ test('official synthesis lane stays extractive even when LLM would add details',
   assert.match(response.answer, /\[Quelle: https:\/\/www\.arbeitsagentur\.de\/arbeitslos-arbeit-finden\/arbeitslosengeld\]/);
 });
 
+test('official synthesis prefers stored structured facts over generated content', async () => {
+  const evidence = [
+    {
+      source: 'https://www.arbeitsagentur.de/familie-und-kinder/kindergeld',
+      confidence: 0.94,
+      content: JSON.stringify({
+        title: 'Kindergeld beantragen',
+        url: 'https://www.arbeitsagentur.de/familie-und-kinder/kindergeld',
+        domain: 'benefits',
+        summary: {
+          de: 'Kindergeld kann bei der Familienkasse beantragt werden.',
+        },
+        applicationSteps: [
+          { de: 'Den Antrag stellen Sie bei der Familienkasse der Bundesagentur fuer Arbeit.' },
+          { de: 'Online koennen Sie den Antrag ueber das Familienkassen-Profil starten.' },
+        ],
+        benefitAmount: {
+          de: 'Kindergeld betraegt 255 Euro pro Kind und Monat.',
+        },
+        requiredDocuments: [
+          { de: 'Fuer ein neugeborenes Kind wird die Steuer-Identifikationsnummer des Kindes benoetigt.' },
+        ],
+        provenance: {
+          sourceTier: 'tier_1_official',
+          sourceRole: 'official_info',
+        },
+      }),
+    },
+  ];
+  const env = {
+    AI: {
+      async run() {
+        return {
+          response:
+            '- Bringen Sie Mietvertrag und Kontoauszuege mit. Die Leistung wird rueckwirkend fuer 24 Monate gezahlt.',
+        };
+      },
+    },
+  };
+
+  const applicationResponse = await buildSynthesis(
+    env,
+    'Wo kann ich Kindergeld beantragen?',
+    evidence,
+    { retrieval_mode: 'keyword' },
+    { official: evidence, assistive: [], contacts: [], context: [] }
+  );
+  assert.equal(applicationResponse.answer_lanes.official.source_mode, 'extractive');
+  assert.match(applicationResponse.answer, /Antrag: Den Antrag stellen Sie bei der Familienkasse/);
+  assert.match(applicationResponse.answer, /Online koennen Sie den Antrag/);
+  assert.doesNotMatch(applicationResponse.answer, /Mietvertrag|Kontoauszuege|24 Monate/);
+
+  const amountResponse = await buildSynthesis(
+    env,
+    'Wie viel Kindergeld bekomme ich?',
+    evidence,
+    { retrieval_mode: 'keyword' },
+    { official: evidence, assistive: [], contacts: [], context: [] }
+  );
+  assert.match(amountResponse.answer, /Hoehe: Kindergeld betraegt 255 Euro pro Kind und Monat/);
+  assert.doesNotMatch(amountResponse.answer, /Mietvertrag|Kontoauszuege|24 Monate/);
+
+  const documentResponse = await buildSynthesis(
+    env,
+    'Welche Unterlagen brauche ich fuer Kindergeld?',
+    evidence,
+    { retrieval_mode: 'keyword' },
+    { official: evidence, assistive: [], contacts: [], context: [] }
+  );
+  assert.match(documentResponse.answer, /Unterlagen: Fuer ein neugeborenes Kind/);
+  assert.doesNotMatch(documentResponse.answer, /Mietvertrag|Kontoauszuege|24 Monate/);
+});
+
 test('synthesis prioritizes local Sozialamt lookup over thematic benefit evidence', async () => {
   const evidence = [
     {

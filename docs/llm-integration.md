@@ -9,6 +9,19 @@ official answer lane is built extractively from stored source text and metadata.
 The LLM can help with query rewrite, Easy German, and non-official guidance, but
 it must not be the source of official factual claims.
 
+For official sources, the preferred content path is:
+
+1. structured facts stored on the entry (`applicationSteps`, `benefitAmount`,
+   `eligibilityCriteria`, `requiredDocuments`, `deadline`,
+   `responsibleAgency`, `onlineApplicationUrl`, `contactChannels`,
+   `appealInfo`),
+2. selected sentences from the stored official source text,
+3. deterministic extractive fallback.
+
+Generic crawler placeholders such as "check the source page" are ignored for
+official fact rendering. If a question needs a better answer, add the missing
+fact to the store with the source URL instead of relying on the LLM to infer it.
+
 ## Current Runtime Contract
 
 Set `LLM_PROVIDER` to select the runtime provider:

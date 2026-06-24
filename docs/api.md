@@ -236,8 +236,22 @@ GET /api/data/entries/550e8400-e29b-41d4-a716-446655440000
       "requiredDocuments": [
         { "de": "Personalausweis oder Reisepass" },
         { "de": "Meldebescheinigung" }
-      ]
-    }
+      ],
+      "deadline": {
+        "de": "Frist oder rueckwirkender Zeitraum laut Quelle"
+      },
+      "responsibleAgency": {
+        "de": "Jobcenter oder Familienkasse"
+      },
+      "onlineApplicationUrl": "https://example.gov/antrag",
+      "contactChannels": [
+        { "de": "Online-Konto oder zuständige Dienststelle laut Quelle" }
+      ],
+      "appealInfo": {
+        "de": "Hinweis zu Widerspruch oder Bescheidpruefung laut Quelle"
+      },
+      "lastVerifiedAt": "2026-06-24T00:00:00.000Z"
+    },
     "translations": {
       "de-LEICHT": {
         "summary": "Kurze Erklärung in Leichter Sprache.",

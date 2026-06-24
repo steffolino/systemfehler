@@ -19,6 +19,10 @@
       "type": "string",
       "description": "Duration of benefit eligibility"
     },
+    "deadline": {
+      "$ref": "#/definitions/multilingualText",
+      "description": "Important application deadlines or retroactive claim windows"
+    },
     "eligibilityCriteria": {
       "$ref": "#/definitions/multilingualText",
       "description": "Eligibility requirements and conditions"
@@ -41,6 +45,31 @@
       "type": "string",
       "format": "uri",
       "description": "Link to application form"
+    },
+    "onlineApplicationUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Direct link to the online application service"
+    },
+    "responsibleAgency": {
+      "$ref": "#/definitions/multilingualText",
+      "description": "Responsible agency or office for the application"
+    },
+    "contactChannels": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/multilingualText"
+      },
+      "description": "Official contact channels described by the source"
+    },
+    "appealInfo": {
+      "$ref": "#/definitions/multilingualText",
+      "description": "Official information about objections, appeals, or reviewing a notice"
+    },
+    "lastVerifiedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the structured facts were last checked against the source"
     },
     "contactInfo": {
       "$ref": "#/definitions/contactInfo",

@@ -2478,10 +2478,91 @@ function evidenceEntryItems(evidence, limit = 4) {
           getLocalizedString(entry.content, entry.content_de || '') ||
           getLocalizedString(entry.summary, entry.summary_de || '')
         ),
+        structuredFacts: officialStructuredFacts(entry),
         domain: entry.domain || inferEvidenceMeta(item).domain,
       };
     })
     .filter(Boolean);
+}
+
+function localizedFactValue(value) {
+  return sanitizeText(getLocalizedString(value, ''));
+}
+
+function localizedFactList(value) {
+  if (!Array.isArray(value)) return [];
+  return value
+    .map((item) => localizedFactValue(item))
+    .filter((item) => item.length > 0);
+}
+
+function isGenericCrawlerFact(text) {
+  const normalized = normalizeGermanChars(String(text || '').toLowerCase());
+  return (
+    /pruefen sie .*quellseite/.test(normalized) ||
+    /pruefen sie die hinweise .*verlinkten seite/.test(normalized) ||
+    /die verlinkte quelle enthaelt die aktuellen hinweise/.test(normalized)
+  );
+}
+
+function usableOfficialFact(text) {
+  const sanitized = sanitizeText(text);
+  if (!sanitized || sanitized.length < 12) return null;
+  if (isGenericCrawlerFact(sanitized)) return null;
+  return sanitized;
+}
+
+function officialStructuredFacts(entry) {
+  const facts = {
+    application: [],
+    amount: [],
+    eligibility: [],
+    documents: [],
+    deadline: [],
+    contacts: [],
+    appeal: [],
+  };
+
+  for (const step of localizedFactList(entry.applicationSteps)) {
+    const fact = usableOfficialFact(step);
+    if (fact) facts.application.push(fact);
+  }
+  for (const document of localizedFactList(entry.requiredDocuments)) {
+    const fact = usableOfficialFact(document);
+    if (fact) facts.documents.push(fact);
+  }
+
+  const amount = usableOfficialFact(localizedFactValue(entry.benefitAmount));
+  if (amount) facts.amount.push(amount);
+
+  const eligibility = usableOfficialFact(localizedFactValue(entry.eligibilityCriteria));
+  if (eligibility) facts.eligibility.push(eligibility);
+
+  const duration = usableOfficialFact(localizedFactValue(entry.duration) || entry.duration);
+  if (duration) facts.deadline.push(duration);
+
+  const deadline = usableOfficialFact(localizedFactValue(entry.deadline) || entry.deadline);
+  if (deadline) facts.deadline.push(deadline);
+
+  const responsibleAgency = usableOfficialFact(
+    localizedFactValue(entry.responsibleAgency) || entry.responsibleAgency
+  );
+  if (responsibleAgency) facts.contacts.push(`Zustaendige Stelle: ${responsibleAgency}`);
+
+  const onlineApplicationUrl = usableOfficialFact(
+    localizedFactValue(entry.onlineApplicationUrl) || entry.onlineApplicationUrl || entry.formLink
+  );
+  if (onlineApplicationUrl) facts.application.push(`Online-Antrag: ${onlineApplicationUrl}`);
+
+  for (const channel of localizedFactList(entry.contactChannels)) {
+    const fact = usableOfficialFact(channel);
+    if (fact) facts.contacts.push(fact);
+  }
+
+  const appealInfo = usableOfficialFact(localizedFactValue(entry.appealInfo) || entry.appealInfo);
+  if (appealInfo) facts.appeal.push(appealInfo);
+
+  return facts;
 }
 
 function splitEvidenceSentences(value) {
@@ -2505,6 +2586,42 @@ function queryIntentTerms(query) {
     ['frist', 'termin', 'datum', 'monat', 'tag', 'rueckwirkend'].forEach((term) => terms.add(term));
   }
   return Array.from(terms);
+}
+
+function structuredFactGroupsForQuery(query, item) {
+  const intents = inferAnswerIntent(query);
+  const facts = item.structuredFacts || {};
+  const groups = [];
+  const addGroup = (label, values, max = 3) => {
+    const usable = Array.from(new Set((values || []).map(usableOfficialFact).filter(Boolean))).slice(0, max);
+    if (usable.length > 0) groups.push({ label, values: usable });
+  };
+
+  if (intents.includes('place') || intents.includes('application')) {
+    addGroup('Antrag', facts.application, 3);
+    addGroup('Zustaendige Stelle', facts.contacts, 2);
+  }
+  if (intents.includes('amount')) {
+    addGroup('Hoehe', facts.amount, 2);
+    addGroup('Anspruch', facts.eligibility, 2);
+  }
+  if (intents.includes('deadline')) {
+    addGroup('Frist oder Dauer', facts.deadline, 2);
+  }
+  if (/(unterlag|dokument|nachweis|papier|formular)/i.test(normalizeGermanChars(query))) {
+    addGroup('Unterlagen', facts.documents, 4);
+  }
+  if (/(widerspruch|bescheid|ablehn|klage)/i.test(normalizeGermanChars(query))) {
+    addGroup('Widerspruch', facts.appeal, 2);
+  }
+
+  if (groups.length === 0) {
+    addGroup('Anspruch', facts.eligibility, 2);
+    addGroup('Antrag', facts.application, 2);
+    addGroup('Hoehe', facts.amount, 1);
+  }
+
+  return groups;
 }
 
 function selectEvidenceSentences(item, query, maxSentences = 2) {
@@ -2544,8 +2661,14 @@ function buildOfficialExtractiveAnswer(query, evidence) {
     }
 
     lines.push(`- ${lead}: ${item.title}.`);
-    const evidenceSentences = selectEvidenceSentences(item, query, 2);
-    const details = evidenceSentences.length > 0 ? evidenceSentences : [item.summary];
+    const structuredGroups = structuredFactGroupsForQuery(query, item);
+    const structuredDetails = structuredGroups.flatMap((group) => (
+      group.values.map((value) => `${group.label}: ${value}`)
+    ));
+    const evidenceSentences = structuredDetails.length > 0 ? [] : selectEvidenceSentences(item, query, 2);
+    const details = structuredDetails.length > 0
+      ? structuredDetails
+      : evidenceSentences.length > 0 ? evidenceSentences : [item.summary];
     for (const detail of details) {
       if (detail && !normalizeGermanChars(detail.toLowerCase()).includes(normalizedTitle)) {
         lines.push(`  ${detail}`);
