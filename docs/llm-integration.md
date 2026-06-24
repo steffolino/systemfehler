@@ -4,6 +4,11 @@ Systemfehler has a provider-neutral LLM adapter for guided search. The default
 runtime remains conservative: if no provider is configured, answer generation
 falls back to source-cited extractive answers and deterministic guards.
 
+Official evidence is handled with a stricter contract than assistive text: the
+official answer lane is built extractively from stored source text and metadata.
+The LLM can help with query rewrite, Easy German, and non-official guidance, but
+it must not be the source of official factual claims.
+
 ## Current Runtime Contract
 
 Set `LLM_PROVIDER` to select the runtime provider:

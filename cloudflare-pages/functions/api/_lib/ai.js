@@ -2459,6 +2459,112 @@ export function extractiveSynthesisAnswer(evidence) {
   return lines.join('\n');
 }
 
+function evidenceEntryItems(evidence, limit = 4) {
+  return (Array.isArray(evidence) ? evidence : [])
+    .slice(0, limit)
+    .map((item) => {
+      const entry = parseJsonSafe(item.content, null);
+      if (!entry) return null;
+      return {
+        entry,
+        source: entry.url || item.source || '',
+        title: getLocalizedString(entry.title, entry.title_de || 'Eintrag'),
+        summary: firstUsefulSentence(
+          getLocalizedString(entry.summary, entry.summary_de || '') ||
+          getLocalizedString(entry.content, entry.content_de || ''),
+          'Direkt pruefen.'
+        ),
+        content: sanitizeText(
+          getLocalizedString(entry.content, entry.content_de || '') ||
+          getLocalizedString(entry.summary, entry.summary_de || '')
+        ),
+        domain: entry.domain || inferEvidenceMeta(item).domain,
+      };
+    })
+    .filter(Boolean);
+}
+
+function splitEvidenceSentences(value) {
+  return sanitizeText(value)
+    .replace(/\s+/g, ' ')
+    .split(/(?<=[.!?])\s+/)
+    .map((sentence) => sentence.trim())
+    .filter((sentence) => sentence.length >= 24 && sentence.length <= 260);
+}
+
+function queryIntentTerms(query) {
+  const normalized = normalizeGermanChars(String(query || '').toLowerCase());
+  const terms = new Set(normalizedQueryTokens(query).filter((token) => token.length >= 5));
+  if (/beantrag|antrag|wo\b|zust/.test(normalized)) {
+    ['beantrag', 'antrag', 'online', 'stelle', 'jobcenter', 'familienkasse', 'arbeitsagentur'].forEach((term) => terms.add(term));
+  }
+  if (/wie\s*viel|wieviel|hoehe|betrag|geld|euro|bekomm/.test(normalized)) {
+    ['hoehe', 'betrag', 'euro', 'anspruch', 'erhalten', 'gezahlt'].forEach((term) => terms.add(term));
+  }
+  if (/frist|wann|datum|termin|bis/.test(normalized)) {
+    ['frist', 'termin', 'datum', 'monat', 'tag', 'rueckwirkend'].forEach((term) => terms.add(term));
+  }
+  return Array.from(terms);
+}
+
+function selectEvidenceSentences(item, query, maxSentences = 2) {
+  const terms = queryIntentTerms(query);
+  const sentences = splitEvidenceSentences(item.content);
+  const scored = sentences
+    .map((sentence, index) => {
+      const normalized = normalizeGermanChars(sentence.toLowerCase());
+      const hits = terms.filter((term) => normalized.includes(normalizeGermanChars(term)));
+      return { sentence, index, score: hits.length * 4 - index * 0.15 };
+    })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score || a.index - b.index);
+
+  return scored.slice(0, maxSentences).map((item) => item.sentence);
+}
+
+function buildOfficialExtractiveAnswer(query, evidence) {
+  const entries = evidenceEntryItems(evidence, 5);
+  if (entries.length === 0) return null;
+
+  const intents = inferAnswerIntent(query);
+  const lines = [];
+  for (const item of entries.slice(0, 4)) {
+    const normalizedTitle = normalizeGermanChars(item.title.toLowerCase());
+    let lead = 'Amtliche Information pruefen';
+    if (intents.includes('place') && intents.includes('application')) {
+      lead = /online|beantrag|antrag|formular|portal/.test(normalizedTitle)
+        ? 'Antrag starten'
+        : 'Zustaendige Stelle pruefen';
+    } else if (intents.includes('application')) {
+      lead = 'Antrag pruefen';
+    } else if (intents.includes('amount')) {
+      lead = 'Hoehe oder Anspruch pruefen';
+    } else if (intents.includes('deadline')) {
+      lead = 'Frist pruefen';
+    }
+
+    lines.push(`- ${lead}: ${item.title}.`);
+    const evidenceSentences = selectEvidenceSentences(item, query, 2);
+    const details = evidenceSentences.length > 0 ? evidenceSentences : [item.summary];
+    for (const detail of details) {
+      if (detail && !normalizeGermanChars(detail.toLowerCase()).includes(normalizedTitle)) {
+        lines.push(`  ${detail}`);
+      }
+    }
+    if (item.source) lines.push(`[Quelle: ${item.source}]`);
+  }
+
+  return lines.join('\n');
+}
+
+function composeLaneAnswer({ officialLane, assistiveLane, contactsLane }) {
+  return [
+    officialLane?.answer ? `Amtliche Grundlage:\n${officialLane.answer}` : '',
+    assistiveLane?.answer ? `\nNGO-/Praktische Hilfe:\n${assistiveLane.answer}` : '',
+    contactsLane?.answer ? `\nDirekte Kontakte:\n${contactsLane.answer}` : '',
+  ].filter(Boolean).join('\n');
+}
+
 function compactEvidenceBlock(evidence) {
   const CONTENT_EXCERPT_LEN = 300;
   return evidence
@@ -3388,6 +3494,14 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
               : 'Keine NGO- oder praktische Hilfsquelle gefunden.',
       };
     }
+    if (laneName === 'official') {
+      return {
+        answer: buildOfficialExtractiveAnswer(query, laneEvidence) || extractiveSynthesisAnswer(laneEvidence),
+        sources: laneEvidence.map((item) => item.source),
+        explanation: 'Amtliche Grundlage wurde strikt aus den gespeicherten Belegen extrahiert.',
+        source_mode: 'extractive',
+      };
+    }
     try {
       const completion = await runWorkersAiText(env, {
         systemPrompt:
@@ -3473,27 +3587,11 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
       ...contactsStrong,
       ...assistiveStrong,
     ]).slice(0, 10);
-    const [completion, plainLanguage] = await Promise.all([
-      runWorkersAiText(env, {
-        systemPrompt:
-          'Du bist ein Retrieval-Assistent für deutsche Sozialleistungen. Benutze nur die bereitgestellten Belege. ' +
-          'Wenn die Belege unzureichend sind, sage das klar. Antworte auf Deutsch.',
-        userPrompt:
-          `Nutzerfrage:\n${query}\n\nBelege:\n${compactEvidenceBlock(synthesisEvidence)}\n\n` +
-          'Antworte mit konkreten Stichpunkten auf Deutsch. Beginne sofort mit dem wichtigsten nächsten Schritt, ohne Einleitung und ohne die Anzahl der Stichpunkte anzukündigen. ' +
-          'Nenne konkrete Leistungen, Anlaufstellen oder Anträge aus den Belegen. Setze Quellen immer als eigene Zeile direkt unter den passenden Stichpunkt im Format [Quelle: URL]. Beende jeden Stichpunkt und jede Quelle vollständig.',
-        maxTokens: 800,
-        task: 'synthesize',
-      }),
-      buildPlainLanguageAnswer(env, query, plainLanguageEvidence),
-    ]);
+    const plainLanguage = await buildPlainLanguageAnswer(env, query, plainLanguageEvidence);
     const standardAnswer =
-      completion.text ||
-      [
-        officialLane.answer ? `Amtliche Grundlage:\n${officialLane.answer}` : '',
-        assistiveLane.answer ? `\nNGO-/Praktische Hilfe:\n${assistiveLane.answer}` : '',
-        contactsLane.answer ? `\nDirekte Kontakte:\n${contactsLane.answer}` : '',
-      ].filter(Boolean).join('\n');
+      composeLaneAnswer({ officialLane, assistiveLane, contactsLane }) ||
+      buildQuestionFocusedExtractiveAnswer(query, synthesisEvidence) ||
+      extractiveSynthesisAnswer(synthesisEvidence);
     const answerShape = auditAnswerShape(query, standardAnswer, synthesisEvidence);
     const guardedAnswer = answerShape.passed
       ? standardAnswer

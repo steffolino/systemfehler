@@ -471,6 +471,12 @@ simple-language quality guard rejects the generated text, the API returns a
 source-cited extractive fallback instead of an unverified simple-language
 rewrite.
 
+The official answer lane is stricter than the other lanes: when official
+evidence is available, `answer_lanes.official.answer` is built extractively from
+stored source text and metadata. The LLM may still organize non-official
+assistive/contact guidance and the Easy German rewrite, but official claims
+must come from the retrieved evidence.
+
 The standard answer also passes a lightweight answer-shape guard. For example,
 questions that ask `Wo ... beantragen?` must produce an answer with an
 application path or responsible place. If the generated answer misses that

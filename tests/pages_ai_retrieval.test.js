@@ -318,7 +318,7 @@ test('synthesis provides simple-language fallback without Workers AI', async () 
   assert.deepEqual(response.plain_language.quality.einfach.findings, []);
 });
 
-test('synthesis guards generated answers that miss application-place intent', async () => {
+test('synthesis uses extractive official answer for application-place intent', async () => {
   const evidence = [
     {
       source: 'https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/buergergeld-beantragen',
@@ -355,13 +355,62 @@ test('synthesis guards generated answers that miss application-place intent', as
     { official: evidence, assistive: [], contacts: [], context: [] }
   );
 
-  assert.equal(response.fallback, true);
-  assert.equal(response.answer_guard.passed, false);
-  assert.ok(response.answer_guard.findings.includes('missing_place_answer'));
+  assert.equal(response.fallback, false);
+  assert.equal(response.answer_guard.passed, true);
+  assert.equal(response.answer_lanes.official.source_mode, 'extractive');
   assert.match(response.answer, /Antrag starten/i);
   assert.match(response.answer, /Buergergeld online beantragen/i);
+  assert.doesNotMatch(response.answer, /Einkommen mit Buergergeld ergaenzen/i);
   assert.match(response.answer, /\[Quelle: https:\/\/www\.arbeitsagentur\.de\/arbeitslos-arbeit-finden\/buergergeld\/buergergeld-beantragen\]/);
   assert.equal(response.answer_quality.answer_shape.passed, true);
+});
+
+test('official synthesis lane stays extractive even when LLM would add details', async () => {
+  const evidence = [
+    {
+      source: 'https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/arbeitslosengeld',
+      confidence: 0.92,
+      content: JSON.stringify({
+        title: 'Arbeitslos melden und Arbeitslosengeld beantragen',
+        url: 'https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/arbeitslosengeld',
+        domain: 'benefits',
+        summary: {
+          de: 'Melden Sie sich arbeitslos und beantragen Sie Arbeitslosengeld bei der Agentur fuer Arbeit.',
+        },
+        content: {
+          de: 'Sie koennen sich online arbeitslos melden. Die Agentur fuer Arbeit prueft Ihren Anspruch auf Arbeitslosengeld.',
+        },
+        provenance: {
+          sourceTier: 'tier_1_official',
+          sourceRole: 'official_info',
+        },
+      }),
+    },
+  ];
+  const env = {
+    AI: {
+      async run() {
+        return {
+          response:
+            '- Bringen Sie Personalausweis, Kuendigungsschreiben und Gehaltsabrechnungen mit. Der Antrag muss innerhalb von 3 Monaten gestellt werden.',
+        };
+      },
+    },
+  };
+
+  const response = await buildSynthesis(
+    env,
+    'Wie beantrage ich Arbeitslosengeld nach Jobverlust?',
+    evidence,
+    { retrieval_mode: 'keyword' },
+    { official: evidence, assistive: [], contacts: [], context: [] }
+  );
+
+  assert.equal(response.answer_lanes.official.source_mode, 'extractive');
+  assert.match(response.answer, /Arbeitslos melden und Arbeitslosengeld beantragen/);
+  assert.match(response.answer, /Sie koennen sich online arbeitslos melden/);
+  assert.doesNotMatch(response.answer, /Personalausweis|Gehaltsabrechnungen|3 Monaten/);
+  assert.match(response.answer, /\[Quelle: https:\/\/www\.arbeitsagentur\.de\/arbeitslos-arbeit-finden\/arbeitslosengeld\]/);
 });
 
 test('synthesis prioritizes local Sozialamt lookup over thematic benefit evidence', async () => {
