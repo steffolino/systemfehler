@@ -28,6 +28,8 @@ jobs:
         run: |
           npm run gen:types
           git diff --exit-code -- frontend/src/lib/db_types.ts
+      - name: Validate entries against schemas
+        run: npm run validate:ci
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
