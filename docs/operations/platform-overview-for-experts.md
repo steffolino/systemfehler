@@ -11,17 +11,20 @@ domain professionals who want to work with Systemfehler.*
 
 ## Was ist Systemfehler? / What is Systemfehler?
 
-**DE:** Systemfehler ist ein digitales Informationswerkzeug, das Menschen in
-schwierigen bürokratischen Situationen hilft – zum Beispiel bei Fragen zu
-Bürgergeld, Jobcenter-Bescheiden, Sozialleistungen, Sanktionen oder Anträgen.
-Nutzer:innen stellen eine Frage in eigenen Worten, und das System liefert eine
-verständliche Antwort auf Basis geprüfter Informationsquellen.
+**DE:** Systemfehler ist ein erster Orientierungspunkt und ein transparentes
+Informationswerkzeug für Menschen in schwierigen bürokratischen Situationen –
+zum Beispiel bei Fragen zu Bürgergeld, Jobcenter-Bescheiden, Sozialleistungen,
+Sanktionen oder Anträgen. Nutzer:innen stellen eine Frage in eigenen Worten,
+und das System liefert eine verständliche, quellenbasierte Orientierung: Was
+könnte relevant sein, woher kommt die Information, und wo finden sie passende
+weitere Hilfe?
 
-**EN:** Systemfehler is a digital information tool that helps people navigate
-difficult bureaucratic situations – for example questions about Bürgergeld,
-Jobcenter decisions, social benefits, sanctions, or how to file applications.
-Users ask a question in plain language, and the system returns a clear answer
-drawn from vetted information sources.
+**EN:** Systemfehler is a first point of orientation and a transparent
+information tool for people navigating difficult bureaucratic situations, such
+as questions about Buergergeld, Jobcenter decisions, social benefits,
+sanctions, or applications. Users ask a question in plain language, and the
+system returns clear, source-based orientation: what may be relevant, where the
+information comes from, and where they can find appropriate further help.
 
 ---
 
@@ -63,8 +66,10 @@ werden:
 | Rechte kennen | „Darf das Jobcenter das von mir verlangen?" |
 | Weitere Hilfe finden | „Wo bekomme ich kostenlose Beratung?" |
 
-Das System gibt **Orientierung und Information** – es ersetzt keine
-Rechtsberatung und trifft keine rechtlich verbindlichen Aussagen.
+Das System gibt **Orientierung und Information**. Es soll helfen, schneller zur
+richtigen Quelle, zum passenden Werkzeug oder zur passenden Beratungsstelle zu
+finden. Es ersetzt keine Rechtsberatung und trifft keine rechtlich
+verbindlichen Aussagen.
 
 ---
 

@@ -14,7 +14,7 @@ import {
 } from '../_lib/ai.js';
 import { applySecurityHeaders, jsonResponse, optionsResponse, readJsonBody } from '../_lib/http.js';
 
-const SYNTH_CACHE_VERSION = '2026-06-24-official-extractive-1';
+const SYNTH_CACHE_VERSION = '2026-06-27-lane-relevance-citation-cleanup-1';
 
 export async function onRequest({ request, env }) {
   if (request.method === 'OPTIONS') {

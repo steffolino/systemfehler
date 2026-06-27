@@ -934,6 +934,7 @@ function getEntrySourceMeta(entry: Entry) {
     sourceRole = 'official_info';
   } else if (
     entry.domain === 'tools' ||
+    sourceId === 'sozialportal' ||
     sourceId === 'dasstehtdirzu' ||
     sourceId === 'familienportal' && lowerUrl.includes('lotse') ||
     lowerUrl.includes('/rechner') ||

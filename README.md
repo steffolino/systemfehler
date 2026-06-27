@@ -1,8 +1,8 @@
 # Systemfehler
 
-Systemfehler is a modular, extensible, preservation-oriented data platform for social services in Germany. It collects, normalizes, and preserves information about benefits, aid programs, tools, organizations, and related support structures.
+Systemfehler is a first point of orientation and a transparent information hub for social services in Germany. It helps people understand what support may exist, where information comes from, and which official, nonprofit, or practical support routes can help them next.
 
-The goal is to make information about social rights and support more transparent, accessible, and robust against removal or silent change.
+The platform collects, normalizes, and preserves information about benefits, aid programs, tools, organizations, advice finders, and related support structures. Its goal is not to replace personal advice, but to make information about social rights and support easier to find, easier to check, and more robust against removal or silent change.
 
 For a high-level German overview for non-technical readers, see
 [`docs/ueberblick.md`](docs/ueberblick.md).
@@ -21,6 +21,14 @@ For a high-level German overview for non-technical readers, see
 ---
 
 ## Features
+
+- **First-line orientation**
+
+  Public search is designed to help users ask in everyday language, get a grounded first overview, and find the next useful route: an official source, a practical tool, a contact point, or a trusted external advice finder.
+
+- **Transparent information hub**
+
+  Entries keep source, provenance, quality, topic, and domain metadata visible so users and reviewers can see where information comes from and how much confidence to place in it.
 
 - **Modular domain structure**
 

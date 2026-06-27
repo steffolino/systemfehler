@@ -397,10 +397,10 @@
             "source_tier": "tier_2_ngo_watchdog"
           },
           {
-            "title": "Widerspruch und Klage gegen Bescheid – Rechtsbehelf und Frist",
-            "url": "https://www.vdk.de/",
-            "domain": "benefits",
-            "source_tier": "tier_3_ngo"
+            "title": "Sozialportal Beratungsstellensuche",
+            "url": "https://www.sozialportal.net/",
+            "domain": "contacts",
+            "source_tier": "tier_2_ngo_watchdog"
           }
         ]
       }
@@ -643,6 +643,12 @@
             "source_tier": "tier_3_ngo"
           },
           {
+            "title": "Sozialportal Beratungsstellensuche",
+            "url": "https://www.sozialportal.net/",
+            "domain": "contacts",
+            "source_tier": "tier_2_ngo_watchdog"
+          },
+          {
             "title": "Widerspruch und Klage gegen Bescheid – Rechtsbehelf und Frist",
             "url": "https://www.vdk.de/",
             "domain": "benefits",
@@ -653,12 +659,6 @@
             "url": "https://www.der-paritaetische.de/leistungen-angebote/finanzierung-sozialer-projekte-dienste-und-einrichtungen",
             "domain": "aid",
             "source_tier": "tier_2_ngo_watchdog"
-          },
-          {
-            "title": "Widerspruch gegen Sanktionsbescheid: Fristen und Rechtsbehelf",
-            "url": "https://sanktionsfrei.de/",
-            "domain": "benefits",
-            "source_tier": "tier_3_ngo"
           }
         ]
       }

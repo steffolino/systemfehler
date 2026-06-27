@@ -2433,9 +2433,12 @@ export function extractiveSynthesisAnswer(evidence) {
   if (entries.length === 0) return null;
 
   const primary = entries[0].entry;
+  const primarySummary = usableOfficialFact(getLocalizedString(primary.summary, primary.summary_de || '')) ||
+    usableOfficialFact(getLocalizedString(primary.content, primary.content_de || '')) ||
+    'Direkt pruefen.';
   const lines = [
     'Wahrscheinlich zuerst relevant:',
-    `- ${getLocalizedString(primary.title, primary.title_de || 'Eintrag')}: ${getLocalizedString(primary.summary, primary.summary_de || 'Direkt pruefen.')}`,
+    `- ${getLocalizedString(primary.title, primary.title_de || 'Eintrag')}: ${primarySummary}`,
   ];
   if (entries[0].source) lines.push(`[Quelle: ${entries[0].source}]`);
 
@@ -2505,10 +2508,22 @@ function isGenericCrawlerFact(text) {
   );
 }
 
+function isGenericCuratedSummary(text) {
+  const normalized = normalizeGermanChars(String(text || '').toLowerCase())
+    .replace(/\s+/g, ' ')
+    .trim();
+  return (
+    normalized === 'kuratiert fuer den gewaehlten lebenskontext.' ||
+    normalized === 'kuratiert fuer den gewaehlten lebenskontext' ||
+    /^kuratiert fuer diesen lebenskontext:/.test(normalized)
+  );
+}
+
 function usableOfficialFact(text) {
   const sanitized = sanitizeText(text);
   if (!sanitized || sanitized.length < 12) return null;
   if (isGenericCrawlerFact(sanitized)) return null;
+  if (isGenericCuratedSummary(sanitized)) return null;
   return sanitized;
 }
 
@@ -2645,6 +2660,15 @@ function buildOfficialExtractiveAnswer(query, evidence) {
 
   const intents = inferAnswerIntent(query);
   const lines = [];
+  const seenLines = new Set();
+  const pushUnique = (line) => {
+    const normalized = normalizeGermanChars(String(line || '').toLowerCase())
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (!normalized || seenLines.has(normalized)) return;
+    seenLines.add(normalized);
+    lines.push(line);
+  };
   for (const item of entries.slice(0, 4)) {
     const normalizedTitle = normalizeGermanChars(item.title.toLowerCase());
     let lead = 'Amtliche Information pruefen';
@@ -2660,7 +2684,10 @@ function buildOfficialExtractiveAnswer(query, evidence) {
       lead = 'Frist pruefen';
     }
 
-    lines.push(`- ${lead}: ${item.title}.`);
+    const itemLabel = lead === 'Amtliche Information pruefen'
+      ? item.title
+      : `${lead}: ${item.title}`;
+    pushUnique(`- ${itemLabel}.`);
     const structuredGroups = structuredFactGroupsForQuery(query, item);
     const structuredDetails = structuredGroups.flatMap((group) => (
       group.values.map((value) => `${group.label}: ${value}`)
@@ -2668,16 +2695,113 @@ function buildOfficialExtractiveAnswer(query, evidence) {
     const evidenceSentences = structuredDetails.length > 0 ? [] : selectEvidenceSentences(item, query, 2);
     const details = structuredDetails.length > 0
       ? structuredDetails
-      : evidenceSentences.length > 0 ? evidenceSentences : [item.summary];
+      : evidenceSentences.length > 0 ? evidenceSentences : [usableOfficialFact(item.summary)].filter(Boolean);
     for (const detail of details) {
       if (detail && !normalizeGermanChars(detail.toLowerCase()).includes(normalizedTitle)) {
-        lines.push(`  ${detail}`);
+        pushUnique(`  - ${detail}`);
       }
     }
-    if (item.source) lines.push(`[Quelle: ${item.source}]`);
+    if (item.source) pushUnique(`[Quelle: ${item.source}]`);
   }
 
   return lines.join('\n');
+}
+
+const RELEVANCE_STOP_WORDS = new Set([
+  'aber',
+  'alle',
+  'auch',
+  'bekomme',
+  'beratung',
+  'dazu',
+  'diese',
+  'dieser',
+  'einer',
+  'einen',
+  'einem',
+  'eine',
+  'fuer',
+  'gemeinsam',
+  'gemeinsame',
+  'haben',
+  'hier',
+  'nach',
+  'oder',
+  'ohne',
+  'sein',
+  'sind',
+  'und',
+  'wann',
+  'wenn',
+  'wer',
+  'wie',
+  'wo',
+  'wohnung',
+  'zur',
+  'zum',
+]);
+
+function queryRelevanceTerms(query) {
+  return Array.from(new Set(
+    normalizeGermanChars(String(query || '').toLowerCase())
+      .replace(/[^\p{L}\p{N}\s-]/gu, ' ')
+      .split(/\s+/)
+      .map((term) => term.trim())
+      .filter((term) => term.length >= 4 && !RELEVANCE_STOP_WORDS.has(term))
+  ));
+}
+
+function evidenceRelevanceText(item) {
+  const entry = parseJsonSafe(item?.content, {});
+  return normalizeGermanChars([
+    item?.source,
+    entry?.url,
+    getLocalizedString(entry?.title, entry?.title_de || ''),
+    getLocalizedString(entry?.summary, entry?.summary_de || ''),
+    getLocalizedString(entry?.content, entry?.content_de || ''),
+  ].filter(Boolean).join(' ').toLowerCase());
+}
+
+function filterLaneByQueryRelevance(query, evidence, { minMatches = 1, fallbackLimit = 2 } = {}) {
+  const items = Array.isArray(evidence) ? evidence : [];
+  const terms = queryRelevanceTerms(query);
+  if (items.length <= fallbackLimit || terms.length === 0) return items;
+
+  const scored = items.map((item) => {
+    const text = evidenceRelevanceText(item);
+    const matches = terms.filter((term) => text.includes(term)).length;
+    return { item, matches };
+  });
+  const relevant = scored
+    .filter((entry) => entry.matches >= minMatches)
+    .map((entry) => entry.item);
+  return relevant.length > 0 ? relevant : scored.slice(0, fallbackLimit).map((entry) => entry.item);
+}
+
+function normalizeAnswerCitations(text) {
+  const sourceSet = new Set();
+  const addSource = (url) => {
+    const cleaned = String(url || '').trim().replace(/[.,;]+$/, '');
+    if (!cleaned) return '';
+    sourceSet.add(cleaned);
+    return `[Quelle: ${cleaned}]`;
+  };
+
+  return String(text || '')
+    .replace(/\[(?:Quelle|Source):?\]\((https?:\/\/[^)\s]+)\)(?:\s+\[(?:https?:\/\/[^\]]+)\]\(\1\))?/gi, (_match, url) =>
+      addSource(url)
+    )
+    .replace(/\[Quelle:\s*(https?:\/\/[^\]\s]+)\]/gi, (_match, url) => addSource(url))
+    .replace(/\b(?:Quelle|Source):\s*(https?:\/\/\S+)/gi, (_match, url) => addSource(url))
+    .replace(/\[(https?:\/\/[^\]\s]+)\]\(\1\)/gi, (_match, url) => addSource(url))
+    .split(/\r?\n/)
+    .map((line) => line.trimEnd())
+    .filter((line, index, lines) => {
+      if (!/^\[Quelle:\s*https?:\/\//i.test(line.trim())) return true;
+      return lines.findIndex((candidate) => candidate.trim() === line.trim()) === index;
+    })
+    .join('\n')
+    .trim();
 }
 
 function composeLaneAnswer({ officialLane, assistiveLane, contactsLane }) {
@@ -3522,10 +3646,10 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
     : [];
   const curatedEvidence = buildCuratedEvidenceFromScenarioResources(scenarioResources);
   const strongEvidence = evidence.filter((item) => Number(item.confidence || 0) >= 0.55);
-  const officialStrong = dedupeEvidence([
+  const officialStrong = filterLaneByQueryRelevance(query, dedupeEvidence([
     ...lanes.official,
     ...curatedEvidence.filter((item) => inferEvidenceMeta(item).domain === 'benefits'),
-  ]).filter((item) => Number(item.confidence || 0) >= 0.55);
+  ]).filter((item) => Number(item.confidence || 0) >= 0.55), { minMatches: 1, fallbackLimit: 2 });
   const practicalFromOfficial = lanes.official.filter((item) => {
     const meta = inferEvidenceMeta(item);
     return ['aid', 'contacts', 'tools'].includes(meta.domain);
@@ -3619,7 +3743,7 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
     }
     if (laneName === 'official') {
       return {
-        answer: buildOfficialExtractiveAnswer(query, laneEvidence) || extractiveSynthesisAnswer(laneEvidence),
+        answer: normalizeAnswerCitations(buildOfficialExtractiveAnswer(query, laneEvidence) || extractiveSynthesisAnswer(laneEvidence)),
         sources: laneEvidence.map((item) => item.source),
         explanation: 'Amtliche Grundlage wurde strikt aus den gespeicherten Belegen extrahiert.',
         source_mode: 'extractive',
@@ -3639,13 +3763,13 @@ export async function buildSynthesis(env, query, evidence, retrievalDiagnostics 
         task: 'synthesize',
       });
       return {
-        answer: completion.text || extractiveSynthesisAnswer(laneEvidence),
+        answer: normalizeAnswerCitations(completion.text || extractiveSynthesisAnswer(laneEvidence)),
         sources: laneEvidence.map((item) => item.source),
         explanation: null,
       };
     } catch (error) {
       return {
-        answer: extractiveSynthesisAnswer(laneEvidence),
+        answer: normalizeAnswerCitations(extractiveSynthesisAnswer(laneEvidence)),
         sources: laneEvidence.map((item) => item.source),
         explanation: error instanceof Error ? error.message : 'LLM request failed.',
       };

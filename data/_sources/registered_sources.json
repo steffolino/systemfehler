@@ -419,6 +419,52 @@
       "status": "active"
     },
     {
+      "id": "sozialportal",
+      "name": "Sozialportal",
+      "baseUrl": "https://www.sozialportal.net",
+      "domains": [
+        "contacts",
+        "tools"
+      ],
+      "languages": [
+        "de",
+        "multilingual"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_2_ngo_watchdog",
+      "institutionType": "ngo",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "defaultTopics": [
+        "contacts",
+        "legal",
+        "widerspruch_einlegen",
+        "hilfe_beratung_unterstuetzung"
+      ],
+      "defaultTags": [
+        "advisory",
+        "directory",
+        "contact",
+        "trusted_tool_source",
+        "meta_support_portal_source"
+      ],
+      "defaultTargetGroups": [
+        "unemployed",
+        "general_public"
+      ],
+      "services": [
+        "Beratungsstellensuche",
+        "Standortsuche",
+        "Fachbereichsfilter",
+        "Mehrsprachige Beratungssuche",
+        "Kartenansicht"
+      ],
+      "operator": "Tacheles e.V.",
+      "integrationPolicy": "reference_only_no_scraping",
+      "license": "unknown",
+      "status": "active"
+    },
+    {
       "id": "paritaetischer",
       "name": "Der Paritaetische Gesamtverband",
       "baseUrl": "https://www.der-paritaetische.de",

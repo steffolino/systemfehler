@@ -178,6 +178,28 @@
       ]
     },
     {
+      "url": "https://www.sozialportal.net/",
+      "enabled": true,
+      "source": "sozialportal",
+      "label": "Sozialportal Beratungsstellensuche",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts",
+        "legal",
+        "widerspruch_einlegen"
+      ],
+      "tags": [
+        "meta_support_portal_source",
+        "directory",
+        "contact",
+        "advisory"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ]
+    },
+    {
       "url": "https://web.arbeitsagentur.de/portal/metasuche/suche/dienststellen?in=familienkassen",
       "label": "Familienkassen Suche",
       "source": "arbeitsagentur",

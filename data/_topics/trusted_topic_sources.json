@@ -638,6 +638,18 @@
           ]
         },
         {
+          "sourceId": "sozialportal",
+          "role": "trusted_advice_finder",
+          "priority": "critical",
+          "preferredPathPatterns": [
+            "/"
+          ],
+          "seedUrls": [
+            "https://www.sozialportal.net/"
+          ],
+          "integrationPolicy": "reference_only_no_scraping"
+        },
+        {
           "sourceId": "paritaetischer",
           "role": "ngo_context_source",
           "priority": "medium",

@@ -55,16 +55,29 @@ function renderInlineMarkdown(text: string): ReactNode[] {
 }
 
 function extractSourceLinks(text: string): { cleanText: string; sources: string[] } {
-  const sources: string[] = [];
+  const sourceSet = new Set<string>();
+  const addSource = (url: string) => {
+    const cleaned = String(url || '')
+      .trim()
+      .replace(/[.,;]+$/, '');
+    if (cleaned) sourceSet.add(cleaned);
+    return '';
+  };
   const cleanText = String(text || '')
+    .replace(/\[(?:Quelle|Source)\]\((https?:\/\/[^)\s]+)\)/gi, (_match, url: string) => addSource(url))
+    .replace(/\[Quelle:\]\((https?:\/\/[^)\s]+)\)(?:\s+\[(?:https?:\/\/[^\]]+)\]\(\1\))?/gi, (_match, url: string) =>
+      addSource(url)
+    )
+    .replace(/\[Quelle:\s*\]\((https?:\/\/[^)\s]+)\)/gi, (_match, url: string) => addSource(url))
     .replace(/\[Quelle:\s*(https?:\/\/[^\]\s]+)\]/gi, (_match, url: string) => {
-      sources.push(url);
-      return '';
+      return addSource(url);
     })
+    .replace(/\b(?:Quelle|Source):\s*(https?:\/\/\S+)/gi, (_match, url: string) => addSource(url))
+    .replace(/\[(https?:\/\/[^\]\s]+)\]\(\1\)/gi, (_match, url: string) => addSource(url))
     .replace(/\s{2,}/g, ' ')
     .trim();
 
-  return { cleanText, sources };
+  return { cleanText, sources: Array.from(sourceSet) };
 }
 
 function SourceLinks({ sources }: { sources: string[] }) {

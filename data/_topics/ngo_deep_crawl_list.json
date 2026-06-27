@@ -49,6 +49,13 @@
       ]
     },
     {
+      "sourceId": "sozialportal",
+      "note": "Reference-only referral target; do not crawl or mirror individual advice-center records without explicit permission.",
+      "urls": [
+        "https://www.sozialportal.net/"
+      ]
+    },
+    {
       "sourceId": "diakonie",
       "urls": [
         "https://beratung.diakonie.de"

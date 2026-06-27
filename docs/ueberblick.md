@@ -6,13 +6,16 @@ soll und was sie leisten kann.
 
 ## Kurz gesagt
 
-Systemfehler ist ein digitales Informationsangebot zu sozialen Hilfen in
-Deutschland. Menschen können in eigenen Worten nach Unterstützung suchen, zum
-Beispiel zu Bürgergeld, Anträgen, Bescheiden, Sanktionen, Beratungsstellen oder
-weiteren Hilfsangeboten.
+Systemfehler ist ein erster Orientierungspunkt und ein transparenter
+Informationsknoten zu sozialen Hilfen in Deutschland. Menschen können in
+eigenen Worten nach Unterstützung suchen, zum Beispiel zu Bürgergeld,
+Anträgen, Bescheiden, Sanktionen, Beratungsstellen oder weiteren
+Hilfsangeboten.
 
-Die Anwendung soll helfen, passende Informationen schneller zu finden und
-verständlicher zu machen. Sie ersetzt keine persönliche Beratung und keine
+Die Anwendung soll helfen, passende Informationen schneller zu finden,
+verständlicher zu machen und den nächsten sinnvollen Weg zu zeigen: eine
+amtliche Quelle, ein Werkzeug, eine Kontaktstelle oder eine passende
+Beratungssuche. Sie ersetzt keine persönliche Beratung und keine
 Rechtsberatung.
 
 ## Welches Problem löst Systemfehler?
@@ -31,7 +34,9 @@ Für Betroffene bedeutet das häufig:
 - Sie müssen mehrere Behörden- und Beratungsseiten vergleichen.
 
 Systemfehler bündelt solche Informationen, ordnet sie nach Themen und Quellen
-und macht sie über eine Suche zugänglich.
+und macht sie über eine Suche zugänglich. Die Anwendung soll dadurch nicht nur
+Antworten geben, sondern vor allem Orientierung schaffen: Was ist relevant?
+Woher kommt die Information? Wo kann ich weiterprüfen oder Hilfe finden?
 
 ## Was bietet die Anwendung?
 
@@ -40,6 +45,7 @@ Systemfehler bietet vor allem Orientierung:
 - Eine Suche für Fragen in normaler Alltagssprache.
 - Antworten auf Basis gespeicherter und geprüfter Quellen.
 - Hinweise auf passende Leistungen, Hilfen, Kontakte und Organisationen.
+- Verweise auf passende offizielle Quellen, Werkzeuge und Beratungssuchen.
 - Links zu den ursprünglichen Quellen, damit Informationen überprüfbar bleiben.
 - Sprachmodi wie `Standard`, `Einfach` und `Leicht`, damit Inhalte besser
   verständlich werden.

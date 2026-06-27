@@ -22467,6 +22467,80 @@
       }
     },
     {
+      "id": "39a5dc80-4461-4f05-85eb-7e90e06779f0",
+      "title": {
+        "de": "Sozialportal Beratungsstellensuche"
+      },
+      "summary": {
+        "de": "Das Sozialportal von Tacheles e.V. verweist auf Beratungsstellen und kann nach Ort, Fachbereich und Sprache genutzt werden."
+      },
+      "content": {
+        "de": "Nutze das Sozialportal, wenn du eine passende Beratung vor Ort suchst, zum Beispiel zu Buergergeld, Sozialleistungen, Widerspruch, Sanktionen, Schulden oder anderen sozialrechtlichen Fragen. Systemfehler verlinkt auf die Suche und spiegelt keine einzelnen Beratungsstellen."
+      },
+      "url": "https://www.sozialportal.net/",
+      "domain": "contacts",
+      "topics": [
+        "hilfe_beratung_unterstuetzung",
+        "contacts",
+        "legal",
+        "widerspruch_einlegen",
+        "financial_support"
+      ],
+      "tags": [
+        "advisory",
+        "directory",
+        "contact",
+        "meta_support_portal_source",
+        "trusted_tool_source"
+      ],
+      "targetGroups": [
+        "unemployed",
+        "general_public"
+      ],
+      "status": "active",
+      "firstSeen": "2026-06-27T00:00:00.000Z",
+      "lastSeen": "2026-06-27T00:00:00.000Z",
+      "sourceUnavailable": false,
+      "contactType": "advice_finder",
+      "specialization": [
+        "Sozialrechtsberatung",
+        "Beratung vor Ort",
+        "Buergergeld",
+        "Widerspruch und Rechtsbehelf",
+        "Schuldnerberatung"
+      ],
+      "availability": {
+        "hours": "Siehe verlinkte Suche",
+        "languages": [
+          "de",
+          "multilingual"
+        ]
+      },
+      "linkedOrganization": "Tacheles e.V.",
+      "eligibilityCriteria": {
+        "de": "Offene Suche nach Beratungsangeboten. Einzelne Beratungsstellen koennen eigene Zustaendigkeiten, Sprachen und Termine haben."
+      },
+      "provenance": {
+        "source": "https://www.sozialportal.net/",
+        "crawledAt": "2026-06-27T00:00:00.000Z",
+        "crawlId": "manual-referral-20260627-sozialportal",
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_2_ngo_watchdog",
+        "institutionType": "ngo",
+        "jurisdiction": "DE",
+        "sourceId": "sozialportal",
+        "providerName": "Tacheles e.V.",
+        "providerLevel": "civil_society",
+        "integrationPolicy": "reference_only_no_scraping",
+        "checksum": "manual-referral-sozialportal-20260627"
+      },
+      "qualityScores": {
+        "iqs": 88,
+        "ais": 86,
+        "computedAt": "2026-06-27T00:00:00.000Z"
+      }
+    },
+    {
       "id": "0eaa1019-614e-4cf9-a43c-885616e4c7cc",
       "title": {
         "de": "Beratung bei Widerspruch und Rechtsbehelf gegen Bescheide"
