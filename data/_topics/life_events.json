@@ -1609,6 +1609,48 @@
                     "hotline"
                 ]
             },
+            "resource_pins": {
+                "documents": [
+                    {
+                        "title": "Depression: Symptome, Ursachen und Behandlung",
+                        "url": "https://gesund.bund.de/depression",
+                        "domain": "aid",
+                        "source_tier": "tier_1_official"
+                    },
+                    {
+                        "title": "Informationen zu Depression und Hilfe",
+                        "url": "https://www.deutsche-depressionshilfe.de/start",
+                        "domain": "aid",
+                        "source_tier": "tier_3_ngo"
+                    }
+                ],
+                "ngo_assistance": [
+                    {
+                        "title": "Krisentelefone und Hilfe bei Depression",
+                        "url": "https://www.deutsche-depressionshilfe.de/krisentelefone",
+                        "domain": "aid",
+                        "source_tier": "tier_3_ngo"
+                    },
+                    {
+                        "title": "Telefonseelsorge: kostenlose Krisenhilfe",
+                        "url": "https://www.telefonseelsorge.de/",
+                        "domain": "aid",
+                        "source_tier": "tier_3_ngo"
+                    },
+                    {
+                        "title": "Psychosoziale Beratung und Krisenhilfe - Sozialpsychiatrischer Dienst",
+                        "url": "https://www.diakonie.de/",
+                        "domain": "aid",
+                        "source_tier": "tier_3_ngo"
+                    },
+                    {
+                        "title": "Psychosoziale Beratungsstellen und Krisenhilfe finden",
+                        "url": "https://www.caritas.de/",
+                        "domain": "contacts",
+                        "source_tier": "tier_3_ngo"
+                    }
+                ]
+            },
             "contact_priority": {
                 "name_keywords": [
                     "Krisen",

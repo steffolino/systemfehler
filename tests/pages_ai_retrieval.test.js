@@ -10,6 +10,7 @@ import {
   getWorkersAiModel,
   getWorkersAiModelConfig,
   localEvaluateEntries,
+  normalizeAnswerCitations,
   retrieveEvidence,
   runLlmText,
 } from '../cloudflare-pages/functions/api/_lib/ai.js';
@@ -124,6 +125,22 @@ test('runLlmText calls Mistral chat completions without Workers AI binding', asy
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test('normalizeAnswerCitations removes empty citation artifacts', () => {
+  const text = [
+    'Pflegegeld beantragen',
+    '[]',
+    '[Quelle:](https://www.wege-zur-pflege.de/) [https://www.wege-zur-pflege.de/](https://www.wege-zur-pflege.de/)',
+  ].join('\n');
+
+  const normalized = normalizeAnswerCitations(text);
+
+  assert.equal(
+    normalized,
+    'Pflegegeld beantragen\n[Quelle: https://www.wege-zur-pflege.de/]'
+  );
+  assert.equal(normalized.includes('[]'), false);
 });
 
 test('caregiving rewrite with compound umlauts resolves to strong care evidence', () => {
@@ -248,6 +265,71 @@ test('retrieval includes curated official care evidence when keyword DB search m
   assert.ok(result.evidence.length >= 2);
   assert.ok(result.evidence.some((item) => item.source.includes('bundesgesundheitsministerium.de')));
   assert.ok(result.evidence.some((item) => item.source.includes('pflegelotse.de')));
+});
+
+test('retrieval drops unclassified crawled contacts from answer evidence', async () => {
+  const entry = {
+    id: 'a0fbd8c8-e09a-4fba-84f8-6e6c88a78530',
+    title: 'Was Sie über die Erkrankung Depression wissen sollten',
+    url: 'https://ifightdepression.com/de',
+    domain: 'contacts',
+    status: 'active',
+    summary: {
+      de: 'Was Sie über die Erkrankung Depression wissen sollten.',
+    },
+    content: {
+      de: 'Depression Selbsttest Selbstmanagement psychosoziale Beratung.',
+    },
+    provenance: {
+      source: 'https://ifightdepression.com/de',
+      sourceTier: 'tier_unknown',
+      institutionType: 'unknown',
+    },
+  };
+  const env = {
+    DB: {
+      prepare() {
+        return {
+          bind() {
+            return {
+              async all() {
+                return {
+                  results: [{
+                    id: entry.id,
+                    domain: entry.domain,
+                    url: entry.url,
+                    status: entry.status,
+                    title_de: entry.title,
+                    summary_de: entry.summary.de,
+                    content_de: entry.content.de,
+                    provenance: JSON.stringify(entry.provenance),
+                    entry_json: JSON.stringify(entry),
+                    updated_at: '2026-03-15T16:07:17.817875+00:00',
+                  }],
+                };
+              },
+            };
+          },
+        };
+      },
+    },
+    ASSETS: {
+      async fetch() {
+        return new Response(JSON.stringify({ scenarios: [] }), {
+          headers: { 'content-type': 'application/json' },
+        });
+      },
+    },
+  };
+
+  const result = await retrieveEvidence(
+    env,
+    'Wo bekomme ich Hilfe bei Depression?',
+    { requestUrl: 'https://systemfehler.pages.dev/' }
+  );
+
+  assert.equal(result.evidence.some((item) => item.source === 'https://ifightdepression.com/de'), false);
+  assert.ok(result.diagnostics.dropped_by_policy >= 1);
 });
 
 test('synthesis routes local institution questions to official finders when exact data is unavailable', async () => {

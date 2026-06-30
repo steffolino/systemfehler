@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-import { api, getEntrySourceMeta, getSourceRoleLabel, type Entry } from '../lib/api';
+import { api, getEntrySourceMeta, getSourceRoleLabel, getSourceTierLabel, type Entry } from '../lib/api';
 import type { AIChatMessage, AIHealthResponse, AIResultBundle } from '../lib/api';
 import SearchInput from '../components/SearchInput';
 import ResultsList from '../components/ResultsList';
@@ -29,6 +29,11 @@ type ChatThreadMessage = AIChatMessage & {
   evidenceCount?: number;
   weakEvidence?: boolean;
   isError?: boolean;
+  relatedEntries?: Entry[];
+  plainLanguage?: {
+    einfach?: string | null;
+    leicht?: string | null;
+  };
 };
 
 const MAX_DEMO_ASSISTANT_RESPONSES = 3;
@@ -74,6 +79,7 @@ function extractSourceLinks(text: string): { cleanText: string; sources: string[
     })
     .replace(/\b(?:Quelle|Source):\s*(https?:\/\/\S+)/gi, (_match, url: string) => addSource(url))
     .replace(/\[(https?:\/\/[^\]\s]+)\]\(\1\)/gi, (_match, url: string) => addSource(url))
+    .replace(/(^|\s)\[\](?=\s|$)/g, ' ')
     .replace(/\s{2,}/g, ' ')
     .trim();
 
@@ -162,6 +168,16 @@ function MarkdownText({ text, className = '' }: { text: string; className?: stri
   flushBullets('bullets-end');
 
   return <div className={['space-y-1', className].filter(Boolean).join(' ')}>{blocks}</div>;
+}
+
+function stripSourceMarkupForReadableAnswer(text: string) {
+  return String(text || '')
+    .replace(/\[Quelle:\s*https?:\/\/[^\]\s]+\]/gi, '')
+    .replace(/\[Quelle:\]\(https?:\/\/[^)\s]+\)/gi, '')
+    .replace(/\[(https?:\/\/[^\]\s]+)\]\(\1\)/gi, '')
+    .replace(/\b(?:Quelle|Source):\s*https?:\/\/\S+/gi, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
 }
 
 function parseEvidenceEntriesForPage(evidence: Array<{ content: string }>): Entry[] {
@@ -266,6 +282,8 @@ export default function SearchPage() {
   const [submittedAiQuery, setSubmittedAiQuery] = useState('');
   const [chatMessages, setChatMessages] = useState<ChatThreadMessage[]>([]);
   const [aiLanguageMode, setAiLanguageMode] = useState<LanguageMode>('standard');
+  const [showHelpfulAnswer, setShowHelpfulAnswer] = useState(false);
+  const [showMoreInformation, setShowMoreInformation] = useState(false);
   const [retrievalMode, setRetrievalMode] = useState<RetrievalMode>('hybrid');
   const [strictOfficialOnly, setStrictOfficialOnly] = useState(false);
   const [lifeEventContext, setLifeEventContext] = useState<string>('');
@@ -619,6 +637,8 @@ export default function SearchPage() {
           content: answerText,
           evidenceCount: relatedEntries.length,
           weakEvidence: Boolean(chatResponse.weak_evidence),
+          relatedEntries,
+          plainLanguage: chatResponse.plain_language,
         },
       ]);
     } catch (err) {
@@ -684,10 +704,11 @@ export default function SearchPage() {
         ? buildGroundedReadableAnswer(aiResult?.relatedEntries || [], aiLanguageMode)
         : '';
 
-    const candidate = backendPlainLanguage || groundedAnswer || base;
-    if (!candidate) return '';
+    if (backendPlainLanguage) return backendPlainLanguage;
+    if (groundedAnswer) return groundedAnswer;
+    if (!base) return '';
 
-    return getReadableAnswerText(candidate, aiLanguageMode);
+    return getReadableAnswerText(stripSourceMarkupForReadableAnswer(base), aiLanguageMode);
   }, [
     aiLanguageMode,
     aiResult?.relatedEntries,
@@ -717,6 +738,27 @@ export default function SearchPage() {
   const assistiveLaneAnswer = aiResult?.synthesis.answer_lanes?.assistive?.answer?.trim() || '';
   const contactsLaneAnswer = aiResult?.synthesis.answer_lanes?.contacts?.answer?.trim() || '';
   const assistiveContacts = aiResult?.synthesis.assistive_contacts || [];
+
+  const getChatMessageText = useCallback((message: ChatThreadMessage) => {
+    if (message.role !== 'assistant' || message.isError || aiLanguageMode === 'standard') {
+      return message.content;
+    }
+
+    const backendPlainLanguage =
+      aiLanguageMode === 'einfach'
+        ? message.plainLanguage?.einfach
+        : aiLanguageMode === 'leicht'
+          ? message.plainLanguage?.leicht
+          : '';
+    const groundedAnswer =
+      (message.relatedEntries?.length || 0) > 0
+        ? buildGroundedReadableAnswer(message.relatedEntries || [], aiLanguageMode)
+        : '';
+    if (backendPlainLanguage) return backendPlainLanguage;
+    if (groundedAnswer) return groundedAnswer;
+
+    return getReadableAnswerText(stripSourceMarkupForReadableAnswer(message.content), aiLanguageMode);
+  }, [aiLanguageMode]);
   const hasNoStrongAiEvidence = Boolean(
     submittedAiQuery &&
     !aiLoading &&
@@ -725,11 +767,14 @@ export default function SearchPage() {
     (aiResult?.relatedEntries?.length || 0) === 0
   );
 
-  const evidenceRoleLabels = useMemo(() => {
+  const evidenceSourceLabels = useMemo(() => {
     const labels = new Set<string>();
 
     for (const entry of aiResult?.relatedEntries || []) {
-      labels.add(getSourceRoleLabel(getEntrySourceMeta(entry).sourceRole, locale));
+      const meta = getEntrySourceMeta(entry);
+      labels.add(getSourceRoleLabel(meta.sourceRole, locale));
+      const tierLabel = getSourceTierLabel(meta.sourceTier, locale);
+      if (tierLabel) labels.add(tierLabel);
     }
 
     return Array.from(labels);
@@ -831,7 +876,7 @@ export default function SearchPage() {
                             variant="outline"
                             className="h-auto whitespace-normal text-left"
                             onClick={() => applySuggestedQuestion(question)}
-                            disabled={chatLimitReached}
+                            disabled={chatLimitReached || turnstileMisconfigured || (turnstileEnabled && !turnstileReady)}
                           >
                             {question}
                           </Button>
@@ -947,21 +992,40 @@ export default function SearchPage() {
                         Jede Antwort wird neu mit passenden Belegen gesucht.
                       </div>
                     </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => {
-                        setChatMessages([]);
-                        setSubmittedAiQuery('');
-                        setAiDraftQuery('');
-                        setAiResult(null);
-                        setAiError(null);
-                        setAiLoading(false);
-                        setAiEvidenceLoading(false);
-                      }}
-                    >
-                      Neuer Chat
-                    </Button>
+                    <div className="flex flex-wrap items-center justify-end gap-2">
+                      <div className="flex flex-wrap gap-2">
+                        {(['standard', 'einfach'] as LanguageMode[]).map((mode) => (
+                          <button
+                            key={mode}
+                            type="button"
+                            onClick={() => setAiLanguageMode(mode)}
+                            className={[
+                              'inline-flex rounded-full border px-3 py-1.5 text-xs font-medium transition',
+                              aiLanguageMode === mode
+                                ? 'border-foreground bg-foreground text-background'
+                                : 'border-border bg-background text-foreground hover:bg-muted',
+                            ].join(' ')}
+                          >
+                            {t(`entry.mode_${mode}` as const)}
+                          </button>
+                        ))}
+                      </div>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          setChatMessages([]);
+                          setSubmittedAiQuery('');
+                          setAiDraftQuery('');
+                          setAiResult(null);
+                          setAiError(null);
+                          setAiLoading(false);
+                          setAiEvidenceLoading(false);
+                        }}
+                      >
+                        Neuer Chat
+                      </Button>
+                    </div>
                   </div>
                 </div>
                 <div className="space-y-3 p-4 md:p-5">
@@ -981,7 +1045,7 @@ export default function SearchPage() {
                             : 'bg-muted/30 text-foreground',
                         ].join(' ')}
                       >
-                        <MarkdownText text={message.content} />
+                        <MarkdownText text={getChatMessageText(message)} />
                         {message.role === 'assistant' && typeof message.evidenceCount === 'number' && (
                           <div className="mt-2 text-xs opacity-75">
                             {message.evidenceCount} Belege
@@ -1043,6 +1107,20 @@ export default function SearchPage() {
               </Card>
             )}
 
+            {turnstileEnabled && (
+              <div className="rounded-3xl border bg-muted/15 p-4 shadow-sm">
+                <TurnstileWidget siteKey={configuredTurnstileSiteKey} onReady={handleTurnstileReady} />
+                <div className="text-xs text-muted-foreground">
+                  {t('search.bot_protection_note')}
+                </div>
+              </div>
+            )}
+            {turnstileMisconfigured && (
+              <div className="rounded-xl border border-red-200 bg-red-50/50 px-4 py-3 text-xs text-red-700">
+                {t('search.bot_protection_failed')}
+              </div>
+            )}
+
             <Card className="rounded-3xl border shadow-md">
               <div className="border-b bg-[linear-gradient(180deg,rgba(248,250,252,0.96),rgba(255,255,255,1))] p-5 md:p-6">
                 <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
@@ -1055,35 +1133,47 @@ export default function SearchPage() {
                     )}
                   </div>
 
-                  <div className="flex flex-wrap gap-2">
-                    {(['standard', 'einfach'] as LanguageMode[]).map((mode) => (
-                      <button
-                        key={mode}
-                        type="button"
-                        onClick={() => setAiLanguageMode(mode)}
-                        className={[
-                          'inline-flex rounded-full border px-3 py-1.5 text-xs font-medium transition',
-                          aiLanguageMode === mode
-                            ? 'border-foreground bg-foreground text-background'
-                            : 'border-border bg-background text-foreground hover:bg-muted',
-                        ].join(' ')}
-                      >
-                        {t(`entry.mode_${mode}` as const)}
-                      </button>
-                    ))}
+                  <div className="flex flex-wrap justify-end gap-2">
+                    <div className="flex flex-wrap gap-2">
+                      {(['standard', 'einfach'] as LanguageMode[]).map((mode) => (
+                        <button
+                          key={mode}
+                          type="button"
+                          onClick={() => setAiLanguageMode(mode)}
+                          className={[
+                            'inline-flex rounded-full border px-3 py-1.5 text-xs font-medium transition',
+                            aiLanguageMode === mode
+                              ? 'border-foreground bg-foreground text-background'
+                              : 'border-border bg-background text-foreground hover:bg-muted',
+                          ].join(' ')}
+                        >
+                          {t(`entry.mode_${mode}` as const)}
+                        </button>
+                      ))}
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setShowHelpfulAnswer((value) => !value)}
+                    >
+                      {showHelpfulAnswer ? t('search.hide_details') : t('search.show_details')}
+                    </Button>
                   </div>
                 </div>
 
-                <div className="mt-2 text-xs text-muted-foreground">{t('search.answer_mode_note')}</div>
+                {showHelpfulAnswer && (
+                  <div className="mt-2 text-xs text-muted-foreground">{t('search.answer_mode_note')}</div>
+                )}
 
-                {submittedAiQuery && aiLanguageMode !== 'standard' && plainLanguageSourceLabel && (
+                {showHelpfulAnswer && submittedAiQuery && aiLanguageMode !== 'standard' && plainLanguageSourceLabel && (
                   <div className="mt-2 text-xs text-muted-foreground">
                     {t('search.answer_source_note')}: {plainLanguageSourceLabel}
                   </div>
                 )}
               </div>
 
-              <div className="p-5 md:p-6">
+              {showHelpfulAnswer && (
+                <div className="p-5 md:p-6">
                 {aiLoading ? (
                   <div className="flex min-h-55 flex-col items-center justify-center gap-3">
                     <Spinner />
@@ -1188,9 +1278,9 @@ export default function SearchPage() {
                       </div>
                     )}
 
-                    {submittedAiQuery && evidenceRoleLabels.length > 0 && (
+                    {submittedAiQuery && evidenceSourceLabels.length > 0 && (
                       <div className="flex flex-wrap gap-2">
-                        {evidenceRoleLabels.map((label) => (
+                        {evidenceSourceLabels.map((label) => (
                           <span
                             key={label}
                             className="inline-flex rounded-full border bg-muted px-2.5 py-1 text-xs font-medium text-foreground"
@@ -1202,15 +1292,26 @@ export default function SearchPage() {
                     )}
                   </div>
                 )}
-              </div>
+                </div>
+              )}
             </Card>
 
             <div className="space-y-4 pt-2">
-              <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                Weitere Informationen
+              <div className="flex items-center justify-between gap-3">
+                <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Weitere Informationen
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowMoreInformation((value) => !value)}
+                >
+                  {showMoreInformation ? t('search.hide_details') : t('search.show_details')}
+                </Button>
               </div>
 
-              <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
+              {showMoreInformation && (
+                <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
                 <Card className="rounded-3xl border bg-muted/15 shadow-sm">
                   <div className="p-5">
                     <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
@@ -1340,21 +1441,9 @@ export default function SearchPage() {
                     </div>
                   </Card>
 
-                  {turnstileEnabled && (
-                    <>
-                      <TurnstileWidget siteKey={configuredTurnstileSiteKey} onReady={handleTurnstileReady} />
-                      <div className="rounded-xl border bg-muted/30 px-4 py-3 text-xs text-muted-foreground">
-                        {t('search.bot_protection_note')}
-                      </div>
-                    </>
-                  )}
-                  {turnstileMisconfigured && (
-                    <div className="rounded-xl border border-red-200 bg-red-50/50 px-4 py-3 text-xs text-red-700">
-                      {t('search.bot_protection_failed')}
-                    </div>
-                  )}
                 </div>
-              </div>
+                </div>
+              )}
             </div>
           </>
         ) : (

@@ -9,8 +9,14 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from crawlers.shared.text_cleaning import clean_entry_text  # noqa: E402
 
 DOMAINS = ["benefits", "aid", "tools", "organizations", "contacts"]
 MAX_STRING_LENGTH = 12000
@@ -63,6 +69,7 @@ def entry_updated_at(entry: dict) -> str | None:
 
 
 def build_insert(domain: str, entry: dict) -> str:
+    clean_entry_text(entry)
     compact_entry = compact_value(entry)
     entry_json = json.dumps(compact_entry, ensure_ascii=False, separators=(",", ":"))
     return (

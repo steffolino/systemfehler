@@ -19,10 +19,17 @@ class SourceProfile:
     name: str
     base_url: str
     domains: tuple[str, ...]
+    canonical_domain: str = ""
+    hosts: tuple[str, ...] = ()
+    publisher_name: str = ""
+    operator_name: str = ""
+    author: str = ""
     source_tier: str = "tier_unknown"
+    source_tier_status: str = "unknown"
     institution_type: str = "unknown"
     jurisdiction: str = "DE"
     provider_level: str = "unknown"
+    review_status: str = "needs_review"
     priority: str = "normal"
     default_topics: tuple[str, ...] = ()
     default_tags: tuple[str, ...] = ()
@@ -36,13 +43,22 @@ class SourceProfile:
         host = (parsed.netloc or "").lower()
         return host[4:] if host.startswith("www.") else host
 
+    @property
+    def source_domain(self) -> str:
+        return self.canonical_domain or self.host
+
+    @property
+    def match_hosts(self) -> tuple[str, ...]:
+        hosts = [self.host, self.source_domain, *self.hosts]
+        return tuple(dict.fromkeys(host for host in hosts if host))
+
     def matches(self, url: str, domain: str) -> bool:
         parsed = urllib.parse.urlparse(url or "")
         host = (parsed.netloc or "").lower()
         host = host[4:] if host.startswith("www.") else host
         if domain not in self.domains:
             return False
-        return host == self.host or host.endswith(f".{self.host}")
+        return any(host == match_host or host.endswith(f".{match_host}") for match_host in self.match_hosts)
 
 
 class SourceRegistry:
@@ -72,16 +88,30 @@ class SourceRegistry:
             domains = tuple(str(value) for value in item.get("domains", []) if isinstance(value, str))
             if not source_id or not base_url or not domains:
                 continue
+            source_tier = str(item.get("sourceTier") or self._infer_source_tier(base_url))
 
             profile = SourceProfile(
                 source_id=source_id,
                 name=name,
                 base_url=base_url,
                 domains=domains,
-                source_tier=str(item.get("sourceTier") or self._infer_source_tier(base_url)),
+                canonical_domain=str(item.get("canonicalDomain") or item.get("sourceDomain") or "").strip(),
+                hosts=tuple(self._normalize_host(value) for value in item.get("hosts", []) if isinstance(value, str)),
+                publisher_name=str(item.get("publisherName") or item.get("publisher") or name).strip(),
+                operator_name=str(item.get("operatorName") or item.get("operator") or "").strip(),
+                author=str(item.get("author") or "").strip(),
+                source_tier=source_tier,
+                source_tier_status=str(
+                    item.get("sourceTierStatus")
+                    or ("verified" if source_tier != "tier_unknown" else "unknown")
+                ),
                 institution_type=str(item.get("institutionType") or self._infer_institution_type(base_url)),
                 jurisdiction=str(item.get("jurisdiction") or "DE"),
                 provider_level=str(item.get("providerLevel") or self._infer_provider_level(base_url)),
+                review_status=str(
+                    item.get("reviewStatus")
+                    or ("approved" if source_tier != "tier_unknown" else "needs_review")
+                ),
                 priority=str(item.get("priority") or "normal"),
                 default_topics=tuple(item.get("defaultTopics") or ()),
                 default_tags=tuple(item.get("defaultTags") or ()),
@@ -92,10 +122,20 @@ class SourceRegistry:
                     "name",
                     "baseUrl",
                     "domains",
+                    "canonicalDomain",
+                    "sourceDomain",
+                    "hosts",
+                    "publisherName",
+                    "publisher",
+                    "operatorName",
+                    "operator",
+                    "author",
                     "sourceTier",
+                    "sourceTierStatus",
                     "institutionType",
                     "jurisdiction",
                     "providerLevel",
+                    "reviewStatus",
                     "priority",
                     "defaultTopics",
                     "defaultTags",
@@ -206,6 +246,11 @@ class SourceRegistry:
         host = (parsed.netloc or "").lower()
         return host[4:] if host.startswith("www.") else host
 
+    def _normalize_host(self, value: str) -> str:
+        parsed = urllib.parse.urlparse(value if "://" in value else f"https://{value}")
+        host = (parsed.netloc or parsed.path or "").lower().strip("/")
+        return host[4:] if host.startswith("www.") else host
+
     def resolve(self, url: str, domain: str, extra_profiles: Optional[Iterable[SourceProfile]] = None) -> Optional[SourceProfile]:
         all_profiles = list(self._profiles)
         if extra_profiles:
@@ -235,10 +280,15 @@ class SourceRegistry:
             name=host,
             base_url=f"https://{host}",
             domains=(domain,),
+            canonical_domain=host,
+            hosts=(host,),
+            publisher_name=host,
             source_tier=inferred_tier,
+            source_tier_status="inferred",
             institution_type=self._infer_institution_type(url),
             jurisdiction="DE",
             provider_level=self._infer_provider_level(url),
+            review_status="needs_review",
             priority="normal",
         )
 

@@ -549,7 +549,7 @@
         "de"
       ],
       "priority": "low",
-      "sourceTier": "tier_3_contextual",
+      "sourceTier": "tier_5_contextual",
       "institutionType": "media",
       "providerLevel": "civil_society",
       "jurisdiction": "DE",
@@ -617,11 +617,18 @@
       "languages": [
         "de"
       ],
-      "priority": "medium",
-      "sourceTier": "tier_3_contextual",
+      "canonicalDomain": "die-linke.de",
+      "hosts": [
+        "die-linke.de"
+      ],
+      "publisherName": "Die Linke",
+      "priority": "low",
+      "sourceTier": "tier_5_partisan_context",
+      "sourceTierStatus": "verified",
       "institutionType": "political",
       "providerLevel": "civil_society",
       "jurisdiction": "DE",
+      "reviewStatus": "approved_context_only",
       "defaultTopics": [
         "financial_support",
         "context"
@@ -637,6 +644,249 @@
       "status": "active"
     },
     {
+      "id": "iab_de",
+      "name": "Institut fuer Arbeitsmarkt- und Berufsforschung",
+      "baseUrl": "https://iab.de",
+      "canonicalDomain": "iab.de",
+      "hosts": [
+        "iab.de"
+      ],
+      "publisherName": "Institut fuer Arbeitsmarkt- und Berufsforschung",
+      "domains": [
+        "contacts"
+      ],
+      "languages": [
+        "de",
+        "en"
+      ],
+      "priority": "medium",
+      "sourceTier": "tier_2_official",
+      "sourceTierStatus": "verified",
+      "institutionType": "research",
+      "providerLevel": "federal",
+      "jurisdiction": "DE",
+      "reviewStatus": "approved",
+      "defaultTopics": [
+        "employment",
+        "research",
+        "contacts"
+      ],
+      "defaultTags": [
+        "official_adjacent",
+        "academic",
+        "contact"
+      ],
+      "defaultTargetGroups": [
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active",
+      "notes": "User-reviewed: closest to official and academic tier."
+    },
+    {
+      "id": "ifightdepression_eaad",
+      "name": "iFightDepression / European Alliance Against Depression",
+      "baseUrl": "https://ifightdepression.com",
+      "canonicalDomain": "ifightdepression.com",
+      "hosts": [
+        "ifightdepression.com"
+      ],
+      "publisherName": "European Alliance Against Depression",
+      "operatorName": "European Alliance Against Depression",
+      "domains": [
+        "contacts",
+        "aid"
+      ],
+      "languages": [
+        "de",
+        "en"
+      ],
+      "priority": "medium",
+      "sourceTier": "tier_4_academic",
+      "sourceTierStatus": "verified",
+      "institutionType": "research_network",
+      "providerLevel": "international",
+      "jurisdiction": "EU",
+      "reviewStatus": "approved",
+      "defaultTopics": [
+        "mental_health",
+        "depression",
+        "suicide_prevention"
+      ],
+      "defaultTags": [
+        "academic",
+        "health_information",
+        "contact"
+      ],
+      "defaultTargetGroups": [
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active",
+      "notes": "User-reviewed: EAAD-backed, research-driven depression information."
+    },
+    {
+      "id": "kompetenznetz_einsamkeit",
+      "name": "Kompetenznetz Einsamkeit",
+      "baseUrl": "https://kompetenznetz-einsamkeit.de",
+      "canonicalDomain": "kompetenznetz-einsamkeit.de",
+      "hosts": [
+        "kompetenznetz-einsamkeit.de"
+      ],
+      "publisherName": "Institut fuer Sozialarbeit und Sozialpaedagogik e.V.",
+      "domains": [
+        "contacts",
+        "aid"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "medium",
+      "sourceTier": "tier_2_ngo_watchdog",
+      "sourceTierStatus": "verified",
+      "institutionType": "ngo",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "reviewStatus": "approved",
+      "defaultTopics": [
+        "loneliness",
+        "mental_health",
+        "contacts"
+      ],
+      "defaultTags": [
+        "federally_supported",
+        "ngo",
+        "contact"
+      ],
+      "defaultTargetGroups": [
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active",
+      "notes": "User-reviewed: ISS e.V. project supported by the federal family ministry."
+    },
+    {
+      "id": "mein_now",
+      "name": "mein NOW",
+      "baseUrl": "https://mein-now.de",
+      "canonicalDomain": "mein-now.de",
+      "hosts": [
+        "mein-now.de"
+      ],
+      "publisherName": "Bundesagentur fuer Arbeit",
+      "operatorName": "Bundesagentur fuer Arbeit",
+      "domains": [
+        "tools"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "high",
+      "sourceTier": "tier_1_official",
+      "sourceTierStatus": "verified",
+      "institutionType": "government",
+      "providerLevel": "federal",
+      "jurisdiction": "DE",
+      "reviewStatus": "approved",
+      "defaultTopics": [
+        "employment",
+        "training",
+        "tools"
+      ],
+      "defaultTags": [
+        "public_service",
+        "official_tool"
+      ],
+      "defaultTargetGroups": [
+        "job_seekers",
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active",
+      "notes": "User-reviewed: operated by Bundesagentur fuer Arbeit."
+    },
+    {
+      "id": "pausentaste",
+      "name": "Pausentaste",
+      "baseUrl": "https://www.pausentaste.de",
+      "canonicalDomain": "pausentaste.de",
+      "hosts": [
+        "pausentaste.de"
+      ],
+      "publisherName": "Pausentaste",
+      "domains": [
+        "contacts",
+        "aid"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "medium",
+      "sourceTier": "tier_2_official",
+      "sourceTierStatus": "verified",
+      "institutionType": "public_service",
+      "providerLevel": "federal",
+      "jurisdiction": "DE",
+      "reviewStatus": "approved",
+      "defaultTopics": [
+        "caregiving",
+        "family",
+        "contacts"
+      ],
+      "defaultTags": [
+        "federally_supported",
+        "public_service",
+        "contact"
+      ],
+      "defaultTargetGroups": [
+        "young_carers",
+        "families"
+      ],
+      "license": "unknown",
+      "status": "active",
+      "notes": "User-reviewed: financed through the federal family ministry."
+    },
+    {
+      "id": "plaudernetz_malteser",
+      "name": "Plaudernetz der Malteser",
+      "baseUrl": "https://plaudernetz.malteser.de",
+      "canonicalDomain": "plaudernetz.malteser.de",
+      "hosts": [
+        "plaudernetz.malteser.de"
+      ],
+      "publisherName": "Malteser",
+      "domains": [
+        "contacts",
+        "aid"
+      ],
+      "languages": [
+        "de"
+      ],
+      "priority": "medium",
+      "sourceTier": "tier_3_ngo",
+      "sourceTierStatus": "verified",
+      "institutionType": "ngo",
+      "providerLevel": "civil_society",
+      "jurisdiction": "DE",
+      "reviewStatus": "approved",
+      "defaultTopics": [
+        "loneliness",
+        "social_support",
+        "contacts"
+      ],
+      "defaultTags": [
+        "ngo",
+        "contact",
+        "phone_support"
+      ],
+      "defaultTargetGroups": [
+        "general_public"
+      ],
+      "license": "unknown",
+      "status": "active",
+      "notes": "User-reviewed: Malteser NGO offer."
+    },
+    {
       "id": "correctiv",
       "name": "Correctiv",
       "baseUrl": "https://correctiv.org",
@@ -647,7 +897,7 @@
         "de"
       ],
       "priority": "medium",
-      "sourceTier": "tier_3_contextual",
+      "sourceTier": "tier_5_contextual",
       "institutionType": "journalism",
       "providerLevel": "media",
       "jurisdiction": "DE",

@@ -39,10 +39,20 @@
         "crawledAt": "2026-03-15T16:25:46.846255Z",
         "crawlId": "aid-seeded-1773591946",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "fb56435c6ac5067989884035c8dd9801de8e2517ecc32996bb6c32a4d1be94bd"
+        "checksum": "fb56435c6ac5067989884035c8dd9801de8e2517ecc32996bb6c32a4d1be94bd",
+        "sourceTierStatus": "inferred",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "familienportal",
+        "providerName": "Familienportal",
+        "providerLevel": "federal",
+        "host": "familienportal.de",
+        "canonicalDomain": "familienportal.de",
+        "sourceDomain": "familienportal.de",
+        "publisherName": "Familienportal",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -87,10 +97,20 @@
         "crawledAt": "2026-03-15T16:25:47.246143Z",
         "crawlId": "aid-seeded-1773591947",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "a270dc7f980241f70b528e61b5b91e778b4ed0ff7f499e3e75747f7bd7a25a95"
+        "checksum": "a270dc7f980241f70b528e61b5b91e778b4ed0ff7f499e3e75747f7bd7a25a95",
+        "sourceTierStatus": "inferred",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "familienportal",
+        "providerName": "Familienportal",
+        "providerLevel": "federal",
+        "host": "familienportal.de",
+        "canonicalDomain": "familienportal.de",
+        "sourceDomain": "familienportal.de",
+        "publisherName": "Familienportal",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -135,10 +155,20 @@
         "crawledAt": "2026-03-15T16:25:47.732818Z",
         "crawlId": "aid-seeded-1773591947",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "fdd9fe9b03810109f008629c725b6ca757e0d9af5b46f2091e0f8477efa793ac"
+        "checksum": "fdd9fe9b03810109f008629c725b6ca757e0d9af5b46f2091e0f8477efa793ac",
+        "sourceTierStatus": "inferred",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "familienportal",
+        "providerName": "Familienportal",
+        "providerLevel": "federal",
+        "host": "familienportal.de",
+        "canonicalDomain": "familienportal.de",
+        "sourceDomain": "familienportal.de",
+        "publisherName": "Familienportal",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -183,10 +213,20 @@
         "crawledAt": "2026-03-15T16:25:48.781376Z",
         "crawlId": "aid-seeded-1773591948",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "c5ade144b8bd7d37d68170015e17cf255a66281947730353b0bee829c114b73f"
+        "checksum": "c5ade144b8bd7d37d68170015e17cf255a66281947730353b0bee829c114b73f",
+        "sourceTierStatus": "inferred",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "familienportal",
+        "providerName": "Familienportal",
+        "providerLevel": "federal",
+        "host": "familienportal.de",
+        "canonicalDomain": "familienportal.de",
+        "sourceDomain": "familienportal.de",
+        "publisherName": "Familienportal",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -231,10 +271,20 @@
         "crawledAt": "2026-03-15T16:25:49.235856Z",
         "crawlId": "aid-seeded-1773591949",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "15457c987f8be1460553d1d06fa54137db43fd34c70bcac72ceeb3efe3aa8a85"
+        "checksum": "15457c987f8be1460553d1d06fa54137db43fd34c70bcac72ceeb3efe3aa8a85",
+        "sourceTierStatus": "inferred",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "familienportal",
+        "providerName": "Familienportal",
+        "providerLevel": "federal",
+        "host": "familienportal.de",
+        "canonicalDomain": "familienportal.de",
+        "sourceDomain": "familienportal.de",
+        "publisherName": "Familienportal",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -279,10 +329,20 @@
         "crawledAt": "2026-03-15T16:25:49.733621Z",
         "crawlId": "aid-seeded-1773591949",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "7392d42daf7b42ff853f69fc70c8087cff651b40eae33712875b87b293e0eed0"
+        "checksum": "7392d42daf7b42ff853f69fc70c8087cff651b40eae33712875b87b293e0eed0",
+        "sourceTierStatus": "inferred",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "familienportal",
+        "providerName": "Familienportal",
+        "providerLevel": "federal",
+        "host": "familienportal.de",
+        "canonicalDomain": "familienportal.de",
+        "sourceDomain": "familienportal.de",
+        "publisherName": "Familienportal",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -327,10 +387,20 @@
         "crawledAt": "2026-03-15T16:25:50.263168Z",
         "crawlId": "aid-seeded-1773591950",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "b071f502d135d5b3ed883a5e28ba8e246ec4f6a70bca2a10161680d39a0ba148"
+        "checksum": "b071f502d135d5b3ed883a5e28ba8e246ec4f6a70bca2a10161680d39a0ba148",
+        "sourceTierStatus": "inferred",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "familienportal",
+        "providerName": "Familienportal",
+        "providerLevel": "federal",
+        "host": "familienportal.de",
+        "canonicalDomain": "familienportal.de",
+        "sourceDomain": "familienportal.de",
+        "publisherName": "Familienportal",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -375,10 +445,20 @@
         "crawledAt": "2026-03-15T16:26:17.803284Z",
         "crawlId": "aid-seeded-1773591977",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_2_ngo_watchdog",
+        "institutionType": "ngo",
         "jurisdiction": "DE",
-        "checksum": "9c22c5e2914ac0cc25af9885b8473a767139aa92c5ee3a6e3a4930999a3400c8"
+        "checksum": "9c22c5e2914ac0cc25af9885b8473a767139aa92c5ee3a6e3a4930999a3400c8",
+        "sourceTierStatus": "inferred",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "maennerberatungsnetz",
+        "providerName": "Maennerberatungsnetz",
+        "providerLevel": "civil_society",
+        "host": "maennerberatungsnetz.de",
+        "canonicalDomain": "maennerberatungsnetz.de",
+        "sourceDomain": "maennerberatungsnetz.de",
+        "publisherName": "Maennerberatungsnetz",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -423,10 +503,20 @@
         "crawledAt": "2026-03-15T16:26:18.392272Z",
         "crawlId": "aid-seeded-1773591978",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_2_ngo_watchdog",
+        "institutionType": "ngo",
         "jurisdiction": "DE",
-        "checksum": "f7df4dce493640015140777ca66c8ade90278138eb46511af4e8541989bf7ecc"
+        "checksum": "f7df4dce493640015140777ca66c8ade90278138eb46511af4e8541989bf7ecc",
+        "sourceTierStatus": "inferred",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "maennerberatungsnetz",
+        "providerName": "Maennerberatungsnetz",
+        "providerLevel": "civil_society",
+        "host": "maennerberatungsnetz.de",
+        "canonicalDomain": "maennerberatungsnetz.de",
+        "sourceDomain": "maennerberatungsnetz.de",
+        "publisherName": "Maennerberatungsnetz",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -471,10 +561,20 @@
         "crawledAt": "2026-03-15T16:26:21.350888Z",
         "crawlId": "aid-seeded-1773591981",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_2_ngo_watchdog",
+        "institutionType": "ngo",
         "jurisdiction": "DE",
-        "checksum": "e413253ef7ddae5331b7cf9e60bb21bb2953b78aa7e8ed27f67589fcb5383ac4"
+        "checksum": "e413253ef7ddae5331b7cf9e60bb21bb2953b78aa7e8ed27f67589fcb5383ac4",
+        "sourceTierStatus": "inferred",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "hilfetelefon",
+        "providerName": "Hilfetelefon",
+        "providerLevel": "civil_society",
+        "host": "onlineberatung.hilfetelefon.de",
+        "canonicalDomain": "hilfetelefon.de",
+        "sourceDomain": "hilfetelefon.de",
+        "publisherName": "Hilfetelefon",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -524,7 +624,13 @@
         "sourceId": "sozialplattform",
         "providerName": "Sozialplattform",
         "providerLevel": "federal",
-        "checksum": "f7b2b9fa60cdb0537fe831dd053c6f757652189531acfd9a7e9ac2c86181e5e5"
+        "checksum": "f7b2b9fa60cdb0537fe831dd053c6f757652189531acfd9a7e9ac2c86181e5e5",
+        "sourceTierStatus": "verified",
+        "host": "sozialplattform.de",
+        "canonicalDomain": "sozialplattform.de",
+        "sourceDomain": "sozialplattform.de",
+        "publisherName": "Sozialplattform",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -572,7 +678,16 @@
         "sourceTier": "tier_2_ngo_watchdog",
         "institutionType": "ngo",
         "jurisdiction": "DE",
-        "checksum": "cdfd44bac26516debca08effd924121daa4a00ce8df4d9756485b8cdf2e92719"
+        "checksum": "cdfd44bac26516debca08effd924121daa4a00ce8df4d9756485b8cdf2e92719",
+        "sourceId": "weisser_ring",
+        "providerName": "WEISSER RING",
+        "providerLevel": "civil_society",
+        "sourceTierStatus": "verified",
+        "host": "weisser-ring.de",
+        "canonicalDomain": "weisser-ring.de",
+        "sourceDomain": "weisser-ring.de",
+        "publisherName": "WEISSER RING",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -621,7 +736,13 @@
         "sourceId": "arbeitsagentur_de",
         "providerName": "arbeitsagentur.de",
         "providerLevel": "federal",
-        "checksum": "9838db830b5be083f7e9acc983f4c8b8cd22010816a4f78314d3c456ecfce9ec"
+        "checksum": "9838db830b5be083f7e9acc983f4c8b8cd22010816a4f78314d3c456ecfce9ec",
+        "sourceTierStatus": "inferred",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "arbeitsagentur.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -671,7 +792,13 @@
         "sourceId": "arbeitsagentur_de",
         "providerName": "arbeitsagentur.de",
         "providerLevel": "federal",
-        "checksum": "a001042584a575740a6d6038abbb53b90959f90d2bd5c96731e106a31a6502d2"
+        "checksum": "a001042584a575740a6d6038abbb53b90959f90d2bd5c96731e106a31a6502d2",
+        "sourceTierStatus": "inferred",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "arbeitsagentur.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -721,7 +848,13 @@
         "sourceId": "arbeitsagentur_de",
         "providerName": "arbeitsagentur.de",
         "providerLevel": "federal",
-        "checksum": "d74b3c9b9714076913e7119ca348ea9eead76c0de86a7e717e117f33f8e77900"
+        "checksum": "d74b3c9b9714076913e7119ca348ea9eead76c0de86a7e717e117f33f8e77900",
+        "sourceTierStatus": "inferred",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "arbeitsagentur.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -773,7 +906,13 @@
         "sourceId": "arbeitsagentur_de",
         "providerName": "arbeitsagentur.de",
         "providerLevel": "federal",
-        "checksum": "7c181a930ed8a6efffa47419968e609938863a28819473e089d17c384c1f43f5"
+        "checksum": "7c181a930ed8a6efffa47419968e609938863a28819473e089d17c384c1f43f5",
+        "sourceTierStatus": "inferred",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "arbeitsagentur.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -823,7 +962,13 @@
         "sourceId": "arbeitsagentur_de",
         "providerName": "arbeitsagentur.de",
         "providerLevel": "federal",
-        "checksum": "c60ce02343971e76651262a07443d574a6444fc088d1a7e28e8d4823ea205a96"
+        "checksum": "c60ce02343971e76651262a07443d574a6444fc088d1a7e28e8d4823ea205a96",
+        "sourceTierStatus": "inferred",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "arbeitsagentur.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -871,7 +1016,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "922ac556dd5ace743ef82215f7d2e22d4c862cc604626c2a31081506ec999995"
+        "checksum": "922ac556dd5ace743ef82215f7d2e22d4c862cc604626c2a31081506ec999995",
+        "sourceId": "arbeitsagentur_de",
+        "providerName": "arbeitsagentur.de",
+        "providerLevel": "federal",
+        "sourceTierStatus": "inferred",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "arbeitsagentur.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -919,7 +1073,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "8312738ab78ecfeda64394ad0b9677d901c7c185fa0f9d3266602bfcb981f854"
+        "checksum": "8312738ab78ecfeda64394ad0b9677d901c7c185fa0f9d3266602bfcb981f854",
+        "sourceId": "arbeitsagentur_de",
+        "providerName": "arbeitsagentur.de",
+        "providerLevel": "federal",
+        "sourceTierStatus": "inferred",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "arbeitsagentur.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -969,7 +1132,13 @@
         "sourceId": "arbeitsagentur_de",
         "providerName": "arbeitsagentur.de",
         "providerLevel": "federal",
-        "checksum": "5b4dd522e2b474e910248c1fd744f353cc94618ba0c4412868ae8e6853e77e59"
+        "checksum": "5b4dd522e2b474e910248c1fd744f353cc94618ba0c4412868ae8e6853e77e59",
+        "sourceTierStatus": "inferred",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "arbeitsagentur.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1019,7 +1188,13 @@
         "sourceId": "arbeitsagentur_de",
         "providerName": "arbeitsagentur.de",
         "providerLevel": "federal",
-        "checksum": "2d0d3ed2b2de66cf75e65c36afb2e7706acf367f06f7cee3d5f77802f63935f9"
+        "checksum": "2d0d3ed2b2de66cf75e65c36afb2e7706acf367f06f7cee3d5f77802f63935f9",
+        "sourceTierStatus": "inferred",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "arbeitsagentur.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1067,7 +1242,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "34d2f04dbb570ec56457fc49761d1a0b7c54b2aed18274f4e868bac32044aaae"
+        "checksum": "34d2f04dbb570ec56457fc49761d1a0b7c54b2aed18274f4e868bac32044aaae",
+        "sourceId": "arbeitsagentur_de",
+        "providerName": "arbeitsagentur.de",
+        "providerLevel": "federal",
+        "sourceTierStatus": "inferred",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "arbeitsagentur.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1115,7 +1299,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "37606e4d320e6f0463b358bfcf28d9f78745db93d200c414d846f198a474ed63"
+        "checksum": "37606e4d320e6f0463b358bfcf28d9f78745db93d200c414d846f198a474ed63",
+        "sourceId": "arbeitsagentur_de",
+        "providerName": "arbeitsagentur.de",
+        "providerLevel": "federal",
+        "sourceTierStatus": "inferred",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "arbeitsagentur.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1163,7 +1356,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "4c4fed4dcb86387f765dd44eeb4675531a5cb8cd84f0c92f88db308326cc4a71"
+        "checksum": "4c4fed4dcb86387f765dd44eeb4675531a5cb8cd84f0c92f88db308326cc4a71",
+        "sourceId": "arbeitsagentur_de",
+        "providerName": "arbeitsagentur.de",
+        "providerLevel": "federal",
+        "sourceTierStatus": "inferred",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "arbeitsagentur.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1216,7 +1418,13 @@
         "sourceId": "arbeitsagentur_de",
         "providerName": "arbeitsagentur.de",
         "providerLevel": "federal",
-        "checksum": "dd4ee76b9f3389056a237266daa007e7e022e388fa872842944c175772bbdd16"
+        "checksum": "dd4ee76b9f3389056a237266daa007e7e022e388fa872842944c175772bbdd16",
+        "sourceTierStatus": "inferred",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "arbeitsagentur.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1269,7 +1477,13 @@
         "sourceId": "arbeitsagentur_de",
         "providerName": "arbeitsagentur.de",
         "providerLevel": "federal",
-        "checksum": "88d22847e476dc6d9da41e0c5762a4be7968fdada9b8880e5e0c61267b6ff3fa"
+        "checksum": "88d22847e476dc6d9da41e0c5762a4be7968fdada9b8880e5e0c61267b6ff3fa",
+        "sourceTierStatus": "inferred",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "arbeitsagentur.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1317,7 +1531,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "5d7b4d5f5aa72e12956a9ac286f979a96e4507fc78e23ce9a823afc48ce3de1f"
+        "checksum": "5d7b4d5f5aa72e12956a9ac286f979a96e4507fc78e23ce9a823afc48ce3de1f",
+        "sourceId": "arbeitsagentur_de",
+        "providerName": "arbeitsagentur.de",
+        "providerLevel": "federal",
+        "sourceTierStatus": "inferred",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "arbeitsagentur.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1365,7 +1588,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "da607a759f44173fb936e05d42806744fff8bb622dcfd89ea3a548c4379551fb"
+        "checksum": "da607a759f44173fb936e05d42806744fff8bb622dcfd89ea3a548c4379551fb",
+        "sourceId": "arbeitsagentur_de",
+        "providerName": "arbeitsagentur.de",
+        "providerLevel": "federal",
+        "sourceTierStatus": "inferred",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "arbeitsagentur.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1410,10 +1642,22 @@
         "crawledAt": "2026-03-15T16:26:23.090418Z",
         "crawlId": "aid-seeded-1773591983",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_2_ngo_watchdog",
+        "institutionType": "ngo",
         "jurisdiction": "DE",
-        "checksum": "3d1a0d5e8127d2f4ba3a887780c7fc2ec855597b12e11f2a6cf5abe8fd7fd5b4"
+        "checksum": "3d1a0d5e8127d2f4ba3a887780c7fc2ec855597b12e11f2a6cf5abe8fd7fd5b4",
+        "sourceTierStatus": "inferred",
+        "sourceTierInferredFrom": "source_registry",
+        "sourceTierInferredAt": "2026-06-30T12:40:04+00:00",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "bke-beratung_de",
+        "providerName": "bke-beratung.de",
+        "providerLevel": "civil_society",
+        "host": "bke-beratung.de",
+        "canonicalDomain": "bke-beratung.de",
+        "sourceDomain": "bke-beratung.de",
+        "publisherName": "bke-beratung.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1467,7 +1711,13 @@
         "sourceId": "bmas",
         "providerName": "Bundesministerium für Arbeit und Soziales",
         "providerLevel": "federal",
-        "checksum": "517fc860031cc1088fb3db16dee33cbcc13f7f1d1f8d7c7b0d143ccc3a1095ca"
+        "checksum": "517fc860031cc1088fb3db16dee33cbcc13f7f1d1f8d7c7b0d143ccc3a1095ca",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1515,7 +1765,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "6ced0e5c407d6b6bc7c616173bbe0c162f962b35e576a205585e7f276a5caa35"
+        "checksum": "6ced0e5c407d6b6bc7c616173bbe0c162f962b35e576a205585e7f276a5caa35",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1563,7 +1822,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "211cd109bf732ddc460942ef700f201e63a451d080053aaf20934c93262911a7"
+        "checksum": "211cd109bf732ddc460942ef700f201e63a451d080053aaf20934c93262911a7",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1611,7 +1879,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "c00603c8a3bdbebf386a355a156caffd8fe013277ee63e903a77bb570a4dec27"
+        "checksum": "c00603c8a3bdbebf386a355a156caffd8fe013277ee63e903a77bb570a4dec27",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1659,7 +1936,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "5963ba2499ea103d8de40ef96defceb4c27b8db60ad2590437329daf5abc9db8"
+        "checksum": "5963ba2499ea103d8de40ef96defceb4c27b8db60ad2590437329daf5abc9db8",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1707,7 +1993,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "0e562f0ab632279ea2fae48cd4aa33bacbae12d0865ba5af403f6917b936f7f0"
+        "checksum": "0e562f0ab632279ea2fae48cd4aa33bacbae12d0865ba5af403f6917b936f7f0",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1757,7 +2052,13 @@
         "sourceId": "bmas",
         "providerName": "Bundesministerium für Arbeit und Soziales",
         "providerLevel": "federal",
-        "checksum": "038fa8dafe6a74f2be46fc59114856a01c0318d458ccf3df74b68946981a7de2"
+        "checksum": "038fa8dafe6a74f2be46fc59114856a01c0318d458ccf3df74b68946981a7de2",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1805,7 +2106,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "87ca73ab30683cc9d10e70930c72ad903dddd407fb32a03a86611bba333dec6c"
+        "checksum": "87ca73ab30683cc9d10e70930c72ad903dddd407fb32a03a86611bba333dec6c",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1853,7 +2163,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "497fb1d12f2969d569c68110bb99c0cd2edafc5b34c625d1e516443118c8d026"
+        "checksum": "497fb1d12f2969d569c68110bb99c0cd2edafc5b34c625d1e516443118c8d026",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1901,7 +2220,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "b890e0be7f4f6c67da1066a8d81563518727aea7a52bc8afbe17c41b825d6341"
+        "checksum": "b890e0be7f4f6c67da1066a8d81563518727aea7a52bc8afbe17c41b825d6341",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1949,7 +2277,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "b54581f38d7a55e84d6411610987717233eb9a9fbd4ed58befad4cfa8af8c82c"
+        "checksum": "b54581f38d7a55e84d6411610987717233eb9a9fbd4ed58befad4cfa8af8c82c",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1997,7 +2334,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "f419ac1a7e3be345e9cb4a1d96ecabc9802a84f73bf7f8fe640c95bfdae898af"
+        "checksum": "f419ac1a7e3be345e9cb4a1d96ecabc9802a84f73bf7f8fe640c95bfdae898af",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2045,7 +2391,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "ee0f73b6d89fcc72386a307cc03d8fa11ecf5824e8177b6cf5c06529ff062b8c"
+        "checksum": "ee0f73b6d89fcc72386a307cc03d8fa11ecf5824e8177b6cf5c06529ff062b8c",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2093,7 +2448,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "8f2c8739caf9c86c47958cf1d71ecfb3f46631ec2308a62e29203abe05865f2a"
+        "checksum": "8f2c8739caf9c86c47958cf1d71ecfb3f46631ec2308a62e29203abe05865f2a",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2141,7 +2505,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "4a77626ec65805d2aad439e126489e63f45a977bc72fd057e4b6f78076528810"
+        "checksum": "4a77626ec65805d2aad439e126489e63f45a977bc72fd057e4b6f78076528810",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2189,7 +2562,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "5dfd6888e458623c9735e75328ec74aefde3f323398c960fb88ce7195debf87b"
+        "checksum": "5dfd6888e458623c9735e75328ec74aefde3f323398c960fb88ce7195debf87b",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2237,7 +2619,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "7edba253fcca14a5d0eeff6e555482b6ea492df96e01763327689b541c0f1728"
+        "checksum": "7edba253fcca14a5d0eeff6e555482b6ea492df96e01763327689b541c0f1728",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2285,7 +2676,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "6ca9c2f1731d65b5c76a911460976d86b6211276e751fa8f49479fd31ee47eb9"
+        "checksum": "6ca9c2f1731d65b5c76a911460976d86b6211276e751fa8f49479fd31ee47eb9",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2333,7 +2733,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "b09b7d7628958d5652a6bf50c32b3b815f1966dbb7b0853db516582f453a66d1"
+        "checksum": "b09b7d7628958d5652a6bf50c32b3b815f1966dbb7b0853db516582f453a66d1",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2384,7 +2793,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "5d8ad89c8d4ab0714d90f839bde5f6ea728b31ff2f7806df84cc06b4443e3867"
+        "checksum": "5d8ad89c8d4ab0714d90f839bde5f6ea728b31ff2f7806df84cc06b4443e3867",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2435,7 +2850,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "cff91ea66b91f045ed167487eac29943fb618e954d528ce209955fbfe246cf9d"
+        "checksum": "cff91ea66b91f045ed167487eac29943fb618e954d528ce209955fbfe246cf9d",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2486,7 +2907,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "d24f1c37bc7462333a4ecf3694fc405c18b94386676890bcdbfa97cba1b73bb8"
+        "checksum": "d24f1c37bc7462333a4ecf3694fc405c18b94386676890bcdbfa97cba1b73bb8",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2537,7 +2964,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "bcc09eb0a06d44fe0788008b4cd66d1b3852ef1f75c6f18ee505b9206646fb66"
+        "checksum": "bcc09eb0a06d44fe0788008b4cd66d1b3852ef1f75c6f18ee505b9206646fb66",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2588,7 +3021,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "f80c418c17551b81967e905e7d9270cf247e37823f097dfd4f99c8148312c656"
+        "checksum": "f80c418c17551b81967e905e7d9270cf247e37823f097dfd4f99c8148312c656",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2639,7 +3078,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "a38c6452824495c257c418c47806525111bdf163d48033a45ca2595e28eb371e"
+        "checksum": "a38c6452824495c257c418c47806525111bdf163d48033a45ca2595e28eb371e",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2690,7 +3135,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "0c667ab5bedb73c7b40ee8c18208de10bdf6f4cf98085e5cd35567d32e95d2cf"
+        "checksum": "0c667ab5bedb73c7b40ee8c18208de10bdf6f4cf98085e5cd35567d32e95d2cf",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2741,7 +3192,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "453631bfa91749a15882beef59dc54f247df9a71185f07f9ef8593b889e202d2"
+        "checksum": "453631bfa91749a15882beef59dc54f247df9a71185f07f9ef8593b889e202d2",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2792,7 +3249,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "d4bdaa5c8d2fe9cab9ac8bda060951a16e7f5ac1d487adf35b747e9409feca9b"
+        "checksum": "d4bdaa5c8d2fe9cab9ac8bda060951a16e7f5ac1d487adf35b747e9409feca9b",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2843,7 +3306,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "103e6bc1cf7b1636817ecdfe45cc291a61988527bca0417fdcfcd6022217605a"
+        "checksum": "103e6bc1cf7b1636817ecdfe45cc291a61988527bca0417fdcfcd6022217605a",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2894,7 +3363,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "6744daea28ffbc60b6e9bc71635cbf493f31d49b42f174d372fa464eefacc6bb"
+        "checksum": "6744daea28ffbc60b6e9bc71635cbf493f31d49b42f174d372fa464eefacc6bb",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2945,7 +3420,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "c17d5a767dafeb121b37873d888da11371652718920d035cc8f375915ccc0b3c"
+        "checksum": "c17d5a767dafeb121b37873d888da11371652718920d035cc8f375915ccc0b3c",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -2996,7 +3477,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "b76a2fa1b9a96f25e47d3a461d297e911616a33595db7d99ffb0ac7e35af3b4e"
+        "checksum": "b76a2fa1b9a96f25e47d3a461d297e911616a33595db7d99ffb0ac7e35af3b4e",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3047,7 +3534,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "b952edf4df7e669b1541d462571cd8133ce549194e6bca58aaf5903336b9e603"
+        "checksum": "b952edf4df7e669b1541d462571cd8133ce549194e6bca58aaf5903336b9e603",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3098,7 +3591,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "83f60de8fdf032957592cabb688a849b3cd36940ca6b5bc70ad1a63fe31cc760"
+        "checksum": "83f60de8fdf032957592cabb688a849b3cd36940ca6b5bc70ad1a63fe31cc760",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3149,7 +3648,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "29c1744ef9036a380a3d3a9ede88b58cd27361505890ff8dfa6c152efc0d7ddb"
+        "checksum": "29c1744ef9036a380a3d3a9ede88b58cd27361505890ff8dfa6c152efc0d7ddb",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3200,7 +3705,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "0f7c7af28bc35bdd7aa97f66147685668efba5d24dbcdf68a987e0f5cfd10952"
+        "checksum": "0f7c7af28bc35bdd7aa97f66147685668efba5d24dbcdf68a987e0f5cfd10952",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3251,7 +3762,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "439088175e1d67af8013edc84ccee0e4e10e34ae2998e0ae9c9c6ee634039d2e"
+        "checksum": "439088175e1d67af8013edc84ccee0e4e10e34ae2998e0ae9c9c6ee634039d2e",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3302,7 +3819,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "2f0debf74971b1db1a1f70b05816833e746a483c4841f2a557628c4ac2586abc"
+        "checksum": "2f0debf74971b1db1a1f70b05816833e746a483c4841f2a557628c4ac2586abc",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3353,7 +3876,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "6eb709ec03978668bf5a38a82964ae29c9668f047313afed3afe529a3d08486d"
+        "checksum": "6eb709ec03978668bf5a38a82964ae29c9668f047313afed3afe529a3d08486d",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3404,7 +3933,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "a0553795ecc167f1c8f76477c3b9ec4ab0913535eb0cd9b0fd48520caef7c74f"
+        "checksum": "a0553795ecc167f1c8f76477c3b9ec4ab0913535eb0cd9b0fd48520caef7c74f",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3455,7 +3990,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "833d7556dc15d759505985f6bed21e962c92821be87ab08204d785b09b5544d7"
+        "checksum": "833d7556dc15d759505985f6bed21e962c92821be87ab08204d785b09b5544d7",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3506,7 +4047,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "9489e7ee1793ca094195bdcc368a6571110c714f876da56a20d1c0321fe18e5c"
+        "checksum": "9489e7ee1793ca094195bdcc368a6571110c714f876da56a20d1c0321fe18e5c",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3557,7 +4104,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "de0551897ba7dc673ed6c5def82d77641a53dce0040292d80b666c0a03738d03"
+        "checksum": "de0551897ba7dc673ed6c5def82d77641a53dce0040292d80b666c0a03738d03",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3608,7 +4161,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "9a5c879dff34f9448c09bbc1f31fd5b663619bb43dfd93891bf6c46f2ee5025d"
+        "checksum": "9a5c879dff34f9448c09bbc1f31fd5b663619bb43dfd93891bf6c46f2ee5025d",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3659,7 +4218,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "a5c430bf7685bfea32f58155aede6263e7157b2dcd1953ca3f5bdafdf92ca0bb"
+        "checksum": "a5c430bf7685bfea32f58155aede6263e7157b2dcd1953ca3f5bdafdf92ca0bb",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3710,7 +4275,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "2365723d669ad38b8b6eb1c0f3604966343db1f974ab59b061f3c797c2955f5a"
+        "checksum": "2365723d669ad38b8b6eb1c0f3604966343db1f974ab59b061f3c797c2955f5a",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3761,7 +4332,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "74a3cd214025785aa6570f7413607efe36177c8cbcdd3367c213a103f401889f"
+        "checksum": "74a3cd214025785aa6570f7413607efe36177c8cbcdd3367c213a103f401889f",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3812,7 +4389,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "0c22a31d538df7b40735b9bd09dec0667cb00fb68439cdaf9d6df54de6851fb3"
+        "checksum": "0c22a31d538df7b40735b9bd09dec0667cb00fb68439cdaf9d6df54de6851fb3",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3863,7 +4446,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "07f7e0f937ac78628352a0d8acb48328b515d17500f6d6a8bd70c5129e7d989a"
+        "checksum": "07f7e0f937ac78628352a0d8acb48328b515d17500f6d6a8bd70c5129e7d989a",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3914,7 +4503,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "849edc3a05c7ab7b446983f1acef149cf22633d80827317306e6da9a73fed251"
+        "checksum": "849edc3a05c7ab7b446983f1acef149cf22633d80827317306e6da9a73fed251",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -3965,7 +4560,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "458a6b3fbb7f965e2ff00b00a625e39feca23753ae2eae4edb2b9a27fed3caf9"
+        "checksum": "458a6b3fbb7f965e2ff00b00a625e39feca23753ae2eae4edb2b9a27fed3caf9",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4016,7 +4617,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "a179632068097276701c029a252d5347c154994433e8fec39ee205e0f9a932b8"
+        "checksum": "a179632068097276701c029a252d5347c154994433e8fec39ee205e0f9a932b8",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4067,7 +4674,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "612309585e3369d262c8cd54f11fdf7238fc5c48b5c3050c604cba29d2007ae8"
+        "checksum": "612309585e3369d262c8cd54f11fdf7238fc5c48b5c3050c604cba29d2007ae8",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4118,7 +4731,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "0a380576d8a607d820b950d5b75054c2f4ef26d928c4a3cda9e91a1e827cbf9d"
+        "checksum": "0a380576d8a607d820b950d5b75054c2f4ef26d928c4a3cda9e91a1e827cbf9d",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4169,7 +4788,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "271f4e21fb8a24d323391351331ce198237a051775d29ffc8aa2a8717888e2ff"
+        "checksum": "271f4e21fb8a24d323391351331ce198237a051775d29ffc8aa2a8717888e2ff",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4220,7 +4845,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "42b9b208fdd543059d08cf891f2dae08cac032d42a4099008317cbb4068d0ff8"
+        "checksum": "42b9b208fdd543059d08cf891f2dae08cac032d42a4099008317cbb4068d0ff8",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4271,7 +4902,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "ec08949e8ac9a70b1c6286f18ea484c234c4d469bf4e227e99588e9f865bc1bd"
+        "checksum": "ec08949e8ac9a70b1c6286f18ea484c234c4d469bf4e227e99588e9f865bc1bd",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4322,7 +4959,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "fd143d2642833529fabd12ea1e257739fd044384927cc9183fb6581bc84b2d2c"
+        "checksum": "fd143d2642833529fabd12ea1e257739fd044384927cc9183fb6581bc84b2d2c",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4373,7 +5016,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "209838816f26c89b9031c76566513739288820299cbadb14fc6300219693abe1"
+        "checksum": "209838816f26c89b9031c76566513739288820299cbadb14fc6300219693abe1",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4424,7 +5073,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "f39321c42b205c771729b8455a75231e43d8bc1d48691b0f9930250ca45bae57"
+        "checksum": "f39321c42b205c771729b8455a75231e43d8bc1d48691b0f9930250ca45bae57",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4475,7 +5130,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "797ccb3a15c19b6d77f9eb39f2629181efd64d8794c334cf5734659e2f644fb1"
+        "checksum": "797ccb3a15c19b6d77f9eb39f2629181efd64d8794c334cf5734659e2f644fb1",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4526,7 +5187,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "8f47bea6f495cdb551b0175de31c99b6325d199d81583884f63715f2ae1c0c7c"
+        "checksum": "8f47bea6f495cdb551b0175de31c99b6325d199d81583884f63715f2ae1c0c7c",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4577,7 +5244,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "09d1998a198554aa353123e318f0a7127d8061ed0b2a58d45ca05937de6f0903"
+        "checksum": "09d1998a198554aa353123e318f0a7127d8061ed0b2a58d45ca05937de6f0903",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4628,7 +5301,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "5ff56bf143a4495c54fba88bd396a5e54e5d52591944ae2174073d0feffd57c6"
+        "checksum": "5ff56bf143a4495c54fba88bd396a5e54e5d52591944ae2174073d0feffd57c6",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4679,7 +5358,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "36a30e13e80c26800dd45f6a1f40ef9757a395d3faa91c984ec18f8e9570d2f0"
+        "checksum": "36a30e13e80c26800dd45f6a1f40ef9757a395d3faa91c984ec18f8e9570d2f0",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4730,7 +5415,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "25794e8d523298fd868f8f7356e2030e55f27bdc1b0e89e24825b4fed0039d38"
+        "checksum": "25794e8d523298fd868f8f7356e2030e55f27bdc1b0e89e24825b4fed0039d38",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4781,7 +5472,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "730385b268f7d94e1c94999fb475b71a99cf28951a3ad213fe3b84a1222c3ca7"
+        "checksum": "730385b268f7d94e1c94999fb475b71a99cf28951a3ad213fe3b84a1222c3ca7",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4832,7 +5529,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "dd3be165f331ba984ee0629185602066c63631b0d5924e2d4efbf2d844c45608"
+        "checksum": "dd3be165f331ba984ee0629185602066c63631b0d5924e2d4efbf2d844c45608",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4885,7 +5588,20 @@
         "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/unterhaltsvorschuss/unterhaltsvorschuss-73558",
         "crawlId": "manual-curation-20260301-realdata-v1",
         "checksum": "8f8b614f4ffad84bb7a3f2b2c70d269115ee9b178a8d107a5f9082cf3f8c1c2b",
-        "crawledAt": "2026-03-01T20:12:00Z"
+        "crawledAt": "2026-03-01T20:12:00Z",
+        "sourceTier": "tier_1_official",
+        "sourceTierStatus": "inferred",
+        "institutionType": "government",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "bmfsfj",
+        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "providerLevel": "federal",
+        "jurisdiction": "DE",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 79.6,
@@ -4936,7 +5652,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "f794686d1fa83d6b74f111c57e7abd8f27efe8f8837fe97e9b723eb42d35faad"
+        "checksum": "f794686d1fa83d6b74f111c57e7abd8f27efe8f8837fe97e9b723eb42d35faad",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -4987,7 +5709,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "4467524438ce8695ae1e2718ee9b69df0b566508f02dc3e9196d0a0ce689adff"
+        "checksum": "4467524438ce8695ae1e2718ee9b69df0b566508f02dc3e9196d0a0ce689adff",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5038,7 +5766,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "f8b135788b5f9e1010c09f5e48681173874e90ea74b96c96e2735eea2d122e34"
+        "checksum": "f8b135788b5f9e1010c09f5e48681173874e90ea74b96c96e2735eea2d122e34",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5089,7 +5823,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "39a3effcff96c538e4e616037aee7b66a6455b697b3c59f6e427d899ae90eed5"
+        "checksum": "39a3effcff96c538e4e616037aee7b66a6455b697b3c59f6e427d899ae90eed5",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5140,7 +5880,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "dc36b7c72e5ec70353338c9a3358c0cddb200a027b0810aadcba012e78f1bd6f"
+        "checksum": "dc36b7c72e5ec70353338c9a3358c0cddb200a027b0810aadcba012e78f1bd6f",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5191,7 +5937,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "f265215a9dd9698bba0792d8052c68eada5a9278e80897babd89dcc4b2dcfe93"
+        "checksum": "f265215a9dd9698bba0792d8052c68eada5a9278e80897babd89dcc4b2dcfe93",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5242,7 +5994,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "1a56e252215b2666fb7f3711e4c538bd7263a9a7f1a28789b5480d686fce8406"
+        "checksum": "1a56e252215b2666fb7f3711e4c538bd7263a9a7f1a28789b5480d686fce8406",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5293,7 +6051,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "93dd70f21315fd3aacfab04af933e6a3f1ced48a1456a295b8d58636d7e5f09c"
+        "checksum": "93dd70f21315fd3aacfab04af933e6a3f1ced48a1456a295b8d58636d7e5f09c",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5344,7 +6108,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "761c1424f7aa68c40b92f9cced7dcb9f3840cb7a91abc9afd95ecd1d2ef6e3fb"
+        "checksum": "761c1424f7aa68c40b92f9cced7dcb9f3840cb7a91abc9afd95ecd1d2ef6e3fb",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5395,7 +6165,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "a69c69047a00f593e004af759ea188f2c62051bc76d77c921a574a71d5d78924"
+        "checksum": "a69c69047a00f593e004af759ea188f2c62051bc76d77c921a574a71d5d78924",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5446,7 +6222,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "f403cf26d031b742d18e627c8f4e1b5b68e2267fcfd445f9edd76d32d0ef8501"
+        "checksum": "f403cf26d031b742d18e627c8f4e1b5b68e2267fcfd445f9edd76d32d0ef8501",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5497,7 +6279,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "b9900ad11e5c251a0dfbbc417f18fb9c5effd6db1d44fcf9475e884b8dbd8541"
+        "checksum": "b9900ad11e5c251a0dfbbc417f18fb9c5effd6db1d44fcf9475e884b8dbd8541",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5548,7 +6336,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "60550d31295337ef7c5ba99fb2463c6d331a656e2e4d45daddca10797a3abaef"
+        "checksum": "60550d31295337ef7c5ba99fb2463c6d331a656e2e4d45daddca10797a3abaef",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5599,7 +6393,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "08dea0c33dbc91db7800ca5022fb40cd685455269e6b44278ba128cc247de530"
+        "checksum": "08dea0c33dbc91db7800ca5022fb40cd685455269e6b44278ba128cc247de530",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5650,7 +6450,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "64b01dddb806b5994a3306896a30eacfc397fc2ba77e0b10026a84fa769bf267"
+        "checksum": "64b01dddb806b5994a3306896a30eacfc397fc2ba77e0b10026a84fa769bf267",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5701,7 +6507,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "3cdab1b0e883eb470cf7b21b695e5a585a34c4a2c37af59a9b10062ead3a7324"
+        "checksum": "3cdab1b0e883eb470cf7b21b695e5a585a34c4a2c37af59a9b10062ead3a7324",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5752,7 +6564,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "ae9775135c8f30eea0ac08830650f9e0ab5c3258ac8a1e3f4d00f5b187ea9166"
+        "checksum": "ae9775135c8f30eea0ac08830650f9e0ab5c3258ac8a1e3f4d00f5b187ea9166",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5803,7 +6621,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "81d8abb5331c34f676f7d22103026888de1531e837011e655b2bedcb25120679"
+        "checksum": "81d8abb5331c34f676f7d22103026888de1531e837011e655b2bedcb25120679",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5854,7 +6678,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "480268885b41fd081e6b4cbe373c642f1ec2b4ecc73d827d2c0cc1b3e373dfe3"
+        "checksum": "480268885b41fd081e6b4cbe373c642f1ec2b4ecc73d827d2c0cc1b3e373dfe3",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5905,7 +6735,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "521d6051964a8e4df5a83197ca3b12015a9a4225a9c4ec62e07d2e26679d74f8"
+        "checksum": "521d6051964a8e4df5a83197ca3b12015a9a4225a9c4ec62e07d2e26679d74f8",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -5956,7 +6792,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "13b4e0c9e212ea1c9bd60a76e9cc18b83c1a689b8cf70f4e24fcc6653877a148"
+        "checksum": "13b4e0c9e212ea1c9bd60a76e9cc18b83c1a689b8cf70f4e24fcc6653877a148",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6007,7 +6849,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "bd0055f0678b44e7800cd71a29d58be4c478964b9970d0d017c800627bac482d"
+        "checksum": "bd0055f0678b44e7800cd71a29d58be4c478964b9970d0d017c800627bac482d",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6058,7 +6906,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "ff51cc2a72381aa3f2e884c17a0102f8c75187aa0a323aad69af4eeb1398c3ba"
+        "checksum": "ff51cc2a72381aa3f2e884c17a0102f8c75187aa0a323aad69af4eeb1398c3ba",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6109,7 +6963,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "19ba1b0b0b690178c632305972c668a6e73308bbfbfbc7796b28588c9cf1b1dd"
+        "checksum": "19ba1b0b0b690178c632305972c668a6e73308bbfbfbc7796b28588c9cf1b1dd",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6160,7 +7020,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "5b7729825841e0e015c28412f04c30206363e65073ff2d79ee0665c438d71156"
+        "checksum": "5b7729825841e0e015c28412f04c30206363e65073ff2d79ee0665c438d71156",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6211,7 +7077,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "d17b7a6d294bcc4a95f90a597fa24a700e532e9f8b9b83358787d08010b24f1b"
+        "checksum": "d17b7a6d294bcc4a95f90a597fa24a700e532e9f8b9b83358787d08010b24f1b",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6262,7 +7134,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "db8f7cade07aa61b063c4777f3b327f29b5473e3afe204c888791579b42f488e"
+        "checksum": "db8f7cade07aa61b063c4777f3b327f29b5473e3afe204c888791579b42f488e",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6313,7 +7191,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "8f72b463c0783d5b0ec022249d2d37696adfae4a24f19432e6059015a912254b"
+        "checksum": "8f72b463c0783d5b0ec022249d2d37696adfae4a24f19432e6059015a912254b",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6364,7 +7248,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "9a7a21acfd65a6c69c3f46f2301a6d440a0a5de6800b189497ec733019a187af"
+        "checksum": "9a7a21acfd65a6c69c3f46f2301a6d440a0a5de6800b189497ec733019a187af",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6415,7 +7305,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "1fda75cee562eb3b3c6e233648fbc98658506965e6d4fb0e7d8ac59df46a2fad"
+        "checksum": "1fda75cee562eb3b3c6e233648fbc98658506965e6d4fb0e7d8ac59df46a2fad",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6466,7 +7362,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "9a74badf7743f4b12ed2ca0659b815599ab0a306b0739cb4888e1d49a2f4b964"
+        "checksum": "9a74badf7743f4b12ed2ca0659b815599ab0a306b0739cb4888e1d49a2f4b964",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6517,7 +7419,13 @@
         "sourceId": "bmfsfj",
         "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
         "providerLevel": "federal",
-        "checksum": "7ea5439a934aca50d79ae6a14afef8e407198fd2cafdba5e83ab2c5b6afbd877"
+        "checksum": "7ea5439a934aca50d79ae6a14afef8e407198fd2cafdba5e83ab2c5b6afbd877",
+        "sourceTierStatus": "verified",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6562,10 +7470,22 @@
         "crawledAt": "2026-03-15T16:25:05.266619Z",
         "crawlId": "aid-seeded-1773591905",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "7b57ec2ca5536d0aefab8fb4e488e185484293ee9fbef94cdb6c74729a59a42f"
+        "checksum": "7b57ec2ca5536d0aefab8fb4e488e185484293ee9fbef94cdb6c74729a59a42f",
+        "sourceTierStatus": "inferred",
+        "sourceTierInferredFrom": "source_registry",
+        "sourceTierInferredAt": "2026-06-30T12:40:04+00:00",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "bundesstiftung-mutter-und-kind_de",
+        "providerName": "bundesstiftung-mutter-und-kind.de",
+        "providerLevel": "federal",
+        "host": "bundesstiftung-mutter-und-kind.de",
+        "canonicalDomain": "bundesstiftung-mutter-und-kind.de",
+        "sourceDomain": "bundesstiftung-mutter-und-kind.de",
+        "publisherName": "bundesstiftung-mutter-und-kind.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6613,7 +7533,13 @@
         "sourceId": "paritaetischer",
         "providerName": "Der Paritaetische Gesamtverband",
         "providerLevel": "civil_society",
-        "checksum": "ce5afba223530d2e7c65a0d5290827fac7f34e47ceca00365de7524637f2909b"
+        "checksum": "ce5afba223530d2e7c65a0d5290827fac7f34e47ceca00365de7524637f2909b",
+        "sourceTierStatus": "verified",
+        "host": "der-paritaetische.de",
+        "canonicalDomain": "der-paritaetische.de",
+        "sourceDomain": "der-paritaetische.de",
+        "publisherName": "Der Paritaetische Gesamtverband",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6658,10 +7584,22 @@
         "crawledAt": "2026-03-15T16:26:26.812760Z",
         "crawlId": "aid-seeded-1773591986",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_2_ngo_watchdog",
+        "institutionType": "ngo",
         "jurisdiction": "DE",
-        "checksum": "b21f8d0eb3621725dde6d406b226a82f6d1ac45c944f27d413d0ee0e46364dd2"
+        "checksum": "b21f8d0eb3621725dde6d406b226a82f6d1ac45c944f27d413d0ee0e46364dd2",
+        "sourceTierStatus": "inferred",
+        "sourceTierInferredFrom": "source_registry",
+        "sourceTierInferredAt": "2026-06-30T12:40:04+00:00",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "dhs_de",
+        "providerName": "dhs.de",
+        "providerLevel": "civil_society",
+        "host": "dhs.de",
+        "canonicalDomain": "dhs.de",
+        "sourceDomain": "dhs.de",
+        "publisherName": "dhs.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6704,13 +7642,21 @@
         "crawledAt": "2026-04-17T09:19:26.071050Z",
         "crawlId": "aid-seeded-1776417566",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_3_contextual",
+        "sourceTier": "tier_5_partisan_context",
         "institutionType": "political",
         "jurisdiction": "DE",
         "sourceId": "dielinke",
         "providerName": "Die Linke",
         "providerLevel": "civil_society",
-        "checksum": "e32ba5565f6143aa359fa02da3af6346c7b391466e8fbc89e43f1769cfd84f22"
+        "checksum": "e32ba5565f6143aa359fa02da3af6346c7b391466e8fbc89e43f1769cfd84f22",
+        "sourceTierStatus": "verified",
+        "host": "die-linke.de",
+        "canonicalDomain": "die-linke.de",
+        "sourceDomain": "die-linke.de",
+        "publisherName": "Die Linke",
+        "reviewStatus": "approved",
+        "sourceTierResolvedFrom": "source_registry",
+        "sourceTierResolvedAt": "2026-06-30T15:09:52+00:00"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6761,7 +7707,13 @@
         "sourceId": "drk",
         "providerName": "Deutsches Rotes Kreuz",
         "providerLevel": "civil_society",
-        "checksum": "9cb316a8bfacf19d57c065aeb1f2bc09ffe9ba83dfebd4a59e571770c7b8b77b"
+        "checksum": "9cb316a8bfacf19d57c065aeb1f2bc09ffe9ba83dfebd4a59e571770c7b8b77b",
+        "sourceTierStatus": "verified",
+        "host": "drk.de",
+        "canonicalDomain": "drk.de",
+        "sourceDomain": "drk.de",
+        "publisherName": "Deutsches Rotes Kreuz",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6812,7 +7764,13 @@
         "sourceId": "drk",
         "providerName": "Deutsches Rotes Kreuz",
         "providerLevel": "civil_society",
-        "checksum": "770377fa6d5329c0078efae804184b87a1d1a643d6c3005cf288a8a44a34ebf5"
+        "checksum": "770377fa6d5329c0078efae804184b87a1d1a643d6c3005cf288a8a44a34ebf5",
+        "sourceTierStatus": "verified",
+        "host": "drk.de",
+        "canonicalDomain": "drk.de",
+        "sourceDomain": "drk.de",
+        "publisherName": "Deutsches Rotes Kreuz",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6857,10 +7815,20 @@
         "crawledAt": "2026-03-15T16:26:27.825584Z",
         "crawlId": "aid-seeded-1773591987",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_2_ngo_watchdog",
+        "institutionType": "ngo",
         "jurisdiction": "DE",
-        "checksum": "397f2f9ae94f38e44250a49e6df8f8b57f377509bb8e0723a6af33eab6806719"
+        "checksum": "397f2f9ae94f38e44250a49e6df8f8b57f377509bb8e0723a6af33eab6806719",
+        "sourceTierStatus": "inferred",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "drk",
+        "providerName": "Deutsches Rotes Kreuz",
+        "providerLevel": "civil_society",
+        "host": "drk.de",
+        "canonicalDomain": "drk.de",
+        "sourceDomain": "drk.de",
+        "publisherName": "Deutsches Rotes Kreuz",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6908,7 +7876,16 @@
         "sourceTier": "tier_2_ngo_watchdog",
         "institutionType": "ngo",
         "jurisdiction": "DE",
-        "checksum": "13921a04cd8d09c94d32f0cd33282a8ebc26e2a018e9b85be3ed8a3b8d42f98b"
+        "checksum": "13921a04cd8d09c94d32f0cd33282a8ebc26e2a018e9b85be3ed8a3b8d42f98b",
+        "sourceId": "frauenhauskoordinierung",
+        "providerName": "Frauenhauskoordinierung",
+        "providerLevel": "civil_society",
+        "sourceTierStatus": "verified",
+        "host": "frauenhauskoordinierung.de",
+        "canonicalDomain": "frauenhauskoordinierung.de",
+        "sourceDomain": "frauenhauskoordinierung.de",
+        "publisherName": "Frauenhauskoordinierung",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -6953,10 +7930,20 @@
         "crawledAt": "2026-03-15T16:25:52.275235Z",
         "crawlId": "aid-seeded-1773591952",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_2_ngo_watchdog",
+        "institutionType": "ngo",
         "jurisdiction": "DE",
-        "checksum": "8b896387c9c631d1760aa9f534a1d53996a6b0cd9684aa8db9f06f3f860ea4a7"
+        "checksum": "8b896387c9c631d1760aa9f534a1d53996a6b0cd9684aa8db9f06f3f860ea4a7",
+        "sourceTierStatus": "inferred",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "fruehehilfen",
+        "providerName": "Frühe Hilfen",
+        "providerLevel": "civil_society",
+        "host": "fruehehilfen.de",
+        "canonicalDomain": "fruehehilfen.de",
+        "sourceDomain": "fruehehilfen.de",
+        "publisherName": "Frühe Hilfen",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -7001,10 +7988,22 @@
         "crawledAt": "2026-03-15T16:26:16.301949Z",
         "crawlId": "aid-seeded-1773591976",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_2_ngo_watchdog",
+        "institutionType": "ngo",
         "jurisdiction": "DE",
-        "checksum": "16f0ed13bc0aefcf4912c7e21886617d43ff92b8f1bc7f929c34e8df491f77ea"
+        "checksum": "16f0ed13bc0aefcf4912c7e21886617d43ff92b8f1bc7f929c34e8df491f77ea",
+        "sourceTierStatus": "inferred",
+        "sourceTierInferredFrom": "source_registry",
+        "sourceTierInferredAt": "2026-06-30T12:40:04+00:00",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "hilfetelefon-schwangere_de",
+        "providerName": "hilfetelefon-schwangere.de",
+        "providerLevel": "civil_society",
+        "host": "hilfetelefon-schwangere.de",
+        "canonicalDomain": "hilfetelefon-schwangere.de",
+        "sourceDomain": "hilfetelefon-schwangere.de",
+        "publisherName": "hilfetelefon-schwangere.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -7049,10 +8048,20 @@
         "crawledAt": "2026-03-15T16:25:56.946491Z",
         "crawlId": "aid-seeded-1773591956",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_2_ngo_watchdog",
+        "institutionType": "ngo",
         "jurisdiction": "DE",
-        "checksum": "8a294208b24157c742572e2619ef5c9020c9288e4335e914165f6b28e5299899"
+        "checksum": "8a294208b24157c742572e2619ef5c9020c9288e4335e914165f6b28e5299899",
+        "sourceTierStatus": "inferred",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "hilfetelefon",
+        "providerName": "Hilfetelefon",
+        "providerLevel": "civil_society",
+        "host": "hilfetelefon.de",
+        "canonicalDomain": "hilfetelefon.de",
+        "sourceDomain": "hilfetelefon.de",
+        "publisherName": "Hilfetelefon",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -7097,10 +8106,20 @@
         "crawledAt": "2026-03-15T16:26:40.995907Z",
         "crawlId": "aid-seeded-1773592000",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_2_ngo_watchdog",
+        "institutionType": "ngo",
         "jurisdiction": "DE",
-        "checksum": "d689a82b18ce050f6bffc7538a78ceaaa4a362723e1b5316e81a4d2f6b9721ac"
+        "checksum": "d689a82b18ce050f6bffc7538a78ceaaa4a362723e1b5316e81a4d2f6b9721ac",
+        "sourceTierStatus": "inferred",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "maennerhilfetelefon",
+        "providerName": "Maennerhilfetelefon",
+        "providerLevel": "civil_society",
+        "host": "maennerhilfetelefon.de",
+        "canonicalDomain": "maennerhilfetelefon.de",
+        "sourceDomain": "maennerhilfetelefon.de",
+        "publisherName": "Maennerhilfetelefon",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -7150,8 +8169,14 @@
         "jurisdiction": "DE",
         "sourceId": "nummergegenkummer_de",
         "providerName": "nummergegenkummer.de",
-        "providerLevel": "unknown",
-        "checksum": "6facf6a3eec55adb472567be93fd7946f9ecebbcb55122a7125b015fd73f769f"
+        "providerLevel": "civil_society",
+        "checksum": "6facf6a3eec55adb472567be93fd7946f9ecebbcb55122a7125b015fd73f769f",
+        "sourceTierStatus": "verified",
+        "host": "nummergegenkummer.de",
+        "canonicalDomain": "nummergegenkummer.de",
+        "sourceDomain": "nummergegenkummer.de",
+        "publisherName": "Nummer gegen Kummer",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -7196,10 +8221,20 @@
         "crawledAt": "2026-03-15T16:26:44.549416Z",
         "crawlId": "aid-seeded-1773592004",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "e30f5a3d391e338ab8e1c5a409663d0a79b2617982f07083e1afe2036f20dac6"
+        "checksum": "e30f5a3d391e338ab8e1c5a409663d0a79b2617982f07083e1afe2036f20dac6",
+        "sourceTierStatus": "inferred",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "wege_zur_pflege",
+        "providerName": "Wege zur Pflege",
+        "providerLevel": "federal",
+        "host": "wege-zur-pflege.de",
+        "canonicalDomain": "wege-zur-pflege.de",
+        "sourceDomain": "wege-zur-pflege.de",
+        "publisherName": "Wege zur Pflege",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -7562,7 +8597,13 @@
         "sourceId": "bmas_reha_sozialamt",
         "providerName": "Bundesministerium für Arbeit und Soziales",
         "providerLevel": "federal",
-        "checksum": "57c7c7b92600c4a63b3e4265b2ad542d9dff22b1f020259676436072a4486082"
+        "checksum": "57c7c7b92600c4a63b3e4265b2ad542d9dff22b1f020259676436072a4486082",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 82,
@@ -7613,7 +8654,12 @@
         "sourceId": "telefonseelsorge_krisenhilfe",
         "providerName": "Telefonseelsorge Deutschland",
         "providerLevel": "federal",
-        "checksum": "fe3becde7cafdfa1b1df671721b3b5648ddb522fda1e61fd40e266e4ca029111"
+        "checksum": "fe3becde7cafdfa1b1df671721b3b5648ddb522fda1e61fd40e266e4ca029111",
+        "host": "telefonseelsorge.de",
+        "canonicalDomain": "telefonseelsorge.de",
+        "sourceDomain": "telefonseelsorge.de",
+        "publisherName": "telefonseelsorge.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 82,
@@ -7663,7 +8709,12 @@
         "sourceId": "diakonie_krisenhilfe",
         "providerName": "Diakonie Deutschland",
         "providerLevel": "federal",
-        "checksum": "d30253461162ac984347b6526e8c76130f67fff5ae5990cb0d59fa2302483135"
+        "checksum": "d30253461162ac984347b6526e8c76130f67fff5ae5990cb0d59fa2302483135",
+        "host": "diakonie.de",
+        "canonicalDomain": "diakonie.de",
+        "sourceDomain": "diakonie.de",
+        "publisherName": "Diakonie Deutschland",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 82,
@@ -7715,7 +8766,12 @@
         "sourceId": "caritas_wohnungsnotfall",
         "providerName": "Caritas Deutschland",
         "providerLevel": "federal",
-        "checksum": "6899c42774255a8139fa27eae9fa7ce7e29082af4e13713d5727ecab32907287"
+        "checksum": "6899c42774255a8139fa27eae9fa7ce7e29082af4e13713d5727ecab32907287",
+        "host": "caritas.de",
+        "canonicalDomain": "caritas.de",
+        "sourceDomain": "caritas.de",
+        "publisherName": "Deutscher Caritasverband",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 82,
@@ -7766,7 +8822,12 @@
         "sourceId": "diakonie_wohnungslosigkeit",
         "providerName": "Diakonie Deutschland",
         "providerLevel": "federal",
-        "checksum": "034e7c52cb898c9f9b8ee9c6db7b9e2ac40569b2021a1583253f7f5270e020eb"
+        "checksum": "034e7c52cb898c9f9b8ee9c6db7b9e2ac40569b2021a1583253f7f5270e020eb",
+        "host": "diakonie.de",
+        "canonicalDomain": "diakonie.de",
+        "sourceDomain": "diakonie.de",
+        "publisherName": "Diakonie Deutschland",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 82,
@@ -7869,7 +8930,12 @@
         "sourceId": "tacheles_sanktionsberatung",
         "providerName": "Tacheles e.V.",
         "providerLevel": "federal",
-        "checksum": "7522e5fac0c164d75e50546e9496dc85e6ec0bb3efa4e8028e9663ca82486ae1"
+        "checksum": "7522e5fac0c164d75e50546e9496dc85e6ec0bb3efa4e8028e9663ca82486ae1",
+        "host": "tacheles-sozialhilfe.de",
+        "canonicalDomain": "tacheles-sozialhilfe.de",
+        "sourceDomain": "tacheles-sozialhilfe.de",
+        "publisherName": "Tacheles e.V.",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 82,

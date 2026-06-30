@@ -1,0 +1,4373 @@
+{
+  "generatedAt": "2026-06-30T20:45:18.256Z",
+  "policy": {
+    "validTiers": [
+      "tier_1_law",
+      "tier_1_official",
+      "tier_2_official",
+      "tier_2_ngo_watchdog",
+      "tier_3_ngo",
+      "tier_3_press",
+      "tier_4_academic",
+      "tier_4_other",
+      "tier_5_contextual",
+      "tier_5_partisan_context"
+    ],
+    "unknownTiers": [
+      "",
+      "unknown",
+      "tier_unknown",
+      "unclassified",
+      "undefined",
+      "null"
+    ],
+    "note": "Unknown, missing, and invalid tiers must not be used as answer evidence."
+  },
+  "entries": {
+    "totals": {
+      "entries": 953,
+      "activeEntries": 953,
+      "unknownTier": 0,
+      "invalidTier": 0,
+      "unknownInstitution": 0,
+      "duplicateUrlGroups": 100,
+      "untrustedSensitive": 122,
+      "lowSignalUrls": 14
+    },
+    "byDomain": {
+      "benefits": 39,
+      "aid": 157,
+      "tools": 159,
+      "organizations": 207,
+      "contacts": 391
+    },
+    "byTier": {
+      "tier_1_official": 909,
+      "tier_3_ngo": 16,
+      "tier_2_ngo_watchdog": 22,
+      "tier_5_partisan_context": 1,
+      "tier_2_official": 4,
+      "tier_4_academic": 1
+    },
+    "byInstitution": {
+      "government": 907,
+      "ngo": 36,
+      "public_service": 5,
+      "political": 1,
+      "civil_society": 1,
+      "advisory": 1,
+      "research": 1,
+      "research_network": 1
+    },
+    "topHosts": {
+      "bmbfsfj.bund.de": 313,
+      "bmas.de": 268,
+      "arbeitsagentur.de": 105,
+      "fitko.de": 77,
+      "familienportal.de": 68,
+      "bundesregierung.de": 44,
+      "drk.de": 5,
+      "web.arbeitsagentur.de": 5,
+      "bafza.de": 5,
+      "115.de": 5,
+      "sozialplattform.de": 3,
+      "wege-zur-pflege.de": 3,
+      "diakonie.de": 3,
+      "caritas.de": 3,
+      "bundesgesundheitsministerium.de": 2,
+      "jobcenter.de": 2,
+      "maennerberatungsnetz.de": 2,
+      "bamf.de": 2,
+      "gkv-spitzenverband.de": 1,
+      "deutsche-rentenversicherung.de": 1,
+      "sanktionsfrei.de": 1,
+      "vdk.de": 1,
+      "onlineberatung.hilfetelefon.de": 1,
+      "weisser-ring.de": 1,
+      "bke-beratung.de": 1,
+      "bundesstiftung-mutter-und-kind.de": 1,
+      "der-paritaetische.de": 1,
+      "dhs.de": 1,
+      "die-linke.de": 1,
+      "frauenhauskoordinierung.de": 1
+    },
+    "samples": {
+      "unknownTier": [],
+      "invalidTier": [],
+      "unknownInstitution": [],
+      "untrustedSensitive": [
+        {
+          "domain": "benefits",
+          "id": "6cb46eda-6fdb-4a19-9656-4e7c3b93e5d7",
+          "title": "Pflegegrad und Pflegegeld: Leistungen der Pflegeversicherung",
+          "url": "https://www.bundesgesundheitsministerium.de/service/begriffe-von-a-z/p/pflegestuetzpunkte",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmg_pflege"
+        },
+        {
+          "domain": "benefits",
+          "id": "ec67c727-879e-4405-9c7a-d5d4eccf0c4b",
+          "title": "KdU und Mietschulden: Übernahme durch das Jobcenter",
+          "url": "https://www.jobcenter.de/",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "jobcenter_kdu_mietschulden"
+        },
+        {
+          "domain": "benefits",
+          "id": "0191386a-db74-407d-a729-2fcaad1653c8",
+          "title": "Darlehen für Energiekosten und KdU: Notfallhilfe bei Heizkosten",
+          "url": "https://www.jobcenter.de/",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "jobcenter_energieschulden"
+        },
+        {
+          "domain": "aid",
+          "id": "e74da8c2-9c3e-45d4-9871-6b955e3e388f",
+          "title": "Männerberatungsnetz • Beratungsangebote für Jungen, Männer und Väter.",
+          "url": "https://maennerberatungsnetz.de/",
+          "tier": "tier_2_ngo_watchdog",
+          "institutionType": "ngo",
+          "sourceId": "maennerberatungsnetz"
+        },
+        {
+          "domain": "aid",
+          "id": "617c0244-23c7-4923-96fd-bcb389b7b9c1",
+          "title": "Locations – Männerberatungsnetz",
+          "url": "https://maennerberatungsnetz.de/beratung",
+          "tier": "tier_2_ngo_watchdog",
+          "institutionType": "ngo",
+          "sourceId": "maennerberatungsnetz"
+        },
+        {
+          "domain": "aid",
+          "id": "bf301738-99d3-47e2-8d3c-896eb1901ea9",
+          "title": "116016, Hilfetelefon bei Gewalt gegen Frauen",
+          "url": "https://onlineberatung.hilfetelefon.de/",
+          "tier": "tier_2_ngo_watchdog",
+          "institutionType": "ngo",
+          "sourceId": "hilfetelefon"
+        },
+        {
+          "domain": "aid",
+          "id": "acd5993a-5b53-46d7-ad91-d713e49164f4",
+          "title": "Das Pflegetelefon",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/service/publikationen/das-pflegetelefon-schnelle-hilfe-fuer-angehoerige-187090",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "b158d8eb-f495-470d-a53e-14d8bd9fbcdf",
+          "title": "Hilfe suchen",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/service/publikationen/hilfe-suchen-hilfe-finden-280182",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "08dfc868-9323-4400-868c-d354ab8a9d71",
+          "title": "Pflegeausbildung",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/berufsfeld-pflege",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "e10437c2-b5d2-45fb-93fa-3841ac995a39",
+          "title": "Ausbildung zur Pflegefachperson",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/berufsfeld-pflege/neue-pflegeausbildungen",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "3427e3fb-4218-4b85-89d5-59968bb38a16",
+          "title": "Nationale Demenzstrategie",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/demenz/nationale-demenzstrategie",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "db75737c-50d4-49a5-8726-751d1a4188dd",
+          "title": "Hilfe und Pflege",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/hilfe-und-pflege",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "03afc707-9830-404b-a0c9-70cafdee8fb3",
+          "title": "Charta der Rechte hilfe- und pflegebedürftiger Menschen",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/hilfe-und-pflege/charta-der-rechte-hilfe-und-pflegebeduerftiger-menschen-77426",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "c461f114-02f0-4d00-a2c8-7e617d530f0d",
+          "title": "Gesetz über die Berufe in der Altenpflege (Altenpflegegesetz)",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/hilfe-und-pflege/gesetz-ueber-die-berufe-in-der-altenpflege-altenpflegegesetz--77744",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "baa2ec2f-6b99-4fa3-9d29-88b9e111db5d",
+          "title": "Gesetzliche Regelungen zur Pflege und Betreuung",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/hilfe-und-pflege/gesetzliche-regelungen",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "ddaa7f4f-fe85-464a-a4ef-01ffe8da5a71",
+          "title": "Beratung für pflegende Kinder, Jugendliche und junge Erwachsene sowie Auszubildende und Studierende",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/hilfe-und-pflege/pausentaste-beratung-fuer-pflegende-kinder-und-jugendliche/beratung-fuer-pflegende-kinder-jugendliche-und-junge-erwachsene-sowie-auszubildende-und-studierende-121244",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "3b569661-5713-44f5-a5a9-541c43291754",
+          "title": "Zehn Jahre Pflegetelefon",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/hilfe-und-pflege/zehn-jahre-pflegetelefon",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "b0a2a0da-dd06-4187-b371-0851418f5612",
+          "title": "Zuhause im Alter",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/hilfe-und-pflege/zuhause-im-alter-75580",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "340b2bba-57ac-488d-a711-607cc10e0792",
+          "title": "Vereinbarkeit von Pflege und Beruf",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/vereinbarkeit-von-pflege-und-beruf",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "5b969339-0305-4105-9e27-294dbdda4c3b",
+          "title": "Zuhause im Alter",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/zuhause-im-alter",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "421fe7a1-093e-4be1-9cbd-9998fb185545",
+          "title": "Sicherheit im Alter",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/zuhause-im-alter/sicherheit-im-alter",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "1cc7a8c5-c0b2-4954-aedf-62d953e2bda5",
+          "title": "Kommunales Bildungsmanagement",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/kommunales-bildungsmanagement",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "1944698f-cc98-422f-a390-53a0af23fda5",
+          "title": "Engagement stärken",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/engagement-staerken",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "0835147e-a9fe-43a6-a638-e40f8e9173d9",
+          "title": "Karin Prien startet Wettbewerb für kleine und mittlere Unternehmen",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/karin-prien-startet-wettbewerb-fuer-kleine-und-mittlere-unternehmen-281112",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "15bc8ed3-2f69-427f-8447-30ed6584728e",
+          "title": "Gute Kinderbetreuung",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/kinderbetreuung",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "93a4c985-d18c-45d3-acf4-bb6d9bec3db7",
+          "title": "Mehr Qualität in der frühen Bildung",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/kinderbetreuung/kita-qualitaet",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "91de6036-75f0-4eb4-96ee-30f64233bf03",
+          "title": "Politik für die Aufwertung sozialer Berufe",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/aufwertung-sozialer-berufe",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "fc6445c8-b934-422b-a340-2e4a32f2e353",
+          "title": "Frauen vor Gewalt schützen",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/frauen-vor-gewalt-schuetzen",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "7aa42364-37bc-4dc0-a995-852b0b59e462",
+          "title": "Erwerbs- und Sorgearbeit gleichberechtigt gestalten",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/gender-care-gap",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "2d921ac7-bf4c-4290-8983-8d3a042e7529",
+          "title": "Jungen und Männer",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/jungen-und-maenner",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "6811f2d1-5434-45ca-8010-b54c48fb5f7a",
+          "title": "Internationale Familienpolitik",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/internationales/internationale-familienpolitik",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "77cea727-07d7-4dd3-bd4d-f893e639e966",
+          "title": "Integration und Chancen für junge Menschen",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend/integration-und-chancen-fuer-junge-menschen",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "6f863442-0364-40af-8139-1b49de5d9448",
+          "title": "Kinder- und Jugendgesundheit",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend/kinder-und-jugendgesundheit",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "cf859bab-84fe-4e38-8d35-2c2bf034193a",
+          "title": "Kinder- und Jugendschutz",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend/kinder-und-jugendschutz",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmfsfj"
+        },
+        {
+          "domain": "aid",
+          "id": "2c6ff52a-0ef6-4cde-a4a6-dfae0808596c",
+          "title": "Frauenhaus- und Beratungsstellensuche",
+          "url": "https://www.frauenhauskoordinierung.de/hilfe-bei-gewalt/frauenhaus-und-fachberatungsstellensuche",
+          "tier": "tier_2_ngo_watchdog",
+          "institutionType": "ngo",
+          "sourceId": "frauenhauskoordinierung"
+        },
+        {
+          "domain": "aid",
+          "id": "8942ac13-74e1-45f1-9abe-8a57fe52ef0e",
+          "title": "Das Hilfetelefon– Beratung und Hilfe für Frauen",
+          "url": "https://www.hilfetelefon.de/",
+          "tier": "tier_2_ngo_watchdog",
+          "institutionType": "ngo",
+          "sourceId": "hilfetelefon"
+        },
+        {
+          "domain": "aid",
+          "id": "d2fd74ff-f129-4ec9-8638-8e04de74c31b",
+          "title": "Gewalt schmerzt. Auch Männer.",
+          "url": "https://www.maennerhilfetelefon.de/",
+          "tier": "tier_2_ngo_watchdog",
+          "institutionType": "ngo",
+          "sourceId": "maennerhilfetelefon"
+        },
+        {
+          "domain": "aid",
+          "id": "77ba428c-66fe-4ac5-98e1-d8649e8ea6fc",
+          "title": "Das Pflegetelefon",
+          "url": "https://www.wege-zur-pflege.de/wege-zur-pflege/pflegende-angehoerige/beratungsangebote/das-pflegetelefon-252968",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "wege_zur_pflege"
+        },
+        {
+          "domain": "aid",
+          "id": "466e3b94-677d-429e-a798-f69d7d282ea7",
+          "title": "Entlastungsbetrag und Kurzzeitpflege nutzen – Pflegeberatung",
+          "url": "https://www.zqp.de/beratung-pflege/",
+          "tier": "tier_3_ngo",
+          "institutionType": "ngo",
+          "sourceId": "zqp_pflegeberatung"
+        },
+        {
+          "domain": "aid",
+          "id": "028b7ced-b349-4e61-9012-807c05f510c2",
+          "title": "Krisenhilfe und psychosoziale Beratung bei Burnout und psychischer Belastung",
+          "url": "https://www.telefonseelsorge.de/",
+          "tier": "tier_3_ngo",
+          "institutionType": "ngo",
+          "sourceId": "telefonseelsorge_krisenhilfe"
+        },
+        {
+          "domain": "aid",
+          "id": "6fa8c2e0-8b1e-4ff3-a14d-77087f2e5384",
+          "title": "Psychosoziale Beratung und Krisenhilfe – Sozialpsychiatrischer Dienst",
+          "url": "https://www.diakonie.de/",
+          "tier": "tier_3_ngo",
+          "institutionType": "ngo",
+          "sourceId": "diakonie_krisenhilfe"
+        },
+        {
+          "domain": "aid",
+          "id": "ddfddc01-aa7f-423f-8045-57f258f0ada9",
+          "title": "Wohnungsnotfall: Notunterkunft, Mietschulden und Wohnungslosenhilfe",
+          "url": "https://www.caritas.de/hilfeundberatung/ratgeber/wohnungslosigkeit/zurueckindieeigenenvierwaende/wege-aus-der-wohnungslosigkeit",
+          "tier": "tier_3_ngo",
+          "institutionType": "ngo",
+          "sourceId": "caritas_wohnungsnotfall"
+        },
+        {
+          "domain": "aid",
+          "id": "a4eaf69f-ce3c-4c23-b54b-886374b9a0ab",
+          "title": "Wohnungslosigkeit: Sozialberatung und Notunterkunft finden",
+          "url": "https://www.diakonie.de/wissen-kompakt-wohnungs-und-obdachlosigkeit",
+          "tier": "tier_3_ngo",
+          "institutionType": "ngo",
+          "sourceId": "diakonie_wohnungslosigkeit"
+        },
+        {
+          "domain": "aid",
+          "id": "4d9348b3-a654-4eee-ab4c-8a42795b6405",
+          "title": "Energieschulden und Notfallhilfe: Was tun bei drohender Abschaltung?",
+          "url": "https://www.verbraucherzentrale.de/",
+          "tier": "tier_3_ngo",
+          "institutionType": "civil_society",
+          "sourceId": "vz_energieschulden"
+        },
+        {
+          "domain": "tools",
+          "id": "5b54596b-7a41-4ed8-a3de-cc9b76df3e82",
+          "title": "Digitale Verwaltung",
+          "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Das-Onlinezugangsgesetz/onlinezugangsgesetz.html",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "(missing)"
+        },
+        {
+          "domain": "tools",
+          "id": "0d6b5bdf-7a79-482a-b069-567b776d4efb",
+          "title": "Podcast \"Das Arbeitsgespräch\"",
+          "url": "https://www.bmas.de/DE/Service/Mediathek/Podcasts/Podcast-das-Arbeitsgespraech-Podcast-mit-Hubertus-Heil/podcast-das-arbeitsgespraech-podcast-mit-hubertus-heil.html",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "(missing)"
+        },
+        {
+          "domain": "tools",
+          "id": "b2310505-78ff-4029-9c70-219dc264e1e1",
+          "title": "Podcasts",
+          "url": "https://www.bmas.de/DE/Service/Mediathek/Podcasts/podcasts.html",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "(missing)"
+        },
+        {
+          "domain": "tools",
+          "id": "55636445-397d-485d-8848-1367ffc93eb8",
+          "title": "BMBFSFJ",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "c1fbea23-6704-47cd-9f30-3ba24ec8ed19",
+          "title": "Aktuell",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/aktuelles",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "594606b4-6d86-4c0e-81aa-56eb8d902a76",
+          "title": "Inhalt",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/inhalt-107174",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "c2f32630-f50a-4cc9-945a-8714a84c1186",
+          "title": "Leichte Sprache",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/meta/leichte-sprache",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "034dce40-816a-4b43-862a-8bb464e80b51",
+          "title": "Pflegeausbildung",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/berufsfeld-pflege",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "f0b3f8d0-e919-42cd-ab32-1e462bee6364",
+          "title": "Ausbildung zur Pflegefachperson",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/berufsfeld-pflege/neue-pflegeausbildungen",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "b59e560c-2b48-4d5f-9613-73256da75b38",
+          "title": "Nationale Demenzstrategie",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/demenz/nationale-demenzstrategie",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "debcbabc-c9fc-46d0-a43e-c148fe5596cd",
+          "title": "Vereinbarkeit von Pflege und Beruf",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/vereinbarkeit-von-pflege-und-beruf",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "f148621c-74fe-4ea5-a75a-054b5756f711",
+          "title": "Zuhause im Alter",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/zuhause-im-alter",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "0ed94712-173c-46b6-ab30-8bcf61e08013",
+          "title": "Kommunales Bildungsmanagement",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/kommunales-bildungsmanagement",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "e74d1aae-4ae9-4bb1-bcf5-ff2fdfa4889a",
+          "title": "Engagement stärken",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/engagement-staerken",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "66037d37-87bc-4067-8d47-b9f602fe9180",
+          "title": "Gute Kinderbetreuung",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/kinderbetreuung",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "5e3d9906-4f75-4460-9cc7-2f0e7d6aea35",
+          "title": "Mehr Qualität in der frühen Bildung",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/kinderbetreuung/kita-qualitaet",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "a3aaa332-3abd-468b-820d-b69b686cc466",
+          "title": "Gleichstellungspolitik: Politik für Frauen und Männer",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "9a15eaa8-beb7-44cd-b899-ca26713087d5",
+          "title": "Politik für die Aufwertung sozialer Berufe",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/aufwertung-sozialer-berufe",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "bcaca84c-adc0-4ff6-a3ba-ff12338e7207",
+          "title": "Frauen vor Gewalt schützen",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/frauen-vor-gewalt-schuetzen",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "435d9633-5eaf-459e-80b0-9411d9b1aee5",
+          "title": "Erwerbs- und Sorgearbeit gleichberechtigt gestalten",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/gender-care-gap",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "46c03ddc-f7bf-48da-8f3f-1ff03e0a63f6",
+          "title": "Jungen und Männer",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/jungen-und-maenner",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "c39681ec-94d5-4f2a-935a-d9e7c5a8010d",
+          "title": "Internationale Familienpolitik",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/internationales/internationale-familienpolitik",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "6e6ece35-3b2c-4601-8c6b-4488e63d3e2c",
+          "title": "Integration und Chancen für junge Menschen",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend/integration-und-chancen-fuer-junge-menschen",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "efa459ca-0828-48dc-bdab-c64c384d811a",
+          "title": "Kinder- und Jugendgesundheit",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend/kinder-und-jugendgesundheit",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "856ec256-aa50-4ee9-a697-a814d29a4c6e",
+          "title": "Kinder- und Jugendschutz",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend/kinder-und-jugendschutz",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "c3b0da6b-525b-439d-ab06-547c45200a4d",
+          "title": "Bessere vereinbarkeit von pflege und beruf flyer englisch data",
+          "url": "https://www.bmbfsfj.bund.de/resource/blob/93366/1d9da10434533ea4ee20e7da7c6e1693/bessere-vereinbarkeit-von-pflege-und-beruf-flyer-englisch-data.pdf",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "tools",
+          "id": "6829b206-c8d6-4ebb-9250-7028827ea676",
+          "title": "Wege zur Pflege",
+          "url": "https://www.wege-zur-pflege.de/",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "wege-zur-pflege_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "67449035-de46-4d9e-9e10-697f3cd70c74",
+          "title": "Compliance | Bundesagentur für Arbeit",
+          "url": "https://www.arbeitsagentur.de/ueber-uns/compliance",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "arbeitsagentur_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "01fb1b40-144e-4936-bc59-fec4f12dc372",
+          "title": "Gemeinsam. bringt weiter – Strategische Ausrichtung der BA bis 2030",
+          "url": "https://www.arbeitsagentur.de/ueber-uns/gemeinsam-bringt-weiter",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "arbeitsagentur_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "eae6fa6b-5d28-4370-9ede-706ccc1655c7",
+          "title": "Geschäftsbericht für das Jahr 2024",
+          "url": "https://www.arbeitsagentur.de/ueber-uns/geschaeftsbericht-2024",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "arbeitsagentur_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "e7641fb6-e9ef-46d8-acf1-77f79850e1a5",
+          "title": "BMBFSFJ",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "a949e1e5-03d5-4003-a58a-4b38bcdc753b",
+          "title": "Aktuell",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/aktuelles",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "5ed75e8e-c38b-4d3d-ba74-efd823a7e8ac",
+          "title": "Beauftragte für Akzeptanz sexueller und geschlechtlicher Vielfalt",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/aktuelles/alle-meldungen/beauftragte-fuer-akzeptanz-sexueller-und-geschlechtlicher-vielfalt-265346",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "2f1755b4-cdca-422f-a113-29a1dc9bfad2",
+          "title": "Bundeskabinett verabschiedet Nationalen Aktionsplan",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/aktuelles/alle-meldungen/bundeskabinett-verabschiedet-nationalen-aktionsplan-78758",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "e19d93b3-1880-4034-9cf7-0bb0293f14cf",
+          "title": "Bundesregierung legt Evaluierungsbericht vor",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/aktuelles/alle-meldungen/bundesregierung-legt-evaluierungsbericht-vor-279870",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "5f96f136-cf7c-4c2c-808b-63e03d07974e",
+          "title": "Inhalt",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/inhalt-107174",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "90b6377a-16ff-48cd-b207-e2bb236f511c",
+          "title": "Förderrichtlinien des Bundes zu Gewaltschutz und -prävention im Rahmen der Gleichstellungspolitik",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/ausschreibungen-foerderung/foerderrichtlinien/gewaltschutz-und-praevention",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "875d6d97-2028-4e75-a714-fe7880612adb",
+          "title": "Behörden, Beauftragte, Beiräte, Gremien und Kommissionen",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "dfa26a59-32ff-472e-b83d-1a0a6c86f878",
+          "title": "Bundesamt für Familie und zivilgesellschaftliche Aufgaben (BAFz A)",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/bafza",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "90781026-d6d4-4d4f-abf5-06e40a9f756e",
+          "title": "Wissenschaftlicher Beirat für Familienfragen",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/beirat-familienfragen",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "e30faa13-b960-48bc-af7f-fa85f9a19e25",
+          "title": "Unabhängige Bundesbeauftragte gegen sexuellen Missbrauch von Kindern und Jugendlichen",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/unabhaengige-beauftragte",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "23ef060c-3aec-4a74-8d99-dafa5783dd54",
+          "title": "Unabhängiger Beirat für die Vereinbarkeit von Pflege und Beruf",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/behoerden-beauftragte-beiraete-gremien/unabhaengiger-beirat-fuer-die-vereinbarkeit-von-pflege-und-beruf-108568",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "bc4a8844-d7e2-48c8-916b-28a5d78f24d7",
+          "title": "Vierter Gleichstellungsbericht",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/berichte-der-bundesregierung/vierter-gleichstellungsbericht-257274",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "9a1f3df2-59e9-4a3a-9a6b-f519cf663e13",
+          "title": "Zehnter Familienbericht",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/berichte-der-bundesregierung/zehnter-familienbericht-253668",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "12b11b57-76e0-4490-9722-fe5b33a16183",
+          "title": "Inklusion",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/inklusion",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "a27638ca-7ad3-4d91-9042-64f088e4ca1a",
+          "title": "Ressortforschung",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/ministerium/ressortforschung",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "organizations",
+          "id": "65c43977-e35b-4b17-aa90-6df9bd91e619",
+          "title": "Föderale IT-Standards",
+          "url": "https://www.fitko.de/foederale-it-architektur/standards",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "fitko"
+        },
+        {
+          "domain": "contacts",
+          "id": "a0fbd8c8-e09a-4fba-84f8-6e6c88a78530",
+          "title": "Was Sie über die Erkrankung Depression wissen sollten",
+          "url": "https://ifightdepression.com/de",
+          "tier": "tier_4_academic",
+          "institutionType": "research_network",
+          "sourceId": "ifightdepression_eaad"
+        },
+        {
+          "domain": "contacts",
+          "id": "c1ba191b-dd52-47c8-8748-b50fa46a38c6",
+          "title": "Compliance | Bundesagentur für Arbeit",
+          "url": "https://www.arbeitsagentur.de/ueber-uns/compliance",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "arbeitsagentur_de"
+        },
+        {
+          "domain": "contacts",
+          "id": "587b6f51-ed58-4991-9560-1f66e2fd2cfb",
+          "title": "BMBFSFJ",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "contacts",
+          "id": "07ddfdf0-4e1a-434b-965e-f3756d3b2efa",
+          "title": "Aktuell",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/aktuelles",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "contacts",
+          "id": "7d721cd6-2d94-4983-b2aa-760004f692a1",
+          "title": "Inhalt",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/inhalt-107174",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "contacts",
+          "id": "f29987ee-d183-40d8-9d14-e786edc555e3",
+          "title": "Pflegeausbildung",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/berufsfeld-pflege",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "contacts",
+          "id": "42afcce6-a9df-44dd-9af8-6f709a32584e",
+          "title": "Ausbildung zur Pflegefachperson",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/berufsfeld-pflege/neue-pflegeausbildungen",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "contacts",
+          "id": "1d51ee00-ebf8-4c7d-ae17-d3d67025a769",
+          "title": "Nationale Demenzstrategie",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/demenz/nationale-demenzstrategie",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        },
+        {
+          "domain": "contacts",
+          "id": "5969c401-7b59-41d8-a532-4f16dbdb5c93",
+          "title": "Vereinbarkeit von Pflege und Beruf",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/vereinbarkeit-von-pflege-und-beruf",
+          "tier": "tier_1_official",
+          "institutionType": "government",
+          "sourceId": "bmbfsfj_bund_de"
+        }
+      ],
+      "lowSignalUrls": [
+        {
+          "domain": "tools",
+          "id": "913020ce-9a1c-4d35-96ee-464fb16f65f3",
+          "title": "Interviews",
+          "url": "https://www.bmas.de/DE/Service/Presse/Interviews/interviews.html",
+          "tier": "tier_1_official"
+        },
+        {
+          "domain": "tools",
+          "id": "9bfdf773-eb73-4155-a5bb-01102aa6f6f3",
+          "title": "Leitungstermine des BMAS",
+          "url": "https://www.bmas.de/DE/Service/Presse/Leitungstermine/leitungstermine.html",
+          "tier": "tier_1_official"
+        },
+        {
+          "domain": "tools",
+          "id": "6abf9361-acb1-4a52-a3de-f1c7d8677578",
+          "title": "Meldungen",
+          "url": "https://www.bmas.de/DE/Service/Presse/Meldungen/meldungen.html",
+          "tier": "tier_1_official"
+        },
+        {
+          "domain": "tools",
+          "id": "a4140fbc-bbbc-4aae-9a3a-07c587e690c1",
+          "title": "Reden",
+          "url": "https://www.bmas.de/DE/Service/Presse/Reden/reden.html",
+          "tier": "tier_1_official"
+        },
+        {
+          "domain": "tools",
+          "id": "ec3f2af8-4799-4788-81b8-86c6c812b6f5",
+          "title": "Zitate für Ihre Berichterstattung",
+          "url": "https://www.bmas.de/DE/Service/Presse/Zitate/zitate.html",
+          "tier": "tier_1_official"
+        },
+        {
+          "domain": "tools",
+          "id": "4994a4c6-fedf-4f56-8d2b-13d15c4f66c4",
+          "title": "Newsroom",
+          "url": "https://www.bmas.de/DE/Service/Presse/presse.html",
+          "tier": "tier_1_official"
+        },
+        {
+          "domain": "organizations",
+          "id": "2fb273d6-787c-449e-91ad-16eb043023c7",
+          "title": "Pressearchiv",
+          "url": "https://www.arbeitsagentur.de/presse/presse-archiv",
+          "tier": "tier_1_official"
+        },
+        {
+          "domain": "organizations",
+          "id": "3d897d57-e335-4f5f-97f8-9e6625b04788",
+          "title": "Presse",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/aktuelles/presse",
+          "tier": "tier_1_official"
+        },
+        {
+          "domain": "organizations",
+          "id": "4f17627a-6c87-4b19-9f9b-59fb10031fd2",
+          "title": "Pressemitteilungen",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/aktuelles/pressemitteilungen",
+          "tier": "tier_1_official"
+        },
+        {
+          "domain": "organizations",
+          "id": "6033bff9-3081-4bce-86ce-755d0fad5345",
+          "title": "Pressekonferenzen und Reden der Bundesregierung",
+          "url": "https://www.bundesregierung.de/breg-de/aktuelles/pressekonferenzen-und-reden",
+          "tier": "tier_1_official"
+        },
+        {
+          "domain": "organizations",
+          "id": "7f436975-068e-4e8f-872e-f860f7a9738e",
+          "title": "Das Bundespresseamt",
+          "url": "https://www.bundesregierung.de/breg-de/bundesregierung/bundespresseamt",
+          "tier": "tier_1_official"
+        },
+        {
+          "domain": "organizations",
+          "id": "c2aa1a7d-3139-4f54-8a8c-1f1cb3aabedc",
+          "title": "Im Gespräch mit dem Bundespresseamt",
+          "url": "https://www.bundesregierung.de/breg-de/bundesregierung/bundespresseamt/im-gespraech-mit-dem-bundespresseamt",
+          "tier": "tier_1_official"
+        },
+        {
+          "domain": "organizations",
+          "id": "9a184044-3571-4afe-bf34-f305cce3c15f",
+          "title": "Pressefotos | Bundesregierung",
+          "url": "https://www.bundesregierung.de/breg-de/mediathek/pressefotos",
+          "tier": "tier_1_official"
+        },
+        {
+          "domain": "organizations",
+          "id": "0ec3d1b1-7d5f-49b1-8be0-4def1d3ce994",
+          "title": "Pressebereich",
+          "url": "https://www.fitko.de/presse",
+          "tier": "tier_1_official"
+        }
+      ],
+      "duplicateUrlGroups": [
+        {
+          "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/antrag-bescheid",
+          "items": [
+            {
+              "domain": "benefits",
+              "id": "f5814251-8e87-421d-bb89-3a8d4eb078a4",
+              "title": "Bürgergeld: Antrag und Bescheid",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "aid",
+              "id": "abb61703-f37e-43bd-b1ff-8f9bc4fa3d77",
+              "title": "Bürgergeld: Antrag und Bescheid",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/einkommen-ergaenzen",
+          "items": [
+            {
+              "domain": "benefits",
+              "id": "6dbce676-e79b-4b7c-b860-24f70839dcab",
+              "title": "Einkommen mit Bürgergeld ergänzen",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "aid",
+              "id": "01121533-ec12-4b36-9290-1240892eeadb",
+              "title": "Einkommen mit Bürgergeld ergänzen",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/voraussetzungen-einkommen-vermoegen",
+          "items": [
+            {
+              "domain": "benefits",
+              "id": "afdca595-4615-4493-bafc-5a92b806e965",
+              "title": "Bürgergeld: Voraussetzungen, Einkommen und Vermögen",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "aid",
+              "id": "750ed334-6a37-440b-9b3b-09f3e4acd2e6",
+              "title": "Bürgergeld: Voraussetzungen, Einkommen und Vermögen",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/finanziell-absichern/zusammensetzung-bedarfe",
+          "items": [
+            {
+              "domain": "benefits",
+              "id": "41aabbf4-4d7c-4e7b-af58-0f5815b31aa8",
+              "title": "Bedarfe: So setzt sich Bürgergeld zusammen",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "aid",
+              "id": "444d0ff3-afe6-48e1-bc5a-f12afc6363d3",
+              "title": "Bedarfe: So setzt sich Bürgergeld zusammen",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld/pflichten-verstehen-und-beachten",
+          "items": [
+            {
+              "domain": "benefits",
+              "id": "8db7919b-63db-4c73-a0b9-b4c14bb8c104",
+              "title": "Bürgergeld: Pflichten verstehen und beachten",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "aid",
+              "id": "306f0949-de16-4138-8dae-890c693cdeef",
+              "title": "Bürgergeld: Pflichten verstehen und beachten",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder",
+          "items": [
+            {
+              "domain": "benefits",
+              "id": "d1e12a82-3d83-4f38-8f2d-c1fc11aba996",
+              "title": "Familie und Kinder",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "aid",
+              "id": "857b3af6-5d6c-413a-95d1-355b5cfe72a5",
+              "title": "Familie und Kinder",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "82e38ab7-ca2b-459a-bdf0-e772cf713380",
+              "title": "Familie und Kinder",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen",
+          "items": [
+            {
+              "domain": "benefits",
+              "id": "f20b9ffa-c79e-49ef-9e63-d260b865af25",
+              "title": "Kinderzuschlag verstehen",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "aid",
+              "id": "89bed917-c2c9-411c-af65-95a96cdf5a38",
+              "title": "Kinderzuschlag verstehen",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kinderzuschlag-anspruch-hoehe-dauer",
+          "items": [
+            {
+              "domain": "benefits",
+              "id": "a89c337d-f370-4eb1-9ca7-11ca27aea334",
+              "title": "Kinderzuschlag: Anspruch, Höhe, Dauer",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "aid",
+              "id": "8e556c2b-9fdb-4d5f-94d0-3c5ae964f378",
+              "title": "Kinderzuschlag: Anspruch, Höhe, Dauer",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.arbeitsagentur.de/lexikon/aufstocker",
+          "items": [
+            {
+              "domain": "benefits",
+              "id": "eb5b494f-8c92-4023-8e2c-5f7586523a47",
+              "title": "Begriffserklärung: Aufstocker",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "aid",
+              "id": "14489f52-8ee3-4bec-8560-67df001841af",
+              "title": "Begriffserklärung: Aufstocker",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.arbeitsagentur.de/lexikon/bedarfsgemeinschaft",
+          "items": [
+            {
+              "domain": "benefits",
+              "id": "0d93f2a5-e468-432c-8b1b-78aa56f675f9",
+              "title": "Begriffserklärung: Bedarfsgemeinschaft",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "aid",
+              "id": "e8a3d91b-30ed-4288-85bc-3abf91dc2576",
+              "title": "Begriffserklärung: Bedarfsgemeinschaft",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen",
+          "items": [
+            {
+              "domain": "benefits",
+              "id": "f0d4693b-32e1-4ec6-95fb-e9d75efefdfa",
+              "title": "Familienleistungen (BMBFSFJ)",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "aid",
+              "id": "402306bc-9c63-41a3-a58d-0b1a09747e49",
+              "title": "Familienleistungen",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/teilhabe-und-inklusion.html",
+          "items": [
+            {
+              "domain": "benefits",
+              "id": "355e4bfb-4ba4-42ef-8baa-4648901a8865",
+              "title": "Grundsicherung bei Erwerbsminderung und Reha (SGB XII)",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "aid",
+              "id": "8dae5a2a-d06b-42f3-b8c7-b7af9aa9f54a",
+              "title": "Reha und Sozialamt: Hilfe bei dauerhafter Erwerbsminderung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "632d5f50-6b5c-45dd-af1b-214114e95dff",
+              "title": "Teilhabe und Inklusion",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://sozialplattform.de/schuldnerberatung",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "790760a8-ecba-4ae5-90fa-0ed3ca94290f",
+              "title": "Schuldnerberatung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "af31909a-5c7a-4591-96e2-0d656540a1be",
+              "title": "Schuldnerberatung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "26862c06-0b4a-4c73-adf0-7cf178aede09",
+              "title": "Schuldnerberatung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.arbeitsagentur.de/freiwillige-arbeitslosenversicherung",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "a212f605-2c54-43fe-b31f-4897b31b408d",
+              "title": "Freiwillige Arbeitslosenversicherung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "d8b24040-f508-4538-8a9a-1574d8f938b3",
+              "title": "Freiwillige Arbeitslosenversicherung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmas.de/DE/Arbeit/Arbeitsrecht/Arbeitnehmerrechte/Kuendigungsschutz/kuendigungsschutz.html",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "d27af04d-5dde-43ba-9dd8-991efa737a60",
+              "title": "Kündigungsschutz",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "0aebf7da-fb2d-4992-bc02-5069a239ed2a",
+              "title": "Kündigungsschutz",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "0249e48f-7fae-46b2-9b82-7168492f2a48",
+              "title": "Bildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "5e86decc-0b1b-45ed-b0be-3e5f73068dac",
+              "title": "Bildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "organizations",
+              "id": "9606b2be-b279-41da-8e4f-db1476dc9a8e",
+              "title": "Bildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "dae5525f-5d64-4b33-9337-82c4d9800182",
+              "title": "Bildung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/aktiv-im-alter",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "68f66902-6a85-4835-9655-88d5f9c38c8e",
+              "title": "Aktiv im Alter",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "565f8bd9-cc97-4792-8ddd-66eeb789cc93",
+              "title": "Aktiv im Alter",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "0fc0ca06-92db-484e-a9d7-e256ae36f765",
+              "title": "Aktiv im Alter",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/berufsfeld-pflege",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "08dfc868-9323-4400-868c-d354ab8a9d71",
+              "title": "Pflegeausbildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "034dce40-816a-4b43-862a-8bb464e80b51",
+              "title": "Pflegeausbildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "f29987ee-d183-40d8-9d14-e786edc555e3",
+              "title": "Pflegeausbildung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/berufsfeld-pflege/neue-pflegeausbildungen",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "e10437c2-b5d2-45fb-93fa-3841ac995a39",
+              "title": "Ausbildung zur Pflegefachperson",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "f0b3f8d0-e919-42cd-ab32-1e462bee6364",
+              "title": "Ausbildung zur Pflegefachperson",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "42afcce6-a9df-44dd-9af8-6f709a32584e",
+              "title": "Ausbildung zur Pflegefachperson",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/demenz",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "d0b4da51-17ab-4045-9d26-4edcccbd8523",
+              "title": "Demenz",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "6f0b32bb-4755-46e9-b5ea-b26c0a4982d3",
+              "title": "Demenz",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "ce9fa327-6ef1-453a-a4c3-f787b8c998ab",
+              "title": "Demenz",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/demenz/nationale-demenzstrategie",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "3427e3fb-4218-4b85-89d5-59968bb38a16",
+              "title": "Nationale Demenzstrategie",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "b59e560c-2b48-4d5f-9613-73256da75b38",
+              "title": "Nationale Demenzstrategie",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "1d51ee00-ebf8-4c7d-ae17-d3d67025a769",
+              "title": "Nationale Demenzstrategie",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/internationale-politik-fuer-aeltere-menschen",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "1d1b164f-7883-4299-a1c7-e83d89365970",
+              "title": "Internationale Politik für ältere Menschen",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "ba8cc10e-1928-4209-98d5-d8d08a75df41",
+              "title": "Internationale Politik für ältere Menschen",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "ccaef8ec-2faa-4fdf-a604-6ffa77ecdd45",
+              "title": "Internationale Politik für ältere Menschen",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/letzte-wege",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "db42e441-d3d0-42d2-b3d3-1fdab97253d3",
+              "title": "Letzte Wege - Begleitung am Lebensende",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "8bc51d3f-32c8-450d-843a-9c0566cfc369",
+              "title": "Letzte Wege - Begleitung am Lebensende",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "0087b780-ed4f-42d8-aef9-66c7c9c42506",
+              "title": "Letzte Wege - Begleitung am Lebensende",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/vereinbarkeit-von-pflege-und-beruf",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "340b2bba-57ac-488d-a711-607cc10e0792",
+              "title": "Vereinbarkeit von Pflege und Beruf",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "debcbabc-c9fc-46d0-a43e-c148fe5596cd",
+              "title": "Vereinbarkeit von Pflege und Beruf",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "5969c401-7b59-41d8-a532-4f16dbdb5c93",
+              "title": "Vereinbarkeit von Pflege und Beruf",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/zuhause-im-alter",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "5b969339-0305-4105-9e27-294dbdda4c3b",
+              "title": "Zuhause im Alter",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "f148621c-74fe-4ea5-a75a-054b5756f711",
+              "title": "Zuhause im Alter",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "b51301b8-85e0-4148-b65f-8304dbc92745",
+              "title": "Zuhause im Alter",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/ausbildung",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "b073c294-fb81-4ac0-a1ff-0ed3dc8a6a89",
+              "title": "Ausbildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "9a3a472f-b711-41e6-8c8b-271ccc68f676",
+              "title": "Ausbildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "0ed7d462-58e1-46aa-a21a-12ff4514a55f",
+              "title": "Ausbildung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/ausserschulische-bildung",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "76f0c51b-87a7-48c1-b118-d7b1d4d2e9b1",
+              "title": "Außerschulische Bildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "cb496db8-ea1f-46df-8678-719142e446d2",
+              "title": "Außerschulische Bildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "961c018c-4980-477b-aab4-fa7133887549",
+              "title": "Außerschulische Bildung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/berufliche-bildung",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "113cee8c-0dc9-4aa7-afad-f19dcc165ad7",
+              "title": "Berufliche Bildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "2a193dfa-4441-40e1-a9f4-a75b5236d25b",
+              "title": "Berufliche Bildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "d3038620-c498-40d3-a3b6-66f223aec86b",
+              "title": "Berufliche Bildung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/bildungsforschung",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "bba40fb1-0edf-4b47-a481-dfe1d6ad02a5",
+              "title": "Bildungsforschung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "9192b7cd-9307-49b2-9258-400c88d4036a",
+              "title": "Bildungsforschung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "df19cb3f-f1b4-40e1-ab73-076b3bd3cd10",
+              "title": "Bildungsforschung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/fruehe-bildung",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "bc56523e-3d45-488f-bc0b-aaf715dbbeba",
+              "title": "Frühe Bildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "e447317c-da43-4f0c-9d6f-a5126ae69d58",
+              "title": "Frühe Bildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "12e4c704-9514-4f10-afe4-46c47788f70a",
+              "title": "Frühe Bildung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/integration-durch-bildung",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "0386a739-430f-4d3f-9f37-a26d0c5f0e22",
+              "title": "Integration durch Bildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "94603f31-d8d2-4582-80af-d997b713e91e",
+              "title": "Integration durch Bildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "7e507fdf-ba59-41e4-ae3b-02417f9df270",
+              "title": "Integration durch Bildung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/kommunales-bildungsmanagement",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "1cc7a8c5-c0b2-4954-aedf-62d953e2bda5",
+              "title": "Kommunales Bildungsmanagement",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "0ed94712-173c-46b6-ab30-8bcf61e08013",
+              "title": "Kommunales Bildungsmanagement",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "c38e14ea-01e1-4a46-a42c-854ab11a9f9a",
+              "title": "Kommunales Bildungsmanagement",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/schule",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "185d9a04-dc82-404c-9121-2d08fa1f8ce2",
+              "title": "Schule",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "01bd03aa-a7ac-4041-bc51-86517f468f7e",
+              "title": "Schule",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "f1436bdb-7068-4331-89d6-507203bc3a36",
+              "title": "Schule",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/weiterbildung",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "9233c3f2-c141-4ee4-880b-3e43723e4b2f",
+              "title": "Weiterbildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "59bf2d19-b55f-425a-b461-364e7cb71227",
+              "title": "Weiterbildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "651c1c2c-eef6-4dce-bed0-3c7474c233a2",
+              "title": "Weiterbildung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/allianz-gegen-einsamkeit",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "8eaa51da-372e-41c3-b005-b09d72a7a799",
+              "title": "Allianz gegen Einsamkeit",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "4241e649-839c-4fb6-a0f3-80cb3a10d113",
+              "title": "Allianz gegen Einsamkeit",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "b9bc8b4a-7b95-45b2-acdf-3b54424ff3b4",
+              "title": "Allianz gegen Einsamkeit",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/bundesprogramm-demokratie-leben--73948",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "aaf6ca79-a145-4d69-a483-1d111ef16475",
+              "title": "Bundesprogramm \"Demokratie leben! \"",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "4f07715f-4e94-4759-b585-48803e3c8db4",
+              "title": "Bundesprogramm \"Demokratie leben! \"",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "a8abc2f3-dc87-4b70-b592-ab6d7913616e",
+              "title": "Bundesprogramm \"Demokratie leben! \"",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/demografischer-wandel-und-nachhaltigkeit",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "fc062edf-b13a-4b93-85d3-d7079d3e6581",
+              "title": "Demografischer Wandel und Nachhaltigkeit",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "bb3eebf1-818c-4166-a0e5-16a51a656e90",
+              "title": "Demografischer Wandel und Nachhaltigkeit",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "39b71e6a-b2ea-4724-9eca-5bdfe115bad1",
+              "title": "Demografischer Wandel und Nachhaltigkeit",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/deutsche-stiftung-fuer-engagement-und-ehrenamt",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "5735a210-06fe-447f-b91c-03f6c3119763",
+              "title": "Deutsche Stiftung für Engagement und Ehrenamt",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "b74b5e44-c629-47fe-9a09-08661e9af347",
+              "title": "Deutsche Stiftung für Engagement und Ehrenamt",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "aec67133-69db-42af-a354-116f89025453",
+              "title": "Deutsche Stiftung für Engagement und Ehrenamt",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/engagement-staerken",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "1944698f-cc98-422f-a390-53a0af23fda5",
+              "title": "Engagement stärken",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "e74d1aae-4ae9-4bb1-bcf5-ff2fdfa4889a",
+              "title": "Engagement stärken",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "b75d29f8-a88e-4719-9052-6e6a14926fe3",
+              "title": "Engagement stärken",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/fluechtlingspolitik-und-integration",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "6f671c61-fec2-4df9-abb0-01ca97e605fc",
+              "title": "Flüchtlingspolitik und Integration",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "1f148486-b9e5-4ed2-a9fe-eadd8d4892c8",
+              "title": "Flüchtlingspolitik und Integration",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "3a431062-9e68-4010-b47d-1871d383b411",
+              "title": "Flüchtlingspolitik und Integration",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/fluechtlingspolitik-und-integration/informationen-fuer-gefluechtete",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "dd5f2633-0d79-4858-8b4d-c123726427c3",
+              "title": "Informationen für geflüchtete Menschen",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "d42524e8-bb2d-4cac-b0e4-40f810b7df91",
+              "title": "Informationen für geflüchtete Menschen",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "4169d12e-53f0-4b76-aaf4-f4b375b7a945",
+              "title": "Informationen für geflüchtete Menschen",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/freiwilligendienste",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "f56d97f6-669b-44a8-88e2-27182fd04811",
+              "title": "Freiwilligendienste",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "fa36eb46-7df1-4017-8b2c-47772300fc62",
+              "title": "Freiwilligendienste",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "b57f0d73-7f14-448b-acbe-1901d43bf719",
+              "title": "Freiwilligendienste",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/mehrgenerationenhaeuser",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "11275f2e-3c96-42f4-ac4c-b177ad6d0aa0",
+              "title": "Mehrgenerationenhäuser",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "1b639726-966d-490a-9fd2-5cf8ca3ac41d",
+              "title": "Mehrgenerationenhäuser",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "42c8759f-127e-4ae4-94fe-f88a0b072ab4",
+              "title": "Mehrgenerationenhäuser",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/chancen-und-teilhabe-fuer-familien",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "bcd5663a-7b97-4066-9f47-7211f6671975",
+              "title": "Chancen und Teilhabe für Familien",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "8c64d2a8-2266-4dcf-a879-9a6d68109b8f",
+              "title": "Chancen und Teilhabe für Familien",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "06550e6b-d122-4025-b92c-ca5b56456a52",
+              "title": "Chancen und Teilhabe für Familien",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familie-und-arbeitswelt",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "d3c7bc30-7da2-4aa4-b84e-ba9e784d34cf",
+              "title": "Familie und Arbeitswelt",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "5734712c-917d-43f7-bc4c-e0dde35da07b",
+              "title": "Familie und Arbeitswelt",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "931dff6b-719c-4c33-b0ec-297ae4eba04c",
+              "title": "Familie und Arbeitswelt",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/kinderbetreuung",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "15bc8ed3-2f69-427f-8447-30ed6584728e",
+              "title": "Gute Kinderbetreuung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "66037d37-87bc-4067-8d47-b9f602fe9180",
+              "title": "Gute Kinderbetreuung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "0a2acabf-0a1f-448a-b14b-6766927fbdd5",
+              "title": "Gute Kinderbetreuung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/kinderbetreuung/kita-qualitaet",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "93a4c985-d18c-45d3-acf4-bb6d9bec3db7",
+              "title": "Mehr Qualität in der frühen Bildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "5e3d9906-4f75-4460-9cc7-2f0e7d6aea35",
+              "title": "Mehr Qualität in der frühen Bildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "37afcbc8-30ca-4b2b-be06-02ed39da0795",
+              "title": "Mehr Qualität in der frühen Bildung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/nationaler-aktionsplan-kinderchancen",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "53f21a90-0c2c-4a02-b417-6c702b51af77",
+              "title": "Nationaler Aktionsplan \"Neue Chancen für Kinder in Deutschland\"",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "a10dffd3-024c-4599-a298-db0ca6874df5",
+              "title": "Nationaler Aktionsplan \"Neue Chancen für Kinder in Deutschland\"",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "d2a0f65d-ffde-471d-8322-bd704db13223",
+              "title": "Nationaler Aktionsplan \"Neue Chancen für Kinder in Deutschland\"",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/schwangerschaft-und-kinderwunsch",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "c506fc92-db49-4018-aba8-4b9f8c2f5cc4",
+              "title": "Schwangerschaft und Kinderwunsch",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "fa7bb845-780e-48af-9be0-dda31ab9b6a8",
+              "title": "Schwangerschaft und Kinderwunsch",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "8346184a-cf23-4dc7-84ea-b27819e9dd3e",
+              "title": "Schwangerschaft und Kinderwunsch",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/smarte-gesellschaftspolitik",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "bda25a78-7f13-4f23-b538-08e1c996cc10",
+              "title": "Agenda für smarte Gesellschaftspolitik",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "5a23ed69-9267-4ae1-961d-98906b130a03",
+              "title": "Agenda für smarte Gesellschaftspolitik",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "b83d569b-e8c6-40fe-9077-5a41cb9a565d",
+              "title": "Agenda für smarte Gesellschaftspolitik",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/aufwertung-sozialer-berufe",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "91de6036-75f0-4eb4-96ee-30f64233bf03",
+              "title": "Politik für die Aufwertung sozialer Berufe",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "9a15eaa8-beb7-44cd-b899-ca26713087d5",
+              "title": "Politik für die Aufwertung sozialer Berufe",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "d254cce4-3398-42e1-90db-dc0684b6b812",
+              "title": "Politik für die Aufwertung sozialer Berufe",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/feministische-digitalpolitik",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "5380af77-f7c8-4ce1-83ce-69692a0c94a4",
+              "title": "Feministische Digitalpolitik",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "c8bdfa9f-4cbc-4a45-9e50-8adc1feb7a27",
+              "title": "Feministische Digitalpolitik",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "d8c15e31-6914-45d4-a51b-6aaa9c504c4b",
+              "title": "Feministische Digitalpolitik",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/frauen-und-arbeitswelt",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "983ecb30-e41b-4c29-810d-2e39de31094d",
+              "title": "Wirtschaftliche Gleichstellung, Frauen und Arbeitswelt",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "8b2ee8ae-e31b-431a-9b6d-0c1807345265",
+              "title": "Wirtschaftliche Gleichstellung, Frauen und Arbeitswelt",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "ea8308ba-22cc-4811-91c3-b7f9cf2af45c",
+              "title": "Wirtschaftliche Gleichstellung, Frauen und Arbeitswelt",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/frauen-vor-gewalt-schuetzen",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "fc6445c8-b934-422b-a340-2e4a32f2e353",
+              "title": "Frauen vor Gewalt schützen",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "bcaca84c-adc0-4ff6-a3ba-ff12338e7207",
+              "title": "Frauen vor Gewalt schützen",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "12286990-ce3e-407b-bfb0-9f8258fc9a2d",
+              "title": "Frauen vor Gewalt schützen",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/gender-care-gap",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "7aa42364-37bc-4dc0-a995-852b0b59e462",
+              "title": "Erwerbs- und Sorgearbeit gleichberechtigt gestalten",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "435d9633-5eaf-459e-80b0-9411d9b1aee5",
+              "title": "Erwerbs- und Sorgearbeit gleichberechtigt gestalten",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "91722984-cbbb-4336-92d3-f00aea3b736b",
+              "title": "Erwerbs- und Sorgearbeit gleichberechtigt gestalten",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/gleichstellung-und-teilhabe",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "9be1eb95-029c-471c-ad3b-5aac9d2de67c",
+              "title": "Gleichstellung und Teilhabe",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "876366b5-44ce-4524-b059-41fb0973daea",
+              "title": "Gleichstellung und Teilhabe",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "c4cac766-f0dc-4e77-902b-521d01b30167",
+              "title": "Gleichstellung und Teilhabe",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/gleichstellungsatlas",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "af107202-1e13-4035-91f2-e2456fe6b72e",
+              "title": "Digitaler Gleichstellungsatlas",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "eb3bc5d2-4e37-43da-b57e-ee8544e5a764",
+              "title": "Digitaler Gleichstellungsatlas",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "33732ec7-6f72-427a-b46f-33551e0801d4",
+              "title": "Digitaler Gleichstellungsatlas",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/internationale-gleichstellungspolitk",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "76ce4448-a5a3-4819-ae4b-9741129ff512",
+              "title": "Internationale Gleichstellungspolitik",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "4ea99e2b-1f5f-478b-8fca-ebb84830275c",
+              "title": "Internationale Gleichstellungspolitik",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "bbd6ced7-6b5a-45c5-b8ca-58578329314f",
+              "title": "Internationale Gleichstellungspolitik",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/internationale-gleichstellungspolitk/gleichstellungspolitik-in-europa",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "22bf81f7-336d-40d8-9a44-ccb74c9cbd28",
+              "title": "Gleichstellungspolitik in Europa",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "d4c6e759-96e7-463e-a3d1-febe1de66284",
+              "title": "Gleichstellungspolitik in Europa",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "43624ce9-1ef4-44b5-9ce0-d2e35a08b105",
+              "title": "Gleichstellungspolitik in Europa",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/jungen-und-maenner",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "2d921ac7-bf4c-4290-8983-8d3a042e7529",
+              "title": "Jungen und Männer",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "46c03ddc-f7bf-48da-8f3f-1ff03e0a63f6",
+              "title": "Jungen und Männer",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "815e9be6-4158-41f0-bf7c-b65bd090b155",
+              "title": "Jungen und Männer",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/gleichstellung/sexuelle-und-geschlechtliche-vielfalt",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "5efc1f1f-bfd6-4d9f-bbfd-756152905c77",
+              "title": "Sexuelle und geschlechtliche Vielfalt",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "ecc02774-0710-4056-b8e6-bc44cbadd338",
+              "title": "Sexuelle und geschlechtliche Vielfalt",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "058cb01c-d3d3-48ea-8e0b-766f7cc900a8",
+              "title": "Sexuelle und geschlechtliche Vielfalt",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/internationales/erasmus-plus",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "ea5a7e26-bc10-4314-b20b-3f7d8bcaa2d8",
+              "title": "Erasmus+",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "94386890-ca80-4887-b87a-1856d790c071",
+              "title": "Erasmus+",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "d60dccbe-d5c6-4975-a29f-6aa816f230a4",
+              "title": "Erasmus+",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/internationales/europaeischer-sozialfonds-esf",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "bdc0129d-7873-48f9-83ec-ea7d95ded3b7",
+              "title": "Europäischer Sozialfonds",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "228deb3b-c643-4778-912d-8ce5704d1821",
+              "title": "Europäischer Sozialfonds",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "c4cfae1d-1240-4795-a159-3e0d311eb698",
+              "title": "Europäischer Sozialfonds",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/internationales/internationale-familienpolitik",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "6811f2d1-5434-45ca-8010-b54c48fb5f7a",
+              "title": "Internationale Familienpolitik",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "c39681ec-94d5-4f2a-935a-d9e7c5a8010d",
+              "title": "Internationale Familienpolitik",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "2e80985c-5166-4daf-aa4c-7fdba07fe291",
+              "title": "Internationale Familienpolitik",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/internationales/internationale-jugendpolitik",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "33527b24-ad71-4498-b884-cf9f0fb4f775",
+              "title": "Internationale und europäische Jugendpolitik",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "ada06104-dea1-4ccf-a7d7-0cf6e2748da3",
+              "title": "Internationale und europäische Jugendpolitik",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "4b5c4ef5-5f97-478d-b184-1e18d27f6e33",
+              "title": "Internationale und europäische Jugendpolitik",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/internationales/internationale-jugendpolitik/internationale-und-europaeische-jugendpolitik",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "3bd5a567-51f3-4911-94ac-186f734a8314",
+              "title": "Internationale und europäische Jugendpolitik",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "0db3d36d-f668-444e-9b4f-f156165139b7",
+              "title": "Internationale und europäische Jugendpolitik",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "c2bc4190-7b14-4cc0-985d-0109da10512e",
+              "title": "Internationale und europäische Jugendpolitik",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/internationales/internationale-politik-fuer-demokratie-und-engagement",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "24dae101-d625-432e-90e2-9f76b34b114d",
+              "title": "Internationale Politik für Demokratie und Engagement",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "98f9bcb2-1cf2-4f3c-8848-7c7df1887f1e",
+              "title": "Internationale Politik für Demokratie und Engagement",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "f588e78d-4e1c-4846-9072-719db72aaa42",
+              "title": "Internationale Politik für Demokratie und Engagement",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend/integration-und-chancen-fuer-junge-menschen",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "77cea727-07d7-4dd3-bd4d-f893e639e966",
+              "title": "Integration und Chancen für junge Menschen",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "6e6ece35-3b2c-4601-8c6b-4488e63d3e2c",
+              "title": "Integration und Chancen für junge Menschen",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "d8e59309-86a3-4b1c-859a-643397d7a419",
+              "title": "Integration und Chancen für junge Menschen",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend/jugendbildung",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "44e477d7-193c-414d-ab64-6299bebcfbdf",
+              "title": "Jugendbildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "1f512d77-61a7-4baa-ad61-4ecb4ce4db19",
+              "title": "Jugendbildung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "0612fd36-ec92-4d88-bb49-da2c1c00c3be",
+              "title": "Jugendbildung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend/jugendbildung/jugendstrategie/jugendstrategie",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "c8873750-1960-470a-b16b-78becb397bfb",
+              "title": "Die Jugendstrategie der Bundesregierung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "eca9c11d-cd0e-43d6-8b2f-d663c257c128",
+              "title": "Die Jugendstrategie der Bundesregierung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "6c3e63cd-9c39-4bae-88fd-8f00f653cbae",
+              "title": "Die Jugendstrategie der Bundesregierung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend/kinder-und-jugendgesundheit",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "6f863442-0364-40af-8139-1b49de5d9448",
+              "title": "Kinder- und Jugendgesundheit",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "efa459ca-0828-48dc-bdab-c64c384d811a",
+              "title": "Kinder- und Jugendgesundheit",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "b22d4045-27b6-481a-bcd5-caa0be410434",
+              "title": "Kinder- und Jugendgesundheit",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend/kinder-und-jugendschutz",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "cf859bab-84fe-4e38-8d35-2c2bf034193a",
+              "title": "Kinder- und Jugendschutz",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "856ec256-aa50-4ee9-a697-a814d29a4c6e",
+              "title": "Kinder- und Jugendschutz",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "7900e26e-b8ea-4783-b055-73d4866cac14",
+              "title": "Kinder- und Jugendschutz",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend/kinder-und-jugendschutz/aktiver-jugendschutz",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "3b8b5842-f018-4aa1-8345-08120391afb1",
+              "title": "Aktiver Jugendschutz",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "cbd0d945-6cba-4102-9798-d1ce6a2784cf",
+              "title": "Aktiver Jugendschutz",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "dff696a1-a631-491b-9ab1-4d725aa15cb1",
+              "title": "Aktiver Jugendschutz",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend/kinderrechte",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "7c21848b-26d0-4282-8b37-894fa209ccc9",
+              "title": "Starke Kinder",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "66c2187e-24d1-48a4-9cbf-cc0171915db7",
+              "title": "Starke Kinder",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "28656670-ba76-47a9-a028-7445c1901bd3",
+              "title": "Starke Kinder",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend/medienkompetenz",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "9a10c08f-7cad-4625-94c1-0beed34b7f34",
+              "title": "Medienkompetenz",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "tools",
+              "id": "bca52f0b-3b68-490a-8649-7e5e1c16895f",
+              "title": "Medienkompetenz",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "5147ed7b-8568-40d8-87dc-afc9c774ad2f",
+              "title": "Medienkompetenz",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.drk.de/hilfe-in-deutschland",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "388dfa5d-083b-4bb6-a0c7-7d7c020795e0",
+              "title": "Leistungen Deutschland",
+              "tier": "tier_2_ngo_watchdog"
+            },
+            {
+              "domain": "contacts",
+              "id": "ed519796-f0a8-41cc-bcf5-28eddc8bd295",
+              "title": "Leistungen Deutschland",
+              "tier": "tier_2_ngo_watchdog"
+            }
+          ]
+        },
+        {
+          "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung",
+          "items": [
+            {
+              "domain": "aid",
+              "id": "c792eacb-bedc-444f-bdfa-02f800aba91d",
+              "title": "Schuldnerberatung",
+              "tier": "tier_2_ngo_watchdog"
+            },
+            {
+              "domain": "contacts",
+              "id": "86cb5d81-86cc-4224-a574-675b1700098d",
+              "title": "Schuldnerberatung",
+              "tier": "tier_2_ngo_watchdog"
+            }
+          ]
+        },
+        {
+          "url": "https://familienportal.de/familienportal",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "1b3ef911-b62a-4b28-90eb-5880c5ca57b5",
+              "title": "Familienportal",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "18d9f4f4-6666-4800-af39-514e7e0e8358",
+              "title": "Familienportal",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://familienportal.de/familienportal/lebenslagen/ausbildung-beruf/ausbildung-studium-mit-kind",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "d1d1f018-1fa1-4687-95ec-ae4c66d76f91",
+              "title": "Ausbildung & Studium mit Kind",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "a0d71083-331a-4f37-83bf-c277ab7b81ff",
+              "title": "Ausbildung & Studium mit Kind",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://familienportal.de/familienportal/lebenslagen/ausbildung-beruf/freiwilliges-engagement",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "a4dee588-d24f-4e66-b7ba-8bc63586473e",
+              "title": "Freiwilliges Engagement",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "806306a8-e3c1-46f1-868f-40c6830a5b33",
+              "title": "Freiwilliges Engagement",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://familienportal.de/familienportal/lebenslagen/ausbildung-beruf/kinderbetreuung",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "16e0917a-d586-4892-a06a-800fdf17a9f0",
+              "title": "Kinderbetreuung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "4c55123a-0055-421a-9388-1dfadaeb8dee",
+              "title": "Kinderbetreuung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://familienportal.de/familienportal/lebenslagen/ausbildung-beruf/selbststaendigkeit",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "79d60bf2-002c-41fe-93e6-2714373c7fb5",
+              "title": "Selbstständigkeit mit Kind",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "e5edbecb-c90a-4828-8fa3-57d4b3a1225e",
+              "title": "Selbstständigkeit mit Kind",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://familienportal.de/familienportal/lebenslagen/ausbildung-beruf/vereinbarkeit-familie-und-beruf",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "93f39e89-dbaf-459a-96bf-0edfe4aa47a5",
+              "title": "Vereinbarkeit Familie & Beruf",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "b9f161fb-84bf-4dc2-a183-3f8ad2a9e9f5",
+              "title": "Vereinbarkeit Familie & Beruf",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://familienportal.de/familienportal/lebenslagen/kinder-jugendliche/familienversicherung",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "47191dc9-8ee9-40ed-952e-96b2099c69a7",
+              "title": "Familienversicherung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "0a603f73-609f-49ee-bfd3-79d9b9abf5ab",
+              "title": "Familienversicherung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://familienportal.de/familienportal/lebenslagen/kinder-jugendliche/gesundheit-erholung",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "bf00db3c-b966-440a-92e5-2779c6bd1193",
+              "title": "Gesundheit & Erholung",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "7949c5bb-e4fb-4d00-a392-a2dac25b663a",
+              "title": "Gesundheit & Erholung",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://familienportal.de/familienportal/lebenslagen/kinder-jugendliche/kinder-jugendschutz",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "b140eabf-1883-41cd-9d8b-681525fd5b6d",
+              "title": "Kinder- & Jugendschutz",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "044d5708-6f92-473d-8ed6-7614c9dbd8e2",
+              "title": "Kinder- & Jugendschutz",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://familienportal.de/familienportal/lebenslagen/kinderwunsch-adoption/adoption",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "62bcfa2a-ba15-43ef-9b68-6d4090ed1f41",
+              "title": "Adoption",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "05b63e72-50c5-46d2-9577-2948710dc629",
+              "title": "Adoption",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://familienportal.de/familienportal/lebenslagen/kinderwunsch-adoption/kinderwunsch",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "2f63dc9b-0980-413c-8d7e-3456b6507061",
+              "title": "Kinderwunsch",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "b77a1188-f601-45f3-a8f1-79bed06f150d",
+              "title": "Kinderwunsch",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.arbeitsagentur.de/erklaerung-barrierefreiheit",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "aa24a8fb-34d2-4f3e-8712-8b0d8ffd6c5e",
+              "title": "Erklärung zur Barrierefreiheit",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "organizations",
+              "id": "dff469a9-6e09-4726-ac92-ca308b00476c",
+              "title": "Erklärung zur Barrierefreiheit",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "ca204451-5795-4348-9a22-2391b471a4aa",
+              "title": "Erklärung zur Barrierefreiheit",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.arbeitsagentur.de/gebaerdensprache",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "e3f4dcdc-e22d-42ca-9024-12f2e6c3cc57",
+              "title": "Informationen in Gebärdensprache",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "organizations",
+              "id": "52720823-c0bd-4877-9855-a21bf99515d5",
+              "title": "Informationen in Gebärdensprache",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "fd40478a-c442-487d-98ae-a81b754609e6",
+              "title": "Informationen in Gebärdensprache",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.arbeitsagentur.de/leichte-sprache",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "1842f5ba-c6b7-4062-b91c-419133f57d9b",
+              "title": "Herzlich willkommen auf der Internet-Seite von der Bundesagentur für Arbeit!",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "organizations",
+              "id": "e086ed5e-f48e-42c4-a6a3-63d9a4d1d6df",
+              "title": "Herzlich willkommen auf der Internet-Seite von der Bundesagentur für Arbeit!",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.arbeitsagentur.de/rechtliche-hinweise",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "eb5a363f-6f5b-4e78-bcc8-14465c9290e3",
+              "title": "Rechtliche Hinweise",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "organizations",
+              "id": "3c0ed1f6-1919-492e-9070-15a6da541d9a",
+              "title": "Rechtliche Hinweise",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "de005494-c6d4-4fc6-8303-e4feddce802d",
+              "title": "Rechtliche Hinweise",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.arbeitsagentur.de/service-bereich/so-erreichen-sie-uns",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "bfa54724-73b0-4696-8a4a-67bdabd0353e",
+              "title": "So erreichen Sie uns",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "b1482eb8-8abd-4edd-9b70-0e531188a0b6",
+              "title": "So erreichen Sie uns",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bafza.de/klartext",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "ccd97f55-248e-4f76-885b-6f932a547d80",
+              "title": "Klartext",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "5b85f265-eb03-4226-b806-c090cccde6f4",
+              "title": "Klartext",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bafza.de/ueber-das-bundesamt/wegbeschreibung/bafza-koeln",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "5a7f4f2b-5850-4bb7-845b-8d9e9274ed94",
+              "title": "BAFz A Köln",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "3bfbd479-9b28-4c83-9c79-6734e0cc6472",
+              "title": "BAFz A Köln",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "55636445-397d-485d-8848-1367ffc93eb8",
+              "title": "BMBFSFJ",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "organizations",
+              "id": "e7641fb6-e9ef-46d8-acf1-77f79850e1a5",
+              "title": "BMBFSFJ",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "587b6f51-ed58-4991-9560-1f66e2fd2cfb",
+              "title": "BMBFSFJ",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/aktuelles",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "c1fbea23-6704-47cd-9f30-3ba24ec8ed19",
+              "title": "Aktuell",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "organizations",
+              "id": "a949e1e5-03d5-4003-a58a-4b38bcdc753b",
+              "title": "Aktuell",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "07ddfdf0-4e1a-434b-965e-f3756d3b2efa",
+              "title": "Aktuell",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/erklaerung-zur-barrierefreiheit-135242",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "dec50ccb-950d-454b-a2e4-53669ba57064",
+              "title": "Erklärung zur Barrierefreiheit",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "organizations",
+              "id": "5964c8aa-5e29-4e41-b958-8a328efba8d7",
+              "title": "Erklärung zur Barrierefreiheit",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "4084742a-3fbc-4de8-bb26-9896914e956a",
+              "title": "Erklärung zur Barrierefreiheit",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/informationen-zur-verarbeitung-personenbezogener-daten-99428",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "86eb9e91-8b68-498d-bd99-2698f3ba1b38",
+              "title": "Informationen zur Verarbeitung personenbezogener Daten",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "organizations",
+              "id": "7a950bb6-88aa-4eeb-a980-97a4674b1aae",
+              "title": "Informationen zur Verarbeitung personenbezogener Daten",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "05fd512a-a5d0-418b-8ea3-211fd4a891b6",
+              "title": "Informationen zur Verarbeitung personenbezogener Daten",
+              "tier": "tier_1_official"
+            }
+          ]
+        },
+        {
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/informationsfreiheitsgesetz-99434",
+          "items": [
+            {
+              "domain": "tools",
+              "id": "e96e4a0d-349a-41e1-b4a0-ebc958fcb409",
+              "title": "Informationsfreiheitsgesetz",
+              "tier": "tier_1_official"
+            },
+            {
+              "domain": "contacts",
+              "id": "d0a55df4-ce90-4ece-a36e-667f406fd282",
+              "title": "Informationsfreiheitsgesetz",
+              "tier": "tier_1_official"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "lifeEventPacks": {
+    "totals": {
+      "scenarios": 20,
+      "unknownOrInvalidTier": 0,
+      "lowRelevance": 39,
+      "belowTarget": 8
+    },
+    "countsBySection": {
+      "documents": 20,
+      "contacts": 20,
+      "ngo_assistance": 20
+    },
+    "samples": {
+      "unknownOrInvalidTier": [],
+      "lowRelevance": [
+        {
+          "scenarioId": "job_loss_start",
+          "label": "Arbeitslos geworden (Neustart)",
+          "section": "contacts",
+          "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+          "url": "https://www.caritas.de/",
+          "domain": "contacts",
+          "sourceTier": "tier_3_ngo",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "job_loss_start",
+          "label": "Arbeitslos geworden (Neustart)",
+          "section": "ngo_assistance",
+          "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+          "url": "https://www.caritas.de/",
+          "domain": "contacts",
+          "sourceTier": "tier_3_ngo",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "job_loss_start",
+          "label": "Arbeitslos geworden (Neustart)",
+          "section": "ngo_assistance",
+          "title": "Wohnungslosigkeit: Sozialberatung und Notunterkunft finden",
+          "url": "https://www.diakonie.de/wissen-kompakt-wohnungs-und-obdachlosigkeit",
+          "domain": "aid",
+          "sourceTier": "tier_3_ngo",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "short_work_or_hours_cut",
+          "label": "Kurzarbeit / Stunden reduziert",
+          "section": "ngo_assistance",
+          "title": "Männerberatungsnetz • Beratungsangebote für Jungen, Männer und Väter.",
+          "url": "https://maennerberatungsnetz.de/",
+          "domain": "aid",
+          "sourceTier": "tier_2_ngo_watchdog",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "self_employment_failed",
+          "label": "Selbständigkeit gescheitert",
+          "section": "documents",
+          "title": "Selbstständigkeit mit Kind",
+          "url": "https://familienportal.de/familienportal/lebenslagen/ausbildung-beruf/selbststaendigkeit",
+          "domain": "tools",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "self_employment_failed",
+          "label": "Selbständigkeit gescheitert",
+          "section": "contacts",
+          "title": "Selbstständigkeit mit Kind",
+          "url": "https://familienportal.de/familienportal/lebenslagen/ausbildung-beruf/selbststaendigkeit",
+          "domain": "contacts",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "low_income_topup",
+          "label": "Niedriglohn / Aufstockung nötig",
+          "section": "ngo_assistance",
+          "title": "Männerberatungsnetz • Beratungsangebote für Jungen, Männer und Väter.",
+          "url": "https://maennerberatungsnetz.de/",
+          "domain": "aid",
+          "sourceTier": "tier_2_ngo_watchdog",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "upskilling",
+          "label": "Weiterbildung / Umschulung",
+          "section": "ngo_assistance",
+          "title": "Männerberatungsnetz • Beratungsangebote für Jungen, Männer und Väter.",
+          "url": "https://maennerberatungsnetz.de/",
+          "domain": "aid",
+          "sourceTier": "tier_2_ngo_watchdog",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "upskilling",
+          "label": "Weiterbildung / Umschulung",
+          "section": "ngo_assistance",
+          "title": "116016, Hilfetelefon bei Gewalt gegen Frauen",
+          "url": "https://onlineberatung.hilfetelefon.de/",
+          "domain": "aid",
+          "sourceTier": "tier_2_ngo_watchdog",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "family_children",
+          "label": "Kind(er) / Familie",
+          "section": "ngo_assistance",
+          "title": "Männerberatungsnetz • Beratungsangebote für Jungen, Männer und Väter.",
+          "url": "https://maennerberatungsnetz.de/",
+          "domain": "aid",
+          "sourceTier": "tier_2_ngo_watchdog",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "separation_divorce",
+          "label": "Trennung / Scheidung",
+          "section": "documents",
+          "title": "Merkblatt unterhaltsvorschussgesetz data",
+          "url": "https://www.bmbfsfj.bund.de/resource/blob/237134/5cc35c258d336dee0d36c4c6d09c5bed/merkblatt-unterhaltsvorschussgesetz-data.pdf",
+          "domain": "tools",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "separation_divorce",
+          "label": "Trennung / Scheidung",
+          "section": "documents",
+          "title": "Berufsberatung und Berufsorientierung",
+          "url": "https://www.bmas.de/DE/Arbeit/Aus-und-Weiterbildung/Berufliche-Ausbildung/Berufsberatung-und-Berufsorientierung/berufsberatung-und-berufsorientierung.html",
+          "domain": "aid",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "separation_divorce",
+          "label": "Trennung / Scheidung",
+          "section": "documents",
+          "title": "Anspruchsvoraussetzungen",
+          "url": "https://www.bmas.de/DE/Arbeit/Grundsicherung-Buergergeld/Anspruchsvoraussetzungen/anspruchsvoraussetzungen.html",
+          "domain": "benefits",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "separation_divorce",
+          "label": "Trennung / Scheidung",
+          "section": "documents",
+          "title": "Technischer Beratungsdienst",
+          "url": "https://www.arbeitsagentur.de/ueber-uns/technischer-beratungsdienst",
+          "domain": "aid",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "separation_divorce",
+          "label": "Trennung / Scheidung",
+          "section": "ngo_assistance",
+          "title": "Männerberatungsnetz • Beratungsangebote für Jungen, Männer und Väter.",
+          "url": "https://maennerberatungsnetz.de/",
+          "domain": "aid",
+          "sourceTier": "tier_2_ngo_watchdog",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "separation_divorce",
+          "label": "Trennung / Scheidung",
+          "section": "ngo_assistance",
+          "title": "Sozialberatung bei Energieschulden und drohender Abschaltung",
+          "url": "https://www.caritas.de/",
+          "domain": "contacts",
+          "sourceTier": "tier_3_ngo",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "separation_divorce",
+          "label": "Trennung / Scheidung",
+          "section": "ngo_assistance",
+          "title": "Schuldnerberatung",
+          "url": "https://www.drk.de/hilfe-in-deutschland/existenzsichernde-hilfe/schuldnerberatung",
+          "domain": "aid",
+          "sourceTier": "tier_2_ngo_watchdog",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "caregiving_relatives",
+          "label": "Pflege von Angehörigen übernommen",
+          "section": "contacts",
+          "title": "Staatliche Leistungen für Menschen mit Behinderung",
+          "url": "https://familienportal.de/familienportal/lebenslagen/leben-mit-behinderung/unterstuetzung-und-finanzielles",
+          "domain": "contacts",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "caregiving_relatives",
+          "label": "Pflege von Angehörigen übernommen",
+          "section": "ngo_assistance",
+          "title": "Leistungen Deutschland",
+          "url": "https://www.drk.de/hilfe-in-deutschland",
+          "domain": "aid",
+          "sourceTier": "tier_2_ngo_watchdog",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "migration_arrival",
+          "label": "Neu im Land",
+          "section": "documents",
+          "title": "Technischer Beratungsdienst",
+          "url": "https://www.arbeitsagentur.de/ueber-uns/technischer-beratungsdienst",
+          "domain": "aid",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "migration_arrival",
+          "label": "Neu im Land",
+          "section": "documents",
+          "title": "Maßnahme bei einem Träger (MAT) beantragen",
+          "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/massnahme-bei-traeger-beantragen",
+          "domain": "tools",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "unclear_residence_status",
+          "label": "Aufenthaltsstatus ungeklärt",
+          "section": "documents",
+          "title": "Integrationskurs und Sprachkurs: Beratung für Zugewanderte",
+          "url": "https://www.bamf.de/DE/Themen/Integration/ZugewanderteTeilnehmende/BeratungErwachsene/beratung-erwachsene-node.html",
+          "domain": "aid",
+          "sourceTier": "tier_1_official",
+          "overlap": 0.08
+        },
+        {
+          "scenarioId": "unclear_residence_status",
+          "label": "Aufenthaltsstatus ungeklärt",
+          "section": "documents",
+          "title": "Faire Integration",
+          "url": "https://www.bmas.de/DE/Arbeit/Arbeitsrecht/Arbeitnehmerrechte/Beratungsangebot-Faire-Integration/beratungsangebot-faire-integration.html",
+          "domain": "aid",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "unclear_residence_status",
+          "label": "Aufenthaltsstatus ungeklärt",
+          "section": "documents",
+          "title": "Sprachkurs und Aufenthaltsberatung für Neuzugewanderte",
+          "url": "https://www.make-it-in-germany.com/de/",
+          "domain": "aid",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "health_disruption",
+          "label": "Krank geworden",
+          "section": "documents",
+          "title": "Digitale Angebote der Sozialversicherung",
+          "url": "https://www.bmas.de/DE/Service/Digitale-Verwaltung/Digitale-Angebote-der-Sozialversicherung/digitale-angebote-der-sozialversicherung.html",
+          "domain": "tools",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "health_disruption",
+          "label": "Krank geworden",
+          "section": "contacts",
+          "title": "Bundesteilhabegesetz",
+          "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/Rehabilitation-und-Teilhabe/Bundesteilhabegesetz/bundesteilhabegesetz.html",
+          "domain": "contacts",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "health_disruption",
+          "label": "Krank geworden",
+          "section": "contacts",
+          "title": "Förderprogramm rehapro",
+          "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/Rehabilitation-und-Teilhabe/Foerderprogramm-rehapro/foerderprogramm-rehapro.html",
+          "domain": "contacts",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "long_term_work_incapacity",
+          "label": "Langfristig arbeitsunfähig",
+          "section": "documents",
+          "title": "Technischer Beratungsdienst",
+          "url": "https://www.arbeitsagentur.de/ueber-uns/technischer-beratungsdienst",
+          "domain": "aid",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "long_term_work_incapacity",
+          "label": "Langfristig arbeitsunfähig",
+          "section": "documents",
+          "title": "Berufliche Rehabilitation",
+          "url": "https://www.arbeitsagentur.de/menschen-mit-behinderungen/berufliche-rehabilitation",
+          "domain": "tools",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "long_term_work_incapacity",
+          "label": "Langfristig arbeitsunfähig",
+          "section": "documents",
+          "title": "Die wichtigsten Merkblätter, Formulare und Anträge der Familienkasse zum Download",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/downloads-familie-und-kinder",
+          "domain": "tools",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "long_term_work_incapacity",
+          "label": "Langfristig arbeitsunfähig",
+          "section": "contacts",
+          "title": "Bundesteilhabegesetz",
+          "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/Rehabilitation-und-Teilhabe/Bundesteilhabegesetz/bundesteilhabegesetz.html",
+          "domain": "contacts",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "long_term_work_incapacity",
+          "label": "Langfristig arbeitsunfähig",
+          "section": "contacts",
+          "title": "Persönliches Budget",
+          "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/Rehabilitation-und-Teilhabe/Persoenliches-Budget/persoenliches-budget.html",
+          "domain": "contacts",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "long_term_work_incapacity",
+          "label": "Langfristig arbeitsunfähig",
+          "section": "ngo_assistance",
+          "title": "Männerberatungsnetz • Beratungsangebote für Jungen, Männer und Väter.",
+          "url": "https://maennerberatungsnetz.de/",
+          "domain": "aid",
+          "sourceTier": "tier_2_ngo_watchdog",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "mental_burnout",
+          "label": "Psychische Belastung / Burnout",
+          "section": "documents",
+          "title": "Kinder- und Jugendgesundheit",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/kinder-und-jugend/kinder-und-jugendgesundheit",
+          "domain": "aid",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "mental_burnout",
+          "label": "Psychische Belastung / Burnout",
+          "section": "contacts",
+          "title": "Bundesteilhabegesetz",
+          "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/Rehabilitation-und-Teilhabe/Bundesteilhabegesetz/bundesteilhabegesetz.html",
+          "domain": "contacts",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "mental_burnout",
+          "label": "Psychische Belastung / Burnout",
+          "section": "contacts",
+          "title": "Förderprogramm rehapro",
+          "url": "https://www.bmas.de/DE/Soziales/Teilhabe-und-Inklusion/Rehabilitation-und-Teilhabe/Foerderprogramm-rehapro/foerderprogramm-rehapro.html",
+          "domain": "contacts",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "sanctions_conflict",
+          "label": "Sanktion / Widerspruch",
+          "section": "documents",
+          "title": "Technischer Beratungsdienst",
+          "url": "https://www.arbeitsagentur.de/ueber-uns/technischer-beratungsdienst",
+          "domain": "aid",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "sanctions_conflict",
+          "label": "Sanktion / Widerspruch",
+          "section": "documents",
+          "title": "Berufsberatung und Berufsorientierung",
+          "url": "https://www.bmas.de/DE/Arbeit/Aus-und-Weiterbildung/Berufliche-Ausbildung/Berufsberatung-und-Berufsorientierung/berufsberatung-und-berufsorientierung.html",
+          "domain": "aid",
+          "sourceTier": "tier_1_official",
+          "overlap": 0
+        },
+        {
+          "scenarioId": "sanctions_conflict",
+          "label": "Sanktion / Widerspruch",
+          "section": "contacts",
+          "title": "Sozialportal Beratungsstellensuche",
+          "url": "https://www.sozialportal.net/",
+          "domain": "contacts",
+          "sourceTier": "tier_2_ngo_watchdog",
+          "overlap": 0
+        }
+      ],
+      "belowTarget": [
+        {
+          "scenarioId": "self_employment_failed",
+          "label": "Selbständigkeit gescheitert",
+          "documents": 5,
+          "documentsMin": 5,
+          "contacts": 4,
+          "contactsMin": 5,
+          "ngoAssistance": 3,
+          "ngoAssistanceMin": 3
+        },
+        {
+          "scenarioId": "education_finished_no_income",
+          "label": "Ausbildung/Studium beendet ohne Einkommen",
+          "documents": 10,
+          "documentsMin": 5,
+          "contacts": 4,
+          "contactsMin": 5,
+          "ngoAssistance": 1,
+          "ngoAssistanceMin": 3
+        },
+        {
+          "scenarioId": "low_income_topup",
+          "label": "Niedriglohn / Aufstockung nötig",
+          "documents": 10,
+          "documentsMin": 5,
+          "contacts": 1,
+          "contactsMin": 5,
+          "ngoAssistance": 3,
+          "ngoAssistanceMin": 3
+        },
+        {
+          "scenarioId": "single_parent_new",
+          "label": "Alleinerziehend geworden",
+          "documents": 10,
+          "documentsMin": 5,
+          "contacts": 2,
+          "contactsMin": 5,
+          "ngoAssistance": 3,
+          "ngoAssistanceMin": 3
+        },
+        {
+          "scenarioId": "unclear_residence_status",
+          "label": "Aufenthaltsstatus ungeklärt",
+          "documents": 4,
+          "documentsMin": 5,
+          "contacts": 4,
+          "contactsMin": 5,
+          "ngoAssistance": 4,
+          "ngoAssistanceMin": 3
+        },
+        {
+          "scenarioId": "recognition_missing",
+          "label": "Anerkennung von Abschlüssen fehlt",
+          "documents": 3,
+          "documentsMin": 5,
+          "contacts": 4,
+          "contactsMin": 5,
+          "ngoAssistance": 0,
+          "ngoAssistanceMin": 3
+        },
+        {
+          "scenarioId": "housing_loss_homelessness_risk",
+          "label": "Wohnung verloren / drohende Obdachlosigkeit",
+          "documents": 4,
+          "documentsMin": 5,
+          "contacts": 2,
+          "contactsMin": 5,
+          "ngoAssistance": 5,
+          "ngoAssistanceMin": 3
+        },
+        {
+          "scenarioId": "energy_cost_unaffordable",
+          "label": "Energiekosten nicht bezahlbar",
+          "documents": 3,
+          "documentsMin": 5,
+          "contacts": 2,
+          "contactsMin": 5,
+          "ngoAssistance": 4,
+          "ngoAssistanceMin": 3
+        }
+      ]
+    }
+  },
+  "urlSeeds": {
+    "totals": {
+      "urls": 2126,
+      "missingTier": 2126
+    },
+    "byDomain": {
+      "benefits": 241,
+      "aid": 220,
+      "tools": 440,
+      "organizations": 655,
+      "contacts": 570
+    },
+    "topHosts": {
+      "bmbfsfj.bund.de": 670,
+      "bmas.de": 528,
+      "familienportal.de": 202,
+      "bafza.de": 153,
+      "arbeitsagentur.de": 146,
+      "fitko.de": 90,
+      "bundesregierung.de": 60,
+      "web.arbeitsagentur.de": 49,
+      "115.de": 43,
+      "wege-zur-pflege.de": 10,
+      "con.arbeitsagentur.de": 5,
+      "pausentaste.de": 5,
+      "caritas.de": 4,
+      "beauftragter-missbrauch.de": 4,
+      "bmfsfj.de": 3,
+      "hilfe-portal-missbrauch.de": 3,
+      "nummergegenkummer.de": 3,
+      "sanktionsfrei.de": 3,
+      "iab.de": 3,
+      "social.bund.de": 3,
+      "bundesamtsozialesicherung.de": 2,
+      "elterngeld-digital.de": 2,
+      "wiki.ubuntuusers.de": 2,
+      "ausschuss-fuer-mutterschutz.de": 2,
+      "bundesstiftung-mutter-und-kind.de": 2,
+      "hilfetelefon.de": 2,
+      "maennerberatungsnetz.de": 2,
+      "dajeb.de": 2,
+      "deutsche-depressionshilfe.de": 2,
+      "tiktok.com": 2
+    },
+    "samples": {
+      "missingTier": [
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/arbeitslosengeld-2",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/kurzarbeitergeld",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kindergeld/kindergeld-73892",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "http://bundesrecht.juris.de/bkgg_1996/index.html",
+          "host": "bundesrecht.juris.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "http://www.familien-wegweiser.de/Elterngeldrechner",
+          "host": "familien-wegweiser.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "http://www.familienportal.de/",
+          "host": "familienportal.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "http://www.gesetze-im-internet.de/estg/BJNR010050934.html",
+          "host": "gesetze-im-internet.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "http://www.wege-zur-pflege.de",
+          "host": "wege-zur-pflege.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://familienportal.de/",
+          "host": "familienportal.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://familienportal.de/familienportal/familienleistungen/elterngeld",
+          "host": "familienportal.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://familienportal.de/familienportal/familienleistungen/kindergeld",
+          "host": "familienportal.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://web.arbeitsagentur.de/kiz/ui/start",
+          "host": "web.arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://web.arbeitsagentur.de/kostaf/fallzuordnung",
+          "host": "web.arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://web.arbeitsagentur.de/opal/kgo-veraenderung-ui",
+          "host": "web.arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://web.arbeitsagentur.de/portal/metasuche/suche/dienststellen?in=familienkassen",
+          "host": "web.arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://web.arbeitsagentur.de/portal/metasuche/suche/information",
+          "host": "web.arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://web.arbeitsagentur.de/profil/profil-ui/pd",
+          "host": "web.arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/datenschutz",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/erklaerung-barrierefreiheit",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/auszahlungstermine",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/downloads-familie-und-kinder",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/familie-und-beruf-vereinbaren",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/informationen-zum-bildungspaket",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/kindergeld-anspruch-hoehe-dauer/kindergeld-antrag-starten",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/kindergeld-nach-ausbildung",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld/kindergeld-nach-schulabschluss",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/kindergeld-anspruch-hoehe-dauer",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kiz-lotse",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/veraenderungen-mitteilen",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/gebaerdensprache",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/impressum",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/karriere-und-weiterbildung/beruflich-wieder-einsteigen",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/leichte-sprache",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/rechtliche-hinweise",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/ueber-uns/familienkasse-der-ba",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/ukraine/ukraine-kindergeld",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/ukraine/ukraine-kindergeld-ru",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.arbeitsagentur.de/ukraine/ukraine-kindergeld-ua",
+          "host": "arbeitsagentur.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/aktuelles",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/aktuelles/alle-meldungen",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/aktuelles/presse",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/aktuelles/pressemitteilungen",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/aktuelles/reden-und-interviews",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/aktuelles/rss",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/erklaerung-zur-barrierefreiheit-135242",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/impressum-99480",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/informationen-zur-verarbeitung-personenbezogener-daten-99428",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/inhalt-107174",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/mediathek/ferienangebote-im-ganztag-278272",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/mediathek/karin-prien-empfaengt-katja-hintze-279164",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/meta/en",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/meta/gebaerdensprache",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/meta/leichte-sprache",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/service/publikationen/elterngeld-und-elternzeit--185102",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/service/publikationen/merkblatt-kindergeld-73894",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/aktiv-im-alter",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/berufsfeld-pflege",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/berufsfeld-pflege/neue-pflegeausbildungen",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/demenz",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/demenz/nationale-demenzstrategie",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/internationale-politik-fuer-aeltere-menschen",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/letzte-wege",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/vereinbarkeit-von-pflege-und-beruf",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/aeltere-menschen/zuhause-im-alter",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/ausbildung",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/ausserschulische-bildung",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/berufliche-bildung",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/bildungsforschung",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/fruehe-bildung",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/integration-durch-bildung",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/kommunales-bildungsmanagement",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/schule",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/bildung/weiterbildung",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/allianz-gegen-einsamkeit",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/bundesprogramm-demokratie-leben--73948",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/demografischer-wandel-und-nachhaltigkeit",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/deutsche-stiftung-fuer-engagement-und-ehrenamt",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/engagement-staerken",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/fluechtlingspolitik-und-integration",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/fluechtlingspolitik-und-integration/informationen-fuer-gefluechtete",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/freiwilligendienste",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/engagement-und-gesellschaft/mehrgenerationenhaeuser",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/chancen-und-teilhabe-fuer-familien",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familie-und-arbeitswelt",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/elterngeld",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/elterngeld/elterngeld-73752",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/elternzeit/elternzeit-73832",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        },
+        {
+          "domain": "benefits",
+          "url": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/freibetraege-fuer-kinder/freibetraege-fuer-kinder-73890",
+          "host": "bmbfsfj.bund.de",
+          "sourceTier": ""
+        }
+      ]
+    }
+  },
+  "severity": {
+    "critical": 0,
+    "warnings": 2295
+  }
+}

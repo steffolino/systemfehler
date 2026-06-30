@@ -42,6 +42,18 @@ for concrete topic questions such as `Wo kann ich Buergergeld beantragen?`, so
 the ranker can prefer application pages and responsible offices over merely
 related explainers.
 
+Curated direct source pins live in:
+
+- `data/_topics/life_event_source_pins.json`
+
+The pack builder merges these pins with per-scenario `resource_pins` from
+`life_events.json`. Pins must carry a classified `source_tier`; unknown or
+invalid tiers are not allowed into generated resource packs. Generated
+non-pinned resources must match the scenario on title/URL surface terms, not
+only buried page body text. If a scenario falls below the old quantity target,
+that is reported by `npm run audit:sources` and should be fixed with curated
+pins rather than generic fallback padding.
+
 Scenario processing implementation:
 
 - `cloudflare-pages/functions/api/_lib/ai.js`
@@ -102,6 +114,7 @@ Key files:
 - **Entry data:** `data/{benefits,aid,contacts,tools,organizations}/entries.json`
 - **Scenarios + detection keywords:** `data/_topics/life_events.json`
 - **Resource packs:** `data/_topics/life_event_resource_packs.json`
+- **Curated source pins:** `data/_topics/life_event_source_pins.json`
 - **Topic links:** `data/_topics/topic_links.json`
 - **Scorer/ranker:** `cloudflare-pages/functions/api/_lib/ai.js` → `localEvaluateEntries()`
 - **Gold fixture:** `tests/fixtures/life_event_gold_queries.json`

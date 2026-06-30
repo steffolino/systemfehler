@@ -25,6 +25,11 @@ def main() -> int:
         default="data",
         help="Base data directory containing <domain>/entries.json",
     )
+    parser.add_argument(
+        "--enrich-source-metadata",
+        action="store_true",
+        help="Fill missing/unknown source metadata from the source registry before each upload",
+    )
     args = parser.parse_args()
 
     root = pathlib.Path(__file__).resolve().parents[1]
@@ -52,6 +57,8 @@ def main() -> int:
             "--chunk-size",
             "250",
         ]
+        if args.enrich_source_metadata:
+            command.append("--enrich-source-metadata")
         print(f"Ingesting {domain} from {snapshot}...")
         result = subprocess.run(command, check=False)
         if result.returncode != 0:

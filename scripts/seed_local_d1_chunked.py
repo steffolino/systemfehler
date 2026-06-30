@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Seed local Wrangler D1 in chunks to avoid large-file execute timeouts.
+"""Seed Wrangler D1 in chunks to avoid large-file execute timeouts.
 
 Usage:
   python scripts/seed_local_d1_chunked.py \
@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import math
+import os
 import pathlib
 import subprocess
 import tempfile
@@ -39,12 +40,12 @@ def parse_sql_statements(seed_path: pathlib.Path) -> List[str]:
     return statements
 
 
-def run_chunk(database: str, chunk_file: pathlib.Path, cwd: pathlib.Path) -> None:
-    command = [
-        "cmd",
-        "/c",
-        f"npx wrangler d1 execute {database} --local --file {chunk_file}",
-    ]
+def run_chunk(database: str, chunk_file: pathlib.Path, cwd: pathlib.Path, remote: bool) -> None:
+    command = ["npx", "wrangler", "d1", "execute", database]
+    command.append("--remote" if remote else "--local")
+    command.extend(["--file", str(chunk_file)])
+    if os.name == "nt":
+        command = ["cmd", "/c", *command]
     completed = subprocess.run(
         command,
         cwd=cwd,
@@ -63,7 +64,7 @@ def run_chunk(database: str, chunk_file: pathlib.Path, cwd: pathlib.Path) -> Non
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Seed local D1 using chunked SQL execution.")
+    parser = argparse.ArgumentParser(description="Seed D1 using chunked SQL execution.")
     parser.add_argument("--database", default="systemfehler-db", help="D1 database name")
     parser.add_argument("--seed", required=True, help="Path to generated seed SQL file")
     parser.add_argument("--chunk-size", type=int, default=60, help="Statements per chunk")
@@ -72,6 +73,7 @@ def main() -> int:
         default="cloudflare-pages",
         help="Working directory where wrangler.toml lives",
     )
+    parser.add_argument("--remote", action="store_true", help="Seed the remote Cloudflare D1 database")
     args = parser.parse_args()
 
     seed_path = pathlib.Path(args.seed).resolve()
@@ -87,7 +89,8 @@ def main() -> int:
         return 0
 
     total_chunks = math.ceil(len(statements) / args.chunk_size)
-    print(f"Seeding {len(statements)} statements in {total_chunks} chunks...")
+    target = "remote" if args.remote else "local"
+    print(f"Seeding {len(statements)} statements in {total_chunks} chunks to {target} D1...")
 
     with tempfile.TemporaryDirectory(prefix="systemfehler-d1-seed-") as tmp_dir:
         tmp_path = pathlib.Path(tmp_dir)
@@ -98,9 +101,9 @@ def main() -> int:
             chunk_file = tmp_path / f"seed_chunk_{chunk_index + 1:04d}.sql"
             chunk_file.write_text("\n".join(chunk_statements) + "\n", encoding="utf-8")
             print(f"  chunk {chunk_index + 1}/{total_chunks} ({len(chunk_statements)} statements)")
-            run_chunk(args.database, chunk_file, wrangler_cwd)
+            run_chunk(args.database, chunk_file, wrangler_cwd, args.remote)
 
-    print("Local D1 seeding complete.")
+    print(f"{target.capitalize()} D1 seeding complete.")
     return 0
 
 

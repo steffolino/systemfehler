@@ -16,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from crawlers.shared.source_metadata_enrichment import enrich_entry_source_metadata  # noqa: E402
 from crawlers.shared.source_registry import SourceRegistry  # noqa: E402
 DEFAULT_DOMAINS = ["benefits", "aid", "tools", "organizations", "contacts"]
 MAX_CONTENT_LENGTH = 500_000
@@ -131,6 +132,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--min-ais", type=float, default=70.0)
     parser.add_argument("--min-content-length", type=int, default=140)
     parser.add_argument("--apply", action="store_true", help="Write merged snapshots back to disk")
+    parser.add_argument(
+        "--no-enrich-source-metadata",
+        action="store_true",
+        help="Do not fill missing/unknown source tiers from the source registry before promotion",
+    )
     return parser.parse_args()
 
 
@@ -248,7 +254,14 @@ def keep_candidate(
     return True, "accepted"
 
 
-def merge_domain(domain: str, min_iqs: float, min_ais: float, min_content_length: int, apply: bool) -> dict:
+def merge_domain(
+    domain: str,
+    min_iqs: float,
+    min_ais: float,
+    min_content_length: int,
+    apply: bool,
+    enrich_source_metadata: bool,
+) -> dict:
     domain_dir = ROOT / "data" / domain
     entries_path = domain_dir / "entries.json"
     candidates_path = domain_dir / "candidates.json"
@@ -258,7 +271,10 @@ def merge_domain(domain: str, min_iqs: float, min_ais: float, min_content_length
 
     existing_by_url = {}
     dropped_existing = 0
+    enriched_existing = 0
     for entry in existing_entries:
+        if enrich_source_metadata and enrich_entry_source_metadata(entry, domain, SOURCE_REGISTRY):
+            enriched_existing += 1
         if not entry.get("url"):
             continue
         title = best_text(entry, "title")
@@ -269,8 +285,11 @@ def merge_domain(domain: str, min_iqs: float, min_ais: float, min_content_length
         existing_by_url[normalize_url_key(str(entry.get("url")))] = entry
     promoted = []
     rejected = {}
+    enriched_candidates = 0
 
     for candidate in candidates:
+        if enrich_source_metadata and enrich_entry_source_metadata(candidate, domain, SOURCE_REGISTRY):
+            enriched_candidates += 1
         keep, reason = keep_candidate(candidate, domain, min_iqs, min_ais, min_content_length)
         if not keep:
             rejected[reason] = rejected.get(reason, 0) + 1
@@ -290,7 +309,7 @@ def merge_domain(domain: str, min_iqs: float, min_ais: float, min_content_length
     merged = list(existing_by_url.values())
     merged.sort(key=lambda item: (str(item.get("url") or ""), str(item.get("id") or "")))
 
-    if apply and (promoted or dropped_existing):
+    if apply and (promoted or dropped_existing or enriched_existing):
         write_entries(entries_path, domain, merged)
 
     return {
@@ -298,6 +317,8 @@ def merge_domain(domain: str, min_iqs: float, min_ais: float, min_content_length
         "existing": len(existing_entries),
         "candidates": len(candidates),
         "promoted": len(promoted),
+        "enriched_existing": enriched_existing,
+        "enriched_candidates": enriched_candidates,
         "total_after_merge": len(merged),
         "dropped_existing": dropped_existing,
         "rejected": rejected,
@@ -308,14 +329,22 @@ def merge_domain(domain: str, min_iqs: float, min_ais: float, min_content_length
 def main() -> int:
     args = parse_args()
     reports = [
-        merge_domain(domain, args.min_iqs, args.min_ais, args.min_content_length, args.apply)
+        merge_domain(
+            domain,
+            args.min_iqs,
+            args.min_ais,
+            args.min_content_length,
+            args.apply,
+            not args.no_enrich_source_metadata,
+        )
         for domain in args.domains
     ]
 
     for report in reports:
         print(
             f"{report['domain']}: existing={report['existing']} candidates={report['candidates']} "
-            f"promoted={report['promoted']} dropped_existing={report['dropped_existing']} "
+            f"promoted={report['promoted']} enriched_existing={report['enriched_existing']} "
+            f"enriched_candidates={report['enriched_candidates']} dropped_existing={report['dropped_existing']} "
             f"total={report['total_after_merge']} rejected={report['rejected']}"
         )
 

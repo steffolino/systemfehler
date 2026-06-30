@@ -17,6 +17,13 @@ import sys
 import urllib.error
 import urllib.request
 
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from crawlers.shared.source_metadata_enrichment import enrich_entry_source_metadata  # noqa: E402
+from crawlers.shared.source_registry import SourceRegistry  # noqa: E402
+from crawlers.shared.text_cleaning import clean_entry_text  # noqa: E402
+
 DEFAULT_MAX_BATCH_BYTES = 6_000_000
 
 
@@ -72,6 +79,11 @@ def main():
         default=int(os.environ.get('INGEST_MAX_BATCH_BYTES', DEFAULT_MAX_BATCH_BYTES)),
         help='Maximum JSON payload bytes per request',
     )
+    parser.add_argument(
+        '--enrich-source-metadata',
+        action='store_true',
+        help='Fill missing/unknown source metadata from the source registry before upload',
+    )
     args = parser.parse_args()
 
     ingest_url = os.environ.get('PAGES_INGEST_URL', '').rstrip('/') + '/api/admin/ingest'
@@ -98,6 +110,20 @@ def main():
     if not isinstance(entries, list):
         print('Error: snapshot must be a JSON array or an object with an entries array', file=sys.stderr)
         sys.exit(1)
+
+    if args.enrich_source_metadata:
+        registry = SourceRegistry(ROOT / 'data')
+        enriched = 0
+        for entry in entries:
+            if isinstance(entry, dict) and enrich_entry_source_metadata(entry, args.domain, registry):
+                enriched += 1
+        print(f'Enriched source metadata before ingest: {enriched}')
+
+    cleaned = 0
+    for entry in entries:
+        if isinstance(entry, dict) and clean_entry_text(entry):
+            cleaned += 1
+    print(f'Cleaned text before ingest: {cleaned}')
 
     # Fix multilingual fields for each entry
     def merge_multilingual(entry, base):

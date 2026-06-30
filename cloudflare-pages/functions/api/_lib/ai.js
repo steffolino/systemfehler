@@ -125,6 +125,8 @@ const SOURCE_TIER_RANK = {
   tier_3_press: 1,
   tier_4_academic: 1,
   tier_4_other: 0,
+  tier_5_contextual: 0,
+  tier_5_partisan_context: 0,
 };
 
 function parseJsonSafe(value, fallback = {}) {
@@ -1338,6 +1340,15 @@ function scoreEntry(query, entry, context = null, scenarioPack = null) {
     if (!q.includes('kinderzuschlag') && normalizedText.includes('kinderzuschlag')) score -= 10;
   }
 
+  if (
+    q.includes('kinderzuschlag') &&
+    (q.includes('wie viel') || q.includes('wie hoch') || q.includes('hoehe') || q.includes('betrag')) &&
+    title.includes('kinderzuschlag') &&
+    (title.includes('anspruch') || title.includes('hoehe') || url.includes('anspruch-hoehe-dauer'))
+  ) {
+    score += 28;
+  }
+
   if (url.includes('/meta/languages') || normalizedText.includes('oικογενειακές') || normalizedText.includes('paroches')) {
     score -= 60;
   }
@@ -1416,12 +1427,27 @@ function scoreEntry(query, entry, context = null, scenarioPack = null) {
   }
 
   if (scenarioPack && scenarioPack.resources) {
-    const urlMatches = (scenarioPack.resources.documents || []).some((item) => canonicalizeUrl(item.url) === url);
-    const ngoMatches = (scenarioPack.resources.ngo_assistance || []).some((item) => canonicalizeUrl(item.url) === url);
-    const contactMatches = (scenarioPack.resources.contacts || []).some((item) => canonicalizeUrl(item.url) === url);
+    const findPackItem = (items = []) => items.find((item) => canonicalizeUrl(item.url) === url) || null;
+    const urlMatchItem = findPackItem(scenarioPack.resources.documents || []);
+    const ngoMatchItem = findPackItem(scenarioPack.resources.ngo_assistance || []);
+    const contactMatchItem = findPackItem(scenarioPack.resources.contacts || []);
+    const packItem = urlMatchItem || ngoMatchItem || contactMatchItem;
+    const packSurface = normalizeGermanChars([
+      packItem?.title || '',
+      packItem?.url || '',
+      packItem?.domain || '',
+    ].join(' ').toLowerCase());
+    const packQueryHits = packItem
+      ? normalizedQueryTokens(query).filter((token) => packSurface.includes(normalizeGermanChars(token.toLowerCase()))).length
+      : 0;
+
+    const urlMatches = Boolean(urlMatchItem);
+    const ngoMatches = Boolean(ngoMatchItem);
+    const contactMatches = Boolean(contactMatchItem);
     if (urlMatches) score += 8;
     if (ngoMatches) score += 10;
     if (contactMatches) score += 12;
+    if (packQueryHits > 0) score += Math.min(24, packQueryHits * 12);
   }
 
   if (entry._curatedLifeEventBridge) {
@@ -1782,6 +1808,10 @@ function inferEvidenceMeta(item) {
   };
 }
 
+function isClassifiedEvidenceSource(meta) {
+  return getTierRank(meta.sourceTier) >= 0;
+}
+
 function splitEvidenceLanes(evidence) {
   const official = [];
   const assistive = [];
@@ -1790,6 +1820,10 @@ function splitEvidenceLanes(evidence) {
 
   for (const item of evidence) {
     const meta = inferEvidenceMeta(item);
+    if (!isClassifiedEvidenceSource(meta)) {
+      context.push(item);
+      continue;
+    }
     const tier = meta.sourceTier;
     const domain = String(meta.domain || '').toLowerCase();
     const institutionType = String(meta.institutionType || '').toLowerCase();
@@ -1847,6 +1881,11 @@ function filterEvidenceByPolicy(evidence, options) {
   for (const item of evidence) {
     const meta = inferEvidenceMeta(item);
     const tierRank = getTierRank(meta.sourceTier);
+
+    if (!isClassifiedEvidenceSource(meta)) {
+      droppedByPolicy += 1;
+      continue;
+    }
 
     if (Number(item.confidence || 0) < minConfidence) {
       droppedByPolicy += 1;
@@ -2778,7 +2817,7 @@ function filterLaneByQueryRelevance(query, evidence, { minMatches = 1, fallbackL
   return relevant.length > 0 ? relevant : scored.slice(0, fallbackLimit).map((entry) => entry.item);
 }
 
-function normalizeAnswerCitations(text) {
+export function normalizeAnswerCitations(text) {
   const sourceSet = new Set();
   const addSource = (url) => {
     const cleaned = String(url || '').trim().replace(/[.,;]+$/, '');
@@ -2788,12 +2827,16 @@ function normalizeAnswerCitations(text) {
   };
 
   return String(text || '')
+    .replace(/(^|\n)\s*\[\]\s*(?=\n|$)/g, '$1')
+    .replace(/(^|\n)\s*\[\]\s*(?=\[Quelle:?\]\(https?:\/\/)/gi, '$1')
     .replace(/\[(?:Quelle|Source):?\]\((https?:\/\/[^)\s]+)\)(?:\s+\[(?:https?:\/\/[^\]]+)\]\(\1\))?/gi, (_match, url) =>
       addSource(url)
     )
     .replace(/\[Quelle:\s*(https?:\/\/[^\]\s]+)\]/gi, (_match, url) => addSource(url))
     .replace(/\b(?:Quelle|Source):\s*(https?:\/\/\S+)/gi, (_match, url) => addSource(url))
     .replace(/\[(https?:\/\/[^\]\s]+)\]\(\1\)/gi, (_match, url) => addSource(url))
+    .replace(/\[\[Quelle:\s*(https?:\/\/[^\]\s]+)\]\]/gi, (_match, url) => addSource(url))
+    .replace(/\n{2,}(?=\[Quelle:\s*https?:\/\/)/gi, '\n')
     .split(/\r?\n/)
     .map((line) => line.trimEnd())
     .filter((line, index, lines) => {
@@ -3042,7 +3085,8 @@ function buildCuratedEvidenceFromScenarioResources(scenarioResources = []) {
       if (!url) continue;
       const domain = String(item?.domain || '').trim().toLowerCase() || 'aid';
       const title = String(item?.title || '').trim() || 'Quelle';
-      const sourceTier = String(item?.source_tier || '').trim().toLowerCase() || 'tier_2_official';
+      const sourceTier = String(item?.source_tier || '').trim().toLowerCase();
+      if (getTierRank(sourceTier) < 0) continue;
       const sourceRole =
         sourceTier.startsWith('tier_1_') || sourceTier === 'tier_2_official'
           ? 'official_info'

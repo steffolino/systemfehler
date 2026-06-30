@@ -10,6 +10,7 @@ const repoRoot = path.resolve(__dirname, '..');
 
 const DOMAINS = ['benefits', 'aid', 'tools', 'organizations', 'contacts'];
 const LIFE_EVENTS_FILE = path.join(repoRoot, 'data', '_topics', 'life_events.json');
+const CURATED_PINS_FILE = path.join(repoRoot, 'data', '_topics', 'life_event_source_pins.json');
 const OUTPUT_FILE = path.join(repoRoot, 'data', '_topics', 'life_event_resource_packs.json');
 
 const TARGETS = {
@@ -22,6 +23,13 @@ const TARGETS = {
 
 const OFFICIAL_TIERS = new Set(['tier_1_law', 'tier_1_official', 'tier_2_official']);
 const NGO_TIERS = new Set(['tier_2_ngo_watchdog', 'tier_3_ngo']);
+const VALID_TIERS = new Set([
+  ...OFFICIAL_TIERS,
+  ...NGO_TIERS,
+  'tier_3_press',
+  'tier_4_academic',
+  'tier_4_other',
+]);
 const CONTACT_HINTS = ['beratung', 'hotline', 'jobcenter', 'arbeitsagentur', 'telefon', 'kontakt', 'anlaufstelle'];
 
 function loadJson(file) {
@@ -30,7 +38,14 @@ function loadJson(file) {
 }
 
 function normalizeText(value) {
-  return String(value || '').toLowerCase();
+  return String(value || '')
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/ä/g, 'ae')
+    .replace(/ö/g, 'oe')
+    .replace(/ü/g, 'ue')
+    .replace(/ß/g, 'ss');
 }
 
 function localized(value) {
@@ -117,6 +132,27 @@ function pinnedEntries(entries, pins = []) {
     .filter(Boolean);
 }
 
+function mergePins(...pinGroups) {
+  const merged = {
+    documents: [],
+    contacts: [],
+    ngo_assistance: [],
+  };
+  const seen = new Set();
+  for (const pins of pinGroups) {
+    if (!pins || typeof pins !== 'object') continue;
+    for (const section of Object.keys(merged)) {
+      for (const pin of pins[section] || []) {
+        const key = `${section}:${pin?.url || ''}`;
+        if (!pin?.url || seen.has(key)) continue;
+        seen.add(key);
+        merged[section].push(pin);
+      }
+    }
+  }
+  return merged;
+}
+
 function score(entry, scenario) {
   let s = 0;
   const text = entry.blob;
@@ -143,13 +179,33 @@ function score(entry, scenario) {
   return s;
 }
 
-function pickScenarioPack(entries, scenario, ngoFallback) {
+function surfaceScore(entry, scenario) {
+  const text = normalizeText([entry.title, entry.url, entry.domain].join(' '));
+  let s = 0;
+  for (const term of scenario.keywords || []) {
+    if (text.includes(normalizeText(term))) s += 3;
+  }
+  for (const term of scenario.expansions || []) {
+    if (text.includes(normalizeText(term))) s += 2;
+  }
+  for (const term of Object.values(scenario.resource_targets || {}).flat()) {
+    if (text.includes(normalizeText(term))) s += 1.5;
+  }
+  return s;
+}
+
+function pickScenarioPack(entries, scenario, ngoFallback, curatedPins) {
   const blockedAny = Array.isArray(scenario.relevance_guard?.blocked_any)
     ? scenario.relevance_guard.blocked_any.map((s) => normalizeText(s))
     : [];
-  const allowedEntries = blockedAny.length > 0
-    ? entries.filter((e) => !blockedAny.some((sig) => e.blob.includes(sig)))
-    : entries;
+  const requiredAny = Array.isArray(scenario.relevance_guard?.required_any)
+    ? scenario.relevance_guard.required_any.map((s) => normalizeText(s))
+    : [];
+  const allowedEntries = entries.filter((e) => {
+    if (blockedAny.some((sig) => e.blob.includes(sig))) return false;
+    if (requiredAny.length > 0 && !requiredAny.some((sig) => e.blob.includes(sig))) return false;
+    return true;
+  });
 
   const ranked = allowedEntries
     .map((entry) => ({ entry, score: score(entry, scenario) }))
@@ -157,21 +213,27 @@ function pickScenarioPack(entries, scenario, ngoFallback) {
     .sort((a, b) => b.score - a.score)
     .map((x) => x.entry);
 
-  const pinnedDocuments = pinnedEntries(entries, scenario.resource_pins?.documents);
-  const pinnedContacts = pinnedEntries(entries, scenario.resource_pins?.contacts);
-  const pinnedNgo = pinnedEntries(entries, scenario.resource_pins?.ngo_assistance);
+  const pins = mergePins(curatedPins[scenario.id], scenario.resource_pins);
+  const pinnedDocuments = pinnedEntries(entries, pins.documents).filter((e) => VALID_TIERS.has(e.sourceTier));
+  const pinnedContacts = pinnedEntries(entries, pins.contacts).filter((e) => VALID_TIERS.has(e.sourceTier));
+  const pinnedNgo = pinnedEntries(entries, pins.ngo_assistance).filter((e) => VALID_TIERS.has(e.sourceTier));
 
   const docs = uniqByUrl([
     ...pinnedDocuments,
-    ...ranked.filter((e) => e.domain !== 'contacts' && OFFICIAL_TIERS.has(e.sourceTier)),
+    ...ranked.filter((e) =>
+      e.domain !== 'contacts' &&
+      OFFICIAL_TIERS.has(e.sourceTier) &&
+      surfaceScore(e, scenario) > 0
+    ),
   ]
   ).slice(0, TARGETS.docsMax);
 
   const contacts = uniqByUrl([
     ...pinnedContacts,
     ...ranked.filter((e) =>
-      e.domain === 'contacts' ||
-      CONTACT_HINTS.some((hint) => e.blob.includes(hint))
+      VALID_TIERS.has(e.sourceTier) &&
+      e.domain === 'contacts' &&
+      surfaceScore(e, scenario) > 0
     ),
   ]
   ).slice(0, TARGETS.contacts);
@@ -179,15 +241,23 @@ function pickScenarioPack(entries, scenario, ngoFallback) {
   let ngo = uniqByUrl([
     ...pinnedNgo,
     ...ranked.filter((e) =>
+      VALID_TIERS.has(e.sourceTier) &&
       e.domain !== 'organizations' &&
-      (e.institutionType === 'ngo' || NGO_TIERS.has(e.sourceTier))
+      (e.institutionType === 'ngo' || NGO_TIERS.has(e.sourceTier)) &&
+      surfaceScore(e, scenario) > 0
     ),
   ]
   ).slice(0, TARGETS.ngoMax);
 
   if (ngo.length < TARGETS.ngoMin) {
     const missing = TARGETS.ngoMin - ngo.length;
-    const supplement = ngoFallback.filter((e) => !ngo.some((n) => n.url === e.url)).slice(0, missing);
+    const supplement = ngoFallback
+      .map((entry) => ({ entry, score: score(entry, scenario) }))
+      .filter((item) => item.score >= 1.5 && surfaceScore(item.entry, scenario) > 0)
+      .sort((a, b) => b.score - a.score)
+      .map((item) => item.entry)
+      .filter((e) => !ngo.some((n) => n.url === e.url))
+      .slice(0, missing);
     ngo = [...ngo, ...supplement];
   }
 
@@ -204,6 +274,8 @@ function pickScenarioPack(entries, scenario, ngoFallback) {
 
 function main() {
   const lifeEvents = loadJson(LIFE_EVENTS_FILE);
+  const curatedPinsPayload = fs.existsSync(CURATED_PINS_FILE) ? loadJson(CURATED_PINS_FILE) : {};
+  const curatedPins = curatedPinsPayload?.scenarios || {};
   const scenarios = Array.isArray(lifeEvents?.scenarios) ? lifeEvents.scenarios : [];
   const entries = collectEntries();
   const previousOutput = fs.existsSync(OUTPUT_FILE) ? loadJson(OUTPUT_FILE) : null;
@@ -212,7 +284,7 @@ function main() {
     e.domain !== 'organizations' && (e.institutionType === 'ngo' || NGO_TIERS.has(e.sourceTier))
   )).slice(0, 10);
 
-  const packs = scenarios.map((scenario) => pickScenarioPack(entries, scenario, ngoFallback));
+  const packs = scenarios.map((scenario) => pickScenarioPack(entries, scenario, ngoFallback, curatedPins));
 
   const output = {
     version: '1.0.0',
@@ -235,7 +307,9 @@ function main() {
   console.log(`Generated ${OUTPUT_FILE}`);
   console.log(`Scenarios: ${packs.length}`);
   console.log(`Scenarios below target: ${missing}`);
-  if (missing > 0) process.exitCode = 2;
+  if (missing > 0) {
+    console.log('Below-target scenarios are allowed; add curated pins instead of broad fallback padding.');
+  }
 }
 
 main();

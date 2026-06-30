@@ -76,9 +76,12 @@ type RegisteredSourceRecord = {
   id?: string;
   name?: string;
   baseUrl?: string;
+  hosts?: string[];
   sourceTier?: string;
   institutionType?: string;
   jurisdiction?: string;
+  domains?: string[];
+  status?: string;
   defaultTags?: string[];
 };
 
@@ -91,12 +94,8 @@ const REGISTERED_SOURCE_LOOKUP = (() => {
   const payload = registeredSources as { sources?: RegisteredSourceRecord[] };
 
   for (const source of payload.sources || []) {
-    if (!source.baseUrl) continue;
-    try {
-      const host = new URL(source.baseUrl).hostname.replace(/^www\./, '');
+    for (const host of getRegisteredSourceHosts(source)) {
       lookup.set(host, source);
-    } catch {
-      continue;
     }
   }
 
@@ -533,6 +532,56 @@ interface SourceCatalogItem {
 
 type SourceRole = 'official_info' | 'trusted_tool' | 'context_info';
 
+function normalizeHost(value: string): string {
+  try {
+    const parsed = new URL(value.includes('://') ? value : `https://${value}`);
+    return parsed.hostname.replace(/^www\./, '');
+  } catch {
+    return value.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0] || 'unknown';
+  }
+}
+
+function getRegisteredSourceHosts(source: RegisteredSourceRecord): string[] {
+  const hosts = new Set<string>();
+  if (source.baseUrl) hosts.add(normalizeHost(source.baseUrl));
+  for (const host of source.hosts || []) {
+    if (host) hosts.add(normalizeHost(host));
+  }
+  return Array.from(hosts).filter(Boolean);
+}
+
+function getRegisteredSourceRole(source: Pick<RegisteredSourceRecord, 'id' | 'sourceTier' | 'institutionType' | 'defaultTags'>): SourceRole {
+  const sourceTier = String(source.sourceTier || '').trim();
+  const sourceId = String(source.id || '').trim();
+  const institutionType = String(source.institutionType || '').trim();
+  const defaultTags = Array.isArray(source.defaultTags) ? source.defaultTags : [];
+
+  if (
+    sourceTier === 'tier_1_official' ||
+    sourceTier === 'tier_2_official' ||
+    sourceId === 'service115' ||
+    sourceId === 'gebaerdentelefon'
+  ) {
+    return 'official_info';
+  }
+
+  if (
+    sourceTier === 'tier_2_ngo_watchdog' ||
+    sourceTier === 'tier_3_ngo' ||
+    sourceId === 'sozialportal' ||
+    sourceId === 'dasstehtdirzu' ||
+    defaultTags.includes('calculator') ||
+    defaultTags.includes('advisory') ||
+    defaultTags.includes('directory') ||
+    institutionType === 'advisory' ||
+    institutionType === 'ngo'
+  ) {
+    return 'trusted_tool';
+  }
+
+  return 'context_info';
+}
+
 interface PlainLanguageReviewResponse {
   entry: Entry;
   mode: 'einfach' | 'leicht';
@@ -925,22 +974,18 @@ function getEntrySourceMeta(entry: Entry) {
   const defaultTags =
     Array.isArray(inferred?.defaultTags) ? inferred.defaultTags : [];
 
-  let sourceRole: SourceRole = 'context_info';
+  let sourceRole = getRegisteredSourceRole({
+    id: sourceId,
+    sourceTier,
+    institutionType,
+    defaultTags,
+  });
   if (
-    sourceTier === 'tier_1_official' ||
-    sourceId === 'service115' ||
-    sourceId === 'gebaerdentelefon'
-  ) {
-    sourceRole = 'official_info';
-  } else if (
-    entry.domain === 'tools' ||
-    sourceId === 'sozialportal' ||
-    sourceId === 'dasstehtdirzu' ||
-    sourceId === 'familienportal' && lowerUrl.includes('lotse') ||
-    lowerUrl.includes('/rechner') ||
-    lowerUrl.includes('kiz-lotse') ||
-    defaultTags.includes('calculator') ||
-    institutionType === 'advisory'
+    sourceRole !== 'official_info' &&
+    (entry.domain === 'tools' ||
+      (sourceId === 'familienportal' && lowerUrl.includes('lotse')) ||
+      lowerUrl.includes('/rechner') ||
+      lowerUrl.includes('kiz-lotse'))
   ) {
     sourceRole = 'trusted_tool';
   }
@@ -964,17 +1009,49 @@ function getSourceRoleLabel(role: SourceRole, locale: keyof MultilingualText = '
         }
       : {
           official_info: 'Amtliche Info',
-          trusted_tool: 'Vertrauenswürdiges Werkzeug',
+          trusted_tool: 'Geprüfte Hilfe / Werkzeug',
           context_info: 'Kontext',
         };
   return labels[role];
+}
+
+function getSourceTierLabel(sourceTier: string, locale: keyof MultilingualText = 'de'): string {
+  const normalized = String(sourceTier || '').trim();
+  const labels =
+    locale === 'en'
+      ? {
+          tier_1_law: 'Law / regulation',
+          tier_1_official: 'Official source',
+          tier_2_official: 'Official-adjacent source',
+          tier_2_ngo_watchdog: 'Reviewed NGO / watchdog',
+          tier_3_ngo: 'NGO / counselling',
+          tier_3_press: 'Press context',
+          tier_4_academic: 'Academic context',
+          tier_4_other: 'Other classified source',
+          tier_5_contextual: 'Context source',
+          tier_5_partisan_context: 'Partisan context',
+        }
+      : {
+          tier_1_law: 'Gesetz / Verordnung',
+          tier_1_official: 'Amtliche Quelle',
+          tier_2_official: 'Amtlich-nahe Quelle',
+          tier_2_ngo_watchdog: 'Geprüfte NGO / Watchdog',
+          tier_3_ngo: 'NGO / Beratung',
+          tier_3_press: 'Presse-Kontext',
+          tier_4_academic: 'Wissenschaftlicher Kontext',
+          tier_4_other: 'Sonstige klassifizierte Quelle',
+          tier_5_contextual: 'Kontextquelle',
+          tier_5_partisan_context: 'Parteipolitischer Kontext',
+        };
+
+  return labels[normalized as keyof typeof labels] || '';
 }
 
 export function getEntryTitleText(entry: Pick<Entry, 'title' | 'title_de' | 'title_en'>, locale: keyof MultilingualText = 'de'): string {
   return getLocalizedTitle(entry.title, locale === 'en' ? entry.title_en ?? entry.title_de ?? '' : entry.title_de, locale);
 }
 
-export { getEntrySourceMeta, getSourceRoleLabel };
+export { getEntrySourceMeta, getSourceRoleLabel, getSourceTierLabel };
 
 function normalizeEntriesPayload(payload: unknown, domainFallback?: string): Entry[] {
   const payloadRecord = isJsonRecord(payload) ? payload : null;
@@ -1061,14 +1138,16 @@ function filterEntries(entries: Entry[], params?: {
       switch (entry.provenance?.sourceTier) {
         case 'tier_1_official':
           return 0;
-        case 'tier_2_ngo_watchdog':
+        case 'tier_2_official':
           return 1;
-        case 'tier_4_academic':
+        case 'tier_2_ngo_watchdog':
           return 2;
-        case 'tier_3_press':
+        case 'tier_4_academic':
           return 3;
-        default:
+        case 'tier_3_press':
           return 4;
+        default:
+          return 5;
       }
     };
 
@@ -1152,10 +1231,18 @@ async function getAllEntriesForCatalog(): Promise<Entry[]> {
 }
 
 function buildSourceCatalog(entries: Entry[]): SourceCatalogItem[] {
-  const groups = new Map<string, SourceCatalogItem>();
+  const statsByHost = new Map<string, {
+    entryCount: number;
+    domains: Set<string>;
+    iqsSum: number;
+    iqsCount: number;
+    aisSum: number;
+    aisCount: number;
+    lastSeen: string | null;
+    sampleUrl: string | null;
+  }>();
 
   for (const entry of entries) {
-    const meta = getEntrySourceMeta(entry);
     const host = (() => {
       try {
         return new URL(entry.url).hostname.replace(/^www\./, '');
@@ -1163,49 +1250,90 @@ function buildSourceCatalog(entries: Entry[]): SourceCatalogItem[] {
         return 'unknown';
       }
     })();
-    const id = `${meta.source.toLowerCase()}::${host}`;
-    const current = groups.get(id);
     const iqs = Number(entry.iqs ?? entry.qualityScores?.iqs ?? 0);
     const ais = Number(entry.ais ?? entry.qualityScores?.ais ?? 0);
     const lastSeen = entry.lastSeen || entry.last_seen || entry.updatedAt || entry.updated_at || null;
-
-    if (!current) {
-      groups.set(id, {
-        id,
-        name: meta.source,
-        host,
-        sourceTier: meta.sourceTier,
-        institutionType: meta.institutionType,
-        jurisdiction: meta.jurisdiction,
-        sourceRole: meta.sourceRole,
-        entryCount: 1,
-        domains: [entry.domain],
-        avgIqs: Number.isFinite(iqs) ? iqs : null,
-        avgAis: Number.isFinite(ais) ? ais : null,
-        lastSeen,
-        sampleUrl: entry.url,
-      });
-      continue;
-    }
+    const current = statsByHost.get(host) || {
+      entryCount: 0,
+      domains: new Set<string>(),
+      iqsSum: 0,
+      iqsCount: 0,
+      aisSum: 0,
+      aisCount: 0,
+      lastSeen: null,
+      sampleUrl: null,
+    };
 
     current.entryCount += 1;
-    if (!current.domains.includes(entry.domain)) {
-      current.domains.push(entry.domain);
+    current.domains.add(entry.domain);
+    if (Number.isFinite(iqs) && iqs > 0) {
+      current.iqsSum += iqs;
+      current.iqsCount += 1;
     }
-    current.avgIqs =
-      current.avgIqs == null
-        ? (Number.isFinite(iqs) ? iqs : null)
-        : (current.avgIqs * (current.entryCount - 1) + (Number.isFinite(iqs) ? iqs : 0)) / current.entryCount;
-    current.avgAis =
-      current.avgAis == null
-        ? (Number.isFinite(ais) ? ais : null)
-        : (current.avgAis * (current.entryCount - 1) + (Number.isFinite(ais) ? ais : 0)) / current.entryCount;
+    if (Number.isFinite(ais) && ais > 0) {
+      current.aisSum += ais;
+      current.aisCount += 1;
+    }
     if (lastSeen && (!current.lastSeen || new Date(lastSeen).getTime() > new Date(current.lastSeen).getTime())) {
       current.lastSeen = lastSeen;
     }
+    current.sampleUrl ||= entry.url;
+    statsByHost.set(host, current);
   }
 
-  return Array.from(groups.values()).sort((a, b) => {
+  const payload = registeredSources as { sources?: RegisteredSourceRecord[] };
+  const catalog = (payload.sources || [])
+    .filter((source) => String(source.status || 'active') === 'active')
+    .map((source): SourceCatalogItem => {
+      const hosts = getRegisteredSourceHosts(source);
+      const combined = hosts.reduce(
+        (acc, host) => {
+          const stats = statsByHost.get(host);
+          if (!stats) return acc;
+          acc.entryCount += stats.entryCount;
+          for (const domain of stats.domains) acc.domains.add(domain);
+          acc.iqsSum += stats.iqsSum;
+          acc.iqsCount += stats.iqsCount;
+          acc.aisSum += stats.aisSum;
+          acc.aisCount += stats.aisCount;
+          if (stats.lastSeen && (!acc.lastSeen || new Date(stats.lastSeen).getTime() > new Date(acc.lastSeen).getTime())) {
+            acc.lastSeen = stats.lastSeen;
+          }
+          acc.sampleUrl ||= stats.sampleUrl;
+          return acc;
+        },
+        {
+          entryCount: 0,
+          domains: new Set<string>(),
+          iqsSum: 0,
+          iqsCount: 0,
+          aisSum: 0,
+          aisCount: 0,
+          lastSeen: null as string | null,
+          sampleUrl: null as string | null,
+        }
+      );
+      const registryDomains = Array.isArray(source.domains) ? source.domains : [];
+      const domains = Array.from(new Set([...registryDomains, ...Array.from(combined.domains)]));
+
+      return {
+        id: source.id || hosts[0] || source.name || 'unknown',
+        name: source.name || hosts[0] || 'Unknown source',
+        host: hosts[0] || 'unknown',
+        sourceTier: source.sourceTier || 'unknown',
+        institutionType: source.institutionType || 'unknown',
+        jurisdiction: source.jurisdiction || 'unknown',
+        sourceRole: getRegisteredSourceRole(source),
+        entryCount: combined.entryCount,
+        domains,
+        avgIqs: combined.iqsCount > 0 ? combined.iqsSum / combined.iqsCount : null,
+        avgAis: combined.aisCount > 0 ? combined.aisSum / combined.aisCount : null,
+        lastSeen: combined.lastSeen,
+        sampleUrl: combined.sampleUrl || source.baseUrl || null,
+      };
+    });
+
+  return catalog.sort((a, b) => {
     const tierSort = a.sourceTier.localeCompare(b.sourceTier);
     if (tierSort !== 0) return tierSort;
     return b.entryCount - a.entryCount;

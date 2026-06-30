@@ -1,0 +1,819 @@
+{
+  "version": "0.1.0",
+  "description": "Curated scenario source pins. These supplement life_events.json and must use classified source_tier values.",
+  "source_note": "Seeded from a reviewed direct-link source list; keep official/legal sources in documents, local finders in contacts, and welfare or NGO advice in ngo_assistance.",
+  "scenarios": {
+    "job_loss_start": {
+      "documents": [
+        {
+          "title": "Arbeitslos melden und Arbeitslosengeld beantragen",
+          "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/arbeitslosengeld",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Buergergeld und Jobcenter.digital",
+          "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "Arbeitsagentur und Jobcenter vor Ort finden",
+          "url": "https://web.arbeitsagentur.de/portal/metasuche/suche/dienststellen",
+          "domain": "contacts",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Caritas: Hilfe und Beratung finden",
+          "url": "https://www.caritas.de/hilfeundberatung/hilfeundberatung",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "Diakonie: Armut und gesellschaftliche Teilhabe",
+          "url": "https://www.diakonie.de/informieren/unsere-themen/armut-beteiligung",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        },
+        {
+          "title": "Tacheles: Sozialhilfe und SGB II Fachinformationen",
+          "url": "https://www.tacheles-sozialhilfe.de/",
+          "domain": "aid",
+          "source_tier": "tier_2_ngo_watchdog"
+        }
+      ]
+    },
+    "short_work_or_hours_cut": {
+      "documents": [
+        {
+          "title": "Bundesagentur fuer Arbeit: Kurzarbeitergeld",
+          "url": "https://www.arbeitsagentur.de/unternehmen/finanziell/kurzarbeitergeld-uebersicht-kurzarbeitergeldformen",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "BMAS: Kurzarbeitergeld",
+          "url": "https://www.bmas.de/DE/Arbeit/Arbeitsfoerderung/Kurzarbeitergeld/kurzarbeitergeld.html",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Buergergeld als ergaenzende Leistung",
+          "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "Arbeitsagentur und Jobcenter vor Ort finden",
+          "url": "https://web.arbeitsagentur.de/portal/metasuche/suche/dienststellen",
+          "domain": "contacts",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Caritas: Allgemeine Sozialberatung online",
+          "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/start",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "DGB: Ratgeber Kurzarbeit",
+          "url": "https://www.dgb.de/service/ratgeber/kurzarbeit/",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        }
+      ]
+    },
+    "self_employment_failed": {
+      "documents": [
+        {
+          "title": "Buergergeld nach Aufgabe der Selbststaendigkeit",
+          "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "Caritas: Schuldnerberatung online",
+          "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/schuldnerberatung/start",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        },
+        {
+          "title": "Diakonie: Schuldnerberatung",
+          "url": "https://www.diakonie.de/wissen-kompakt-schuldnerberatung",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "Bundesarbeitsgemeinschaft Schuldnerberatung",
+          "url": "https://www.bag-sb.de/",
+          "domain": "aid",
+          "source_tier": "tier_2_ngo_watchdog"
+        },
+        {
+          "title": "Tacheles: Sozialrechtliche Fachinformationen",
+          "url": "https://www.tacheles-sozialhilfe.de/",
+          "domain": "aid",
+          "source_tier": "tier_2_ngo_watchdog"
+        }
+      ]
+    },
+    "education_finished_no_income": {
+      "documents": [
+        {
+          "title": "Arbeitslos melden und Arbeitslosengeld beantragen",
+          "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/arbeitslosengeld",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Bundesagentur fuer Arbeit: Berufsberatung",
+          "url": "https://www.arbeitsagentur.de/bildung/berufsberatung",
+          "domain": "aid",
+          "source_tier": "tier_1_official"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "Arbeitsagentur und Jobcenter vor Ort finden",
+          "url": "https://web.arbeitsagentur.de/portal/metasuche/suche/dienststellen",
+          "domain": "contacts",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Studierendenwerke: Beratungsangebote",
+          "url": "https://www.studierendenwerke.de/themen/beratungsangebote",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "Caritas: Allgemeine Sozialberatung online",
+          "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/start",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        }
+      ]
+    },
+    "low_income_topup": {
+      "documents": [
+        {
+          "title": "Buergergeld als ergaenzende Leistung",
+          "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "BMWSB: Wohngeld",
+          "url": "https://www.bmwsb.bund.de/wohngeld",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Familienportal: Staatliche Leistungen fuer Familien",
+          "url": "https://familienportal.de/familienportal/familienleistungen/staatliche-leistungen-fuer-familien-138196",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "Caritas: Allgemeine Sozialberatung online",
+          "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/start",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "Tacheles: Freibetraege und Einkommensanrechnung",
+          "url": "https://www.tacheles-sozialhilfe.de/",
+          "domain": "aid",
+          "source_tier": "tier_2_ngo_watchdog"
+        }
+      ]
+    },
+    "upskilling": {
+      "documents": [
+        {
+          "title": "Bundesagentur fuer Arbeit: Bildungsgutschein",
+          "url": "https://www.arbeitsagentur.de/karriere-und-weiterbildung/bildungsgutschein",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Bundesagentur fuer Arbeit: Foerderung beruflicher Weiterbildung",
+          "url": "https://www.arbeitsagentur.de/karriere-und-weiterbildung/foerderung-berufliche-weiterbildung",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "BMAS: Berufliche Weiterbildung",
+          "url": "https://www.bmas.de/DE/Arbeit/Aus-und-Weiterbildung/Berufliche-Weiterbildung/berufliche-weiterbildung.html",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "Mein NOW: Nationales Weiterbildungsportal",
+          "url": "https://mein-now.de/",
+          "domain": "tools",
+          "source_tier": "tier_2_official"
+        },
+        {
+          "title": "Volkshochschulen: Kurssuche",
+          "url": "https://www.volkshochschule.de/kursfinder.php",
+          "domain": "tools",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "ngo_assistance": []
+    },
+    "family_children": {
+      "documents": [
+        {
+          "title": "Familienportal des Bundes",
+          "url": "https://familienportal.de/",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Familienkasse: Kindergeld",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/infos-rund-um-kindergeld",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Familienkasse: Kinderzuschlag",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "KiZ-Lotse: Anspruch auf Kinderzuschlag online pruefen",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kiz-lotse",
+          "domain": "tools",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Kinderzuschlag: Anspruch, Hoehe und Dauer",
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen/kinderzuschlag-anspruch-hoehe-dauer",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "DAJEB: Beratungsstellen in Ihrer Naehe",
+          "url": "https://www.dajeb.de/beratungsfuehrer-online/beratung-in-ihrer-naehe",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "Caritas: Familie und Erziehung",
+          "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/eltern-familie/start",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        }
+      ]
+    },
+    "single_parent_new": {
+      "documents": [
+        {
+          "title": "Familienportal: Unterstuetzung fuer Alleinerziehende",
+          "url": "https://familienportal.de/familienportal/lebenslagen/trennung/allein-und-getrennt-erziehende-eltern/welche-unterstuetzung-gibt-es-fuer-getrennt-erziehende-und-alleinerziehende-eltern--126044",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Familienportal: Unterhaltsvorschuss",
+          "url": "https://familienportal.de/familienportal/familienleistungen/unterhaltsvorschuss",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "Verband alleinerziehender Muetter und Vaeter",
+          "url": "https://www.vamv.de/",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "Caritas: Unterhaltsvorschuss fuer Alleinerziehende",
+          "url": "https://www.caritas.de/hilfeundberatung/eltern-und-paare/unterhaltsvorschuss-fuer-alleinerziehende",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        },
+        {
+          "title": "Diakonie: Hilfen fuer Alleinerziehende",
+          "url": "https://www.diakonie.de/informieren/infothek/aktuelles/themen/hilfen-fuer-alleinerziehende",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        }
+      ]
+    },
+    "separation_divorce": {
+      "documents": [
+        {
+          "title": "Familienportal: Trennung",
+          "url": "https://familienportal.de/familienportal/lebenslagen/trennung",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Familienportal: Staatliche Leistungen fuer getrennte Eltern",
+          "url": "https://familienportal.de/familienportal/lebenslagen/trennung/staatliche-leistungen",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "DAJEB: Beratungsstellen in Ihrer Naehe",
+          "url": "https://www.dajeb.de/beratungsfuehrer-online/beratung-in-ihrer-naehe",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        },
+        {
+          "title": "bke: Beratungsstellensuche",
+          "url": "https://www.bke.de/fachinfos/beratungsstellensuche",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "Caritas: Trennungs- und Scheidungsberatung",
+          "url": "https://www.caritas.de/glossare/trennungs-und-scheidungsberatung",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        }
+      ]
+    },
+    "caregiving_relatives": {
+      "documents": [
+        {
+          "title": "BMG: Online-Ratgeber Pflege",
+          "url": "https://www.bundesgesundheitsministerium.de/themen/pflege/online-ratgeber-pflege",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "BMG: Pflegeberatung",
+          "url": "https://www.bundesgesundheitsministerium.de/themen/pflege/online-ratgeber-pflege/pflegeberatung",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "ZQP: Beratungssuche Pflege",
+          "url": "https://www.zqp.de/beratung-pflege/",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        },
+        {
+          "title": "Pflegewegweiser NRW",
+          "url": "https://www.pflegewegweiser-nrw.de/",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "Caritas: Pflege und Betreuung",
+          "url": "https://www.caritas.de/hilfeundberatung/ratgeber/alter/pflegeundbetreuung/",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        }
+      ]
+    },
+    "migration_arrival": {
+      "documents": [
+        {
+          "title": "BAMF: Migrationsberatung fuer Erwachsene",
+          "url": "https://www.bamf.de/DE/Themen/Integration/ZugewanderteTeilnehmende/BeratungErwachsene/beratung-erwachsene-node.html",
+          "domain": "aid",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "BAMF: Integrationskurse",
+          "url": "https://www.bamf.de/DE/Themen/Integration/ZugewanderteTeilnehmende/Integrationskurse/integrationskurse-node.html",
+          "domain": "aid",
+          "source_tier": "tier_1_official"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "BAMF-NAvI: Beratungsstellen vor Ort",
+          "url": "https://bamf-navi.bamf.de/de/Themen/Beratungsstellen/",
+          "domain": "contacts",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Jugendmigrationsdienste",
+          "url": "https://www.jugendmigrationsdienste.de/",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "Caritas: Migration und Integration",
+          "url": "https://www.caritas.de/hilfeundberatung/migration/",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        }
+      ]
+    },
+    "unclear_residence_status": {
+      "documents": [
+        {
+          "title": "BAMF-NAvI: Beratungsstellen",
+          "url": "https://bamf-navi.bamf.de/de/Themen/Beratungsstellen/",
+          "domain": "contacts",
+          "source_tier": "tier_1_official"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "PRO ASYL: Beratung",
+          "url": "https://www.proasyl.de/beratung/",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        },
+        {
+          "title": "Fluechtlingsrat: Landesfluechtlingsraete",
+          "url": "https://www.fluechtlingsrat.de/",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "Caritas: Migration und Flucht",
+          "url": "https://www.caritas.de/hilfeundberatung/migration/",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        },
+        {
+          "title": "Diakonie: Migration und Flucht",
+          "url": "https://www.diakonie.de/informieren/unsere-themen/migration-und-flucht",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        }
+      ]
+    },
+    "recognition_missing": {
+      "documents": [
+        {
+          "title": "Anerkennung in Deutschland: Anerkennungs-Finder",
+          "url": "https://www.anerkennung-in-deutschland.de/de/interest/finder/profession",
+          "domain": "tools",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "anabin: Datenbank der ZAB",
+          "url": "https://anabin.kmk.org/anabin.html",
+          "domain": "tools",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "ZAB: Zeugnisbewertung",
+          "url": "https://zab.kmk.org/de/zeugnisbewertung",
+          "domain": "tools",
+          "source_tier": "tier_1_official"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "Anerkennung in Deutschland: Beratungssuche",
+          "url": "https://www.anerkennung-in-deutschland.de/html/de/beratungssuche.php",
+          "domain": "contacts",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "IQ Netzwerk",
+          "url": "https://www.netzwerk-iq.de/",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "ngo_assistance": []
+    },
+    "health_disruption": {
+      "documents": [
+        {
+          "title": "gesund.bund.de: Staatliches Gesundheitsportal",
+          "url": "https://gesund.bund.de/",
+          "domain": "aid",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Deutsche Rentenversicherung: Medizinische Rehabilitation",
+          "url": "https://www.deutsche-rentenversicherung.de/DRV/DE/Reha/Medizinische-Reha/medizinische-reha.html",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "Unabhaengige Patientenberatung Deutschland",
+          "url": "https://patientenberatung.de/",
+          "domain": "contacts",
+          "source_tier": "tier_2_ngo_watchdog"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "Verbraucherzentrale: Krankenversicherung",
+          "url": "https://www.verbraucherzentrale.de/wissen/gesundheit-pflege/krankenversicherung",
+          "domain": "aid",
+          "source_tier": "tier_2_ngo_watchdog"
+        },
+        {
+          "title": "Caritas: Allgemeine Sozialberatung online",
+          "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/start",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        }
+      ]
+    },
+    "long_term_work_incapacity": {
+      "documents": [
+        {
+          "title": "Deutsche Rentenversicherung: Erwerbsminderungsrente",
+          "url": "https://www.deutsche-rentenversicherung.de/DRV/DE/Rente/Allgemeine-Informationen/Rentenarten-und-Leistungen/Erwerbsminderungsrente/erwerbsminderungsrente.html",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Deutsche Rentenversicherung: Grundsicherung",
+          "url": "https://www.deutsche-rentenversicherung.de/DRV/DE/Rente/In-der-Rente/Grundsicherung/grundsicherung.html",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "EUTB: Beratungsangebote",
+          "url": "https://www.teilhabeberatung.de/beratung/beratungsangebote-der-eutb",
+          "domain": "contacts",
+          "source_tier": "tier_2_ngo_watchdog"
+        },
+        {
+          "title": "SoVD: Sozialberatung",
+          "url": "https://www.sovd.de/sozialberatung",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "VdK: Erwerbsminderungsrente",
+          "url": "https://www.vdk.de/themen/rente/erwerbsminderungsrente/",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        }
+      ]
+    },
+    "mental_burnout": {
+      "documents": [
+        {
+          "title": "gesund.bund.de: Psychische Gesundheit",
+          "url": "https://gesund.bund.de/psychische-gesundheit",
+          "domain": "aid",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Depression: Symptome, Ursachen und Behandlung",
+          "url": "https://gesund.bund.de/depression",
+          "domain": "aid",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Stiftung Deutsche Depressionshilfe",
+          "url": "https://www.deutsche-depressionshilfe.de/",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "Diakonie: Hilfe vor Ort",
+          "url": "https://www.diakonie.de/informieren/hilfe-vor-ort",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        },
+        {
+          "title": "Caritas: Beratung bei psychischer Beeintraechtigung",
+          "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/behinderung-und-psychische-beeintraechtigung/start",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "Deutsche Depressionshilfe: Krisentelefone",
+          "url": "https://www.deutsche-depressionshilfe.de/krisentelefone",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        },
+        {
+          "title": "Deutsche Gesellschaft fuer Suizidpraevention: Hilfsangebote",
+          "url": "https://www.suizidprophylaxe.de/hilfsangebote/",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        },
+        {
+          "title": "Telefonseelsorge: kostenlose Krisenhilfe",
+          "url": "https://www.telefonseelsorge.de/",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        }
+      ]
+    },
+    "housing_loss_homelessness_risk": {
+      "documents": [
+        {
+          "title": "Caritas: Was tun bei Mietschulden?",
+          "url": "https://www.caritas.de/hilfeundberatung/ratgeber/wohnungslosigkeit/lebenaufderstrasse/was-tun-bei-mietschulden",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        },
+        {
+          "title": "Diakonie: Wohnungs- und Obdachlosigkeit",
+          "url": "https://www.diakonie.de/wissen-kompakt-wohnungs-und-obdachlosigkeit",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "BAG Wohnungslosenhilfe: Hilfe finden",
+          "url": "https://www.bagw.de/de/themen/praevention/hilfe-finden",
+          "domain": "contacts",
+          "source_tier": "tier_2_ngo_watchdog"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "BAG Wohnungslosenhilfe",
+          "url": "https://www.bagw.de/",
+          "domain": "aid",
+          "source_tier": "tier_2_ngo_watchdog"
+        },
+        {
+          "title": "Tacheles: Unterkunftskosten und Mietschulden",
+          "url": "https://www.tacheles-sozialhilfe.de/",
+          "domain": "aid",
+          "source_tier": "tier_2_ngo_watchdog"
+        }
+      ]
+    },
+    "energy_cost_unaffordable": {
+      "documents": [
+        {
+          "title": "Verbraucherzentrale: Stromsperre verhindern",
+          "url": "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/stromsperre-was-sie-jetzt-tun-koennen-11674",
+          "domain": "aid",
+          "source_tier": "tier_2_ngo_watchdog"
+        },
+        {
+          "title": "Verbraucherzentrale Energieberatung",
+          "url": "https://verbraucherzentrale-energieberatung.de/",
+          "domain": "contacts",
+          "source_tier": "tier_2_ngo_watchdog"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "Caritas: Allgemeine Sozialberatung online",
+          "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/start",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "Diakonie: Schuldnerberatung",
+          "url": "https://www.diakonie.de/wissen-kompakt-schuldnerberatung",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        },
+        {
+          "title": "Tacheles: Heizkosten, Darlehen und Energieschulden",
+          "url": "https://www.tacheles-sozialhilfe.de/",
+          "domain": "aid",
+          "source_tier": "tier_2_ngo_watchdog"
+        }
+      ]
+    },
+    "sanctions_conflict": {
+      "documents": [
+        {
+          "title": "Bundesagentur fuer Arbeit: Buergergeld",
+          "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Bundesjustizministerium: Beratungshilfe",
+          "url": "https://service.justiz.de/beratungshilfe",
+          "domain": "benefits",
+          "source_tier": "tier_1_official"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "Sozialgerichtsbarkeit: Gerichtsverzeichnis",
+          "url": "https://justiz.de/OrtsGerichtsverzeichnis/index.php",
+          "domain": "contacts",
+          "source_tier": "tier_1_official"
+        },
+        {
+          "title": "Der Paritaetische: Landesverbaende",
+          "url": "https://www.der-paritaetische.de/verband/landesverbaende/",
+          "domain": "contacts",
+          "source_tier": "tier_2_ngo_watchdog"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "Tacheles: Sozialhilfe und SGB II Fachinformationen",
+          "url": "https://www.tacheles-sozialhilfe.de/",
+          "domain": "aid",
+          "source_tier": "tier_2_ngo_watchdog"
+        },
+        {
+          "title": "Tacheles: Rechtsprechungsticker",
+          "url": "https://www.tacheles-sozialhilfe.de/newsticker/",
+          "domain": "aid",
+          "source_tier": "tier_2_ngo_watchdog"
+        },
+        {
+          "title": "Caritas: Allgemeine Sozialberatung online",
+          "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/allgemeine-soziale-beratung/start",
+          "domain": "aid",
+          "source_tier": "tier_3_ngo"
+        }
+      ]
+    },
+    "debt_crisis": {
+      "documents": [
+        {
+          "title": "Verbraucherzentrale: Inkasso, Schulden und Insolvenz",
+          "url": "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/kredit-schulden-insolvenz",
+          "domain": "aid",
+          "source_tier": "tier_2_ngo_watchdog"
+        },
+        {
+          "title": "Meine Schulden: Informationsportal der BAG Schuldnerberatung",
+          "url": "https://www.meine-schulden.de/",
+          "domain": "aid",
+          "source_tier": "tier_2_ngo_watchdog"
+        }
+      ],
+      "contacts": [
+        {
+          "title": "Caritas: Schuldnerberatung online",
+          "url": "https://www.caritas.de/hilfeundberatung/onlineberatung/schuldnerberatung/start",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        },
+        {
+          "title": "Diakonie: Schuldnerberatung",
+          "url": "https://www.diakonie.de/wissen-kompakt-schuldnerberatung",
+          "domain": "contacts",
+          "source_tier": "tier_3_ngo"
+        }
+      ],
+      "ngo_assistance": [
+        {
+          "title": "Bundesarbeitsgemeinschaft Schuldnerberatung",
+          "url": "https://www.bag-sb.de/",
+          "domain": "aid",
+          "source_tier": "tier_2_ngo_watchdog"
+        }
+      ]
+    }
+  }
+}

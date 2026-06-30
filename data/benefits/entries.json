@@ -45,7 +45,13 @@
         "sourceId": "familienportal",
         "providerName": "Familienportal",
         "providerLevel": "federal",
-        "checksum": "6a6745dbd9d49d0a379719d0fa6925e57984db5b2053fbfc6ff83ebdedab3b48"
+        "checksum": "6a6745dbd9d49d0a379719d0fa6925e57984db5b2053fbfc6ff83ebdedab3b48",
+        "sourceTierStatus": "verified",
+        "host": "familienportal.de",
+        "canonicalDomain": "familienportal.de",
+        "sourceDomain": "familienportal.de",
+        "publisherName": "Familienportal",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -87,10 +93,20 @@
         "crawledAt": "2026-03-16T13:43:19.708307Z",
         "crawlId": "benefits-seeded-1773668599",
         "crawlerVersion": "0.1.0",
-        "sourceTier": "tier_unknown",
-        "institutionType": "unknown",
+        "sourceTier": "tier_1_official",
+        "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "3e24d1423b20b68cfd76be7d2b12053d1199454617ccd9da9180a75b502a39a0"
+        "checksum": "3e24d1423b20b68cfd76be7d2b12053d1199454617ccd9da9180a75b502a39a0",
+        "sourceTierStatus": "inferred",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "familienportal",
+        "providerName": "Familienportal",
+        "providerLevel": "federal",
+        "host": "familienportal.de",
+        "canonicalDomain": "familienportal.de",
+        "sourceDomain": "familienportal.de",
+        "publisherName": "Familienportal",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -150,7 +166,20 @@
         "crawledAt": "2026-03-15T07:13:17.339351Z",
         "crawlId": "arbeitsagentur-1773558797",
         "checksum": "20acd53f2652d47309a2d5a3c74928281b146a896770ca1341a40114dc346b4a",
-        "crawlerVersion": "0.1.0"
+        "crawlerVersion": "0.1.0",
+        "sourceTier": "tier_1_official",
+        "sourceTierStatus": "inferred",
+        "institutionType": "government",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "jurisdiction": "DE",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -195,7 +224,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "5753c5ba57f5c1ec4b32de7b98334d3e065d2f5be33c71f05f71efc243bf051e"
+        "checksum": "5753c5ba57f5c1ec4b32de7b98334d3e065d2f5be33c71f05f71efc243bf051e",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -250,7 +285,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "d6e26f2279adfd2d3d74bfe3b451be90baaf8aae98b2068c8138d2875dd24f89"
+        "checksum": "d6e26f2279adfd2d3d74bfe3b451be90baaf8aae98b2068c8138d2875dd24f89",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -303,7 +344,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "fd2b155a52611fd7d82d33970689151717cbd903f300b0d9147444b12c71a163"
+        "checksum": "fd2b155a52611fd7d82d33970689151717cbd903f300b0d9147444b12c71a163",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -357,7 +404,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "f6a811844cd5c25a70206e825966b796b8df3c439b43bdd55566eb1210c82733"
+        "checksum": "f6a811844cd5c25a70206e825966b796b8df3c439b43bdd55566eb1210c82733",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -414,7 +467,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "bc1a3f833705d47e2c14ad13cdcbf0f001dd9effd206e220e4f3ace6585773fa"
+        "checksum": "bc1a3f833705d47e2c14ad13cdcbf0f001dd9effd206e220e4f3ace6585773fa",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -463,7 +522,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "40fb46740262f9f2cfa710d52c84c1d7f546cb8244c75fed8f3bacfb6104b4fe"
+        "checksum": "40fb46740262f9f2cfa710d52c84c1d7f546cb8244c75fed8f3bacfb6104b4fe",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -521,7 +586,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "2ec9210fa70761abb141a3f49a1aaf647c28fbb9ff99108f3c0dc9a961127c1f"
+        "checksum": "2ec9210fa70761abb141a3f49a1aaf647c28fbb9ff99108f3c0dc9a961127c1f",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -566,7 +637,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "a5158bdcaf76dd58012aa86999cb51c59ab0906ad6ad6429b8cfea1a81936e92"
+        "checksum": "a5158bdcaf76dd58012aa86999cb51c59ab0906ad6ad6429b8cfea1a81936e92",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -614,7 +691,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "fcba5e074d3831edf653ae070f99717fce6595a814c1b9632337008f0e5f9f36"
+        "checksum": "fcba5e074d3831edf653ae070f99717fce6595a814c1b9632337008f0e5f9f36",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -659,7 +742,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "7b42528395fa481d12727295e5a0e70632bbb25c003ae2e079986098d668c4a1"
+        "checksum": "7b42528395fa481d12727295e5a0e70632bbb25c003ae2e079986098d668c4a1",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -710,7 +799,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "214106ce267e5df24b17c8b2a0e7ecd111f56aa2303da3bfce529ecb670c0eac"
+        "checksum": "214106ce267e5df24b17c8b2a0e7ecd111f56aa2303da3bfce529ecb670c0eac",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -761,7 +856,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "fefb79bc828edc06c44d40d33ae8e0422a35ccc73298d669b26ce5d54dba1dfe"
+        "checksum": "fefb79bc828edc06c44d40d33ae8e0422a35ccc73298d669b26ce5d54dba1dfe",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -819,7 +920,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "f5c3c3431ff9b4d1062eb8d0ee7f8bcc61b4ee461a744f42802afb85c9a1ca5f"
+        "checksum": "f5c3c3431ff9b4d1062eb8d0ee7f8bcc61b4ee461a744f42802afb85c9a1ca5f",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -864,7 +971,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "2e1c4e8590955c726174480cdb38b9763d5b14b903e5d8b6207f0a060a3d6fdb"
+        "checksum": "2e1c4e8590955c726174480cdb38b9763d5b14b903e5d8b6207f0a060a3d6fdb",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -912,7 +1025,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "a57045c68eeac0314e4b52384e2c86fae5d2e53a9e9d19a68b85a8a095957bd0"
+        "checksum": "a57045c68eeac0314e4b52384e2c86fae5d2e53a9e9d19a68b85a8a095957bd0",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -977,7 +1096,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "7239bdc10388d38dbb6c2f165b45a1381f56ca7194aef321ffd55ad51ded3b5e"
+        "checksum": "7239bdc10388d38dbb6c2f165b45a1381f56ca7194aef321ffd55ad51ded3b5e",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1030,7 +1155,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "069f156297aed47a84ce0c9177fff8d4426a39b1fa7e1ea5d976074dc9c0c39e"
+        "checksum": "069f156297aed47a84ce0c9177fff8d4426a39b1fa7e1ea5d976074dc9c0c39e",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1087,7 +1218,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "61ac3b8b2978b104f485cbcf515e321cdd7751abaa70ea106a32f9eaa15e16a8"
+        "checksum": "61ac3b8b2978b104f485cbcf515e321cdd7751abaa70ea106a32f9eaa15e16a8",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1137,7 +1274,20 @@
         "source": "https://www.arbeitsagentur.de/kurzarbeitergeld",
         "crawlId": "manual-curation-20260301-realdata-v1",
         "checksum": "2ef8ee37d9f5582f3b8debf465436172d0870f3e1977fc89ceef0ad80b0b7e4a",
-        "crawledAt": "2026-03-01T20:10:00Z"
+        "crawledAt": "2026-03-01T20:10:00Z",
+        "sourceTier": "tier_1_official",
+        "sourceTierStatus": "inferred",
+        "institutionType": "government",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "arbeitsagentur",
+        "providerName": "Bundesagentur für Arbeit",
+        "providerLevel": "federal",
+        "jurisdiction": "DE",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 77.4,
@@ -1186,7 +1336,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "2ca967687a62b5b6c1885e1343c3cba2eabc7c927ae6ea9b89671461f9c782e8"
+        "checksum": "2ca967687a62b5b6c1885e1343c3cba2eabc7c927ae6ea9b89671461f9c782e8",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1243,7 +1399,13 @@
         "sourceId": "arbeitsagentur",
         "providerName": "Bundesagentur für Arbeit",
         "providerLevel": "federal",
-        "checksum": "990c9e581ac66166717138e5c63f014352137be9dab632ba768a1f5d4dc620dc"
+        "checksum": "990c9e581ac66166717138e5c63f014352137be9dab632ba768a1f5d4dc620dc",
+        "sourceTierStatus": "verified",
+        "host": "arbeitsagentur.de",
+        "canonicalDomain": "arbeitsagentur.de",
+        "sourceDomain": "arbeitsagentur.de",
+        "publisherName": "Bundesagentur für Arbeit",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1289,7 +1451,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "6af7944693ee300fcc5c6d006f8dc1363e274714bef2bfaddac3fb88c2664020"
+        "checksum": "6af7944693ee300fcc5c6d006f8dc1363e274714bef2bfaddac3fb88c2664020",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1339,7 +1510,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "503ccc8ee49910dc8fdb2cf7a4f4e305601c23519782666abd547bf4365ea13e"
+        "checksum": "503ccc8ee49910dc8fdb2cf7a4f4e305601c23519782666abd547bf4365ea13e",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1383,7 +1563,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "c6e3ea4d0247e668f4992c03695d0712c174ffea85d869a08481c70d30a9d94e"
+        "checksum": "c6e3ea4d0247e668f4992c03695d0712c174ffea85d869a08481c70d30a9d94e",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1425,7 +1614,16 @@
         "sourceTier": "tier_1_official",
         "institutionType": "government",
         "jurisdiction": "DE",
-        "checksum": "16fb18be6aa7c1e25d82c64d69c707e1f40ca9d8b69d6426bfa052c614e1ecfb"
+        "checksum": "16fb18be6aa7c1e25d82c64d69c707e1f40ca9d8b69d6426bfa052c614e1ecfb",
+        "sourceId": "bmas",
+        "providerName": "Bundesministerium für Arbeit und Soziales",
+        "providerLevel": "federal",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 84.58,
@@ -1475,7 +1673,20 @@
         "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen",
         "crawlId": "manual-curation-20260301-realdata-v1",
         "checksum": "ec0ed83e469778b0fdf1d2a7c70fd4fa7f1a6f8c5e372514ce717fce83032630",
-        "crawledAt": "2026-03-01T20:10:00Z"
+        "crawledAt": "2026-03-01T20:10:00Z",
+        "sourceTier": "tier_1_official",
+        "sourceTierStatus": "inferred",
+        "institutionType": "government",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "bmfsfj",
+        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "providerLevel": "federal",
+        "jurisdiction": "DE",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 81,
@@ -1525,7 +1736,20 @@
         "source": "https://www.bmbfsfj.bund.de/bmbfsfj/themen/familie/familienleistungen/kindergeld/kindergeld-73892",
         "crawlId": "manual-curation-20260301-realdata-v1",
         "checksum": "fa664ec8eb3f7782ac29965f22420ab0f6dbc9d7f03041e2caeb1f4cce5a8d6d",
-        "crawledAt": "2026-03-01T20:10:00Z"
+        "crawledAt": "2026-03-01T20:10:00Z",
+        "sourceTier": "tier_1_official",
+        "sourceTierStatus": "inferred",
+        "institutionType": "government",
+        "institutionTypeStatus": "inferred",
+        "sourceId": "bmfsfj",
+        "providerName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "providerLevel": "federal",
+        "jurisdiction": "DE",
+        "host": "bmbfsfj.bund.de",
+        "canonicalDomain": "bmbfsfj.bund.de",
+        "sourceDomain": "bmbfsfj.bund.de",
+        "publisherName": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 80.3,
@@ -1786,7 +2010,13 @@
         "sourceId": "bmas_grundsicherung_em",
         "providerName": "Bundesministerium für Arbeit und Soziales",
         "providerLevel": "federal",
-        "checksum": "57c7c7b92600c4a63b3e4265b2ad542d9dff22b1f020259676436072a4486082"
+        "checksum": "57c7c7b92600c4a63b3e4265b2ad542d9dff22b1f020259676436072a4486082",
+        "sourceTierStatus": "verified",
+        "host": "bmas.de",
+        "canonicalDomain": "bmas.de",
+        "sourceDomain": "bmas.de",
+        "publisherName": "Bundesministerium für Arbeit und Soziales",
+        "reviewStatus": "approved"
       },
       "qualityScores": {
         "iqs": 82,
@@ -1942,7 +2172,12 @@
         "sourceId": "sanktionsfrei_widerspruch",
         "providerName": "Sanktionsfrei e.V.",
         "providerLevel": "federal",
-        "checksum": "67b2d5d110f3d97372be41e0c8acccff4454c8b0585817bad41167beec018282"
+        "checksum": "67b2d5d110f3d97372be41e0c8acccff4454c8b0585817bad41167beec018282",
+        "host": "sanktionsfrei.de",
+        "canonicalDomain": "sanktionsfrei.de",
+        "sourceDomain": "sanktionsfrei.de",
+        "publisherName": "sanktionsfrei.de",
+        "reviewStatus": "needs_review"
       },
       "qualityScores": {
         "iqs": 82,
