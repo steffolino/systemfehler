@@ -37,10 +37,24 @@ export default function AboutPage() {
         <Section title={t('about.section_for_who')} body={t('about.for_who_body')} />
         <Section title={t('about.section_transparency')} body={t('about.transparency_body')} />
 
-        <div className="flex justify-end rounded-2xl border bg-card px-4 py-3 text-sm">
-          <Button asChild variant="outline" size="sm">
-            <Link to="/">{t('about.back_to_home')}</Link>
-          </Button>
+        <div className="pt-4">
+          <div className="mx-auto max-w-3xl">
+            <div className="relative overflow-hidden rounded-3xl border bg-card p-2 shadow-[0_24px_70px_rgba(15,23,32,0.16)]">
+              <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+              <img
+                src="/og-image.png"
+                alt="Systemfehler"
+                className="aspect-[1200/630] w-full rounded-2xl object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            <div className="mt-4 flex justify-center">
+              <Button asChild variant="outline" size="sm">
+                <Link to="/">{t('about.back_to_home')}</Link>
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
