@@ -37,8 +37,7 @@ export default function AboutPage() {
         <Section title={t('about.section_for_who')} body={t('about.for_who_body')} />
         <Section title={t('about.section_transparency')} body={t('about.transparency_body')} />
 
-        <div className="flex items-center justify-between rounded-2xl border bg-card px-4 py-3 text-sm">
-          <span className="text-muted-foreground">{t('about.subtitle')}</span>
+        <div className="flex justify-end rounded-2xl border bg-card px-4 py-3 text-sm">
           <Button asChild variant="outline" size="sm">
             <Link to="/">{t('about.back_to_home')}</Link>
           </Button>
