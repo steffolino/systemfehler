@@ -3254,6 +3254,14 @@ function buildAssistiveContacts(evidence, scenarioResources = []) {
 
 const INSTITUTION_FALLBACK_ROUTES = [
   {
+    id: 'stadt_leipzig',
+    label: 'Stadt Leipzig',
+    url: 'https://www.leipzig.de/',
+    keywords: ['leipzig'],
+    cityKeywords: ['leipzig'],
+    note: 'Nutze die offizielle Stadtseite als Einstieg zu lokalen Ämtern, Beratungsangeboten, Formularen und Kontaktwegen in Leipzig.',
+  },
+  {
     id: 'stadt_leipzig_sozialamt',
     label: 'Stadt Leipzig',
     url: 'https://www.leipzig.de/',

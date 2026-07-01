@@ -94,6 +94,15 @@ function recentUserSubjects(messages, latest) {
   return uniqueOrdered(previousUserMessages.flatMap((message) => findSubjects(message.content))).slice(0, 3);
 }
 
+function latestLocationHint(text) {
+  const normalized = normalizeFollowupText(text);
+  if (/\bleipzig\b/.test(normalized)) return 'in Leipzig';
+  const postalCode = normalized.match(/\b\d{5}\b/);
+  if (postalCode) return `bei PLZ ${postalCode[0]}`;
+  if (/\b(in meiner stadt|in meiner naehe|in der naehe|vor ort|bei mir)\b/.test(normalized)) return 'vor Ort';
+  return '';
+}
+
 function deterministicStandaloneFollowup(messages) {
   const latest = latestUserMessage(messages);
   if (!latest) return '';
@@ -105,10 +114,13 @@ function deterministicStandaloneFollowup(messages) {
   const subjectText = subjects.join(' und ');
   const shortFollowup = latest.length <= 90;
   const asksApplication = /\bwo\b/.test(normalized) && /(beantrag|antrag|stelle|zustaendig|zustandig|bekomm)/.test(normalized);
+  const asksLocalLookup = /\bwo\b/.test(normalized) && /(finde|gibt|adresse|kontakt|stelle|amt|vor ort|naehe|stadt|leipzig|\bplz\b)/.test(normalized);
   const asksAmount = /(wie\s*viel|wieviel|wie hoch|hoehe|betrag|geld|bekomm)/.test(normalized);
   const asksContact = /(wer hilft|hilfe|beratung|kontakt|telefon|an wen)/.test(normalized);
+  const locationHint = latestLocationHint(latest);
 
   if (!shortFollowup) return '';
+  if (asksLocalLookup) return `Wo finde ich ${subjectText}${locationHint ? ` ${locationHint}` : ''}?`;
   if (asksApplication) return `Wo kann ich ${subjectText} beantragen?`;
   if (asksAmount) return `Wie viel ${subjectText} bekomme ich?`;
   if (asksContact) return `Wo bekomme ich Hilfe zu ${subjectText}?`;

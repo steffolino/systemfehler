@@ -14,6 +14,7 @@ import {
   retrieveEvidence,
   runLlmText,
 } from '../cloudflare-pages/functions/api/_lib/ai.js';
+import { buildStandaloneQuery } from '../cloudflare-pages/functions/api/ai/chat.js';
 
 const DOMAINS = ['benefits', 'aid', 'tools', 'organizations', 'contacts'];
 
@@ -600,4 +601,62 @@ test('synthesis prioritizes local Sozialamt lookup over thematic benefit evidenc
   assert.match(response.answer, /Stadt Leipzig/i);
   assert.ok(response.sources.includes('https://www.leipzig.de/'));
   assert.ok(response.retrieval.fallback_router.includes('stadt_leipzig_sozialamt'));
+});
+
+test('chat follow-up keeps local Leipzig lookup intent', async () => {
+  const standalone = await buildStandaloneQuery({}, [
+    { role: 'user', content: 'Ich will Kinderzuschlag beantragen.' },
+    { role: 'assistant', content: 'Kinderzuschlag koennen Sie online pruefen.' },
+    { role: 'user', content: 'Wo finde ich das in Leipzig?' },
+  ]);
+
+  assert.match(standalone, /Kinderzuschlag/i);
+  assert.match(standalone, /Leipzig/i);
+});
+
+test('synthesis routes generic Leipzig location follow-up away from thematic benefit evidence', async () => {
+  const evidence = [
+    {
+      source: 'https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld',
+      confidence: 0.9,
+      content: JSON.stringify({
+        title: 'Buergergeld als ergaenzende Leistung',
+        url: 'https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld',
+        domain: 'benefits',
+        summary: { de: 'Buergergeld als ergaenzende Leistung.' },
+        provenance: {
+          sourceTier: 'tier_1_official',
+          sourceRole: 'official_info',
+        },
+      }),
+    },
+    {
+      source: 'https://www.bmwsb.bund.de/wohngeld',
+      confidence: 0.88,
+      content: JSON.stringify({
+        title: 'BMWSB: Wohngeld',
+        url: 'https://www.bmwsb.bund.de/wohngeld',
+        domain: 'benefits',
+        summary: { de: 'Wohngeld.' },
+        provenance: {
+          sourceTier: 'tier_1_official',
+          sourceRole: 'official_info',
+        },
+      }),
+    },
+  ];
+
+  const response = await buildSynthesis(
+    {},
+    'Wo finde ich Kinderzuschlag in Leipzig?',
+    evidence,
+    { retrieval_mode: 'keyword' },
+    { official: evidence, assistive: [], contacts: [], context: [] }
+  );
+
+  assert.equal(response.fallback, true);
+  assert.match(response.answer, /keinen verlässlichen lokalen Treffer/i);
+  assert.match(response.answer, /Stadt Leipzig/i);
+  assert.ok(response.sources.includes('https://www.leipzig.de/'));
+  assert.ok(response.retrieval.fallback_router.includes('stadt_leipzig'));
 });
