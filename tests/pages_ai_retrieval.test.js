@@ -346,8 +346,10 @@ test('synthesis routes local institution questions to official finders when exac
   assert.equal(response.weak_evidence, true);
   assert.match(response.answer, /keinen verlässlichen lokalen Treffer/i);
   assert.match(response.answer, /Bundesagentur für Arbeit/i);
+  assert.match(response.answer, /Serviceportal Bund/i);
+  assert.ok(response.sources.includes('https://www.service.bund.de/'));
   assert.ok(response.sources.includes('https://web.arbeitsagentur.de/portal/metasuche/suche/dienststellen'));
-  assert.deepEqual(response.retrieval.fallback_router, ['arbeitsagentur']);
+  assert.deepEqual(response.retrieval.fallback_router, ['service_bund_local_search', 'arbeitsagentur']);
 });
 
 test('synthesis routes weak health questions to a matching official institution source', async () => {
@@ -603,18 +605,29 @@ test('synthesis prioritizes local Sozialamt lookup over thematic benefit evidenc
   assert.ok(response.retrieval.fallback_router.includes('stadt_leipzig_sozialamt'));
 });
 
-test('chat follow-up keeps local Leipzig lookup intent', async () => {
+test('chat follow-up keeps local place lookup intent', async () => {
   const standalone = await buildStandaloneQuery({}, [
     { role: 'user', content: 'Ich will Kinderzuschlag beantragen.' },
     { role: 'assistant', content: 'Kinderzuschlag koennen Sie online pruefen.' },
-    { role: 'user', content: 'Wo finde ich das in Leipzig?' },
+    { role: 'user', content: 'Wo finde ich das in Dresden?' },
   ]);
 
   assert.match(standalone, /Kinderzuschlag/i);
-  assert.match(standalone, /Leipzig/i);
+  assert.match(standalone, /Dresden/i);
 });
 
-test('synthesis routes generic Leipzig location follow-up away from thematic benefit evidence', async () => {
+test('chat follow-up keeps postal-code lookup intent', async () => {
+  const standalone = await buildStandaloneQuery({}, [
+    { role: 'user', content: 'Ich brauche Wohngeld.' },
+    { role: 'assistant', content: 'Wohngeld ist eine Wohnkostenleistung.' },
+    { role: 'user', content: 'Wo finde ich das bei PLZ 04109?' },
+  ]);
+
+  assert.match(standalone, /Wohngeld/i);
+  assert.match(standalone, /04109/);
+});
+
+test('synthesis routes generic local follow-up away from thematic benefit evidence', async () => {
   const evidence = [
     {
       source: 'https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/buergergeld',
@@ -648,7 +661,7 @@ test('synthesis routes generic Leipzig location follow-up away from thematic ben
 
   const response = await buildSynthesis(
     {},
-    'Wo finde ich Kinderzuschlag in Leipzig?',
+    'Wo finde ich Kinderzuschlag in Dresden?',
     evidence,
     { retrieval_mode: 'keyword' },
     { official: evidence, assistive: [], contacts: [], context: [] }
@@ -656,7 +669,41 @@ test('synthesis routes generic Leipzig location follow-up away from thematic ben
 
   assert.equal(response.fallback, true);
   assert.match(response.answer, /keinen verlässlichen lokalen Treffer/i);
-  assert.match(response.answer, /Stadt Leipzig/i);
-  assert.ok(response.sources.includes('https://www.leipzig.de/'));
-  assert.ok(response.retrieval.fallback_router.includes('stadt_leipzig'));
+  assert.match(response.answer, /Dresden/i);
+  assert.match(response.answer, /Serviceportal Bund/i);
+  assert.ok(response.sources.includes('https://www.service.bund.de/'));
+  assert.ok(response.retrieval.fallback_router.includes('service_bund_local_search'));
+});
+
+test('synthesis routes postal-code local follow-up to official local search', async () => {
+  const evidence = [
+    {
+      source: 'https://www.bmwsb.bund.de/wohngeld',
+      confidence: 0.9,
+      content: JSON.stringify({
+        title: 'BMWSB: Wohngeld',
+        url: 'https://www.bmwsb.bund.de/wohngeld',
+        domain: 'benefits',
+        summary: { de: 'Wohngeld.' },
+        provenance: {
+          sourceTier: 'tier_1_official',
+          sourceRole: 'official_info',
+        },
+      }),
+    },
+  ];
+
+  const response = await buildSynthesis(
+    {},
+    'Wo finde ich Wohngeld bei PLZ 04109?',
+    evidence,
+    { retrieval_mode: 'keyword' },
+    { official: evidence, assistive: [], contacts: [], context: [] }
+  );
+
+  assert.equal(response.fallback, true);
+  assert.match(response.answer, /PLZ 04109/i);
+  assert.match(response.answer, /Serviceportal Bund/i);
+  assert.ok(response.sources.includes('https://www.service.bund.de/'));
+  assert.ok(response.retrieval.fallback_router.includes('service_bund_local_search'));
 });

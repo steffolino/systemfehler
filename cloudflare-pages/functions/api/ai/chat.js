@@ -95,10 +95,12 @@ function recentUserSubjects(messages, latest) {
 }
 
 function latestLocationHint(text) {
+  const raw = String(text || '');
   const normalized = normalizeFollowupText(text);
-  if (/\bleipzig\b/.test(normalized)) return 'in Leipzig';
   const postalCode = normalized.match(/\b\d{5}\b/);
   if (postalCode) return `bei PLZ ${postalCode[0]}`;
+  const namedPlace = raw.match(/\b(?:in|bei|für|fuer)\s+([A-ZÄÖÜ][A-Za-zÄÖÜäöüß.-]+(?:\s+[A-ZÄÖÜ][A-Za-zÄÖÜäöüß.-]+){0,2})\b/u);
+  if (namedPlace?.[1]) return `in ${namedPlace[1].trim()}`;
   if (/\b(in meiner stadt|in meiner naehe|in der naehe|vor ort|bei mir)\b/.test(normalized)) return 'vor Ort';
   return '';
 }
@@ -114,7 +116,7 @@ function deterministicStandaloneFollowup(messages) {
   const subjectText = subjects.join(' und ');
   const shortFollowup = latest.length <= 90;
   const asksApplication = /\bwo\b/.test(normalized) && /(beantrag|antrag|stelle|zustaendig|zustandig|bekomm)/.test(normalized);
-  const asksLocalLookup = /\bwo\b/.test(normalized) && /(finde|gibt|adresse|kontakt|stelle|amt|vor ort|naehe|stadt|leipzig|\bplz\b)/.test(normalized);
+  const asksLocalLookup = /\bwo\b/.test(normalized) && /(finde|gibt|adresse|kontakt|stelle|amt|vor ort|naehe|stadt|\bplz\b|\b\d{5}\b|\bin\s+[a-z][a-z-]+\b|\bbei\s+[a-z][a-z-]+\b)/.test(normalized);
   const asksAmount = /(wie\s*viel|wieviel|wie hoch|hoehe|betrag|geld|bekomm)/.test(normalized);
   const asksContact = /(wer hilft|hilfe|beratung|kontakt|telefon|an wen)/.test(normalized);
   const locationHint = latestLocationHint(latest);

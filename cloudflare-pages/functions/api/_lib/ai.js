@@ -3254,14 +3254,6 @@ function buildAssistiveContacts(evidence, scenarioResources = []) {
 
 const INSTITUTION_FALLBACK_ROUTES = [
   {
-    id: 'stadt_leipzig',
-    label: 'Stadt Leipzig',
-    url: 'https://www.leipzig.de/',
-    keywords: ['leipzig'],
-    cityKeywords: ['leipzig'],
-    note: 'Nutze die offizielle Stadtseite als Einstieg zu lokalen Ämtern, Beratungsangeboten, Formularen und Kontaktwegen in Leipzig.',
-  },
-  {
     id: 'stadt_leipzig_sozialamt',
     label: 'Stadt Leipzig',
     url: 'https://www.leipzig.de/',
@@ -3328,12 +3320,51 @@ const INSTITUTION_FALLBACK_ROUTES = [
 ];
 
 function hasLocalLookupIntent(normalizedQuery) {
-  return /\b(in meiner stadt|in meiner naehe|in der naehe|vor ort|bei mir|postleitzahl|plz|adresse|dienststelle|wo finde ich|wo ist|wo gibt es|wo bekomme ich)\b/.test(normalizedQuery);
+  return /\b(in meiner stadt|in meiner naehe|in der naehe|vor ort|bei mir|postleitzahl|plz|adresse)\b/.test(normalizedQuery) ||
+    extractLocalLookupHint(normalizedQuery) !== null ||
+    /\b\d{5}\b/.test(normalizedQuery);
+}
+
+function titleCasePlace(value) {
+  return String(value || '')
+    .trim()
+    .split(/\s+/)
+    .map((part) => part ? part.charAt(0).toUpperCase() + part.slice(1) : part)
+    .join(' ');
+}
+
+function isLocalPlaceCandidate(value) {
+  const normalized = normalizeGermanChars(String(value || '').toLowerCase()).trim();
+  if (!normalized) return false;
+  if (/^(meiner|meine|der|die|dem|mir|mir in)\b/.test(normalized)) return false;
+  return !/\b(kindergeld|kinderzuschlag|buergergeld|burgergeld|arbeitslosengeld|krankengeld|wohngeld|elterngeld|pflegegeld|unterlagen|antrag|hilfe|leistung|leistungen|stelle)\b/.test(normalized);
+}
+
+function extractLocalLookupHint(normalizedQuery) {
+  const postalCode = normalizedQuery.match(/\b\d{5}\b/);
+  if (postalCode) return { type: 'postal_code', label: `PLZ ${postalCode[0]}` };
+  const place = normalizedQuery.match(/\b(?:in|fuer|für)\s+([a-zäöüß][a-zäöüß.-]+(?:\s+[a-zäöüß][a-zäöüß.-]+){0,2})\b/);
+  if (place?.[1] && isLocalPlaceCandidate(place[1])) {
+    return { type: 'place', label: titleCasePlace(place[1]) };
+  }
+  return null;
+}
+
+function buildGenericLocalLookupRoute(normalizedQuery) {
+  const hint = extractLocalLookupHint(normalizedQuery);
+  const target = hint?.label || 'deinem Ort';
+  return {
+    id: 'service_bund_local_search',
+    label: 'Serviceportal Bund: Behörden und Leistungen vor Ort',
+    url: 'https://www.service.bund.de/',
+    note: `Nutze das Serviceportal Bund als amtlichen Einstieg und suche dort nach der zuständigen Stelle für ${target}. Von dort kommst du zu kommunalen Behörden, Zuständigkeiten und Kontaktwegen.`,
+  };
 }
 
 function buildInstitutionFallback(query, { evidence = [], strongEvidence = [] } = {}) {
   const normalized = normalizeGermanChars(String(query || '').toLowerCase());
   if (!normalized.trim()) return null;
+  const localIntent = hasLocalLookupIntent(normalized);
 
   const matchedRoutes = INSTITUTION_FALLBACK_ROUTES
     .map((route) => ({
@@ -3351,26 +3382,30 @@ function buildInstitutionFallback(query, { evidence = [], strongEvidence = [] } 
     .sort((a, b) => b.score - a.score)
     .slice(0, 3);
 
-  if (matchedRoutes.length === 0) return null;
+  const routes = [
+    ...(localIntent ? [buildGenericLocalLookupRoute(normalized)] : []),
+    ...matchedRoutes,
+  ].filter((route, index, list) => list.findIndex((item) => item.id === route.id) === index);
 
-  const localIntent = hasLocalLookupIntent(normalized);
+  if (routes.length === 0) return null;
+
   const weakEvidence = evidence.length === 0 || strongEvidence.length === 0;
   if (!localIntent && !weakEvidence) return null;
 
   const intro = localIntent
     ? 'Dazu haben wir keinen verlässlichen lokalen Treffer im aktuellen Datenbestand.'
     : 'Dazu haben wir gerade keinen ausreichend passenden Eintrag im aktuellen Datenbestand.';
-  const routeIntro = matchedRoutes.length === 1
+  const routeIntro = routes.length === 1
     ? 'Aufgrund deiner Frage passt wahrscheinlich diese Anlaufstelle:'
     : 'Aufgrund deiner Stichwörter passen wahrscheinlich diese Anlaufstellen:';
-  const routeLines = matchedRoutes.map((route) =>
+  const routeLines = routes.map((route) =>
     `- ${route.label}: ${route.note}\n[Quelle: ${route.url}]`
   );
 
   return {
     answer: [intro, routeIntro, ...routeLines].join('\n\n'),
-    sources: matchedRoutes.map((route) => route.url),
-    routes: matchedRoutes,
+    sources: routes.map((route) => route.url),
+    routes,
   };
 }
 
