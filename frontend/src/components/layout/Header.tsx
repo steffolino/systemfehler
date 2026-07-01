@@ -1,9 +1,9 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useMemo, useState } from "react";
-import SearchInput from "../SearchInput";
+import { useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
 import { useAppAuth } from "@/lib/auth";
+import { BrandIcon } from "./BrandAssets";
 
 const ROLES_CLAIM = "https://systemfehler/roles";
 
@@ -19,7 +19,6 @@ function getDisplayName(user: Record<string, unknown> | undefined) {
 }
 
 export function Header() {
-  const [searchValue, setSearchValue] = useState("");
   const { locale, setLocale, t } = useI18n();
 
   const { isAuthenticated, logout, user, isLoading, isConfigured } =
@@ -72,14 +71,14 @@ export function Header() {
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex min-w-0 items-center justify-between gap-4">
             <div className="min-w-0">
-              <Link
-                to="/"
-                className="block truncate text-xl font-semibold tracking-tight text-foreground md:text-2xl"
-              >
-                Systemfehler
+              <Link to="/" className="inline-flex items-center gap-3">
+                <BrandIcon className="h-10 w-10 md:h-11 md:w-11" />
+                <span className="truncate text-xl font-semibold tracking-tight text-foreground md:text-2xl">
+                  Systemfehler
+                </span>
               </Link>
 
-              <div className="mt-0.5 flex items-center gap-2 text-xs text-muted-foreground md:text-sm">
+              <div className="mt-1 flex items-center gap-2 text-xs text-muted-foreground md:text-sm">
                 <span>{subtitle}</span>
                 <span className="hidden sm:inline">•</span>
                 <span className="hidden sm:inline">{t("app.version")} 0.1.0</span>
@@ -98,17 +97,6 @@ export function Header() {
               </div>
             )}
           </div>
-
-          {!isAdminRoute && (
-            <div className="w-full lg:max-w-xl lg:flex-1">
-              <SearchInput
-                navbar
-                value={searchValue}
-                onChange={setSearchValue}
-                placeholder={t("search.article_placeholder")}
-              />
-            </div>
-          )}
 
           <div className="flex flex-wrap items-center gap-2">
             <Button

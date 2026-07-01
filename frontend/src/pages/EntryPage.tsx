@@ -55,7 +55,7 @@ function InfoList({ items }: { items: Array<{ label: string; value: React.ReactN
   return (
     <dl className="grid grid-cols-1 gap-3 sm:grid-cols-2">
       {items.map((item) => (
-        <div key={item.label} className="rounded-xl border p-4">
+        <div key={item.label} className="rounded-xl border bg-card p-4">
           <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{item.label}</dt>
           <dd className="mt-2 break-words text-sm text-foreground">{item.value}</dd>
         </div>
@@ -240,7 +240,7 @@ export default function EntryPage() {
 
   return (
     <div className={`mx-auto w-full p-4 md:p-6 ${isAdmin ? 'max-w-6xl' : 'max-w-3xl'}`}>
-      <div className="mb-6 rounded-3xl border bg-gradient-to-br from-muted/40 via-background to-background p-5 shadow-sm md:p-6">
+      <div className="surface-hero mb-6 p-5 md:p-6">
         <div className="flex flex-col gap-4">
           <div className="flex flex-wrap items-center gap-2">
             <Button asChild variant="outline" size="sm">
@@ -388,7 +388,7 @@ export default function EntryPage() {
               ))}
             </div>
             {languageMode !== 'standard' && (
-              <div className="mb-4 rounded-xl border bg-muted/40 px-4 py-3 text-sm text-muted-foreground">
+              <div className="mb-4 rounded-xl border bg-card px-4 py-3 text-sm text-muted-foreground">
                 <div className="font-medium text-foreground">
                   {t('entry.reading_mode_active', { mode: getModeLabel(languageMode) })}
                 </div>

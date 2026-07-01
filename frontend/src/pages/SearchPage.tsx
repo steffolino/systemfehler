@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { Link } from 'react-router-dom';
 
 import { api, getEntrySourceMeta, getSourceRoleLabel, getSourceTierLabel, type Entry } from '../lib/api';
 import type { AIChatMessage, AIHealthResponse, AIResultBundle } from '../lib/api';
 import SearchInput from '../components/SearchInput';
 import ResultsList from '../components/ResultsList';
 import TurnstileWidget from '../components/TurnstileWidget';
+import { GlossaryInfoButton, GlossaryTerm } from '@/components/glossary/GlossaryProvider';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Spinner } from '@/components/ui/spinner';
@@ -15,6 +15,7 @@ import {
   getReadableAnswerText,
   type LanguageMode,
 } from '@/lib/plain_language';
+import localLifeEvents from '../../../data/_topics/life_events.json';
 import suggestedQuestionsByLifeEvent from '../data/life_event_suggested_questions.json';
 
 type TabKey = 'article' | 'ai';
@@ -23,6 +24,13 @@ type LifeEventOption = {
   id: string;
   label_de: string;
   label_en?: string;
+};
+type LocalLifeEventsFile = {
+  scenarios?: Array<{
+    id?: string;
+    label_de?: string;
+    label_en?: string;
+  }>;
 };
 type ChatThreadMessage = AIChatMessage & {
   id: string;
@@ -284,6 +292,7 @@ export default function SearchPage() {
   const [aiLanguageMode, setAiLanguageMode] = useState<LanguageMode>('standard');
   const [showHelpfulAnswer, setShowHelpfulAnswer] = useState(false);
   const [showMoreInformation, setShowMoreInformation] = useState(false);
+  const [lifeEventPanel, setLifeEventPanel] = useState<'overview' | 'detail'>('overview');
   const [retrievalMode, setRetrievalMode] = useState<RetrievalMode>('hybrid');
   const [strictOfficialOnly, setStrictOfficialOnly] = useState(false);
   const [lifeEventContext, setLifeEventContext] = useState<string>('');
@@ -674,20 +683,7 @@ export default function SearchPage() {
   }, [aiDraftQuery, standardQuery, tab]);
 
   const MAX_AI_RESULTS = 30;
-  const activeResults =
-    tab === 'article' ? standardResults : (aiResult?.relatedEntries?.slice(0, MAX_AI_RESULTS) || []);
-  const activeLoading = tab === 'article' ? standardLoading : aiEvidenceLoading;
-  const activeError = tab === 'article' ? standardError : aiError;
-  const activeQuery = tab === 'article' ? debouncedStandardQuery : submittedAiQuery;
-
-  const resultLabel = useMemo(() => {
-    if (activeLoading) return t('common.loading_results');
-    if (activeError) return t('common.error_title');
-
-    return tab === 'ai'
-      ? t('search.evidence_count', { count: activeResults.length })
-      : t('search.result_count', { count: activeResults.length });
-  }, [activeError, activeLoading, activeResults.length, t, tab]);
+  const activeResults = aiResult?.relatedEntries?.slice(0, MAX_AI_RESULTS) || [];
 
   const displayedAiAnswer = useMemo(() => {
     const base = aiResult?.synthesis.answer || aiResult?.synthesis.explanation || '';
@@ -792,9 +788,20 @@ export default function SearchPage() {
 
   const lifeEventOptions = useMemo<LifeEventOption[]>(() => {
     const fromHealth = aiHealth?.retrieval?.lifeEvents || [];
-    if (fromHealth.length === 0) return [];
-    return fromHealth
+    const fromLocal = ((localLifeEvents as LocalLifeEventsFile).scenarios || []).map((item) => ({
+      id: item.id || '',
+      label_de: item.label_de || item.id || '',
+      label_en: item.label_en || item.label_de || item.id || '',
+    }));
+
+    const seen = new Set<string>();
+    return [...fromHealth, ...fromLocal]
       .filter((item) => typeof item?.id === 'string' && item.id.trim())
+      .filter((item) => {
+        if (seen.has(item.id)) return false;
+        seen.add(item.id);
+        return true;
+      })
       .map((item) => ({
         id: item.id,
         label_de: item.label_de || item.id,
@@ -809,179 +816,28 @@ export default function SearchPage() {
     return Array.isArray(suggestions) ? suggestions.slice(0, 5) : [];
   }, [lifeEventContext]);
 
+  const visibleLifeEventOptions = useMemo(() => lifeEventOptions.slice(0, 12), [lifeEventOptions]);
+  const selectedLifeEventLabel = useMemo(() => {
+    const option = lifeEventOptions.find((item) => item.id === lifeEventContext);
+    if (!option) return '';
+    return locale === 'en' ? option.label_en || option.label_de : option.label_de;
+  }, [lifeEventContext, lifeEventOptions, locale]);
+
+  useEffect(() => {
+    if (!lifeEventContext) {
+      setLifeEventPanel('overview');
+    }
+  }, [lifeEventContext]);
+
   return (
     <div className="mx-auto w-full max-w-5xl p-4 md:p-6">
-      <div className="mb-6 rounded-3xl border bg-[linear-gradient(180deg,rgba(248,250,252,0.96),rgba(255,255,255,1))] p-5 shadow-sm md:p-6">
+      <div className="surface-hero mb-6 p-5 md:p-6">
         <h1 className="text-3xl font-semibold tracking-tight">{t('search.hero_title')}</h1>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">{t('search.hero_body')}</p>
-        <div className="mt-3 text-sm text-muted-foreground">
-          <Link to="/sources" className="font-medium text-foreground underline underline-offset-4">
-            {t('search.source_link')}
-          </Link>
-        </div>
       </div>
 
       <div className="space-y-5">
         <Card className="rounded-3xl border shadow-sm">
-          <div className="p-4 md:p-5">
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                <div>
-                  <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                    {t('search.mode')}
-                  </div>
-                  <div className="mt-1 text-sm text-muted-foreground">
-                    {tab === 'ai' ? t('search.mode_ai_desc') : t('search.mode_article_desc')}
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 rounded-lg border p-1">
-                  <Button variant={tab === 'article' ? 'default' : 'ghost'} onClick={() => setTab('article')}>
-                    {t('search.mode_article')}
-                  </Button>
-                  <Button variant={tab === 'ai' ? 'default' : 'ghost'} onClick={() => setTab('ai')}>
-                    {t('search.mode_ai')}
-                  </Button>
-                </div>
-              </div>
-
-              {tab === 'ai' && (
-                <div className="space-y-2">
-                  <div className="max-w-md">
-                    <div className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                      {t('search.life_event_context')}
-                    </div>
-                    <select
-                      value={lifeEventContext}
-                      onChange={(event) => setLifeEventContext(event.target.value)}
-                      className="h-10 w-full rounded-md border bg-background px-3 text-sm"
-                    >
-                      <option value="">{t('search.life_event_none')}</option>
-                      {lifeEventOptions.map((item) => (
-                        <option key={item.id} value={item.id}>
-                          {locale === 'en' ? item.label_en || item.label_de : item.label_de}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  {lifeEventContext && selectedSuggestedQuestions.length > 0 && (
-                    <div className="rounded-2xl border bg-muted/20 p-3">
-                      <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                        {t('search.suggested_questions')}
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedSuggestedQuestions.map((question) => (
-                          <Button
-                            key={question}
-                            variant="outline"
-                            className="h-auto whitespace-normal text-left"
-                            onClick={() => applySuggestedQuestion(question)}
-                            disabled={chatLimitReached || turnstileMisconfigured || (turnstileEnabled && !turnstileReady)}
-                          >
-                            {question}
-                          </Button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              <div className="flex flex-col gap-3 md:flex-row md:items-start">
-                <div className="flex-1">
-                  <SearchInput
-                    value={tab === 'article' ? standardQuery : aiDraftQuery}
-                    onChange={tab === 'article' ? setStandardQuery : setAiDraftQuery}
-                    enableAutocomplete={tab === 'article'}
-                    onSubmit={tab === 'ai' ? submitAiQuery : undefined}
-                    placeholder={tab === 'ai' ? t('search.ai_placeholder') : t('search.article_placeholder')}
-                    disabled={tab === 'ai' && chatLimitReached}
-                  />
-                  <div className="mt-2 text-xs text-muted-foreground">
-                    {tab === 'ai' ? t('search.ai_helper') : t('search.article_helper')}
-                  </div>
-                  {tab === 'ai' && (
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setRetrievalMode('keyword')}
-                        className={[
-                          'inline-flex rounded-full border px-3 py-1.5 text-xs font-medium transition',
-                          retrievalMode === 'keyword'
-                            ? 'border-foreground bg-foreground text-background'
-                            : 'border-border bg-background text-foreground hover:bg-muted',
-                        ].join(' ')}
-                      >
-                        {t('search.retrieval_keyword')}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setRetrievalMode('hybrid')}
-                        className={[
-                          'inline-flex rounded-full border px-3 py-1.5 text-xs font-medium transition',
-                          retrievalMode === 'hybrid'
-                            ? 'border-foreground bg-foreground text-background'
-                            : 'border-border bg-background text-foreground hover:bg-muted',
-                        ].join(' ')}
-                      >
-                        {t('search.retrieval_hybrid')}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setStrictOfficialOnly((value) => !value)}
-                        className={[
-                          'inline-flex rounded-full border px-3 py-1.5 text-xs font-medium transition',
-                          strictOfficialOnly
-                            ? 'border-foreground bg-foreground text-background'
-                            : 'border-border bg-background text-foreground hover:bg-muted',
-                        ].join(' ')}
-                      >
-                        {t('search.retrieval_official_only')}
-                      </button>
-                    </div>
-                  )}
-                </div>
-
-                {tab === 'ai' && (
-                  <div className="md:w-44">
-                    <Button
-                      className="h-11 w-full"
-                      onClick={submitAiQuery}
-                      disabled={
-                        aiLoading ||
-                        !aiDraftQuery.trim() ||
-                        chatLimitReached ||
-                        turnstileMisconfigured ||
-                        (turnstileEnabled && !turnstileReady)
-                      }
-                    >
-                      {aiLoading ? t('search.working') : t('search.ask_ai')}
-                    </Button>
-                  </div>
-                )}
-              </div>
-
-              <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                <div className="text-sm text-muted-foreground">
-                  {activeQuery
-                    ? tab === 'ai'
-                      ? t('search.showing_ai', { query: activeQuery })
-                      : t('search.showing_article', { query: activeQuery })
-                    : tab === 'ai'
-                      ? t('search.prompt_ai')
-                      : t('search.show_all')}
-                </div>
-
-                <div className="text-sm text-muted-foreground">{resultLabel}</div>
-              </div>
-            </div>
-          </div>
-        </Card>
-
-        {tab === 'ai' ? (
-          <>
-            {chatMessages.length > 0 && (
-              <Card className="rounded-3xl border shadow-sm">
                 <div className="border-b p-4 md:p-5">
                   <div className="flex items-center justify-between gap-3">
                     <div>
@@ -993,6 +849,14 @@ export default function SearchPage() {
                       </div>
                     </div>
                     <div className="flex flex-wrap items-center justify-end gap-2">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setShowMoreInformation((value) => !value)}
+                      >
+                        {showMoreInformation ? t('search.hide_details') : t('search.show_details')}
+                      </Button>
+                      {showMoreInformation && (
                       <div className="flex flex-wrap gap-2">
                         {(['standard', 'einfach'] as LanguageMode[]).map((mode) => (
                           <button
@@ -1010,25 +874,126 @@ export default function SearchPage() {
                           </button>
                         ))}
                       </div>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          setChatMessages([]);
-                          setSubmittedAiQuery('');
-                          setAiDraftQuery('');
-                          setAiResult(null);
-                          setAiError(null);
-                          setAiLoading(false);
-                          setAiEvidenceLoading(false);
-                        }}
-                      >
-                        Neuer Chat
-                      </Button>
+                      )}
+                      {chatMessages.length > 0 && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            setChatMessages([]);
+                            setSubmittedAiQuery('');
+                            setAiDraftQuery('');
+                            setAiResult(null);
+                            setAiError(null);
+                            setAiLoading(false);
+                            setAiEvidenceLoading(false);
+                            setLifeEventPanel('overview');
+                          }}
+                        >
+                          Neuer Chat
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </div>
                 <div className="space-y-3 p-4 md:p-5">
+                  {chatMessages.length === 0 && !aiLoading && (
+                    <div className="overflow-hidden rounded-2xl border border-dashed bg-muted/10 text-sm">
+                      <div
+                        className={[
+                          'flex w-[200%] transition-transform duration-300 ease-out',
+                          lifeEventPanel === 'detail' ? '-translate-x-1/2' : 'translate-x-0',
+                        ].join(' ')}
+                      >
+                        <div className="w-1/2 shrink-0 px-4 py-5">
+                          <div className="space-y-4">
+                            <div>
+                              <div className="font-medium text-foreground">{t('search.prompt_ai')}</div>
+                              <div className="mt-1 text-muted-foreground">
+                                {t('search.life_event_context')}
+                              </div>
+                            </div>
+
+                            {visibleLifeEventOptions.length > 0 && (
+                              <div className="flex flex-wrap gap-2">
+                                {visibleLifeEventOptions.map((item) => {
+                                  const label = locale === 'en' ? item.label_en || item.label_de : item.label_de;
+                                  const selected = item.id === lifeEventContext;
+
+                                  return (
+                                    <button
+                                      key={item.id}
+                                      type="button"
+                                      onClick={() => {
+                                        setLifeEventContext(selected ? '' : item.id);
+                                        setLifeEventPanel(selected ? 'overview' : 'detail');
+                                      }}
+                                      className={[
+                                        'inline-flex rounded-full border px-3 py-1.5 text-xs font-medium transition',
+                                        selected
+                                          ? 'border-foreground bg-foreground text-background'
+                                          : 'border-border bg-background text-foreground hover:bg-muted',
+                                      ].join(' ')}
+                                    >
+                                      {label}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="w-1/2 shrink-0 px-4 py-5">
+                          <div className="flex h-full flex-col">
+                            <div className="flex items-start justify-between gap-3">
+                              <div>
+                                <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                                  {t('search.life_event_context')}
+                                </div>
+                                <div className="mt-1 text-base font-semibold text-foreground">
+                                  {selectedLifeEventLabel || t('search.life_event_none')}
+                                </div>
+                              </div>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => setLifeEventPanel('overview')}
+                              >
+                                {t('entry.back')}
+                              </Button>
+                            </div>
+
+                            <div className="mt-5 space-y-3">
+                              <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                                {t('search.suggested_questions')}
+                              </div>
+
+                              {selectedSuggestedQuestions.length > 0 ? (
+                                <div className="flex flex-wrap gap-2">
+                                  {selectedSuggestedQuestions.map((question) => (
+                                    <Button
+                                      key={question}
+                                      variant="outline"
+                                      className="h-auto whitespace-normal text-left"
+                                      onClick={() => applySuggestedQuestion(question)}
+                                      disabled={chatLimitReached || turnstileMisconfigured || (turnstileEnabled && !turnstileReady)}
+                                    >
+                                      {question}
+                                    </Button>
+                                  ))}
+                                </div>
+                              ) : (
+                                <div className="rounded-xl border border-dashed bg-card px-4 py-3 text-muted-foreground">
+                                  {t('search.suggested_questions_desc')}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   {chatMessages.map((message) => (
                     <div
                       key={message.id}
@@ -1049,7 +1014,14 @@ export default function SearchPage() {
                         {message.role === 'assistant' && typeof message.evidenceCount === 'number' && (
                           <div className="mt-2 text-xs opacity-75">
                             {message.evidenceCount} Belege
-                            {message.weakEvidence ? ` ${t('search.status_weak_evidence')}` : ''}
+                            {message.weakEvidence ? (
+                              <>
+                                {' '}
+                                <GlossaryTerm termId="weak_evidence">
+                                  {t('search.status_weak_evidence')}
+                                </GlossaryTerm>
+                              </>
+                            ) : null}
                           </div>
                         )}
                       </div>
@@ -1064,7 +1036,7 @@ export default function SearchPage() {
                     </div>
                   )}
                   {chatLimitReached && (
-                    <div className="rounded-2xl border bg-muted/20 px-4 py-3 text-sm text-muted-foreground">
+                    <div className="rounded-2xl border bg-card px-4 py-3 text-sm text-muted-foreground">
                       {t('search.chat_limit_notice')}
                     </div>
                   )}
@@ -1105,10 +1077,9 @@ export default function SearchPage() {
                   </div>
                 </form>
               </Card>
-            )}
 
             {turnstileEnabled && (
-              <div className="rounded-3xl border bg-muted/15 p-4 shadow-sm">
+              <div className="surface-panel p-4">
                 <TurnstileWidget siteKey={configuredTurnstileSiteKey} onReady={handleTurnstileReady} />
                 <div className="text-xs text-muted-foreground">
                   {t('search.bot_protection_note')}
@@ -1121,12 +1092,15 @@ export default function SearchPage() {
               </div>
             )}
 
-            <Card className="rounded-3xl border shadow-md">
-              <div className="border-b bg-[linear-gradient(180deg,rgba(248,250,252,0.96),rgba(255,255,255,1))] p-5 md:p-6">
+            {showMoreInformation && (
+            <Card className="surface-panel">
+              <div className="surface-hero rounded-b-none border-b p-5 md:p-6">
                 <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                   <div>
                     <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                      {t('search.ai_synthesis')}
+                      <GlossaryTerm termId="helpful_answer">
+                        {t('search.ai_synthesis')}
+                      </GlossaryTerm>
                     </div>
                     {submittedAiQuery && aiStatusSummary && (
                       <div className="mt-2 text-base font-semibold text-foreground">{aiStatusSummary}</div>
@@ -1202,25 +1176,31 @@ export default function SearchPage() {
                       <div className="space-y-3">
                         <div className="rounded-2xl border bg-background p-4">
                           <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                            {t('search.answer_lane_official')}
+                            <GlossaryTerm termId="official_baseline">
+                              {t('search.answer_lane_official')}
+                            </GlossaryTerm>
                           </div>
                           <MarkdownText
                             className="text-base leading-6 text-foreground"
                             text={officialLaneAnswer || t('search.answer_lane_official_empty')}
                           />
                         </div>
-                        <div className="rounded-2xl border bg-muted/20 p-4">
+                        <div className="rounded-2xl border bg-card p-4">
                           <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                            {t('search.answer_lane_assistive')}
+                            <GlossaryTerm termId="assistive_support">
+                              {t('search.answer_lane_assistive')}
+                            </GlossaryTerm>
                           </div>
                           <MarkdownText
                             className="text-base leading-6 text-foreground"
                             text={assistiveLaneAnswer || t('search.answer_lane_assistive_empty')}
                           />
                         </div>
-                        <div className="rounded-2xl border bg-muted/20 p-4">
+                        <div className="rounded-2xl border bg-card p-4">
                           <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                            {t('search.answer_lane_contacts')}
+                            <GlossaryTerm termId="direct_contacts">
+                              {t('search.answer_lane_contacts')}
+                            </GlossaryTerm>
                           </div>
                           <MarkdownText
                             className="text-base leading-6 text-foreground"
@@ -1228,7 +1208,9 @@ export default function SearchPage() {
                           />
                           <div className="mt-4">
                             <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                              {t('search.assistive_contacts')}
+                              <GlossaryTerm termId="direct_contacts">
+                                {t('search.assistive_contacts')}
+                              </GlossaryTerm>
                             </div>
                             {assistiveContacts.length > 0 ? (
                               <div className="space-y-2">
@@ -1274,7 +1256,9 @@ export default function SearchPage() {
 
                     {submittedAiQuery && aiResult?.synthesis.weak_evidence && !hasNoStrongAiEvidence && (
                       <div className="rounded-xl border bg-muted/30 px-4 py-3 text-xs text-muted-foreground">
-                        {t('search.status_weak_evidence')}
+                        <GlossaryTerm termId="weak_evidence">
+                          {t('search.status_weak_evidence')}
+                        </GlossaryTerm>
                       </div>
                     )}
 
@@ -1295,27 +1279,145 @@ export default function SearchPage() {
                 </div>
               )}
             </Card>
+            )}
 
+            {showMoreInformation && (
             <div className="space-y-4 pt-2">
-              <div className="flex items-center justify-between gap-3">
-                <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  Weitere Informationen
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setShowMoreInformation((value) => !value)}
-                >
-                  {showMoreInformation ? t('search.hide_details') : t('search.show_details')}
-                </Button>
-              </div>
+              <Card className="surface-panel">
+                <div className="space-y-5 p-5">
+                  <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                    <div>
+                      <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                        {t('search.mode')}
+                      </div>
+                      <div className="mt-1 text-sm text-muted-foreground">
+                        {tab === 'ai' ? t('search.mode_ai_desc') : t('search.mode_article_desc')}
+                      </div>
+                    </div>
 
-              {showMoreInformation && (
+                    <div className="flex items-center gap-2 rounded-lg border bg-background p-1">
+                      <div className="inline-flex items-center gap-1">
+                        <Button variant={tab === 'article' ? 'default' : 'ghost'} onClick={() => setTab('article')}>
+                          {t('search.mode_article')}
+                        </Button>
+                        <GlossaryInfoButton label={t('search.mode_article')} termId="article_search" />
+                      </div>
+                      <div className="inline-flex items-center gap-1">
+                        <Button variant={tab === 'ai' ? 'default' : 'ghost'} onClick={() => setTab('ai')}>
+                          {t('search.mode_ai')}
+                        </Button>
+                        <GlossaryInfoButton label={t('search.mode_ai')} termId="ai_guided_search" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div className="space-y-3">
+                      <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                        {t('search.status_retrieval_mode')}
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        <span className="inline-flex items-center gap-1">
+                          <button
+                            type="button"
+                            onClick={() => setRetrievalMode('keyword')}
+                            className={[
+                              'inline-flex rounded-full border px-3 py-1.5 text-xs font-medium transition',
+                              retrievalMode === 'keyword'
+                                ? 'border-foreground bg-foreground text-background'
+                                : 'border-border bg-background text-foreground hover:bg-muted',
+                            ].join(' ')}
+                          >
+                            {t('search.retrieval_keyword')}
+                          </button>
+                          <GlossaryInfoButton label={t('search.retrieval_keyword')} termId="direct_search" />
+                        </span>
+                        <span className="inline-flex items-center gap-1">
+                          <button
+                            type="button"
+                            onClick={() => setRetrievalMode('hybrid')}
+                            className={[
+                              'inline-flex rounded-full border px-3 py-1.5 text-xs font-medium transition',
+                              retrievalMode === 'hybrid'
+                                ? 'border-foreground bg-foreground text-background'
+                                : 'border-border bg-background text-foreground hover:bg-muted',
+                            ].join(' ')}
+                          >
+                            {t('search.retrieval_hybrid')}
+                          </button>
+                          <GlossaryInfoButton label={t('search.retrieval_hybrid')} termId="hybrid_search" />
+                        </span>
+                        <span className="inline-flex items-center gap-1">
+                          <button
+                            type="button"
+                            onClick={() => setStrictOfficialOnly((value) => !value)}
+                            className={[
+                              'inline-flex rounded-full border px-3 py-1.5 text-xs font-medium transition',
+                              strictOfficialOnly
+                                ? 'border-foreground bg-foreground text-background'
+                                : 'border-border bg-background text-foreground hover:bg-muted',
+                            ].join(' ')}
+                          >
+                            {t('search.retrieval_official_only')}
+                          </button>
+                          <GlossaryInfoButton label={t('search.retrieval_official_only')} termId="official_only_sources" />
+                        </span>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  {tab === 'article' && (
+                    <div className="space-y-3 border-t pt-5">
+                      <SearchInput
+                        value={standardQuery}
+                        onChange={setStandardQuery}
+                        enableAutocomplete
+                        placeholder={t('search.article_placeholder')}
+                      />
+                      <div className="text-xs text-muted-foreground">{t('search.article_helper')}</div>
+                      <Card className="rounded-2xl border bg-background shadow-none">
+                        <div className="min-h-80 p-4">
+                          {standardLoading ? (
+                            <div className="flex h-80 flex-col items-center justify-center gap-3">
+                              <Spinner />
+                              <div className="text-sm text-muted-foreground">{t('common.loading_results')}</div>
+                            </div>
+                          ) : standardError ? (
+                            <div className="flex h-80 items-center justify-center p-6 text-center">
+                              <div>
+                                <div className="font-medium text-red-600">{t('common.error_title')}</div>
+                                <div className="mt-1 text-sm text-muted-foreground">{standardError}</div>
+                              </div>
+                            </div>
+                          ) : standardResults.length === 0 ? (
+                            <div className="flex h-80 items-center justify-center p-6 text-center">
+                              <div>
+                                <div className="font-medium">
+                                  {debouncedStandardQuery ? t('common.no_results') : t('common.no_data')}
+                                </div>
+                                <div className="mt-1 text-sm text-muted-foreground">
+                                  {debouncedStandardQuery ? t('common.try_other_query') : t('search.subtitle')}
+                                </div>
+                              </div>
+                            </div>
+                          ) : (
+                            <ResultsList results={standardResults} />
+                          )}
+                        </div>
+                      </Card>
+                    </div>
+                  )}
+                </div>
+              </Card>
+
                 <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
-                <Card className="rounded-3xl border bg-muted/15 shadow-sm">
+                <Card className="surface-panel">
                   <div className="p-5">
                     <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                      {t('search.evidence_entries')}
+                      <GlossaryTerm termId="evidence_entries">
+                        {t('search.evidence_entries')}
+                      </GlossaryTerm>
                     </div>
                     <div className="mt-2">
                       {aiEvidenceLoading ? (
@@ -1324,7 +1426,7 @@ export default function SearchPage() {
                           <div className="text-sm text-muted-foreground">{t('common.loading_results')}</div>
                         </div>
                       ) : activeResults.length === 0 ? (
-                        <div className="rounded-xl border border-dashed bg-background/70 p-6 text-center">
+                        <div className="rounded-xl border border-dashed bg-card p-6 text-center">
                           <div className="font-medium">
                             {submittedAiQuery ? t('search.no_evidence') : t('search.enter_query')}
                           </div>
@@ -1340,10 +1442,12 @@ export default function SearchPage() {
                 </Card>
 
                 <div className="space-y-4">
-                  <Card className="rounded-3xl border bg-muted/15 shadow-sm">
+                  <Card className="surface-panel">
                     <div className="p-5">
                       <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                        {t('search.ai_focus')}
+                        <GlossaryTerm termId="search_focus">
+                          {t('search.ai_focus')}
+                        </GlossaryTerm>
                       </div>
                       <div className="mt-2 text-sm text-foreground">
                         {submittedAiQuery
@@ -1360,7 +1464,9 @@ export default function SearchPage() {
                       {submittedAiQuery && (aiResult?.rewrite.matched_topics?.length || 0) > 0 && (
                         <div className="mt-3">
                           <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                            {t('search.matched_topics')}
+                            <GlossaryTerm termId="matched_topic_profiles">
+                              {t('search.matched_topics')}
+                            </GlossaryTerm>
                           </div>
                           <div className="flex flex-wrap gap-2">
                             {aiResult?.rewrite.matched_topics?.map((topic) => (
@@ -1377,12 +1483,14 @@ export default function SearchPage() {
                     </div>
                   </Card>
 
-                  <Card className="rounded-3xl border bg-muted/15 shadow-sm">
+                  <Card className="surface-panel">
                     <div className="p-5">
                       <div className="flex items-center justify-between gap-3">
                         <div>
                           <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                            {t('search.technical_details')}
+                            <GlossaryTerm termId="technical_details">
+                              {t('search.technical_details')}
+                            </GlossaryTerm>
                           </div>
                           <div className="mt-1 text-sm text-muted-foreground">
                             {t('search.technical_details_desc')}
@@ -1400,8 +1508,18 @@ export default function SearchPage() {
                       {showTechnicalDetails && (
                         <>
                           <div className="mt-4 space-y-2 text-sm">
-                            <div>{t('search.status_sidecar')}: {aiHealth?.status || t('common.unknown')}</div>
-                            <div>{t('search.status_provider')}: {aiHealth?.provider.provider || 'none'}</div>
+                            <div>
+                              <GlossaryTerm termId="answer_service">
+                                {t('search.status_sidecar')}
+                              </GlossaryTerm>
+                              : {aiHealth?.status || t('common.unknown')}
+                            </div>
+                            <div>
+                              <GlossaryTerm termId="provider">
+                                {t('search.status_provider')}
+                              </GlossaryTerm>
+                              : {aiHealth?.provider.provider || 'none'}
+                            </div>
                             <div>
                               {t('search.status_configured')}: {statusText(aiHealth?.provider.configured, translate)}
                             </div>
@@ -1409,20 +1527,49 @@ export default function SearchPage() {
                               {t('search.status_provider_state')}: {aiHealth?.provider.status || t('common.unknown')}
                             </div>
                             <div>
-                              {t('search.status_bot_protection')}:{' '}
+                              <GlossaryTerm termId="bot_protection">
+                                {t('search.status_bot_protection')}
+                              </GlossaryTerm>
+                              :{' '}
                               {statusText((turnstileEnabled && turnstileReady) || turnstileMisconfigured, translate)}
                             </div>
-                            <div>{t('search.status_retrieval_mode')}: {aiResult?.synthesis.retrieval?.retrieval_mode || aiHealth?.retrieval?.activeMode || t('common.unknown')}</div>
-                            <div>{t('search.status_retrieval_filter')}: {statusText(strictOfficialOnly, translate)}</div>
-                            <div>{t('search.status_life_event')}: {aiResult?.synthesis.retrieval?.selected_life_event || lifeEventContext || t('common.unknown')}</div>
-                            <div>{t('search.status_retrieval_external')}: {aiResult?.synthesis.retrieval?.external_status || (aiHealth?.retrieval?.externalConfigured ? t('search.status_ready') : t('search.status_loading'))}</div>
                             <div>
-                              Redaktionelle Prüfung:{' '}
+                              <GlossaryTerm termId="retrieval_mode">
+                                {t('search.status_retrieval_mode')}
+                              </GlossaryTerm>
+                              : {aiResult?.synthesis.retrieval?.retrieval_mode || aiHealth?.retrieval?.activeMode || t('common.unknown')}
+                            </div>
+                            <div>
+                              <GlossaryTerm termId="official_filter">
+                                {t('search.status_retrieval_filter')}
+                              </GlossaryTerm>
+                              : {statusText(strictOfficialOnly, translate)}
+                            </div>
+                            <div>
+                              <GlossaryTerm termId="life_event_context">
+                                {t('search.status_life_event')}
+                              </GlossaryTerm>
+                              : {aiResult?.synthesis.retrieval?.selected_life_event || lifeEventContext || t('common.unknown')}
+                            </div>
+                            <div>
+                              <GlossaryTerm termId="external_retrieval">
+                                {t('search.status_retrieval_external')}
+                              </GlossaryTerm>
+                              : {aiResult?.synthesis.retrieval?.external_status || (aiHealth?.retrieval?.externalConfigured ? t('search.status_ready') : t('search.status_loading'))}
+                            </div>
+                            <div>
+                              <GlossaryTerm termId="editorial_review">
+                                Redaktionelle Prüfung
+                              </GlossaryTerm>
+                              :{' '}
                               {statusText(Boolean(aiResult?.synthesis.retrieval?.editorial_review_required), translate)}
                             </div>
                             {(aiResult?.synthesis.retrieval?.editorial_review_reasons || []).length > 0 && (
                               <div>
-                                Review-Hinweise: {(aiResult?.synthesis.retrieval?.editorial_review_reasons || []).join(', ')}
+                                <GlossaryTerm termId="review_notes">
+                                  Review-Hinweise
+                                </GlossaryTerm>
+                                : {(aiResult?.synthesis.retrieval?.editorial_review_reasons || []).join(', ')}
                               </div>
                             )}
                           </div>
@@ -1443,41 +1590,8 @@ export default function SearchPage() {
 
                 </div>
                 </div>
-              )}
             </div>
-          </>
-        ) : (
-          <Card className="rounded-3xl border shadow-sm">
-            <div className="min-h-80 bg-background p-4 md:p-5">
-              {activeLoading ? (
-                <div className="flex h-80 flex-col items-center justify-center gap-3">
-                  <Spinner />
-                  <div className="text-sm text-muted-foreground">{t('common.loading_results')}</div>
-                </div>
-              ) : activeError ? (
-                <div className="flex h-80 items-center justify-center p-6 text-center">
-                  <div>
-                    <div className="font-medium text-red-600">{t('common.error_title')}</div>
-                    <div className="mt-1 text-sm text-muted-foreground">{activeError}</div>
-                  </div>
-                </div>
-              ) : activeResults.length === 0 ? (
-                <div className="flex h-80 items-center justify-center p-6 text-center">
-                  <div>
-                    <div className="font-medium">
-                      {debouncedStandardQuery ? t('common.no_results') : t('common.no_data')}
-                    </div>
-                    <div className="mt-1 text-sm text-muted-foreground">
-                      {debouncedStandardQuery ? t('common.try_other_query') : t('search.subtitle')}
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <ResultsList results={activeResults} />
-              )}
-            </div>
-          </Card>
-        )}
+            )}
       </div>
     </div>
   );

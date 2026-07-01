@@ -1,14 +1,18 @@
 import { lazy, Suspense, useState, type FormEvent, type JSX } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Link, Routes, Route, Navigate } from "react-router-dom";
 
 import { Header } from "./components/layout/Header";
+import { BrandIcon } from "./components/layout/BrandAssets";
+import { BackgroundDecor } from "./components/layout/BackgroundDecor";
 import AdminLayout from "./components/admin/AdminLayout";
+import { GlossaryProvider } from "./components/glossary/GlossaryProvider";
 import { I18nProvider, useI18n } from "./lib/i18n";
 import { useAppAuth } from "./lib/auth";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 const SearchPage = lazy(() => import("./pages/SearchPage"));
+const ImpressumPage = lazy(() => import("./pages/ImpressumPage"));
 const EntryPage = lazy(() => import("./pages/EntryPage"));
 const SourcesPage = lazy(() => import("./pages/SourcesPage"));
 const AdminApp = lazy(() => import("./pages/AdminApp"));
@@ -96,6 +100,29 @@ function AdminLoginGate() {
   );
 }
 
+function AppFooter() {
+  const { t } = useI18n();
+
+  return (
+    <footer className="border-t bg-background/95">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-4 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between md:px-6">
+        <div className="flex items-center gap-3">
+          <BrandIcon className="h-9 w-9" />
+          <span>{t('app.search_validate')}</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <Link to="/sources" className="underline underline-offset-4">
+            {t('nav.sources')}
+          </Link>
+          <Link to="/impressum" className="underline underline-offset-4">
+            {t('nav.impressum')}
+          </Link>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 export default function App() {
   const LoadingRoute = () => {
     const { t } = useI18n();
@@ -104,38 +131,45 @@ export default function App() {
 
   return (
     <I18nProvider>
-      <>
-        <Header />
+      <GlossaryProvider>
+        <BackgroundDecor />
+        <div className="relative z-10">
+          <Header />
 
-        <Suspense fallback={<LoadingRoute />}>
-          <Routes>
-            <Route path="/" element={<SearchPage />} />
-            <Route path="/sources" element={<SourcesPage />} />
-            <Route path="/entry/:id" element={<EntryPage />} />
+          <main className="relative">
+            <Suspense fallback={<LoadingRoute />}>
+              <Routes>
+                <Route path="/" element={<SearchPage />} />
+                <Route path="/sources" element={<SourcesPage />} />
+                <Route path="/impressum" element={<ImpressumPage />} />
+                <Route path="/entry/:id" element={<EntryPage />} />
 
-            <Route
-              path="/admin"
-              element={
-                <ProtectedRoute>
-                  <AdminLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route index element={<AdminApp />} />
-              <Route path="moderation" element={<AdminModeration />} />
-              <Route path="quality" element={<AdminQuality />} />
-              <Route path="raw" element={<AdminRawEntries />} />
-              <Route path="plain-language" element={<AdminPlainLanguage />} />
-              <Route path="life-events" element={<AdminLifeEventReview />} />
-              <Route path="duplicates" element={<AdminDuplicates />} />
-              <Route path="user-trust" element={<AdminUserTrust />} />
-              <Route path="audit-log" element={<AdminAuditLog />} />
-            </Route>
+                <Route
+                  path="/admin"
+                  element={
+                    <ProtectedRoute>
+                      <AdminLayout />
+                    </ProtectedRoute>
+                  }
+                >
+                  <Route index element={<AdminApp />} />
+                  <Route path="moderation" element={<AdminModeration />} />
+                  <Route path="quality" element={<AdminQuality />} />
+                  <Route path="raw" element={<AdminRawEntries />} />
+                  <Route path="plain-language" element={<AdminPlainLanguage />} />
+                  <Route path="life-events" element={<AdminLifeEventReview />} />
+                  <Route path="duplicates" element={<AdminDuplicates />} />
+                  <Route path="user-trust" element={<AdminUserTrust />} />
+                  <Route path="audit-log" element={<AdminAuditLog />} />
+                </Route>
 
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </Suspense>
-      </>
+                <Route path="*" element={<Navigate to="/" />} />
+              </Routes>
+            </Suspense>
+          </main>
+          <AppFooter />
+        </div>
+      </GlossaryProvider>
     </I18nProvider>
   );
 }

@@ -1080,7 +1080,9 @@ function normalizeEntriesPayload(payload: unknown, domainFallback?: string): Ent
 
 async function loadSnapshotEntries(domain?: string): Promise<Entry[]> {
   if (domain) {
-    const payload = await fetchSnapshot<unknown>(`/data/${domain}/entries.json`);
+    const payload = await fetchSnapshot<unknown>(`/data/${domain}/entries.json`).catch(
+      () => loadLocalEntriesPayload(domain)
+    );
     return normalizeEntriesPayload(payload, domain);
   }
 
@@ -1089,6 +1091,37 @@ async function loadSnapshotEntries(domain?: string): Promise<Entry[]> {
       const payload = await fetchSnapshot<unknown>(`/data/${currentDomain}/entries.json`).catch(() => []);
       return normalizeEntriesPayload(payload, currentDomain);
     })
+  );
+
+  return allEntries.flat();
+}
+
+async function loadLocalEntriesPayload(domain: string): Promise<unknown> {
+  switch (domain) {
+    case 'benefits':
+      return (await import('../../../data/benefits/entries.json')).default;
+    case 'aid':
+      return (await import('../../../data/aid/entries.json')).default;
+    case 'tools':
+      return (await import('../../../data/tools/entries.json')).default;
+    case 'organizations':
+      return (await import('../../../data/organizations/entries.json')).default;
+    case 'contacts':
+      return (await import('../../../data/contacts/entries.json')).default;
+    default:
+      return [];
+  }
+}
+
+async function loadLocalEntries(domain?: string): Promise<Entry[]> {
+  if (domain && DOMAINS.includes(domain as (typeof DOMAINS)[number])) {
+    return normalizeEntriesPayload(await loadLocalEntriesPayload(domain), domain);
+  }
+
+  const allEntries = await Promise.all(
+    DOMAINS.map(async (currentDomain) =>
+      normalizeEntriesPayload(await loadLocalEntriesPayload(currentDomain), currentDomain)
+    )
   );
 
   return allEntries.flat();
@@ -1219,12 +1252,19 @@ async function getAllEntriesForCatalog(): Promise<Entry[]> {
   let total = Infinity;
   const entries: Entry[] = [];
 
-  while (offset < total) {
-    const response = await fetchApi<EntriesResponse>(`/api/data/entries?limit=${limit}&offset=${offset}&includeTranslations=true`);
-    entries.push(...response.entries);
-    total = response.total;
-    offset += response.entries.length;
-    if (response.entries.length === 0) break;
+  try {
+    while (offset < total) {
+      const response = await fetchApi<EntriesResponse>(`/api/data/entries?limit=${limit}&offset=${offset}&includeTranslations=true`);
+      entries.push(...response.entries);
+      total = response.total;
+      offset += response.entries.length;
+      if (response.entries.length === 0) break;
+    }
+  } catch (error) {
+    if (IS_LOCALHOST) {
+      return loadLocalEntries();
+    }
+    throw error;
   }
 
   return entries;
