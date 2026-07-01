@@ -36,6 +36,21 @@ export default function AboutPage() {
         <Section title={t('about.section_how')} body={t('about.how_body')} />
         <Section title={t('about.section_for_who')} body={t('about.for_who_body')} />
         <Section title={t('about.section_transparency')} body={t('about.transparency_body')} />
+        <Card className="surface-panel">
+          <div className="p-5 md:p-6">
+            <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+              {t('about.section_open')}
+            </div>
+            <p className="mt-3 text-sm leading-7 text-foreground">{t('about.open_body')}</p>
+            <div className="mt-5">
+              <Button asChild variant="default" size="sm">
+                <a href="https://github.com/steffolino/systemfehler" target="_blank" rel="noreferrer">
+                  {t('about.github_link')}
+                </a>
+              </Button>
+            </div>
+          </div>
+        </Card>
 
         <div className="pt-4">
           <div className="mx-auto max-w-3xl">

@@ -263,6 +263,9 @@ const messages = {
     'about.for_who_body': 'Für Menschen, die Hilfe suchen, sowie für Fachkräfte und andere Personen, die einen klaren, nachvollziehbaren Einstieg in das Thema brauchen.',
     'about.section_transparency': 'Transparenz und Vertrauen',
     'about.transparency_body': 'Wichtige Quellen, Qualitätswerte und Kontext bleiben sichtbar, damit man einschätzen kann, wie belastbar eine Information ist.',
+    'about.section_open': 'Kostenfrei, offen, transparent',
+    'about.open_body': 'Die Nutzung von Systemfehler ist gratis. Das Projekt verfolgt keine Profitinteressen und soll offen und nachvollziehbar bleiben: Quellen, Arbeitsweise und Weiterentwicklung sollen sichtbar sein.',
+    'about.github_link': 'GitHub öffnen und Projekt unterstützen',
     'about.back_to_home': 'Zur Startseite',
   },
   en: {
@@ -525,6 +528,9 @@ const messages = {
     'about.for_who_body': 'For people looking for help, and for professionals or others who need a clear, traceable entry point into the topic.',
     'about.section_transparency': 'Transparency and trust',
     'about.transparency_body': 'Key sources, quality signals, and context stay visible so it is easier to judge how reliable a piece of information is.',
+    'about.section_open': 'Free, open, transparent',
+    'about.open_body': 'Systemfehler is free to use. The project has no profit interest and is intended to stay open and traceable: sources, working methods, and ongoing development should remain visible.',
+    'about.github_link': 'Open GitHub and support the project',
     'about.back_to_home': 'Back to home',
   },
 } as const;
