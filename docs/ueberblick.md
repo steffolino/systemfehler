@@ -18,6 +18,11 @@ amtliche Quelle, ein Werkzeug, eine Kontaktstelle oder eine passende
 Beratungssuche. Sie ersetzt keine persönliche Beratung und keine
 Rechtsberatung.
 
+Die Nutzung von Systemfehler ist gratis. Das Projekt verfolgt keine
+Profitinteressen und soll offen und nachvollziehbar bleiben. Die öffentliche
+GitHub-Ablage dokumentiert Arbeitsweise, Datenmodell und Weiterentwicklung,
+damit Menschen das Projekt prüfen, weiterverwenden oder unterstützen können.
+
 ## Welches Problem löst Systemfehler?
 
 Informationen zu sozialen Leistungen sind oft auf viele verschiedene Webseiten

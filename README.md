@@ -4,6 +4,8 @@ Systemfehler is a first point of orientation and a transparent information hub f
 
 The platform collects, normalizes, and preserves information about benefits, aid programs, tools, organizations, advice finders, and related support structures. Its goal is not to replace personal advice, but to make information about social rights and support easier to find, easier to check, and more robust against removal or silent change.
 
+Systemfehler is free to use, has no profit interest, and is intended to remain open and transparent. The public repository documents the project, its data model, and ongoing development so people can review, reuse, or support the work.
+
 For a high-level German overview for non-technical readers, see
 [`docs/ueberblick.md`](docs/ueberblick.md).
 
