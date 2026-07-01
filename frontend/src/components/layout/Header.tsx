@@ -120,6 +120,13 @@ export function Header() {
             >
               {t("nav.sources")}
             </Button>
+            <Button
+              variant={location.pathname === "/about" ? "default" : "outline"}
+              size="sm"
+              onClick={() => navigate("/about")}
+            >
+              {t("nav.about")}
+            </Button>
 
             {/* Admin button only when logged in */}
             {isAuthenticated && (

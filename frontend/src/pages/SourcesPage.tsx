@@ -126,6 +126,15 @@ export default function SourcesPage() {
     };
   }, [sources]);
 
+  const sourceRoleOptions = useMemo(
+    () => [
+      { value: 'official_info', label: t('sources.filter_official_info') },
+      { value: 'trusted_tool', label: t('sources.filter_trusted_tool') },
+      { value: 'context_info', label: t('sources.filter_context_info') },
+    ],
+    [t]
+  );
+
   const activeFilters =
     Number(Boolean(query.trim())) +
     Number(roleFilter !== 'all') +
@@ -162,7 +171,7 @@ export default function SourcesPage() {
                 {t('sources.filter')}
               </div>
               <div className="mt-1 text-sm text-muted-foreground">
-                Search, then narrow by role, tier, jurisdiction, and domain.
+                {t('sources.filter_description')}
               </div>
             </div>
 
@@ -171,14 +180,14 @@ export default function SourcesPage() {
               onClick={resetFilters}
               className="inline-flex items-center justify-center rounded-full border px-3 py-1.5 text-xs font-medium transition hover:bg-muted"
             >
-              Reset filters
+              {t('sources.reset_filters')}
             </button>
           </div>
 
           <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-6">
             <label className="xl:col-span-2">
               <span className="mb-1 block text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-                {t('sources.filter')}
+                {t('sources.filter_search_label')}
               </span>
               <input
                 value={query}
@@ -190,30 +199,32 @@ export default function SourcesPage() {
 
             <label>
               <span className="mb-1 block text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-                Source role
+                {t('sources.filter_role_label')}
               </span>
               <select
                 value={roleFilter}
                 onChange={(event) => setRoleFilter(event.target.value as typeof roleFilter)}
                 className="h-10 w-full rounded-md border bg-background px-3 text-sm"
               >
-                <option value="all">All roles</option>
-                <option value="official_info">Official info</option>
-                <option value="trusted_tool">Trusted tool</option>
-                <option value="context_info">Context info</option>
+                <option value="all">{t('sources.filter_all_roles')}</option>
+                {sourceRoleOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
               </select>
             </label>
 
             <label>
               <span className="mb-1 block text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-                Source tier
+                {t('sources.filter_tier_label')}
               </span>
               <select
                 value={tierFilter}
                 onChange={(event) => setTierFilter(event.target.value)}
                 className="h-10 w-full rounded-md border bg-background px-3 text-sm"
               >
-                <option value="all">All tiers</option>
+                <option value="all">{t('sources.filter_all_tiers')}</option>
                 {filterOptions.tiers.map((tier) => (
                   <option key={tier} value={tier}>
                     {getSourceTierLabel(tier, locale) || tier.replace(/_/g, ' ')}
@@ -224,14 +235,14 @@ export default function SourcesPage() {
 
             <label>
               <span className="mb-1 block text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-                Jurisdiction
+                {t('sources.filter_jurisdiction_label')}
               </span>
               <select
                 value={jurisdictionFilter}
                 onChange={(event) => setJurisdictionFilter(event.target.value)}
                 className="h-10 w-full rounded-md border bg-background px-3 text-sm"
               >
-                <option value="all">All jurisdictions</option>
+                <option value="all">{t('sources.filter_all_jurisdictions')}</option>
                 {filterOptions.jurisdictions.map((jurisdiction) => (
                   <option key={jurisdiction} value={jurisdiction}>
                     {jurisdiction}
@@ -242,14 +253,14 @@ export default function SourcesPage() {
 
             <label>
               <span className="mb-1 block text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-                Domain
+                {t('sources.filter_domain_label')}
               </span>
               <select
                 value={domainFilter}
                 onChange={(event) => setDomainFilter(event.target.value)}
                 className="h-10 w-full rounded-md border bg-background px-3 text-sm"
               >
-                <option value="all">All domains</option>
+                <option value="all">{t('sources.filter_all_domains')}</option>
                 {filterOptions.domains.map((domain) => (
                   <option key={domain} value={domain}>
                     {domain}
@@ -260,22 +271,25 @@ export default function SourcesPage() {
 
             <label>
               <span className="mb-1 block text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-                Sort by
+                {t('sources.filter_sort_label')}
               </span>
               <select
                 value={sortBy}
                 onChange={(event) => setSortBy(event.target.value as typeof sortBy)}
                 className="h-10 w-full rounded-md border bg-background px-3 text-sm"
               >
-                <option value="recommended">Recommended</option>
-                <option value="entries">Most entries</option>
-                <option value="name">Name</option>
+                <option value="recommended">{t('sources.sort_recommended')}</option>
+                <option value="entries">{t('sources.sort_entries')}</option>
+                <option value="name">{t('sources.sort_name')}</option>
               </select>
             </label>
           </div>
 
           <div className="mt-4 text-xs text-muted-foreground">
-            {activeFilters} active filter{activeFilters === 1 ? '' : 's'}
+            {t('sources.active_filters', {
+              count: activeFilters,
+              suffix: activeFilters === 1 ? '' : 's',
+            })}
           </div>
         </div>
 

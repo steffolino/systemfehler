@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 const SearchPage = lazy(() => import("./pages/SearchPage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ImpressumPage = lazy(() => import("./pages/ImpressumPage"));
 const EntryPage = lazy(() => import("./pages/EntryPage"));
 const SourcesPage = lazy(() => import("./pages/SourcesPage"));
@@ -140,6 +141,7 @@ export default function App() {
             <Suspense fallback={<LoadingRoute />}>
               <Routes>
                 <Route path="/" element={<SearchPage />} />
+                <Route path="/about" element={<AboutPage />} />
                 <Route path="/sources" element={<SourcesPage />} />
                 <Route path="/impressum" element={<ImpressumPage />} />
                 <Route path="/entry/:id" element={<EntryPage />} />
